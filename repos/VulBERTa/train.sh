@@ -14,6 +14,7 @@
 #   --batch_size          Batch size (default: 2 for MLP, 128 for CNN)
 #   --epochs              Number of epochs (default: 10 for MLP, 20 for CNN)
 #   --learning_rate       Learning rate (default: 3e-05 for MLP, 0.0005 for CNN)
+#   --weight_decay        Weight decay (default: 0.0)
 #   --seed                Random seed (default: 42 for MLP, 1234 for CNN)
 #   --fp16                Use mixed precision training
 #   -h, --help            Show this help message

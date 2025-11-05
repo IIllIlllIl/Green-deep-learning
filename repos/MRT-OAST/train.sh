@@ -44,6 +44,7 @@ show_usage() {
     --batch-size N          批次大小 (默认: 64)
     --lr RATE               学习率 (默认: 0.0001)
     --dropout RATE          Dropout率 (默认: 0.2)
+    --weight-decay DECAY    权重衰减/L2正则化 (默认: 0.0)
     --seed N                随机种子 (默认: 1334)
     --valid-step N          验证步数 (默认: 1750, 0表示每epoch验证)
 
@@ -90,6 +91,7 @@ EPOCHS=10
 BATCH_SIZE=64
 LEARNING_RATE=0.0001
 DROPOUT=0.2
+WEIGHT_DECAY=0.0
 SEED=1334
 VALID_STEP=1750
 MAX_LEN=256
@@ -131,6 +133,10 @@ while [[ $# -gt 0 ]]; do
             ;;
         --dropout)
             DROPOUT="$2"
+            shift 2
+            ;;
+        --weight-decay)
+            WEIGHT_DECAY="$2"
             shift 2
             ;;
         --seed)
@@ -287,6 +293,7 @@ echo "模型维度: $D_MODEL"
 echo "前馈维度: $D_FF"
 echo "注意力头数: $HEADS"
 echo "Dropout: $DROPOUT"
+echo "权重衰减: $WEIGHT_DECAY"
 echo "随机种子: $SEED"
 echo "GPU: $([ -n "$USE_CUDA" ] && echo "启用" || echo "禁用")"
 echo "模型保存路径: $SAVE_DIR"
@@ -317,6 +324,7 @@ TRAIN_CMD="python main_batch.py \
     --batch_size $BATCH_SIZE \
     --lr $LEARNING_RATE \
     --dropout $DROPOUT \
+    --weight_decay $WEIGHT_DECAY \
     --seed $SEED \
     --valid_step $VALID_STEP \
     --sen_max_len $MAX_LEN \

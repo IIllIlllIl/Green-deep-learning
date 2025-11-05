@@ -1,0 +1,48 @@
+{
+  "models": {
+    "test_repo": {
+      "path": "test/repos/test_repo",
+      "train_script": "./train.sh",
+      "models": ["model_a", "model_b"],
+      "supported_hyperparams": {
+        "epochs": {
+          "flag": "--epochs",
+          "type": "int",
+          "default": 10,
+          "range": [5, 20]
+        },
+        "learning_rate": {
+          "flag": "--lr",
+          "type": "float",
+          "default": 0.001,
+          "range": [0.0001, 0.01]
+        },
+        "seed": {
+          "flag": "--seed",
+          "type": "int",
+          "default": 42,
+          "range": [0, 9999]
+        },
+        "dropout": {
+          "flag": "--dropout",
+          "type": "float",
+          "default": 0.5,
+          "range": [0.0, 0.8]
+        },
+        "weight_decay": {
+          "flag": "--weight-decay",
+          "type": "float",
+          "default": 0.0001,
+          "range": [0.0, 0.01]
+        }
+      },
+      "model_flag": "-n",
+      "performance_metrics": {
+        "log_patterns": {
+          "accuracy": "Test Accuracy[:\\s]+([0-9.]+)",
+          "loss": "Test Loss[:\\s]+([0-9.]+)"
+        }
+      }
+    }
+  }
+}

@@ -26,7 +26,7 @@ import numpy as np
 
 
 def train_dnn_custom(i, num_folds, samples, start, finish, sample_dict, bug_reports, br2files_dict,
-                     hidden_sizes, alpha, max_iter, n_iter_no_change, solver):
+                     hidden_sizes, alpha, max_iter, n_iter_no_change, solver, random_state):
     """Custom DNN training function with configurable hyperparameters"""
     print("Fold: {} / {}".format(i + 1, num_folds), end="\r")
 
@@ -41,7 +41,7 @@ def train_dnn_custom(i, num_folds, samples, start, finish, sample_dict, bug_repo
         solver=solver,
         alpha=alpha,
         hidden_layer_sizes=hidden_sizes,
-        random_state=1,
+        random_state=random_state,
         max_iter=max_iter,
         n_iter_no_change=n_iter_no_change,
     )
@@ -53,17 +53,22 @@ def train_dnn_custom(i, num_folds, samples, start, finish, sample_dict, bug_repo
 
 
 def dnn_model_custom(k=10, hidden_sizes=(300,), alpha=1e-5, max_iter=10000,
-                     n_iter_no_change=30, solver="sgd", n_jobs=-2):
+                     n_iter_no_change=30, solver="sgd", n_jobs=-2, random_state=None):
     """Run kfold cross validation with custom hyperparameters"""
     samples = csv2dict("../data/features.csv")
     sample_dict, bug_reports, br2files_dict = helper_collections(samples)
+
+    # Set numpy random seed if provided
+    if random_state is not None:
+        np.random.seed(random_state)
+
     np.random.shuffle(samples)
 
     # K-fold Cross Validation in parallel
     acc_dicts = Parallel(n_jobs=n_jobs)(
         delayed(train_dnn_custom)(
             i, k, samples, start, step, sample_dict, bug_reports, br2files_dict,
-            hidden_sizes, alpha, max_iter, n_iter_no_change, solver
+            hidden_sizes, alpha, max_iter, n_iter_no_change, solver, random_state
         )
         for i, (start, step) in enumerate(kfold_split_indexes(k, len(samples)))
     )
@@ -98,6 +103,8 @@ def main():
                         help='Optimizer (default: sgd)')
     parser.add_argument('--n_jobs', type=int, default=-2,
                         help='Number of parallel jobs (-2 = all cores but one, default: -2)')
+    parser.add_argument('--seed', type=int, default=None,
+                        help='Random seed for reproducibility (default: None, uses non-deterministic training)')
 
     args = parser.parse_args()
 
@@ -130,6 +137,10 @@ def main():
             print(f"  - Early stopping patience: {args.n_iter_no_change}")
             print(f"  - Solver: {args.solver}")
             print(f"  - Parallel jobs: {args.n_jobs}")
+            if args.seed is not None:
+                print(f"  - Random seed: {args.seed} (deterministic mode)")
+            else:
+                print(f"  - Random seed: Not set (original non-deterministic behavior)")
             print()
             print("Training DNN model with k-fold cross-validation...")
             print("-" * 80)
@@ -141,7 +152,8 @@ def main():
                 max_iter=args.max_iter,
                 n_iter_no_change=args.n_iter_no_change,
                 solver=args.solver,
-                n_jobs=args.n_jobs
+                n_jobs=args.n_jobs,
+                random_state=args.seed
             )
             report['results'] = results
 

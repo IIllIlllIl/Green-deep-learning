@@ -38,6 +38,7 @@ WEIGHT_DECAY=0.0001
 WORKERS=4
 PRINT_FREQ=50
 SAVE_EVERY=10
+SEED=""  # 空字符串表示不设置seed（保持原始随机行为）
 
 #===================================================================================
 # 参数解析
@@ -57,6 +58,7 @@ usage() {
     -j, --workers NUM           数据加载线程数 (默认: 4)
     --print-freq NUM            打印频率 (默认: 50)
     --save-every NUM            保存频率(epochs) (默认: 10)
+    --seed SEED                 随机种子 (默认: 不设置，保持原始随机行为)
     --half                      使用半精度训练
     -h, --help                  显示此帮助信息
 
@@ -69,6 +71,9 @@ usage() {
 
     # 训练ResNet1202，使用小批次和半精度
     $0 -n resnet1202 -b 32 --half
+
+    # 使用固定种子训练（可重复）
+    $0 --seed 42
 
 EOF
 }
@@ -113,6 +118,10 @@ while [[ $# -gt 0 ]]; do
             ;;
         --save-every)
             SAVE_EVERY="$2"
+            shift 2
+            ;;
+        --seed)
+            SEED="$2"
             shift 2
             ;;
         --half)
@@ -174,6 +183,7 @@ echo "  初始学习率: $LR"
 echo "  动量: $MOMENTUM"
 echo "  权重衰减: $WEIGHT_DECAY"
 echo "  数据加载线程: $WORKERS"
+echo "  随机种子: $([ -n "$SEED" ] && echo "$SEED" || echo '未设置（原始随机行为）')"
 echo "  ��精度训练: $([ -n "$USE_HALF" ] && echo '是' || echo '否')"
 echo "  保存目录: $SAVE_DIR"
 echo ""
@@ -208,6 +218,7 @@ TRAIN_CMD="$PYTHON -u trainer.py \
     --print-freq=$PRINT_FREQ \
     --save-every=$SAVE_EVERY \
     --save-dir=$SAVE_DIR \
+    $([ -n "$SEED" ] && echo "--seed=$SEED") \
     $USE_HALF"
 
 echo -e "${YELLOW}执行命令:${NC}"

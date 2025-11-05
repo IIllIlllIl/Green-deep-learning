@@ -34,6 +34,7 @@ STRIDE=2
 ERASING_P=0
 DROPRATE=0.5
 LINEAR_NUM=512
+SEED=""  # 空字符串表示不设置seed（保持原始随机行为）
 
 # 模型特定参数
 USE_DENSE=""
@@ -94,6 +95,7 @@ Optional Training Parameters:
   --erasing_p PROB       Random erasing probability (default: $ERASING_P)
   --droprate RATE        Dropout rate (default: $DROPRATE)
   --linear_num NUM       Linear feature dimension (default: $LINEAR_NUM)
+  --seed SEED            Random seed for reproducibility (default: not set, uses non-deterministic training)
   --no_train_all         Do not use all training data (use train/val split)
 
 Optional Flags:
@@ -289,6 +291,10 @@ while [[ $# -gt 0 ]]; do
             LINEAR_NUM="$2"
             shift 2
             ;;
+        --seed)
+            SEED="$2"
+            shift 2
+            ;;
         --no_train_all)
             TRAIN_ALL=""
             shift
@@ -360,6 +366,7 @@ print_config() {
     echo "  Stride: $STRIDE"
     echo "  Erasing Prob: $ERASING_P"
     echo "  Dropout Rate: $DROPRATE"
+    echo "  Random Seed: $([ -n "$SEED" ] && echo "$SEED" || echo 'Not set (original non-deterministic behavior)')"
     echo ""
     echo "Model Options:"
     [ -n "$USE_DENSE" ] && echo "  - DenseNet-121"
@@ -393,6 +400,7 @@ build_train_command() {
     [ $(echo "$ERASING_P > 0" | bc) -eq 1 ] && cmd="$cmd --erasing_p $ERASING_P"
     [ $(echo "$DROPRATE != 0.5" | bc) -eq 1 ] && cmd="$cmd --droprate $DROPRATE"
     [ $LINEAR_NUM -ne 512 ] && cmd="$cmd --linear_num $LINEAR_NUM"
+    [ -n "$SEED" ] && cmd="$cmd --seed $SEED"
 
     [ -n "$TRAIN_ALL" ] && cmd="$cmd $TRAIN_ALL"
     [ -n "$USE_DENSE" ] && cmd="$cmd $USE_DENSE"

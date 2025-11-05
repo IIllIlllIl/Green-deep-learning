@@ -49,12 +49,16 @@ parser.add_argument('--pretrained', dest='pretrained', action='store_true',
                     help='use pre-trained model')
 parser.add_argument('--half', dest='half', action='store_true',
                     help='use half-precision(16-bit) ')
+parser.add_argument('--bf16', dest='bf16', action='store_true',
+                    help='use bfloat16 precision ')
 parser.add_argument('--save-dir', dest='save_dir',
                     help='The directory used to save the trained models',
                     default='save_temp', type=str)
 parser.add_argument('--save-every', dest='save_every',
                     help='Saves checkpoints at every specified number of epochs',
                     type=int, default=10)
+parser.add_argument('--seed', type=int, default=None,
+                    help='random seed for reproducibility (default: None, uses non-deterministic training)')
 best_prec1 = 0
 
 
@@ -62,6 +66,18 @@ def main():
     global args, best_prec1
     args = parser.parse_args()
 
+    # Set random seed for reproducibility
+    if args.seed is not None:
+        import random
+        import numpy as np
+
+        random.seed(args.seed)
+        np.random.seed(args.seed)
+        torch.manual_seed(args.seed)
+        torch.cuda.manual_seed_all(args.seed)
+        print(f"=> Using seed: {args.seed} (deterministic mode)")
+    else:
+        print("=> No seed set - using non-deterministic training (original behavior)")
 
     # Check the save_dir exists or not
     if not os.path.exists(args.save_dir):
@@ -86,7 +102,12 @@ def main():
         else:
             print("=> no checkpoint found at '{}'".format(args.resume))
 
-    cudnn.benchmark = True
+    # Set cudnn behavior based on whether seed is set
+    if args.seed is not None:
+        cudnn.deterministic = True
+        cudnn.benchmark = False
+    else:
+        cudnn.benchmark = True  # Original behavior for faster training
 
     normalize = transforms.Normalize(mean=[0.485, 0.456, 0.406],
                                      std=[0.229, 0.224, 0.225])

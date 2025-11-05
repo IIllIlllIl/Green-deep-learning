@@ -32,6 +32,7 @@ MAX_ITER=10000
 N_ITER_NO_CHANGE=30
 SOLVER="sgd"
 N_JOBS=-2
+SEED=""  # 空字符串表示不设置seed（保持原始随机行为）
 
 # Parse command line arguments
 while [[ $# -gt 0 ]]; do
@@ -68,6 +69,10 @@ while [[ $# -gt 0 ]]; do
             N_JOBS="$2"
             shift 2
             ;;
+        --seed)
+            SEED="$2"
+            shift 2
+            ;;
         -h|--help)
             echo "Usage: $0 [-n MODEL_NAME] [OPTIONS]"
             echo ""
@@ -83,6 +88,7 @@ while [[ $# -gt 0 ]]; do
             echo "  --n_iter_no_change N          Early stopping patience (default: 30)"
             echo "  --solver SOLVER               Optimizer: sgd, adam, lbfgs (default: sgd)"
             echo "  --n_jobs N                    Parallel jobs (default: -2, all cores but one)"
+            echo "  --seed SEED                   Random seed for reproducibility (default: not set)"
             echo ""
             echo "Examples:"
             echo "  $0 -n dnn                                    # Train DNN with default params"
@@ -115,6 +121,7 @@ if [ "$MODEL_NAME" = "dnn" ]; then
     PYTHON_CMD="$PYTHON_CMD --n_iter_no_change $N_ITER_NO_CHANGE"
     PYTHON_CMD="$PYTHON_CMD --solver $SOLVER"
     PYTHON_CMD="$PYTHON_CMD --n_jobs $N_JOBS"
+    [ -n "$SEED" ] && PYTHON_CMD="$PYTHON_CMD --seed $SEED"
 fi
 
 # Display configuration
@@ -132,6 +139,7 @@ if [ "$MODEL_NAME" = "dnn" ]; then
     echo "Early stopping: $N_ITER_NO_CHANGE"
     echo "Solver: $SOLVER"
     echo "Parallel jobs: $N_JOBS"
+    echo "Random seed: $([ -n "$SEED" ] && echo "$SEED" || echo 'Not set (original non-deterministic behavior)')"
 fi
 echo "========================================"
 echo ""

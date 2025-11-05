@@ -80,8 +80,22 @@ parser.add_argument('--lifted', action='store_true', help='use lifted loss' )
 parser.add_argument('--sphere', action='store_true', help='use sphere loss' )
 parser.add_argument('--adv', default=0.0, type=float, help='add the adversarial training. Follow the paper `U-turn: Crafting Adversarial Queries with Opposite-direction Features, IJCV2022`' )
 parser.add_argument('--aiter', default=10, type=float, help='enable adversarial loss every x iter' )
+parser.add_argument('--seed', type=int, default=None, help='random seed for reproducibility (default: None, uses non-deterministic training)')
 
 opt = parser.parse_args()
+
+# Set random seed for reproducibility
+if opt.seed is not None:
+    import random
+    import numpy as np
+
+    random.seed(opt.seed)
+    np.random.seed(opt.seed)
+    torch.manual_seed(opt.seed)
+    torch.cuda.manual_seed_all(opt.seed)
+    print(f"=> Using seed: {opt.seed} (deterministic mode)")
+else:
+    print("=> No seed set - using non-deterministic training (original behavior)")
 
 if opt.DG:
     opt.wa = True #DG will enable swa.
@@ -106,7 +120,12 @@ opt.gpu_ids = gpu_ids
 if len(gpu_ids)>0:
     #torch.cuda.set_device(gpu_ids[0])
     cudnn.enabled = True
-    cudnn.benchmark = True
+    # Set cudnn behavior based on whether seed is set
+    if opt.seed is not None:
+        cudnn.deterministic = True
+        cudnn.benchmark = False
+    else:
+        cudnn.benchmark = True  # Original behavior for faster training
 ######################################################################
 # Load Data
 # ---------

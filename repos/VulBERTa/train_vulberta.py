@@ -302,6 +302,7 @@ def train_mlp(args):
         save_total_limit=20,
         seed=args.seed,
         learning_rate=args.learning_rate,
+        weight_decay=args.weight_decay,
         fp16=args.fp16,
         report_to=None,
         load_best_model_at_end=True
@@ -360,6 +361,9 @@ def main():
     parser.add_argument('--learning_rate', type=float, default=None,
                        help='Learning rate (default: 3e-05 for MLP, 0.0005 for CNN)')
 
+    parser.add_argument('--weight_decay', type=float, default=None,
+                       help='Weight decay (default: 0.0)')
+
     parser.add_argument('--seed', type=int, default=None,
                        help='Random seed (default: 42 for MLP, 1234 for CNN)')
 
@@ -379,6 +383,8 @@ def main():
             args.epochs = 10
         if args.learning_rate is None:
             args.learning_rate = 3e-05
+        if args.weight_decay is None:
+            args.weight_decay = 0.0
         if args.seed is None:
             args.seed = 42
         if args.fp16 is None:
@@ -390,6 +396,8 @@ def main():
             args.epochs = 20
         if args.learning_rate is None:
             args.learning_rate = 0.0005
+        if args.weight_decay is None:
+            args.weight_decay = 0.0
         if args.seed is None:
             args.seed = 1234
         if args.fp16 is None:
@@ -437,6 +445,7 @@ def main():
     print(f"  Batch size: {args.batch_size}")
     print(f"  Epochs: {args.epochs}")
     print(f"  Learning rate: {args.learning_rate}")
+    print(f"  Weight decay: {args.weight_decay}")
     print(f"  Seed: {args.seed}")
     print(f"  FP16: {args.fp16}")
 

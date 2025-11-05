@@ -1,0 +1,27 @@
+{
+  "experiment_id": "20251105_174723_test_repo_model_a",
+  "timestamp": "2025-11-05T17:47:45.528255",
+  "repository": "test_repo",
+  "model": "model_a",
+  "hyperparameters": {
+    "epochs": 19,
+    "learning_rate": 0.004355898544890743
+  },
+  "duration_seconds": 19.092665910720825,
+  "energy_metrics": {
+    "cpu_energy_pkg_joules": 406.32,
+    "cpu_energy_ram_joules": 30.54,
+    "cpu_energy_total_joules": 436.86,
+    "gpu_power_avg_watts": 68.59454545454545,
+    "gpu_power_max_watts": 68.85,
+    "gpu_power_min_watts": 68.44,
+    "gpu_energy_total_joules": 754.54
+  },
+  "performance_metrics": {
+    "accuracy": 85.0,
+    "loss": 0.6337
+  },
+  "training_success": true,
+  "retries": 0,
+  "error_message": "Training completed successfully"
+}
