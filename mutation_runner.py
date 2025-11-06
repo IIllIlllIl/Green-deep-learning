@@ -174,13 +174,15 @@ class MutationRunner:
     def build_training_command(self,
                               repo: str,
                               model: str,
-                              mutation: Dict[str, Any]) -> Tuple[List[str], str]:
+                              mutation: Dict[str, Any],
+                              energy_dir: str) -> Tuple[List[str], str]:
         """Build the training command with mutated hyperparameters
 
         Args:
             repo: Repository name
             model: Model name
             mutation: Dictionary of mutated hyperparameters
+            energy_dir: Directory for energy monitoring outputs
 
         Returns:
             Tuple of (command list, log file path)
@@ -194,9 +196,9 @@ class MutationRunner:
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         log_file = f"results/training_{repo}_{model}_{timestamp}.log"
 
-        # Build command
-        train_wrapper = self.project_root / "scripts" / "train_wrapper.sh"
-        cmd = [str(train_wrapper), repo_path, train_script, log_file]
+        # Build command (now includes energy_dir for integrated monitoring)
+        run_script = self.project_root / "scripts" / "run.sh"
+        cmd = [str(run_script), repo_path, train_script, log_file, energy_dir]
 
         # Add model flag if needed
         if "model_flag" in repo_config and model != "default":
@@ -325,6 +327,10 @@ class MutationRunner:
             "gpu_power_max_watts": None,
             "gpu_power_min_watts": None,
             "gpu_energy_total_joules": None,
+            "gpu_temp_avg_celsius": None,
+            "gpu_temp_max_celsius": None,
+            "gpu_util_avg_percent": None,
+            "gpu_util_max_percent": None,
         }
 
         # Parse CPU energy
@@ -368,6 +374,50 @@ class MutationRunner:
             except Exception as e:
                 print(f"⚠️  Warning: Error parsing GPU power data: {e}")
 
+        # Parse GPU temperature (new)
+        gpu_temp_file = energy_dir / "gpu_temperature.csv"
+        if gpu_temp_file.exists():
+            try:
+                import csv
+                gpu_temps = []
+                with open(gpu_temp_file, 'r') as f:
+                    reader = csv.DictReader(f)
+                    for row in reader:
+                        try:
+                            temp = float(row['gpu_temp_c'])
+                            gpu_temps.append(temp)
+                        except (ValueError, KeyError):
+                            pass
+
+                if gpu_temps:
+                    metrics["gpu_temp_avg_celsius"] = sum(gpu_temps) / len(gpu_temps)
+                    metrics["gpu_temp_max_celsius"] = max(gpu_temps)
+
+            except Exception as e:
+                print(f"⚠️  Warning: Error parsing GPU temperature data: {e}")
+
+        # Parse GPU utilization (new)
+        gpu_util_file = energy_dir / "gpu_utilization.csv"
+        if gpu_util_file.exists():
+            try:
+                import csv
+                gpu_utils = []
+                with open(gpu_util_file, 'r') as f:
+                    reader = csv.DictReader(f)
+                    for row in reader:
+                        try:
+                            util = float(row['gpu_util_percent'])
+                            gpu_utils.append(util)
+                        except (ValueError, KeyError):
+                            pass
+
+                if gpu_utils:
+                    metrics["gpu_util_avg_percent"] = sum(gpu_utils) / len(gpu_utils)
+                    metrics["gpu_util_max_percent"] = max(gpu_utils)
+
+            except Exception as e:
+                print(f"⚠️  Warning: Error parsing GPU utilization data: {e}")
+
         return metrics
 
     def run_training_with_monitoring(self,
@@ -376,8 +426,11 @@ class MutationRunner:
                                     experiment_id: str) -> Tuple[int, float, Dict[str, Any]]:
         """Run training with energy monitoring
 
+        Note: Energy monitoring is now integrated into run.sh
+        This method simply runs the training command and parses the results.
+
         Args:
-            cmd: Training command
+            cmd: Training command (includes energy_dir in run.sh args)
             log_file: Path to log file
             experiment_id: Unique experiment identifier
 
@@ -387,56 +440,45 @@ class MutationRunner:
         energy_dir = self.results_dir / f"energy_{experiment_id}"
         energy_dir.mkdir(exist_ok=True)
 
-        print(f"🚀 Starting training...")
+        print(f"🚀 Starting training with integrated energy monitoring...")
         print(f"   Command: {' '.join(cmd)}")
         print(f"   Log: {log_file}")
+        print(f"   Energy directory: {energy_dir}")
 
         start_time = time.time()
 
-        # Start training process
-        train_process = subprocess.Popen(
-            cmd,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.STDOUT,
-            text=True
-        )
-
-        train_pid = train_process.pid
-        print(f"   Training PID: {train_pid}")
-
-        # Start energy monitoring
-        energy_monitor_script = self.project_root / "scripts" / "energy_monitor.sh"
-        energy_cmd = [str(energy_monitor_script), str(energy_dir), str(train_pid)]
-
+        # Run training with integrated energy monitoring
+        # run.sh now handles both training and energy monitoring
         try:
-            energy_process = subprocess.Popen(
-                energy_cmd,
-                stdout=subprocess.PIPE,
-                stderr=subprocess.STDOUT,
-                text=True
+            train_process = subprocess.run(
+                cmd,
+                capture_output=False,  # Output is handled by run.sh (tee to log)
+                text=True,
+                timeout=None  # No timeout, let training complete naturally
             )
-            print(f"   Energy monitoring PID: {energy_process.pid}")
-        except Exception as e:
-            print(f"⚠️  Warning: Failed to start energy monitoring: {e}")
-            energy_process = None
+            exit_code = train_process.returncode
 
-        # Wait for training to complete
-        exit_code = train_process.wait()
+        except subprocess.TimeoutExpired:
+            print(f"⚠️  Warning: Training timed out")
+            exit_code = -1
+        except Exception as e:
+            print(f"❌ Error running training: {e}")
+            exit_code = -1
+
         end_time = time.time()
         duration = end_time - start_time
 
         print(f"✓ Training finished in {duration:.1f}s with exit code {exit_code}")
 
-        # Wait for energy monitoring to finish
-        if energy_process:
-            try:
-                energy_process.wait(timeout=10)
-            except subprocess.TimeoutExpired:
-                energy_process.kill()
-                print("⚠️  Warning: Energy monitoring timed out")
-
-        # Parse energy metrics
+        # Parse energy metrics from the energy directory
+        # run.sh has already written the energy data
         energy_metrics = self.parse_energy_metrics(energy_dir)
+
+        # Print energy summary
+        if energy_metrics.get("cpu_energy_total_joules"):
+            print(f"   CPU Energy: {energy_metrics['cpu_energy_total_joules']:.2f} J")
+        if energy_metrics.get("gpu_energy_total_joules"):
+            print(f"   GPU Energy: {energy_metrics['gpu_energy_total_joules']:.2f} J")
 
         return exit_code, duration, energy_metrics
 
@@ -510,9 +552,6 @@ class MutationRunner:
         print(f"   Hyperparameters: {mutation}")
         print("=" * 80)
 
-        # Build training command
-        cmd, log_file = self.build_training_command(repo, model, mutation)
-
         success = False
         retries = 0
         exit_code = -1
@@ -524,6 +563,10 @@ class MutationRunner:
         while not success and retries <= max_retries:
             if retries > 0:
                 print(f"\n🔄 Retry {retries}/{max_retries}")
+
+            # Build training command with energy directory
+            energy_dir = f"results/energy_{experiment_id}_attempt{retries}"
+            cmd, log_file = self.build_training_command(repo, model, mutation, energy_dir)
 
             # Run training with monitoring
             exit_code, duration, energy_metrics = self.run_training_with_monitoring(

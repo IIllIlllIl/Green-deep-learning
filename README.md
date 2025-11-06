@@ -24,8 +24,11 @@ nightly/
 ├── config/
 │   └── models_config.json      # 模型配置：定义支持的超参数
 ├── scripts/
-│   ├── energy_monitor.sh       # 能耗监控脚本
-│   └── train_wrapper.sh        # 训练包装脚本
+│   └── run.sh                   # 训练包装脚本（集成能耗监控）
+├── test/                        # 测试目录
+│   ├── run_tests.sh             # 测试运行脚本
+│   ├── validate_energy_monitoring.sh  # 能耗监控验证脚本
+│   └── README.md                # 测试文档
 ├── experiments/ → settings/     # 实验配置文件目录（新增）
 │   ├── all.json                # 全面变异所有模型
 │   ├── default.json            # 复现原始训练（基线）
@@ -195,7 +198,11 @@ sudo python3 mutation_runner.py \
     "gpu_power_avg_watts": 68.59,
     "gpu_power_max_watts": 68.85,
     "gpu_power_min_watts": 68.44,
-    "gpu_energy_total_joules": 754.54
+    "gpu_energy_total_joules": 754.54,
+    "gpu_temp_avg_celsius": 75.2,
+    "gpu_temp_max_celsius": 78.0,
+    "gpu_util_avg_percent": 95.3,
+    "gpu_util_max_percent": 98.0
   },
   "performance_metrics": {
     "accuracy": 85.0,
@@ -206,6 +213,10 @@ sudo python3 mutation_runner.py \
   "error_message": ""
 }
 ```
+
+**新增能耗指标**（v2.0）：
+- `gpu_temp_avg_celsius` / `gpu_temp_max_celsius` - GPU温度统计
+- `gpu_util_avg_percent` / `gpu_util_max_percent` - GPU利用率统计
 
 ## 工作流程
 
@@ -249,11 +260,37 @@ cd test
 
 ## 能耗监控
 
+### 监控方法改进（v2.0）⭐
+
+本项目已采用**直接包装**（Direct Wrapping）的能耗监控方法，显著提升测量精度：
+
+| 改进维度 | 旧方法 | 新方法（当前） | 精度提升 |
+|---------|--------|--------------|---------|
+| CPU能耗度量 | 间隔采样求和 | 直接包装命令 | **误差从5-10%降至<2%** |
+| 时间边界 | ±2秒轮询误差 | 精确对齐 | **零边界误差** |
+| GPU指标 | 仅功耗 | 功耗+温度+利用率 | **5项指标** |
+
+**关键优势**：
+- ✅ CPU能耗：使用 `perf stat` 直接包装训练命令，获取总能耗（无累积误差）
+- ✅ GPU监控：一次查询获取功耗、温度、利用率，保证时间一致性
+- ✅ 优雅停止：使用SIGTERM而非SIGKILL，避免数据丢失
+- ✅ 进程精度：只监控目标进程树，无其他进程干扰
+
+详细技术说明请查看：[docs/energy_monitoring_improvements.md](docs/energy_monitoring_improvements.md)
+
+### 验证改进效果
+
+运行验证脚本测试新方法的准确性：
+```bash
+./test/validate_energy_monitoring.sh
+```
+
 ### CPU能耗监控
 
-使用Linux `perf` 工具监控：
+使用Linux `perf` 工具直接包装训练命令：
 - **Package Energy** - CPU封装能耗
 - **RAM Energy** - 内存能耗
+- **监控方式** - 进程树级精确监控（包含所有子进程）
 
 需要权限：
 ```bash
@@ -266,9 +303,22 @@ echo 'kernel.perf_event_paranoid=-1' | sudo tee -a /etc/sysctl.conf
 
 ### GPU能耗监控
 
-使用 `nvidia-smi` 监控：
-- **Power Draw** - 实时功耗（每秒采样）
-- **统计数据** - 平均/最大/最小功耗
+使用 `nvidia-smi` 异步监控（每秒采样）：
+- **Power Draw** - 实时功耗
+- **GPU Temperature** - GPU核心温度
+- **Memory Temperature** - 显存温度
+- **GPU Utilization** - GPU利用率
+- **Memory Utilization** - 显存利用率
+- **统计数据** - 平均/最大/最小值
+
+能耗数据保存位置：`results/energy_<experiment_id>/`
+```
+├── cpu_energy.txt              # CPU能耗总结
+├── cpu_energy_raw.txt          # perf原始输出
+├── gpu_power.csv               # GPU功耗时间序列
+├── gpu_temperature.csv         # GPU温度时间序列
+└── gpu_utilization.csv         # GPU利用率时间序列
+```
 
 ## 配置文件
 

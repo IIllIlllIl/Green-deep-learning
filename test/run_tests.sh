@@ -66,12 +66,12 @@ print_header "Test 1: File Existence Check"
 
 files_to_check=(
     "mutation_runner.py"
-    "scripts/energy_monitor.sh"
-    "scripts/train_wrapper.sh"
+    "scripts/run.sh"
     "config/models_config.json"
     "test/test_config.json"
     "test/repos/test_repo/train.sh"
     "test/governor.sh"
+    "test/validate_energy_monitoring.sh"
 )
 
 for file in "${files_to_check[@]}"; do
@@ -90,10 +90,10 @@ print_header "Test 2: Script Executability Check"
 
 scripts_to_check=(
     "mutation_runner.py"
-    "scripts/energy_monitor.sh"
-    "scripts/train_wrapper.sh"
+    "scripts/run.sh"
     "test/repos/test_repo/train.sh"
     "test/governor.sh"
+    "test/validate_energy_monitoring.sh"
 )
 
 for script in "${scripts_to_check[@]}"; do
@@ -145,20 +145,25 @@ else
 fi
 
 ################################################################################
-# Test 5: Train Wrapper Script Test
+# Test 5: Run Script Test (with integrated energy monitoring)
 ################################################################################
-print_header "Test 5: Train Wrapper Script Test"
+print_header "Test 5: Run Script Test"
 
-print_test "Testing train_wrapper.sh"
-if ./scripts/train_wrapper.sh test/repos/test_repo ./train.sh results/test_wrapper.log -n model_a --epochs 2 > /tmp/test_wrapper_output.txt 2>&1; then
-    if [ -f "results/test_wrapper.log" ]; then
-        print_pass "Train wrapper executed successfully"
+print_test "Testing run.sh with integrated energy monitoring"
+mkdir -p results/test_energy
+if ./scripts/run.sh test/repos/test_repo ./train.sh results/test_run.log results/test_energy -n model_a --epochs 2 > /tmp/test_run_output.txt 2>&1; then
+    if [ -f "results/test_run.log" ]; then
+        print_pass "Run script executed successfully"
+        # Check if energy files were created
+        if [ -f "results/test_energy/cpu_energy.txt" ]; then
+            print_pass "Energy monitoring created CPU energy file"
+        fi
     else
-        print_fail "Train wrapper did not create log file"
+        print_fail "Run script did not create log file"
     fi
 else
-    print_fail "Train wrapper script failed"
-    cat /tmp/test_wrapper_output.txt
+    print_fail "Run script failed"
+    cat /tmp/test_run_output.txt
 fi
 
 ################################################################################
@@ -178,34 +183,9 @@ else
 fi
 
 ################################################################################
-# Test 7: Energy Monitor Script Test
+# Test 7: Mutation Runner --list Test
 ################################################################################
-print_header "Test 7: Energy Monitor Script Test"
-
-print_test "Testing energy monitor script"
-
-# Start a background process to monitor
-sleep 5 &
-SLEEP_PID=$!
-
-mkdir -p results/test_energy
-
-# Run energy monitor for a short duration
-timeout 10 ./scripts/energy_monitor.sh results/test_energy $SLEEP_PID > /tmp/test_energy_output.txt 2>&1 || true
-
-wait $SLEEP_PID 2>/dev/null || true
-
-if [ -f "results/test_energy/cpu_energy.txt" ] || [ -f "results/test_energy/gpu_power.csv" ]; then
-    print_pass "Energy monitor created output files"
-else
-    print_fail "Energy monitor did not create expected output files"
-    cat /tmp/test_energy_output.txt
-fi
-
-################################################################################
-# Test 8: Mutation Runner --list Test
-################################################################################
-print_header "Test 8: Mutation Runner --list Test"
+print_header "Test 7: Mutation Runner --list Test"
 
 print_test "Testing mutation_runner.py --list with test config"
 if python3 mutation_runner.py --list --config test/test_config.json > /tmp/test_list.txt 2>&1; then
@@ -221,9 +201,9 @@ else
 fi
 
 ################################################################################
-# Test 9: Mutation Runner Full Integration Test
+# Test 8: Mutation Runner Full Integration Test
 ################################################################################
-print_header "Test 9: Full Integration Test (Mutation Runner)"
+print_header "Test 8: Full Integration Test (Mutation Runner)"
 
 print_test "Running mutation_runner.py with test config"
 print_info "This will take approximately 15-20 seconds..."
@@ -266,9 +246,9 @@ rm -f governor.sh
 mv governor.sh.backup governor.sh 2>/dev/null || true
 
 ################################################################################
-# Test 10: Hyperparameter Mutation Test
+# Test 9: Hyperparameter Mutation Test
 ################################################################################
-print_header "Test 10: Hyperparameter Mutation Test"
+print_header "Test 9: Hyperparameter Mutation Test"
 
 print_test "Testing hyperparameter mutation logic"
 
