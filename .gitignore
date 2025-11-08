@@ -48,6 +48,7 @@ repos/bug-localization-by-dnn-and-rvsm/
 
 # Model files
 *.pth
+*.th
 *.ckpt
 *.h5
 *.pb
@@ -70,6 +71,7 @@ repos/*/model/
 repos/*/models/
 repos/*/Market/
 repos/*/origindata/
+repos/*/pretrained_models/
 
 # Additional large file types
 *.zip
