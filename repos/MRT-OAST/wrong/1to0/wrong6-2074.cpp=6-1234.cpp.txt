@@ -1,0 +1,57 @@
+pred sim: 0.6193236708641052
+
+==========================================
+origin_1 file: 6-2074.cpp
+int main()
+{
+	int k, a[100][100], i, j, m, n, sum = 0;
+	cin >> k;
+	for (int l = 0; l < k; l++)
+	{	
+		cin >> m >> n;
+		for (i = 0; i < m; i++)
+			for (j = 0; j < n; j++)
+				cin >> a[i][j];
+		for (j = 0; j < n; j++)
+		{
+			sum = sum + a[0][j] + a[m - 1][j];
+			if (m - 1 == 0)
+				sum = sum - a[m - 1][j];
+		}
+		for (i = 1; i < m - 1; i++)
+		{	
+			sum = sum + a[i][0] + a[i][n - 1];
+			if (n - 1 == 0)
+				sum = sum - a[i][n - 1];
+		}
+		cout << sum << endl;
+		sum = 0;
+	}
+	return 0;
+}
+-------------------------------------------
+origin_2 file: 6-2074.cpp
+
+int main()
+{
+	int k,m,n,a[100][100],i,j,l,sum[100]={0};
+	cin>>k;
+	for(l=1;l<=k;l++)
+	{
+		cin>>m>>n;
+		for(i=1;i<=m;i++)
+			for(j=1;j<=n;j++)
+				cin>>a[i][j];
+		for(j=1;j<=n;j++)
+			sum[l]+=a[1][j];
+		for(j=1;j<=n;j++)
+			sum[l]+=a[m][j];
+		for(i=1;i<=m;i++)
+			sum[l]+=a[i][1];
+		for(i=1;i<=m;i++)
+			sum[l]+=a[i][n];
+		sum[l]=sum[l]-a[1][1]-a[m][1]-a[1][n]-a[m][n];
+		cout<<sum[l]<<endl;
+	}
+		return 0;
+}

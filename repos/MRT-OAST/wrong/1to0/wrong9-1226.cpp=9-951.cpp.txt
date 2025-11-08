@@ -1,0 +1,79 @@
+pred sim: 0.8668399453163147
+
+==========================================
+origin_1 file: 9-1226.cpp
+struct patient{
+  char id[10];
+  int age;
+}young[100],old[100];
+
+int main(){
+   int i,j,n,temp,yn=0,on=0,people[150]={0};
+   char t[10];
+   scanf("%d",&n);
+   for(i=0;i<n;i++){
+       scanf("%s%d",t,&temp);
+       if(temp>=60){
+          strcat(old[on].id,t);
+          old[on].age=temp;
+          on++;
+          people[temp]++;
+       }
+       else{
+          strcat(young[yn].id,t);
+          young[yn].age=temp;
+          yn++;
+       }
+   }
+   for(i=149;i>=60;i--){
+       if(people[i]>0){
+          for(j=0;j<on;j++)
+             if(old[j].age==i)
+                printf("%s\n",old[j].id);  
+       }
+   }
+   for(i=0;i<yn;i++)
+     printf("%s\n",young[i].id);
+}
+
+-------------------------------------------
+origin_2 file: 9-1226.cpp
+int main()
+{ struct peo
+  { char num[10];
+    int old;
+    struct peo *next;
+   };
+  struct peo *p,*p1,*p2,*p3,*head1,*head2,*head3;
+  int n,i,j,k;
+  p=p1=p2=p3=head1=head2=head3=(struct peo *)malloc
+
+(sizeof(struct peo));
+  scanf("%d\n",&n);
+  for (i=1;i<=n;i++)
+   { scanf("%s%d",&p1->num,&p1->old);
+     if (i==1) head1=p1;
+     else p2->next=p1;
+     p2=p1;
+     p1=(struct peo *)malloc(sizeof(struct peo));
+    }
+  for (i=1;i<=n;i++)
+  { p1=head1;p2=head1;
+    for (j=1;j<=(n+1-i);j++)
+     {if (p1->old>p2->old&&p1->old>=60) {p2=p1;}
+      p1=p1->next;}
+    if (i==1) head2=p2;
+    else p->next=p2;
+    p=p2;
+    p1=head1;p3=head1;
+    for (j=1;j<=(n-i+1);j++)
+     {if (p1->num==p2->num) {if (j==1) head1=p1->next;
+                             else p3->next=p1->next;}
+      p3=p1;p1=p1->next;
+      }
+   }
+ p=head2;
+ for (i=1;i<=n;i++)
+  {printf("%s\n",p->num);p=p->next;}
+ 
+}

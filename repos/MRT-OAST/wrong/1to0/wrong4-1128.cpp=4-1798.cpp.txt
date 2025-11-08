@@ -1,0 +1,46 @@
+pred sim: 0.8247150182723999
+
+==========================================
+origin_1 file: 4-1128.cpp
+int main()
+{
+	int row,col;
+	cin>>row>>col;
+	int i=0,j=0,k=0;
+	int a[100][100];
+	for(i=0;i<row;i++)
+		for(j=0;j<col;j++)
+			cin>>a[i][j];
+	int (*p)[100]=a;
+	for(k=0;k<col;k++)
+		for(i=0;i<row&&k-i<col&&k-i>=0;i++)
+			cout<<*(*(p+i)+k-i)<<endl;
+	for(k=col;k<=(row-1)+(col-1);k++)
+		for(i=k-col+1;i<row&&k-i>=0;i++)
+			cout<<*(*(p+i)+k-i)<<endl;
+	return 0;
+}
+-------------------------------------------
+origin_2 file: 4-1128.cpp
+
+int main(int argc, char* argv[])
+{
+	int col,row,sz[99][99],i,j;
+	scanf("%d%d",&row,&col);
+	for(i=0;i<row;i++){
+		for(j=0;j<col;j++){
+			scanf("%d",&sz[i][j]);
+		}
+	}
+	for(i=0;i<col;i++){
+		for(j=0;j<=i&&j<row;j++){
+			printf("%d\n",sz[j][i-j]);
+		}
+	}
+	for(i=1;i<row;i++){
+		for(j=0;j+i<row&&j<col;j++){
+			printf("%d\n",sz[i+j][col-j-1]);
+		}
+	}
+	return 0;
+}

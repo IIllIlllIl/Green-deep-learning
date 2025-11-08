@@ -1,0 +1,96 @@
+pred sim: 0.3465203046798706
+
+==========================================
+origin_1 file: 7-682.cpp
+int main(){
+    char a[256],b[256],c[256];
+    int i,j=0,k=-1,n,p,q,s,h=0,r;
+    int d[256];
+    scanf("%s",a);
+    scanf("%s",b);
+    scanf("%s",c);
+    for(i=0;i<256;i++){
+                       if(a[i]==b[0]){
+                                      k=0;
+                                      d[j]=i;
+                                      j+=1;
+                                      }
+                       }
+    n=strlen(b);
+    p=strlen(c);
+    q=strlen(a);
+    if(k!=-1){
+              for(s=0;s<j;s++){
+              for(i=d[s];i<d[s]+n;i++){
+                                       r=d[s];
+                                       if(a[i]!=b[i-r]){
+                                                        h+=1;
+                                                         break;
+                                                        }    
+                                       }
+              if(i==d[s]+n){
+                         for(r=0;r<d[s];r++){
+                                          printf("%c",a[r]);
+                                          }
+                         for(r=0;r<p;r++){
+                                          printf("%c",c[r]);
+                                          }
+                         for(r=d[s]+n;r<q;r++){
+                                            printf("%c",a[r]);
+                                            }
+break;
+                         }
+                         }
+              if(h==j){
+                       printf("%s",a);
+                       }
+              }
+    else {
+         printf("%s",a);
+         }
+    return 0;
+}
+                         
+
+-------------------------------------------
+origin_2 file: 7-682.cpp
+
+int main()
+{
+	
+    int i,j,x,y,m,l=0,t;
+	char b[N],a[N],c[N];
+	scanf("%s",b);
+	scanf("%s",a);
+	scanf("%s",c);
+
+	for(y=0;i<N;y++)
+	{
+		if(a[y]=='\0')
+			break;
+	}
+
+    
+	for(i=0;i<N;i++)
+	{
+		m=0;
+		for(j=i;j-i<y;j++)
+		{
+            if(a[j-i]==b[j])
+				m++;
+		}
+		if(m>=y)
+			break;
+	}
+	
+	   for(t=i;c[t-i]!=0&&t<256;t++)
+	{
+	    b[t]=c[t-i];
+		if(c[t-i]=='\0')
+			break;
+	}
+	puts(b);
+	return 0;
+
+
+}

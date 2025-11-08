@@ -1,0 +1,91 @@
+pred sim: 0.12231281399726868
+
+==========================================
+origin_1 file: 4-869.cpp
+int main()
+{
+	int m, n, i = 1, j = 1;
+	int tempi=1, tempj = 1, a[100][100]={0};
+	cin>>m>>n;
+	for(int s=1;s<=m;s++)
+		for(int t=1;t<=n;t++)
+			cin>>a[s][t];
+	while(tempi != m || tempj != n)
+	{
+		do
+		{
+			cout<<a[i][j]<<endl;
+		    i++;
+			j--;
+		} while(j != 0 && i != m + 1 );
+	    if(tempj != n)
+		{
+			tempj++;
+			i = tempi;
+			j=tempj;
+		}
+		else
+		{
+			tempi++;
+			i=tempi;
+			j=tempj;
+		}
+	}
+	cout<<a[m][n];
+	return 0;
+}
+
+-------------------------------------------
+origin_2 file: 4-869.cpp
+int main()
+{
+	int row, col;                                    //????????? 
+	int a[110][110];
+	int max, min;
+	
+	cin >> row >> col;
+	
+	for(int i = 0; i < row; i ++)
+	for(int j = 0; j < col; j ++)
+	{
+		cin >> a[i][j];
+	}
+	
+	if(row > col)
+	{
+		max = row;
+		min = col;
+	}
+	else
+	{
+		max = col;
+		min = row;
+	}
+	
+	for(int i = 0; i < min; i ++)
+	for(int j = 0; j <= i; j ++)
+	cout << a[j][i - j] << endl;
+	
+	if(col != row)
+	{
+		for(int i = min; i < max; i ++)
+		{
+			if(col > row)
+			for(int j = 0; j < min; j ++)
+			cout << a[j][i - j] << endl;
+			
+			else
+			for(int j = col - 1; j >= 0; j --)
+			cout << a[i - j][j] << endl;
+		}
+	}
+	
+	
+	for(int i = max; i <= row + col - 2; i ++)
+	for(int j = col - 1; i - j <= row - 1; j --)
+	cout << a[i - j][j] << endl;
+		
+	
+	 
+	return 0;
+}

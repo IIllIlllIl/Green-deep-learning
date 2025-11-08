@@ -1,0 +1,61 @@
+pred sim: 0.8836054801940918
+
+==========================================
+origin_1 file: 13-27.cpp
+int main()
+{
+    int i=1,n,j,r=0,a[20001],b[101];    //r?????????b???????? 
+    cin>>n;
+    memset(b,1,sizeof(b));              //?b????????1?????????0 
+    
+     do
+      { 
+       r=r+1;                      //?????? 
+       cin>>j;                     //???????j    
+       if (b[j]!=0)                //????????a????????? 
+       {
+       a[i]=j;
+       b[a[i]]=0;
+       i=i+1;
+       }
+       }
+      while (r<n);
+       
+    for (j=1;j<i-1;j++)  cout<<a[j]<<' ';   
+    cout<<a[i-1]; //?? 
+
+    
+    return 0;
+}
+    
+-------------------------------------------
+origin_2 file: 13-27.cpp
+
+void main()
+{
+int n,i,j;
+int a[20000],b[20000];
+
+scanf("%d",&n);
+for(i=0;i<n;i++)
+	scanf("%d",&a[i]);
+
+b[0]=a[0];
+for(i=0;i<n;i++)
+{
+for(j=i+1;j<n;j++)
+	{if(a[i]==a[j])
+	a[j]=0;}
+}
+
+j=0;
+for(i=0;i<n;i++)
+{if (a[i]==0) ;
+else {b[j]=a[i];j++;}
+}
+
+for(i=0;i<j-1;i++)
+	printf("%d ",b[i]);
+printf("%d",b[j-1]);
+
+}

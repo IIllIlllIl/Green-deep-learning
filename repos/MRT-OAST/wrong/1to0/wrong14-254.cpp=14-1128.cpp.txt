@@ -1,0 +1,115 @@
+pred sim: 0.45828700065612793
+
+==========================================
+origin_1 file: 14-254.cpp
+struct Student
+{int num;
+ int yuwen;
+ int shuxue;
+};
+void fun(int*a,int*b);
+int main()
+{
+	int n,i,j;
+	int sum[100000];
+	scanf ("%d",&n);
+	struct Student stu[100000];
+	for (i=0;i<n;i++)
+	{
+		scanf ("%d%d%d",&stu[i].num,&stu[i].yuwen,&stu[i].shuxue);
+		sum[i]=stu[i].yuwen+stu[i].shuxue;
+	}
+	for(i=0;i<3;i++)
+	{
+		for(j=n-1;j>i;j--)
+		{
+			if(sum[j]>sum[j-1])
+			{
+				fun(&sum[j],&sum[j-1]);
+				fun(&stu[j-1].num,&stu[j].num);
+					fun(&stu[j-1].yuwen,&stu[j].yuwen);
+					fun(&stu[j-1].shuxue,&stu[j].shuxue);
+			}
+		}
+	}
+	for (i=0;i<3;i++)
+		printf ("%d %d\n",stu[i].num,sum[i]);
+	return 0;
+}
+void fun(int*a,int*b)
+{
+	int k;
+	k=*a;
+	*a=*b;
+	*b=k;
+}
+-------------------------------------------
+origin_2 file: 14-254.cpp
+struct linknode *CreateLinkList();
+void DisplayLinkList(struct linknode *linklist1);
+void qiansan(struct linknode *linklist2);
+struct linknode
+{
+	int id;
+	int chinese;
+	int math;
+	int total;
+	int mark;
+	struct linknode *next;
+};
+int main()
+{
+	qiansan(CreateLinkList());
+
+}
+struct linknode *CreateLinkList()
+{
+	long n,i;
+	struct linknode *head,*p;
+	scanf("%ld",&n);
+	head=(struct linknode *)malloc(sizeof(struct linknode));
+	p=head;
+	if (p==NULL)
+	{
+		printf("fail");
+		exit(-1);
+	}
+	for(i=1;i<=n;i++)
+	{
+		scanf("%d %d %d",&p->id,&p->chinese,&p->math);
+		p->total=p->chinese+p->math;
+		p->mark=0;
+		if (i==n)
+			p->next=NULL;
+		else
+		{
+			p->next=(struct linknode *)malloc(sizeof(struct linknode));
+			p=p->next;
+		}
+	}
+	return head;
+}
+void  qiansan(struct linknode *linklist2)
+{
+   struct linknode *head,*p,*max;
+
+   head=linklist2;
+   p=head;
+   max=(struct linknode *)malloc(sizeof(struct linknode));
+   int j;
+   for (j=1;j<=3;j++)
+   {
+	   p=head;
+	   max->total=0;
+	   while (p!=NULL)
+	   {
+		   if (p->total>max->total&&p->mark==0)
+		   {
+               max=p;
+		   }
+		   p=p->next;
+	   }
+	   max->mark=1;
+	   printf("%d %d\n",max->id,max->total);
+	}
+}

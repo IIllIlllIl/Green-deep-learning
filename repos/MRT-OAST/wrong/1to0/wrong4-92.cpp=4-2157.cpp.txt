@@ -1,0 +1,33 @@
+pred sim: 0.8097538948059082
+
+==========================================
+origin_1 file: 4-92.cpp
+void main()
+{
+	int row,col,n=0,i,j,a[100][100];
+	scanf("%d%d",&row,&col);
+	for(i=0;i<row;i++)
+	{
+		for(j=0;j<col;j++) scanf("%d",&a[i][j]);
+	}
+	i=0;j=0;
+	while(n<row+col-1)
+	{
+		printf("%d\n",a[i][j]);
+		if(j==0||(i==row-1&&j!=0)) {n++;j=n;i=0;}
+		else {i++;j--;}
+		while(j>col-1) {j--;i++;}
+		if(i==row-1&&j==col-1) {printf("%d\n",a[i][j]);break;}
+	}
+}
+-------------------------------------------
+origin_2 file: 4-92.cpp
+int main()
+{
+    int n , m , i , j , a[100][100] ;
+    cin>>n>>m;
+    for( i=1 ; i<=n ; i++ )
+     for( j=1 ; j<=m ; j++ ) cin>>a[i][j];  
+    for( i=2 ; i<=n+m ; i++ )
+     for( j=max(1,i-m) ; j<=min(n,i-1) ; j++ ) cout<<a[j][i-j]<<endl;
+}

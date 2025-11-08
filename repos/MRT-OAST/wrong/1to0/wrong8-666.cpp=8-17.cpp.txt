@@ -1,0 +1,99 @@
+pred sim: 0.5306589603424072
+
+==========================================
+origin_1 file: 8-666.cpp
+
+int a[1000],b[1000];
+void inputdata();
+void outputdata();
+void sortdata();
+
+int main()
+{
+    inputdata();
+    sortdata();
+    outputdata();
+
+    return 0;
+}
+
+void inputdata()
+{
+     cin>>a[0]>>b[0];
+     for (int i=1;i<=a[0];i++) cin>>a[i];
+     for (int i=1;i<=b[0];i++) cin>>b[i];
+}
+void sortdata()
+{
+     sort(a+1,a+a[0]+1);
+     sort(b+1,b+b[0]+1);
+}
+void outputdata()
+{
+     for (int i=1;i<=a[0];i++) cout<<a[i]<<' ';
+     for (int i=1;i<b[0];i++) cout<<b[i]<<' ';
+     cout<<b[b[0]];
+}
+
+-------------------------------------------
+origin_2 file: 8-666.cpp
+/*?????? 
+a)  ??????????????????? 
+b)  ??????????? 
+c)  ?????????? 
+d)  ????????? 
+*/
+int exchange(int m[],int n)
+{
+	int i,j,l;
+	for(i=0;i<n-1;i++)
+	{
+		for(j=i+1;j<n;j++)
+		{
+			if(m[i]>m[j])
+			{
+				l=m[i];
+				m[i]=m[j];
+				m[j]=l;
+			}
+		}
+	}
+	return m;
+}
+
+int add(int x[],int y[],int e,int f)
+{
+	int g;
+	for(g=0;g<f;g++)
+	{
+		x[e+g]=y[g];
+	}
+	return x;
+}
+
+void getint(int r[],int s)
+{
+	int t;
+	for(t=0;t<s;t++)
+	{
+		scanf("%d",&r[t]);
+	}
+}
+
+void print(int u[],int v)
+{
+	int w;
+	for(w=0;w<v-1;w++)
+	{
+		printf("%d ",u[w]);
+	}
+	printf("%d",u[v-1]);
+}
+
+void main()
+{
+	int a[40],b[20],c,d;
+	scanf("%d%d\n",&c,&d);
+	getint(a,c),getint(b,d);
+	print(add(exchange(a,c),exchange(b,d),c,d),c+d);
+}

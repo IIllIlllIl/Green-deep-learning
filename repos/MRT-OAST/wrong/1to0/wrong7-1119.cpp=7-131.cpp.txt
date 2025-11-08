@@ -1,0 +1,79 @@
+pred sim: 0.8839895129203796
+
+==========================================
+origin_1 file: 7-1119.cpp
+int main()
+{
+	char a[260],b[260],c[260];
+	int i,j,k=0,len1,len2,flag,m,t,q;
+	scanf("%s%s%s",b,a,c);
+	len1=strlen(a);
+	len2=strlen(b);
+	for(i=0;i<len2;i++)
+	{flag=1;q=1;
+		if(b[i]==a[0])
+		{
+			k=i+1;
+			for(j=1;j<len1;j++)
+			{
+				if(b[k++]!=a[j])
+				{
+					flag=0;
+					break;
+				}
+			}
+			if(flag==1)
+			{
+				t=0;
+				for(m=i;m<i+len1;m++)
+					b[m]=c[t++];
+				q=0;
+
+			}
+			
+		}
+		if(q==0)
+			break;
+	}
+		printf("%s\n",b);
+		return 0;
+}
+
+
+-------------------------------------------
+origin_2 file: 7-1119.cpp
+int main()
+{
+	char str[256];
+	char sub[256];
+	char rep[256];
+	scanf("%s%s%s",str,sub,rep);
+	char zfc[2][256]={0};
+         int a=strlen(str);
+	int b=strlen(sub);
+         int i;
+         for(i=0;i<=(a-b);i++){
+		int j;
+		for(j=i;j<i+b;j++){
+			if(str[j]!=sub[j-i]){
+				break;
+		         }
+		}
+		if(j==i+b){
+			for(int m=0;m<i;m++){
+				zfc[0][m]=str[m];
+			}
+			for(int n=i+b;n<a;n++){
+				zfc[1][n-i-b]=str[n];
+			}
+			strcat(zfc[0],rep);
+			strcat(zfc[0],zfc[1]);
+			printf("%s\n",zfc[0]);
+			break;
+		}
+	}
+         if(i==(a-b+1)){
+              printf("%s\n",str);
+         }
+	return 0;
+}

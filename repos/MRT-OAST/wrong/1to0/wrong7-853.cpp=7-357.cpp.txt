@@ -1,0 +1,73 @@
+pred sim: 0.6675136089324951
+
+==========================================
+origin_1 file: 7-853.cpp
+char s1[10000],s2[10000],s[10000];
+int Len(char *s)
+{
+	int i;
+	for(i=0;s[i];i++);
+	return i;
+}
+int Match(char *s1,char *s2)
+{
+	int i,l=Len(s2);
+	for(i=0;i<l;i++)
+		if (s1[i]!=s2[i])
+			return 0;
+	return 1;
+}
+int Find(char *s,char *s1)
+{
+	int i,l=Len(s);
+	for(i=0;i<l;i++)
+		if (Match(s+i,s1))
+			return i;
+	return l;
+}
+int main()
+{
+	int l,i,t;
+	scanf("%s%s%s",s,s1,s2);
+	l=Len(s);
+	t=Find(s,s1);
+	if (t==l)
+		printf("%s\n",s);
+	else
+	{
+		for(i=0;i<t;i++)
+			printf("%1c",s[i]);
+		printf("%s",s2);
+		for(i=Len(s1)+t;i<l;i++)
+			printf("%1c",s[i]);
+		printf("\n");
+	}
+	return 0;}	
+
+
+-------------------------------------------
+origin_2 file: 7-853.cpp
+int main(){
+  int le,len,lenn,i,j,k,a=0,b,m=0;
+  char aa[256],bb[256],cc[256];
+  scanf("%s%s%s",aa,bb,cc);
+  le=strlen(aa);
+  len=strlen(bb);
+  lenn=strlen(cc);
+  for(i=0;i<le;i++)
+  {      a=0;
+       for(j=i,k=0;j<len+i&&k<len;j++,k++)
+	   {
+	   if(bb[k]==aa[j])
+             a++;  
+	   }
+	   if(a==len){b=i;m++;break;}
+ }
+
+     if(m==0) puts(aa);
+     else{ 
+      for(i=0;i<b;i++){printf("%c",aa[i]);}
+      for(k=0;k<lenn;k++){printf("%c",cc[k]);}
+      for(i=b+len;i<le;i++){printf("%c",aa[i]);}
+          }
+return 0;}

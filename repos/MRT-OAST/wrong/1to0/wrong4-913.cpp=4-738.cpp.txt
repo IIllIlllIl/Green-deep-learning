@@ -1,0 +1,62 @@
+pred sim: 0.8650133609771729
+
+==========================================
+origin_1 file: 4-913.cpp
+int main()
+{
+    int a[110][110]={0};
+    int m,n,i,j,k;
+    cin>>m>>n;
+    for(i=0;i<=m-1;i++)
+    {
+                     for(j=0;j<=n-1;j++)
+                     {
+                                      cin>>*(*(a+i)+j);
+                     }
+    }
+    for(j=0;j<=n-1;j++)
+    {
+                      k=j;
+                      for(i=0;i<=m-1;i++)
+                      {
+                                       cout<<*(*(a+i)+k)<<endl;
+                                       k--;
+                                       if(k<0) break;
+                      }
+    }
+    for(i=1;i<=m-1;i++)
+    {
+                       j=n-1;
+                       for(k=i;k<=m-1;k++)
+                       {
+                                          cout<<*(*(a+k)+j)<<endl;
+                                          j--;
+                                          if(j<0) break;
+                       }
+    }
+    return 0;
+}
+   
+-------------------------------------------
+origin_2 file: 4-913.cpp
+int arr[100][100];
+int row,col;
+void bianli(int y,int x)//??x,y?????????
+{
+	for(;y<=row&&x>0;y++,x--)
+	{
+		cout<<*(*(arr+y)+x)<<endl;
+	}
+}
+int main()
+{
+	cin>>row>>col;
+	for(int i=1;i<=row;i++)
+		for(int j=1;j<=col;j++)
+			cin>>*(*(arr+i)+j);
+	for(int i=1;i<=col;i++)//?????????
+		bianli(1,i);
+	for(int i=2;i<=row;i++)//?????
+		bianli(i,col);
+	return 0;
+}

@@ -1,0 +1,13 @@
+name: mrt-oast
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.7
+  - matplotlib=3.5.3
+  - numpy=1.21.6
+  - tqdm
+  - pip
+  - pip:
+    - javalang
+    - tensorboard

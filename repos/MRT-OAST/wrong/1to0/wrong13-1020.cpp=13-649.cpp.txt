@@ -1,0 +1,80 @@
+pred sim: 0.8426481485366821
+
+==========================================
+origin_1 file: 13-1020.cpp
+
+int main()
+{
+	int n,end;
+	cin >> n;
+	int a[n], b[n];
+	memset(b, 0, sizeof(b));
+	for (int i = 0; i < n; i++)
+	{
+		cin >> a[i];
+	}
+	for (int i = 0; i < n; i++)
+		for (int j = i + 1; j< n; j++)
+		{
+			if(a[i] == a[j])
+			{
+				b[j] = 1;
+			}
+		}
+	for (int i = n-1; i >= 0; i--)
+	{
+		if(b[i]==0)
+		{
+			end = i;
+			b[i] = 1;
+			break;
+		}
+	}
+if(end!=0)
+	{for (int i = 0; i < n; i++)
+	{
+		if(b[i] == 0)
+		cout << a[i] << " " ;
+	}}
+	cout << a[end] << endl;
+	return 0;
+	
+}
+-------------------------------------------
+origin_2 file: 13-1020.cpp
+int BT(int x,int a[40000])
+{
+    int b=0,c=0;
+    while(b<40000)
+    {
+                 if(a[b]==x)
+                 {
+                            c=1;
+                            break;
+                 }
+                 else
+                 b++;
+    }
+    return c;
+}
+main()
+{
+      int n,a[40000],i,b[40000],c;
+      scanf("%d",&n);
+      for(i=0;i<n;i++)
+      scanf("%d",&a[i]);
+      for(i=0;i<10001;i++)
+      b[i]=-1;
+      for(i=0,c=0;i<n;i++)
+      if(BT(a[i],b)==0)
+      {
+                       if(c==0)
+                       printf("%d",a[i]);
+                       else
+                       printf(" %d",a[i]);
+                       b[c]=a[i];
+                       c++;
+      } 
+      getchar();
+      getchar();
+}

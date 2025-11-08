@@ -1,0 +1,92 @@
+pred sim: 0.9646958708763123
+
+==========================================
+origin_1 file: 14-1396.cpp
+struct student
+{
+        int num;
+        int sum;
+}stu[100000];
+
+int main()
+{
+
+   int n,i,j,t,a,b,m;
+   int tempSum;
+   int tempMax;
+   int rank[3]={0};
+   scanf("%d",&n);
+   //struct student * stu;
+   //stu = (struct student *)malloc(sizeof(struct student) * n);
+   for(i=0;i<n;i++)
+   {
+        tempSum = 0;
+           scanf("%d",&stu[i].num);
+           stu[i].sum = 0;
+           for(j=0;j<2;j++){
+            scanf("%d",&tempSum);
+            stu[i].sum += tempSum;
+           }
+   }
+   for(b=0;b<3;b++)
+   {
+       tempMax = 0;
+       for(a=b;a<n;a++)
+       {
+           if(stu[a].sum > tempMax){
+            tempMax = stu[a].sum;
+            rank[b] = a;
+           }
+       }
+       t = stu[b].num;
+       stu[b].num = stu[rank[b]].num;
+       stu[rank[b]].num = t;
+       t = stu[b].sum;
+       stu[b].sum = stu[rank[b]].sum;
+       stu[rank[b]].sum = t;
+   }
+   for(a=0;a<3;a++)
+   printf("%d %d\n",stu[a].num,stu[a].sum);
+
+  return 0;
+}
+
+-------------------------------------------
+origin_2 file: 14-1396.cpp
+int main()
+{struct book{
+	int num;
+	char s[26];
+}b[1000];
+struct author{
+	int n[1000];
+	int p;
+	char c;
+}a[26],e;
+
+int i,j,k,m,q,max;
+char d;
+for(i=0;i<26;i++)
+	a[i].p=0;
+for(i=0,d='A';i<26;i++,d++)
+{a[i].c=d;}
+scanf("%d",&m);
+for(i=0;i<m;i++)
+{scanf("%d%s",&b[i].num,b[i].s);}
+for(i=0;i<m;i++)
+{for(j=0;;j++)
+{if(b[i].s[j]=='\0')
+	break;
+for(k=0;k<26;k++)
+{if(b[i].s[j]==a[k].c)
+{a[k].n[a[k].p]=b[i].num;
+a[k].p+=1;}}}}
+max=a[0].p;
+e=a[0];
+for(i=0;i<26;i++)
+{if(a[i].p>max)
+{e=a[i];max=a[i].p;}}
+printf("%c\n",e.c);
+printf("%d\n",e.p);
+for(j=0;j<e.p;j++)
+	printf("%d\n",e.n[j]);}

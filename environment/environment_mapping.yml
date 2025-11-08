@@ -43,4 +43,4 @@ mutation_runner:
   environment_name: mutation_runner
   environment_file: mutation_runner.yml
   python_version: "3.10"
-  description: "用于运行mutation_runner.py主程序（仅需Python标准库）"
+  description: "用于运行mutation.py主程序（仅需Python标准库）"

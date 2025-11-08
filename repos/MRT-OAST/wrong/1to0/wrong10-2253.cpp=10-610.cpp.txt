@@ -1,0 +1,71 @@
+pred sim: 0.8558062314987183
+
+==========================================
+origin_1 file: 10-2253.cpp
+void main()
+{
+	int n,h[25],d[25],i,j,max;
+	scanf("%d",&n);
+	for(i=0;i<n;i++) scanf("%d",&h[i]);
+	d[n-1]=1;
+	for(i=n-2;i>=0;i--)
+	{
+		d[i]=1;
+		for(j=i+1;j<n;j++)
+		{
+			if(d[j]+1>d[i]&&h[j]<=h[i]) d[i]=d[j]+1;
+		}
+	}
+	max=d[0];
+	for(i=0;i<n;i++)
+	{
+		if(d[i]>max) max=d[i];
+	}
+	printf("%d",max);
+}
+-------------------------------------------
+origin_2 file: 10-2253.cpp
+int compare(const void *a,const void *b)
+{
+    return (*(int*)b-*(int*)a);
+}
+int main()
+{
+    int k,i,j,m=0;
+    scanf("%d",&k);
+    int a[30]={0};
+    for(i=0;i<k;i++)
+    {
+    scanf("%d",&a[i]);
+    }
+    int b[30]={1};
+    int t;
+    int c[30];
+    for(i=1;i<k;i++)
+    {
+                 t=0;
+              for(j=0;j<30;j++)
+              {
+                               c[j]=0;
+              }
+              for(j=i-1;j>=0;j--)
+              {
+                               if(a[j]>=a[i])
+                               {
+                                       c[t]=b[j];
+                                       t++;
+                               }
+              }
+              qsort(c,t,sizeof(int),compare);
+              b[i]=c[0]+1;
+    }
+    for(i=0;i<k;i++)
+    {
+                    if(m<b[i])
+                    m=b[i];
+    }
+    printf("%d\n",m);
+    getchar();
+    getchar();
+    getchar();
+}

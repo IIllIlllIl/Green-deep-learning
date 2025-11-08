@@ -1,0 +1,58 @@
+pred sim: 0.8071572780609131
+
+==========================================
+origin_1 file: 13-491.cpp
+main()
+{
+      int a[101]={0};
+      int n,i,now,sign;
+      
+      scanf("%d",&n);
+      sign=0;
+      for (i=1;i<=n;i++)
+      {
+          scanf("%d",&now);
+          if (a[now]==0)
+          {
+              a[now]=1;
+              if (sign==1)
+                  printf(" ");
+              else
+                  sign=1;
+              printf("%d",now);
+          }
+      } 
+      printf("\n");;
+      return 0;      
+}
+
+-------------------------------------------
+origin_2 file: 13-491.cpp
+/*
+ * c.cpp
+ * ???1100012870;
+ * ???????
+ *  Created on: 2011-10-19
+ *      Author: Li Wenpeng
+ */
+int main()
+{
+	int n,a[20001],p[200],x,step=-1;
+	cin>>n;
+	memset(p,0,sizeof(p));
+	memset(a,0,sizeof(a));
+	for (int i=0;i<n;i++)                //????
+	{
+		cin>>x;
+		if (p[x]==0)                     //?????????????????
+				{
+			step++;                      //????????1
+			a[step]=x;
+			p[x]=1;                      //???x?????
+				}
+	}
+	cout<<a[0];
+	for (int j=1;j<=step;j++) cout<<' '<<a[j];
+	return 0;
+}
+

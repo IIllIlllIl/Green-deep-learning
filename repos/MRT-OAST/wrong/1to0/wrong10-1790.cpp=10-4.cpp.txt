@@ -1,0 +1,68 @@
+pred sim: 0.8429937958717346
+
+==========================================
+origin_1 file: 10-1790.cpp
+int max[26]={0};
+int a[26]={0};
+void attack(int n)
+{
+	int i=0,j=0,premax=0;
+	for(i=0;i<n;i++)
+	{   max[i]=1;
+		for(j=0;j<i;j++)
+		{
+			if(a[i]<=a[j])
+			{
+			premax=max[j]+1;
+			if(premax>max[i])
+			max[i]=premax;} 
+		}
+	}
+}
+int main()
+{   static int n,i,num=0;
+	scanf("%d",&n);
+	for(i=0;i<n;i++)
+	scanf("%d",&a[i]);
+	attack(n);
+	num=max[0];
+	for(i=1;i<n;i++)
+	if(max[i]>num)
+	num=max[i];
+	printf("%d",num);
+}
+-------------------------------------------
+origin_2 file: 10-1790.cpp
+int main()
+{
+	int height[25],amount[25]={0};
+	int n,i,j,max;
+	scanf("%d",&n);
+	for(i=0;i<n-1;i++)
+	{
+		scanf("%d ",&height[i]);
+	}
+	scanf("%d",&height[n-1]);
+	amount[n-1]=1;
+	for(i=n-2;i>=0;i--)
+	{
+		max=0;
+		for(j=i;j<n;j++)
+		{
+			if(amount[j]>max&&height[j]<=height[i])
+			{
+				max=amount[j];
+			}
+		}
+		amount[i]=max+1;
+	}
+	for(i=0;i<n;i++)
+	{
+		if(amount[i]>max)
+		{
+			max=amount[i];
+		}
+	}
+	printf("%d\n",max);
+	return 0;
+}

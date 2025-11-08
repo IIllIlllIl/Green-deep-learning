@@ -1,0 +1,78 @@
+pred sim: 0.6220558881759644
+
+==========================================
+origin_1 file: 10-2164.cpp
+main()
+{
+      int k,i,j,temp,max;
+      int a[100],ans[100];
+      scanf("%d",&k);
+      for(i=1;i<=k;i++) scanf("%d",&a[i]);
+      for(i=1;i<=k;i++) ans[i]=1;
+      for(i=k-1;i>=1;i--)
+      {
+                         temp=1;
+                         for(j=i+1;j<=k;j++)
+                         {
+                                            if(a[j]<=a[i])
+                                            {
+                                                          if(ans[j]+1>temp) temp=ans[j]+1;
+                                            }
+                         }
+                         ans[i]=temp;
+      }
+      max=0;
+      for(i=1;i<=k;i++)
+      {
+                       if(ans[i]>max) max=ans[i];
+      }
+      printf("%d",max);
+      
+}
+
+-------------------------------------------
+origin_2 file: 10-2164.cpp
+struct missile
+{
+    int num;
+    int high;
+};
+struct missile a[25];
+void f(int n,int sum);
+int main()
+{
+    int i=0,j=0,sum=0,max=0;
+    scanf("%d",&sum);
+    //a=(struct missile*)malloc(sum*sizeof(struct missile));
+    for(i=0;i<=sum-1;i++)       //read in
+    {
+        scanf("%d",&a[i].high);
+    }
+    for(i=sum-1;i>=0;i--)       //find num
+    {
+        f(i,sum);
+    }
+    for(i=0;i<=sum-1;i++)       //find max
+    {
+        if(a[i].num>max){max=a[i].num;}
+    }
+    printf("%d",max);
+}
+void f(int n,int sum)
+{
+    int i=0,t=1;//a[n].num???1?
+    if(n==sum-1)
+    {a[n].num=1;}
+    else
+    {
+        a[n].num=1;
+        for(i=n+1;i<=sum-1;i++)
+        {
+            if(a[n].high>=a[i].high)
+            {
+                if(a[i].num+1>a[n].num)
+                {a[n].num=a[i].num+1;}      //??????  .XXX
+            }
+        }
+    }
+}

@@ -65,7 +65,7 @@ rm -rf results/test_* results/energy_* test/results 2>/dev/null || true
 print_header "Test 1: File Existence Check"
 
 files_to_check=(
-    "mutation_runner.py"
+    "mutation.py"
     "scripts/run.sh"
     "config/models_config.json"
     "test/test_config.json"
@@ -89,7 +89,7 @@ done
 print_header "Test 2: Script Executability Check"
 
 scripts_to_check=(
-    "mutation_runner.py"
+    "mutation.py"
     "scripts/run.sh"
     "test/repos/test_repo/train.sh"
     "test/governor.sh"
@@ -187,8 +187,8 @@ fi
 ################################################################################
 print_header "Test 7: Mutation Runner --list Test"
 
-print_test "Testing mutation_runner.py --list with test config"
-if python3 mutation_runner.py --list --config test/test_config.json > /tmp/test_list.txt 2>&1; then
+print_test "Testing mutation.py --list with test config"
+if python3 mutation.py --list --config test/test_config.json > /tmp/test_list.txt 2>&1; then
     if grep -q "test_repo" /tmp/test_list.txt && grep -q "model_a" /tmp/test_list.txt; then
         print_pass "Mutation runner --list works correctly"
     else
@@ -205,14 +205,14 @@ fi
 ################################################################################
 print_header "Test 8: Full Integration Test (Mutation Runner)"
 
-print_test "Running mutation_runner.py with test config"
+print_test "Running mutation.py with test config"
 print_info "This will take approximately 15-20 seconds..."
 
 # Copy governor.sh to project root for this test
 cp test/governor.sh governor.sh.backup 2>/dev/null || true
 cp test/governor.sh governor.sh
 
-if python3 mutation_runner.py \
+if python3 mutation.py \
     --repo test_repo \
     --model model_a \
     --mutate epochs,learning_rate,seed \

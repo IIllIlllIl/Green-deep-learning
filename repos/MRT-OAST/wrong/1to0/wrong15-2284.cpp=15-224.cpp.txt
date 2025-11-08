@@ -1,0 +1,61 @@
+pred sim: 0.8927100300788879
+
+==========================================
+origin_1 file: 15-2284.cpp
+
+int main (void)
+{
+    int n, i, j, start_row, start_col, end_row, end_col, row, col, value, area;
+    
+    scanf ("%i", &n);
+    start_row = 0;
+    for (i = 1; i <= n; i++)
+        for (j = 1; j <= n; j++) {
+            scanf ("%i", &value);
+            if (!value) {
+                       row = i;
+                       col = j;
+                       if (start_row == 0)
+                          start_row = row, start_col = col;
+            }
+        }
+    end_row = row, end_col = col;
+    area = (end_row - start_row - 1) * (end_col - start_col - 1);
+    printf ("%i", area);
+    
+    return 0;
+}
+
+-------------------------------------------
+origin_2 file: 15-2284.cpp
+
+int main()
+{
+	int n, i, x0, y0, x1, y1;
+	int pixel;
+	scanf("%d", &n);
+	for(i=0; i<n*n; i++)
+	{
+		scanf("%d", &pixel);
+		if (pixel == 0)
+		{
+			x0 = i/n;
+			y0 = i%n;
+			break;
+		}
+	}
+	for (i=i+1; i<n*n; i++)
+	{
+		scanf("%d", &pixel);
+		if (pixel == 0)
+		{
+			x1 = i/n;
+			y1 = i%n;
+		}
+
+	}
+
+	printf("%d\n", (x1-x0-1)*(y1-y0-1));
+
+	return 0;
+}

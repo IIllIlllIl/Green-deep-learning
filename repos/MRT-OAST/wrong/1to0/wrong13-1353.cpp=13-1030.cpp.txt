@@ -1,0 +1,74 @@
+pred sim: 0.8118503093719482
+
+==========================================
+origin_1 file: 13-1353.cpp
+int main(){
+	int n;
+	int *number;
+	int i,j;
+	int sum;
+
+	scanf("%d",&n);
+	number=(int*)malloc(sizeof(int)*n);
+	for(i=0;i<n;i++){
+		scanf("%d",&number[i]);
+	}
+
+	i=0;
+	while((i<n)&&(sum!=0)){
+	    if((i==n-1)&&(number[i]!=0)){
+			printf("%d",number[i]);
+		}
+		sum=0;
+		for(j=i+1;j<n;j++){
+			if(number[j]==number[i]){
+				*(number+j)=0;
+			}
+			sum+=number[j];
+		}
+		
+		if((sum!=0)&&(number[i]!=0)){
+			printf("%d ",number[i]);
+		}
+		else if ((sum==0)&&(number[n-1]==0)){
+			printf("%d",number[i]);
+			sum=0;
+		}
+		i++;
+
+	}
+	
+	free(number);
+	return 0;
+}
+
+-------------------------------------------
+origin_2 file: 13-1353.cpp
+/*
+ * practice.cpp
+ *???
+ *  Created on: 2011-11-5
+ *      Author: ???
+ */
+int main ()
+{
+  int i,n,a[1000]={0},j,k,m;
+  cin>>n;
+  cin>>a[1];
+  for (i=2,m=2;m<=n;i++,m++)
+  {
+	  cin>>a[i];
+	  for (j=1;j<i;j++)
+	  {
+		  if (a[i]==a[j])
+		  {
+			  i--;
+			  break;
+		  }
+	  }
+  }
+  cout<<a[1];
+  for (k=2;k<=i-1;k++)
+	  cout<<' '<<a[k];
+	return 0;
+}

@@ -1,0 +1,98 @@
+pred sim: 0.9714128971099854
+
+==========================================
+origin_1 file: 2-43.cpp
+struct book
+{int num;
+char w[26];
+}b[999];
+void main()
+{  
+	int m,i,j,k,e;
+	scanf("%d",&m);
+	for(i=0;i<m;i++)
+		scanf("%d %s",&b[i].num,b[i].w);
+	char a[26]={'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
+	int c[26]={0};
+	for(j=0;j<26;j++)
+    {for(i=0;i<m;i++)
+	{e=strlen(b[i].w);
+	for(k=0;k<e;k++)
+		if(b[i].w[k]==a[j])
+			c[j]++;
+	}
+	}
+	int sum=0;
+	for(j=0;j<26;j++)
+		if(c[j]>c[sum])
+			sum=j;
+		printf("%c\n",a[sum]);
+		printf("%d\n",c[sum]);
+	for(i=0;i<m;i++)
+	{e=strlen(b[i].w);
+	for(k=0;k<e;k++)
+		if(b[i].w[k]==a[sum])
+	printf("%d\n",b[i].num);
+	}
+}
+
+-------------------------------------------
+origin_2 file: 2-43.cpp
+struct patient
+{
+	char id[10];
+	int age;
+	struct patient * next;
+};
+int n;
+struct patient * creat(int x)
+{
+	struct patient * head;
+	struct patient *p1,*p2;
+	n=0;
+	p1=p2=(struct patient *)malloc(LEN);
+	scanf("%s %d\n",p1->id,&p1->age);
+	head=NULL;
+	while(n!=x)
+	{
+		n=n+1;
+		if(n==1)head=p1;
+		else p2->next=p1;
+		p2=p1;
+		p1=(struct patient *)malloc(LEN);
+        scanf("%s %d\n",p1->id,&p1->age);
+	}
+	p2->next=NULL;
+	return(head);
+}
+void main()
+{
+    int m,i,j,v,t,*b;
+	struct patient *head,*p1;
+	b=(int*)malloc(100*sizeof(int));
+    scanf("%d\n",&m);
+	head=creat(m);
+	p1=head;
+	for(i=0;i<m;i++) {*(b+i)=p1->age;p1=p1->next;}
+	for(j=0;j<m-1;j++)
+	   for(i=0;i<m-1-j;i++) 
+		   if(*(b+i)<*(b+i+1))
+		   {t=*(b+i);*(b+i)=*(b+i+1);*(b+i+1)=t;}
+    for(i=0;i<m;i++) if(*(b+i)<60) {v=i;break;}
+	p1=head;
+	for(j=0;j<v;j++)
+	{
+		p1=head;
+		while(p1!=NULL)
+		{
+			if(p1->age==*(b+j) && (j==0 || *(b+j)!=*(b+j-1))) printf("%s\n",p1->id);
+			p1=p1->next;
+		}
+	}
+	p1=head;
+	while(p1 != NULL) 
+	{
+		if(p1->age<60) printf("%s\n",p1->id);
+		p1=p1->next;
+	}
+}

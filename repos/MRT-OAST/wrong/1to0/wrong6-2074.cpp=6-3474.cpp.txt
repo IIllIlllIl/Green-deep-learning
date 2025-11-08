@@ -1,0 +1,75 @@
+pred sim: 0.646980881690979
+
+==========================================
+origin_1 file: 6-2074.cpp
+int main()
+{
+	int k, a[100][100], i, j, m, n, sum = 0;
+	cin >> k;
+	for (int l = 0; l < k; l++)
+	{	
+		cin >> m >> n;
+		for (i = 0; i < m; i++)
+			for (j = 0; j < n; j++)
+				cin >> a[i][j];
+		for (j = 0; j < n; j++)
+		{
+			sum = sum + a[0][j] + a[m - 1][j];
+			if (m - 1 == 0)
+				sum = sum - a[m - 1][j];
+		}
+		for (i = 1; i < m - 1; i++)
+		{	
+			sum = sum + a[i][0] + a[i][n - 1];
+			if (n - 1 == 0)
+				sum = sum - a[i][n - 1];
+		}
+		cout << sum << endl;
+		sum = 0;
+	}
+	return 0;
+}
+-------------------------------------------
+origin_2 file: 6-2074.cpp
+int main()
+{
+	int n,hang,lie,h,*p,i,j,a[10000],place;
+	int sum=0;
+	scanf("%d",&n);
+	for (i=1;i<=n;i++)
+	{
+		sum=0;
+		scanf("%d%d\n",&hang,&lie);
+		p=a;
+		for (j=1;j<=hang;j++)
+		{
+			for (h=1;h<=lie;h++)
+			{
+				scanf("%d",&*(p++));
+			}
+		
+		}
+		for (place=0;place<=lie-1;place++)
+		{
+			p=a+place;
+			sum+=*p;
+		}
+		for (place=2*lie-1;place<hang*lie-1;place+=lie)
+		{
+			p=a+place;
+			sum+=*p;
+		}
+		for (place=hang*lie-1;place>hang*lie-lie;place--)
+		{
+			p=a+place;
+			sum+=*p;
+		}
+		for (place=lie;place<=hang*lie-lie;place+=lie)
+		{
+			p=a+place;
+			sum+=*p;
+		}
+		
+		printf("%d\n",sum);
+	}
+}

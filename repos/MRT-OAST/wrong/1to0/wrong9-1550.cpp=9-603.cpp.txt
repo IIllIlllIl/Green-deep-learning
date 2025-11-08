@@ -1,0 +1,110 @@
+pred sim: 0.31656917929649353
+
+==========================================
+origin_1 file: 9-1550.cpp
+// ??(14-6) ????.cpp : Defines the entry point for the console application.
+//
+
+
+struct patient
+{
+	char id[20];
+	int age;
+	int num;
+};
+
+int main()
+{
+	int n;
+	scanf("%d",&n);
+	int i,j;
+	struct patient p[100];
+	for(i=1;i<=n;++i)
+	{
+		scanf("%s%d",&p[i].id,&p[i].age);
+		p[i].num=i;
+	}
+	for(i=1;i<=n-1;++i)
+	{
+		for(j=i+1;j<=n;++j)
+		{
+			if(p[j].age>p[i].age)
+			{
+				struct patient t;
+				t=p[i];
+				p[i]=p[j];
+				p[j]=t;
+			}
+		}
+	}
+	for(i=1;p[i].age>=60;++i)
+	{
+		for(j=i+1;p[j].age==p[i].age;++j)
+		{
+			if(p[i].num>p[j].num)
+			{
+				struct patient t;
+				t=p[i];
+				p[i]=p[j];
+				p[j]=t;
+			}
+		}
+		printf("%s\n",p[i].id);
+	}
+	for(j=i;j<=n;++j)
+	{
+		int k;
+		for(k=j+1;k<=n;++k)
+		{
+			if(p[j].num>p[k].num)
+			{
+				struct patient t;
+				t=p[j];
+				p[j]=p[k];
+				p[k]=t;
+			}
+		}
+		printf("%s\n",p[j].id);
+	}
+	return 0;
+}
+
+
+-------------------------------------------
+origin_2 file: 9-1550.cpp
+int main()
+{
+    int num,j,i,n,max,count,a[100];
+	//int order[100];
+    char s[100][10];
+    scanf("%d",&num);
+    for( i = 0;i < num;i++)
+    {
+      scanf("%s %d",s[i],&a[i]);//???s[i][10](?????)??s[i](??????)
+    }
+	n = 0;
+    for(count = 0;count < num;count++)
+    {
+       max = 59;
+       for(i = 0;i<num; i++)
+      { 
+        if(a[i] > max&&a[i] < 200)//??????
+        {
+                max = a[i];
+                j = i;
+         }
+      }
+	   if(max == 59)//??????????????60?????
+		   break;
+      printf("%s\n", s[j]); //???s[i][10](?????)??s[i](??????) ???????max
+	  a[j] = 300;//??????
+     }
+     for( i = 0;i < num; i++)
+     {
+          if(a[i] < 60)
+          printf("%s\n", s[i]); //???s[i][10](?????)??s[i](??????)
+    }
+    //getchar();
+    //getchar();???vc6.0?????
+    return 0;
+}

@@ -1,0 +1,73 @@
+pred sim: 0.8733563423156738
+
+==========================================
+origin_1 file: 14-282.cpp
+struct student
+{
+    int xuehao;
+    int yuwen;
+    int shuxue;
+}stu[100000];
+int main()
+{
+    int sum[100000];
+    long i,j,n,t;
+    scanf ("%d",&n);
+    for (i=0;i<n;i++)
+    {
+        scanf ("%d %d %d",&stu[i].xuehao,&stu[i].yuwen,&stu[i].shuxue);
+        sum[i]=stu[i].yuwen+stu[i].shuxue;
+    }
+    
+    for (i=0;i<3;i++)
+    {
+        t=0;
+        for (j=0;j<n-1;j++)
+        {
+            if (sum[j+1]>sum[t])
+            t=j+1;
+        }
+        printf ("%d %d\n",stu[t].xuehao,sum[t]);
+        sum[t]=0;
+    }
+    getchar();
+    getchar();
+    getchar();
+}
+
+ 
+
+-------------------------------------------
+origin_2 file: 14-282.cpp
+ struct student
+ { int id;
+   int a;
+   int b;
+   int zong;
+ }; 
+ struct student ren[100000];
+ 
+ int main()
+ {int n,i,fen,flag=0,j;
+ 
+  scanf("%d\n",&n);
+   for(i=0;i<=n-1;i++)
+   { scanf("%d",&ren[i].id);
+    scanf("%d",&ren[i].a);
+    scanf("%d",&ren[i].b);
+    ren[i].zong=ren[i].a+ren[i].b;
+   }
+   
+   for(fen=200;fen>=100;fen--)
+   { for(i=0;i<=n-1;i++)
+      if(fen==ren[i].zong)
+      {printf("%d %d\n",ren[i].id,ren[i].zong);
+       flag=flag+1;
+       if(flag==3)goto end;
+      
+      }
+      }
+      end:
+  getchar();
+  
+}

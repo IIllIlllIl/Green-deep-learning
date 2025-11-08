@@ -1,0 +1,90 @@
+pred sim: 0.7900258302688599
+
+==========================================
+origin_1 file: 10-1723.cpp
+int main()
+{
+	int k,i,j,m=0,n,max=0;
+	int a[25],t[25]={0},s[25]={0};
+    scanf("%d",&k);
+	for(i=0;i<k;i++)
+		scanf("%d",&a[i]);
+	t[k-1]=1;
+	if(k==1)
+		printf("1\n");
+	else
+	{
+		for(i=k-2;i>=0;i--)
+		{
+            for(j=i+1;j<k;j++)
+			{
+			    if(a[j]<=a[i])
+				{
+				    s[m]=t[j];
+				    m++;
+				}
+			}
+		    m=0;
+		    max=s[0];
+		    for(n=1;n<25;n++)
+			{
+			    if(s[n]>max)
+				    max=s[n];
+			}
+		    for(j=0;j<25;j++)
+			    s[j]=0;
+		    t[i]=max+1;
+		}
+
+	    max=0;
+	    for(i=0;i<k;i++)
+		{
+		    if(t[i]>max)
+			    max=t[i];
+		}
+	    printf("%d\n",max);
+	}
+	return 0;
+}
+-------------------------------------------
+origin_2 file: 10-1723.cpp
+int a[25];
+int n;
+
+void main()
+{
+	
+	int i;
+	int max(int);
+	int num=0;
+	
+	scanf("%d",&n);
+	for(i=0;i<n;i++)
+		scanf("%d",&a[i]);
+	for(i=0;i<n;i++)
+		num=max(i)>num?max(i):num;
+	printf("%d",num);
+	    
+}
+
+
+int max(int chu)
+{
+	int z=1,tempj;
+	int i,j,k;
+	
+	if(chu==n-1) z=1;
+	else{
+			for(j=chu+1;j<n;j++)
+			{
+				if(a[j]>a[chu]) continue;
+				tempj=1+max(j);
+				z=tempj>z?tempj:z;
+				tempj=0;
+				
+			}
+			
+		}
+	
+	return z;
+}

@@ -1,0 +1,92 @@
+pred sim: 0.7882764339447021
+
+==========================================
+origin_1 file: 6-2016.cpp
+int main()
+{
+int n;
+cin>>n;
+for(int k=1;k<=n;k++)
+{
+	int row,col,count=0,i,j;
+	cin>>row>>col;
+	int str[101][101];
+	for(i=1;i<=row;i++)
+	  for(j=1;j<=col;j++)
+	     {
+		 cin>>*(*(str+i)+j);                                                  //???? 
+		 }
+	for(i=1;i<=col;i++)
+	   count=count+*(*(str+1)+i);
+	for(i=2;i<=row;i++)
+	   count=count+*(*(str+i)+col);                                          //???????count 
+	for(i=col-1;i>=1;i--)
+	   count=count+*(*(str+row)+i);
+	for(i=row-1;i>=2;i--)
+	   count=count+*(*(str+i)+1);
+	cout<<count<<endl;                                                      //?? 
+}
+return 0;
+}
+-------------------------------------------
+origin_2 file: 6-2016.cpp
+int main()
+{
+	int sum,a,b,m,n,k,i,j;
+	int num[100][100];
+	scanf("%d",&n);
+	for(i=0;i<n;i++)
+	{
+		sum=0;
+		for(a=0;a<100;a++)
+		{
+			for(b=0;b<100;b++)
+			{
+				num[a][b]=0;
+			}
+		}
+		scanf("%d %d",&m,&k);
+		if(m==1&&k==1)
+		{
+			scanf("%d",&j);
+			printf("%d",j);
+		}
+		else if(m==1&&k!=1)
+		{
+			for(a=0;a<k;a++)
+			{
+				scanf("%d",&num[0][a]);
+				sum=sum+num[0][a];
+			}
+			printf("%d",sum);
+		}
+		else if(m!=1&&k==1)
+		{
+			for(a=0;a<m;a++)
+			{
+				scanf("%d",&num[a][0]);
+				sum=sum+num[a][0];
+			}
+			printf("%d",sum);
+		}
+		else
+		{
+		for(a=0;a<m;a++)
+		{
+			for(b=0;b<k;b++)
+			{
+				scanf("%d",&num[a][b]);
+			}
+		}
+		for(a=0;a<k;a++)
+		{
+			sum=sum+num[0][a]+num[m-1][a];
+		}
+		for(a=1;a<(m-1);a++)
+		{
+			sum=sum+num[a][0]+num[a][k-1];
+		}
+		printf("%d\n",sum);
+		}
+	}
+}

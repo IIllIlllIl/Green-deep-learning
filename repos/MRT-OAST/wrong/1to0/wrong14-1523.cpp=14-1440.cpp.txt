@@ -1,0 +1,91 @@
+pred sim: 0.8765429854393005
+
+==========================================
+origin_1 file: 14-1523.cpp
+struct student
+{
+	int xuehao;
+	int yuwen;
+	int shuxue;
+	int zongfen;
+}stu[100000];
+int main(int argc, char* argv[])
+{
+	int n,i;
+	scanf("%d",&n);
+	for(i=0;i<n;i++)
+	{
+		scanf("%d %d %d",&stu[i].xuehao,&stu[i].yuwen,&stu[i].shuxue);
+		stu[i].zongfen=stu[i].yuwen+stu[i].shuxue;
+	}
+	int max1=2,max2=1,max3=0,num1=0,num2=0,num3=0;
+	for(i=0;i<n;i++)
+	{
+		if(stu[i].zongfen>max1)
+		{
+			max3=max2;
+			num3=num2;
+			max2=max1;
+			num2=num1;
+			max1=stu[i].zongfen;
+			num1=i;
+		}else if(stu[i].zongfen<=max1&&stu[i].zongfen>max2)
+		{
+			max3=max2;
+			num3=num2;
+			max2=stu[i].zongfen;
+			num2=i;
+		}else if(stu[i].zongfen<=max2&&stu[i].zongfen>max3)
+		{
+			max3=stu[i].zongfen;
+			num3=i;
+		}
+	}
+	printf("%d %d\n",stu[num1].xuehao,stu[num1].zongfen);
+	printf("%d %d\n",stu[num2].xuehao,stu[num2].zongfen);
+	printf("%d %d\n",stu[num3].xuehao,stu[num3].zongfen);
+	return 0;
+}
+
+-------------------------------------------
+origin_2 file: 14-1523.cpp
+
+int main(){
+	int n;
+	scanf("%d",&n);
+	struct score{
+		int id;
+		int yw;
+		int sx;
+	} stu [100000];
+	int i,j;
+	for(i=0;i<n;i++){
+		scanf("%d%d%d",&stu[i].id,&stu[i].yw,&stu[i].sx);
+	}
+	for(j=1;j<=3;j++){
+		int e,max=0;
+		for(i=0;i<=n-j;i++){
+			if((stu[i].yw+stu[i].sx)>(stu[max].yw+stu[max].sx)){
+				max=i;
+			}
+		}
+		if(max!=n-j){
+			e=stu[max].yw;
+			stu[max].yw=stu[n-j].yw;
+			stu[n-j].yw=e;
+
+			e=stu[max].sx;
+			stu[max].sx=stu[n-j].sx;
+			stu[n-j].sx=e;
+
+			e=stu[max].id;
+			stu[max].id=stu[n-j].id;
+			stu[n-j].id=e;
+		}
+	}
+	for(i=n-1;i>=n-2;i--){
+		printf("%d %d\n",(stu[i].id),(stu[i].yw+stu[i].sx));
+	}
+	printf("%d %d",(stu[n-3].id),(stu[n-3].yw+stu[n-3].sx));
+	return 0;
+}

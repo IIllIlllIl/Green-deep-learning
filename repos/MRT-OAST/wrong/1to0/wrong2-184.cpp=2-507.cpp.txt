@@ -1,0 +1,67 @@
+pred sim: 0.6861591935157776
+
+==========================================
+origin_1 file: 2-184.cpp
+struct book
+{
+  int num;
+  char aut[26];
+}bo[999];
+main()
+{
+  int n,i,j,k,count[26],max;
+  scanf("%d",&n);
+  for(i=0;i<n;i++)
+  {
+    scanf("%d %s",&bo[i].num,&bo[i].aut);
+  }
+  for(i=0;i<26;i++)
+    count[i]=0;
+  for(i=0;i<n;i++)
+  {
+    for(j=0;j<26;j++)
+      {
+        if(bo[i].aut[j]-65>=0&&bo[i].aut[j]-65<26)
+          count[bo[i].aut[j]-65]++;
+      }
+  }
+  max=0;
+  for(i=0;i<26;i++)
+  {
+    if(count[i]>max)
+      {max=count[i];k=i;}
+  }
+  printf("%c\n%d\n",k+65,max);
+  for(i=0;i<n;i++)
+  {
+    for(j=0;j<26;j++)
+      {
+        if(bo[i].aut[j]-65==k)
+          printf("%d\n",bo[i].num);
+      }
+  }
+}
+-------------------------------------------
+origin_2 file: 2-184.cpp
+int main()
+{
+ int i,j,k,l,m,n,g[26]={0},s[26][1000]={0};
+ char a[50];
+ scanf("%d",&n);
+ for(m=0;m<n;m++)
+ {for(i=0;i<50;i++)
+   a[i]=0;
+  scanf("%d%s",&l,a);
+  for(i=0;i<26;i++)
+   for(j=0;j<26;j++)  
+    if(a[i]=='A'+j) 
+    {s[j][g[j]]=l,g[j]++;
+     break;}}
+ m=0;
+ for(i=0;i<26;i++)
+  if(g[i]>m) m=g[i],k=i;
+ printf("%c\n%d\n",'A'+k,m);
+ for(i=0;i<m;i++)
+  printf("%d\n",s[k][i]);
+
+}

@@ -1,0 +1,68 @@
+pred sim: 0.6802468299865723
+
+==========================================
+origin_1 file: 4-362.cpp
+int max(int a,int b)
+{
+	if(a>=b)
+	{
+		return a;
+	}
+	else
+	{
+		return b;
+	}
+}
+int min(int a,int b)
+{
+	if(a<=b)
+	{
+		return a;
+	}
+	else
+	{
+		return b;
+	}
+}
+int main()
+{
+	int a[100][100];
+	int hang,lie;
+	int i,j,k;
+	scanf("%d%d",&hang,&lie);
+	for(i=0;i<=hang-1;i++)
+	{
+		for(j=0;j<=lie-1;j++)
+		{
+			scanf("%d",&a[i][j]);
+		}
+	}
+	for(k=0;k<=hang+lie-2;k++)
+	{
+		   for(i=max(0,k-lie+1);i<=min(hang-1,k);i++)
+		   {
+			   printf("%d\n",a[i][k-i]);
+		   }
+	}
+	return 0;
+}
+-------------------------------------------
+origin_2 file: 4-362.cpp
+int main()
+{
+	int m,n,i,j,min;
+	cin>>m>>n;
+	int a[m][n];
+	for (i=0;i<m;i++)
+		for (j=0;j<n;j++)
+			cin>>a[i][j];
+	for (j=0;j<=n-1;j++)
+		{min=(m-1>j? j:m-1);
+	     for (i=0;i<=min;i++)                        //????????????????
+			cout <<a[i][j-i]<<endl;}
+	for (j=n;j<=m+n-2;j++)
+		{min=(m-1>j? j:m-1);
+		for (i=j-(n-1);i<=min;i++)                   //????????????????????????????????????
+			cout <<a[i][j-i]<<endl;}
+	return 0;
+}

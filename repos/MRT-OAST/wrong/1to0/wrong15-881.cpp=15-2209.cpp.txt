@@ -1,0 +1,69 @@
+pred sim: 0.8910996317863464
+
+==========================================
+origin_1 file: 15-881.cpp
+int main()
+{
+	int n;
+	scanf("%d",&n);
+	int sz[ROW][COL];
+	int x1,y1,x2,y2;
+	for(int row=1;row<=n;row++)
+	{
+		for(int col=1;col<=n;col++)
+		{
+			scanf("%d",&sz[row][col]);
+		}
+	}
+	for(int row=1;row<=n;row++)
+	{
+		for(int col=1;col<=n;col++)
+		{
+			if(sz[row][col]==0)
+			{
+				x1=row;
+				y1=col;
+			}
+		}
+	}
+	for(int row=n;row>0;row--)
+	{
+		for(int col=n;col>0;col--)
+		{
+			if(sz[row][col]==0)
+			{
+				x2=row;
+				y2=col;
+			}
+		}
+	}
+	int s;
+	s=(x2-x1+1)*(y2-y1+1);
+	printf("%d",s);
+	return 0;
+}
+-------------------------------------------
+origin_2 file: 15-881.cpp
+
+
+int main()
+{
+    int a[1000][1000],is1[4000],is2[4000],s,n;
+    int k = 0;
+    cin >> n;
+   for (int i = 0; i < n;i++)
+    {
+         for (int j = 0; j < n;j++)
+         {
+             cin >> a[i][j];
+             if (a[i][j] == 0)
+             {
+                         
+                         is1[k] = i;
+                         is2[k++] = j;
+             }
+         }
+    }
+    cout <<  (is1[k - 1] - is1[0]-1)*(is2[k - 1] - is2[0]-1);
+    return 0;
+}

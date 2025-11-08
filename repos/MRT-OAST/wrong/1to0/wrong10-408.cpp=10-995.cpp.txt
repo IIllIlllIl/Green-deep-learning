@@ -1,0 +1,60 @@
+pred sim: 0.7439152598381042
+
+==========================================
+origin_1 file: 10-408.cpp
+main()
+{
+	int i,j,k,l,a[26],len[26];
+	scanf("%d",&k);
+	for(i=0;i<k;++i)
+		scanf("%d",&a[i]);
+	for(i=0;i<k;++i)
+		len[i]=1;
+	for(i=1;i<k;++i)
+	{
+		for(j=0;j<i;++j)
+			if(a[i]<=a[j])
+			{
+				len[i]=len[j]+1;
+				break;
+			}
+		for(l=j+1;l<i;++l)
+			if(len[l]>=len[i]&&a[i]<=a[l])
+			{
+				len[i]=len[l]+1;
+				continue;
+			}
+
+	}
+	for(i=0;i<k;++i)
+		if(len[i]>len[0])
+			len[0]=len[i];
+	printf("%d",len[0]);
+}
+
+-------------------------------------------
+origin_2 file: 10-408.cpp
+int max(int a,int b)
+{
+    if(a>b) return a;
+    else return b;
+}
+int solve(int k,int h,int *p,int n)
+{
+    if(k==n) return 0;
+    if(p[k]==h) return 1+solve(k+1, h, p,n);
+    if(p[k]>h)   return solve(k+1, h, p, n);
+    return max(solve(k+1, h, p, n),1+solve(k+1, p[k], p, n));
+}
+int main()
+{
+    int n;
+    int p[25];
+    scanf("%d",&n);
+    for (int i=0; i<n; i++)
+    {
+        scanf("%d",&p[i]);
+    }
+    printf("%d",solve(0, 100000, p, n));
+    return 0;
+}

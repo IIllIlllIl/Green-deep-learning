@@ -1,0 +1,77 @@
+pred sim: 0.7989882230758667
+
+==========================================
+origin_1 file: 6-3900.cpp
+int main()
+{
+	int *a[100];
+	int k,*m,*n,i,plus=0,j,l;
+	scanf("%d",&k);
+	m=(int*)malloc(100*sizeof(int));
+	n=(int*)malloc(100*sizeof(int));
+	for(i=0;i<k;i++)
+	{
+		scanf("%d",m+i);
+		scanf("%d",n+i);
+		a[i]=(int*)malloc(((*(m+i))*(*(n+i)))*sizeof(int));
+		for(j=0;j<*(m+i);j++)
+		{
+			for(l=0;l<*(n+i);l++)
+				scanf("%d",a[i]+(j*(*(n+i))+l));
+		}
+	}
+	for(i=0;i<k;i++)
+	{
+		for(j=0;j<*(m+i);j++)
+		{
+			plus=plus+(*(a[i]+(j*(*(n+i)))));
+			plus=plus+(*(a[i]+((j+1)*(*(n+i))-1)));
+		}
+		for(l=1;l<(*(n+i))-1;l++)
+		{
+			plus=plus+(*(a[i]+l));
+			plus=plus+(*(a[i]+l+(*(m+i)-1)*(*(n+i))));
+		}
+		printf("%d\n",plus);
+		plus=0;
+	}
+	return 0;
+}
+-------------------------------------------
+origin_2 file: 6-3900.cpp
+main()
+{
+ int s,y,i,j,k,n,m,t,q;
+ scanf("%d",&t);
+ 
+ //printf("%d\n",t); 
+ for(q=0;q<t;q++)
+ { s=0;
+ y=0;
+ scanf("%d %d",&m,&n);
+ int a[m][n];
+    for(i=0;i<m;i++)
+  {
+    for(j=0;j<n;j++)
+    {
+     scanf("%d",&a[i][j]);// printf("%d\n",a[i][j]);             
+    }                
+  }
+  for(i=0;i<n;i++)
+  {
+   s=a[0][i]+a[m-1][i]+s; //printf("%d\n",s);                 
+  }
+  for(i=1;i<m-1;i++)
+  {
+   y=a[i][0]+a[i][n-1]+y; //printf("%d\n",y);                   
+  }
+  //k=s+y;
+   printf("%d\n",(s+y));              
+ }
+ getchar();
+ getchar();
+ getchar(); 
+   getchar();
+ getchar();
+ getchar();   
+}

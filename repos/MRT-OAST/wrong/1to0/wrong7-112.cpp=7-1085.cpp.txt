@@ -1,0 +1,82 @@
+pred sim: 0.8263318538665771
+
+==========================================
+origin_1 file: 7-112.cpp
+
+
+
+int main()
+{
+	char str[256];
+	char sta[256];
+	char stb[256];
+	char res[512] = "";
+
+	gets(str);
+	gets(sta);
+	gets(stb);
+	
+	char* a = str;
+	char* b = 0;
+
+	if(b=strstr(a,sta))
+	{
+		strncat(res,a,b-a);
+		strcat(res,stb);
+		a = b+strlen(sta);
+	}
+
+	strcat(res,a);
+
+	printf("%s\n",res);
+
+	return 0;
+}
+-------------------------------------------
+origin_2 file: 7-112.cpp
+
+int i,j,k,kk;
+char s1[305],s2[305];
+char s3[305];
+
+int main()
+{
+    scanf("%s",s1);
+    scanf("%s",s2);
+    scanf("%s",s3);
+    for(i=0;i<strlen(s1);i++)
+    {
+         for(j=0;j<strlen(s2);j++)
+         {
+            if(s1[i+j]!=s2[j])
+            {
+                break;
+            }
+         }
+         if(j==strlen(s2))
+         {
+             k=i;
+             kk=1;
+             break;
+         }
+    }
+    if(kk==1)
+    {
+             for(i=0;i<k;i++)
+             {
+              printf("%c",s1[i]);
+             }
+             printf("%s",s3);
+             for(i=k+strlen(s2);i<strlen(s1);i++)
+             {
+               printf("%c",s1[i]);
+             }
+             printf("\n");
+    }
+    else
+    {
+        printf("%s\n",s1);
+    }
+    return 0;
+}
+

@@ -1,0 +1,89 @@
+pred sim: 0.5147703289985657
+
+==========================================
+origin_1 file: 9-1396.cpp
+int main()
+{
+	char id[100][10],a[10];
+	int n,i,j;
+	int age[100],b;
+	scanf("%d ",&n);
+	for(i=0;i<n;i++)
+	{
+		scanf(" %s %d",&id[i],&age[i]);
+	}
+	
+	for(j=n-1;j>0;j--)
+	{
+		for(i=n-1;i>0;i--)
+		{
+			if(age[i]>=60&&age[i-1]>=60)
+			{
+				if(age[i]>age[i-1])
+				{
+					strcpy(a,id[i]);b=age[i];
+					strcpy(id[i],id[i-1]);age[i]=age[i-1];
+					strcpy(id[i-1],a);age[i-1]=b;
+				}
+			}
+			if(age[i]>=60&&age[i-1]<60)
+			{
+					strcpy(a,id[i]);b=age[i];
+					strcpy(id[i],id[i-1]);age[i]=age[i-1];
+					strcpy(id[i-1],a);age[i-1]=b;
+			}
+		}
+	}
+
+	for(i=0;i<n;i++)
+	{
+		if(i==0) printf("%s",id[i]);
+		else printf("\n%s",id[i]);
+	}
+
+	return 0;
+
+}
+-------------------------------------------
+origin_2 file: 9-1396.cpp
+struct bin
+{
+	char num[10];
+	int age;
+}t,b[100],c[100],a[100];
+void main()
+{
+	int n,i,j=0,k=0,p,q;
+	scanf("%d",&n);
+	for(i=0;i<n;i++)
+	{
+		scanf("%s%d",a[i].num,&a[i].age);
+		if(a[i].age>=60)
+		{
+			b[j]=a[i];
+			j++;
+		}
+		p=j;
+		if(a[i].age<60)
+		{
+			c[k]=a[i];
+			k++;
+		}
+		q=k;
+	}
+    
+	for(j=1;j<p;j++)
+	for(i=0;i<p-j;i++)
+	{
+		if(b[i].age<b[i+1].age)
+		{
+          t=b[i];
+		  b[i]=b[i+1];
+		  b[i+1]=t;
+		}
+	}
+    for(i=0;i<p;i++) 
+		printf("%s\n",b[i].num);
+    for(i=0;i<q;i++)
+		printf("%s\n",c[i].num);
+}

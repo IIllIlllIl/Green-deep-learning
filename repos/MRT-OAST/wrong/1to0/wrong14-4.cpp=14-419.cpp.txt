@@ -1,0 +1,129 @@
+pred sim: 0.2714906930923462
+
+==========================================
+origin_1 file: 14-4.cpp
+struct student
+{
+	int num;
+	int score1;
+	int score2;
+	int sum;
+	struct student *next;
+	struct student *before;
+};
+main()
+{
+	int i,n,n1=0,n2=0,n3=0,m1=0,m2=0,m3=0;
+	struct student *head;
+	struct student *p1,*p2;
+	scanf("%d",&n);
+	p1=p2=(struct student *)malloc(LEN);
+	scanf("%d %d %d",&p1->num,&p1->score1,&p1->score1);
+	p1->sum=p1->score1+p1->score2;
+	m1=p1->sum;
+	n1=p1->num;
+	head=0;
+	i=0;
+	while(i<=n-2)
+	{
+		i++;
+		if(i==1)
+			head=p1;
+		else
+		{
+			p1->before=p2;
+			p2->next=p1;
+		}
+		p2=p1;
+		p1=(struct student *)malloc(LEN);
+        scanf("%d %d %d",&p1->num,&p1->score1,&p1->score2);
+		p1->sum=p1->score1+p1->score2;
+		if(p1->sum>m3 && p1->sum<=m2)
+		{
+			m3=p1->sum;
+			n3=p1->num;
+		}
+		if(p1->sum>m2 && p1->sum<=m1)
+		{
+			m3=m2;
+			n3=n2;
+			m2=p1->sum;
+			n2=p1->num;
+		}
+		if(p1->sum>m1)
+		{
+			m3=m2;
+			n3=n2;
+			m2=m1;
+			n2=n1;
+			m1=p1->sum;
+			n1=p1->num;
+		}
+	}
+	printf("%d %d\n",n1,m1);
+	printf("%d %d\n",n2,m2);
+	printf("%d %d\n",n3,m3);
+}
+-------------------------------------------
+origin_2 file: 14-4.cpp
+int pfCompare(const void * elem1, const void * elem2)
+{
+    int c;
+    c=*(int*)elem1-*(int*)elem2;
+    return c;
+}
+struct student
+{
+      int num;
+      int x;
+      int y;
+}a[100000];
+main()
+{
+    int n,i,j,d=0,b[100000],c[100000];
+    scanf("%d",&n);
+    for(i=0;i<n;i++)
+    {
+                    scanf("%d",&a[i].num);
+                    scanf("%d",&a[i].x);
+                    scanf("%d",&a[i].y);
+    }
+    for(i=0;i<n;i++)
+    {
+                    b[i]=a[i].x+a[i].y; 
+    }
+    qsort(b,n,sizeof(int),pfCompare);
+    for(j=0;j<n;j++)
+    {
+             if(b[n-1]==a[j].x+a[j].y)
+             {
+                     printf("%d"" ""%d",a[j].num,b[n-1]);
+                     printf("\n");
+                     d++;
+             }
+             if(d==3)
+             break;
+    }  
+    for(i=n-2;i>n-4;i--)
+    { 
+                  if(b[i]==b[i+1])
+                  continue;
+                  else
+                  {
+                                  for(j=0;j<n;j++)
+                                  {
+                                              if(b[i]==a[j].x+a[j].y)
+                                              {
+                                                      printf("%d"" ""%d",a[j].num,b[i]);
+                                                      printf("\n");
+                                                      d++;
+                                              }
+                                              if(d==3)
+                                              break;
+                                  }
+                                  if(d==3)
+                                  break;
+                  }
+    }
+   }
+

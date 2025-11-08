@@ -1,0 +1,88 @@
+pred sim: 0.8772062063217163
+
+==========================================
+origin_1 file: 6-2168.cpp
+/*
+ * main.cpp
+ *
+ *  Created on: 2012-12-10
+ *      Author: ??
+ *     ????????????????????????????????????????????????????????????
+
+ */
+
+
+void function()
+{
+	int a[110][110],(*p)[110];
+	int n,m,i,sum=0,j;
+	cin>>n>>m;
+	for (i=0;i<n;i++)
+		for (j=0;j<m;j++)
+			cin>>a[i][j];
+	p=a;
+	for (i=0;i<m;i++)
+	{
+		sum+=*(*p+i);
+		if (n>1) sum+=*(*(p+n-1)+i);
+	}
+	for (i=1;i<n-1;i++)
+	{
+		sum+=**(p+i);
+		if (m>1) sum+=*(*(p+i)+m-1);
+	}
+	cout<<sum<<endl;
+}
+int main()
+{
+	int n,i;
+	cin>>n;
+	for (i=1;i<=n;i++)
+		function();
+	return 0;
+}
+-------------------------------------------
+origin_2 file: 6-2168.cpp
+int main()
+{
+	int k;
+	scanf("%d",&k);
+	int m,n;
+	int a[100][100];
+	int i;
+	int j;
+	int e;
+    int sum[100]={0};
+	for(e=0;e<k;e++)
+	{
+        scanf("%d%d",&m,&n);
+		for(i=0;i<m;i++)
+		{
+			for(j=0;j<n;j++)
+			{	
+				scanf("%d",&a[i][j]);
+			}
+		}
+		for(j=0;j<n;j++)
+		{
+			sum[e]=sum[e]+a[0][j];
+		}
+     	for(i=1;i<m;i++)
+		{
+			sum[e]=sum[e]+a[i][n-1];
+		}
+     	for(j=n-2;j>=0;j--)
+		{
+			sum[e]=sum[e]+a[m-1][j];
+		}
+	    for(i=m-2;i>0;i--)
+		{
+			sum[e]=sum[e]+a[i][0];
+		}
+	}
+    for(e=0;e<k;e++)
+	{
+		printf("%d\n",sum[e]);
+	}
+	return 0;
+}

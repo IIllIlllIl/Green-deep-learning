@@ -1,0 +1,79 @@
+pred sim: 0.8573282957077026
+
+==========================================
+origin_1 file: 13-1892.cpp
+//
+//  main.cpp
+//  redundant_num
+//
+//  Created by ? ?? on 13-11-9.
+//  Copyright (c) 2013? LEE. All rights reserved.
+//
+
+int main(int argc, const char * argv[])
+{
+    int n=0,i=0;
+    cin>>n;
+    int a[n];
+    for (i=0;i<n;i++)
+        cin>>a[i];
+    
+    int j=0,k=0,l=0;
+    for(j=0;j<n-1;j++)
+        for(k=j+1;k<n;k++)
+        {if(a[j]==a[k])
+        {   for(l=k;l<n-1;l++)
+                {    a[l]=a[l+1];//???????????????
+                    }     n--;//???????????????????
+              k--;        //????????????
+
+        }
+        }
+    
+    
+    
+
+    for (i=0;i<n-1;i++)
+        cout<<a[i]<<" ";
+    cout<<a[n-1];
+    
+    
+    
+    
+    return 0;
+}
+
+
+
+
+-------------------------------------------
+origin_2 file: 13-1892.cpp
+int main()
+{
+    int n,i,j,x,a[20000]={0},b[20000]={0};
+    scanf("%d\n",&n);
+    for(i=0;i<n;i++)
+         scanf("%d ",&a[i]);
+    b[0]=a[0];
+    for(j=1;j<=n;j++)
+    {
+                     x=0;
+                     for(i=0;i<j;i++)
+                     {
+                                     if(a[j]==a[i])
+                                     x++;
+                     } 
+                     if(x==0)
+                     b[j]=a[j];
+                     else b[j]=0;
+    }
+    printf("%d",b[0]); 
+    for(i=1;i<n;i++)
+    {
+                     if(b[i]!= 0)
+                     printf(" %d",b[i]);
+    }    
+    getchar();
+    getchar();
+}                      
+                       

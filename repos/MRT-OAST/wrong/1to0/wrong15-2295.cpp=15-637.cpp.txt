@@ -1,0 +1,54 @@
+pred sim: 0.5226619243621826
+
+==========================================
+origin_1 file: 15-2295.cpp
+int main (){
+int n,number[1001],i,p,count,start,end;
+count=0;
+scanf("%d",&n);
+for(i=1;i<=n;i++){	
+	start=0;
+	end=0;
+	for(p=1;p<=n;p++){scanf("%d",&number[p]);}
+	for(p=1;p<=n-1;p++){
+		if(start==0&&number[p]==0&&(p==1||number[p-1]!=0)&&number[p+1]!=0){start=p;}
+		if(start!=0&&number[p]==0&&(p==1||number[p-1]!=0)&&number[p+1]!=0){end=p;}	
+	}
+	if(end-start<=1){continue;}
+	count+=(end-start-1);
+
+
+
+}
+printf("%d",count);
+return 0;}
+-------------------------------------------
+origin_2 file: 15-2295.cpp
+int main()
+{
+long i,j,x1,x2,n,d,n2,s;
+int a;
+scanf("%d",&n);
+a=1;i=0;
+while (a!=0)
+{
+i++;
+scanf("%d",&a);
+}
+x1=i;
+n2=n*n;
+x2=i;d=0;
+for (j=i;j<=n2;j++)
+{
+scanf("%d",&a);
+if (a==255) d++;
+if (a==0) 
+{
+x2++;
+x2=x2+d;
+d=0;
+}
+}
+s=((x2-x2%n)/n-(x1-x1%n)/n-1)*(abs(x1%n-x2%n)-1);
+printf("%ld",s);
+}

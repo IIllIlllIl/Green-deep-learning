@@ -1,0 +1,56 @@
+pred sim: 0.8278302550315857
+
+==========================================
+origin_1 file: 10-845.cpp
+
+main()
+{
+      int k,i,t,m;
+      int a[25],b[25];
+      scanf("%d",&k);
+      for(i=0;i<k;i=i+1) 
+      scanf("%d",&a[i]);
+      b[k-1]=1;
+      for(i=k-2;i>=0;i=i-1) 
+      {
+      for(t=0,m=i+1;m<k;m=m+1)
+      if(a[i]>=a[m]&&b[m]>t)
+      t=b[m];
+      b[i]=t+1;
+      }
+      for(i=0,t=0;i<k;i=i+1)
+      if(b[i]>t)
+      t=b[i];
+      printf("%d",t);
+    
+}
+-------------------------------------------
+origin_2 file: 10-845.cpp
+
+int H[100];
+int N;
+
+int memo[40][40];
+
+int dp(int i, int k) { // from i, max H[k]
+	int rslt;
+	if(i == N) return 0;
+	if(memo[i][k] != -1) return memo[i][k];
+	if(k != 30 && H[i] > H[k]) rslt = dp(i + 1, k);
+	else {
+		int a = dp(i + 1, i) + 1;
+		int b = dp(i + 1, k);
+		if(a > b) rslt = a; else rslt = b;
+	}
+	return memo[i][k] = rslt;
+}
+
+int main() {
+	scanf("%d", &N);
+	for(int i = 0; i < 40; i++) for(int j = 0; j < 40; j++)
+		memo[i][j] = -1;
+	for(int i = 0; i < N; i++) {
+		scanf("%d", &H[i]);
+	}
+	printf("%d\n", dp(0, 30));
+}

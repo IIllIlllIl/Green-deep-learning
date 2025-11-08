@@ -1,0 +1,95 @@
+pred sim: 0.5286622047424316
+
+==========================================
+origin_1 file: 8-544.cpp
+int A,B,a[40],b[40];
+
+void enter()
+{
+ int i;
+ scanf("%d %d",&A,&B);
+ scanf("%d",&a[1]);
+    for(i=2;i<=A;i++)
+  scanf(" %d",&a[i]);
+ scanf("%d",&b[1]);
+    for(i=2;i<=B;i++)
+  scanf(" %d",&b[i]);
+}
+
+void array()
+{
+ int i,j,m;
+ for(i=1;i<=A-1;i++)
+  for(j=1;j<=A-i;j++)
+  {
+   if(a[j]>a[j+1])
+   {
+                m=a[j];
+    a[j]=a[j+1];
+    a[j+1]=m;
+   }
+  }
+ for(i=1;i<=B-1;i++)
+     for(j=1;j<=B-i;j++)
+  {
+      if(b[j]>b[j+1])
+   {
+                m=b[j];
+        b[j]=b[j+1];
+       b[j+1]=m;
+   }
+  }
+}
+
+void connect()
+{
+ int i,j;
+ for(i=A+1,j=1;i<=A+B;i++,j++)
+  a[i]=b[j];
+}
+
+void print()
+{
+ int i;
+ printf("%d",a[1]);
+ for(i=2;i<=A+B;i++)
+  printf(" %d",a[i]);
+}
+
+
+void main()
+{
+    enter();
+    array();
+ connect();
+ print();
+}
+
+
+-------------------------------------------
+origin_2 file: 8-544.cpp
+int n,m,i,j;
+int a[10000];
+void input()
+{
+cin>>n>>m;
+for(i=0;i<n+m;i++)
+cin>>a[i];
+}
+
+void fsort()
+{
+ sort(a,a+n);
+ sort(a+n,a+n+m);
+}
+void print(){
+	cout<<a[0];
+	for(i=1;i<n+m;i++)
+	cout<<' '<<a[i];
+}
+int main()
+{input();
+ fsort();
+ print();
+return 0;
+}

@@ -1,0 +1,68 @@
+pred sim: 0.7449367046356201
+
+==========================================
+origin_1 file: 15-2016.cpp
+int main()
+{
+	int n,s[1000][1000],i,j,S;
+	int a[2],b[2];
+	scanf("%d",&n);
+	for(i=0;i<n;i++){
+		for(j=0;j<n;j++){
+		    scanf("%d",&s[i][j]);
+		}
+	}
+	for(i=0;i<n;i++){
+		for(j=0;j<n;j++){
+			if(s[i][j]==0&&s[i+1][j]==0&&s[i][j+1]==0){
+				a[0]=i;
+				b[0]=j;
+			}
+			if(s[i][j]==0&&s[i-1][j]==0&&s[i][j-1]==0){
+				a[1]=i;
+				b[1]=j;
+			}
+		}
+	}
+	S=(a[1]-a[0]-1)*(b[1]-b[0]-1);
+	printf("%d",S);
+	return 0;
+}
+-------------------------------------------
+origin_2 file: 15-2016.cpp
+int  main()
+{int n,i,j,a[500][500],x=0,y=0;
+ scanf("%d",&n);
+ for(i=0;i<n;i++)
+ {
+  for(j=0;j<n;j++)
+   scanf("%d",&a[i][j]);
+ }
+
+for(i=0;i<n;i++)
+ {
+  for(j=0;j<n;j++)
+  {
+   if(a[i][j]==0)
+    x++;
+  }
+  if(x!=0)
+   break;
+ }
+    for(j=0;j<n;j++)
+ {
+  for(i=0;i<n;i++)
+  {
+   if(a[i][j]==0)
+    y++;
+  }
+  if(y!=0)
+   break;
+ }
+ printf("%d\n",(x-2)*(y-2));
+
+
+return 0;
+
+
+}

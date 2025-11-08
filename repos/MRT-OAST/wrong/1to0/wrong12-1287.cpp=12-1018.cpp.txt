@@ -1,0 +1,62 @@
+pred sim: 0.4716663956642151
+
+==========================================
+origin_1 file: 12-1287.cpp
+
+int main()
+{
+	int x[20],r,ctr,t,i,j;
+	while(cin.peek()!='-')
+	{
+		r=ctr=0;
+		while(cin>>t,t)
+			x[++r]=t;
+		cin.get();
+		for(i=1;i<=r;i++)
+		{
+			for(j=1;j<=r;j++)
+			{
+				if(x[i]==(x[j]<<1))
+					ctr++;
+			}
+		}
+		cout<<ctr<<endl;
+	}
+	return 0;
+}
+-------------------------------------------
+origin_2 file: 12-1287.cpp
+
+
+int main(int argc, char* argv[])
+{
+	int i, num;
+	int sz[100] = {0};
+	int j,k;
+	int geshu=-1;
+	while(1)
+	{
+		i = 0;
+		scanf("%d",&num);
+		if ( num == -1 )
+			break;
+		sz[0] = num;
+		while(1)
+		{
+			if ( sz[i] == 0 )
+				break;
+			i++;
+			scanf("%d",&sz[i]);
+		}
+		for(k=0;k<=i;k++){
+			for(j=0;j<=i;j++){
+				if(sz[j]==2*sz[k]){
+					geshu=geshu+1;
+				}
+			}
+		}
+		printf("%d\n",geshu);
+		geshu=-1;
+	}
+	return 0;
+}

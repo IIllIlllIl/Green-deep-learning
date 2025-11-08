@@ -1,0 +1,67 @@
+pred sim: 0.493725061416626
+
+==========================================
+origin_1 file: 15-1949.cpp
+
+int main()
+{
+	int shuzu[1001],jilu[1001];
+	int a=0,b=0,c,n,i,k;
+	scanf("%d",&n);
+	for(i=0;i<n;i++)
+	{
+		for(k=0;k<n;k++)
+		{
+		scanf("%d",&shuzu[k]);
+		if(shuzu[k]==0)
+		{
+			jilu[a]=k;
+			a++;
+		}
+		}
+		if(a==2)
+		{
+			c=jilu[1]-jilu[0]-1;
+			b+=c;
+		}
+		a=0;
+	}
+	printf("%d",b);
+	return 0;
+}
+
+-------------------------------------------
+origin_2 file: 15-1949.cpp
+
+int main()
+{
+	int sz[100][100];
+    int row,col,n,x=0,k;
+	scanf("%d",&n);
+    for(row=0;row<n;row++)
+	{
+	    for(col=0;col<n;col++)
+		{
+		scanf("%d",&(sz[row][col]));
+		}
+	}
+    
+k=2;
+	
+
+	for(row=k;row<n-k;row++)
+	{
+	    for(col=k;col<n-k;col++)
+		{
+		     if(sz[row][col]!=0)
+			 {
+			 x++;
+			 }
+		}
+	}
+
+	 printf("%d\n",x);
+
+	 return 0;
+}
+

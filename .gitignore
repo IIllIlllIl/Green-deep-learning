@@ -36,3 +36,45 @@ logs/
 # Cache
 .cache/
 *.cache
+
+# Large files - Models and Datasets
+repos/models/
+repos/examples/
+repos/VulBERTa/
+repos/Person_reID_baseline_pytorch/
+repos/MRT-OAST/
+repos/pytorch_resnet_cifar10/
+repos/bug-localization-by-dnn-and-rvsm/
+
+# Model files
+*.pth
+*.ckpt
+*.h5
+*.pb
+*.onnx
+*.bin
+*.safetensors
+
+# Dataset files
+*.csv
+*.json
+*.parquet
+*.arrow
+*.tfrecord
+
+# Repos - data and virtual environments
+repos/*/data/
+repos/*/venv/
+repos/*/.git/
+repos/*/model/
+repos/*/models/
+repos/*/Market/
+repos/*/origindata/
+
+# Additional large file types
+*.zip
+*.tar
+*.tar.gz
+*.so
+*.dll
+*.dylib

@@ -1,0 +1,88 @@
+pred sim: 0.6806036233901978
+
+==========================================
+origin_1 file: 4-784.cpp
+/*
+ * ????ergodic-process-of2Darray-fTRtBL.cpp
+ * ??????
+ * ????:2012-12-14
+ * ?????????????
+ */
+int main(){                                                    //???
+	int row=0,col=0,array[100][100],(*p)[100]=array,*q=*p; //????row,col,????array,??p,q
+	cin>>row>>col;                                         //??array?????row???col
+	for(int i=0;i<row;i++)                                 //??????array
+		for(int j=0;j<col;j++)
+			cin>>array[i][j];
+	int x=0,j=0;                                           //????x
+	while(q!=array[row-1]+col-1)                           //???????????????
+	{
+		cout<<*q<<endl;
+		if(q==*p||*p==array[row-1])                    //??q??????????????????????????
+		{
+			x++;                                   //???x+1???
+			if(x>=col)                             //????????????
+			{
+				p=array+x+1-col;               //??p?????
+				q=*p+col-1;                    //q???????????
+				j=col-1;//??
+			}
+			else                                   //??
+			{
+				p=array;                       //p?????
+				q=*p+x;                        //??q?????
+				j=x;                           //??
+			}
+		}
+		else                                           //??????
+		{
+			p++;                                   //???
+			q=*p+(--j);                            //???
+		}
+	}
+	cout<<*q;                                              //????????
+	return 0;                                              //?????
+}
+-------------------------------------------
+origin_2 file: 4-784.cpp
+
+int main()
+{
+	int i,j,k,row,col;
+	int (*p)[100];
+	scanf("%d %d",&row,&col);
+	p=(int *)calloc(100,10);
+	for(i=0;i<row;i++)
+		for(j=0;j<col;j++)
+			scanf("%d",*(p+i)+j);
+	printf("%d\n",*(*(p+0)+0));
+	j=1;
+	i=0;
+	for(;j<col;)
+	{
+		k=j;
+		while(j>=0&&i<row)
+		{
+			printf("%d\n",*(*(p+i)+j));
+			j=j-1;
+			i=i+1;
+		}
+		j=k+1;
+		i=0;
+	}
+	i=1;
+	j=col-1;
+	for(;i<row;)
+	{
+		k=i;
+		while(i<row&&j>=0)
+		{
+			printf("%d\n",*(*(p+i)+j));
+			j=j-1;
+			i=i+1;
+		}
+		i=k+1;
+		j=col-1;
+	}
+	
+}

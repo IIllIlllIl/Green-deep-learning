@@ -21,7 +21,7 @@ The `experiments/` directory has been renamed to `settings/` to better reflect i
 
 ### 2. Code Updates ✅
 
-#### mutation_runner.py
+#### mutation.py
 Updated all references from "experiments/" to "settings/" in:
 - Line 804-805: Example commands in help text
 - Line 812: --experiment-config argument help text
@@ -106,7 +106,7 @@ Created `docs_backup/` directory with full backup of original docs/ before reorg
 
 ```
 nightly/
-├── mutation_runner.py          # Updated: settings/ references
+├── mutation.py          # Updated: settings/ references
 ├── README.md                   # Updated: settings/ references
 ├── settings/                   # RENAMED from experiments/
 │   ├── all.json
@@ -156,7 +156,7 @@ nightly/
 ## Verification
 
 ### All References Updated ✅
-- [x] mutation_runner.py: 2 references updated
+- [x] mutation.py: 2 references updated
 - [x] README.md: 4 references updated
 - [x] docs/CONFIG_FILE_FEATURE.md: 8 references updated
 - [x] settings/README.md: 21 path references updated (6 JSON key names preserved)
@@ -179,9 +179,9 @@ nightly/
 ### Running Experiments
 ```bash
 # Updated commands (experiments/ → settings/)
-sudo python3 mutation_runner.py --experiment-config settings/default.json
-sudo python3 mutation_runner.py --experiment-config settings/all.json
-python3 mutation_runner.py --experiment-config settings/learning_rate_study.json
+sudo python3 mutation.py --experiment-config settings/default.json
+sudo python3 mutation.py --experiment-config settings/all.json
+python3 mutation.py --experiment-config settings/learning_rate_study.json
 ```
 
 ### Viewing Documentation
@@ -202,14 +202,14 @@ ls docs/archived/
 # Create custom experiment configuration
 cp settings/default.json settings/my_experiment.json
 vim settings/my_experiment.json
-python3 mutation_runner.py --experiment-config settings/my_experiment.json
+python3 mutation.py --experiment-config settings/my_experiment.json
 ```
 
 ---
 
 ## Summary Statistics
 
-**Files Modified**: 4 (mutation_runner.py, README.md, CONFIG_FILE_FEATURE.md, settings/README.md)
+**Files Modified**: 4 (mutation.py, README.md, CONFIG_FILE_FEATURE.md, settings/README.md)
 **Total References Updated**: 35+
 **Documentation Files Organized**: 23
 **Documentation Files Archived**: 11

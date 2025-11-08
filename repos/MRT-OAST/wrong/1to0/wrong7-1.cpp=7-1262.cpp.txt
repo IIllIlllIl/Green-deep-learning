@@ -1,0 +1,81 @@
+pred sim: 0.7771526575088501
+
+==========================================
+origin_1 file: 7-1.cpp
+int main()
+{
+	int len,len2,i,j,f,ff;
+	char s[300],sub[300],replace[300];
+	gets(s);
+	len=strlen(s);
+	gets(sub);
+	gets(replace);
+	len2=strlen(sub);
+	f=0;
+	for (i=0; i<=len-len2;i++) {
+		ff=1;
+		for (j=0; j<len2; j++) 
+			if (sub[j]!=s[i+j]) {ff=0; break;}
+		if (ff==0) continue;
+		for (j=0; j<i; j++) printf("%c",s[j]);
+		printf("%s",replace);
+		for (j=i+len2; j<len; j++) printf("%c",s[j]);
+		f=1;
+		break;
+	}
+	if (f==0) printf("%s",s);
+	return 0;
+}
+
+-------------------------------------------
+origin_2 file: 7-1.cpp
+//*********************
+//* ??? ????   *
+//* 1200012878 ??? *
+//* 1?2?            *
+//*********************
+int main()
+{
+	char a[257], b[257], c[256];
+	cin.getline(a, 257);
+	cin.getline(b, 257);
+	cin.getline(c, 257);
+	int len1 = strlen(a), len2 = strlen(b), len3 = strlen(c);
+	int i, j, count, flag = -1, m;
+	for (i = 0; i <= len1 - 1; i++)
+	{
+		m = 0;
+		if (a[i] == b[m])
+		{
+			count = 0;
+			for (j = i; j <= i + len2 - 1; j++)
+			{
+				if (a[j] == b[m++])
+					count++;
+			}
+			if (count == len2)
+			{
+				flag = i;
+				break;
+			}
+		}
+	}
+	if (flag == -1)
+		cout << a;
+	else
+		if (flag == 0)
+		{
+			cout << c;
+			for (i = len2; i <= len1 - 1; i++)
+				cout << a[i];
+		}
+		else
+		{
+			for (i = 0; i <= flag - 1; i++)
+				cout << a[i];
+			cout << c;
+			for (i = i + len2; i <= len1 - 1; i++)
+				cout << a[i];
+		}
+		return 0;
+}

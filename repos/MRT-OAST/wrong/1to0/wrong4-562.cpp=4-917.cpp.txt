@@ -1,0 +1,51 @@
+pred sim: 0.82215416431427
+
+==========================================
+origin_1 file: 4-562.cpp
+/*
+ * c.cpp
+ * ???1100012870;
+ * ???????
+ *  Created on: 2011-10-19
+ *      Author: Li Wenpeng
+ */
+int main()
+{
+	int a[200][200],m,n,i,j,k;
+	cin>>m>>n;
+	for(i=0;i<m;i++)                       //????
+		for(j=0;j<n;j++)
+			cin>>a[i][j];
+	for(k=0;k<m+n-1;k++)                   //?????
+	    for(i=0;i<m;i++)
+		    for(j=0;j<n;j++)
+		    	if(i+j-k==0) cout<<a[i][j]<<endl;   //?????
+	return 0;
+}
+-------------------------------------------
+origin_2 file: 4-562.cpp
+
+int main()
+{
+	int row, col;
+	cin >> row >> col;
+	int a[100][100];
+	int i, j;
+	for (i = 0; i < row; i++)
+		for (j = 0; j < col; j++)
+			cin >> a[i][j];
+	for (i = 0; i < col; i++)
+		for (j = 0; j <= i; j++)
+		{
+			if (j < row)
+			cout << a[j][i - j] << endl;
+		}
+	for (i = 1; i < row; i++)
+		for (j = i; j < col + i; j++)
+		{
+			if (j < row)
+			cout << a[j][col + i - j - 1] << endl;
+		}
+
+	return 0;
+}

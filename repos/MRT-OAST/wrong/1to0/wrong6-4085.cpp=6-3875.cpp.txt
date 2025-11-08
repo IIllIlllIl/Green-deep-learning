@@ -1,0 +1,58 @@
+pred sim: 0.8651851415634155
+
+==========================================
+origin_1 file: 6-4085.cpp
+int main()
+{
+	int a[10000],b[10000],c[10000],i,l,n,sum[10000]={0};
+	cin>>n;
+	for(i=0;i<n;i++)
+	{
+		cin>>a[i]>>b[i];
+		for(l=0;l<a[i]*b[i];l++)
+		{
+			cin>>c[l];
+			if(l<=b[i]||l>=(b[i]*a[i]-b[i]+1)||l%b[i]==0||(l+1)%b[i]==0)
+				sum[i]+=c[l];
+		}
+	}
+	for(i=0;i<n;i++)
+		cout<<sum[i]<<endl;
+	return 0;
+}
+-------------------------------------------
+origin_2 file: 6-4085.cpp
+int main(){
+	int k,i,j,l,a,n,m,sz[100][100],result[100];
+	scanf("%d",&k);
+	for(i=0;i<k;i++){
+		scanf("%d %d",&m,&n);
+		for(j=0;j<m;j++){
+			for(l=0;l<n;l++){
+				scanf("%d",&sz[j][l]);
+			}
+		}
+		a=0;
+		for(l=0;l<n;l++){
+			a+=sz[0][l];
+		}
+		if(m>1){
+		    for(l=0;l<n;l++){
+			    a+=sz[m-1][l];
+			}
+		}
+		for(j=1;j<m-1;j++){
+			a+=sz[j][0];
+		}
+		if(n>1){
+		    for(j=1;j<m-1;j++){
+			    a+=sz[j][n-1];
+			}
+		}
+		result[i]=a;
+	}
+	for(i=0;i<k;i++){
+		printf("%d\n",result[i]);
+	}
+	return 0;
+}

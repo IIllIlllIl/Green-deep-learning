@@ -1,0 +1,81 @@
+pred sim: 0.8817348480224609
+
+==========================================
+origin_1 file: 4-805.cpp
+int main()
+{
+	int lin, col;
+	cin >> lin >> col;
+	int i, j;
+	int num[100][100];
+	for(i = 0; i < lin; i++)
+	{
+		for(j = 0; j < col; j++)
+			cin >> num[i][j];
+	}
+	if(lin <= col)
+	{
+		for(j = 0; j < col; j++)
+		{
+			for(i = 0; i <= j && i < lin; i++)
+				cout << num[i][j - i] << endl;
+		}
+		for(i = 1; i < lin; i++)
+		{
+			for(j = col - 1; j >= i && col + i - 1 - j < lin; j--)
+				cout << num[col + i - 1 - j][j] << endl;
+		}
+	}
+	else
+	{
+		for(j = 0; j < col; j++)
+		{
+			for(i = 0; i <= j; i++)
+				cout << num[i][j - i] << endl;
+		}
+		for(i = 1; i < lin; i++)
+		{
+			for(j = col - 1;col - 1 + i - j < lin && j >= 0 ; j--)
+				cout << num[col + i - 1 - j][j] << endl;
+		}
+	}
+
+	return 0;
+}
+		
+
+-------------------------------------------
+origin_2 file: 4-805.cpp
+int main()
+{
+    int row,col,i,j,**p,k;
+    scanf("%d %d",&row,&col);
+    p=(int**)malloc(row*sizeof(int*));
+    for(i=0;i<row;i++)
+    *(p+i)=(int*)malloc(col*sizeof(int));
+      for(i=0;i<row;i++)
+      for(j=0;j<col;j++)
+      scanf("%d",*(p+i)+j);
+    for(j=0;j<col;j++)
+    {
+        i=0;
+        k=j;
+        while(k>=0&&i<row)
+        {
+            printf("%d\n",*(*(p+i)+k));
+            i++;
+            k--;
+        }
+    }
+    for(i=1;i<row;i++)
+    {
+        j=col-1;
+        k=i;
+        while(k<row&&j>=0)
+        {
+            printf("%d\n",*(*(p+k)+j));
+            k++;
+            j--;
+        }
+    }
+}

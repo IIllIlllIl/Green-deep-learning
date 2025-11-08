@@ -1,0 +1,70 @@
+pred sim: 0.8473870754241943
+
+==========================================
+origin_1 file: 14-621.cpp
+
+int main(){
+	struct student{		//????student
+		int StudentNumber;	//??
+		int ChineseGrades;	//????
+		int MathGrades;	    //????
+		int Total;			//???
+	};
+	struct student Stu[100000],sTemp;	//??????Stu?sTemp
+	int n,i,j;	//n??????i?j?????
+	cin>>n;	//??????
+	for (i=0;i<=n-1;i++){	//????????????????????????
+		cin>>Stu[i].StudentNumber>>Stu[i].ChineseGrades>>Stu[i].MathGrades;
+		Stu[i].Total=Stu[i].ChineseGrades+Stu[i].MathGrades;
+	}
+	for (i=0;i<=2;i++){	//?????????????????????
+		for (j=n-1;j>=i+1;j--){
+			if (Stu[j].Total>Stu[j-1].Total){
+				sTemp=Stu[j];
+				Stu[j]=Stu[j-1];
+				Stu[j-1]=sTemp;
+			}
+		}
+	}
+	cout<<Stu[0].StudentNumber<<" "<<Stu[0].Total;	//?????
+	for (i=1;i<=2;i++){
+		cout<<endl;
+		cout<<Stu[i].StudentNumber<<" "<<Stu[i].Total;
+	}
+	return 0;
+}
+
+-------------------------------------------
+origin_2 file: 14-621.cpp
+int main()
+{
+	int n;
+	cin>>n;
+	struct student
+	{
+		int ID;
+		int chinese;
+		int math;
+		int total;
+	}score[100000];
+	for(int i=0;i<n;i++)
+	{
+		cin>>score[i].ID>>score[i].chinese>>score[i].math;
+		score[i].total=score[i].chinese+score[i].math;
+	}
+	for(int i=0;i<3;i++)
+		for(int j=n-1;j>0;j--)
+			if(score[j].total>score[j-1].total)
+			{
+				struct student temp=score[j];
+			    score[j]=score[j-1];
+			    score[j-1]=temp;
+			}
+	if(n==2)
+			for(int i=0;i<n;i++)
+				cout<<score[i].ID<<score[i].total<<endl;
+	else {
+	for(int i=0;i<3;i++)
+		cout<<score[i].ID<<' '<<score[i].total<<endl;
+	}
+}

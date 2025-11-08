@@ -1,0 +1,98 @@
+pred sim: 0.8918014764785767
+
+==========================================
+origin_1 file: 14-903.cpp
+struct student
+{
+int name;
+int ch;
+int math;
+}stu[100000];
+
+main()
+{
+int n;int sum[100000];int max[3];int i,j,k,m,o;int s;
+scanf("%d",&n);
+for(i=0;i<n;i++)
+scanf("%d %d %d",&stu[i].name,&stu[i].ch,&stu[i].math);
+for(i=0;i<n;i++)
+{
+               sum[i]=stu[i].ch+stu[i].math;
+}
+
+                max[0]=0;
+                for(j=0,k=0;j<n;j++)
+                {if(sum[j]>max[0])
+                {max[0]=sum[j];
+                k=j;}
+                }
+
+   max[1]=0;
+                for(j=1,m=0;j<n;j++)
+                {if((sum[j]>max[1])&&(j!=k))
+                {max[1]=sum[j];
+                m=j;}
+                }
+
+
+                max[2]=0;
+                for(j=1,o=0;j<n;j++)
+                {if((sum[j]>max[2])&&(j!=k)&&(j!=m))
+                {max[2]=sum[j];
+                o=j;}
+                
+                }
+                
+                
+               
+
+
+printf("%d %d\n",stu[k].name,sum[k]);
+printf("%d %d\n",stu[m].name,sum[m]);
+printf("%d %d\n",stu[o].name,sum[o]);
+
+}
+
+-------------------------------------------
+origin_2 file: 14-903.cpp
+struct student
+{
+int num;
+int chn;
+int math;
+int sum;
+};
+
+int main()
+{
+int n;
+int i, j, e;
+int x;
+struct student a[100000];
+scanf("%d", &n);
+for(i=0; i<n; i++)
+{
+scanf("%d %d %d", &a[i].num, &a[i].chn, &a[i].math);
+a[i].sum=a[i].chn+a[i].math;
+}
+for(i=1; i<=3; i++)
+   {
+    for(j=n-i-1; j>=0; j--)
+      {
+       if(a[j].sum<a[j+1].sum)
+          {
+           x=a[j+1].sum;
+           a[j+1].sum=a[j].sum;
+           a[j].sum=x;
+           e=a[j+1].num;
+           a[j+1].num=a[j].num;
+           a[j].num=e;
+          }
+      }
+   }
+for(i=0; i<=2; i++)
+{
+ printf("%d %d\n", a[i].num, a[i].sum);
+}
+return 0;
+}

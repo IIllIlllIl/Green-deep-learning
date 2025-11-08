@@ -7,13 +7,13 @@
 ### 1. 列出所有可用模型
 
 ```bash
-python3 mutation_runner.py --list
+python3 mutation.py --list
 ```
 
 ### 2. 最简单的单次实验
 
 ```bash
-python3 mutation_runner.py \
+python3 mutation.py \
     --repo pytorch_resnet_cifar10 \
     --model resnet20 \
     --mutate epochs \
@@ -23,7 +23,7 @@ python3 mutation_runner.py \
 ### 3. 变异多个超参数
 
 ```bash
-python3 mutation_runner.py \
+python3 mutation.py \
     --repo pytorch_resnet_cifar10 \
     --model resnet20 \
     --mutate epochs,learning_rate,seed \
@@ -33,7 +33,7 @@ python3 mutation_runner.py \
 ### 4. 变异所有支持的超参数
 
 ```bash
-python3 mutation_runner.py \
+python3 mutation.py \
     --repo VulBERTa \
     --model mlp \
     --mutate all \
@@ -45,7 +45,7 @@ python3 mutation_runner.py \
 ### 5. 使用性能模式（减少干扰）
 
 ```bash
-sudo python3 mutation_runner.py \
+sudo python3 mutation.py \
     --repo Person_reID_baseline_pytorch \
     --model densenet121 \
     --mutate epochs,learning_rate \
@@ -56,7 +56,7 @@ sudo python3 mutation_runner.py \
 ### 6. 增加重试次数
 
 ```bash
-python3 mutation_runner.py \
+python3 mutation.py \
     --repo examples \
     --model mnist_cnn \
     --mutate all \
@@ -67,7 +67,7 @@ python3 mutation_runner.py \
 ### 7. 使用自定义配置文件
 
 ```bash
-python3 mutation_runner.py \
+python3 mutation.py \
     --repo test_repo \
     --model model_a \
     --mutate all \
@@ -83,7 +83,7 @@ python3 mutation_runner.py \
 
 ```bash
 # 运行10次，每次随机变异learning_rate
-python3 mutation_runner.py \
+python3 mutation.py \
     --repo pytorch_resnet_cifar10 \
     --model resnet20 \
     --mutate learning_rate \
@@ -103,7 +103,7 @@ done
 **目标**: 研究dropout对模型准确率和能耗的影响
 
 ```bash
-python3 mutation_runner.py \
+python3 mutation.py \
     --repo Person_reID_baseline_pytorch \
     --model densenet121 \
     --mutate dropout \
@@ -122,7 +122,7 @@ done
 **目标**: 研究随机种子对训练结果的影响
 
 ```bash
-python3 mutation_runner.py \
+python3 mutation.py \
     --repo VulBERTa \
     --model mlp \
     --mutate seed \
@@ -139,7 +139,7 @@ cat results/*.json | jq -r '[.hyperparameters.seed, .performance_metrics.accurac
 
 ```bash
 # 运行大规模实验
-python3 mutation_runner.py \
+python3 mutation.py \
     --repo pytorch_resnet_cifar10 \
     --model resnet20 \
     --mutate all \
@@ -190,7 +190,7 @@ for model in "${MODELS[@]}"; do
     echo "Running experiments for $model"
     echo "========================================="
 
-    sudo python3 mutation_runner.py \
+    sudo python3 mutation.py \
         --repo $REPO \
         --model $model \
         --mutate $MUTATE_PARAMS \
@@ -229,7 +229,7 @@ for config in "${!experiments[@]}"; do
     echo "Parameters: $params"
     echo "========================================="
 
-    sudo python3 mutation_runner.py \
+    sudo python3 mutation.py \
         --repo "$repo" \
         --model "$model" \
         --mutate "$params" \
@@ -334,7 +334,7 @@ if 'learning_rate' in df.columns:
 
 ```bash
 # 在一个终端运行实验
-python3 mutation_runner.py --repo pytorch_resnet_cifar10 --model resnet20 --mutate all --runs 10 &
+python3 mutation.py --repo pytorch_resnet_cifar10 --model resnet20 --mutate all --runs 10 &
 
 # 在另一个终端监控进度
 watch -n 5 'ls results/*.json | wc -l && tail -20 results/*.log | grep -i "epoch\|accuracy\|loss"'
@@ -404,11 +404,11 @@ echo "Failed: $(cat results/*.json | jq -r 'select(.training_success == false)' 
 
 1. **使用performance governor**：`--governor performance`
 2. **关闭不必要的服务**
-3. **增加休眠时间**：修改mutation_runner.py中的sleep时间
+3. **增加休眠时间**：修改mutation.py中的sleep时间
 
 ## 帮助和支持
 
 如有问题，请：
-1. 查看 `python3 mutation_runner.py --help`
+1. 查看 `python3 mutation.py --help`
 2. 阅读 [README.md](../README.md)
 3. 检查 [test/README.md](../test/README.md) 中的测试用例

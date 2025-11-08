@@ -1,0 +1,56 @@
+pred sim: 0.4283197522163391
+
+==========================================
+origin_1 file: 4-1802.cpp
+
+
+
+
+int g[100][100];
+
+
+int main()
+{
+	int r,c;
+	scanf("%d%d",&r,&c);
+
+	for(int i=0;i<r;i++)
+		for(int j=0;j<c;j++)
+			scanf("%d",g[i]+j);
+
+	for(int j=0;j<r+c-1;j++)
+	{
+		for(int i=0;i<r;i++)
+		{
+			if(j-i>=0 && j-i<c)
+				printf("%d\n",g[i][j-i]);
+		}
+	}
+
+	return 0;
+}
+
+
+
+-------------------------------------------
+origin_2 file: 4-1802.cpp
+int main()
+{
+	int x,y,i,j,a[100][100];
+	double b[100][200];
+	for(j=0;j<200;j++)
+		for(i=0;i<100;i++)
+			b[i][j]=0.5;
+	cin>>x>>y;
+	for(i=0;i<x;i++)
+		for(j=0;j<y;j++)
+			cin>>a[i][j];
+	for(i=0;i<x;i++)
+		for(j=0;j<y;j++)
+			b[i][j+i]=a[i][j];
+	for(j=0;j<200;j++)
+		for(i=0;i<100;i++)
+			if(b[i][j]!=0.5)
+				cout<<b[i][j]<<endl;
+	return 0;
+}

@@ -1,0 +1,67 @@
+pred sim: 0.840133547782898
+
+==========================================
+origin_1 file: 12-429.cpp
+/*
+ * ????.cpp
+ *
+ *  Created on: 2010-11-17
+ *      Author: IBM
+ */
+
+
+int main(){
+	int n,k,i,j;                                             //n?2?????
+	int a[16];
+	while(cin>>a[0]&&a[0]!=-1){               //?????????-1
+		k=1;                                            //????????
+		n=0;
+		while(cin>>a[k]&&a[k]!=0)         //???????0
+			k++;                                   //??????1
+		for(i=0;i<k-1;i++)
+			for(j=i+1;j<k;j++)
+				if((a[i]==a[j]*2)||(a[j]==a[i]*2))   //??????????2??1/2
+					n++;                   //2?????1
+		cout<<n<<endl;                         //????
+	}
+	return 0;
+}
+
+
+-------------------------------------------
+origin_2 file: 12-429.cpp
+/********************************************
+ *@file   1.cpp                             *
+ *@author ??                              *
+ *@date   2013-10-27                        *
+ *@description                              *
+ *??????6???                       *
+ ********************************************
+ */
+int main()
+{
+	int num[101], number, i, j, count = 0;
+	while (1)
+	{
+		cin >> number;
+		if (number == -1)
+			break;
+		for (i = 1; ; i++)
+		{
+			num[0] = number;
+			cin >> num[i];
+			for (j = 0; j < i; j++)
+			{
+				if (num[j] > num[i] && num[j] == (num[i] * 2))
+					count++;
+				if (num[i] > num[j] && num[i] == (num[j] * 2))
+					count++;
+			}
+			if (num[i] == 0)
+				break;
+		}
+		cout << count << endl;
+		count = 0;
+	}
+	return 0;
+}

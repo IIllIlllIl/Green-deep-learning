@@ -1,0 +1,107 @@
+pred sim: 0.8475092053413391
+
+==========================================
+origin_1 file: 6-3925.cpp
+int main()
+{
+	int sum,a,b,m,n,k,i,j;
+	int num[100][100];
+	scanf("%d",&n);
+	for(i=0;i<n;i++)
+	{
+		sum=0;
+		for(a=0;a<100;a++)
+		{
+			for(b=0;b<100;b++)
+			{
+				num[a][b]=0;
+			}
+		}
+		scanf("%d %d",&m,&k);
+		if(m==1&&k==1)
+		{
+			scanf("%d",&j);
+			printf("%d",j);
+		}
+		else if(m==1&&k!=1)
+		{
+			for(a=0;a<k;a++)
+			{
+				scanf("%d",&num[0][a]);
+				sum=sum+num[0][a];
+			}
+			printf("%d",sum);
+		}
+		else if(m!=1&&k==1)
+		{
+			for(a=0;a<m;a++)
+			{
+				scanf("%d",&num[a][0]);
+				sum=sum+num[a][0];
+			}
+			printf("%d",sum);
+		}
+		else
+		{
+		for(a=0;a<m;a++)
+		{
+			for(b=0;b<k;b++)
+			{
+				scanf("%d",&num[a][b]);
+			}
+		}
+		for(a=0;a<k;a++)
+		{
+			sum=sum+num[0][a]+num[m-1][a];
+		}
+		for(a=1;a<(m-1);a++)
+		{
+			sum=sum+num[a][0]+num[a][k-1];
+		}
+		printf("%d\n",sum);
+		}
+	}
+}
+-------------------------------------------
+origin_2 file: 6-3925.cpp
+int main()
+{
+    int k, m, n, i, j, sum;
+    cin >> k;
+    while ( k-- )
+    {
+        sum = 0;
+        cin >> m >> n;
+        int a[m][n];
+        for ( i = 0; i < m; i++ )
+            for ( j = 0; j < n; j++ )
+                cin >> *(*(a+i)+j);
+        if ( m == 1 )                     //??????,???????? 
+        {
+            for ( i = 0; i < n; i++ )
+                sum += *(*(a)+i);
+            cout << sum << endl;
+            continue;
+        }
+        if ( n == 1 )
+        {
+            for ( i = 0; i < m; i++ )
+                sum += *(*(a+i));
+            cout << sum << endl;
+            continue;
+        }
+        for ( i = 0; i < n; i++ )         //???????????? 
+        {
+            sum += *(*(a)+i);
+            sum += *(*(a+m-1)+i);
+        }
+        for ( i = 1; i < m - 1; i++ )     //???????????? 
+        {
+            sum += *(*(a+i));
+            sum += *(*(a+i)+n-1);
+        }
+        cout << sum << endl; 
+    }
+    
+    return 0;
+}

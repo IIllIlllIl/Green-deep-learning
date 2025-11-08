@@ -1,0 +1,60 @@
+pred sim: 0.03900416940450668
+
+==========================================
+origin_1 file: 15-2095.cpp
+int main()
+{
+	int a,i,j,b,x,p=0,q;
+	scanf("%d",&a);
+	for(i=1;i<=a;i++)
+	{
+		for(x=0,j=1;j<=a;j++)
+		{
+			scanf("%d",&b);
+			if(b==0) x=x+1;
+			else x=x+0;
+		}
+		if(x!=0) {p++;q=x;}
+	}
+    printf("%d",(p-2)*(q-2));
+	return 0;
+}
+
+-------------------------------------------
+origin_2 file: 15-2095.cpp
+/*
+ * 5.9.cpp
+ *
+ *  Created on: 2011-10-27
+ *      Author: sony
+ */
+
+int main()
+{
+	int n;
+	cin>>n;
+	int dt[n],i,j,k,p,q,N,sum=0;
+	for(j=1;j<=n;j++){          //?j???
+		for(i=0;i<n;i++)
+			cin>>dt[i];         //???j???
+
+		for(p=0;p<n;p++){
+			if(dt[p]==0){          //????????
+				for(k=n-1;;k--){    //???????????
+					if(dt[k]==0)
+					{N=k;
+					break;
+					}
+				}
+				for(q=p;q<=N;q++){
+					if(dt[q]!=0) sum++;
+				}
+			}
+		}
+
+	}
+
+
+	cout<<sum<<endl;
+	return 0;
+}

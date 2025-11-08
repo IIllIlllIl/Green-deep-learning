@@ -1,0 +1,6 @@
+/home/green/energy_dl/test/Person_reID_baseline_pytorch/evaluate_gpu.py:40: DeprecationWarning: `in1d` is deprecated. Use `np.isin` instead.
+  mask = np.in1d(index, junk_index, invert=True)
+/home/green/energy_dl/test/Person_reID_baseline_pytorch/evaluate_gpu.py:45: DeprecationWarning: `in1d` is deprecated. Use `np.isin` instead.
+  mask = np.in1d(index, good_index)
+torch.Size([3368, 12288])
+Rank@1:0.920724 Rank@5:0.971200 Rank@10:0.981591 mAP:0.775805

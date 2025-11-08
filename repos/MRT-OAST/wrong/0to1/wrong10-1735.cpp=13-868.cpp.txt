@@ -1,0 +1,55 @@
+pred sim: 0.9270687103271484
+
+==========================================
+origin_1 file: 10-1735.cpp
+int main()
+{
+int n;
+scanf("%d",&n);
+int a[n],b[n],m=0;
+for (int i=0;i<n;i++)
+    {
+    scanf("%d",&a[i]);
+    b[i]=1;
+    }
+for (int i=n-1;i>=0;i--)
+    for (int j=i-1;j>=0;j--)
+        if (a[j]>=a[i]&& b[j]<b[i]+1) b[j]=b[i]+1;
+for (int i=0;i<n;i++)
+    if (m<b[i]) m=b[i];
+printf("%d",m);
+}
+
+-------------------------------------------
+origin_2 file: 10-1735.cpp
+/*
+ * ????????.cpp
+ *
+ *  Created on: 2011-10-21
+ *      Author: ??
+ */
+int main(){
+   int n,l;
+   cin>>n;
+   int m[n];                   //???
+   for (int i=0;i<n;i++)
+     cin>>m[i];                 //?????
+   int cishu[101]={0};            //?????,?????????????
+   for (int i=0;i<n;i++)          //??????????
+     {
+      cishu[m[i]]++;
+      if (cishu[m[i]]>=2)         //??????.???????
+         m[i]=0;
+     }
+   for (int i=0;i<n;i++)         //??
+     {
+     if (i==0)
+       cout<<m[i];
+     else
+       if (m[i]!=0)
+         cout<<" "<<m[i];
+     }
+   return 0;
+   
+}
+

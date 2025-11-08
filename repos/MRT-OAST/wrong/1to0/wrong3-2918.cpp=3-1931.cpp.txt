@@ -1,0 +1,60 @@
+pred sim: 0.8706339597702026
+
+==========================================
+origin_1 file: 3-2918.cpp
+int read();
+int find();
+int n,k,a[1000],m;
+int main()
+{
+    read();
+    m=find();
+    if (m==0)
+    printf("no");
+    else printf("yes");
+    return 0;
+}
+int read()
+{
+    int i;
+    scanf("%d%d",&n,&k);
+    for (i=1;i<=n;i++)
+    scanf("%d",&a[i]);
+    return 0;
+}
+int find()
+{
+    int i,j;
+    for (i=1;i<=n-1;i++)
+       for (j=i+1;j<=n;j++)
+       { if (a[i]+a[j]==k)
+         { return 1;
+           break;
+          }
+        }
+     return 0;
+}
+-------------------------------------------
+origin_2 file: 3-2918.cpp
+int main()
+{
+	int n,k,a[1000],count=0;
+	cin>>n>>k;
+	int i,j;
+	for(i=0;i<n;i++)
+		cin>>a[i];//???????????
+	for(i=0;i<n;i++)
+		for(j=i+1;j<n;j++)
+		{
+			if(a[i]+a[j]!=k)
+				count=count+1;
+		}//????????????????????k??????
+	int m;
+	m=n*(n-1)/2;
+	if(count<m)
+		cout<<"yes"<<endl;
+	else
+		cout<<"no"<<endl;//???????m??????????
+	return 0;
+
+}

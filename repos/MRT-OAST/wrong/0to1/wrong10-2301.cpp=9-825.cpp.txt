@@ -1,0 +1,112 @@
+pred sim: 0.9068088531494141
+
+==========================================
+origin_1 file: 10-2301.cpp
+struct z
+{
+       int g;
+       int h;
+};
+int main()
+{
+    int k,i,j,w;
+    struct z a[50];
+    scanf("%d",&k);
+    for(i=0;i<k;i++)
+    {scanf("%d",&a[i].g);}
+    for(i=0;i<k;i++)
+    {a[i].h=1;}
+    for(i=k-2;i>=0;i--)
+    {
+        for(j=i+1;j<k;j++)
+        {
+             if(a[i].g>=a[j].g)
+             {
+                 if(a[i].h<a[j].h+1)
+                  a[i].h=a[j].h+1;
+             }
+        }
+    }
+    for(i=0;i<k-1;i++)
+    {
+        for(j=i+1;j<k;j++)
+        {
+            if(a[i].h<a[j].h)
+            {
+               w=a[i].h;
+               a[i].h=a[j].h;
+               a[j].h=w;
+            }
+        }
+    }
+    printf("%d\n",a[0].h);
+    //getchar();
+    //getchar();
+    return 0;
+}
+
+-------------------------------------------
+origin_2 file: 10-2301.cpp
+struct patient
+{
+	char num[10];
+	int age;
+	struct patient *next;
+};
+int n;
+struct patient *creat(void)
+{
+	struct patient *head;
+	struct patient *p1,*p2;
+	int num=1;
+	head=NULL;
+	while(num<=n)
+	{
+		p1=(struct patient *)malloc(LEN);
+		scanf("%s %d",p1->num,&p1->age);
+		if (num==1)
+			head=p1;
+		else
+			p2->next=p1;
+		p2=p1;
+		num++;
+	}
+	p2->next=NULL;
+	return (head);
+}
+int main()
+{
+	struct patient *pt,*p,*pre;
+	int i,max,num=0;
+	scanf("%d",&n);
+	pt=creat();
+	for (p=pt;p;p=p->next)
+	{
+		if (p->age>=60)
+			num++;
+	}
+	for (i=1;i<=num;i++)
+	{
+		max=59;
+		for (p=pt;p;p=p->next)
+		{
+			if (max<p->age)
+				max=p->age;
+		}
+		for (p=pre=pt;p;p=p->next)
+		{
+			if (p->age!=max)
+				pre=p;
+			else
+				break;
+		}
+		printf("%s\n",p->num);
+		if (p==pt)
+			pt=p->next;
+		else
+			pre->next=p->next;
+	}
+	for (p=pt;p;p=p->next)
+		printf("%s\n",p->num);
+	return 0;
+}

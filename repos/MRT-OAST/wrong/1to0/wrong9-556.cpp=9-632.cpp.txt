@@ -1,0 +1,56 @@
+pred sim: 0.6077820062637329
+
+==========================================
+origin_1 file: 9-556.cpp
+int main()
+{
+int n,i,j,a[100],b[100],c[100];
+char d[100][100];
+scanf("%d",&n);
+for(i=0;i<n;i++)
+scanf("%s %d",d[i],&a[i]);
+for(j=0;j<=n;j++)
+if(a[j]>=60)
+b[j]=a[j]*1000-j;
+else b[j]=1000-j;
+for(j=0;j<=n;j++)
+c[j]=0;
+for(i=0;i<n;i++)
+for(j=0;j<n;j++)
+if(b[j]>=b[i])
+c[i]++;
+for(i=0;i<n;i++)
+for(j=0;j<n;j++)
+if(c[j]==i+1)
+printf("%s\n",d[j]);
+}
+-------------------------------------------
+origin_2 file: 9-556.cpp
+main()
+{
+int n,i,k,t;
+int d[100];
+char c[100][10],e[10];
+scanf("%d",&n);
+for(i=1;i<=n;i++)
+scanf("%s %d",c[i-1],&d[i-1]);
+for(i=1;i<=n-1;i++)
+{
+for(k=n;k>=i+1;k--)
+{
+if(d[k-1]>d[k-2]&&d[k-1]>=60)
+{
+t=d[k-2];
+d[k-2]=d[k-1];
+d[k-1]=t;
+strcpy(e,c[k-2]);
+strcpy(c[k-2],c[k-1]);
+strcpy(c[k-1],e);
+}                     
+}
+}
+for(i=1;i<=n;i++)
+printf("%s\n",c[i-1]);                                                   
+getchar();
+getchar();  
+}

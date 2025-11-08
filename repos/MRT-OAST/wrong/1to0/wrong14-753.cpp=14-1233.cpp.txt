@@ -1,0 +1,94 @@
+pred sim: 0.665118396282196
+
+==========================================
+origin_1 file: 14-753.cpp
+int main()
+{  
+	int n,i,m;
+	int a,b,c;
+	int j,k,v;
+	int sum[100000];
+	int max1=0,max2=0,max3=0;
+	int A[100000][1];
+	scanf ("%d",&n);
+	for (i=1;i<=n;i++)
+	{
+		scanf ("%d %d %d",&m,&A[i][0],&A[i][1]);
+		sum[i]=A[i][0]+A[i][1];
+	}
+	for (j=1;j<=n;j++)
+	{
+		if (sum[j]>max1)
+		{max1=sum[j];
+		a=j;}
+	}
+	for (k=1;k<=n;k++)
+	{
+		
+			if (sum[k]>max2&&k!=a)
+			{max2=sum[k];
+			b=k;}
+		
+	}
+	for (v=1;v<=n;v++)
+	{
+		if (sum[v]<max2)
+		{
+			if (sum[v]>max3)
+			{max3=sum[v];
+			c=v;}
+		}
+	}
+	printf ("%d %d\n",a,max1);
+	printf ("%d %d\n",b,max2);
+	printf ("%d %d",c,max3);
+
+	  return 0;
+}
+
+ 
+
+
+-------------------------------------------
+origin_2 file: 14-753.cpp
+struct student
+{
+	int num;
+	int score1;//????
+	int score2;//????
+	int total;
+};
+struct student stu[100000];
+int main()
+{
+   	long i,m;
+	scanf("%ld",&m);
+	struct student *p=stu;
+	for(i=0;i<m;i++,p++)
+	{
+		scanf("%d%d%d",&(p->num),&(p->score1),&(p->score2));
+		p->total=(p->score1+p->score2);
+	}
+	int max1,max2,max3,a1=0,a2=0,a3=0;
+	max1=stu[0].total;
+	for(i=0;i<m;i++)
+	{
+		if(stu[i].total>max1)	{max1=stu[i].total;a1=i;}
+	}
+	max2=stu[0].total;
+	for(i=0;i<m;i++)
+	{
+		
+		if(stu[i].total>max2&&i!=a1)	{max2=stu[i].total;a2=i;}
+	}
+	max3=stu[0].total;
+	for(i=0;i<m;i++)
+	{
+		
+		if(stu[i].total>max3&&stu[i].total<max2)	{max3=stu[i].total;a3=i;}
+	}
+	printf("%d %d\n",stu[a1].num,stu[a1].total);
+	printf("%d %d\n",stu[a2].num,stu[a2].total);
+	printf("%d %d",stu[a3].num,stu[a3].total);
+	return 0;
+}

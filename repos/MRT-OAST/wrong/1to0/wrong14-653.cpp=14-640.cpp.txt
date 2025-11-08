@@ -1,0 +1,72 @@
+pred sim: 0.8587584495544434
+
+==========================================
+origin_1 file: 14-653.cpp
+struct student
+{
+	int id;
+	int china;
+	int math;
+	int total;
+}stu[M],temp;
+int main()
+{
+	int n,i,j,count;
+	scanf("%d",&n);
+	for(i=0;i<n;i++)
+	{
+		scanf("%d%d%d",&stu[i].id,&stu[i].china,&stu[i].math);
+		stu[i].total=stu[i].china+stu[i].math;
+	}
+	for(i=0;i<3;i++)
+	{
+		temp=stu[i];
+		count=i;
+		for(j=i+1;j<n;j++)
+		{
+			if(stu[j].total>temp.total)
+			{
+				temp=stu[j];
+				count=j;
+			}
+		}
+		stu[count]=stu[i];
+		stu[i]=temp;
+	}
+	for(i=0;i<3;i++)
+		printf("%d %d\n",stu[i].id,stu[i].total);
+	return 0;
+}
+-------------------------------------------
+origin_2 file: 14-653.cpp
+
+struct stu
+{
+	long int num;
+	int chi;
+	int mat;
+	int tot;
+};
+int main()
+{
+	struct stu a[100050];
+	int n,k,i,j,temp2,max;
+	long int temp1;
+	scanf("%d",&n);
+	for (i=1;i<=n;i++)
+	{
+		scanf("%ld%d%d",&a[i].num,&a[i].chi,&a[i].mat);
+		a[i].tot=a[i].chi+a[i].mat;
+	}
+	for (j=1;j<=3;j++)
+	{
+	max=0;
+	a[0].tot=0;
+	for (i=1;i<=n;i++)
+		if (a[max].tot<a[i].tot) max=i;
+	printf("%ld %d\n",a[max].num,a[max].tot);
+	a[max].tot=0;
+	}
+	scanf("\n");
+	return(0);
+}

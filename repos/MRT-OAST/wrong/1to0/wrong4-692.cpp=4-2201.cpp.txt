@@ -1,0 +1,43 @@
+pred sim: 0.5024235248565674
+
+==========================================
+origin_1 file: 4-692.cpp
+int main()
+{
+    long t,m,r,l,i,x,j,a[1000][1000]={0},b[1000]={0};
+    scanf("%ld%ld",&r,&l);
+    for(i=1;i<=r;i++)
+       for(j=1;j<=l;j++)
+          {scanf("%ld",&x);
+           a[i+j][b[i+j]]=x;
+           b[i+j]++;  
+                     }
+           i=i-1;
+           j=j-1;
+    for(t=2;t<=i+j;t++)
+       {for(m=0;m<b[t];m++)
+          { printf("%ld\n",a[t][m]);}
+                                     }
+    return 0;
+}
+-------------------------------------------
+origin_2 file: 4-692.cpp
+int main() { 
+     int row, col, i, j, temp_i, a[100][100]; 
+     scanf("%d%d", &row, &col); 
+     for(i=0;i<row;i++) 
+          for(j=0;j<col;j++) 
+               scanf("%d", &a[i][j]); 
+     for(j=0;j<col;j++){
+           for(i=0;i<=j&&i<row;i++) 
+                 printf("%d\n", a[i][j-i]); 
+     } 
+     for(i=1;i<row;i++){ 
+           temp_i=i;
+           for(j=col-1;j>=0 && temp_i<row;j--){ 
+                 printf("%d\n", a[temp_i][j]); 
+                 temp_i++;
+           } 
+     } 
+     return 0; 
+} 

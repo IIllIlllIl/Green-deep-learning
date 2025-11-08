@@ -1,0 +1,48 @@
+pred sim: 0.2227526754140854
+
+==========================================
+origin_1 file: 3-840.cpp
+char a[10000][256];
+void main()
+{
+	int n,k;
+	int i,j;
+	int a[1000];
+	scanf("%d%d",&n,&k);
+	for(i=0;i<n;i++)
+		scanf("%d",&a[i]);
+	for(i=0;i<n;i++)
+		for(j=0;j<n-i;j++)
+		{
+			if(a[i]+a[i+j]==k)
+			{
+				printf("yes\n");
+				goto end;
+			}
+			if(i==n-1&&j==n-i-1)printf("no\n");
+		}
+    end:;
+	
+}
+-------------------------------------------
+origin_2 file: 3-840.cpp
+int main(){
+	int a[MAX],n,k,i,j,l=0;
+	scanf("%d%d",&n,&k);
+	for(i=0;i<n;i++){
+		scanf("%d",&a[i]);
+	}
+	for(i=0;i<(n-1);i++){
+		for(j=(n-1);j>i;j--){
+			if(k==a[i]+a[j]){
+				printf("yes");
+				l=1;
+			break;}
+		}
+		if(l==1)
+		    break;
+	}
+	if(i==(n-1))
+		printf("no");
+	return 0;
+}

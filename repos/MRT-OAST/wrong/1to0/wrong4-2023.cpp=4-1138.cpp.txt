@@ -1,0 +1,48 @@
+pred sim: 0.7766847610473633
+
+==========================================
+origin_1 file: 4-2023.cpp
+
+int main()
+{
+	int i,j,k,l,n,m,row,col;
+	int a[200][200]={0};
+	scanf("%d%d",&row,&col);
+	for(i=1;i<=row;i++)
+		for(j=1;j<=col;j++)
+			scanf("%d",&a[i][j]);
+	for(i=1;i<row+col+1;i++)
+		for(j=1;j<=i;j++)
+			if(a[j][i-j]!=0)
+			printf("%d\n",a[j][i-j]);
+	return 0;
+}
+-------------------------------------------
+origin_2 file: 4-2023.cpp
+/*
+ * point1005.cpp
+ *
+ *  Created on: 2013-12-4
+ *      Author: weng
+ */
+
+
+int main()
+{
+	int n , m , i , j , * p = NULL ;
+	cin >> n >> m ;
+	int a[n][m] ;
+	for( p = * a ; p < * ( a ) + n * m ; p ++ )
+			cin >> * p ;
+	for( i = 0 , j = 0 ; i < n ; i ++ )
+	{
+		for( ; j < m ; j ++ )
+		{
+			p = *a + m * i + j ;
+			for( int k = 0 ; k <= j && k <= m && k <= n && k < n - i ; k ++ )
+				cout << * ( p + ( m - 1 ) * k ) << endl ;
+		}
+		j -- ;
+	}
+	return 0 ;
+}

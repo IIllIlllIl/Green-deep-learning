@@ -1,0 +1,47 @@
+pred sim: 0.8238123059272766
+
+==========================================
+origin_1 file: 4-1947.cpp
+int main()
+{
+	int row,col;
+	scanf("%d %d",&row,&col);
+	int *head=(int *)calloc(row*col,sizeof(int));
+    int *p;
+	for(p=head;p<head+row*col;p++)
+	{
+		scanf("%d",p);
+	}
+	int i,j,jj,ii;
+	for(j=0;j<col;j++)
+	{
+		for(jj=j,i=0;jj>=0&&i<row;jj--,i++)
+		{
+			printf("%d\n",*(head+col*i+jj));
+		}
+	}
+	for(i=1;i<row;i++)
+	{
+		for(ii=i,j=col-1;j>=0&&ii<row;j--,ii++)
+		{
+			printf("%d\n",*(head+col*ii+j));
+		}
+	}
+	return 0;
+}
+
+-------------------------------------------
+origin_2 file: 4-1947.cpp
+int main(){
+    int r,c,a[99][99];
+    cin>>r>>c;
+    for(int i=0;i<r;++i)
+        for(int j=0;j<c;++j)
+            cin>>a[i][j];
+    for(int j=0;j<c;++j)
+        for(int x=j,y=0;x>=0&&y<r;--x,++y)
+            cout<<a[y][x]<<endl;
+    for(int i=1;i<r;++i)
+        for(int y=i,x=c-1;x>=0&&y<r;--x,++y)
+            cout<<a[y][x]<<endl;
+}

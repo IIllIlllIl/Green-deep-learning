@@ -1,0 +1,63 @@
+pred sim: 0.7390390634536743
+
+==========================================
+origin_1 file: 15-2006.cpp
+int main()
+{
+	int sz[100][100];
+	int n,i,j,l,k;
+	int sum=0;
+	scanf("%d",&n);
+	for(i=1;i<=n;i++){
+		for(j=1;j<=n;j++){
+			scanf("%d",&(sz[i][j]));
+		}
+	}
+	for(i=1;i<=n;i++){	
+		l=0;
+		k=0;
+		sz[i][0]=255;
+		sz[i][n+1]=255;
+		for(j=1;j<=n;j++){
+			if((sz[i][j]-sz[i][j-1])*(sz[i][j]-sz[i][j+1])>0){
+				l=j-l;
+				k++;
+			}
+		}
+		if(k==2){
+		  sum+=(l-1);
+		}
+		  
+	}
+	printf("%d",sum);
+	return 0;
+}
+-------------------------------------------
+origin_2 file: 15-2006.cpp
+int main(){
+	int n,i,j,k,p=0,q=0;
+	int mianji;
+	scanf("%d\n",&n);
+	int shu[n];
+	int ge[n];
+	for(i=0;i<n;i++){
+		k=0;
+		for(j=0;j<n;j++){
+			scanf("%d ",&shu[j]);
+			if(shu[j]==0)
+				k++;
+		}
+		ge[i]=k;
+		if(ge[i]>p)
+			p=ge[i];
+		for(j=0;j<n;j++){
+			if(shu[j]==0){
+				q++;
+				break;
+			}
+		}
+	}
+	mianji=(p-2)*(q-2);
+	printf("%d\n",mianji);
+	return 0;
+}

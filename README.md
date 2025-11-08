@@ -19,7 +19,7 @@
 
 ```
 nightly/
-├── mutation_runner.py          # 主程序：协调整个实验流程
+├── mutation.py          # 主程序：协调整个实验流程
 ├── governor.sh                 # CPU频率调度器控制脚本
 ├── config/
 │   └── models_config.json      # 模型配置：定义支持的超参数
@@ -60,10 +60,10 @@ nightly/
 ls settings/*.json
 
 # 2. 运行基线实验（复现所有模型的原始训练）
-sudo python3 mutation_runner.py --experiment-config settings/default.json
+sudo python3 mutation.py --experiment-config settings/default.json
 
 # 3. 运行全面变异实验
-sudo python3 mutation_runner.py --experiment-config settings/all.json
+sudo python3 mutation.py --experiment-config settings/all.json
 ```
 
 **预设配置文件**:
@@ -81,7 +81,7 @@ sudo python3 mutation_runner.py --experiment-config settings/all.json
 ### 1. 查看可用模型
 
 ```bash
-python3 mutation_runner.py --list
+python3 mutation.py --list
 ```
 
 输出示例：
@@ -103,7 +103,7 @@ python3 mutation_runner.py --list
 
 ```bash
 # 变异ResNet20的epochs和learning_rate
-python3 mutation_runner.py \
+python3 mutation.py \
     --repo pytorch_resnet_cifar10 \
     --model resnet20 \
     --mutate epochs,learning_rate \
@@ -114,7 +114,7 @@ python3 mutation_runner.py \
 
 ```bash
 # 变异所有支持的超参数，运行5次
-python3 mutation_runner.py \
+python3 mutation.py \
     --repo VulBERTa \
     --model mlp \
     --mutate all \
@@ -125,7 +125,7 @@ python3 mutation_runner.py \
 
 ```bash
 # 设置CPU为performance模式，减少干扰
-sudo python3 mutation_runner.py \
+sudo python3 mutation.py \
     --repo Person_reID_baseline_pytorch \
     --model densenet121 \
     --mutate epochs,learning_rate,dropout \
@@ -355,7 +355,7 @@ echo 'kernel.perf_event_paranoid=-1' | sudo tee -a /etc/sysctl.conf
 1. 在 `config/models_config.json` 中添加配置
 2. 确保训练脚本支持命令行参数
 3. 定义性能指标提取的正则表达式
-4. 测试配置：`python3 mutation_runner.py --list`
+4. 测试配置：`python3 mutation.py --list`
 
 ## 最佳实践
 
@@ -371,7 +371,7 @@ sudo ./governor.sh powersave
 
 或使用 `--governor` 参数自动设置：
 ```bash
-sudo python3 mutation_runner.py ... --governor performance
+sudo python3 mutation.py ... --governor performance
 ```
 
 ### 2. 批量实验
@@ -379,7 +379,7 @@ sudo python3 mutation_runner.py ... --governor performance
 ```bash
 # 示例：对多个模型运行实验
 for model in resnet20 resnet32 resnet44; do
-    python3 mutation_runner.py \
+    python3 mutation.py \
         --repo pytorch_resnet_cifar10 \
         --model $model \
         --mutate all \
@@ -422,7 +422,7 @@ cat results/<experiment_id>.json | jq '.error_message'
 
 需要root权限：
 ```bash
-sudo python3 mutation_runner.py ... --governor performance
+sudo python3 mutation.py ... --governor performance
 ```
 
 ## 依赖项
@@ -452,7 +452,7 @@ sudo sysctl -w kernel.perf_event_paranoid=-1
 ### 研究学习率对能耗的影响
 
 ```bash
-python3 mutation_runner.py \
+python3 mutation.py \
     --repo pytorch_resnet_cifar10 \
     --model resnet20 \
     --mutate learning_rate \
@@ -462,7 +462,7 @@ python3 mutation_runner.py \
 ### 研究Dropout对性能的影响
 
 ```bash
-python3 mutation_runner.py \
+python3 mutation.py \
     --repo Person_reID_baseline_pytorch \
     --model densenet121 \
     --mutate dropout \
@@ -472,7 +472,7 @@ python3 mutation_runner.py \
 ### 全面变异实验
 
 ```bash
-python3 mutation_runner.py \
+python3 mutation.py \
     --repo VulBERTa \
     --model mlp \
     --mutate all \

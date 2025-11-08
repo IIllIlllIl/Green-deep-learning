@@ -1,0 +1,70 @@
+pred sim: 0.775556743144989
+
+==========================================
+origin_1 file: 9-369.cpp
+struct person
+{
+ char num[11];
+ int yr;
+}pe[100],t;
+int main()
+{
+ int n,i,e,k;
+ scanf("%d",&n);
+ for(i=0;i<n;i++){
+  scanf("%s %d",pe[i].num,&pe[i].yr);
+ }
+    for(k = 0 ; k < n ; k++){
+ for(i = 0; i <n-k-1 ; i++){
+   if((pe[i+1].yr>=60)&&(pe[i].yr<pe[i+1].yr)){
+    t=pe[i];
+    pe[i]=pe[i+1];
+    pe[i+1]=t;
+   }
+ }
+}
+    for(i=0;i<n;i++){
+  printf("%s\n",pe[i].num);
+ }
+ return 0;
+}
+-------------------------------------------
+origin_2 file: 9-369.cpp
+
+
+int main(){
+
+	int n, i, k;
+
+	char id[N][LEN];
+
+	int  age[N];
+
+	scanf("%d", &n);
+
+	for(i = 0; i < n; i++){
+		scanf("%s %d", id[i], &(age[i]));
+	}
+
+	int e_age;
+	char e_id[LEN];
+	for(k = 1 ; k <= n ; k++){
+		for(int i = 0; i < n - k; i++){
+			if( (age[i] < age[i+1]) && !(age[i+1] < 60) ){
+				e_age = age[i+1];
+				strcpy(e_id, id[i+1]);
+				age[i+1] = age[i];
+				strcpy(id[i+1], id[i]);
+				age[i] = e_age;
+				strcpy(id[i], e_id);
+			}
+		}
+	}
+
+	for(i = 0; i < n; i++){
+		printf("%s\n", id[i]);
+	}
+
+
+	return 0;
+}

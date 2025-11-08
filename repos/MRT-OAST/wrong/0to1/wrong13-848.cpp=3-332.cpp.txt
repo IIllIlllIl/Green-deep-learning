@@ -1,0 +1,46 @@
+pred sim: 0.9522188901901245
+
+==========================================
+origin_1 file: 13-848.cpp
+int main(){
+	int n,i,k,t;
+	cin>>n;
+	int a[n];
+	for(i=0;i<n;i++)
+		cin>>a[i];
+	for(i=0;i<n;i++)
+		for(k=i+1;k<n;k++)
+		 while ((a[k]==a[i])&&(k<n)) //?a?i???????????
+		  {for(t=k;t<n-1;t++)        //???????
+		  a[t]=a[t+1];
+		  n--;}
+	for(i=0;i<n-1;i++)
+		cout<<a[i]<<" ";
+	cout<<a[n-1];
+	return 0;
+
+}
+
+-------------------------------------------
+origin_2 file: 13-848.cpp
+void main()
+{
+	int x[1000],y[1000],n,k,i,j,he,z=0;
+	scanf ("%d%d",&n,&k);
+	for (i=0;i<n;i++)
+	{
+		scanf ("%d",&x[i]);
+		y[i]=x[i];
+	}
+	for (i=0;i<n;i++)
+	{
+		for (j=i+1;j<n;j++)
+		{
+			he=x[i]+y[j];
+			if (he==k) z+=1;
+			else z+=0;
+		}
+	}
+if (z>0) printf("yes");
+else printf ("no");
+}

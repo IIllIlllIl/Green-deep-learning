@@ -1,0 +1,95 @@
+pred sim: 0.7378889918327332
+
+==========================================
+origin_1 file: 4-949.cpp
+/*
+  Name: ?????????? 
+  Copyright: 
+  Author: 
+  Date: 09/12/12 22:42
+  Description: ????row?col??????array????array[0][0]????????????????????????? 
+*/
+int main()
+{ 
+    int row,col;
+   int time=0;
+   cin>>row>>col;
+   int array[110][110]={0},*p=NULL;
+   int i,j,k; 
+   for( i = 0 ; i < row ; i++) 
+       for( p=*(array+i);p <*(array+i)+col;p++)      
+          cin>>*p;
+      //    for( i = 0 ; i < row ; i++) 
+//       for( j = 0 ; j < col ; j++)
+//       cout<<array[i][j]<<endl; 
+   for(k=0;k<=col+row;k++)
+   {
+       for(i=0;i<row;i++)
+          for(j=0,p=*(array+i);p<*(array+i)+col;j++,p++) 
+       { 
+         if(i+j==k&&*p!=0) 
+          cout<<*p<<endl;
+           
+       }                                    
+   } 
+    
+    return 0;
+}
+
+-------------------------------------------
+origin_2 file: 4-949.cpp
+
+int main()
+{
+	int row, col;
+	int i, j;
+	int sum;
+	int a[100][100];
+	
+	scanf("%d%d",&row,&col);
+	for (i = 0; i < row; i++) {
+		for (j = 0; j < col; j++) {
+			scanf("%d",&a[i][j]);
+		}
+	}
+	
+	for (j = 0; ; ) {
+		if (j < col - 1) {
+			sum = j;
+			for (; ; ) {
+				if (sum >= 0 && j - sum < row) {
+					printf("%d\n",a[j - sum][sum]);
+					sum--;
+				}
+				else {
+					break;
+				}
+			}
+			j++;
+		}
+		else {
+			break;
+		}
+	}
+	for (i = 0; ; ) {
+		if (i <= row - 1) {
+			sum = col - 1 + i;
+			for (; ; ) {
+				if (sum >= 0 && col - 1 + i - sum < row) {
+					if (sum <= col - 1) {
+						printf("%d\n",a[col - 1 + i - sum][sum]);
+					}
+					sum--;
+				}
+				else {
+					break;
+				}
+			}
+			i++;
+		}
+		else {
+			break;
+		}
+	}
+	return 0;
+}

@@ -1,0 +1,81 @@
+pred sim: 0.6565327048301697
+
+==========================================
+origin_1 file: 14-328.cpp
+struct student
+{
+    int num;
+    int yw;
+    int sx;
+    int he;
+}student[100000];
+
+int main()
+{
+    int i,n,j,s=0,m;
+    scanf("%d",&n);
+    for(i=0;i<n;i++)
+    {
+        scanf("%d %d %d",&student[i].num,&student[i].yw,&student[i].sx);
+        student[i].he=student[i].yw+student[i].sx;
+    }
+    for(i=0;i<n;i++)
+    {m=student[0].he;
+        for(j=n-1;j>0;j--)
+        {
+            
+            m=student[j].he>m?student[j].he:m;
+        }
+        
+        for(j=0;j<n;j++)
+        {
+            if(student[j].he==m)
+            {printf("%d %d\n",student[j].num,student[j].he);
+			student[j].he=0;s=s+1;if(s==3)
+            {goto guiyi;}}
+            
+        }
+		       
+    }
+	guiyi: return 0;
+    
+}
+-------------------------------------------
+origin_2 file: 14-328.cpp
+struct student
+{	int ID;
+	int ch;
+	int ma;
+};
+
+void main()
+{	struct student re[N];
+	int n;
+	int i=0,j=0,rec;
+	int total[N];
+	scanf("%d",&n);
+	for(i=0;i<n;i++)
+	{	scanf("%d%d%d",&re[i].ID,&re[i].ch,&re[i].ma);
+		total[i]=re[i].ch+re[i].ma;
+	}
+	
+	int max=total[0];
+	
+	for(i=0;i<n;i++)
+	{	if(max<total[i])
+		{	max=total[i];
+			rec=i;
+		}
+		if(i==n-1)
+		{	printf("%d %d\n",re[rec].ID,total[rec]);
+			total[rec]=0;
+			i=0;
+			max=total[0];
+			j++;
+		}
+		
+		if(j==3)
+			break;
+	}
+
+}

@@ -49,7 +49,7 @@ cd test/repos/test_repo
 
 #### Test Mutation Runner with Test Config
 ```bash
-python3 mutation_runner.py --list --config test/test_config.json
+python3 mutation.py --list --config test/test_config.json
 ```
 
 #### Run Single Mutation Test
@@ -58,7 +58,7 @@ python3 mutation_runner.py --list --config test/test_config.json
 cp test/governor.sh governor.sh
 
 # Run mutation test
-python3 mutation_runner.py \
+python3 mutation.py \
     --repo test_repo \
     --model model_a \
     --mutate epochs,learning_rate,seed \
@@ -133,7 +133,7 @@ Make sure all scripts are executable:
 chmod +x test/run_tests.sh
 chmod +x test/repos/test_repo/train.sh
 chmod +x test/governor.sh
-chmod +x mutation_runner.py
+chmod +x mutation.py
 chmod +x scripts/*.sh
 ```
 
@@ -173,10 +173,10 @@ After tests pass, you can test with real repositories:
 
 ```bash
 # List real models
-python3 mutation_runner.py --list
+python3 mutation.py --list
 
 # Run mutation on real model (example)
-python3 mutation_runner.py \
+python3 mutation.py \
     --repo pytorch_resnet_cifar10 \
     --model resnet20 \
     --mutate epochs,learning_rate \

@@ -1,0 +1,71 @@
+pred sim: 0.6393818259239197
+
+==========================================
+origin_1 file: 15-834.cpp
+int main()
+{
+	int i,j,n,star1,star2,end1,end2;
+	int f=-1;
+	int re=0;
+	i=0;
+	j=0;
+	scanf("%d",&n);
+	int s[1000][1000];
+	for(i=0;i<n;i++)
+	{
+		for(j=0;j<n;j++)
+		{
+			scanf("%d",&(s[i][j]));
+			if(s[i][j]==0&&f==-1)
+			{
+				star1=i+1;
+				star2=j+1;
+				f=1;
+			}
+			if(s[i][j]==0)
+			{
+				end1=i-1;
+				end2=j-1;
+			}
+		}
+	}
+	re=(end1-star1+1)*(end2-star2+1);
+	printf("%d",re);
+	return 0;
+}
+		
+
+-------------------------------------------
+origin_2 file: 15-834.cpp
+int main()
+{
+	int n,i,j,a,b,c,d,z;
+	int point[100][1000];
+	scanf("%d",&n);
+
+	for(i=0;i<n;i++){
+		for(j=0;j<n;j++){
+			scanf("%d",&point[i][j]);
+		}
+	}
+	for(i=0;i<n;i++){
+		for(j=0;j<n;j++){
+			if(point[i][j]==0){
+				if(i==0&&j==0||i==0&&j!=0&&point[i][j-1]!=0  ||i!=0&&point[i-1][j]!=0&&j!=n-1&&point[i][j+1]==0&&j!=0&&point[i][j-1]!=0||i!=0&&point[i-1][j]!=0&&j!=n-1&&point[i][j+1]==0&&j==0){
+					a=i;
+				    b=j;
+				}
+				else if(j==n-1||j!=n-1&&point[i][j-1]==0&&point[i][j+1]!=0){
+					c=i;
+					d=j;
+				}
+			}
+		}
+	}
+	z=(c-a-1)*(d-b-1);
+	printf("%d",z);
+	
+	return 0;
+}
+
+

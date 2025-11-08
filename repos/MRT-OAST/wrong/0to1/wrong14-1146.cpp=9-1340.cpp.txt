@@ -1,0 +1,61 @@
+pred sim: 0.9599173069000244
+
+==========================================
+origin_1 file: 14-1146.cpp
+int main()
+{
+	int n,i,b,c,d;
+	struct{
+		int sn;
+		int chi;
+		int mat;
+		int sum;
+	}a[100000];
+	scanf("%d",&n);
+	for(i=0;i<n;i++){
+		scanf("%d %d %d",&a[i].sn,&a[i].chi,&a[i].mat);
+		a[i].sum=a[i].chi+a[i].mat;
+	}	
+	b=n;
+	c=n;
+	d=n;
+	a[n].sum=-100;
+	for(i=0;i<n;i++){
+		if(a[b].sum>=a[i].sum)b=b;
+		else b=i;
+	}
+	for(i=0;i<n;i++){
+		if(i!=b){if(a[c].sum>=a[i].sum)c=c;else c=i;}
+		else ;
+	} 
+	for(i=0;i<n;i++){
+		if(i!=c&i!=b){if(a[d].sum>=a[i].sum)d=d;else d=i;}
+		else ;
+	}
+	printf("%d %d\n",a[b].sn,a[b].sum);
+	printf("%d %d\n",a[c].sn,a[c].sum);
+	printf("%d %d\n",a[d].sn,a[d].sum);
+	return 0;
+}
+-------------------------------------------
+origin_2 file: 14-1146.cpp
+int main()
+{
+	struct patient{
+		char ID[10];int a;
+	}p[100],pr;
+	int np,i,k;
+	scanf("%d",&np);
+	for(i=0;i<np;i++){
+		scanf("%s %d",p[i].ID,&p[i].a);
+	}
+	for(i=0;i<np;i++){
+		for(k=np-1;k>i;k--){
+			if(p[k].a>p[k-1].a&&p[k].a>=60){
+				pr=p[k];p[k]=p[k-1];p[k-1]=pr;
+			}
+		}
+		printf("%s\n",p[i].ID);
+	}
+	return 0;
+}

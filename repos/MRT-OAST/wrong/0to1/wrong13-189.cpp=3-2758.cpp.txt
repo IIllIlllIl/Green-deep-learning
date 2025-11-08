@@ -1,0 +1,69 @@
+pred sim: 0.9032483100891113
+
+==========================================
+origin_1 file: 13-189.cpp
+int main()
+{
+ int a[20000];
+ int i,j,k,x;
+ scanf("%d",&x);
+ for(i=0;i<x;i++)
+	 scanf("%d",&a[i]);
+ for(i=0;i<x;i++)
+ {
+  for(j=i+1;j<x;j++)
+  {
+   if(a[i]==a[j])
+   {
+	   x--;
+    for(k=j;k<x;k++)
+     a[k]=a[k+1];
+    j--;
+   }
+  }
+ }
+ for(i=0;i<x-1;i++)printf("%d ",a[i]);
+ if(i<x)printf("%d",a[i]);
+ return 0;
+}
+-------------------------------------------
+origin_2 file: 13-189.cpp
+int main()
+{
+    int n,i,k,num;
+    int a[N],b[N];
+    scanf("%d%d",&n,&num);
+    
+    for(i=0;i<n;i++)
+   {
+       scanf("%d",&(a[i]));
+   }
+   for(k=0;k<n-1;k++)
+   {
+       for(i=1;i<n-k;i++)
+       {
+           if(a[k]+a[k+i]==num)
+           {
+              goto done;
+           }
+       }
+     
+   }
+   
+   
+   done:if(k>=n-1)
+        {
+            printf("no");
+        }
+        else
+        {
+             printf("yes");
+        }
+    return 0;
+}
+
+
+
+
+
+

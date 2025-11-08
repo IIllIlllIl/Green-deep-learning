@@ -1,0 +1,114 @@
+pred sim: 0.8259655833244324
+
+==========================================
+origin_1 file: 2-366.cpp
+main()
+{
+      int amount_temp=0,amount_most=0;
+      char most,temp;
+      int i,j,k,s,p;
+      int m;
+      char jiancha[27];
+      struct xinxi
+      {
+             int bianhao;
+             char zuozhe[27];
+      };
+      struct xinxi shuru[999];
+      scanf("%d",&m);
+      for(p=0;p<m;p++)
+      {
+          scanf("%d %s",&shuru[p].bianhao,shuru[p].zuozhe);
+      }
+      for(temp='A';temp<='Z';temp++)
+      {
+          for(i=0;i<m;i++)
+          {
+              strcpy(jiancha,shuru[i].zuozhe);
+              for(j=0;j<strlen(jiancha);j++)
+              {
+                  if(jiancha[j]==temp)
+                  {
+                      amount_temp++;
+                  }
+              }
+          }
+          if(amount_temp>amount_most)
+          {
+              amount_most=amount_temp;
+              most=temp;
+              amount_temp=0;
+          }
+          else
+          {
+              amount_temp=0;
+          }
+      }
+      printf("%c\n%d\n",most,amount_most);
+      for(i=0;i<m;i++)
+          {
+              strcpy(jiancha,shuru[i].zuozhe);
+              for(j=0;j<strlen(jiancha);j++)
+              {
+                  if(jiancha[j]==most)
+                  {
+                      printf("%d\n",shuru[i].bianhao);
+                      break;
+                  }
+              }
+          }
+}
+
+-------------------------------------------
+origin_2 file: 2-366.cpp
+
+
+
+int main()
+{
+    int a;
+	scanf("%d",&a);
+	char zuozhe[100][100];
+	int shuhao[100];
+	int zuo[200];
+	int shu[200][200];
+	int n=0,p,i,j;
+	int m[200];
+	
+	for(i=0;i<200;i++)
+	{  zuo[i]=0;
+	   m[i]=0;
+	}
+	
+	for(i=0;i<a;i++)
+	{
+		scanf("%d %s",&shuhao[i],zuozhe[i]);
+	}
+	for(i=0;i<a;i++)
+	{
+		for(j=0;(zuozhe[i][j])!='\0';j++)
+		{  
+			zuo[(zuozhe[i][j])]=zuo[(zuozhe[i][j])]+1;
+			shu[(zuozhe[i][j])][(m[(zuozhe[i][j])])]=shuhao[i];
+			m[(zuozhe[i][j])]=m[(zuozhe[i][j])]+1;
+		}
+	}
+    for(i=65;i<=90;i++)
+	{
+		if(zuo[i]>n)
+		{
+			n=zuo[i];
+			p=i;
+		}
+	}
+	printf("%c\n",p);
+	printf("%d\n",zuo[p]);
+	for(i=0;i<m[p];i++)
+	{
+		printf("%d\n",shu[p][i]);
+	}
+
+	return 0;
+}
+
+

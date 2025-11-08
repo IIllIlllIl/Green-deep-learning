@@ -4,7 +4,7 @@
 
 ### 1. 实验配置文件支持
 
-mutation_runner.py现在支持通过JSON配置文件批量运行实验，比命令行模式更方便。
+mutation.py现在支持通过JSON配置文件批量运行实验，比命令行模式更方便。
 
 ### 2. 两种运行模式
 
@@ -34,7 +34,7 @@ settings/
 └── README.md                     # 完整使用说明
 ```
 
-### mutation_runner.py 修改
+### mutation.py 修改
 
 **新增方法**:
 - `run_from_experiment_config()` - 从配置文件运行实验
@@ -55,7 +55,7 @@ settings/
 
 **运行**:
 ```bash
-sudo python3 mutation_runner.py --experiment-config settings/all.json
+sudo python3 mutation.py --experiment-config settings/all.json
 ```
 
 **预计时间**: 10-50小时
@@ -76,7 +76,7 @@ sudo python3 mutation_runner.py --experiment-config settings/all.json
 
 **运行**:
 ```bash
-sudo python3 mutation_runner.py --experiment-config settings/default.json
+sudo python3 mutation.py --experiment-config settings/default.json
 ```
 
 **预计时间**: 5-20小时
@@ -171,12 +171,12 @@ sudo python3 mutation_runner.py --experiment-config settings/default.json
 
 1. **第一步：建立基线**
    ```bash
-   sudo python3 mutation_runner.py --experiment-config settings/default.json
+   sudo python3 mutation.py --experiment-config settings/default.json
    ```
 
 2. **第二步：运行变异实验**
    ```bash
-   sudo python3 mutation_runner.py --experiment-config settings/all.json
+   sudo python3 mutation.py --experiment-config settings/all.json
    ```
 
 3. **第三步：分析对比**
@@ -198,7 +198,7 @@ cp settings/default.json settings/my_experiment.json
 vim settings/my_experiment.json
 
 # 运行
-python3 mutation_runner.py --experiment-config settings/my_experiment.json
+python3 mutation.py --experiment-config settings/my_experiment.json
 ```
 
 ---
@@ -257,7 +257,7 @@ python3 mutation_runner.py --experiment-config settings/my_experiment.json
 ### 核心逻辑
 
 ```python
-# mutation_runner.py
+# mutation.py
 
 def run_from_experiment_config(self, config_file: str):
     # 1. 加载配置文件
@@ -298,7 +298,7 @@ def run_from_experiment_config(self, config_file: str):
 python3 -c "import json; print(json.load(open('settings/default.json'))['experiment_name'])"
 
 # 2. 快速测试（使用demo配置）
-python3 mutation_runner.py --experiment-config settings/mixed_mode_demo.json
+python3 mutation.py --experiment-config settings/mixed_mode_demo.json
 
 # 3. 检查生成的结果
 ls -lh results/*.json
@@ -311,19 +311,19 @@ cat results/*.json | jq '.mode'
 
 ```bash
 # 查看帮助
-python3 mutation_runner.py --help
+python3 mutation.py --help
 
 # 列出模型
-python3 mutation_runner.py --list
+python3 mutation.py --list
 
 # 命令行模式（旧方式，仍然支持）
-python3 mutation_runner.py --repo pytorch_resnet_cifar10 --model resnet20 --mutate all --runs 5
+python3 mutation.py --repo pytorch_resnet_cifar10 --model resnet20 --mutate all --runs 5
 
 # 配置文件模式（新方式）
-python3 mutation_runner.py --experiment-config settings/all.json
+python3 mutation.py --experiment-config settings/all.json
 
 # 复现基线（新功能）
-python3 mutation_runner.py --experiment-config settings/default.json
+python3 mutation.py --experiment-config settings/default.json
 ```
 
 ---

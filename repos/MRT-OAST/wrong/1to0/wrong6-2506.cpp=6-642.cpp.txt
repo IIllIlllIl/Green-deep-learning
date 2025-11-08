@@ -1,0 +1,74 @@
+pred sim: 0.6668417453765869
+
+==========================================
+origin_1 file: 6-2506.cpp
+
+int main()
+{
+	int i,j,s1,s2,q1,q2,a,b,t,k,p,s;
+	scanf("%d",&k);
+	for(i=1;i<=k;i++)
+	{
+		int pi[100001];
+		s1=0;
+		s2=0;
+		q1=0;
+		q2=0;
+		scanf("%d %d",&a,&b);
+		for(j=1;j<=a*b;j++)
+		{
+			scanf("%d",pi+j-1);
+		}
+		for(t=1;t<=b;t++)
+		{
+			s1=s1+*(pi+t-1);
+			s2=s2+*(pi+a*b-t);
+		}
+		for(p=1;p<a-1;p++)
+		{
+			q1=q1+*(pi+p*b);
+			q2=q2+*(pi+b-1+p*b);
+		}
+		s=s1+s2+q1+q2;
+		if(a==1&b==1)
+		{
+			printf("%d\n",s/2);
+		}
+		else
+		{
+			printf("%d\n",s);
+		}
+	}
+	return 0;
+}
+
+-------------------------------------------
+origin_2 file: 6-2506.cpp
+int main()
+{
+	int n;
+	scanf("%d",&n);
+	int i,j,k,sum,x,y;
+	int a[100],b[100],ar[100][100];
+	for(i=0;i<n;i++){
+		scanf("%d%d",&a[i],&b[i]);
+		x=a[i]-1;
+		y=b[i]-1;
+		for(j=0;j<a[i];j++){
+			for(k=0;k<b[i];k++){
+				scanf("%d",&ar[j][k]);
+			}
+		}
+		sum=0;
+		for(j=0;j<a[i];j++){
+			sum=sum+ar[j][0]+ar[j][y];
+		}
+		for(k=0;k<b[i];k++){
+			sum=sum+ar[0][k]+ar[x][k];
+		}
+		sum=sum-ar[0][0]-ar[0][y]-ar[x][0]-ar[x][y];
+		printf("%d\n",sum);
+		sum=0;
+	}
+	return 0;
+}

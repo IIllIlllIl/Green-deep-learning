@@ -113,7 +113,7 @@ kill -9 "$GPU_MONITOR_PID" 2>/dev/null || true
 - ✅ 使用SIGTERM优雅停止，避免数据丢失
 - ✅ 分离存储不同指标，便于后续分析
 
-### 2. mutation_runner.py 简化
+### 2. mutation.py 简化
 
 **简化前**（旧方法）：
 ```python
@@ -195,17 +195,17 @@ cd /home/green/energy_dl/nightly
 3. 输出详细的能耗数据
 4. 展示改进的关键优势
 
-### 使用 mutation_runner.py
+### 使用 mutation.py
 
 新方法已完全集成，无需改变使用方式：
 
 ```bash
 # 单次实验
-python mutation_runner.py --repo pytorch_resnet_cifar10 --model resnet20 \
+python mutation.py --repo pytorch_resnet_cifar10 --model resnet20 \
                           --mutate epochs,learning_rate --runs 1
 
 # 批量实验
-python mutation_runner.py --experiment-config settings/default.json
+python mutation.py --experiment-config settings/default.json
 ```
 
 能耗数据将自动保存到 `results/energy_<experiment_id>/` 目录：
@@ -330,7 +330,7 @@ This method provides more accurate results than interval sampling
 
 - **原始方法**: `scripts/energy_monitor.sh`
 - **改进方法**: `scripts/run.sh` (lines 79-191)
-- **Python集成**: `mutation_runner.py` (lines 423-483)
+- **Python集成**: `mutation.py` (lines 423-483)
 - **验证脚本**: `test/validate_energy_monitoring.sh`
 - **参考实现**: `../../green_llm/my_codamosa/run.sh`
 

@@ -1,0 +1,125 @@
+pred sim: 0.8093564510345459
+
+==========================================
+origin_1 file: 7-49.cpp
+
+
+int f[MAX_LEN];
+
+int kmp(char* p, char* t)
+{
+	int cur_p = 0, cur_t = 0;
+	int len_p = strlen(p);
+	int len_t = strlen(t);
+	while(cur_p < len_p && cur_t < len_t)
+	{
+		if(p[cur_p] == t[cur_t])
+		{
+			cur_p++;
+			cur_t++;
+		}
+		else
+		{
+			if(cur_p == 0)
+				cur_t++;
+			else
+				cur_p = f[cur_p-1]+1;
+		}
+	}
+	if(cur_p == len_p)
+		return cur_t-len_p;
+	else
+		return -1;
+}
+
+void fail(char* p)
+{
+	int len_p = strlen(p);
+	f[0] = -1;
+	for(int i=1; i<len_p; i++)
+	{
+		int j = f[i-1];
+		while(p[i]!=p[j+1] && j>=0)
+			j = f[j];
+		if(p[i] == p[j+1])
+			f[i] = j+1;
+		else
+			f[i] = -1;
+	}
+}
+
+int main()
+{
+	char string[257], subString[257], replacement[257];
+	char output[512];
+	scanf("%s%s%s", string, subString, replacement);
+	fail(subString);
+	int index = kmp(subString, string);
+	if(index > -1)
+	{
+		int len = strlen(string);
+		int sub_len = strlen(subString);
+		int rep_len = strlen(replacement);
+		int j=0;
+		for(int i=0; i<index; i++)
+		{
+			output[j] = string[i];
+			j++;
+		}
+		for(int i=0; i<rep_len; i++)
+		{
+			output[j] = replacement[i];
+			j++;
+		}
+		for(int i=index+sub_len; i<len; i++)
+		{
+			output[j] = string[i];
+			j++;
+		}
+		output[j] = '\0';
+		printf("%s", output);
+	}
+	else
+		printf("%s", string);
+}
+-------------------------------------------
+origin_2 file: 7-49.cpp
+int main(int argc, char* argv[])
+{
+	int i,j,s,m,n,k;
+	char str1[257],str2[257],str3[257];
+	scanf("%s",str1);
+	scanf("%s",str2);
+	scanf("%s",str3);
+	m=strlen(str1);
+	n=strlen(str2);
+	k=strlen(str3);
+	for(i=0;i<=m-n;i++)
+	{
+		s=0;
+		for(j=i;j<i+n;j++)
+		{
+			if(str2[j-i]==str1[j])
+				s++;
+		}
+		if(s==n)
+		{
+			for(j=0;j<i;j++)
+			{
+				printf("%c",str1[j]);
+			}
+			for(j=0;j<k;j++)
+			{
+				printf("%c",str3[j]);
+			}
+			for(j=i+n;j<m;j++)
+			{
+				printf("%c",str1[j]);
+			}
+			break;
+		}
+	}
+    if(s!=n)
+		printf("%s",str1);
+	return 0;
+}

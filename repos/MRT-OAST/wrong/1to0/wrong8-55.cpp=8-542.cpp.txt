@@ -1,0 +1,106 @@
+pred sim: 0.8541001081466675
+
+==========================================
+origin_1 file: 8-55.cpp
+
+
+void main()
+{
+	int a[2],i,j,b[2][100],p,c[100],s,t;
+	
+	for(i=0;i<2;i++)
+		scanf("%d",&a[i]);
+	
+	for(i=0;i<2;i++)
+		for(j=0;j<a[i];j++)
+			scanf("%d",&b[i][j]);
+		
+		for(i=0;i<2;i++)
+		{
+			for(s=0;s<a[i]-1;s++)
+			{
+				for(t=0;t<a[i]-1-s;t++)
+					if(b[i][t]>b[i][t+1])
+					{
+						p=b[i][t];
+						b[i][t]=b[i][t+1];
+						b[i][t+1]=p;
+					}
+			}
+		}
+
+					for(i=0;i<a[0];i++)
+						c[i]=b[0][i];
+					for(j=0;j<a[1];j++)
+						c[a[0]+j]=b[1][j];
+
+					for(s=0;s<a[0]+a[1]-1;s++)
+						printf("%d ",c[s]);
+					    printf("%d",c[a[0]+a[1]-1]);
+
+}
+
+
+
+
+
+
+
+
+	
+
+
+
+
+-------------------------------------------
+origin_2 file: 8-55.cpp
+int n,m,a[100],b[100],c[200];
+void f1()
+{
+	int i;
+	scanf("%d%d",&m,&n);
+	for(i=0;i<m;i++)
+		scanf("%d",&a[i]);
+	for(i=0;i<n;i++)
+		scanf("%d",&b[i]);
+}
+
+void f2(int k[],int l)
+{
+	int i,j,t;
+	for(i=0;i<l-1;i++)
+		for(j=i;j<l;j++)
+			if(k[i]>k[j])
+			{
+				t=k[i];
+				k[i]=k[j];
+				k[j]=t;
+			}
+}
+
+void f3()
+{
+	f2(a,m);
+	f2(b,n);
+    int i;
+	for(i=0;i<m;i++)
+		c[i]=a[i];
+	for(i=0;i<n;i++)
+		c[i+m]=b[i];
+}
+
+void f4()
+{
+	int i;
+	for(i=0;i<m+n-1;i++)
+		printf("%d ",c[i]);
+	printf("%d",c[m+n-1]);
+}
+
+void main()
+{
+	f1();
+    f3();
+	f4();
+}
+

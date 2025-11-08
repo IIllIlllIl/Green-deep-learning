@@ -1,0 +1,55 @@
+pred sim: 0.7894816994667053
+
+==========================================
+origin_1 file: 10-140.cpp
+void main()
+{int n,i,a[99];
+ scanf("%d",&n);
+ for(i=1;i<n;i++)
+  scanf("%d ",&a[i]);
+ scanf("%d",&a[n]);
+ if(n==8)
+  printf("6\n");
+ else if(n==25&&a[9]==3348)
+  printf("9\n");
+ else if(n==25&&a[9]==4348)
+  printf("8\n");
+ else if(n==3)
+   printf("2\n");
+ else if(n==10)
+   printf("6\n");
+ else printf("rror\n");
+}
+
+-------------------------------------------
+origin_2 file: 10-140.cpp
+int a[100];
+
+int f(int a[],int n,int min)
+{
+	if(n==1)
+	{
+		if(a[0]>=min)  return (1);
+		else return(0);
+	}
+	else
+	{
+		if(a[n-1]<min) return(f(a,n-1,min));
+		else if(f(a,n-1,a[n-1])+1<f(a,n-1,min))
+			return(f(a,n-1,min));
+		else return(f(a,n-1,a[n-1])+1);
+	}
+}
+
+
+
+int main()
+{
+	int n,i;
+	scanf("%d",&n);
+	for(i=0;i<n;i++)
+		scanf("%d",&a[i]);
+	int result;
+	result=f(a,n,0);
+	printf("%d",result);
+	return 0;}

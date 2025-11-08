@@ -1,0 +1,43 @@
+pred sim: 0.8448334336280823
+
+==========================================
+origin_1 file: 13-1660.cpp
+int main(){
+int n,k,w[200];
+cin>>n;memset(w,0,sizeof(w));
+for(int i=0;i<n;i++){
+cin>>k;
+if(!w[k]){
+if(i)cout<<' ';
+w[k]=1;
+cout<<k;
+}
+}
+return 0;
+}
+
+-------------------------------------------
+origin_2 file: 13-1660.cpp
+main()
+{
+      int a[101]={0};
+      int n,i,now,sign;
+      
+      scanf("%d",&n);
+      sign=0;
+      for (i=1;i<=n;i++)
+      {
+          scanf("%d",&now);
+          if (a[now]==0)
+          {
+              a[now]=1;
+              if (sign==1)
+                  printf(" ");
+              else
+                  sign=1;
+              printf("%d",now);
+          }
+      } 
+      printf("\n");;
+      return 0;      
+}

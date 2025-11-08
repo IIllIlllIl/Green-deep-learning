@@ -1,0 +1,91 @@
+pred sim: 0.89238041639328
+
+==========================================
+origin_1 file: 8-1313.cpp
+int Compare(const void *elem1, const void *elem2)
+{
+    return *((int *)(elem1)) - *((int *)(elem2));
+}
+int main()
+{
+    int M,N;
+    scanf("%d%d",&M,&N);
+    int a[100], b[100];
+    int i;
+    for(i=0;i<M;i++)
+    {
+        scanf("%d",&a[i]);
+    }
+    qsort(a,M,sizeof(int),Compare);
+    for(i=0;i<M;i++)
+    {
+        printf("");
+    }
+    for(i=0;i<N;i++)
+    {
+        scanf("%d",&b[i]);
+    }
+    qsort(b,N,sizeof(int),Compare);
+    for(i=0;i<N;i++)
+    {
+        printf("");
+    }
+    int c[200];
+    for(i=0;i<M;i++)
+    {
+        c[i]=a[i];
+    }
+    int j;
+    for(j=0;j<N;j++,i++)
+    {
+        c[i]=b[j];
+    }
+    for(i=0;i<M+N-1;i++)
+    {
+        printf("%d ",c[i]);
+    }
+    printf("%d",c[i]);
+}
+
+-------------------------------------------
+origin_2 file: 8-1313.cpp
+/*
+ * ?????????.cpp
+ * ??????
+ * ?????2012.11.27
+ * ??????????????????????????
+ */
+int x,y;
+int print(){
+	cout<<" ";
+	return 0;
+}
+void order(int n)
+{
+	int i,j,temp=0;
+	int a[10];
+	for (i=0;i<n;i++){
+		cin>>a[i];
+	}
+	for (i=0;i<n-1;i++){
+		for (j=0;j<n-1-i;j++){
+			if (a[j+1]<a[j]){
+				temp=a[j];
+				a[j]=a[j+1];
+				a[j+1]=temp;
+			}
+		}
+	}
+	for (i=0;i<n-1;i++){
+		cout<<a[i]<<" ";
+	}
+	cout<<a[n-1];
+}
+int main()
+{
+	cin>>x>>y;
+	order(x);
+	print();
+	order(y);
+	return 0;
+}

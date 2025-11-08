@@ -1,0 +1,56 @@
+pred sim: 0.8434971570968628
+
+==========================================
+origin_1 file: 12-17.cpp
+
+int main(int argc, char* argv[])
+{
+	int num[15];
+	int i,m;
+	for(i=0;i<15;i++)
+	{scanf("%d",&num[i]);
+	{if(num[i]==0)
+	break;}
+    i++;
+	}
+	int j=0;
+	int a;
+    m=i;
+    i=a=0;
+	for(i=0;i<m;i++)
+	{
+		for(j=0;j<m;j++)
+		{if(num[i]/num[j]==2&&num[i]%num[j]==0)
+		a++;}
+	}
+	printf("%d\n",a);
+	return 0;
+}
+-------------------------------------------
+origin_2 file: 12-17.cpp
+int main(int argc, char* argv[])
+{  int a[100][15],i=0,j=0,x=10,k=0,m,num=0;
+for(i=0;i<100;i++){
+	if(x==-1)break;
+	for(j=0;j<16;j++){
+		scanf("%d",&x);
+		if(x==-1)break;
+		if(x==0)break;
+		a[i][j]=x;
+	}
+
+}
+k=i;
+for(i=0;i<k-1;i++){
+	for(j=0;j<15;j++){
+		for(m=j+1;m<15;m++){
+		if(a[i][j]*1.0/a[i][m]==2||a[i][m]*1.0/a[i][j]==2)num++;
+		}
+	
+	}
+	printf("%d\n",num);
+	num=0;
+}
+
+	return 0;
+}

@@ -1,0 +1,78 @@
+pred sim: 0.8338546752929688
+
+==========================================
+origin_1 file: 4-26.cpp
+int main()
+{
+	int row,col,i,j,m;
+	int *p;
+	p=(int *)malloc(100*sizeof(int));
+	scanf("%d %d",&row,&col);
+	for (i=0;i<row;i++)
+	{
+		for (j=0;j<col;j++)
+			scanf("%d",p+i*col+j);
+	}
+	for (j=0;j<col;j++)
+	{
+		m=j;
+		for (i=0;!((m==-1)||(i==row));i++,m--)
+			printf("%d\n",*(p+i*col+m));
+	}
+	for (i=1;i<row;i++)
+	{
+		m=i;
+		for (j=col-1;!((m==row)||(j==-1));m++,j--)
+			printf("%d\n",*(p+m*col+j));
+	}
+	return 0;
+}
+-------------------------------------------
+origin_2 file: 4-26.cpp
+int main()
+{
+	int i,k,n,l,s[100][100],m,a;
+	scanf("%d%d",&n,&l);
+	for(i=0;i<n;i++){
+		for(k=0;k<l;k++){
+			scanf("%d",&s[i][k]);
+		}
+	}
+	if(n>=l){
+		for(m=0;m<l;m++){
+		    for(i=0,k=m;i<n,k>=0;i++,k--){
+			    printf("%d\n",s[i][k]);
+			}
+		}
+		for(m=l;m<n;m++){
+		    for(i=m+1-l;i<=m;i++){
+				k=m-i;
+			    printf("%d\n",s[i][k]);
+			}
+		}
+        for(m=n;m<n+l-1;m++){
+		    for(i=m+1-l;i<n;i++){
+				k=m-i;
+			    printf("%d\n",s[i][k]);
+			}
+		}
+	}
+	else{
+		for(m=0;m<n;m++){
+		    for(i=0,k=m;i<n,k>=0;i++,k--){
+			    printf("%d\n",s[i][k]);
+			}
+		}
+		for(m=n;m<l;m++){
+			for(i=0,k=m;i<n,k>m-n;i++,k--){
+				printf("%d\n",s[i][k]);
+			}
+		}
+	    for(a=1;a<n;a++){
+		    for(i=a,k=l-1;i<n,k>=l-n+a;i++,k--){
+			    printf("%d\n",s[i][k]);
+			}
+		}
+	}
+	return 0;
+}

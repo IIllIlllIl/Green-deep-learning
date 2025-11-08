@@ -14,7 +14,7 @@
 
 **运行方式**:
 ```bash
-python3 mutation_runner.py --experiment-config settings/all.json
+python3 mutation.py --experiment-config settings/all.json
 ```
 
 **预计时间**: 根据模型大小和epochs，约10-50小时
@@ -36,7 +36,7 @@ python3 mutation_runner.py --experiment-config settings/all.json
 
 **运行方式**:
 ```bash
-python3 mutation_runner.py --experiment-config settings/default.json
+python3 mutation.py --experiment-config settings/default.json
 ```
 
 **预计时间**: 约5-20小时
@@ -64,7 +64,7 @@ python3 mutation_runner.py --experiment-config settings/default.json
 
 **运行方式**:
 ```bash
-python3 mutation_runner.py --experiment-config settings/resnet_all_models.json
+python3 mutation.py --experiment-config settings/resnet_all_models.json
 ```
 
 **预计时间**: 约6-10小时
@@ -85,7 +85,7 @@ python3 mutation_runner.py --experiment-config settings/resnet_all_models.json
 
 **运行方式**:
 ```bash
-python3 mutation_runner.py --experiment-config settings/learning_rate_study.json
+python3 mutation.py --experiment-config settings/learning_rate_study.json
 ```
 
 **预计时间**: 约5-8小时
@@ -106,7 +106,7 @@ python3 mutation_runner.py --experiment-config settings/learning_rate_study.json
 
 **运行方式**:
 ```bash
-python3 mutation_runner.py --experiment-config settings/mixed_mode_demo.json
+python3 mutation.py --experiment-config settings/mixed_mode_demo.json
 ```
 
 **预计时间**: 约30-60分钟
@@ -246,10 +246,10 @@ results/
 
 ```bash
 # 第一步：建立基线
-python3 mutation_runner.py --experiment-config settings/default.json
+python3 mutation.py --experiment-config settings/default.json
 
 # 第二步：运行变异实验
-python3 mutation_runner.py --experiment-config settings/all.json
+python3 mutation.py --experiment-config settings/all.json
 
 # 第三步：对比结果
 ```
@@ -258,10 +258,10 @@ python3 mutation_runner.py --experiment-config settings/all.json
 
 ```bash
 # 先用小配置测试
-python3 mutation_runner.py --experiment-config settings/mixed_mode_demo.json
+python3 mutation.py --experiment-config settings/mixed_mode_demo.json
 
 # 确认无误后运行大规模实验
-python3 mutation_runner.py --experiment-config settings/all.json
+python3 mutation.py --experiment-config settings/all.json
 ```
 
 ### 3. 使用性能模式减少干扰
@@ -273,7 +273,7 @@ python3 mutation_runner.py --experiment-config settings/all.json
 
 运行时使用sudo:
 ```bash
-sudo python3 mutation_runner.py --experiment-config settings/all.json
+sudo python3 mutation.py --experiment-config settings/all.json
 ```
 
 ### 4. 监控实验进度
@@ -302,10 +302,10 @@ tail -f results/training_*.log
 
 ```bash
 # 步骤1: 运行基线
-sudo python3 mutation_runner.py --experiment-config settings/default.json
+sudo python3 mutation.py --experiment-config settings/default.json
 
 # 步骤2: 运行变异（只变异learning_rate）
-sudo python3 mutation_runner.py --experiment-config settings/learning_rate_study.json
+sudo python3 mutation.py --experiment-config settings/learning_rate_study.json
 
 # 步骤3: 分析结果
 cd results
@@ -316,7 +316,7 @@ cat *.json | jq '[.repository, .model, .hyperparameters.learning_rate, .performa
 
 ```bash
 # 只研究ResNet系列
-sudo python3 mutation_runner.py --experiment-config settings/resnet_all_models.json
+sudo python3 mutation.py --experiment-config settings/resnet_all_models.json
 ```
 
 ### 场景3: 快速原型验证
@@ -338,7 +338,7 @@ sudo python3 mutation_runner.py --experiment-config settings/resnet_all_models.j
 
 运行:
 ```bash
-python3 mutation_runner.py --experiment-config custom.json
+python3 mutation.py --experiment-config custom.json
 ```
 
 ---
@@ -368,7 +368,7 @@ python3 mutation_runner.py --experiment-config custom.json
 ### 查看可用的仓库和模型
 
 ```bash
-python3 mutation_runner.py --list
+python3 mutation.py --list
 ```
 
 ### 验证配置文件
@@ -405,10 +405,10 @@ jq . settings/my_config.json
 
 ```bash
 # 查看命令行帮助
-python3 mutation_runner.py --help
+python3 mutation.py --help
 
 # 列出可用模型
-python3 mutation_runner.py --list
+python3 mutation.py --list
 
 # 验证配置文件（会输出实验数量）
 python3 -c "import json; c=json.load(open('settings/all.json')); print(f\"Total: {len(c['experiments'])} experiments\")"

@@ -1,0 +1,56 @@
+pred sim: 0.8827186822891235
+
+==========================================
+origin_1 file: 12-439.cpp
+/*
+ * pp19.cpp
+ *
+ *  Created on: 2010-11-17
+ *      Author: d
+ */
+int main()
+{
+int i=1,j,n=0,sum=0;
+int a[20];
+while(cin>>a[0]&&a[0]!=-1){
+    while(cin>>a[i]&&a[i]!=0)
+    {    i++;n++;  }
+    for(i=0;i<=n;i++)
+    	for(j=i+1;j<=n;j++)
+    		if(a[i]==a[j]*2||a[j]==a[i]*2)
+    			sum++;
+
+    cout<<sum<<endl;i=1;   sum=0;  n=0;
+    }
+    return 0;
+}
+
+-------------------------------------------
+origin_2 file: 12-439.cpp
+void main()
+{
+	int x[100][15],a[100],b[100]={0},m,i,j,k;
+		for(i=0;;i++)
+		{
+			for(j=0;i<15;j++)
+			{
+				scanf("%d",&x[i][j]);
+				if(x[i][j]==0||x[i][j]==-1)
+                                     {a[i]=j;break;}   //a[i]???i??????
+			}
+			if(x[i][j]==-1) {m=i;break;} //m??????????
+		}
+		for(i=0;i<m;i++)
+		{
+			for(j=0;j<a[i];j++)
+			{
+				for(k=0;k<a[i];k++)
+				{
+					if((float)x[i][k]/(float)x[i][j]==2.0) b[i]++;   //b[i]???i???????????
+				}
+			}
+		}
+		for(i=0;i<m;i++)
+			printf("%d\n",b[i]);
+		return;
+}

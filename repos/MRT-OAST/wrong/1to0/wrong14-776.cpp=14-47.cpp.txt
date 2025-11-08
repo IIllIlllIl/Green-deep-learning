@@ -1,0 +1,121 @@
+pred sim: 0.5896271467208862
+
+==========================================
+origin_1 file: 14-776.cpp
+int x[100000],y[100000],z[100000],s[100000],b[100000];
+int main(int argc, char* argv[])
+{
+	int n;
+	scanf("%d",&n);
+	int i,j,t,m1,m2;
+	for(i=1;i<=n;i++)
+	{
+		scanf("%d%d%d",&x[i],&y[i],&z[i]);
+		s[i]=y[i]+z[i];
+		b[i]=s[i];
+	}
+    for(i=1;i<4;i++)
+	{
+		for(j=i+1;j<=n;j++)
+		{
+			if(s[i]<s[j])
+			{
+				t=s[i];
+                s[i]=s[j];
+                s[j]=t;
+			}
+		}
+	}
+	for(i=1;i<=n;i++)
+	{
+		if(s[1]==b[i])
+		{
+			m1=i;
+			printf("%d %d\n",x[i],b[i]);
+			break;
+		}
+	}
+	for(i=1;i<=n;i++)
+	{
+		if(s[2]==b[i]&&i!=m1)
+		{
+			m2=i;
+			printf("%d %d\n",x[i],b[i]);
+			break;
+		}
+	}
+	for(i=1;i<=n;i++)
+	{
+		if(s[3]==b[i]&&i!=m1&&i!=m2)
+		{
+			printf("%d %d\n",x[i],b[i]);
+			break;
+		}
+	}
+	return 0;
+}
+
+
+-------------------------------------------
+origin_2 file: 14-776.cpp
+
+int main()
+
+{
+    int n,i,j,k,z,x;
+    scanf("%d",&n);
+    struct Student
+    {
+       int num;
+       int yuwen;
+       int shuxue;
+       int zongfen;       
+    }stu[n];
+    
+    
+    for(i=0;i<n;i++)
+    {
+        scanf("%d%d%d",&stu[i].num,&stu[i].yuwen,&stu[i].shuxue);
+        stu[i].zongfen=stu[i].yuwen+stu[i].shuxue;                
+    }
+    
+    for(j=0;j<3;j++)
+    {
+        for(k=0;k<n-1;k++)               
+        {
+            if(stu[k].zongfen>stu[k+1].zongfen)
+            {
+               z=stu[k+1].zongfen;
+               stu[k+1].zongfen=stu[k].zongfen;
+               stu[k].zongfen=z; 
+               x=stu[k+1].num;
+               stu[k+1].num=stu[k].num;
+               stu[k].num=x;                               
+            }   
+            else if(stu[k].zongfen==stu[k+1].zongfen&&stu[k].num<stu[k+1].num)
+            {
+               z=stu[k+1].zongfen;
+               stu[k+1].zongfen=stu[k].zongfen;
+               stu[k].zongfen=z; 
+               x=stu[k+1].num;
+               stu[k+1].num=stu[k].num;
+               stu[k].num=x;                               
+            }   
+            else;                              
+        }
+    }
+    
+    for(j=0;j<3;j++)
+    {
+        printf("%d %d\n",stu[n-1-j].num,stu[n-1-j].zongfen);            
+    }
+    
+    
+    getchar();
+    getchar();
+    
+    
+    
+        
+
+}

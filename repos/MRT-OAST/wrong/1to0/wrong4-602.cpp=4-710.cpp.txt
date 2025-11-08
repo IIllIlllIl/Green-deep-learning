@@ -1,0 +1,52 @@
+pred sim: 0.8114112615585327
+
+==========================================
+origin_1 file: 4-602.cpp
+int main()
+{
+	int n,m,a[1500][1500],b[10000],i,j,sum,t=0;///????
+	cin>>n>>m;
+	for (i=1;i<=1499;i++) for (j=1;j<=1499 ;j++) a[i][j]=-198;
+	for(i=1;i<=n;i++)
+		for(j=1;j<=m;j++)
+		{
+			cin>>a[i][j];
+		}
+		for(sum=2;sum<=(n+m);sum++)
+		{
+			for (i=1;i<sum;i++)	
+			{
+				if (a[i][sum-i]!=-198)
+					cout<<a[i][sum-i]<<endl;
+			}
+		}
+		return 0;
+}
+-------------------------------------------
+origin_2 file: 4-602.cpp
+int main()
+{
+	int L,R,i,j,k;
+	cin>>R>>L;
+	const int l=L;
+	const int r=R;
+	int a[r][l];
+	for(i=0;i<r;i++)
+		for(j=0;j<l;j++)
+			cin>>a[i][j];
+	for(k=0;k<l;k++)
+	{
+		for(i=0;(i<r)&&((k-i)>=0);i++)
+				{
+					cout<<a[i][k-i]<<endl;
+				}
+	}
+	for(k=l;k<=l+r-2;k++)
+	{
+		for(i=l-1;(i>=0)&&((k-i)<r);i--)
+					{
+						cout<<a[k-i][i]<<endl;
+					}
+
+}
+}

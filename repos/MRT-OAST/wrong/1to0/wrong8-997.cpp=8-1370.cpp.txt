@@ -1,0 +1,97 @@
+pred sim: 0.7980476021766663
+
+==========================================
+origin_1 file: 8-997.cpp
+void paixu(int a[],int m)
+{
+int i,j,d;
+for(i=0;i<m;i++)
+{
+for(j=i+1;j<m;j++)
+{
+if(a[i]>a[j])
+{
+d=a[i];
+a[i]=a[j];
+a[j]=d;
+}
+}
+}
+return;
+}
+void hebing(int a[],int b[],int m,int n)
+{
+int i;
+printf("%d",a[0]);
+for(i=1;i<m;i++)
+printf(" %d",a[i]);
+for(i=0;i<n;i++)
+printf(" %d",b[i]);
+return;
+}
+
+int main()
+{
+int m,n,a[100],b[100],i;
+scanf("%d %d",&m,&n);
+for(i=0;i<m;i++)
+{
+scanf("%d",&a[i]);
+}
+for(i=0;i<n;i++)
+{
+scanf("%d",&b[i]);
+}
+paixu(a,m);
+paixu(b,n);
+hebing(a,b,m,n);
+return 0;
+}
+
+-------------------------------------------
+origin_2 file: 8-997.cpp
+int main()
+{int a[100],b[100],c[200],i,m,n;
+scanf("%d",&m);
+scanf("%d",&n);
+for(i=0;i<m;i++)
+scanf("%d",&a[i]);
+for(i=0;i<n;i++)
+scanf("%d",&b[i]);
+int j,p;
+for(i=m-2;i>=0;i--)
+{
+for(j=0;j<=i;j++)
+{
+if(a[j]>a[j+1])
+{
+p=a[j];
+a[j]=a[j+1];
+a[j+1]=p;
+}
+}
+}
+
+for(i=n-2;i>=0;i--)
+{
+for(j=0;j<=i;j++)
+{
+if(b[j]>b[j+1])
+{
+p=b[j];
+b[j]=b[j+1];
+b[j+1]=p;
+}
+}
+}
+int q;
+for(q=0;q<m;q++)
+c[q]=a[q];
+for(q=m;q<m+n;q++)
+c[q]=b[q-m];
+int s;
+printf("%d",c[0]);
+for(s=1;s<m+n;s++)
+printf(" %d",c[s]);
+
+}

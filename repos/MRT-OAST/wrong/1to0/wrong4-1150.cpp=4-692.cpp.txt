@@ -1,0 +1,37 @@
+pred sim: 0.4387303292751312
+
+==========================================
+origin_1 file: 4-1150.cpp
+int a[201][201];
+int main()
+{
+	int n,m;
+	cin>>n>>m;
+	memset(a,0,sizeof(a));
+	for(int i=0;i<n;i++)
+	for(int j=0;j<m;j++)
+	cin>>*(*(a+i)+j);
+	for(int s=0;s<n+m-1;s++)
+	for(int i=0;i<=s;i++)
+	if(a[i][s-i]!=0)cout<<a[i][s-i]<<endl;
+} 
+-------------------------------------------
+origin_2 file: 4-1150.cpp
+int main()
+{
+    long t,m,r,l,i,x,j,a[1000][1000]={0},b[1000]={0};
+    scanf("%ld%ld",&r,&l);
+    for(i=1;i<=r;i++)
+       for(j=1;j<=l;j++)
+          {scanf("%ld",&x);
+           a[i+j][b[i+j]]=x;
+           b[i+j]++;  
+                     }
+           i=i-1;
+           j=j-1;
+    for(t=2;t<=i+j;t++)
+       {for(m=0;m<b[t];m++)
+          { printf("%ld\n",a[t][m]);}
+                                     }
+    return 0;
+}

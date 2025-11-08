@@ -1,0 +1,76 @@
+pred sim: 0.6466022729873657
+
+==========================================
+origin_1 file: 4-571.cpp
+/*
+ * fuxi1.cpp
+ *??????
+ *  Created on: 2011-11-4
+ *      Author: APPLE
+ */
+int main()                                         //??????i????j???
+{
+	int i,j,a,b,k,p;                               //????
+	int array[102][102];                           //??????
+	cin>>a>>b;
+	for(i=0;i<a;i++)                                  //????????????
+		for(j=0;j<b;j++)
+			cin>>array[i][j];
+
+
+		if(a>=b)                                     //?????????????????????
+		{for(j=0;j<b;j++)
+			for(k=j,i=0;k>=0;i++,k--)
+    cout<<array[i][k]<<endl;
+		for(i=1;i<=a-b;i++)
+			for(p=i,j=b-1;j>=0;p++,j--)
+				cout<<array[p][j]<<endl;
+		for(i=a-b+1;i<a;i++)
+			for(p=i,j=b-1;p<a;p++,j--)
+						cout<<array[p][j]<<endl; }
+		else                                             //??????????????????
+		{for(j=0;j<a;j++)
+         for(k=j,i=0;k>=0;i++,k--)
+		    cout<<array[i][k]<<endl;
+	     for(j=a;j<b;j++)
+	    	 for(k=j,i=0;i<a;i++,k--)
+	    	cout<<array[i][k]<<endl;
+      for(i=1;i<a;i++)
+		for(j=b-1,p=i;p<a;p++,j--)
+			cout<<array[p][j]<<endl;}
+	return 0;                                          //?????
+
+
+}
+
+-------------------------------------------
+origin_2 file: 4-571.cpp
+/*
+ * point1005.cpp
+ *
+ *  Created on: 2013-12-4
+ *      Author: weng
+ */
+
+
+int main()
+{
+	int n , m , i , j ;
+	cin >> n >> m ;
+	int a[n][m] ;
+	for( i = 0 ; i < n ; i ++ )
+		for( j = 0 ; j < m ; j ++ )
+			cin >> a[i][j] ;
+	int * p = NULL ;
+	for( i = 0 , j = 0 ; i < n ; i ++ )
+	{
+		for( ; j < m ; j ++ )
+		{
+			p = &a[0][0] + m * i + j ;
+			for( int k = 0 ; k <= j && k <= m && k <= n && k < n - i ; k ++ )
+				cout << * ( p + ( m - 1 ) * k ) << endl ;
+		}
+		j -- ;
+	}
+	return 0 ;
+}

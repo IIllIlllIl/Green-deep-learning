@@ -1,0 +1,71 @@
+pred sim: 0.7841147184371948
+
+==========================================
+origin_1 file: 6-152.cpp
+void main()
+{
+	int bysum(int z);
+	int k;
+	scanf("%d",&k);
+	int *m,*n;
+	m=(int*)malloc(k*sizeof(int));
+	for(n=m;n<m+k;n++)
+		printf("%d\n",bysum(*n));
+}
+int bysum(int z)
+{
+	int m,n,*a,*b,sum=0;
+	scanf("%d%d",&m,&n);
+    a=(int*)malloc(m*n*sizeof(int));
+    for(b=a;b<a+m*n;b++)
+		scanf("%d",b);
+    for(b=a;b<a+n;b++)
+		sum=sum+*b;
+    for(b=a+(m-1)*n;b<a+m*n;b++)
+		sum=sum+*b;
+    for(b=a+n;b<a+(m-2)*n+1;b=b+n)
+        sum=sum+*b;
+	for(b=a+n*2-1;b<a+(m-2)*n+n;b=b+n)
+	    sum=sum+*b;
+	return(sum);
+}
+-------------------------------------------
+origin_2 file: 6-152.cpp
+int main()
+{
+	int k,m,n,i,j,jz[100][100],sum=0;   //????????????
+	cin >> k;                           //??????
+	while (cin >> m >> n)               //????????
+	{
+	    for(i=0;i<m;i++)                //?????
+		{
+			for(j=0;j<n;j++)
+				cin >> jz[i][j];
+		}
+		if(m==1&&n==1)                  //???
+			sum=jz[0][0];
+		else if(m==1)
+		{
+			for(i=0;i<n;i++)
+				sum=sum+jz[0][i];
+		}
+        else if(m==1)
+		{
+			for(i=0;i<n;i++)
+				sum=sum+jz[0][i];
+		}
+		else
+		{
+			for(i=0;i<n;i++)                
+				sum=sum+jz[0][i]+jz[m-1][i];
+			for(i=1;i<m-1;i++)
+				sum=sum+jz[i][0]+jz[i][n-1];
+		}
+		cout << sum << endl;            //???
+		sum=0;
+	}
+	return 0;
+}
+
+
+

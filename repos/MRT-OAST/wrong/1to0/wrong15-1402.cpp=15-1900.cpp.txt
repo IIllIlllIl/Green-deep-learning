@@ -1,0 +1,112 @@
+pred sim: 0.8605636358261108
+
+==========================================
+origin_1 file: 15-1402.cpp
+int main()
+{
+	int i,j,l1,c1,l2,c2,count=0,n;
+	int a[500][500];
+	cin>>n;
+	for(i=1;i<=n;i++)
+	{
+		for(j=1;j<=n;j++)
+		{
+			cin>>a[i][j];
+		}
+	}
+	
+	for(i=1;i<=n;i++)
+	{
+		for(j=1;j<=n;j++)
+		{
+			if(a[i][j]!=0&&a[i][j+1]==0)
+			{
+				l1=i;
+				c1=j+1;break;
+			}
+		}
+            if(a[i][j]!=0&&a[i][j+1]==0)
+			{
+				l1=i;
+				c1=j+1;break;
+			}
+	
+	}
+	
+	for(;i<=n;i++)
+	{
+		for(j=1;j<=n;j++)
+		{
+			if(a[i][j]==0&&a[i][j+1]!=0)
+			{
+				l2=i;
+				c2=j;
+			}
+		}
+	}
+	
+	count=(l2-l1-1)*(c2-c1-1);
+	if(count==-20)
+	{
+		cout<<9;
+	}
+	else if(count==-6)
+	{
+		cout<<2;
+	}
+	else
+	{
+		cout<<count;
+    }
+	return 0;
+}
+
+-------------------------------------------
+origin_2 file: 15-1402.cpp
+
+int main(int argc, char* argv[])
+{
+    int a[100][100];
+    int x1, y1, x2, y2, area=0;
+    int n, i, j;
+    
+    /* ??n*n?? */
+    scanf("%d",&n);
+    for (i=0; i<n; i++) {
+        for (j=0; j<n; j++) {
+            scanf("%d", &a[i][j]);
+        }
+    }
+    /* ?????? */
+    for (i=0; i<n; i++) {
+        for (j=0; j<n; j++) {
+            /* ??????0???????? */
+            if (a[i][j] == 0) {
+                x1=i;
+                y1=j;
+                break;
+            }
+        }
+        if (j<n) {
+            break;
+        }
+    }
+    /* ?????? */
+    for (i=n-1; i>=0; i--) {
+        for (j=n-1; j>=0; j--) {
+            /* ??????0???????? */
+            if (a[i][j] == 0) {
+                x2=i;
+                y2=j;
+                break;
+            }
+        }
+        if (j>=0) {
+            break;
+        }
+    }
+    /* ??????????? */
+    area=(x2-x1-1)*(y2-y1-1);
+    printf("%d", area);
+    return 0;
+}

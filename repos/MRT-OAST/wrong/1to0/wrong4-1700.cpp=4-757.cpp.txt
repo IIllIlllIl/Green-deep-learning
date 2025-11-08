@@ -1,0 +1,78 @@
+pred sim: 0.31129056215286255
+
+==========================================
+origin_1 file: 4-1700.cpp
+void main()
+{
+	int row,col;
+	int i=0,j=0,k=0;
+	int str[100][100]={0};
+	scanf("%d%d",&row,&col);
+	for(i=0;i<row;i++)
+		for(j=0;j<col;j++)
+			scanf("%d",&str[i][j]);
+	for(k=0;k<col;k++)
+		for(i=0,j=k;j>=0;i++,j--)
+		{
+			if(str[i][j]==0)
+				break;
+			else
+				printf("%d\n",str[i][j]);
+		}
+	i=0;
+	k=0;
+	j=0;
+	for(k=1;k<row;k++)
+		for(i=k,j=col-1;(i<row)&&(j>=0);i++,j--)
+			printf("%d\n",str[i][j]);
+}
+
+
+
+
+-------------------------------------------
+origin_2 file: 4-1700.cpp
+
+//
+//  main.cpp
+//  Homework_12_10
+//  ??????????
+//  Created by airjcy on 12/10/12.
+//  Copyright (c) 2012 airjcy. All rights reserved.
+//
+
+
+int main(int argc, const char * argv[])
+{
+    int row, col;
+    cin >> row >> col;
+    int a[row][col];
+    int i,j;
+    for (i = 0; i < row; i ++) {
+        for (j = 0; j < col; j ++) {
+            cin >> a[i][j];
+        }
+    }
+    for(j = 0; j < col ; j++)
+    {
+        int t = 0;
+        int k = j;
+        while (t < row && k >= 0) {
+            cout << a[t][k] << endl;
+            t++;
+            k--;
+        }
+    }
+    for(i = 1; i < row; i++)
+    {
+        int t = i;
+        int k = col - 1;
+        while (t < row && k >= 0) {
+            cout << a[t][k] << endl;
+            t ++;
+            k --;
+        }
+    }
+    
+    return 0;
+}

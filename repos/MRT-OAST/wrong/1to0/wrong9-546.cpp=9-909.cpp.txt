@@ -1,0 +1,77 @@
+pred sim: 0.8134870529174805
+
+==========================================
+origin_1 file: 9-546.cpp
+struct pat
+{
+   char id[10];
+   int  age;
+       }pat[100];
+main()
+{
+      int n,a[200],j,i;
+      scanf("%d",&n);
+      for(j=0;j<150;j++) a[j]=0;
+      for( i=0;i<n;i++)
+       {
+              scanf("%s %d",pat[i].id,&pat[i].age);
+              for(j=1;j<150;j++)
+              {
+                      if(j==pat[i].age) a[j]++;
+                      }
+              }
+       for(j=150;j>=60;j--)
+        { 
+             if(a[j]==0)   continue;          
+          for(i=0;i<n;i++)
+        {
+                          if(j==pat[i].age)  printf("%s\n",pat[i].id);
+                }
+                }  
+               for(i=0;i<n;i++)
+                         if(pat[i].age<60) printf("%s\n",pat[i].id);
+                getchar();
+                getchar();
+                }
+-------------------------------------------
+origin_2 file: 9-546.cpp
+int main()
+{
+    int n,i,y,x=0;
+	struct ID {
+		int age;
+		char a[10];
+	}ID[201];
+	scanf("%d",&n);
+    for(i=0;i<n;i++){
+		scanf("%s",ID[i].a);
+		scanf("%d",&ID[i].age);
+	}
+	for(i=0;i<n;i++){
+		if(ID[i].age>=60){
+			ID[100+x]=ID[i];
+			ID[i].a[0]='\0';
+            x++;
+		}
+	}
+	for(i=0;i<x-1;i++){
+		for(y=0;y<x-1-i;y++){
+			if(ID[100+y].age<ID[y+101].age){
+				ID[200]=ID[100+y];
+				ID[100+y]=ID[y+101];
+				ID[y+101]=ID[200];
+			}
+		}
+	}
+	for(i=0;i<x;i++){
+		printf("%s\n",ID[100+i].a);
+	}
+	for(i=0;i<n;i++){
+		if(ID[i].a[0]!='\0')
+			printf("%s\n",ID[i].a);
+	}
+
+
+	return 0;
+}
+

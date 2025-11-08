@@ -1,0 +1,53 @@
+pred sim: 0.9851300716400146
+
+==========================================
+origin_1 file: 3-1023.cpp
+int main(){
+	int n, m, sz[1000], f=1;
+	scanf("%d%d", &n, &m);
+	for(int i=0; i<n; i++){
+		scanf("%d", &sz[i]);
+	}
+	for(int j=0; j<n-1&&f!=0; j++){
+		for(int k=j+1; k<n&&f!=0; k++){
+			if(sz[j]+sz[k]==m){
+				printf("yes");
+				f--;
+			}
+		}
+	}
+	if(f==1)
+		printf("no");
+	return 0;
+}
+
+				
+
+
+-------------------------------------------
+origin_2 file: 3-1023.cpp
+int main()
+{
+	int n,i,j,l,k;  //??????
+	cin>>n;         //??n??
+	int a[20001];   //????
+	for ( i=0; i<n; i++)
+		cin>>a[i];
+	for ( i=0; i<n; i++)  //??????i
+	{
+		for (j=i+1; j<n; j++)  //??????j
+		{
+		    if (a[i]==a[j])   //??????
+                {
+                    for (k=j; k<n-1; k++)
+                        a[k]=a[k+1];//????
+                    n=n-1;
+                    j=j-1;
+                }
+
+		}
+	}
+		for (l=0; l<n; l++)
+cout<<a[l]<<setw(3);//???????
+return 0;           //??????????????????
+}                 //????

@@ -1,0 +1,65 @@
+pred sim: 0.8296687602996826
+
+==========================================
+origin_1 file: 15-1297.cpp
+int main(){
+	int n,i,k,sum=0,m,l,p,q;
+	int a=0,b=0;
+	int sz[1000][1000];
+	scanf("%d",&n);
+	for(i=0;i<n;i++){
+		for(k=0;k<n;k++){
+	scanf("%d",&sz[i][k]);
+		}
+	}
+	for(i=1;i<n-1;i++){
+		for(k=1;k<n-1;k++){
+			if(sz[i][k]==0&&a==0){
+			
+				m=i;
+				l=k;
+				a=1;
+			}
+			}
+	}
+	
+	for(i=n-1;i>=0;i--){
+		for(k=n-1;k>=0;k--){
+			if(sz[i][k]==0&&b==0){
+				
+				p=i;
+				q=k;
+				b=1;
+		
+			}
+	}
+	}
+	sum=(p-m-1)*(q-l-1);
+	printf("%d",sum);
+
+	return 0;
+}
+-------------------------------------------
+origin_2 file: 15-1297.cpp
+int main()
+{
+	int a[100][100],b[100]={0};
+	int i,j,n,sum=0,line=0;
+	scanf("%d",&n);
+	for(i=1;i<=n;i++)
+	{
+		for(j=1;j<=n;j++)
+		{
+			scanf("%d",&a[i][j]);
+			if(a[i][j]==0)
+			b[i]++;
+		}
+        if(b[i]>0)
+			line++;
+		if(b[i]>sum)
+			sum=b[i];
+	}
+	int num=sum*line-2*line-2*sum+4;
+	printf("%d",num);
+	return 0;
+}

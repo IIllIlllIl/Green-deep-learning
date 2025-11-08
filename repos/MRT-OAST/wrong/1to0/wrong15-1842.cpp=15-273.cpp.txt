@@ -1,0 +1,70 @@
+pred sim: 0.8759451508522034
+
+==========================================
+origin_1 file: 15-1842.cpp
+int main(){
+	int n;
+	int sz[500][500];
+	scanf("%d",&n);
+	int i,j;
+	for(i=0;i<n;i++){
+		for(j=0;j<n;j++){
+			scanf("%d",&sz[i][j]);
+		}
+	}
+	int mincol=n,minrow=n,maxcol=0,maxrow=0;
+	for(i=0;i<n;i++){
+		for(j=0;j<n;j++){
+			if(sz[i][j]==0){
+				if(i<mincol){
+					mincol=i;
+				}
+				if(j<minrow){
+					minrow=j;
+				}
+				if(i>maxcol){
+					maxcol=i;
+				}
+				if(j>maxrow){
+					maxrow=j;
+				}
+			}
+		}
+	}
+	int zong;
+	zong=(maxcol-mincol-1)*(maxrow-minrow-1);
+	printf("%d",zong);
+	return 0;
+}
+-------------------------------------------
+origin_2 file: 15-1842.cpp
+
+int main()
+{
+	int n,i,k,h,hengsum=0,js=1,spj,susum=0;
+	scanf("%d",&n);
+	for (i=1;i<=n;i++)
+	{
+		spj=1;
+		if(hengsum==0)
+			js=i;
+		for (k=1;k<=n;k++)
+		{
+			scanf("%d", &h);
+			if (h==0)
+			{
+				if (spj==1)
+				{
+					susum+=1;
+					spj++;
+				}
+					
+				if (js==i)
+					hengsum+=1;
+			}
+
+		}
+	}
+	printf("%d",(susum-2)*(hengsum-2));
+	return 0;
+}

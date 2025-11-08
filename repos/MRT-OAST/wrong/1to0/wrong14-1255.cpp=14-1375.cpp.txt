@@ -1,0 +1,70 @@
+pred sim: 0.5214313268661499
+
+==========================================
+origin_1 file: 14-1255.cpp
+int k[99999];
+
+int x[99999];
+int main()
+{
+	int n,i ,a,b,c,j,r,t,m=0;
+	scanf("%d",&n);
+	for(i=0;i<n;i++)
+	{
+		scanf("%d%d%d",&a,&b,&c);k[a-1]=b+c;x[i]=a;
+	}
+	for(j=n-1;j>=0;j--)
+	{
+		for(r=0;r<j;r++)
+		{
+			if(k[r]>=k[r+1])
+			{
+				t=k[r+1];
+				k[r+1]=k[r];
+				k[r]=t;
+				t=x[r+1];
+                x[r+1]=x[r];
+				x[r]=t;
+			}
+		
+		}	m++;
+		if(m>3) break;
+	}                     
+		
+		printf("%d %d\n%d %d\n%d %d\n",x[n-1],k[n-1],x[n-2],k[n-2],x[n-3],k[n-3]);
+		return 0;
+}
+-------------------------------------------
+origin_2 file: 14-1255.cpp
+struct Student {
+        int ID;
+        int chinese;
+        int maths;
+        int sum;
+};
+int main() {
+        struct Student stu[3],t;        //????????
+        stu[0].sum =stu[1].sum =stu[2].sum =0;  //???????0
+        int i, n;
+        cin >> n;
+        for (i = 0; i < n; i++) {
+                cin >> t.ID >> t.chinese >> t.maths;
+                t.sum = t.chinese + t.maths;
+                // ????????????
+                if(t.sum>stu[0].sum){
+                        stu[2] = stu[1];        //????????????????
+                        stu[1] = stu[0];
+                        stu[0] = t;
+                } else if(t.sum>stu[1].sum){    //???????????
+                        stu[2] = stu[1];                //???????????????
+                        stu[1] = t;
+                } else if(t.sum>stu[2].sum){    //???????????
+                        stu[2] = t;                     //??????????
+                }
+        }
+        //?????????????
+        for (i = 0; i < 3; i++) {
+                cout << stu[i].ID << " " << stu[i].sum << endl;
+        }
+        return 0;
+}

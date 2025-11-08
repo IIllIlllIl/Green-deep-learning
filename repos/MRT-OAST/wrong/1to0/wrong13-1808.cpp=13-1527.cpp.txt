@@ -1,0 +1,68 @@
+pred sim: 0.8650794625282288
+
+==========================================
+origin_1 file: 13-1808.cpp
+int main()
+{
+	int n,i,j,k,l=0;
+	cin>>n;
+	int a[n];
+	for(i=0;i<n;i++)
+		cin>>a[i];
+	for(i=0;i<n;i++)
+		for(j=n-1;j>i;j--)
+		{if (a[i]==0)
+			break;
+			if(a[j]==a[i])
+			{for(k=j;k<n;k++)
+				a[k]=a[k+1];
+			a[k]=0;
+			l=l+1;
+			}
+		}
+	for(i=0;i<n-l;i++)
+		{if(i==0)
+			cout<<a[i];
+		else
+			cout<<" "<<a[i];}
+	return 0;
+}
+-------------------------------------------
+origin_2 file: 13-1808.cpp
+int main()
+{
+    int n;
+    int a[9000],ans[9000];
+    scanf("%d",&n);
+    int i,j;
+    int num=1,t=0;
+    scanf("%d",&a[0]);
+    ans[0]=a[0];
+    printf("%d",a[0]);
+    for(i=1;i<n;i++)
+    {
+                    scanf("%d",&a[i]);
+                    int j=0;
+                    while(j<num)
+                    {
+                                if(a[i]==ans[j]) 
+                                {
+                                                 t=1;
+                                                 break;
+                                }
+                                j++;
+                    }
+                    if(t==0) 
+                    {
+                             ans[num]=a[i];
+                             printf(" %d",ans[num]);
+                             num++;
+                    }
+                    else  t=0;
+    }
+    getchar();
+    getchar();
+    getchar();
+}
+                                     
+    

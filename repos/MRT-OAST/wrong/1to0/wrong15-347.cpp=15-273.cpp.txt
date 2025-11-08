@@ -1,0 +1,61 @@
+pred sim: 0.8816711902618408
+
+==========================================
+origin_1 file: 15-347.cpp
+int main()
+{
+	int n,i,j,a[100][100],p,q,r,s,mj;
+	scanf("%d",&n);
+	for(i=0;i<n;i++)
+		for(j=0;j<n;j++)
+			scanf("%d",&a[i][j]);
+	for(i=0;i<n;i++)
+		for(j=0;j<n;j++)
+		{
+			if(a[i][j]==0&&a[i][j+1]==0&&a[i+1][j]==0&&a[i+1][j+1]!=0)
+			{
+				p=j;
+				q=i;
+			}
+			if(a[i][j]==0&&a[i-1][j]==0&&a[i][j-1]==0&&a[i-1][j-1]!=0)
+			{
+				r=i;
+				s=j;
+			}
+		}
+		mj=(r-p-1)*(s-q-1);
+		printf("%d",mj);
+		return 0;
+}
+-------------------------------------------
+origin_2 file: 15-347.cpp
+
+int main()
+{
+	int n,i,k,h,hengsum=0,js=1,spj,susum=0;
+	scanf("%d",&n);
+	for (i=1;i<=n;i++)
+	{
+		spj=1;
+		if(hengsum==0)
+			js=i;
+		for (k=1;k<=n;k++)
+		{
+			scanf("%d", &h);
+			if (h==0)
+			{
+				if (spj==1)
+				{
+					susum+=1;
+					spj++;
+				}
+					
+				if (js==i)
+					hengsum+=1;
+			}
+
+		}
+	}
+	printf("%d",(susum-2)*(hengsum-2));
+	return 0;
+}

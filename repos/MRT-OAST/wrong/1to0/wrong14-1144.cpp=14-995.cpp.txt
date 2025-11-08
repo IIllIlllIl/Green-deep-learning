@@ -1,0 +1,99 @@
+pred sim: 0.8581624031066895
+
+==========================================
+origin_1 file: 14-1144.cpp
+struct student
+{int num;
+ int yu;
+ int shu;
+ int score;
+ struct student *next;
+};
+void main()
+{
+	int n,i,max;
+	struct student *p1,*p2,*head;
+	p1=p2=head=NULL;
+	scanf("%d",&n);
+	for(i=0;i<n;i++)
+	{
+		p1=(struct student *)malloc(sizeof(struct student));
+
+		scanf("%d %d %d",&p1->num,&p1->yu,&p1->shu);
+	
+		p1->score=p1->yu+p1->shu;
+	    if(i==0)head=p1;
+		else p2->next=p1;
+		p2=p1;
+	}
+	    p2->next=NULL;
+	
+
+		for(i=0;i<3;i++)
+		{
+			p2=p1=head;
+			max=p1->score;
+			while(p1!=NULL)
+			{
+				if(p1->score>max){max=p1->score;p2=p1;}
+				p1=p1->next;
+			}
+			printf("%d %d\n",p2->num,max);
+            p1=head;
+			while(p1->next!=p2)
+			{
+				p1=p1->next;
+			}
+			p1->next=p2->next;
+		}
+}
+
+-------------------------------------------
+origin_2 file: 14-1144.cpp
+struct stu
+{
+	int num;
+	int chinese;
+	int math;
+	int sum;
+	struct stu *next;
+};
+
+void main()
+{
+	void max(struct stu*);
+	int n,i;
+	struct stu *p,*q,*head;
+	scanf("%d\n",&n);
+	head=(struct stu*)malloc(sizeof(struct stu));
+	p=(struct stu*)malloc(sizeof(struct stu));
+	head->next=p;
+	for(i=0;i<n;i++)
+	{
+		scanf("%d %d %d",&p->num,&p->chinese,&p->math);
+		p->sum=p->chinese+p->math;
+		q=(struct stu*)malloc(sizeof(struct stu));
+		p->next=q;
+		p=q;
+	}
+	p->next=NULL;
+	max(head);
+	max(head);
+	max(head);
+}
+
+void max(struct stu*head)
+{
+	struct stu *p,*k,*r,*q;
+	int max=0;
+	p=head;
+	while(p->next!=NULL)
+	{
+		r=p;
+		p=p->next;
+		if(p->sum>max)  max=p->sum,k=r,q=p;
+	}
+	printf("%d %d\n",q->num,q->sum);
+	k->next=q->next;
+	free(q);
+}

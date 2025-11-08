@@ -1,0 +1,79 @@
+pred sim: 0.8510754108428955
+
+==========================================
+origin_1 file: 3-2739.cpp
+int main()
+{
+	int n,k,a,e[10008],i,j,m,log;
+	log=0;
+	scanf("%d %d",&n,&k);
+	if(n==1)
+	{
+		if(n==k)
+		{
+			printf("yes");
+		}else{
+			printf("no");
+		}
+	}else{
+		scanf("%d",&a);
+		e[1]=a;
+	    for(i=2;i<=n;i++)
+		{
+	     	scanf(" %d",&a);
+			e[i]=a;
+		}
+		for(j=1;j<=n;j++)
+		{
+			for(m=n;m>j;m--)
+			{
+				if((e[j]+e[m])==k)
+				{
+					printf("yes");
+					log=1;
+					break;
+				}
+			}
+			if(log>0.1)
+			{
+				break;
+			}
+		}
+		if(log<0.1)
+		{
+			printf("no");
+		}
+	}
+		return 0;
+}
+
+
+
+
+
+-------------------------------------------
+origin_2 file: 3-2739.cpp
+int main()
+{
+	int n,k,i,j;
+	int a[1000],b[1000];
+	scanf("%d%d",&n,&k);
+	for(i=0;i<n;i++)
+	{
+		scanf("%d",&a[i]);
+		b[i]=a[i];
+	}
+	for(i=0;i<n;i++)
+	{
+		for(j=i+1;j<n;j++)
+		{
+			if(a[i]+b[j]==k)
+			{
+				printf("yes");
+			    return 0;
+			}
+		}
+	}
+printf("no");
+return 0;
+}

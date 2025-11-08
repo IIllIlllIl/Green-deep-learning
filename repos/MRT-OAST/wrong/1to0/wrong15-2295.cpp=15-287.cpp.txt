@@ -1,0 +1,55 @@
+pred sim: 0.5656353235244751
+
+==========================================
+origin_1 file: 15-2295.cpp
+int main (){
+int n,number[1001],i,p,count,start,end;
+count=0;
+scanf("%d",&n);
+for(i=1;i<=n;i++){	
+	start=0;
+	end=0;
+	for(p=1;p<=n;p++){scanf("%d",&number[p]);}
+	for(p=1;p<=n-1;p++){
+		if(start==0&&number[p]==0&&(p==1||number[p-1]!=0)&&number[p+1]!=0){start=p;}
+		if(start!=0&&number[p]==0&&(p==1||number[p-1]!=0)&&number[p+1]!=0){end=p;}	
+	}
+	if(end-start<=1){continue;}
+	count+=(end-start-1);
+
+
+
+}
+printf("%d",count);
+return 0;}
+-------------------------------------------
+origin_2 file: 15-2295.cpp
+void main()
+{    
+	int n,i,j,a[100][100],x=0,y=0,s,place;
+	scanf("%d",&n);
+	for(i=0;i<n;i++)
+		for(j=0;j<n;j++)
+			scanf("%d",&a[i][j]);
+	for(i=0;i<n;i++)
+	{ 
+		if(x==0)
+		for(j=0;j<n;j++) 
+		{if(a[i][j]==0) x++;}
+		else break;
+	}
+	for(j=0;j<n;j++)
+	{ 
+		if(y==0)
+		for(i=0;i<n;i++) 
+	
+		{	if(a[i][j]==0) 
+		
+				y++;}
+
+		else break;
+	}
+	
+	s=(y-2)*(x-2);
+	printf("%d",s);
+}

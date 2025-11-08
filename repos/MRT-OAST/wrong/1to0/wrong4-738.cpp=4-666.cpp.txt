@@ -1,0 +1,48 @@
+pred sim: 0.863074541091919
+
+==========================================
+origin_1 file: 4-738.cpp
+int arr[100][100];
+int row,col;
+void bianli(int y,int x)//??x,y?????????
+{
+	for(;y<=row&&x>0;y++,x--)
+	{
+		cout<<*(*(arr+y)+x)<<endl;
+	}
+}
+int main()
+{
+	cin>>row>>col;
+	for(int i=1;i<=row;i++)
+		for(int j=1;j<=col;j++)
+			cin>>*(*(arr+i)+j);
+	for(int i=1;i<=col;i++)//?????????
+		bianli(1,i);
+	for(int i=2;i<=row;i++)//?????
+		bianli(i,col);
+	return 0;
+}
+-------------------------------------------
+origin_2 file: 4-738.cpp
+int main()
+{
+	int i,j,b,c,d,e,f,g,y,h,k,m,n,t,a,x[500][500];
+	scanf("%d%d",&a,&b);
+	y=0;
+	for(i=1;i<=a;i++){
+		for(j=1;j<=b;j++){
+			scanf("%d",&x[i][j]);
+		}
+	}
+	for(t=2;t<=a+b;t++){
+
+	for(k=1;k<t;k++){
+		if(t-k<=b&&k<=a){
+		printf("%d\n",x[k][t-k]);
+		}
+		
+	}
+	}
+		return 0;
+}

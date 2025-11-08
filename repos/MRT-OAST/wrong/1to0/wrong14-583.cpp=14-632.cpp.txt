@@ -1,0 +1,94 @@
+pred sim: 0.7517885565757751
+
+==========================================
+origin_1 file: 14-583.cpp
+/*
+ * statistics of scores.cpp
+ *
+ *  Created on: 2011-12-11
+ *      Author: Administrator
+ */
+struct stu
+	{
+		int Num;
+		int scoreC;
+		int scoreM;
+		int all;
+	};
+	struct stu stu[100005];
+void fsort(int first,int last)
+{
+	int chosen1,chosen2,p,q;
+	if(first>=last){return;}
+	chosen1=stu[first].all;
+	chosen2=stu[first].Num;
+	p=first;q=last;
+    while(p<q)
+    {
+    	while((p<q)&&(stu[q].all>=chosen1)){q--;}
+    	if(p<q){stu[p].all=stu[q].all;stu[p].Num=stu[q].Num;p++;}
+    	while((p<q)&&(stu[p].all<chosen1)){p++;}
+    	if(p<q){stu[q].all=stu[p].all;stu[q].Num=stu[p].Num;q--;}
+    }
+    stu[p].all=chosen1;stu[p].Num=chosen2;
+    fsort(first,p-1);
+    fsort(p+1,last);
+}
+int main()
+{
+	int m,i;//????
+	cin>>m;
+	for(i=1;i<=m;i++)//????
+	{
+		cin>>stu[i].Num>>stu[i].scoreC>>stu[i].scoreM;
+		stu[i].all=stu[i].scoreC+stu[i].scoreM;
+	}
+	fsort(1,m);
+	cout<<stu[m].Num<<" "<<stu[m].all<<endl;//?????
+	cout<<stu[m-1].Num<<" "<<stu[m-1].all<<endl;
+	cout<<stu[m-2].Num<<" "<<stu[m-2].all<<endl;
+	return 0;
+}
+
+
+-------------------------------------------
+origin_2 file: 14-583.cpp
+int main()
+{
+	  int n,i,j;
+	  float one=0,two=0,three=0,yi=0,er=0,san=0;
+	  float a[100000][2];
+	  scanf("%d",&n);
+	  struct Student
+	  {
+		  float xuehao;
+		  float yuwen;
+		  float shuxue;
+	  } student;
+	  for (i=0;i<n;i++){
+		  scanf("%f %f %f",&student.xuehao,&student.yuwen,&student.shuxue);
+		  for (j=0;j<2;j++){
+			  a[i][1]=student.yuwen+student.shuxue;  
+	          a[i][0]=i+1;
+		  }
+	  }
+	  for (i=0;i<n;i++){
+          if (a[i][1]>one)
+		  {		  one=a[i][1];
+		  yi=a[i][0];  }
+	  }
+      for (i=0;i<n;i++){
+          if (a[i][1]>two&&a[i][1]<=one&&a[i][0]!=yi)
+		  {		  two=a[i][1];
+		  er=a[i][0];  }
+	  }
+       for (i=0;i<n;i++){
+          if (a[i][1]>three&&a[i][1]<=one&&a[i][1]<=two&&a[i][0]!=yi&&a[i][0]!=er)
+		  {		  three=a[i][1];
+		  san=a[i][0];  }
+	  }
+	   printf("%.0f %.0f\n",yi,one);
+	   printf("%.0f %.0f\n",er,two);
+	   printf("%.0f %.0f\n",san,three);
+	   return 0;
+}

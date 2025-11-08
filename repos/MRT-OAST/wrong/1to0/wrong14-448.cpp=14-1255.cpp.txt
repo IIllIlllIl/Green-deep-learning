@@ -1,0 +1,77 @@
+pred sim: 0.5087518692016602
+
+==========================================
+origin_1 file: 14-448.cpp
+// ????????.cpp : ??????????????
+//
+
+
+struct student
+{
+	int id;
+	int chinese;
+	int math;
+	int total;
+};
+
+int main()
+{
+	int number;
+	struct student stu[100000];
+	scanf("%d\n",&number);
+	for(int i=1;i<=number;++i)
+	{
+		scanf("%d%d%d",&stu[i].id,&stu[i].chinese,&stu[i].math);
+		stu[i].total=stu[i].chinese+stu[i].math;
+	}
+	for(int i=1;i<=3;++i)
+	{
+		for(int j=i+1;j<=number;++j)
+		{
+			if(stu[i].total<stu[j].total)
+			{
+				struct student temp;
+				temp=stu[i];
+				stu[i]=stu[j];
+				stu[j]=temp;
+			}
+		}
+		printf("%d %d\n",stu[i].id,stu[i].total);
+	}
+	return 0;
+}
+
+-------------------------------------------
+origin_2 file: 14-448.cpp
+int k[99999];
+
+int x[99999];
+int main()
+{
+	int n,i ,a,b,c,j,r,t,m=0;
+	scanf("%d",&n);
+	for(i=0;i<n;i++)
+	{
+		scanf("%d%d%d",&a,&b,&c);k[a-1]=b+c;x[i]=a;
+	}
+	for(j=n-1;j>=0;j--)
+	{
+		for(r=0;r<j;r++)
+		{
+			if(k[r]>=k[r+1])
+			{
+				t=k[r+1];
+				k[r+1]=k[r];
+				k[r]=t;
+				t=x[r+1];
+                x[r+1]=x[r];
+				x[r]=t;
+			}
+		
+		}	m++;
+		if(m>3) break;
+	}                     
+		
+		printf("%d %d\n%d %d\n%d %d\n",x[n-1],k[n-1],x[n-2],k[n-2],x[n-3],k[n-3]);
+		return 0;
+}

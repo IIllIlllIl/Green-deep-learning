@@ -1,0 +1,55 @@
+pred sim: 0.9784692525863647
+
+==========================================
+origin_1 file: 3-2505.cpp
+
+int main(){
+   int n,k,i,j,t;
+   int a[Max];
+   scanf("%d %d\n",&n,&k);
+   for(i=0;i<n;i++){
+      scanf("%d ",&a[i]);
+   }
+   for(i=0;i<n;i++){
+      t=k-a[i];
+	  for(j=0;j<n;j++){
+		  if(a[j]==t&&j!=i){
+			  
+			    printf("yes");
+				return 0;
+			  
+		  
+		  }
+	  
+	  }
+   }
+   printf("no");
+   return 0;
+}
+-------------------------------------------
+origin_2 file: 3-2505.cpp
+int main()
+{
+	int n;
+	cin >> n;
+	int mark[101];
+	for (int i = 0; i < 101; i++)
+		mark[i] = 0;
+	int num[20005];
+	for (int i = 0; i < n; i++)
+	{
+		cin >> num[i];
+	}
+	cout << num[0];
+	mark[num[0]] = 1;
+	for (int i = 0; i < n; i++)
+	{
+		if (mark[num[i]] == 0)
+		{
+			mark[num[i]] = 1;
+			cout << " " << num[i];
+		}
+	}
+	cout << endl;
+	return 0;
+}

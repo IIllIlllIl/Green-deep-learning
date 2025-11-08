@@ -1,0 +1,75 @@
+pred sim: 0.7689632177352905
+
+==========================================
+origin_1 file: 4-1294.cpp
+int main()
+{
+	int row,col,sz[100][100],i,j;
+	scanf("%d%d",&row,&col);
+	for(i=0;i<row;i++)
+	{
+		for(j=0;j<col;j++)
+		{
+			scanf("%d",&sz[i][j]);
+		}
+	}
+	for(i=0;i<col;i++)
+	{
+		for(j=0;j<i+1;j++)
+		{
+			if(j>=row)
+			{
+				break;
+			}
+			else
+			{
+				printf("%d\n",sz[j][i-j]);
+			}
+		}
+	}
+	for(i=1;i<row;i++)
+	{
+		for(j=0;j<col;j++)
+		{
+			if(i+j>=row)
+			{
+				break;
+			}
+			else
+			{
+			    printf("%d\n",sz[i+j][col-j-1]);
+			}
+		}
+	}
+	return 0;
+}
+-------------------------------------------
+origin_2 file: 4-1294.cpp
+int matrix[100][100],row,col;
+void display(int step)
+{
+    int x,y,i;
+    if (step>row+col-1) return;
+    if (step<col)
+    {
+        y=step-1;
+        for (i=y;i>=0&&y-i<row;i--)
+            cout<<matrix[y-i][i]<<endl;
+    }
+    else
+    {
+        x=step-col;
+        for (i=x;i<row&&col-1+x-i>=0;i++)
+            cout<<matrix[i][col-1+x-i]<<endl;
+    }
+    display(step+1);
+}
+int main()
+{
+    int i,j;
+    cin>>row>>col;
+    for (i=0;i<row;i++)
+        for (j=0;j<col;j++)
+            cin>>*(*(matrix+i)+j);
+    display(1);
+}

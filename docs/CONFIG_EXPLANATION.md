@@ -83,7 +83,7 @@
 1. **只传递被变异的参数**
    ```bash
    # 用户命令
-   python3 mutation_runner.py --repo pytorch_resnet_cifar10 --model resnet20 --mutate epochs
+   python3 mutation.py --repo pytorch_resnet_cifar10 --model resnet20 --mutate epochs
 
    # 生成的实际命令（假设变异后epochs=100）
    ./train.sh -n resnet20 -e 100
@@ -148,16 +148,16 @@ cd repos/VulBERTa
 
 这样���使用train.sh内部定义的所有默认值，完全复现原始训练。
 
-### 方法2：不使用mutation_runner.py
+### 方法2：不使用mutation.py
 
-mutation_runner.py的设计目的是**变异**超参数，不是用来复现原始训练的。
+mutation.py的设计目的是**变异**超参数，不是用来复现原始训练的。
 
 ## 变异策略示例
 
 ### 示例1：只变异epochs
 
 ```bash
-python3 mutation_runner.py --repo pytorch_resnet_cifar10 --model resnet20 --mutate epochs --runs 5
+python3 mutation.py --repo pytorch_resnet_cifar10 --model resnet20 --mutate epochs --runs 5
 ```
 
 **效果**：
@@ -167,7 +167,7 @@ python3 mutation_runner.py --repo pytorch_resnet_cifar10 --model resnet20 --muta
 ### 示例2：变异epochs和learning_rate
 
 ```bash
-python3 mutation_runner.py --repo pytorch_resnet_cifar10 --model resnet20 --mutate epochs,learning_rate --runs 5
+python3 mutation.py --repo pytorch_resnet_cifar10 --model resnet20 --mutate epochs,learning_rate --runs 5
 ```
 
 **效果**：
@@ -178,7 +178,7 @@ python3 mutation_runner.py --repo pytorch_resnet_cifar10 --model resnet20 --muta
 ### 示例3：变异所有支持的参数
 
 ```bash
-python3 mutation_runner.py --repo pytorch_resnet_cifar10 --model resnet20 --mutate all --runs 5
+python3 mutation.py --repo pytorch_resnet_cifar10 --model resnet20 --mutate all --runs 5
 ```
 
 **效果**：
@@ -262,12 +262,12 @@ python3 mutation_runner.py --repo pytorch_resnet_cifar10 --model resnet20 --muta
 
 6. **验证配置**
    ```bash
-   python3 mutation_runner.py --list
+   python3 mutation.py --list
    ```
 
 ## 总结
 
 - ✅ **配置文件的default值与原仓库一致** - 用于文档记录和变异策略
 - ✅ **只传递被变异的参数** - 未变异的参数由train.sh使用自己的默认值
-- ✅ **复现原始训练请直接使用train.sh** - mutation_runner.py用于变异实验
+- ✅ **复现原始训练请直接使用train.sh** - mutation.py用于变异实验
 - ✅ **配置文件统一了6个仓库的差异** - 提供统一的接口进行超参数变异
