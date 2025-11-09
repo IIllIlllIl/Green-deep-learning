@@ -300,11 +300,11 @@ echo "模型保存路径: $SAVE_DIR"
 echo "日志文件: $LOG_FILE"
 echo "======================"
 
-# 检查conda环境
-if ! conda info --envs | grep -q "mrt-oast"; then
-    print_error "conda环境 'mrt-oast' 不存在，请先运行 'conda env create -f environment.yml'"
-    exit 1
-fi
+# 检查conda环境（在sudo下跳过，因为conda命令不可用）
+# if ! conda info --envs | grep -q "mrt-oast"; then
+#     print_error "conda环境 'mrt-oast' 不存在，请先运行 'conda env create -f environment.yml'"
+#     exit 1
+# fi
 
 # 激活conda环境并训练
 print_info "开始训练..."
@@ -343,8 +343,7 @@ echo "===========================================" >> "$LOG_FILE"
 echo "" >> "$LOG_FILE"
 
 # 执行训练
-eval "$(conda shell.bash hook)"
-conda activate mrt-oast
+source /home/green/miniconda3/bin/activate mrt-oast
 
 # 训练并记录日志
 if eval "$TRAIN_CMD" 2>&1 | tee -a "$LOG_FILE"; then

@@ -50,17 +50,23 @@
       "train_script": "./train.sh",
       "models": ["default"],
       "supported_hyperparams": {
-        "epochs": {
-          "flag": "--epochs",
+        "max_iter": {
+          "flag": "--max_iter",
+          "type": "int",
+          "default": 10000,
+          "range": [1000, 20000]
+        },
+        "kfold": {
+          "flag": "--kfold",
           "type": "int",
           "default": 10,
-          "range": [5, 20]
+          "range": [2, 10]
         },
-        "learning_rate": {
-          "flag": "--lr",
+        "alpha": {
+          "flag": "--alpha",
           "type": "float",
-          "default": 0.001,
-          "range": [0.0001, 0.01]
+          "default": 0.00001,
+          "range": [0.000001, 0.0001]
         },
         "seed": {
           "flag": "--seed",
@@ -71,8 +77,9 @@
       },
       "performance_metrics": {
         "log_patterns": {
-          "map": "MAP[:\\s@]+([0-9.]+)",
-          "mrr": "MRR[:\\s@]+([0-9.]+)"
+          "top1": "Top-1[:\\s@]+([0-9.]+)",
+          "top5": "Top-5[:\\s@]+([0-9.]+)",
+          "map": "MAP[:\\s@]+([0-9.]+)"
         }
       }
     },

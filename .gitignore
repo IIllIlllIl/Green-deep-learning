@@ -46,6 +46,10 @@ repos/MRT-OAST/
 repos/pytorch_resnet_cifar10/
 repos/bug-localization-by-dnn-and-rvsm/
 
+# But allow .sh and .py files in repos
+!repos/**/*.sh
+!repos/**/*.py
+
 # Model files
 *.pth
 *.th

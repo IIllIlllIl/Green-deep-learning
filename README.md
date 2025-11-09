@@ -2,6 +2,23 @@
 
 自动化深度学习模型训练的超参数变异与能耗性能分析框架
 
+## ⚠️ 重要提示
+
+**Sudo环境修复状态** (更新于 2025-11-09):
+- ✅ 所有已知的sudo环境兼容性问题已修复
+- ✅ 6个模型全部通过修复并准备测试
+- 📖 详细修复说明: [docs/FIXES_AND_TESTING.md](docs/FIXES_AND_TESTING.md)
+
+**快速验证测试**:
+```bash
+cd /home/green/energy_dl/nightly
+sudo python3 mutation.py --experiment-config settings/failed_models_quick_test.json
+```
+
+预期结果: 3/3 成功 (约10-15分钟)
+
+---
+
 ## 项目概述
 
 本框架用于研究深度学习模型训练超参数对能耗与性能的影响。通过自动化变异超参数、监控能耗、收集性能指标，支持大规模实验研究。
@@ -135,20 +152,34 @@ sudo python3 mutation.py \
 
 ## 命令行参数
 
+所有参数都支持缩写形式，详见 [参数缩写手册](docs/mutation_parameter_abbreviations.md) 或 [快速参考卡片](docs/QUICK_REFERENCE.md)
+
 ### 必需参数
 
-- `--repo REPO_NAME` - 仓库名称（如pytorch_resnet_cifar10）
-- `--model MODEL_NAME` - 模型名称（如resnet20）
-- `--mutate PARAMS` - 要变异的超参数（逗号分隔，或使用"all"）
+- `--repo REPO_NAME` (缩写: `-r`) - 仓库名称（如pytorch_resnet_cifar10）
+- `--model MODEL_NAME` (缩写: `-m`) - 模型名称（如resnet20）
+- `--mutate PARAMS` (缩写: `-mt`) - 要变异的超参数（逗号分隔，或使用"all"）
 
 ### 可选参数
 
-- `--runs N` - 运行次数（默认：1）
-- `--governor MODE` - CPU调度器模式（performance/powersave/ondemand）
-- `--max-retries N` - 失败时最大重试次数（默认：2）
-- `--config PATH` - 配置文件路径（默认：config/models_config.json）
-- `--list` - 列出所有可用模型
+- `--runs N` (缩写: `-n`) - 运行次数（默认：1）
+- `--governor MODE` (缩写: `-g`) - CPU调度器模式（performance/powersave/ondemand）
+- `--max-retries N` (缩写: `-mr`) - 失败时最大重试次数（默认：2）
+- `--config PATH` (缩写: `-c`) - 配置文件路径（默认：config/models_config.json）
+- `--experiment-config FILE` (缩写: `-ec`) - 实验配置文件路径
+- `--seed N` (缩写: `-s`) - 随机种子（用于可复现实验）
+- `--list` (缩写: `-l`) - 列出所有可用模型
 - `-h, --help` - 显示帮助信息
+
+### 缩写示例
+
+```bash
+# 完整参数
+python3 mutation.py --repo VulBERTa --model mlp --mutate all --runs 5
+
+# 使用缩写（效果相同）
+python3 mutation.py -r VulBERTa -m mlp -mt all -n 5
+```
 
 ## 支持的仓库和模型
 

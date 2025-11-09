@@ -67,7 +67,7 @@ EVAL_ERROR=""
 
 # Conda环境Python路径
 CONDA_ENV="reid_baseline"
-PYTHON_PATH="$HOME/miniconda3/envs/$CONDA_ENV/bin/python"
+PYTHON_PATH="/home/green/miniconda3/envs/$CONDA_ENV/bin/python"
 
 # 检查Python路径
 if [ ! -f "$PYTHON_PATH" ]; then
@@ -559,7 +559,11 @@ main() {
     echo "========================================="
     echo "Starting Evaluation..."
     echo "========================================="
-    if ! $PYTHON_PATH evaluate_gpu.py > eval_output.txt 2>&1; then
+
+    # 激活conda环境以确保scipy等依赖包可用
+    source /home/green/miniconda3/bin/activate reid_baseline
+
+    if ! python evaluate_gpu.py > eval_output.txt 2>&1; then
         EVAL_ERROR="Evaluation command failed with exit code $?"
         cat eval_output.txt
     else

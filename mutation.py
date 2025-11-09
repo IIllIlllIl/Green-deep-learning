@@ -40,12 +40,12 @@ class MutationRunner:
     GOVERNOR_TIMEOUT_SECONDS = 10
     RETRY_SLEEP_SECONDS = 30
     RUN_SLEEP_SECONDS = 60
-    CONFIG_SLEEP_SECONDS = 120
+    CONFIG_SLEEP_SECONDS = 60
     DEFAULT_TRAINING_TIMEOUT_SECONDS = 36000  # 10 hours max
 
     # Validation constants
     MIN_LOG_FILE_SIZE_BYTES = 1000
-    DEFAULT_MAX_RETRIES = 2
+    DEFAULT_MAX_RETRIES = 3
 
     # Mutation constants
     SCALE_FACTOR_MIN = 0.5
@@ -892,88 +892,97 @@ def main():
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
-  # Run single mutation for ResNet20
+  # Run single mutation for ResNet20 (full arguments)
   python mutation.py --repo pytorch_resnet_cifar10 --model resnet20 \\
                      --mutate epochs,learning_rate,seed
 
-  # Run 5 mutations for VulBERTa MLP, mutating all supported hyperparameters
-  python mutation.py --repo VulBERTa --model mlp \\
-                     --mutate all --runs 5
+  # Same using abbreviations
+  python mutation.py -r pytorch_resnet_cifar10 -m resnet20 -mt epochs,learning_rate,seed
 
-  # Run with performance governor
+  # Run 5 mutations for VulBERTa MLP (full arguments)
+  python mutation.py --repo VulBERTa --model mlp --mutate all --runs 5
+
+  # Same using abbreviations
+  python mutation.py -r VulBERTa -m mlp -mt all -n 5
+
+  # Run with performance governor (full arguments)
   python mutation.py --repo Person_reID_baseline_pytorch --model densenet121 \\
                      --mutate epochs,learning_rate --governor performance
 
+  # Same using abbreviations
+  python mutation.py -r Person_reID_baseline_pytorch -m densenet121 \\
+                     -mt epochs,learning_rate -g performance
+
   # List available models
-  python mutation.py --list
+  python mutation.py --list  # or: python mutation.py -l
 
   # Run from experiment configuration file
-  python mutation.py --experiment-config settings/all.json
+  python mutation.py --experiment-config settings/all.json  # or: -ec settings/all.json
   python mutation.py --experiment-config settings/default.json
         """
     )
 
     parser.add_argument(
-        "--experiment-config",
+        "-ec", "--experiment-config",
         type=str,
         help="Path to experiment configuration JSON file (e.g., settings/all.json, settings/default.json)"
     )
 
     parser.add_argument(
-        "--repo",
+        "-r", "--repo",
         type=str,
         help="Repository name (e.g., pytorch_resnet_cifar10, VulBERTa)"
     )
 
     parser.add_argument(
-        "--model",
+        "-m", "--model",
         type=str,
         help="Model name (e.g., resnet20, mlp, densenet121)"
     )
 
     parser.add_argument(
-        "--mutate",
+        "-mt", "--mutate",
         type=str,
         help="Comma-separated list of hyperparameters to mutate, or 'all' "
              "(e.g., epochs,learning_rate,seed,dropout,weight_decay)"
     )
 
     parser.add_argument(
-        "--runs",
+        "-n", "--runs",
         type=int,
         default=1,
         help="Number of mutation runs (default: 1)"
     )
 
     parser.add_argument(
-        "--governor",
+        "-g", "--governor",
         type=str,
         choices=["performance", "powersave", "ondemand", "conservative"],
         help="CPU governor mode to set before experiments"
     )
 
     parser.add_argument(
-        "--max-retries",
+        "-mr", "--max-retries",
         type=int,
         default=2,
         help="Maximum number of retries on training failure (default: 2)"
     )
 
     parser.add_argument(
-        "--list",
+        "-l", "--list",
         action="store_true",
         help="List available repositories and models"
     )
 
     parser.add_argument(
-        "--config",
+        "-c", "--config",
         type=str,
         default="config/models_config.json",
         help="Path to models configuration file (default: config/models_config.json)"
     )
 
     parser.add_argument(
-        "--seed",
+        "-s", "--seed",
         type=int,
         default=None,
         help="Random seed for reproducibility (default: None, random)"

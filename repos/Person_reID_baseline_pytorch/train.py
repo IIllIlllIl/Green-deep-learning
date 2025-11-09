@@ -624,7 +624,8 @@ else:
          ], weight_decay=opt.weight_decay, momentum=0.9, nesterov=True)
 
 # Decay LR by a factor of 0.1 every 40 epochs
-exp_lr_scheduler = optim.lr_scheduler.StepLR(optimizer_ft, step_size=opt.total_epoch*2//3, gamma=0.1)
+# Fix: Ensure step_size is at least 1 to avoid ZeroDivisionError when total_epoch < 3
+exp_lr_scheduler = optim.lr_scheduler.StepLR(optimizer_ft, step_size=max(1, opt.total_epoch*2//3), gamma=0.1)
 if opt.cosine:
     exp_lr_scheduler = optim.lr_scheduler.CosineAnnealingLR(optimizer_ft, opt.total_epoch, eta_min=0.01*opt.lr)
 
