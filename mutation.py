@@ -21,6 +21,7 @@ Usage:
 import argparse
 import csv
 import json
+import math
 import os
 import random
 import re
@@ -117,12 +118,19 @@ class MutationRunner:
             print(f"⚠️  WARNING: Error setting governor: {e}")
             return False
 
-    def mutate_hyperparameter(self, param_config: Dict, strategy: str = "random") -> Any:
-        """Mutate a single hyperparameter
+    def mutate_hyperparameter(self, param_config: Dict, param_name: str = "") -> Any:
+        """Mutate a single hyperparameter with advanced strategies
+
+        Implements parameter-specific mutation strategies:
+        - Epochs: Log-uniform distribution [default×0.5, default×2.0]
+        - Learning Rate: Log-uniform distribution [default×0.1, default×10.0]
+        - Weight Decay: 30% zero + 70% log-uniform [0.0, default×100]
+        - Dropout: Uniform distribution [0.0, 0.7]
+        - Seed: Uniform integer [0, 9999]
 
         Args:
-            param_config: Configuration for the hyperparameter
-            strategy: Mutation strategy (random, scale, discrete)
+            param_config: Configuration for the hyperparameter (contains type, range, default, etc.)
+            param_name: Name of the parameter (used to determine strategy)
 
         Returns:
             Mutated value
@@ -131,25 +139,42 @@ class MutationRunner:
         param_range = param_config["range"]
         default_value = param_config.get("default")
 
-        if strategy == "random":
-            # Random value within range
-            if param_type == "int":
-                return random.randint(param_range[0], param_range[1])
-            elif param_type == "float":
-                return random.uniform(param_range[0], param_range[1])
+        # Get mutation distribution strategy (default to "uniform")
+        distribution = param_config.get("distribution", "uniform")
+        zero_probability = param_config.get("zero_probability", 0.0)
 
-        elif strategy == "scale" and default_value is not None:
-            # Scale from default value
-            scale_factor = random.uniform(self.SCALE_FACTOR_MIN, self.SCALE_FACTOR_MAX)
-            if param_type == "int":
-                new_value = int(default_value * scale_factor)
-                return max(param_range[0], min(param_range[1], new_value))
-            elif param_type == "float":
-                new_value = default_value * scale_factor
-                return max(param_range[0], min(param_range[1], new_value))
+        # Handle zero probability for parameters like weight_decay
+        if zero_probability > 0 and random.random() < zero_probability:
+            return 0.0 if param_type == "float" else 0
 
-        # Fallback to random
-        return self.mutate_hyperparameter(param_config, "random")
+        # Determine the range
+        min_val, max_val = param_range[0], param_range[1]
+
+        # Handle different distribution strategies
+        if distribution == "log_uniform":
+            # Log-uniform distribution (for exponentially-sensitive parameters)
+            if min_val <= 0:
+                raise ValueError(f"Log-uniform distribution requires min_val > 0, got {min_val}")
+
+            log_min = math.log(min_val)
+            log_max = math.log(max_val)
+            log_value = random.uniform(log_min, log_max)
+            value = math.exp(log_value)
+
+            if param_type == "int":
+                return max(min_val, min(max_val, int(round(value))))
+            else:
+                return max(min_val, min(max_val, value))
+
+        elif distribution == "uniform":
+            # Standard uniform distribution
+            if param_type == "int":
+                return random.randint(min_val, max_val)
+            else:
+                return random.uniform(min_val, max_val)
+
+        else:
+            raise ValueError(f"Unknown distribution type: {distribution}")
 
     def generate_mutations(self,
                           repo: str,
@@ -195,7 +220,7 @@ class MutationRunner:
             mutation = {}
             for param in params_to_mutate:
                 param_config = supported_params[param]
-                mutation[param] = self.mutate_hyperparameter(param_config)
+                mutation[param] = self.mutate_hyperparameter(param_config, param)
 
             # Convert to hashable form for uniqueness check
             mutation_key = frozenset(mutation.items())
@@ -284,35 +309,40 @@ class MutationRunner:
         with open(log_path, 'r', encoding='utf-8', errors='ignore') as f:
             log_content = f.read()
 
-        # Check for common error patterns
-        error_patterns = [
-            r"CUDA out of memory",
-            r"RuntimeError",
-            r"AssertionError",
-            r"FileNotFoundError",
-            r"KeyboardInterrupt",
-            r"Traceback \(most recent call last\)",
-            r"FAILED",
-            r"Error:",
-            r"错误:",
-        ]
-
-        for pattern in error_patterns:
-            if re.search(pattern, log_content, re.IGNORECASE):
-                return False, f"Error pattern found: {pattern}"
-
-        # Check for success indicators
+        # IMPORTANT: Check for success indicators FIRST
+        # Some repos may have warnings/tracebacks but still complete successfully
         success_patterns = [
-            r"Training completed",
+            r"Training completed successfully",
             r"训练完成",
-            r"SUCCESS",
-            r"✓",
+            r"训练成功完成",
+            r"\[SUCCESS\]",
+            r"✓.*训练成功",
             r"Evaluation completed",
+            r"All.*completed",
+            r"Rank@1:",  # Person_reID success indicator
+            r"mAP:",     # Person_reID success indicator
         ]
 
         for pattern in success_patterns:
             if re.search(pattern, log_content, re.IGNORECASE):
                 return True, "Training completed successfully"
+
+        # Only check for error patterns if no success indicators found
+        # More specific error patterns to avoid false positives
+        error_patterns = [
+            r"CUDA out of memory",
+            r"RuntimeError:.*(?!DeprecationWarning)",  # Exclude DeprecationWarnings
+            r"AssertionError",
+            r"FileNotFoundError",
+            r"KeyboardInterrupt",
+            r"Training.*FAILED",
+            r"Fatal error:",
+            r"致命错误:",
+        ]
+
+        for pattern in error_patterns:
+            if re.search(pattern, log_content, re.IGNORECASE):
+                return False, f"Error pattern found: {pattern}"
 
         # If no clear indicators, check file size
         if log_path.stat().st_size < self.MIN_LOG_FILE_SIZE_BYTES:

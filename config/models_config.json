@@ -9,31 +9,37 @@
           "flag": "--epochs",
           "type": "int",
           "default": 10,
-          "range": [5, 20]
+          "range": [5, 20],
+          "distribution": "log_uniform"
         },
         "learning_rate": {
           "flag": "--lr",
           "type": "float",
           "default": 0.0001,
-          "range": [0.00001, 0.001]
+          "range": [0.00001, 0.001],
+          "distribution": "log_uniform"
         },
         "seed": {
           "flag": "--seed",
           "type": "int",
           "default": 1334,
-          "range": [0, 9999]
+          "range": [0, 9999],
+          "distribution": "uniform"
         },
         "dropout": {
           "flag": "--dropout",
           "type": "float",
           "default": 0.2,
-          "range": [0.0, 0.5]
+          "range": [0.0, 0.7],
+          "distribution": "uniform"
         },
         "weight_decay": {
           "flag": "--weight-decay",
           "type": "float",
           "default": 0.0,
-          "range": [0.0, 0.01]
+          "range": [0.00001, 0.01],
+          "distribution": "log_uniform",
+          "zero_probability": 0.3
         }
       },
       "performance_metrics": {
@@ -54,25 +60,29 @@
           "flag": "--max_iter",
           "type": "int",
           "default": 10000,
-          "range": [1000, 20000]
+          "range": [1000, 20000],
+          "distribution": "log_uniform"
         },
         "kfold": {
           "flag": "--kfold",
           "type": "int",
           "default": 10,
-          "range": [2, 10]
+          "range": [2, 10],
+          "distribution": "uniform"
         },
         "alpha": {
           "flag": "--alpha",
           "type": "float",
           "default": 0.00001,
-          "range": [0.000001, 0.0001]
+          "range": [0.000001, 0.0001],
+          "distribution": "log_uniform"
         },
         "seed": {
           "flag": "--seed",
           "type": "int",
           "default": 42,
-          "range": [0, 9999]
+          "range": [0, 9999],
+          "distribution": "uniform"
         }
       },
       "performance_metrics": {
@@ -92,25 +102,30 @@
           "flag": "-e",
           "type": "int",
           "default": 200,
-          "range": [50, 200]
+          "range": [100, 400],
+          "distribution": "log_uniform"
         },
         "learning_rate": {
           "flag": "--lr",
           "type": "float",
           "default": 0.1,
-          "range": [0.01, 0.2]
+          "range": [0.01, 1.0],
+          "distribution": "log_uniform"
         },
         "seed": {
           "flag": "--seed",
           "type": "int",
           "default": null,
-          "range": [0, 9999]
+          "range": [0, 9999],
+          "distribution": "uniform"
         },
         "weight_decay": {
           "flag": "--wd",
           "type": "float",
           "default": 0.0001,
-          "range": [0.0, 0.001]
+          "range": [0.00001, 0.01],
+          "distribution": "log_uniform",
+          "zero_probability": 0.3
         }
       },
       "model_flag": "-n",
@@ -130,25 +145,30 @@
           "flag": "--epochs",
           "type": "int",
           "default": 10,
-          "range": [5, 20]
+          "range": [5, 20],
+          "distribution": "log_uniform"
         },
         "learning_rate": {
           "flag": "--learning_rate",
           "type": "float",
           "default": 3e-05,
-          "range": [1e-05, 1e-04]
+          "range": [3e-06, 3e-04],
+          "distribution": "log_uniform"
         },
         "seed": {
           "flag": "--seed",
           "type": "int",
           "default": 42,
-          "range": [0, 9999]
+          "range": [0, 9999],
+          "distribution": "uniform"
         },
         "weight_decay": {
           "flag": "--weight_decay",
           "type": "float",
           "default": 0.0,
-          "range": [0.0, 0.01]
+          "range": [0.00001, 0.01],
+          "distribution": "log_uniform",
+          "zero_probability": 0.3
         }
       },
       "model_flag": "-n",
@@ -171,25 +191,29 @@
           "flag": "--total_epoch",
           "type": "int",
           "default": 60,
-          "range": [20, 60]
+          "range": [30, 120],
+          "distribution": "log_uniform"
         },
         "learning_rate": {
           "flag": "--lr",
           "type": "float",
           "default": 0.05,
-          "range": [0.01, 0.1]
+          "range": [0.005, 0.5],
+          "distribution": "log_uniform"
         },
         "seed": {
           "flag": "--seed",
           "type": "int",
           "default": null,
-          "range": [0, 9999]
+          "range": [0, 9999],
+          "distribution": "uniform"
         },
         "dropout": {
           "flag": "--droprate",
           "type": "float",
           "default": 0.5,
-          "range": [0.0, 0.7]
+          "range": [0.0, 0.7],
+          "distribution": "uniform"
         }
       },
       "model_flag": "-n",
@@ -204,31 +228,41 @@
     "examples": {
       "path": "repos/examples",
       "train_script": "./train.sh",
-      "models": ["mnist_cnn", "mnist_rnn", "mnist_forward_forward", "siamese"],
+      "models": ["mnist", "mnist_rnn", "mnist_ff", "siamese", "word_lm"],
       "supported_hyperparams": {
         "epochs": {
-          "flag": "--epochs",
+          "flag": "-e",
           "type": "int",
           "default": 10,
-          "range": [5, 20]
+          "range": [5, 20],
+          "distribution": "log_uniform"
         },
         "learning_rate": {
-          "flag": "--lr",
+          "flag": "-l",
           "type": "float",
           "default": 0.01,
-          "range": [0.001, 0.1]
+          "range": [0.001, 0.1],
+          "distribution": "log_uniform"
+        },
+        "batch_size": {
+          "flag": "-b",
+          "type": "int",
+          "default": 32,
+          "range": [16, 128],
+          "distribution": "uniform"
         },
         "seed": {
           "flag": "--seed",
           "type": "int",
           "default": 1,
-          "range": [0, 9999]
+          "range": [0, 9999],
+          "distribution": "uniform"
         }
       },
       "model_flag": "-n",
       "performance_metrics": {
         "log_patterns": {
-          "test_accuracy": "Test.*Accuracy[:\\s]+([0-9.]+)",
+          "test_accuracy": "Final Test Accuracy[:\\s]+([0-9.]+)%",
           "test_loss": "Test.*Loss[:\\s]+([0-9.]+)"
         }
       }
