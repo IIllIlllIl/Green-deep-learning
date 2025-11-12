@@ -168,6 +168,35 @@ fi
 SAVE_DIR="save_${MODEL_NAME}"
 mkdir -p "$SAVE_DIR"
 
+# 清理权限问题文件
+# 检查目录中是否有当前用户无法写入的文件
+PERMISSION_ISSUES=false
+for file in "${SAVE_DIR}"/*.th; do
+    [ -f "$file" ] || continue  # Skip if no .th files exist
+    if [ ! -w "$file" ]; then
+        echo -e "${YELLOW}警告: 发现无写权限的文件: $file (所有者: $(stat -c '%U' "$file" 2>/dev/null || echo 'unknown'))${NC}"
+        # 尝试重命名（备份）
+        backup_name="${file}.bak.$(date +%s)"
+        if mv "$file" "$backup_name" 2>/dev/null; then
+            echo -e "${GREEN}已将文件重命名为: $backup_name${NC}"
+        else
+            echo -e "${RED}无法移动文件: $file${NC}"
+            echo -e "${RED}这可能导致训练失败。请手动删除该文件或使用sudo权限清理。${NC}"
+            PERMISSION_ISSUES=true
+        fi
+    fi
+done
+
+if [ "$PERMISSION_ISSUES" = true ]; then
+    echo -e "${YELLOW}建议: 运行 'rm -f ${SAVE_DIR}/*.th' 清理旧文件${NC}"
+    echo -n "是否继续训练? (y/n): "
+    read -r response
+    if [[ ! "$response" =~ ^[Yy]$ ]]; then
+        echo "已取消"
+        exit 1
+    fi
+fi
+
 #===================================================================================
 # 训练前准备
 #===================================================================================

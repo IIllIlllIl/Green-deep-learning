@@ -2,20 +2,13 @@
 
 自动化深度学习模型训练的超参数变异与能耗性能分析框架
 
-## ⚠️ 重要提示
+## ⚠️ 项目状态
 
-**Sudo环境修复状态** (更新于 2025-11-09):
-- ✅ 所有已知的sudo环境兼容性问题已修复
-- ✅ 6个模型全部通过修复并准备测试
-- 📖 详细修复说明: [docs/FIXES_AND_TESTING.md](docs/FIXES_AND_TESTING.md)
-
-**快速验证测试**:
-```bash
-cd /home/green/energy_dl/nightly
-sudo python3 mutation.py --experiment-config settings/failed_models_quick_test.json
-```
-
-预期结果: 3/3 成功 (约10-15分钟)
+**当前版本**: v2.0 - 生产就绪
+- ✅ 所有模型已验证通过
+- ✅ 能耗监控精度提升（误差<2%）
+- ✅ 完整的超参数变异支持
+- 📖 问题排查: [docs/FIXES_AND_TESTING.md](docs/FIXES_AND_TESTING.md)
 
 ---
 
@@ -46,10 +39,9 @@ nightly/
 │   ├── run_tests.sh             # 测试运行脚本
 │   ├── validate_energy_monitoring.sh  # 能耗监控验证脚本
 │   └── README.md                # 测试文档
-├── experiments/ → settings/     # 实验配置文件目录（新增）
+├── settings/                    # 实验配置文件目录
 │   ├── all.json                # 全面变异所有模型
 │   ├── default.json            # 复现原始训练（基线）
-│   ├── learning_rate_study.json # 学习率影响研究
 │   └── README.md               # 配置文件使用说明
 ├── results/                    # 实验结果目录（JSON格式）
 ├── repos/                      # 模型仓库目录
@@ -86,10 +78,7 @@ sudo python3 mutation.py --experiment-config settings/all.json
 **预设配置文件**:
 - `default.json` - ⭐ 复现所有模型的原始训练（推荐先运行）
 - `all.json` - 变异所有模型的所有超参数
-- `learning_rate_study.json` - 研究学习率影响
-- `resnet_all_models.json` - ResNet家族实验
-
-详见 [settings/README.md](settings/README.md)
+- 其他专项配置 - 详见 [settings/README.md](settings/README.md)
 
 ### 方式2: 命令行模式
 
@@ -152,7 +141,7 @@ sudo python3 mutation.py \
 
 ## 命令行参数
 
-所有参数都支持缩写形式，详见 [参数缩写手册](docs/mutation_parameter_abbreviations.md) 或 [快速参考卡片](docs/QUICK_REFERENCE.md)
+所有参数都支持缩写形式，详见 [参数缩写手册](docs/mutation_parameter_abbreviations.md)
 
 ### 必需参数
 
@@ -291,39 +280,30 @@ cd test
 
 ## 能耗监控
 
-### 监控方法改进（v2.0）⭐
+### 能耗监控方法（v2.0）
 
-本项目已采用**直接包装**（Direct Wrapping）的能耗监控方法，显著提升测量精度：
+本项目采用**直接包装**（Direct Wrapping）的能耗监控方法，显著提升测量精度：
 
-| 改进维度 | 旧方法 | 新方法（当前） | 精度提升 |
-|---------|--------|--------------|---------|
-| CPU能耗度量 | 间隔采样求和 | 直接包装命令 | **误差从5-10%降至<2%** |
-| 时间边界 | ±2秒轮询误差 | 精确对齐 | **零边界误差** |
-| GPU指标 | 仅功耗 | 功耗+温度+利用率 | **5项指标** |
+| 改进维度 | 精度提升 |
+|---------|---------|
+| CPU能耗测量 | **误差<2%**（旧方法5-10%） |
+| 时间边界 | **零边界误差** |
+| GPU指标 | **5项完整指标** |
 
 **关键优势**：
-- ✅ CPU能耗：使用 `perf stat` 直接包装训练命令，获取总能耗（无累积误差）
-- ✅ GPU监控：一次查询获取功耗、温度、利用率，保证时间一致性
-- ✅ 优雅停止：使用SIGTERM而非SIGKILL，避免数据丢失
-- ✅ 进程精度：只监控目标进程树，无其他进程干扰
+- ✅ CPU能耗：使用 `perf stat` 直接包装训练命令
+- ✅ GPU监控：功耗+温度+利用率统计
+- ✅ 进程精度：仅监控目标进程树，无干扰
 
-详细技术说明请查看：[docs/energy_monitoring_improvements.md](docs/energy_monitoring_improvements.md)
-
-### 验证改进效果
-
-运行验证脚本测试新方法的准确性：
-```bash
-./test/validate_energy_monitoring.sh
-```
+详细技术说明：[docs/energy_monitoring_improvements.md](docs/energy_monitoring_improvements.md)
 
 ### CPU能耗监控
 
 使用Linux `perf` 工具直接包装训练命令：
 - **Package Energy** - CPU封装能耗
 - **RAM Energy** - 内存能耗
-- **监控方式** - 进程树级精确监控（包含所有子进程）
 
-需要权限：
+权限设置：
 ```bash
 # 临时允许
 sudo sysctl -w kernel.perf_event_paranoid=-1
@@ -334,22 +314,12 @@ echo 'kernel.perf_event_paranoid=-1' | sudo tee -a /etc/sysctl.conf
 
 ### GPU能耗监控
 
-使用 `nvidia-smi` 异步监控（每秒采样）：
-- **Power Draw** - 实时功耗
-- **GPU Temperature** - GPU核心温度
-- **Memory Temperature** - 显存温度
-- **GPU Utilization** - GPU利用率
-- **Memory Utilization** - 显存利用率
-- **统计数据** - 平均/最大/最小值
+使用 `nvidia-smi` 异步监控：
+- **功耗统计** - 平均/最大/最小功耗
+- **温度监控** - GPU核心和显存温度
+- **利用率** - GPU和显存利用率
 
 能耗数据保存位置：`results/energy_<experiment_id>/`
-```
-├── cpu_energy.txt              # CPU能耗总结
-├── cpu_energy_raw.txt          # perf原始输出
-├── gpu_power.csv               # GPU功耗时间序列
-├── gpu_temperature.csv         # GPU温度时间序列
-└── gpu_utilization.csv         # GPU利用率时间序列
-```
 
 ## 配置文件
 
@@ -510,6 +480,23 @@ python3 mutation.py \
     --runs 20 \
     --governor performance
 ```
+
+## 📚 文档导航
+
+本项目提供完整的文档支持，详见 [docs/README.md](docs/README.md)
+
+### 快速导航
+
+| 需求 | 文档 |
+|------|------|
+| 快速使用命令 | [快速参考卡片](docs/QUICK_REFERENCE.md) |
+| 配置实验 | [实验配置指南](docs/SETTINGS_CONFIGURATION_GUIDE.md) |
+| 超参数变异策略 | [变异策略指南](docs/HYPERPARAMETER_MUTATION_STRATEGY.md) |
+| 排查问题 | [问题排查与测试](docs/FIXES_AND_TESTING.md) |
+| 了解能耗监控 | [能耗监控改进](docs/energy_monitoring_improvements.md) |
+| 性能度量分析 | [性能度量结论](docs/PERFORMANCE_METRICS_CONCLUSION.md) |
+
+更多文档请查看 [docs/](docs/) 目录。
 
 ## 贡献
 
