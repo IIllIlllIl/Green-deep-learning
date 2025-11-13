@@ -1,5 +1,0 @@
-CPU Energy Consumption Summary
-==============================
-Package Energy (Joules): 406.32
-RAM Energy (Joules): 30.54
-Total CPU Energy (Joules): 436.86
