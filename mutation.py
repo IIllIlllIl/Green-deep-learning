@@ -19,10 +19,13 @@ Usage:
 """
 
 import argparse
+import atexit
 import csv
 import json
+import logging
 import math
 import os
+import platform
 import random
 import re
 import shutil
@@ -199,6 +202,9 @@ class ExperimentSession:
 class MutationRunner:
     """Main class for running mutation-based training experiments"""
 
+    # Security whitelist for governor modes (FIX 1.4)
+    ALLOWED_GOVERNORS = {"performance", "powersave", "ondemand", "conservative", "schedutil"}
+
     # Timing constants (seconds)
     GOVERNOR_TIMEOUT_SECONDS = 10
     RETRY_SLEEP_SECONDS = 30
@@ -249,8 +255,18 @@ class MutationRunner:
             random.seed(random_seed)
             print(f"🎲 Random seed set to: {random_seed}")
 
+        # FIX 2.1: Initialize logger
+        self.logger = logging.getLogger(__name__)
+
         # Track active background processes for cleanup
         self._active_background_processes = []
+        self._cleanup_registered = False
+
+        # FIX 1.3: Register cleanup handlers for reliable process termination
+        atexit.register(self._cleanup_all_background_processes)
+        signal.signal(signal.SIGINT, self._signal_handler)
+        signal.signal(signal.SIGTERM, self._signal_handler)
+        self._cleanup_registered = True
 
         # Create experiment session for hierarchical directory structure
         self.session = ExperimentSession(self.results_dir)
@@ -263,22 +279,72 @@ class MutationRunner:
         with open(self.config_path, 'r') as f:
             return json.load(f)
 
-    def __del__(self):
-        """Cleanup background processes on deletion"""
+    def _signal_handler(self, signum, frame):
+        """Handle interrupt signals gracefully (FIX 1.3)
+
+        Args:
+            signum: Signal number
+            frame: Current stack frame
+        """
+        print(f"\n⚠️  Received signal {signum}, cleaning up...")
         self._cleanup_all_background_processes()
+        sys.exit(0)
+
+    def close(self):
+        """Explicitly close and cleanup all resources (FIX 1.3)"""
+        if hasattr(self, '_active_background_processes'):
+            self._cleanup_all_background_processes()
+        print("✓ MutationRunner closed (all background processes terminated)")
+
+    def __enter__(self):
+        """Context manager entry (FIX 1.3)"""
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        """Context manager exit - ensure cleanup (FIX 1.3)
+
+        Args:
+            exc_type: Exception type
+            exc_val: Exception value
+            exc_tb: Exception traceback
+
+        Returns:
+            False to not suppress exceptions
+        """
+        self.close()
+        return False  # Don't suppress exceptions
+
+    def __del__(self):
+        """Cleanup background processes on deletion (last resort, FIX 1.3)"""
+        # Try cleanup, but don't rely on it (atexit is primary)
+        try:
+            if hasattr(self, '_cleanup_registered') and not self._cleanup_registered:
+                # Only cleanup if atexit wasn't registered
+                self._cleanup_all_background_processes()
+        except:
+            pass  # Ignore all errors during finalization
 
     def _cleanup_all_background_processes(self):
-        """Terminate all tracked background processes"""
+        """Terminate all tracked background processes (FIX 2.2: Improved exception handling)"""
         for proc in self._active_background_processes[:]:  # Copy list to avoid modification during iteration
             if proc.poll() is None:  # Process still running
                 try:
                     os.killpg(os.getpgid(proc.pid), signal.SIGTERM)
                     proc.wait(timeout=2)
-                except:
+                    self.logger.info(f"Terminated background process {proc.pid}")
+                except subprocess.TimeoutExpired:
+                    # Force kill after timeout
                     try:
                         os.killpg(os.getpgid(proc.pid), signal.SIGKILL)
-                    except:
-                        pass
+                        self.logger.warning(f"Force killed background process {proc.pid}")
+                    except ProcessLookupError:
+                        self.logger.debug(f"Process {proc.pid} already terminated")
+                    except Exception as e:
+                        self.logger.error(f"Failed to kill process {proc.pid}: {e}", exc_info=True)
+                except ProcessLookupError:
+                    self.logger.debug(f"Process {proc.pid} already terminated")
+                except Exception as e:
+                    self.logger.error(f"Error terminating process {proc.pid}: {e}", exc_info=True)
             self._active_background_processes.remove(proc)
 
     def _format_hyperparam_value(self, value: Any, param_type: str) -> str:
@@ -297,6 +363,30 @@ class MutationRunner:
             return f"{value:.{self.FLOAT_PRECISION}f}"
         else:
             return str(value)
+
+    def _normalize_mutation_key(self, mutation: Dict[str, Any]) -> tuple:
+        """Create normalized, hashable key for mutation uniqueness check (FIX 2.4)
+
+        Args:
+            mutation: Hyperparameter mutation dictionary
+
+        Returns:
+            Sorted tuple of (param, normalized_value) pairs
+        """
+        normalized_items = []
+        for param, value in mutation.items():
+            # Normalize float values to fixed precision
+            if isinstance(value, float):
+                normalized_value = f"{value:.{self.FLOAT_PRECISION}f}"
+            elif isinstance(value, int):
+                normalized_value = str(int(value))
+            else:
+                normalized_value = str(value)
+
+            normalized_items.append((param, normalized_value))
+
+        # Sort by parameter name for deterministic order
+        return tuple(sorted(normalized_items))
 
     def _build_hyperparam_args(self,
                               supported_params: Dict,
@@ -323,24 +413,52 @@ class MutationRunner:
         return args if as_list else " ".join(args)
 
     def set_governor(self, mode: str) -> bool:
-        """Set CPU governor mode using governor.sh
+        """Set CPU governor mode using governor.sh (FIX 1.4: Added security validation)
 
         Args:
-            mode: Governor mode (performance, powersave, ondemand, etc.)
+            mode: Governor mode (must be one of: performance, powersave, ondemand, conservative, schedutil)
 
         Returns:
             True if successful, False otherwise
+
+        Security:
+            - Governor modes are strictly whitelisted to prevent shell injection
+            - Requires sudo permissions (checks before execution)
         """
+        # FIX 1.4: Validate mode (SECURITY: prevent shell injection)
+        if mode not in self.ALLOWED_GOVERNORS:
+            print(f"❌ Error: Invalid governor mode '{mode}'")
+            print(f"   Allowed modes: {', '.join(sorted(self.ALLOWED_GOVERNORS))}")
+            return False
+
         governor_script = self.project_root / "governor.sh"
 
         if not governor_script.exists():
             print(f"⚠️  WARNING: Governor script not found: {governor_script}")
             return False
 
+        # FIX 1.4: Check sudo permissions first
+        try:
+            sudo_check = subprocess.run(
+                ["sudo", "-n", "true"],  # Non-interactive sudo check
+                capture_output=True,
+                timeout=2
+            )
+            if sudo_check.returncode != 0:
+                print(f"⚠️  WARNING: sudo permissions required for governor control")
+                print(f"   Run: sudo -v  (or configure passwordless sudo for governor.sh)")
+                return False
+        except subprocess.TimeoutExpired:
+            print(f"⚠️  WARNING: sudo permission check timed out")
+            return False
+        except Exception as e:
+            print(f"⚠️  WARNING: Cannot check sudo permissions: {e}")
+            return False
+
         try:
             print(f"🔧 Setting CPU governor to: {mode}")
             result = subprocess.run(
-                ["sudo", str(governor_script), mode],
+                ["sudo", str(governor_script), mode],  # Now safe - mode is validated
                 capture_output=True,
                 text=True,
                 timeout=self.GOVERNOR_TIMEOUT_SECONDS
@@ -354,7 +472,10 @@ class MutationRunner:
                 return False
 
         except subprocess.TimeoutExpired:
-            print("⚠���  WARNING: Governor command timed out")
+            print(f"⚠️  WARNING: Governor command timed out")
+            return False
+        except subprocess.SubprocessError as e:
+            print(f"⚠️  WARNING: Subprocess error setting governor: {e}")
             return False
         except Exception as e:
             print(f"⚠️  WARNING: Error setting governor: {e}")
@@ -464,8 +585,8 @@ class MutationRunner:
                 param_config = supported_params[param]
                 mutation[param] = self.mutate_hyperparameter(param_config, param)
 
-            # Convert to hashable form for uniqueness check
-            mutation_key = frozenset(mutation.items())
+            # FIX 2.4: Use normalized key for uniqueness check (handles float precision issues)
+            mutation_key = self._normalize_mutation_key(mutation)
 
             # Check if this mutation is unique
             if mutation_key not in seen_mutations:
@@ -612,7 +733,7 @@ class MutationRunner:
         # More specific error patterns to avoid false positives
         error_patterns = [
             r"CUDA out of memory",
-            r"RuntimeError:.*(?!DeprecationWarning)",  # Exclude DeprecationWarnings
+            r"RuntimeError:(?!.*DeprecationWarning).*",  # FIX 2.3: Correctly exclude DeprecationWarnings
             r"AssertionError",
             r"FileNotFoundError",
             r"KeyboardInterrupt",
@@ -662,17 +783,29 @@ class MutationRunner:
             matches = re.findall(pattern, log_content, re.IGNORECASE)
             if matches:
                 try:
-                    # Take the last match (usually final result)
-                    metrics[metric_name] = float(matches[-1])
-                except (ValueError, IndexError) as e:
-                    print(f"⚠️  Warning: Failed to parse metric '{metric_name}': {e}")
+                    last_match = matches[-1]
+                    # FIX 2.3: Handle both tuple (groups) and string (no groups)
+                    if isinstance(last_match, tuple):
+                        value_str = last_match[0] if last_match else None
+                    else:
+                        value_str = last_match
+
+                    if value_str:
+                        metrics[metric_name] = float(value_str)
+                        self.logger.debug(f"Extracted {metric_name}: {metrics[metric_name]}")
+                    else:
+                        self.logger.warning(f"Empty match for metric '{metric_name}'")
+                except (ValueError, TypeError) as e:
+                    self.logger.warning(f"Failed to parse metric '{metric_name}': {e}")
+                except IndexError as e:
+                    self.logger.error(f"Index error parsing metric '{metric_name}': {e}")
             else:
-                print(f"⚠️  Warning: Metric '{metric_name}' pattern not found in log")
+                self.logger.debug(f"Metric '{metric_name}' pattern not found in log")
 
         return metrics
 
     def _parse_csv_metric_streaming(self, csv_file: Path, field_name: str) -> Dict[str, Optional[float]]:
-        """Parse CSV file and compute statistics in streaming fashion (memory-efficient)
+        """Parse CSV file and compute statistics in streaming fashion (FIX 2.2: Improved exception handling)
 
         Args:
             csv_file: Path to CSV file
@@ -682,6 +815,7 @@ class MutationRunner:
             Dictionary with avg, max, min, sum statistics (or None if file doesn't exist)
         """
         if not csv_file.exists():
+            self.logger.debug(f"CSV file not found: {csv_file}")
             return self.EMPTY_STATS_DICT.copy()
 
         try:
@@ -692,17 +826,29 @@ class MutationRunner:
 
             with open(csv_file, 'r') as f:
                 reader = csv.DictReader(f)
-                for row in reader:
+                
+                # FIX 2.5: Validate field exists in header
+                if field_name not in (reader.fieldnames or []):
+                    self.logger.warning(
+                        f"Field '{field_name}' not found in {csv_file.name}. "
+                        f"Available fields: {', '.join(reader.fieldnames or [])}"
+                    )
+                    return self.EMPTY_STATS_DICT.copy()
+                
+                for row_num, row in enumerate(reader, start=1):
                     try:
                         value = float(row[field_name])
                         count += 1
                         total += value
                         max_val = max(max_val, value)
                         min_val = min(min_val, value)
-                    except (ValueError, KeyError):
-                        pass
+                    except ValueError as e:
+                        self.logger.warning(f"Invalid value in {csv_file.name} row {row_num}: {row.get(field_name)} - {e}")
+                    except KeyError as e:
+                        self.logger.error(f"Missing field '{field_name}' in {csv_file.name} row {row_num}: {e}")
 
             if count == 0:
+                self.logger.warning(f"No valid data in {csv_file.name} for field '{field_name}'")
                 return self.EMPTY_STATS_DICT.copy()
 
             return {
@@ -713,7 +859,7 @@ class MutationRunner:
             }
 
         except Exception as e:
-            print(f"⚠️  Warning: Error parsing {csv_file}: {e}")
+            self.logger.error(f"Error parsing {csv_file}: {e}", exc_info=True)
             return self.EMPTY_STATS_DICT.copy()
 
     def parse_energy_metrics(self, energy_dir: Path) -> Dict[str, Any]:
@@ -781,7 +927,7 @@ class MutationRunner:
     def run_training_with_monitoring(self,
                                     cmd: List[str],
                                     log_file: str,
-                                    experiment_id: str,
+                                    exp_dir: Path,
                                     timeout: Optional[int] = None) -> Tuple[int, float, Dict[str, Any]]:
         """Run training with energy monitoring
 
@@ -791,14 +937,15 @@ class MutationRunner:
         Args:
             cmd: Training command (includes energy_dir in run.sh args)
             log_file: Path to log file
-            experiment_id: Unique experiment identifier
+            exp_dir: Experiment directory (energy/ subdirectory will be used)
             timeout: Maximum training time in seconds (default: use class constant)
 
         Returns:
             Tuple of (exit_code, duration_seconds, energy_metrics)
         """
-        energy_dir = self.results_dir / f"energy_{experiment_id}"
-        energy_dir.mkdir(exist_ok=True)
+        # FIX 1.2: Use canonical energy directory under exp_dir
+        energy_dir = exp_dir / "energy"
+        energy_dir.mkdir(exist_ok=True, parents=True)
 
         # Use provided timeout or default
         if timeout is None:
@@ -939,7 +1086,7 @@ class MutationRunner:
                                    model: str,
                                    hyperparams: Dict[str, Any],
                                    log_dir: Path) -> Tuple[subprocess.Popen, None]:
-        """Start background training loop using reusable template script
+        """Start background training loop using reusable template script (FIX 2.6: Added platform detection)
 
         Args:
             repo: Repository name
@@ -950,6 +1097,10 @@ class MutationRunner:
         Returns:
             Tuple of (subprocess.Popen object, None)
             Note: Returns None for script_path since we use a reusable template
+
+        Platform Support:
+            - POSIX (Linux/macOS): Uses os.setsid for process group management
+            - Windows: Uses CREATE_NEW_PROCESS_GROUP flag (limited cleanup capability)
         """
         repo_config = self.config["models"][repo]
         repo_path = self.project_root / repo_config["path"]
@@ -967,8 +1118,26 @@ class MutationRunner:
         if not template_script_path.exists():
             raise RuntimeError(f"Background training template script not found: {template_script_path}")
 
+        # FIX 2.6: Platform detection for process group management
+        is_posix = platform.system() != 'Windows'
+
+        if not is_posix:
+            self.logger.warning("Running on Windows - background process cleanup may be limited")
+
+        # Conditionally use preexec_fn (POSIX-only) or creationflags (Windows)
+        popen_kwargs = {
+            "stdout": subprocess.DEVNULL,
+            "stderr": subprocess.DEVNULL,
+        }
+
+        if is_posix:
+            # POSIX: Use process group for reliable cleanup
+            popen_kwargs["preexec_fn"] = os.setsid
+        else:
+            # Windows: Use CREATE_NEW_PROCESS_GROUP (limited, but best available)
+            popen_kwargs["creationflags"] = subprocess.CREATE_NEW_PROCESS_GROUP
+
         # Launch background process using template script with parameters
-        # CRITICAL: Use os.setsid to create new process group for clean termination
         process = subprocess.Popen(
             [
                 str(template_script_path),
@@ -978,9 +1147,7 @@ class MutationRunner:
                 str(log_dir),
                 str(self.BACKGROUND_RESTART_DELAY_SECONDS)
             ],
-            stdout=subprocess.DEVNULL,
-            stderr=subprocess.DEVNULL,
-            preexec_fn=os.setsid  # Create new process group
+            **popen_kwargs
         )
 
         print(f"🔄 Background training started (PID: {process.pid})")
@@ -989,6 +1156,11 @@ class MutationRunner:
         print(f"   Model: {model}")
         print(f"   Arguments: {train_args}")
         print(f"   Log directory: {log_dir}")
+        if not is_posix:
+            print(f"   Platform: Windows (limited process cleanup)")
+
+        # FIX 1.1: Track background process for cleanup
+        self._active_background_processes.append(process)
 
         return process, None  # Return None since we don't need to delete template
 
@@ -1165,8 +1337,9 @@ class MutationRunner:
             cmd = self._build_training_command_from_dir(repo, model, mutation, exp_dir, log_file, energy_dir)
 
             # Run training with monitoring
+            # FIX 1.2: Pass exp_dir instead of experiment_id
             exit_code, duration, energy_metrics = self.run_training_with_monitoring(
-                cmd, log_file, experiment_id
+                cmd, log_file, exp_dir
             )
 
             # Check training success
