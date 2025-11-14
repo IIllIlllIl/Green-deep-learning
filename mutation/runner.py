@@ -72,7 +72,7 @@ class MutationRunner:
     TIMESTAMP_FORMAT = "%Y%m%d_%H%M%S"  # Consistent timestamp format across all methods
     FLOAT_PRECISION = 6  # Decimal places for float hyperparameters
 
-    def __init__(self, config_path: str = "config/models_config.json", random_seed: Optional[int] = None):
+    def __init__(self, config_path: Optional[str] = None, random_seed: Optional[int] = None):
         """Initialize the mutation runner
 
         Sets up the experiment environment including:
@@ -82,11 +82,16 @@ class MutationRunner:
         - Registering cleanup handlers for background processes
 
         Args:
-            config_path: Path to the models configuration file
+            config_path: Path to the models configuration file (default: mutation/models_config.json)
             random_seed: Random seed for reproducibility (default: None, uses system time)
         """
         self.project_root = Path(__file__).parent.parent.absolute()
-        self.config_path = self.project_root / config_path
+
+        # Default to models_config.json in the mutation package
+        if config_path is None:
+            self.config_path = Path(__file__).parent / "models_config.json"
+        else:
+            self.config_path = self.project_root / config_path
         self.config = self._load_config()
         self.results_dir = self.project_root / "results"
         self.results_dir.mkdir(exist_ok=True)
@@ -424,32 +429,50 @@ class MutationRunner:
         error_message = ""
 
         # Use the same experiment directory for all retry attempts
-        log_file = str(exp_dir / "training.log")
-        energy_dir = exp_dir / "energy"
+        # Pass relative paths to run.sh, which will handle path resolution
+        log_file = f"results/{self.session.session_dir.name}/{experiment_id}/training.log"
+        energy_dir = f"results/{self.session.session_dir.name}/{experiment_id}/energy"
 
         while not success and retries <= max_retries:
             if retries > 0:
                 print(f"\nRetry {retries}/{max_retries}")
 
-            # Build and run training command with energy monitoring
-            exit_code, duration, energy_metrics = self.cmd_runner.run_training_with_monitoring(
+            # Build training command
+            cmd = self.cmd_runner.build_training_command_from_dir(
                 repo=repo,
                 model=model,
                 mutation=mutation,
                 exp_dir=exp_dir,
                 log_file=log_file,
-                energy_dir=energy_dir,
+                energy_dir=str(energy_dir)
+            )
+
+            # Run training with energy monitoring
+            exit_code, duration, energy_metrics = self.cmd_runner.run_training_with_monitoring(
+                cmd=cmd,
+                log_file=log_file,
+                exp_dir=exp_dir,
                 timeout=self.DEFAULT_TRAINING_TIMEOUT_SECONDS
             )
 
             # Check training success
-            success, error_message = check_training_success(log_file, repo, self.config, self.project_root)
+            success, error_message = check_training_success(
+                log_file=log_file,
+                repo=repo,
+                min_log_file_size_bytes=self.MIN_LOG_FILE_SIZE_BYTES,
+                logger=self.logger
+            )
 
             if success:
                 print(f"Training successful!")
                 # Extract performance metrics
+                repo_config = self.config["models"][repo]
+                log_patterns = repo_config.get("performance_metrics", {})
                 performance_metrics = extract_performance_metrics(
-                    log_file, repo, self.config, self.project_root, self.logger
+                    log_file=log_file,
+                    repo=repo,
+                    log_patterns=log_patterns,
+                    logger=self.logger
                 )
                 if performance_metrics:
                     print(f"Performance metrics: {performance_metrics}")

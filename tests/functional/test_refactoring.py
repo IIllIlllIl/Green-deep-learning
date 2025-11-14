@@ -156,8 +156,8 @@ def test_command_runner():
     """Test CommandRunner functionality"""
     from mutation.command_runner import CommandRunner
 
-    # Load config
-    config_path = Path("config/models_config.json")
+    # Load config from mutation package
+    config_path = Path("mutation/models_config.json")
     with open(config_path) as f:
         config = json.load(f)
 
@@ -191,7 +191,7 @@ def test_runner_init():
     """Test MutationRunner initialization"""
     from mutation import MutationRunner
 
-    runner = MutationRunner("config/models_config.json", random_seed=42)
+    runner = MutationRunner(random_seed=42)
 
     assert runner.config is not None, "Config not loaded"
     assert runner.session is not None, "Session not created"
@@ -249,7 +249,8 @@ def test_file_structure():
         "runner.py",
         "run.sh",
         "background_training_template.sh",
-        "governor.sh"
+        "governor.sh",
+        "models_config.json"
     ]
 
     for filename in required_files:
@@ -265,12 +266,75 @@ def test_file_structure():
     print(f"  All shell scripts are executable")
 
 
-@test("8. Backward Compatibility")
+@test("8. Path Handling (Bug #3 Regression Test)")
+def test_path_handling():
+    """
+    Integration test for Bug #3: Path duplication bug
+
+    Verifies that:
+    1. No nested 'home/' directory is created
+    2. Files are created in the correct location
+    3. No path duplication occurs (no '//' in paths)
+
+    This is a critical regression test to prevent recurrence of the path
+    duplication bug where absolute paths were concatenated with PROJECT_ROOT,
+    creating paths like: /project//absolute/path
+    """
+    import tempfile
+    import shutil
+    from mutation.session import ExperimentSession
+
+    # Create temporary results directory
+    temp_results = Path(tempfile.mkdtemp(prefix="test_path_"))
+
+    try:
+        # Create session with temporary results directory
+        session = ExperimentSession(temp_results)
+
+        # Get an experiment directory
+        exp_dir, exp_id = session.get_next_experiment_dir(
+            "pytorch_resnet_cifar10",
+            "resnet20"
+        )
+
+        # Verify experiment directory was created
+        assert exp_dir.exists(), f"Experiment directory not created: {exp_dir}"
+
+        # Check 1: No nested 'home/' directory created
+        home_dirs = list(temp_results.rglob("home"))
+        assert len(home_dirs) == 0, f"Unexpected 'home/' directory created: {home_dirs}"
+
+        # Check 2: Experiment directory is in the correct location
+        assert str(exp_dir).startswith(str(temp_results)), \
+            f"Experiment directory not under results dir.\n  Expected prefix: {temp_results}\n  Got: {exp_dir}"
+
+        # Check 3: No path duplication (no '//' in path)
+        exp_dir_str = str(exp_dir)
+        assert '//' not in exp_dir_str, f"Path duplication detected (contains '//'): {exp_dir_str}"
+
+        # Check 4: Path structure is correct (should be: results/run_XXXXXX/repo_model_NNN)
+        path_parts = exp_dir.relative_to(temp_results).parts
+        assert len(path_parts) == 2, f"Unexpected path structure: {path_parts}"
+        assert path_parts[0].startswith("run_"), f"Session directory doesn't start with 'run_': {path_parts[0]}"
+        assert path_parts[1] == exp_id, f"Experiment ID mismatch: {path_parts[1]} vs {exp_id}"
+
+        print(f"  ✓ No 'home/' directory created")
+        print(f"  ✓ Experiment directory in correct location: {exp_dir.relative_to(temp_results)}")
+        print(f"  ✓ No path duplication (no '//' in paths)")
+        print(f"  ✓ Path structure correct: {'/'.join(path_parts)}")
+
+    finally:
+        # Clean up
+        if temp_results.exists():
+            shutil.rmtree(temp_results)
+
+
+@test("9. Backward Compatibility")
 def test_backward_compatibility():
     """Test that refactored code maintains backward compatibility"""
     from mutation import MutationRunner
 
-    runner = MutationRunner("config/models_config.json", random_seed=42)
+    runner = MutationRunner(random_seed=42)
 
     # Test that old attribute names still work (if we kept any)
     assert hasattr(runner, "config"), "Missing config attribute"
@@ -313,6 +377,7 @@ def run_all_tests():
     test_runner_init()
     test_cli()
     test_file_structure()
+    test_path_handling()
     test_backward_compatibility()
 
     # Print summary

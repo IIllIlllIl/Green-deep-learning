@@ -36,8 +36,20 @@ TRAIN_ARGS="$@"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 REPO_FULL_PATH="$PROJECT_ROOT/$REPO_PATH"
-LOG_FULL_PATH="$PROJECT_ROOT/$LOG_FILE"
-ENERGY_FULL_PATH="$PROJECT_ROOT/$ENERGY_DIR"
+
+# Handle log file path (check if already absolute)
+if [[ "$LOG_FILE" = /* ]]; then
+    LOG_FULL_PATH="$LOG_FILE"
+else
+    LOG_FULL_PATH="$PROJECT_ROOT/$LOG_FILE"
+fi
+
+# Handle energy directory path (check if already absolute)
+if [[ "$ENERGY_DIR" = /* ]]; then
+    ENERGY_FULL_PATH="$ENERGY_DIR"
+else
+    ENERGY_FULL_PATH="$PROJECT_ROOT/$ENERGY_DIR"
+fi
 
 # Create energy directory
 mkdir -p "$ENERGY_FULL_PATH"

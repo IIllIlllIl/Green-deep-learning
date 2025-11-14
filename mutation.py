@@ -112,8 +112,8 @@ Examples:
     parser.add_argument(
         "-c", "--config",
         type=str,
-        default="config/models_config.json",
-        help="Path to models configuration file (default: config/models_config.json)"
+        default=None,
+        help="Path to models configuration file (default: mutation/models_config.json)"
     )
 
     parser.add_argument(
