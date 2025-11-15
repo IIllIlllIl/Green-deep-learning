@@ -467,7 +467,8 @@ class MutationRunner:
                 print(f"Training successful!")
                 # Extract performance metrics
                 repo_config = self.config["models"][repo]
-                log_patterns = repo_config.get("performance_metrics", {})
+                perf_config = repo_config.get("performance_metrics", {})
+                log_patterns = perf_config.get("log_patterns", {})
                 performance_metrics = extract_performance_metrics(
                     log_file=log_file,
                     repo=repo,

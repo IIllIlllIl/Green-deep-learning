@@ -186,7 +186,7 @@ def generate_mutations(
         logger: Logger instance for debug messages
 
     Returns:
-        List of mutated hyperparameter dictionaries (all unique)
+        List of mutated hyperparameter dictionaries (all unique and different from defaults)
     """
     if logger is None:
         logger = logging.getLogger(__name__)
@@ -205,8 +205,24 @@ def generate_mutations(
 
     print(f"📊 Generating {num_mutations} unique mutation(s) for parameters: {params_to_mutate}")
 
+    # Build default values key for exclusion
+    default_mutation = {}
+    for param in params_to_mutate:
+        default_value = supported_params[param].get("default")
+        if default_value is not None:
+            default_mutation[param] = default_value
+
+    default_key = _normalize_mutation_key(default_mutation) if default_mutation else None
+    if default_key:
+        print(f"   Excluding default values: {default_mutation}")
+
     mutations = []
     seen_mutations = set()  # Track unique mutations using normalized keys
+
+    # Add default key to seen set to prevent generating it
+    if default_key:
+        seen_mutations.add(default_key)
+
     attempts = 0
 
     while len(mutations) < num_mutations and attempts < MAX_MUTATION_ATTEMPTS:
@@ -226,7 +242,7 @@ def generate_mutations(
         # Use normalized key for uniqueness check (handles float precision issues)
         mutation_key = _normalize_mutation_key(mutation)
 
-        # Check if this mutation is unique
+        # Check if this mutation is unique (and not the default)
         if mutation_key not in seen_mutations:
             seen_mutations.add(mutation_key)
             mutations.append(mutation)
