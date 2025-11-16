@@ -681,24 +681,12 @@ class MutationRunner:
         total_start_time = time.time()
 
         for exp_idx, exp in enumerate(experiments, 1):
-            repo = exp["repo"]
-            model = exp["model"]
             exp_mode = exp.get("mode", mode)  # Allow per-experiment mode override
 
             print(f"\n\n{'=' * 80}")
-            print(f"CONFIGURATION {exp_idx}/{len(experiments)}: {repo}/{model}")
+            print(f"CONFIGURATION {exp_idx}/{len(experiments)}")
             print(f"Mode: {exp_mode}")
             print("=" * 80)
-
-            # Validate repository and model
-            if repo not in self.config["models"]:
-                print(f"Warning: Repository '{repo}' not found, skipping")
-                continue
-
-            repo_config = self.config["models"][repo]
-            if model not in repo_config["models"]:
-                print(f"Warning: Model '{model}' not available in {repo}, skipping")
-                continue
 
             try:
                 if exp_mode == "parallel":
@@ -712,14 +700,24 @@ class MutationRunner:
                         continue
 
                     # Extract foreground configuration
-                    fg_repo = foreground_config.get("repo", repo)
-                    fg_model = foreground_config.get("model", model)
+                    fg_repo = foreground_config["repo"]
+                    fg_model = foreground_config["model"]
                     fg_mode = foreground_config.get("mode", "mutation")
 
                     # Extract background configuration
                     bg_repo = background_config["repo"]
                     bg_model = background_config["model"]
                     bg_hyperparams = background_config.get("hyperparameters", {})
+
+                    # Validate foreground repo/model
+                    if fg_repo not in self.config["models"]:
+                        print(f"Warning: Foreground repo '{fg_repo}' not found, skipping")
+                        continue
+
+                    fg_repo_config = self.config["models"][fg_repo]
+                    if fg_model not in fg_repo_config["models"]:
+                        print(f"Warning: Foreground model '{fg_model}' not found in {fg_repo}, skipping")
+                        continue
 
                     # Validate background repo/model
                     if bg_repo not in self.config["models"]:
@@ -779,6 +777,20 @@ class MutationRunner:
 
                 elif exp_mode == "default":
                     # Default mode: use specified hyperparameters directly
+                    repo = exp["repo"]
+                    model = exp["model"]
+
+                    # Validate repository and model
+                    if repo not in self.config["models"]:
+                        print(f"Warning: Repository '{repo}' not found, skipping")
+                        continue
+
+                    repo_config = self.config["models"][repo]
+                    if model not in repo_config["models"]:
+                        print(f"Warning: Model '{model}' not available in {repo}, skipping")
+                        continue
+
+                    print(f"Repository/Model: {repo}/{model}")
                     hyperparams = exp.get("hyperparameters", {})
                     print(f"Using default hyperparameters: {hyperparams}")
 
@@ -798,6 +810,20 @@ class MutationRunner:
                             time.sleep(self.RUN_SLEEP_SECONDS)
                 else:
                     # Mutation mode: mutate specified parameters
+                    repo = exp["repo"]
+                    model = exp["model"]
+
+                    # Validate repository and model
+                    if repo not in self.config["models"]:
+                        print(f"Warning: Repository '{repo}' not found, skipping")
+                        continue
+
+                    repo_config = self.config["models"][repo]
+                    if model not in repo_config["models"]:
+                        print(f"Warning: Model '{model}' not available in {repo}, skipping")
+                        continue
+
+                    print(f"Repository/Model: {repo}/{model}")
                     mutate_params = exp.get("mutate", ["all"])
                     print(f"Mutating parameters: {mutate_params}")
 
@@ -829,7 +855,7 @@ class MutationRunner:
                             time.sleep(self.RUN_SLEEP_SECONDS)
 
             except Exception as e:
-                print(f"Error running experiment {repo}/{model}: {e}")
+                print(f"Error running experiment: {e}")
                 import traceback
                 traceback.print_exc()
                 continue

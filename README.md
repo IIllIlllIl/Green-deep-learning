@@ -2,7 +2,7 @@
 
 自动化深度学习模型训练的超参数变异与能耗性能分析框架
 
-**当前版本**: v4.0.1 - Modular Architecture
+**当前版本**: v4.1.0 - Unified Hyperparameter Ranges
 
 ---
 
@@ -12,9 +12,10 @@
 
 ### 核心功能
 
-- ✅ **超参数变异** - 自动生成超参数变体（log-uniform/uniform分布）
+- ✅ **超参数变异** - 统一范围公式，自动生成超参数变体（log-uniform/uniform分布）
 - ✅ **能耗监控** - CPU (perf) + GPU (nvidia-smi)，CPU误差<2%
-- ✅ **结果组织** - 分层目录结构 + CSV汇总
+- ✅ **并行训练** - 支持前台监控+后台负载的并行训练模式
+- ✅ **结果组织** - 分层目录结构 + CSV汇总 + JSON详细数据
 - ✅ **自动重试** - 训练失败时智能重试
 - ✅ **批量实验** - 配置文件支持复杂实验设计
 
@@ -45,9 +46,11 @@ python3 mutation.py -r pytorch_resnet_cifar10 -m resnet20 -mt epochs,learning_ra
 sudo python3 mutation.py -ec settings/default.json
 
 # 可用配置：
-# - default.json          复现所有模型原始训练
-# - all.json              变异所有模型所有超参数
-# - boundary_test_v2.json 超参数边界测试
+# - default.json                     复现所有模型原始训练
+# - all.json                         变异所有模型所有超参数
+# - boundary_test_v2.json            超参数边界测试（已完成）
+# - minimal_validation.json          新范围最小验证（14个实验，6.1小时）
+# - parallel_feasibility_test.json   并行训练可行性测试（12个实验，快速）
 ```
 
 ### 4. 设置CPU Governor（可选）
@@ -90,6 +93,29 @@ mutation/                        # 自包含核心包
 python3 -m unittest discover -s tests/unit
 python3 tests/functional/test_refactoring.py
 ```
+
+## 超参数变异范围
+
+### 统一范围公式 (v4.1.0)
+
+所有模型使用统一的变异范围，基于固定公式：
+
+| 超参数 | 范围公式 | 分布 | 说明 |
+|--------|----------|------|------|
+| **Epochs** | [default × 0.5, default × 1.5] | Uniform | 线性均匀采样 |
+| **Learning Rate** | [default × 0.5, default × 2.0] | Log-Uniform | 对数均匀采样 |
+| **Weight Decay** | [0.00001, 0.01] | Log-Uniform (100%) | 绝对范围，无零值 |
+| **Dropout** | [0.0, 0.4] | Uniform | 绝对范围 |
+| **Seed** | [0, 9999] | Uniform | 随机种子 |
+
+### 关键特性
+
+- ✅ **默认值排除**: 变异结果保证不等于默认值
+- ✅ **重复检查**: 6位小数精度的唯一性检查
+- ✅ **边界测试**: 通过boundary_test_v2验证（12个实验，5.5小时）
+- ✅ **最小验证**: minimal_validation验证新范围（14个实验，6.1小时）
+
+详细信息: [docs/MUTATION_RANGES_QUICK_REFERENCE.md](docs/MUTATION_RANGES_QUICK_REFERENCE.md)
 
 ---
 
@@ -258,15 +284,22 @@ sudo python3 mutation.py ... -g performance
 ## 📚 文档
 
 ### 快速参考
-- [功能特性总览](docs/FEATURES_OVERVIEW.md)
-- [实验配置指南](docs/SETTINGS_CONFIGURATION_GUIDE.md)
-- [快速参考卡片](docs/QUICK_REFERENCE.md)
+- [超参数变异范围](docs/MUTATION_RANGES_QUICK_REFERENCE.md) - 统一范围公式和配置
+- [功能特性总览](docs/FEATURES_OVERVIEW.md) - 系统功能完整说明
+- [实验配置指南](docs/SETTINGS_CONFIGURATION_GUIDE.md) - 如何编写配置文件
+- [输出结构快速参考](docs/OUTPUT_STRUCTURE_QUICKREF.md) - 结果目录结构
+- [并行训练使用指南](docs/PARALLEL_TRAINING_USAGE.md) - 并行训练模式说明
 
-### 深入学习
-- [模块化架构说明](docs/REFACTORING_SUMMARY.md)
-- [配置迁移记录](docs/CONFIG_MIGRATION.md)
-- [超参数变异策略](docs/HYPERPARAMETER_MUTATION_STRATEGY.md)
-- [能耗监控改进](docs/energy_monitoring_improvements.md)
+### 实验结果
+- [边界测试V2最终总结](docs/BOUNDARY_TEST_V2_FINAL_SUMMARY.md) - 边界测试完整结果
+- [最小验证总结](docs/MINIMAL_VALIDATION_SUMMARY.md) - 新范围验证实验设计
+- [并行可行性测试](docs/PARALLEL_FEASIBILITY_TEST_SUMMARY.md) - 并行训练测试配置
+- [完整性能表](docs/COMPLETE_PERFORMANCE_TABLE.md) - 所有实验性能数据
+
+### 技术深入
+- [变异机制详解](docs/MUTATION_MECHANISMS_DETAILED.md) - 超参数变异算法详解
+- [超参数变异策略](docs/HYPERPARAMETER_MUTATION_STRATEGY.md) - 变异策略设计
+- [能耗监控改进](docs/energy_monitoring_improvements.md) - 能耗监控实现细节
 
 ### 完整文档索引
 [docs/README.md](docs/README.md)
@@ -275,7 +308,17 @@ sudo python3 mutation.py ... -g performance
 
 ## 版本历史
 
-### v4.0.1 (2025-11-13) - Current
+### v4.1.0 (2025-11-15) - Current
+- ✅ 统一超参数变异范围（基于固定公式）
+- ✅ Epochs改为uniform分布，Weight Decay 100%对数采样
+- ✅ 默认值排除机制，保证变异唯一性
+- ✅ Dropout范围调整为[0.0, 0.4]
+- ✅ 修复parallel模式KeyError bug
+- ✅ 修复experiment.json生成bug（log_patterns提取）
+- ✅ 完成boundary_test_v2和minimal_validation实验设计
+- ✅ 并行训练可行性测试配置
+
+### v4.0.1 (2025-11-13)
 - ✅ 配置文件移至mutation/包（自包含模块）
 - ✅ 目录清理整合（tests统一结构）
 - ✅ 文档完善
@@ -298,5 +341,5 @@ sudo python3 mutation.py ... -g performance
 ---
 
 **状态**: ✅ Production Ready
-**版本**: v4.0.1
-**更新**: 2025-11-13
+**版本**: v4.1.0
+**更新**: 2025-11-15
