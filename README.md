@@ -2,21 +2,21 @@
 
 自动化深度学习模型训练的超参数变异与能耗性能分析框架
 
-**当前版本**: v4.1.0 - Unified Hyperparameter Ranges
+**当前版本**: v4.2.0 - Sequential and Parallel Training
+**状态**: ✅ Production Ready
 
 ---
 
 ## 项目概述
 
-研究深度学习训练超参数对能耗和性能的影响。通过自动化变异超参数、监控能耗、收集性能指标，支持大规模实验研究。
+研究深度学习训练超参数对能耗和性能的影响。通过自动化变异超参数、监控能耗、收集性能指标,支持大规模实验研究。
 
 ### 核心功能
 
-- ✅ **超参数变异** - 统一范围公式，自动生成超参数变体（log-uniform/uniform分布）
-- ✅ **能耗监控** - CPU (perf) + GPU (nvidia-smi)，CPU误差<2%
+- ✅ **超参数变异** - 自动生成超参数变体（log-uniform/uniform分布）
+- ✅ **能耗监控** - CPU (perf) + GPU (nvidia-smi),CPU误差<2%
 - ✅ **并行训练** - 支持前台监控+后台负载的并行训练模式
 - ✅ **结果组织** - 分层目录结构 + CSV汇总 + JSON详细数据
-- ✅ **自动重试** - 训练失败时智能重试
 - ✅ **批量实验** - 配置文件支持复杂实验设计
 
 ---
@@ -32,314 +32,114 @@ python3 mutation.py --list
 ### 2. 运行单个实验
 
 ```bash
-# 完整命令
-python3 mutation.py --repo pytorch_resnet_cifar10 --model resnet20 --mutate epochs,learning_rate --runs 3
-
-# 简写形式
+# 基本用法
 python3 mutation.py -r pytorch_resnet_cifar10 -m resnet20 -mt epochs,learning_rate -n 3
 ```
 
 ### 3. 运行批量实验（推荐）
 
 ```bash
-# 使用预设配置文件
-sudo python3 mutation.py -ec settings/default.json
-
-# 可用配置：
-# - default.json                     复现所有模型原始训练
-# - all.json                         变异所有模型所有超参数
-# - boundary_test_v2.json            超参数边界测试（已完成）
-# - minimal_validation.json          新范围最小验证（14个实验，6.1小时）
-# - parallel_feasibility_test.json   并行训练可行性测试（12个实验，快速）
+# 使用sudo确保能量数据准确
+sudo python3 mutation.py -ec settings/11_models_sequential_and_parallel_training.json -g performance
 ```
-
-### 4. 设置CPU Governor（可选）
-
-```bash
-sudo python3 mutation.py -ec settings/all.json -g performance
-```
-
----
-
-## 架构
-
-### 模块化设计 (v4.0)
-
-从1,851行单体文件重构为8个专注模块：
-
-```
-mutation/                        # 自包含核心包
-├── models_config.json          # 模型配置
-├── runner.py                   # 主编排器 (841行)
-├── session.py                  # 会话管理
-├── hyperparams.py              # 超参数变异
-├── command_runner.py           # 进程执行
-├── energy.py                   # 能耗/性能解析
-├── utils.py                    # 工具函数
-├── exceptions.py               # 异常层次
-├── run.sh                      # 训练包装脚本
-├── governor.sh                 # Governor控制
-└── background_training_template.sh
-```
-
-### 测试套件
-
-- **33个测试** (32 passed, 1 skipped)
-- 单元测试: `tests/unit/` (25个)
-- 功能测试: `tests/functional/` (8个)
-
-```bash
-# 运行所有测试
-python3 -m unittest discover -s tests/unit
-python3 tests/functional/test_refactoring.py
-```
-
-## 超参数变异范围
-
-### 统一范围公式 (v4.1.0)
-
-所有模型使用统一的变异范围，基于固定公式：
-
-| 超参数 | 范围公式 | 分布 | 说明 |
-|--------|----------|------|------|
-| **Epochs** | [default × 0.5, default × 1.5] | Uniform | 线性均匀采样 |
-| **Learning Rate** | [default × 0.5, default × 2.0] | Log-Uniform | 对数均匀采样 |
-| **Weight Decay** | [0.00001, 0.01] | Log-Uniform (100%) | 绝对范围，无零值 |
-| **Dropout** | [0.0, 0.4] | Uniform | 绝对范围 |
-| **Seed** | [0, 9999] | Uniform | 随机种子 |
-
-### 关键特性
-
-- ✅ **默认值排除**: 变异结果保证不等于默认值
-- ✅ **重复检查**: 6位小数精度的唯一性检查
-- ✅ **边界测试**: 通过boundary_test_v2验证（12个实验，5.5小时）
-- ✅ **最小验证**: minimal_validation验证新范围（14个实验，6.1小时）
-
-详细信息: [docs/MUTATION_RANGES_QUICK_REFERENCE.md](docs/MUTATION_RANGES_QUICK_REFERENCE.md)
 
 ---
 
 ## 支持的模型
 
-| 仓库 | 模型 | 超参数 |
-|------|------|--------|
-| **pytorch_resnet_cifar10** | resnet20/32/44/56/110/1202 | epochs, lr, seed, weight_decay |
-| **Person_reID_baseline_pytorch** | densenet121, hrnet18, pcb | epochs, lr, seed, dropout |
-| **VulBERTa** | mlp, cnn | epochs, lr, seed, weight_decay |
-| **MRT-OAST** | default | epochs, lr, seed, dropout, weight_decay |
-| **bug-localization-by-dnn-and-rvsm** | default | epochs, lr, seed |
-| **examples** | mnist_cnn, mnist_rnn, siamese | epochs, lr, seed |
+| 仓库 | 模型 | 超参数 | Epochs范围 |
+|------|------|--------|-----------|
+| **pytorch_resnet_cifar10** | resnet20/32/44/56 | epochs, lr, weight_decay, seed | [100, 300] |
+| **Person_reID_baseline_pytorch** | densenet121, hrnet18, pcb | epochs, lr, dropout, seed | [30, 90] |
+| **VulBERTa** | mlp, cnn | epochs, lr, weight_decay, seed | [5, 20] |
+| **MRT-OAST** | default | epochs, lr, dropout, weight_decay, seed | [5, 15] |
+| **bug-localization** | default | max_iter, alpha, kfold, seed | - |
+| **examples** | mnist, mnist_rnn, mnist_ff, siamese | epochs, lr, batch_size, seed | [5, 15] |
 
-查看详情：`python3 mutation.py --list`
-
----
-
-## 结果目录
-
-每次运行创建独立session，自动递增实验编号：
-
-```
-results/
-└── run_20251113_150000/              # Session目录
-    ├── summary.csv                   # 汇总CSV（所有实验）
-    ├── pytorch_resnet_cifar10_resnet20_001/
-    │   ├── experiment.json           # 详细数据（JSON）
-    │   ├── training.log              # 训练日志
-    │   └── energy/                   # 能耗原始数据
-    │       ├── cpu_energy.txt
-    │       ├── gpu_power.csv
-    │       └── gpu_temperature.csv
-    └── pytorch_resnet_cifar10_resnet20_002/
-        └── ...
-```
-
-### CSV汇总内容
-
-- 实验元数据（ID、时间、repo、model）
-- 超参数（动态列，适配不同实验）
-- 性能指标（accuracy, mAP, rank-1等）
-- 能耗数据（CPU/GPU全指标）
+**详细范围**: [docs/MUTATION_RANGES_QUICK_REFERENCE.md](docs/MUTATION_RANGES_QUICK_REFERENCE.md)
 
 ---
 
-## 命令行参数
+## 结果输出
 
-### 必需参数（CLI模式）
+每次运行创建独立session,包含CSV汇总和详细JSON数据：
 
-- `-r`, `--repo` - 仓库名
-- `-m`, `--model` - 模型名
-- `-mt`, `--mutate` - 超参数（逗号分隔或`all`）
+```
+results/run_YYYYMMDD_HHMMSS/
+├── summary.csv                    # 所有实验汇总
+└── {repo}_{model}_{id}/
+    ├── experiment.json            # 完整数据（超参数+性能+能耗）
+    ├── training.log               # 训练日志
+    └── energy/                    # 能耗原始数据
+```
 
-### 常用选项
-
-- `-n`, `--runs` - 运行次数（默认：1）
-- `-g`, `--governor` - CPU调度器（performance/powersave/ondemand）
-- `-ec`, `--experiment-config` - 配置文件路径
-- `-s`, `--seed` - 随机种子
-- `-l`, `--list` - 列出所有模型
-- `-mr`, `--max-retries` - 最大重试次数（默认：2）
+**详细说明**: [docs/OUTPUT_STRUCTURE_QUICKREF.md](docs/OUTPUT_STRUCTURE_QUICKREF.md)
 
 ---
 
-## 工作流程
-
-```
-1. 加载配置 → 2. 创建Session → 3. 生成变异
-        ↓
-4. 对每个实验：
-   a. 创建实验目录
-   b. 启动训练 + 能耗监控
-   c. 等待完成
-   d. 解析能耗/性能数据
-   e. 保存结果
-   f. 冷却60秒
-        ↓
-5. 生成CSV汇总 → 6. 显示摘要
-```
-
----
-
-## 依赖项
-
-### Python
-- Python 3.6+ (仅标准库，无需pip包)
-
-### 系统工具
-```bash
-# 必需
-sudo apt-get install linux-tools-common linux-tools-generic  # perf
-sudo sysctl -w kernel.perf_event_paranoid=-1                 # 启用perf
-
-# 可选（GPU监控）
-nvidia-smi  # 通常随NVIDIA驱动安装
-```
-
----
-
-## 最佳实践
-
-### 1. 使用配置文件进行批量实验
+## 常用命令
 
 ```bash
-# ✅ 推荐
-sudo python3 mutation.py -ec settings/default.json
+# 列出所有模型
+python3 mutation.py --list
 
-# ❌ 不推荐（难以复现）
-python3 mutation.py -r repo1 -m model1 -mt all -n 5
-python3 mutation.py -r repo2 -m model2 -mt all -n 5
-...
-```
+# 单次训练
+python3 mutation.py -r pytorch_resnet_cifar10 -m resnet20 -mt epochs -n 3
 
-### 2. 设置Performance Governor减少干扰
+# 批量实验（使用sudo确保能量数据准确）
+sudo python3 mutation.py -ec settings/11_models_sequential_and_parallel_training.json -g performance
 
-```bash
-sudo python3 mutation.py -ec settings/all.json -g performance
-```
-
-### 3. 使用随机种子确保可复现
-
-```bash
-python3 mutation.py -r pytorch_resnet_cifar10 -m resnet20 -mt all -n 5 -s 42
-```
-
-### 4. 分析结果
-
-```bash
-# 查看CSV
+# 查看结果
 cat results/run_*/summary.csv | column -t -s,
-
-# 使用jq分析JSON
-cat results/run_*/*/experiment.json | jq '.performance_metrics'
-
-# 提取能耗数据
-cat results/run_*/*/experiment.json | jq -r '[.experiment_id, .energy_metrics.cpu_energy_total_joules] | @csv'
 ```
+
+**完整参数说明**: [docs/QUICK_REFERENCE.md](docs/QUICK_REFERENCE.md)
 
 ---
 
-## 常见问题
+## 系统要求
 
-### 1. 训练失败
-查看错误信息：
-```bash
-cat results/run_*/*/experiment.json | jq '.error_message'
-```
-框架会自动重试（默认最多2次）
+- **Python**: 3.6+ (仅标准库)
+- **能耗监控**: `perf` (CPU), `nvidia-smi` (GPU)
+- **权限**: 需要sudo以获取准确的CPU能量数据
 
-### 2. 能耗监控无数据
-检查权限：
 ```bash
-sudo sysctl kernel.perf_event_paranoid  # 应该为-1或0
-nvidia-smi                               # GPU监控
-```
-
-### 3. Governor设置失败
-需要sudo权限：
-```bash
-sudo python3 mutation.py ... -g performance
+# 安装perf
+sudo apt-get install linux-tools-common linux-tools-generic
+sudo sysctl -w kernel.perf_event_paranoid=-1
 ```
 
 ---
 
 ## 📚 文档
 
-### 快速参考
-- [超参数变异范围](docs/MUTATION_RANGES_QUICK_REFERENCE.md) - 统一范围公式和配置
-- [功能特性总览](docs/FEATURES_OVERVIEW.md) - 系统功能完整说明
-- [实验配置指南](docs/SETTINGS_CONFIGURATION_GUIDE.md) - 如何编写配置文件
-- [输出结构快速参考](docs/OUTPUT_STRUCTURE_QUICKREF.md) - 结果目录结构
-- [并行训练使用指南](docs/PARALLEL_TRAINING_USAGE.md) - 并行训练模式说明
-
-### 实验结果
-- [边界测试V2最终总结](docs/BOUNDARY_TEST_V2_FINAL_SUMMARY.md) - 边界测试完整结果
-- [最小验证总结](docs/MINIMAL_VALIDATION_SUMMARY.md) - 新范围验证实验设计
-- [并行可行性测试](docs/PARALLEL_FEASIBILITY_TEST_SUMMARY.md) - 并行训练测试配置
-- [完整性能表](docs/COMPLETE_PERFORMANCE_TABLE.md) - 所有实验性能数据
-
-### 技术深入
-- [变异机制详解](docs/MUTATION_MECHANISMS_DETAILED.md) - 超参数变异算法详解
-- [超参数变异策略](docs/HYPERPARAMETER_MUTATION_STRATEGY.md) - 变异策略设计
-- [能耗监控改进](docs/energy_monitoring_improvements.md) - 能耗监控实现细节
-
-### 完整文档索引
-[docs/README.md](docs/README.md)
+| 文档 | 说明 |
+|-----|------|
+| [超参数变异范围](docs/MUTATION_RANGES_QUICK_REFERENCE.md) | 各模型的超参数范围配置 ⭐⭐⭐ |
+| [快速参考](docs/QUICK_REFERENCE.md) | 命令速查表 ⭐⭐ |
+| [实验配置指南](docs/SETTINGS_CONFIGURATION_GUIDE.md) | 配置文件编写指南 ⭐⭐ |
+| [并行训练使用](docs/PARALLEL_TRAINING_USAGE.md) | 并行训练模式说明 ⭐⭐ |
+| [输出结构](docs/OUTPUT_STRUCTURE_QUICKREF.md) | 结果目录结构 ⭐ |
+| [功能总览](docs/FEATURES_OVERVIEW.md) | 所有功能说明 ⭐⭐ |
+| [完整索引](docs/README.md) | 所有文档列表 |
 
 ---
 
-## 版本历史
+## 版本信息
 
-### v4.1.0 (2025-11-15) - Current
-- ✅ 统一超参数变异范围（基于固定公式）
-- ✅ Epochs改为uniform分布，Weight Decay 100%对数采样
-- ✅ 默认值排除机制，保证变异唯一性
-- ✅ Dropout范围调整为[0.0, 0.4]
-- ✅ 修复parallel模式KeyError bug
-- ✅ 修复experiment.json生成bug（log_patterns提取）
-- ✅ 完成boundary_test_v2和minimal_validation实验设计
-- ✅ 并行训练可行性测试配置
+**当前版本**: v4.2.0 (2025-11-17)
+- ✅ Sequential和Parallel训练完整配置
+- ✅ 11个模型的默认值训练和并行组合
+- ✅ 运行时估算公式: T(n) = 23.94 + 25.04n 小时
 
-### v4.0.1 (2025-11-13)
-- ✅ 配置文件移至mutation/包（自包含模块）
-- ✅ 目录清理整合（tests统一结构）
-- ✅ 文档完善
+**主要里程碑**:
+- v4.1.0: 模型独立的超参数范围，完成范围测试和并行V3测试
+- v4.0: 模块化重构，33个测试
+- v3.0: 分层目录结构 + CSV汇总
+- v2.0: 高精度能耗监控（误差<2%）
 
-### v4.0 (2025-11-13)
-- ✅ 模块化架构重构（8个模块）
-- ✅ 完整测试套件（33个测试）
-- ✅ 100%向后兼容
-- ✅ 代码质量提升（-54.6%行数）
-
-### v3.0 (2025-11-12)
-- ✅ 分层目录结构 + CSV汇总
-
-### v2.0 (2025-11-10)
-- ✅ 高精度能耗监控（CPU误差<2%）
-
-### v1.0 (2025-11-08)
-- ✅ 核心超参数变异功能
+**完整版本历史**: [docs/FEATURES_OVERVIEW.md](docs/FEATURES_OVERVIEW.md)
 
 ---
 
-**状态**: ✅ Production Ready
-**版本**: v4.1.0
-**更新**: 2025-11-15
+**维护者**: Green | **项目状态**: ✅ Production Ready | **最后更新**: 2025-11-17

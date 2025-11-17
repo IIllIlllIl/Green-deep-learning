@@ -1,6 +1,8 @@
 """Experiment session management and result persistence"""
 
 import csv
+import os
+import subprocess
 from datetime import datetime
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple, Any
@@ -165,3 +167,49 @@ class ExperimentSession:
         print(f"   Failed: {sum(1 for e in self.experiments if not e.get('training_success'))}")
 
         return csv_file
+
+    def restore_permissions(self):
+        """Restore file ownership to original user when run with sudo
+
+        This method detects if the script is running with sudo and automatically
+        restores ownership of all generated files to the original user (SUDO_USER).
+        This allows the user to process results without needing sudo privileges.
+        """
+        # Check if running as root (with sudo)
+        if os.geteuid() != 0:
+            # Not running as root, no need to change permissions
+            return
+
+        # Get the original user from SUDO_USER environment variable
+        sudo_user = os.environ.get('SUDO_USER')
+        if not sudo_user:
+            # Not running via sudo, or SUDO_USER not set
+            print("⚠️  Running as root but SUDO_USER not found. Skipping permission restoration.")
+            return
+
+        # Get the UID and GID of the original user
+        try:
+            import pwd
+            user_info = pwd.getpwnam(sudo_user)
+            uid = user_info.pw_uid
+            gid = user_info.pw_gid
+        except (KeyError, ImportError):
+            print(f"⚠️  Could not find user info for '{sudo_user}'. Skipping permission restoration.")
+            return
+
+        # Restore ownership of the entire session directory
+        try:
+            print(f"🔧 Restoring file ownership to user '{sudo_user}'...")
+
+            # Use chown -R to recursively change ownership
+            # This is more efficient than walking the directory tree in Python
+            cmd = ['chown', '-R', f'{uid}:{gid}', str(self.session_dir)]
+            result = subprocess.run(cmd, capture_output=True, text=True)
+
+            if result.returncode == 0:
+                print(f"✅ File ownership restored: {self.session_dir}")
+                print(f"   User '{sudo_user}' can now access all files without sudo")
+            else:
+                print(f"⚠️  Failed to restore ownership: {result.stderr}")
+        except Exception as e:
+            print(f"⚠️  Error restoring permissions: {e}")

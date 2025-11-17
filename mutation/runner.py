@@ -606,6 +606,9 @@ class MutationRunner:
         if csv_file:
             print(f"Summary CSV: {csv_file}")
 
+        # Restore file ownership if running with sudo
+        self.session.restore_permissions()
+
         print("\nAll experiments completed!\n")
 
     def run_from_experiment_config(self, config_file: str) -> None:
@@ -902,5 +905,8 @@ class MutationRunner:
         csv_file = self.session.generate_summary_csv()
         if csv_file:
             print(f"Summary CSV: {csv_file}")
+
+        # Restore file ownership if running with sudo
+        self.session.restore_permissions()
 
         print("\nAll experiments completed!\n")
