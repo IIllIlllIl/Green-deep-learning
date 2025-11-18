@@ -229,7 +229,8 @@ class MutationRunner:
                     performance_metrics: Dict[str, float],
                     success: bool,
                     retries: int,
-                    error_message: str = "") -> None:
+                    error_message: str = "",
+                    parallel_config: Optional[Dict[str, Any]] = None) -> None:
         """Save experiment results to JSON file in experiment directory and add to session
 
         Results are saved in two formats:
@@ -247,7 +248,9 @@ class MutationRunner:
             success: Whether training succeeded
             retries: Number of retries attempted
             error_message: Error message if failed
+            parallel_config: Optional parallel experiment configuration (background model info)
         """
+        # Base result structure (for non-parallel or foreground)
         result = {
             "experiment_id": experiment_id,
             "timestamp": datetime.now().isoformat(),
@@ -262,6 +265,32 @@ class MutationRunner:
             "error_message": error_message
         }
 
+        # If this is a parallel experiment, enhance the structure
+        if parallel_config is not None:
+            result = {
+                "experiment_id": experiment_id,
+                "timestamp": datetime.now().isoformat(),
+                "mode": "parallel",
+                "foreground": {
+                    "repository": repo,
+                    "model": model,
+                    "hyperparameters": mutation,
+                    "duration_seconds": duration,
+                    "energy_metrics": energy_metrics,
+                    "performance_metrics": performance_metrics,
+                    "training_success": success,
+                    "retries": retries,
+                    "error_message": error_message
+                },
+                "background": {
+                    "repository": parallel_config.get("bg_repo"),
+                    "model": parallel_config.get("bg_model"),
+                    "hyperparameters": parallel_config.get("bg_hyperparams"),
+                    "log_directory": parallel_config.get("bg_log_dir"),
+                    "note": "Background training served as GPU load only (not monitored)"
+                }
+            }
+
         # Save to experiment directory (new structure)
         exp_dir = self.session.session_dir / experiment_id
         result_file = exp_dir / "experiment.json"
@@ -270,8 +299,23 @@ class MutationRunner:
 
         print(f"Results saved to: {result_file}")
 
+        # For CSV generation, use flattened structure (foreground data for parallel)
+        csv_result = {
+            "experiment_id": experiment_id,
+            "timestamp": datetime.now().isoformat(),
+            "repository": repo,
+            "model": model,
+            "hyperparameters": mutation,
+            "duration_seconds": duration,
+            "energy_metrics": energy_metrics,
+            "performance_metrics": performance_metrics,
+            "training_success": success,
+            "retries": retries,
+            "error_message": error_message
+        }
+
         # Add to session for CSV generation
-        self.session.add_experiment_result(result)
+        self.session.add_experiment_result(csv_result)
 
     def run_parallel_experiment(self,
                                fg_repo: str,
@@ -349,8 +393,20 @@ class MutationRunner:
             print(f"Starting foreground training...")
             print(f"{'─' * 80}\n")
 
+            # Prepare parallel configuration for save_results
+            parallel_cfg = {
+                "bg_repo": bg_repo,
+                "bg_model": bg_model,
+                "bg_hyperparams": bg_hyperparams,
+                "bg_log_dir": str(bg_log_dir)
+            }
+
+            # Pass the parallel experiment directory to run_experiment
+            # This ensures foreground results are saved in the parallel directory
             foreground_result = self.run_experiment(
-                fg_repo, fg_model, fg_mutation, max_retries
+                fg_repo, fg_model, fg_mutation, max_retries,
+                exp_dir=exp_dir, experiment_id=experiment_id,
+                parallel_config=parallel_cfg
             )
 
             print(f"\n{'─' * 80}")
@@ -382,11 +438,14 @@ class MutationRunner:
                       repo: str,
                       model: str,
                       mutation: Dict[str, Any],
-                      max_retries: int = 2) -> Dict[str, Any]:
+                      max_retries: int = 2,
+                      exp_dir: Optional[Path] = None,
+                      experiment_id: Optional[str] = None,
+                      parallel_config: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
         """Run a single training experiment with retries
 
         Executes a complete training experiment including:
-        1. Creating experiment directory structure
+        1. Creating experiment directory structure (or using provided directory)
         2. Running training with energy monitoring
         3. Validating training success
         4. Extracting performance metrics
@@ -401,6 +460,9 @@ class MutationRunner:
             model: Model name
             mutation: Mutated hyperparameters
             max_retries: Maximum number of retries on failure
+            exp_dir: Optional pre-created experiment directory (for parallel experiments)
+            experiment_id: Optional pre-assigned experiment ID (must be provided with exp_dir)
+            parallel_config: Optional parallel experiment configuration (background model info)
 
         Returns:
             Dictionary containing:
@@ -410,7 +472,14 @@ class MutationRunner:
             - retries: Number of retries attempted
         """
         # Get experiment directory from session (BEFORE retry loop)
-        exp_dir, experiment_id = self.session.get_next_experiment_dir(repo, model, mode="train")
+        # If exp_dir and experiment_id are provided, use them (parallel experiment case)
+        # Otherwise, create a new experiment directory
+        if exp_dir is not None and experiment_id is not None:
+            # Use provided directory (parallel experiment case)
+            pass
+        else:
+            # Create new experiment directory
+            exp_dir, experiment_id = self.session.get_next_experiment_dir(repo, model, mode="train")
 
         print("\n" + "=" * 80)
         print(f"EXPERIMENT: {experiment_id}")
@@ -496,7 +565,8 @@ class MutationRunner:
             performance_metrics=performance_metrics,
             success=success,
             retries=retries,
-            error_message=error_message
+            error_message=error_message,
+            parallel_config=parallel_config
         )
 
         return {

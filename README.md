@@ -2,7 +2,7 @@
 
 自动化深度学习模型训练的超参数变异与能耗性能分析框架
 
-**当前版本**: v4.2.0 - Sequential and Parallel Training
+**当前版本**: v4.3.0 - Enhanced Parallel Experiments & Offline Training
 **状态**: ✅ Production Ready
 
 ---
@@ -16,6 +16,9 @@
 - ✅ **超参数变异** - 自动生成超参数变体（log-uniform/uniform分布）
 - ✅ **能耗监控** - CPU (perf) + GPU (nvidia-smi),CPU误差<2%
 - ✅ **并行训练** - 支持前台监控+后台负载的并行训练模式
+- ✅ **完整元数据** - 并行实验记录完整前景+背景模型信息
+- ✅ **离线训练** - 支持完全离线运行，避免网络依赖
+- ✅ **快速验证** - 1-epoch配置，15-20分钟验证全部模型
 - ✅ **结果组织** - 分层目录结构 + CSV汇总 + JSON详细数据
 - ✅ **批量实验** - 配置文件支持复杂实验设计
 
@@ -39,8 +42,12 @@ python3 mutation.py -r pytorch_resnet_cifar10 -m resnet20 -mt epochs,learning_ra
 ### 3. 运行批量实验（推荐）
 
 ```bash
-# 使用sudo确保能量数据准确
-sudo python3 mutation.py -ec settings/11_models_sequential_and_parallel_training.json -g performance
+# 快速验证（15-20分钟，1 epoch）
+HF_HUB_OFFLINE=1 python3 mutation.py -ec settings/11_models_quick_validation_1epoch.json
+
+# 完整实验（9+小时，使用sudo确保能量数据准确）
+export HF_HUB_OFFLINE=1
+sudo -E python3 mutation.py -ec settings/11_models_sequential_and_parallel_training.json -g performance
 ```
 
 ---
@@ -67,10 +74,12 @@ sudo python3 mutation.py -ec settings/11_models_sequential_and_parallel_training
 ```
 results/run_YYYYMMDD_HHMMSS/
 ├── summary.csv                    # 所有实验汇总
-└── {repo}_{model}_{id}/
+└── {repo}_{model}_{id}_parallel/  # 并行实验（或不带_parallel为顺序实验）
     ├── experiment.json            # 完整数据（超参数+性能+能耗）
-    ├── training.log               # 训练日志
-    └── energy/                    # 能耗原始数据
+    │                              # 并行实验包含foreground和background信息
+    ├── training.log               # 前景训练日志
+    ├── energy/                    # 能耗原始数据
+    └── background_logs/           # 后台训练日志（仅并行实验）
 ```
 
 **详细说明**: [docs/OUTPUT_STRUCTURE_QUICKREF.md](docs/OUTPUT_STRUCTURE_QUICKREF.md)
@@ -86,8 +95,12 @@ python3 mutation.py --list
 # 单次训练
 python3 mutation.py -r pytorch_resnet_cifar10 -m resnet20 -mt epochs -n 3
 
-# 批量实验（使用sudo确保能量数据准确）
-sudo python3 mutation.py -ec settings/11_models_sequential_and_parallel_training.json -g performance
+# 快速验证（15-20分钟）
+HF_HUB_OFFLINE=1 python3 mutation.py -ec settings/11_models_quick_validation_1epoch.json
+
+# 完整批量实验（9+小时，使用sudo确保能量数据准确）
+export HF_HUB_OFFLINE=1
+sudo -E python3 mutation.py -ec settings/11_models_sequential_and_parallel_training.json -g performance
 
 # 查看结果
 cat results/run_*/summary.csv | column -t -s,
@@ -121,25 +134,29 @@ sudo sysctl -w kernel.perf_event_paranoid=-1
 | [并行训练使用](docs/PARALLEL_TRAINING_USAGE.md) | 并行训练模式说明 ⭐⭐ |
 | [输出结构](docs/OUTPUT_STRUCTURE_QUICKREF.md) | 结果目录结构 ⭐ |
 | [功能总览](docs/FEATURES_OVERVIEW.md) | 所有功能说明 ⭐⭐ |
+| [更新日志 2025-11-18](docs/CHANGELOG_20251118.md) | v4.3.0 更新详情 🆕 |
 | [完整索引](docs/README.md) | 所有文档列表 |
 
 ---
 
 ## 版本信息
 
-**当前版本**: v4.2.0 (2025-11-17)
-- ✅ Sequential和Parallel训练完整配置
-- ✅ 11个模型的默认值训练和并行组合
-- ✅ 运行时估算公式: T(n) = 23.94 + 25.04n 小时
+**当前版本**: v4.3.0 (2025-11-18)
+- ✅ 并行实验JSON增强 - 完整记录前景+背景模型信息
+- ✅ 离线训练支持 - HF_HUB_OFFLINE=1 完全离线运行
+- ✅ 快速验证配置 - 1-epoch版本，15-20分钟完成全模型测试
+- ✅ 实验数据完整性 - 改进目录结构，确保数据不丢失
 
 **主要里程碑**:
+- v4.3.0: 并行实验元数据增强 + 离线训练 + 快速验证工具
+- v4.2.0: Sequential和Parallel训练完整配置
 - v4.1.0: 模型独立的超参数范围，完成范围测试和并行V3测试
 - v4.0: 模块化重构，33个测试
 - v3.0: 分层目录结构 + CSV汇总
 - v2.0: 高精度能耗监控（误差<2%）
 
-**完整版本历史**: [docs/FEATURES_OVERVIEW.md](docs/FEATURES_OVERVIEW.md)
+**完整版本历史**: [docs/FEATURES_OVERVIEW.md](docs/FEATURES_OVERVIEW.md) | **v4.3.0更新详情**: [docs/CHANGELOG_20251118.md](docs/CHANGELOG_20251118.md)
 
 ---
 
-**维护者**: Green | **项目状态**: ✅ Production Ready | **最后更新**: 2025-11-17
+**维护者**: Green | **项目状态**: ✅ Production Ready | **最后更新**: 2025-11-18

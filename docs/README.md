@@ -1,7 +1,7 @@
 # 项目文档索引
 
-**最后更新**: 2025-11-17
-**版本**: v4.2.0 - Sequential and Parallel Training
+**最后更新**: 2025-11-18
+**版本**: v4.3.0 - Enhanced Parallel Experiments & Offline Training
 
 本目录包含Mutation-Based Training Energy Profiler项目的完整文档。
 
@@ -11,12 +11,24 @@
 
 ### 新手推荐阅读顺序
 1. [FEATURES_OVERVIEW.md](FEATURES_OVERVIEW.md) - **功能特性总览** ⭐ 了解所有功能
-2. [MUTATION_RANGES_QUICK_REFERENCE.md](MUTATION_RANGES_QUICK_REFERENCE.md) - **超参数范围** ⭐⭐⭐ 必读
-3. [SETTINGS_CONFIGURATION_GUIDE.md](SETTINGS_CONFIGURATION_GUIDE.md) - 实验配置指南
+2. [CHANGELOG_20251118.md](CHANGELOG_20251118.md) - **v4.3.0更新日志** 🆕 了解最新改进
+3. [MUTATION_RANGES_QUICK_REFERENCE.md](MUTATION_RANGES_QUICK_REFERENCE.md) - **超参数范围** ⭐⭐⭐ 必读
+4. [SETTINGS_CONFIGURATION_GUIDE.md](SETTINGS_CONFIGURATION_GUIDE.md) - 实验配置指南
 
 ---
 
 ## 📚 核心文档
+
+### 更新日志
+
+#### [CHANGELOG_20251118.md](CHANGELOG_20251118.md) 🆕
+**v4.3.0 更新日志** - 今日完成
+- 并行实验JSON结构增强 - 完整记录前景+背景模型信息
+- 离线训练环境完善 - HF_HUB_OFFLINE=1 完全离线运���
+- 快速验证配置 - 1-epoch版本，15-20分钟验证全模型
+- 实验数据完整性改进 - 目录结构优化
+
+---
 
 ### 超参数变异
 
@@ -104,6 +116,7 @@
 
 | 需求 | 推荐文档 | 优先级 |
 |------|---------|--------|
+| 了解最新改进 | [CHANGELOG_20251118.md](CHANGELOG_20251118.md) | ⭐⭐⭐ 🆕 |
 | 了解超参数范围 | [MUTATION_RANGES_QUICK_REFERENCE.md](MUTATION_RANGES_QUICK_REFERENCE.md) | ⭐⭐⭐ |
 | 了解所有功能 | [FEATURES_OVERVIEW.md](FEATURES_OVERVIEW.md) | ⭐⭐ |
 | 快速使用命令 | [QUICK_REFERENCE.md](QUICK_REFERENCE.md) | ⭐⭐ |
@@ -118,6 +131,11 @@
 ## 📦 已归档文档
 
 已完成的测试、实验和设计文档已归档至 `archive/` 目录：
+
+### 2025-11-18归档 🆕
+- **问题修复**: 并行目录结构修复、hrnet18 SSL证书问题
+- **环境配置**: 离线训练环境设置指南和完成报告
+- **相关文档**: FIX_SUMMARY_20251118.md, HRNET18_SSL_FIX.md, OFFLINE_SETUP_COMPLETION_REPORT.md, OFFLINE_TRAINING_SETUP.md
 
 ### 2025-11-17归档
 - **已完成的测试**: 并行可行性测试V3设计文档（测试已完成）
@@ -138,7 +156,8 @@
 
 ## 📊 文档统计
 
-**当前活跃文档**: 10个
+**当前活跃文档**: 11个
+- 更新日志: 1个 🆕
 - 超参数变异: 2个
 - 使用指南: 3个
 - 功能特性: 2个
@@ -146,7 +165,7 @@
 - 技术实现: 1个
 - 索引文件: 1个
 
-**已归档文档**: 90+个
+**已归档文档**: 94+个
 
 ---
 
@@ -172,5 +191,5 @@
 
 **维护者**: Green
 **项目**: Mutation-Based Training Energy Profiler
-**文档版本**: v4.2.0
+**文档版本**: v4.3.0
 **状态**: ✅ Production Ready
