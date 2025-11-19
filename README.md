@@ -2,7 +2,7 @@
 
 自动化深度学习模型训练的超参数变异与能耗性能分析框架
 
-**当前版本**: v4.3.0 - Enhanced Parallel Experiments & Offline Training
+**当前版本**: v4.3.0 (2025-11-19)
 **状态**: ✅ Production Ready
 
 ---
@@ -45,7 +45,13 @@ python3 mutation.py -r pytorch_resnet_cifar10 -m resnet20 -mt epochs,learning_ra
 # 快速验证（15-20分钟，1 epoch）
 HF_HUB_OFFLINE=1 python3 mutation.py -ec settings/11_models_quick_validation_1epoch.json
 
-# 完整实验（9+小时，使用sudo确保能量数据准确）
+# 变异实验验证（1次变异，快速测试）
+sudo -E python3 mutation.py -ec settings/mutation_validation_1x.json -g performance
+
+# 完整变异实验（3次变异，完整数据）
+sudo -E python3 mutation.py -ec settings/mutation_all_models_3x_dynamic.json -g performance
+
+# 完整基线实验（9+小时）
 export HF_HUB_OFFLINE=1
 sudo -E python3 mutation.py -ec settings/11_models_sequential_and_parallel_training.json -g performance
 ```
@@ -98,7 +104,10 @@ python3 mutation.py -r pytorch_resnet_cifar10 -m resnet20 -mt epochs -n 3
 # 快速验证（15-20分钟）
 HF_HUB_OFFLINE=1 python3 mutation.py -ec settings/11_models_quick_validation_1epoch.json
 
-# 完整批量实验（9+小时，使用sudo确保能量数据准确）
+# 变异实验（动态生成超参数）
+sudo -E python3 mutation.py -ec settings/mutation_validation_1x.json -g performance
+
+# 完整实验（9+小时）
 export HF_HUB_OFFLINE=1
 sudo -E python3 mutation.py -ec settings/11_models_sequential_and_parallel_training.json -g performance
 
@@ -128,35 +137,74 @@ sudo sysctl -w kernel.perf_event_paranoid=-1
 
 | 文档 | 说明 |
 |-----|------|
-| [超参数变异范围](docs/MUTATION_RANGES_QUICK_REFERENCE.md) | 各模型的超参数范围配置 ⭐⭐⭐ |
+| [超参数变异范围](docs/MUTATION_RANGES_QUICK_REFERENCE.md) | 变异范围速查 ⭐⭐⭐ |
 | [快速参考](docs/QUICK_REFERENCE.md) | 命令速查表 ⭐⭐ |
-| [实验配置指南](docs/SETTINGS_CONFIGURATION_GUIDE.md) | 配置文件编写指南 ⭐⭐ |
-| [并行训练使用](docs/PARALLEL_TRAINING_USAGE.md) | 并行训练模式说明 ⭐⭐ |
+| [实验配置指南](docs/SETTINGS_CONFIGURATION_GUIDE.md) | Settings JSON编写 ⭐⭐ |
+| [11个模型概览](docs/11_MODELS_OVERVIEW.md) | 模型详细信息 ⭐⭐ |
+| [并行训练使用](docs/PARALLEL_TRAINING_USAGE.md) | 并行训练配置 ⭐⭐ |
 | [输出结构](docs/OUTPUT_STRUCTURE_QUICKREF.md) | 结果目录结构 ⭐ |
 | [功能总览](docs/FEATURES_OVERVIEW.md) | 所有功能说明 ⭐⭐ |
-| [更新日志 2025-11-18](docs/CHANGELOG_20251118.md) | v4.3.0 更新详情 🆕 |
-| [完整索引](docs/README.md) | 所有文档列表 |
+| [完整文档索引](docs/README.md) | 所有文档列表 |
+
+---
+
+## Settings配置文件
+
+### 可用配置（settings/目录）
+
+| 配置文件 | 说明 | 预计时间 |
+|---------|------|---------|
+| `11_models_quick_validation_1epoch.json` | 快速验证（1 epoch） | 15-20分钟 |
+| `mutation_validation_1x.json` | 变异验证（1次） | 按模型而定 |
+| `mutation_all_models_3x_dynamic.json` | 完整变异（3次） | 较长时间 |
+| `11_models_sequential_and_parallel_training.json` | 完整基线 | 9+小时 |
+| `person_reid_dropout_boundary_test.json` | Dropout边界测试 | ~6.5小时 |
+
+### 配置格式
+
+**顺序训练**:
+```json
+{
+  "repo": "examples",
+  "model": "mnist",
+  "mode": "mutation",
+  "mutate": ["epochs", "learning_rate"]
+}
+```
+
+**并行训练**:
+```json
+{
+  "mode": "parallel",
+  "foreground": {
+    "repo": "examples",
+    "model": "mnist",
+    "mode": "mutation",
+    "mutate": ["epochs"]
+  },
+  "background": {
+    "repo": "Person_reID_baseline_pytorch",
+    "model": "densenet121",
+    "hyperparameters": {"epochs": 60, "learning_rate": 0.05}
+  }
+}
+```
+
+**详细指南**: [docs/SETTINGS_CONFIGURATION_GUIDE.md](docs/SETTINGS_CONFIGURATION_GUIDE.md)
 
 ---
 
 ## 版本信息
 
-**当前版本**: v4.3.0 (2025-11-18)
-- ✅ 并行实验JSON增强 - 完整记录前景+背景模型信息
-- ✅ 离线训练支持 - HF_HUB_OFFLINE=1 完全离线运行
-- ✅ 快速验证配置 - 1-epoch版本，15-20分钟完成全模型测试
-- ✅ 实验数据完整性 - 改进目录结构，确保数据不丢失
+**v4.3.0** (2025-11-19)
+- ✅ 11个模型完整支持（基线+变异）
+- ✅ 动态变异系统（log-uniform/uniform分布）
+- ✅ 并行训练（前景+背景GPU同时利用）
+- ✅ 离线训练（HF_HUB_OFFLINE=1）
+- ✅ 高精度能耗监控（CPU误差<2%）
 
-**主要里程碑**:
-- v4.3.0: 并行实验元数据增强 + 离线训练 + 快速验证工具
-- v4.2.0: Sequential和Parallel训练完整配置
-- v4.1.0: 模型独立的超参数范围，完成范围测试和并行V3测试
-- v4.0: 模块化重构，33个测试
-- v3.0: 分层目录结构 + CSV汇总
-- v2.0: 高精度能耗监控（误差<2%）
-
-**完整版本历史**: [docs/FEATURES_OVERVIEW.md](docs/FEATURES_OVERVIEW.md) | **v4.3.0更新详情**: [docs/CHANGELOG_20251118.md](docs/CHANGELOG_20251118.md)
+**完整版本历史**: [docs/FEATURES_OVERVIEW.md](docs/FEATURES_OVERVIEW.md)
 
 ---
 
-**维护者**: Green | **项目状态**: ✅ Production Ready | **最后更新**: 2025-11-18
+**维护者**: Green | **状态**: ✅ Production Ready | **更新**: 2025-11-19
