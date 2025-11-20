@@ -202,6 +202,10 @@ sudo sysctl -w kernel.perf_event_paranoid=-1
 - ✅ 并行训练（前景+背景GPU同时利用）
 - ✅ 离线训练（HF_HUB_OFFLINE=1）
 - ✅ 高精度能耗监控（CPU误差<2%）
+- ✅ Dropout范围优化：统一采用d-0.2到d+0.1策略
+  - MRT-OAST: [0.0, 0.3] (d=0.2)
+  - Person_reID: [0.3, 0.6] (d=0.5)
+  - 基于边界测试验证，dropout=0.6性能变化<1%，dropout=0.7导致严重劣化(-3%~-8%)
 
 **完整版本历史**: [docs/FEATURES_OVERVIEW.md](docs/FEATURES_OVERVIEW.md)
 

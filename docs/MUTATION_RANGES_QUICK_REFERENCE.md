@@ -14,7 +14,7 @@
 |------|--------|---------|---------|
 | epochs | 10 | [5, 15] | uniform |
 | learning_rate | 0.0001 | [0.00005, 0.00015] | log_uniform |
-| dropout | 0.2 | [0.0, 0.4] | uniform |
+| dropout | 0.2 | [0.0, 0.3] | uniform |
 | weight_decay | 0.0 | [0.00001, 0.001] | log_uniform |
 | seed | 1334 | [0, 9999] | uniform |
 
@@ -59,13 +59,13 @@
 |------|--------|---------|---------|
 | epochs | 60 | [30, 90] | uniform |
 | learning_rate | 0.05 | [0.025, 0.075] | log_uniform |
-| dropout | 0.5 | [0.0, 0.4] | uniform |
+| dropout | 0.5 | [0.3, 0.6] | uniform |
 | seed | null | [0, 9999] | uniform |
 
 **模型**: densenet121, hrnet18, pcb
 **性能指标**: Rank@1, Rank@5, mAP
 
-**注意**: Dropout范围上限为0.4,避免信息流阻断
+**注意**: Dropout范围为[0.3, 0.6] (d-0.2到d+0.1)，基于边界测试验证，避免过高dropout导致性能劣化
 
 ---
 
@@ -127,9 +127,11 @@
 - 对数采样,确保小值(接近0)也能被采样
 - 覆盖从弱正则化到强正则化
 
-### 3. **Dropout上限限制**
-- 最大值: 0.4 (Person_reID, MRT-OAST)
-- 避免超过0.5导致信息流严重阻断
+### 3. **Dropout统一策略: d-0.2 到 d+0.1**
+- MRT-OAST (d=0.2): [0.0, 0.3]
+- Person_reID (d=0.5): [0.3, 0.6]
+- 基于实验验证: dropout=0.7导致严重性能劣化(-3%~-8%)
+- dropout=0.6经验证安全，性能变化<1%
 
 ### 4. **Seed范围**
 - 统一: [0, 9999]
