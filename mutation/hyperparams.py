@@ -174,7 +174,8 @@ def generate_mutations(
     mutate_params: List[str],
     num_mutations: int = 1,
     random_seed: Optional[int] = None,
-    logger: Optional[logging.Logger] = None
+    logger: Optional[logging.Logger] = None,
+    existing_mutations: Optional[set] = None
 ) -> List[Dict[str, Any]]:
     """Generate mutated hyperparameter sets with uniqueness guarantee
 
@@ -184,6 +185,7 @@ def generate_mutations(
         num_mutations: Number of unique mutation sets to generate
         random_seed: Random seed for reproducibility (only used if provided)
         logger: Logger instance for debug messages
+        existing_mutations: Optional set of normalized mutation keys to avoid (for inter-round deduplication)
 
     Returns:
         List of mutated hyperparameter dictionaries (all unique and different from defaults)
@@ -216,13 +218,18 @@ def generate_mutations(
     if default_key:
         print(f"   Excluding default values: {default_mutation}")
 
-    mutations = []
-    seen_mutations = set()  # Track unique mutations using normalized keys
+    # Initialize seen_mutations set (may include historical mutations)
+    if existing_mutations is not None:
+        seen_mutations = existing_mutations.copy()  # Make a copy to avoid modifying the original
+        print(f"   Loaded {len(existing_mutations)} historical mutations for deduplication")
+    else:
+        seen_mutations = set()  # Track unique mutations using normalized keys
 
     # Add default key to seen set to prevent generating it
     if default_key:
         seen_mutations.add(default_key)
 
+    mutations = []
     attempts = 0
 
     while len(mutations) < num_mutations and attempts < MAX_MUTATION_ATTEMPTS:

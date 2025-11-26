@@ -25,6 +25,7 @@ from typing import Dict, List, Optional, Tuple, Any
 from .session import ExperimentSession
 from .command_runner import CommandRunner
 from .hyperparams import generate_mutations
+from .dedup import load_historical_mutations, build_dedup_set, print_dedup_statistics
 from .energy import check_training_success, extract_performance_metrics, parse_energy_metrics
 from .utils import setup_logger, set_governor
 
@@ -54,6 +55,7 @@ class MutationRunner:
     RETRY_SLEEP_SECONDS = 30
     RUN_SLEEP_SECONDS = 60
     CONFIG_SLEEP_SECONDS = 60
+    GPU_CLEANUP_WAIT_SECONDS = 3  # Wait after GPU cleanup
     # IMPORTANT: No default timeout - allows long-running experiments
     # Each model can specify its own timeout in the config file
     DEFAULT_TRAINING_TIMEOUT_SECONDS = None  # No limit by default
@@ -140,6 +142,63 @@ class MutationRunner:
 
         with open(self.config_path, 'r') as f:
             return json.load(f)
+
+    def _cleanup_gpu_memory(self, verbose: bool = True) -> None:
+        """Clean up GPU memory between experiments
+
+        Runs the GPU cleanup utility script to free GPU memory.
+        This helps prevent memory accumulation across multiple experiments.
+
+        Args:
+            verbose: Print cleanup status messages
+        """
+        cleanup_script = Path(__file__).parent / "gpu_cleanup.py"
+
+        if not cleanup_script.exists():
+            if verbose:
+                print("⚠️  GPU cleanup script not found, skipping cleanup")
+            return
+
+        try:
+            if verbose:
+                print("\n" + "─" * 80)
+                print("🧹 Cleaning up GPU memory...")
+                print("─" * 80)
+
+            # Run cleanup script
+            args = [sys.executable, str(cleanup_script)]
+            if not verbose:
+                args.append('--quiet')
+
+            result = subprocess.run(
+                args,
+                capture_output=not verbose,
+                text=True,
+                timeout=30
+            )
+
+            if result.returncode == 0:
+                if verbose:
+                    print("✓ GPU cleanup completed")
+                    print("─" * 80 + "\n")
+            else:
+                if verbose:
+                    print(f"⚠️  GPU cleanup completed with warnings")
+                    if result.stderr:
+                        print(result.stderr)
+
+            # Wait a moment for GPU to stabilize
+            if verbose:
+                print(f"Waiting {self.GPU_CLEANUP_WAIT_SECONDS} seconds for GPU to stabilize...")
+            time.sleep(self.GPU_CLEANUP_WAIT_SECONDS)
+
+        except subprocess.TimeoutExpired:
+            if verbose:
+                print("⚠️  GPU cleanup timed out (30s)")
+        except Exception as e:
+            if verbose:
+                print(f"⚠️  Error during GPU cleanup: {e}")
+            self.logger.warning(f"GPU cleanup error: {e}")
 
     def _signal_handler(self, signum: int, frame) -> None:
         """Handle interrupt signals gracefully
@@ -551,6 +610,8 @@ class MutationRunner:
                 retries += 1
 
                 if retries <= max_retries:
+                    # Clean up GPU memory before retry
+                    self._cleanup_gpu_memory(verbose=True)
                     print(f"Waiting {self.RETRY_SLEEP_SECONDS} seconds before retry...")
                     time.sleep(self.RETRY_SLEEP_SECONDS)
 
@@ -733,6 +794,11 @@ class MutationRunner:
         experiments = exp_config.get("experiments", [])
         mode = exp_config.get("mode", "mutation")
 
+        # Inter-round deduplication support
+        use_deduplication = exp_config.get("use_deduplication", False)
+        historical_csvs = exp_config.get("historical_csvs", [])
+        dedup_set = None
+
         print("\n" + "=" * 80)
         print(f"EXPERIMENT CONFIGURATION: {experiment_name}")
         print("=" * 80)
@@ -743,7 +809,44 @@ class MutationRunner:
         print(f"Max retries: {max_retries}")
         if governor:
             print(f"Governor: {governor}")
+        if use_deduplication:
+            print(f"Inter-round deduplication: ENABLED")
+            print(f"Historical CSV files: {len(historical_csvs)}")
         print("=" * 80)
+
+        # Load historical mutations for deduplication if enabled
+        if use_deduplication and historical_csvs:
+            print("\n" + "=" * 80)
+            print("LOADING HISTORICAL HYPERPARAMETER DATA")
+            print("=" * 80)
+
+            # Convert paths to Path objects relative to project root
+            csv_paths = [self.project_root / csv_path for csv_path in historical_csvs]
+
+            # Check which files exist
+            existing_csvs = [p for p in csv_paths if p.exists()]
+            missing_csvs = [p for p in csv_paths if not p.exists()]
+
+            if missing_csvs:
+                print(f"⚠️  Warning: {len(missing_csvs)} CSV files not found:")
+                for csv_path in missing_csvs:
+                    print(f"   - {csv_path.relative_to(self.project_root)}")
+
+            if existing_csvs:
+                print(f"Loading from {len(existing_csvs)} CSV files...")
+                try:
+                    mutations, stats = load_historical_mutations(existing_csvs, logger=self.logger)
+                    dedup_set = build_dedup_set(mutations, logger=self.logger)
+                    print_dedup_statistics(stats, dedup_set)
+                except Exception as e:
+                    print(f"⚠️  Error loading historical data: {e}")
+                    print("   Continuing without inter-round deduplication")
+                    dedup_set = None
+            else:
+                print("⚠️  No valid CSV files found, disabling inter-round deduplication")
+                dedup_set = None
+
+            print("=" * 80 + "\n")
 
         # Set CPU governor if specified
         if governor:
@@ -820,7 +923,8 @@ class MutationRunner:
                             mutate_params=mutate_params,
                             num_mutations=runs_per_config,
                             random_seed=self.random_seed,
-                            logger=self.logger
+                            logger=self.logger,
+                            existing_mutations=dedup_set  # Inter-round deduplication
                         )
                     else:
                         # Use default hyperparameters
@@ -839,6 +943,9 @@ class MutationRunner:
                             max_retries
                         )
                         all_results.append(result)
+
+                        # Clean up GPU memory after parallel experiment
+                        self._cleanup_gpu_memory(verbose=True)
 
                         # CRITICAL: Stop background training and sleep to allow GPU cooling
                         # This ensures 60 seconds of GPU idle time between runs
@@ -877,6 +984,9 @@ class MutationRunner:
                         result = self.run_experiment(repo, model, hyperparams, max_retries)
                         all_results.append(result)
 
+                        # Clean up GPU memory after experiment
+                        self._cleanup_gpu_memory(verbose=True)
+
                         # Sleep between runs
                         if run < runs_per_config - 1:
                             print(f"\nSleeping {self.RUN_SLEEP_SECONDS} seconds to prevent energy interference...")
@@ -910,7 +1020,8 @@ class MutationRunner:
                         mutate_params=mutate_params,
                         num_mutations=runs_per_config,
                         random_seed=self.random_seed,
-                        logger=self.logger
+                        logger=self.logger,
+                        existing_mutations=dedup_set  # Inter-round deduplication
                     )
 
                     # Run each mutation
@@ -921,6 +1032,9 @@ class MutationRunner:
 
                         result = self.run_experiment(repo, model, mutation, max_retries)
                         all_results.append(result)
+
+                        # Clean up GPU memory after experiment
+                        self._cleanup_gpu_memory(verbose=True)
 
                         # Sleep between runs
                         if run < runs_per_config:

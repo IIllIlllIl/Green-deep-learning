@@ -14,6 +14,12 @@ from .hyperparams import (
     mutate_hyperparameter,
     generate_mutations,
 )
+from .dedup import (
+    extract_mutations_from_csv,
+    load_historical_mutations,
+    build_dedup_set,
+    print_dedup_statistics,
+)
 from .command_runner import CommandRunner
 from .energy import (
     check_training_success,
@@ -36,6 +42,10 @@ __all__ = [
     "CommandRunner",
     "mutate_hyperparameter",
     "generate_mutations",
+    "extract_mutations_from_csv",
+    "load_historical_mutations",
+    "build_dedup_set",
+    "print_dedup_statistics",
     "check_training_success",
     "extract_performance_metrics",
     "parse_energy_metrics",
