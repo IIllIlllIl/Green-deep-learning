@@ -60,13 +60,6 @@ repos/bug-localization-by-dnn-and-rvsm/
 *.bin
 *.safetensors
 
-# Dataset files
-*.csv
-*.json
-*.parquet
-*.arrow
-*.tfrecord
-
 # Repos - data and virtual environments
 repos/*/data/
 repos/*/venv/
@@ -76,6 +69,13 @@ repos/*/models/
 repos/*/Market/
 repos/*/origindata/
 repos/*/pretrained_models/
+
+# Dataset files in repos only
+repos/**/*.csv
+repos/**/*.json
+repos/**/*.parquet
+repos/**/*.arrow
+repos/**/*.tfrecord
 
 # Additional large file types
 *.zip
