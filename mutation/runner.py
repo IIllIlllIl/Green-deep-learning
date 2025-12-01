@@ -74,7 +74,7 @@ class MutationRunner:
     TIMESTAMP_FORMAT = "%Y%m%d_%H%M%S"  # Consistent timestamp format across all methods
     FLOAT_PRECISION = 6  # Decimal places for float hyperparameters
 
-    def __init__(self, config_path: Optional[str] = None, random_seed: Optional[int] = None):
+    def __init__(self, config_path: Optional[str] = None, random_seed: Optional[int] = None, append_to_summary: bool = True):
         """Initialize the mutation runner
 
         Sets up the experiment environment including:
@@ -86,6 +86,7 @@ class MutationRunner:
         Args:
             config_path: Path to the models configuration file (default: mutation/models_config.json)
             random_seed: Random seed for reproducibility (default: None, uses system time)
+            append_to_summary: Whether to append session results to results/summary_all.csv (default: True)
         """
         self.project_root = Path(__file__).parent.parent.absolute()
 
@@ -104,6 +105,11 @@ class MutationRunner:
             import random
             random.seed(random_seed)
             print(f"Random seed set to: {random_seed}")
+
+        # Control whether to append results to summary_all.csv
+        self.append_to_summary = append_to_summary
+        if not append_to_summary:
+            print(f"⚠️  Results will NOT be appended to summary_all.csv (test/validation mode)")
 
         # Initialize logger
         self.logger = setup_logger(__name__)
@@ -127,6 +133,61 @@ class MutationRunner:
             config=self.config,
             logger=self.logger
         )
+
+    def _append_to_summary_all(self) -> None:
+        """Append current session results to global summary_all.csv
+
+        This method calls the aggregate_csvs.py script to merge the current
+        session's summary.csv into the global results/summary_all.csv file.
+
+        Only called if self.append_to_summary is True.
+        """
+        if not self.append_to_summary:
+            return
+
+        # Path to aggregate_csvs script
+        aggregate_script = self.project_root / "scripts" / "aggregate_csvs.py"
+
+        if not aggregate_script.exists():
+            self.logger.warning(f"aggregate_csvs.py not found at {aggregate_script}, skipping summary_all.csv update")
+            print(f"⚠️  aggregate_csvs.py not found, skipping summary_all.csv update")
+            return
+
+        try:
+            print("\n" + "=" * 80)
+            print("Appending results to summary_all.csv...")
+            print("=" * 80)
+
+            # Run aggregate_csvs.py to update summary_all.csv
+            result = subprocess.run(
+                [sys.executable, str(aggregate_script)],
+                cwd=self.project_root,
+                capture_output=True,
+                text=True,
+                timeout=60
+            )
+
+            if result.returncode == 0:
+                print("✅ Results successfully appended to results/summary_all.csv")
+                # Print summary statistics from the script output
+                if result.stdout:
+                    # Extract key lines from output
+                    for line in result.stdout.split('\n'):
+                        if 'Total experiments' in line or 'Unique hyperparameters' in line:
+                            print(f"   {line.strip()}")
+            else:
+                print(f"⚠️  Failed to append to summary_all.csv:")
+                if result.stderr:
+                    print(result.stderr)
+                self.logger.error(f"aggregate_csvs.py failed: {result.stderr}")
+        except subprocess.TimeoutExpired:
+            print("⚠️  aggregate_csvs.py timed out (60s)")
+            self.logger.error("aggregate_csvs.py timed out")
+        except Exception as e:
+            print(f"⚠️  Error appending to summary_all.csv: {e}")
+            self.logger.error(f"Error calling aggregate_csvs.py: {e}")
+
+        print("=" * 80 + "\n")
 
     def _load_config(self) -> Dict:
         """Load models configuration from JSON file
@@ -740,6 +801,9 @@ class MutationRunner:
         # Restore file ownership if running with sudo
         self.session.restore_permissions()
 
+        # Append to summary_all.csv if enabled
+        self._append_to_summary_all()
+
         print("\nAll experiments completed!\n")
 
     def run_from_experiment_config(self, config_file: str) -> None:
@@ -1092,5 +1156,8 @@ class MutationRunner:
 
         # Restore file ownership if running with sudo
         self.session.restore_permissions()
+
+        # Append to summary_all.csv if enabled
+        self._append_to_summary_all()
 
         print("\nAll experiments completed!\n")

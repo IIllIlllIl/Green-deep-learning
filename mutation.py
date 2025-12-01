@@ -123,11 +123,21 @@ Examples:
         help="Random seed for reproducibility (default: None, random)"
     )
 
+    parser.add_argument(
+        "-S", "--skip-summary-append",
+        action="store_true",
+        help="Skip appending results to results/summary_all.csv (for test/validation runs)"
+    )
+
     args = parser.parse_args()
 
     # Initialize runner
     try:
-        runner = MutationRunner(config_path=args.config, random_seed=args.seed)
+        runner = MutationRunner(
+            config_path=args.config,
+            random_seed=args.seed,
+            append_to_summary=not args.skip_summary_append
+        )
     except Exception as e:
         print(f"❌ Error: {e}")
         sys.exit(1)
