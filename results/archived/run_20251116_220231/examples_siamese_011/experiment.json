@@ -1,0 +1,33 @@
+{
+  "experiment_id": "examples_siamese_011",
+  "timestamp": "2025-11-17T03:03:54.150840",
+  "repository": "examples",
+  "model": "siamese",
+  "hyperparameters": {
+    "epochs": 10,
+    "learning_rate": 0.01,
+    "batch_size": 32,
+    "seed": 1
+  },
+  "duration_seconds": 307.6189749240875,
+  "energy_metrics": {
+    "cpu_energy_pkg_joules": 9557.88,
+    "cpu_energy_ram_joules": 731.11,
+    "cpu_energy_total_joules": 10288.99,
+    "gpu_power_avg_watts": 172.88946308724843,
+    "gpu_power_max_watts": 178.69,
+    "gpu_power_min_watts": 71.07,
+    "gpu_energy_total_joules": 51521.060000000034,
+    "gpu_temp_avg_celsius": 69.52684563758389,
+    "gpu_temp_max_celsius": 74.0,
+    "gpu_util_avg_percent": 49.73489932885906,
+    "gpu_util_max_percent": 52.0
+  },
+  "performance_metrics": {
+    "test_accuracy": 98.0,
+    "test_loss": 0.0
+  },
+  "training_success": true,
+  "retries": 0,
+  "error_message": "Training completed successfully"
+}

@@ -1,0 +1,45 @@
+{
+  "experiment_id": "examples_mnist_ff_020_parallel",
+  "timestamp": "2025-11-18T17:12:11.820074",
+  "mode": "parallel",
+  "foreground": {
+    "repository": "examples",
+    "model": "mnist_ff",
+    "hyperparameters": {
+      "epochs": 1,
+      "learning_rate": 0.01,
+      "batch_size": 32,
+      "seed": 1
+    },
+    "duration_seconds": 7.119188547134399,
+    "energy_metrics": {
+      "cpu_energy_pkg_joules": 213.96,
+      "cpu_energy_ram_joules": 16.24,
+      "cpu_energy_total_joules": 230.2,
+      "gpu_power_avg_watts": 269.8933333333334,
+      "gpu_power_max_watts": 275.87,
+      "gpu_power_min_watts": 258.02,
+      "gpu_energy_total_joules": 1619.3600000000001,
+      "gpu_temp_avg_celsius": 75.5,
+      "gpu_temp_max_celsius": 76.0,
+      "gpu_util_avg_percent": 78.83333333333333,
+      "gpu_util_max_percent": 83.0
+    },
+    "performance_metrics": {},
+    "training_success": true,
+    "retries": 0,
+    "error_message": "Training completed successfully"
+  },
+  "background": {
+    "repository": "Person_reID_baseline_pytorch",
+    "model": "densenet121",
+    "hyperparameters": {
+      "epochs": 1,
+      "learning_rate": 0.05,
+      "dropout": 0.5,
+      "seed": 1334
+    },
+    "log_directory": "/home/green/energy_dl/nightly/results/run_20251118_155526/examples_mnist_ff_020_parallel/background_logs",
+    "note": "Background training served as GPU load only (not monitored)"
+  }
+}

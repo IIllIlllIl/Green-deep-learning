@@ -1,0 +1,46 @@
+{
+  "experiment_id": "Person_reID_baseline_pytorch_densenet121_122_parallel",
+  "timestamp": "2025-11-24T14:50:08.643030",
+  "mode": "parallel",
+  "foreground": {
+    "repository": "Person_reID_baseline_pytorch",
+    "model": "densenet121",
+    "hyperparameters": {
+      "epochs": 53
+    },
+    "duration_seconds": 3116.409588098526,
+    "energy_metrics": {
+      "cpu_energy_pkg_joules": 216548.7,
+      "cpu_energy_ram_joules": 15976.87,
+      "cpu_energy_total_joules": 232525.57,
+      "gpu_power_avg_watts": 222.52513684913228,
+      "gpu_power_max_watts": 288.69,
+      "gpu_power_min_watts": 4.95,
+      "gpu_energy_total_joules": 666685.3100000003,
+      "gpu_temp_avg_celsius": 81.10013351134846,
+      "gpu_temp_max_celsius": 85.0,
+      "gpu_util_avg_percent": 48.10447263017357,
+      "gpu_util_max_percent": 98.0
+    },
+    "performance_metrics": {
+      "rank1": 0.902019,
+      "rank5": 0.962886,
+      "map": 0.745102
+    },
+    "training_success": true,
+    "retries": 0,
+    "error_message": "Training completed successfully"
+  },
+  "background": {
+    "repository": "VulBERTa",
+    "model": "mlp",
+    "hyperparameters": {
+      "epochs": 10,
+      "learning_rate": 3e-05,
+      "weight_decay": 0.0,
+      "seed": 42
+    },
+    "log_directory": "/home/green/energy_dl/nightly/results/run_20251122_175401/Person_reID_baseline_pytorch_densenet121_122_parallel/background_logs",
+    "note": "Background training served as GPU load only (not monitored)"
+  }
+}

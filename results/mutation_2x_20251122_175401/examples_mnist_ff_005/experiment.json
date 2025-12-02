@@ -1,0 +1,27 @@
+{
+  "experiment_id": "examples_mnist_ff_005",
+  "timestamp": "2025-11-22T18:50:58.877921",
+  "repository": "examples",
+  "model": "mnist_ff",
+  "hyperparameters": {
+    "seed": 6075
+  },
+  "duration_seconds": 240.28770399093628,
+  "energy_metrics": {
+    "cpu_energy_pkg_joules": 16131.11,
+    "cpu_energy_ram_joules": 1138.06,
+    "cpu_energy_total_joules": 17269.17,
+    "gpu_power_avg_watts": 184.45896103896106,
+    "gpu_power_max_watts": 305.26,
+    "gpu_power_min_watts": 167.5,
+    "gpu_energy_total_joules": 42610.020000000004,
+    "gpu_temp_avg_celsius": 70.88744588744589,
+    "gpu_temp_max_celsius": 75.0,
+    "gpu_util_avg_percent": 100.0,
+    "gpu_util_max_percent": 100.0
+  },
+  "performance_metrics": {},
+  "training_success": false,
+  "retries": 3,
+  "error_message": "Error pattern found: CUDA out of memory"
+}

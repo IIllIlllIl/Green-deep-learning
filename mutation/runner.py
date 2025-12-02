@@ -137,20 +137,25 @@ class MutationRunner:
     def _append_to_summary_all(self) -> None:
         """Append current session results to global summary_all.csv
 
-        This method calls the aggregate_csvs.py script to merge the current
-        session's summary.csv into the global results/summary_all.csv file.
+        Directly appends the current session's summary.csv to results/summary_all.csv
+        without overwriting existing data. This ensures that manually merged or
+        historical data is preserved.
 
         Only called if self.append_to_summary is True.
         """
         if not self.append_to_summary:
             return
 
-        # Path to aggregate_csvs script
-        aggregate_script = self.project_root / "scripts" / "aggregate_csvs.py"
+        import csv
 
-        if not aggregate_script.exists():
-            self.logger.warning(f"aggregate_csvs.py not found at {aggregate_script}, skipping summary_all.csv update")
-            print(f"⚠️  aggregate_csvs.py not found, skipping summary_all.csv update")
+        # Get paths
+        session_summary = self.session.session_dir / "summary.csv"
+        summary_all_path = self.results_dir / "summary_all.csv"
+
+        # Check if session summary exists
+        if not session_summary.exists():
+            self.logger.warning(f"Session summary not found at {session_summary}, skipping append")
+            print(f"⚠️  Session summary not found, skipping summary_all.csv update")
             return
 
         try:
@@ -158,34 +163,42 @@ class MutationRunner:
             print("Appending results to summary_all.csv...")
             print("=" * 80)
 
-            # Run aggregate_csvs.py to update summary_all.csv
-            result = subprocess.run(
-                [sys.executable, str(aggregate_script)],
-                cwd=self.project_root,
-                capture_output=True,
-                text=True,
-                timeout=60
-            )
+            # Read session data
+            with open(session_summary, 'r', newline='') as f:
+                reader = csv.DictReader(f)
+                fieldnames = reader.fieldnames
+                session_rows = list(reader)
 
-            if result.returncode == 0:
-                print("✅ Results successfully appended to results/summary_all.csv")
-                # Print summary statistics from the script output
-                if result.stdout:
-                    # Extract key lines from output
-                    for line in result.stdout.split('\n'):
-                        if 'Total experiments' in line or 'Unique hyperparameters' in line:
-                            print(f"   {line.strip()}")
-            else:
-                print(f"⚠️  Failed to append to summary_all.csv:")
-                if result.stderr:
-                    print(result.stderr)
-                self.logger.error(f"aggregate_csvs.py failed: {result.stderr}")
-        except subprocess.TimeoutExpired:
-            print("⚠️  aggregate_csvs.py timed out (60s)")
-            self.logger.error("aggregate_csvs.py timed out")
+            if not session_rows:
+                print("⚠️  No data in session summary, skipping append")
+                return
+
+            # Determine if we need to write header (file doesn't exist or is empty)
+            write_header = not summary_all_path.exists() or summary_all_path.stat().st_size == 0
+
+            # Append to summary_all.csv
+            with open(summary_all_path, 'a', newline='') as f:
+                writer = csv.DictWriter(f, fieldnames=fieldnames)
+
+                # Write header only if file is new/empty
+                if write_header:
+                    writer.writeheader()
+                    print(f"   Created new summary_all.csv with header")
+
+                # Write all session rows
+                writer.writerows(session_rows)
+
+            print(f"✅ Results successfully appended to results/summary_all.csv")
+            print(f"   Added {len(session_rows)} experiment(s)")
+
+            # Count total rows in summary_all.csv
+            with open(summary_all_path, 'r') as f:
+                total_rows = sum(1 for line in f) - 1  # Subtract header
+            print(f"   Total experiments in summary_all.csv: {total_rows}")
+
         except Exception as e:
             print(f"⚠️  Error appending to summary_all.csv: {e}")
-            self.logger.error(f"Error calling aggregate_csvs.py: {e}")
+            self.logger.error(f"Error appending to summary_all.csv: {e}", exc_info=True)
 
         print("=" * 80 + "\n")
 

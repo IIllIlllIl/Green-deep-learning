@@ -1,0 +1,27 @@
+{
+  "experiment_id": "Person_reID_baseline_pytorch_pcb_146",
+  "timestamp": "2025-11-26T05:42:18.057274",
+  "repository": "Person_reID_baseline_pytorch",
+  "model": "pcb",
+  "hyperparameters": {
+    "epochs": 50
+  },
+  "duration_seconds": 18.885892629623413,
+  "energy_metrics": {
+    "cpu_energy_pkg_joules": 357.39,
+    "cpu_energy_ram_joules": 25.73,
+    "cpu_energy_total_joules": 383.12,
+    "gpu_power_avg_watts": 64.99277777777779,
+    "gpu_power_max_watts": 150.14,
+    "gpu_power_min_watts": 4.02,
+    "gpu_energy_total_joules": 1169.8700000000001,
+    "gpu_temp_avg_celsius": 53.05555555555556,
+    "gpu_temp_max_celsius": 55.0,
+    "gpu_util_avg_percent": 0.2777777777777778,
+    "gpu_util_max_percent": 5.0
+  },
+  "performance_metrics": {},
+  "training_success": false,
+  "retries": 3,
+  "error_message": "Error pattern found: CUDA out of memory"
+}

@@ -1,0 +1,30 @@
+{
+  "experiment_id": "Person_reID_baseline_pytorch_hrnet18_006",
+  "timestamp": "2025-11-18T16:31:30.729148",
+  "repository": "Person_reID_baseline_pytorch",
+  "model": "hrnet18",
+  "hyperparameters": {
+    "epochs": 1,
+    "learning_rate": 0.05,
+    "dropout": 0.5,
+    "seed": 1334
+  },
+  "duration_seconds": 59.974257946014404,
+  "energy_metrics": {
+    "cpu_energy_pkg_joules": 743.83,
+    "cpu_energy_ram_joules": 36.46,
+    "cpu_energy_total_joules": 780.29,
+    "gpu_power_avg_watts": 31.684,
+    "gpu_power_max_watts": 79.83,
+    "gpu_power_min_watts": 4.4,
+    "gpu_energy_total_joules": 1742.6200000000001,
+    "gpu_temp_avg_celsius": 51.236363636363635,
+    "gpu_temp_max_celsius": 54.0,
+    "gpu_util_avg_percent": 0.0,
+    "gpu_util_max_percent": 0.0
+  },
+  "performance_metrics": {},
+  "training_success": false,
+  "retries": 3,
+  "error_message": "Error pattern found: Training.*FAILED"
+}
