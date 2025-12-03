@@ -166,7 +166,6 @@ class MutationRunner:
             # Read session data
             with open(session_summary, 'r', newline='') as f:
                 reader = csv.DictReader(f)
-                fieldnames = reader.fieldnames
                 session_rows = list(reader)
 
             if not session_rows:
@@ -176,16 +175,28 @@ class MutationRunner:
             # Determine if we need to write header (file doesn't exist or is empty)
             write_header = not summary_all_path.exists() or summary_all_path.stat().st_size == 0
 
+            # Determine fieldnames to use
+            if write_header:
+                # New file: use session's fieldnames
+                with open(session_summary, 'r', newline='') as f:
+                    reader = csv.DictReader(f)
+                    fieldnames = reader.fieldnames
+            else:
+                # Existing file: use summary_all.csv's fieldnames to ensure column consistency
+                with open(summary_all_path, 'r', newline='') as f:
+                    reader = csv.DictReader(f)
+                    fieldnames = reader.fieldnames
+
             # Append to summary_all.csv
             with open(summary_all_path, 'a', newline='') as f:
-                writer = csv.DictWriter(f, fieldnames=fieldnames)
+                writer = csv.DictWriter(f, fieldnames=fieldnames, extrasaction='ignore')
 
                 # Write header only if file is new/empty
                 if write_header:
                     writer.writeheader()
                     print(f"   Created new summary_all.csv with header")
 
-                # Write all session rows
+                # Write all session rows (missing columns will be filled with empty values)
                 writer.writerows(session_rows)
 
             print(f"✅ Results successfully appended to results/summary_all.csv")
