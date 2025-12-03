@@ -1,0 +1,172 @@
+{
+  "experiment_name": "baseline_reproduction",
+  "description": "Reproduce original training process for all models using default hyperparameters (baseline for comparison)",
+  "governor": "performance",
+  "runs_per_config": 1,
+  "max_retries": 2,
+  "mode": "default",
+  "experiments": [
+    {
+      "repo": "pytorch_resnet_cifar10",
+      "model": "resnet20",
+      "mode": "default",
+      "hyperparameters": {
+        "epochs": 200,
+        "learning_rate": 0.1,
+        "weight_decay": 0.0001
+      },
+      "comment": "ResNet20原始默认配置（不设置seed）"
+    },
+    {
+      "repo": "pytorch_resnet_cifar10",
+      "model": "resnet32",
+      "mode": "default",
+      "hyperparameters": {
+        "epochs": 200,
+        "learning_rate": 0.1,
+        "weight_decay": 0.0001
+      }
+    },
+    {
+      "repo": "pytorch_resnet_cifar10",
+      "model": "resnet44",
+      "mode": "default",
+      "hyperparameters": {
+        "epochs": 200,
+        "learning_rate": 0.1,
+        "weight_decay": 0.0001
+      }
+    },
+    {
+      "repo": "pytorch_resnet_cifar10",
+      "model": "resnet56",
+      "mode": "default",
+      "hyperparameters": {
+        "epochs": 200,
+        "learning_rate": 0.1,
+        "weight_decay": 0.0001
+      }
+    },
+    {
+      "repo": "VulBERTa",
+      "model": "mlp",
+      "mode": "default",
+      "hyperparameters": {
+        "epochs": 10,
+        "learning_rate": 0.00003,
+        "seed": 42,
+        "weight_decay": 0.0
+      },
+      "comment": "VulBERTa MLP原始默认配置"
+    },
+    {
+      "repo": "VulBERTa",
+      "model": "cnn",
+      "mode": "default",
+      "hyperparameters": {
+        "epochs": 20,
+        "learning_rate": 0.0005,
+        "seed": 1234,
+        "weight_decay": 0.0
+      },
+      "comment": "VulBERTa CNN原始默认配置"
+    },
+    {
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "densenet121",
+      "mode": "default",
+      "hyperparameters": {
+        "epochs": 60,
+        "learning_rate": 0.05,
+        "dropout": 0.5
+      },
+      "comment": "DenseNet121原始默认配置（不设置seed）"
+    },
+    {
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "hrnet18",
+      "mode": "default",
+      "hyperparameters": {
+        "epochs": 60,
+        "learning_rate": 0.05,
+        "dropout": 0.5
+      }
+    },
+    {
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "pcb",
+      "mode": "default",
+      "hyperparameters": {
+        "epochs": 60,
+        "learning_rate": 0.02,
+        "dropout": 0.5
+      },
+      "comment": "PCB使用不同的learning_rate"
+    },
+    {
+      "repo": "MRT-OAST",
+      "model": "default",
+      "mode": "default",
+      "hyperparameters": {
+        "epochs": 10,
+        "learning_rate": 0.0001,
+        "seed": 1334,
+        "dropout": 0.2,
+        "weight_decay": 0.0
+      },
+      "comment": "MRT-OAST原始默认配置"
+    },
+    {
+      "repo": "bug-localization-by-dnn-and-rvsm",
+      "model": "default",
+      "mode": "default",
+      "hyperparameters": {
+        "epochs": 10,
+        "learning_rate": 0.001,
+        "seed": 42
+      },
+      "comment": "Bug定位原始默认配置"
+    },
+    {
+      "repo": "examples",
+      "model": "mnist_cnn",
+      "mode": "default",
+      "hyperparameters": {
+        "epochs": 10,
+        "learning_rate": 0.01,
+        "seed": 1
+      },
+      "comment": "MNIST CNN原始默认配置"
+    },
+    {
+      "repo": "examples",
+      "model": "mnist_rnn",
+      "mode": "default",
+      "hyperparameters": {
+        "epochs": 10,
+        "learning_rate": 0.01,
+        "seed": 1
+      }
+    },
+    {
+      "repo": "examples",
+      "model": "mnist_forward_forward",
+      "mode": "default",
+      "hyperparameters": {
+        "epochs": 10,
+        "learning_rate": 0.01,
+        "seed": 1
+      }
+    },
+    {
+      "repo": "examples",
+      "model": "siamese",
+      "mode": "default",
+      "hyperparameters": {
+        "epochs": 10,
+        "learning_rate": 0.01,
+        "seed": 1
+      }
+    }
+  ]
+}

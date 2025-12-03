@@ -1,0 +1,282 @@
+{
+  "experiment_name": "parallel_feasibility_test_v3",
+  "description": "Parallel training feasibility test v3 - 11 model combinations, each model appears as foreground exactly once",
+  "governor": "performance",
+  "runs_per_config": 1,
+  "max_retries": 1,
+  "mode": "parallel",
+  "experiments": [
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "pytorch_resnet_cifar10",
+        "model": "resnet20",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 1,
+          "learning_rate": 0.1,
+          "seed": 1334
+        }
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist_ff",
+        "hyperparameters": {
+          "epochs": 1,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1334
+        }
+      },
+      "note": "Group 1: 超低显存 (1300MB) - resnet20 + mnist_ff"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "VulBERTa",
+        "model": "mlp",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 1,
+          "learning_rate": 3e-05,
+          "seed": 1334
+        }
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {
+          "epochs": 1,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1334
+        }
+      },
+      "note": "Group 2: 低显存 (2000MB) - VulBERTa_mlp + mnist"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 1,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1334
+        }
+      },
+      "background": {
+        "repo": "VulBERTa",
+        "model": "mlp",
+        "hyperparameters": {
+          "epochs": 1,
+          "learning_rate": 3e-05,
+          "seed": 1334
+        }
+      },
+      "note": "Group 3: 低显存 (2000MB) - mnist + VulBERTa_mlp"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "MRT-OAST",
+        "model": "default",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 1,
+          "learning_rate": 0.0001,
+          "dropout": 0.2,
+          "seed": 1334
+        }
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "hyperparameters": {
+          "epochs": 1,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1334
+        }
+      },
+      "note": "Group 4: 低显存 (2700MB) - MRT-OAST + mnist_rnn"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "pcb",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 1,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "hyperparameters": {
+          "epochs": 1,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1334
+        }
+      },
+      "note": "Group 5: 中显存 (3000MB) - pcb + mnist_rnn"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "hrnet18",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 1,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "hyperparameters": {
+          "epochs": 1,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1334
+        }
+      },
+      "note": "Group 6: 中显存 (3000MB) - hrnet18 + mnist_rnn"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "siamese",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 1,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1334
+        }
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "pcb",
+        "hyperparameters": {
+          "epochs": 1,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "note": "Group 7: 中显存 (3500MB) - siamese + pcb"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 1,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1334
+        }
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "pcb",
+        "hyperparameters": {
+          "epochs": 1,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "note": "Group 8: 中显存 (3000MB) - mnist_rnn + pcb"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist_ff",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 1,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1334
+        }
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "densenet121",
+        "hyperparameters": {
+          "epochs": 1,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "note": "Group 9: 中显存 (4000MB) - mnist_ff + densenet121"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "bug-localization-by-dnn-and-rvsm",
+        "model": "default",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 1,
+          "max_iter": 10000,
+          "alpha": 1e-05,
+          "kfold": 10,
+          "seed": 1334
+        }
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "pcb",
+        "hyperparameters": {
+          "epochs": 1,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "note": "Group 10: 中显存 (4000MB) - bug-localization + pcb"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "densenet121",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 1,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "background": {
+        "repo": "VulBERTa",
+        "model": "mlp",
+        "hyperparameters": {
+          "epochs": 1,
+          "learning_rate": 3e-05,
+          "seed": 1334
+        }
+      },
+      "note": "Group 11: 高显存 (5000MB) - densenet121 + VulBERTa_mlp"
+    }
+  ]
+}

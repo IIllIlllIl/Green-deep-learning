@@ -1,0 +1,36 @@
+{
+  "experiment_name": "parallel_densenet_reid",
+  "description": "Realistic parallel training: DenseNet121 (foreground) + Person Re-ID (background) for GPU load simulation",
+  "mode": "parallel",
+  "governor": "performance",
+  "runs_per_config": 1,
+  "max_retries": 2,
+  "experiments": [
+    {
+      "repo": "placeholder",
+      "model": "placeholder",
+      "mode": "parallel",
+      "description": "Test parallel training with realistic workloads",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "densenet121",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 60,
+          "learning_rate": 0.05,
+          "dropout": 0.5
+        },
+        "description": "DenseNet121 with default hyperparameters (monitored)"
+      },
+      "background": {
+        "repo": "pytorch_resnet_cifar10",
+        "model": "resnet20",
+        "hyperparameters": {
+          "epochs": 164,
+          "learning_rate": 0.1
+        },
+        "description": "ResNet20 training loops as GPU background load"
+      }
+    }
+  ]
+}

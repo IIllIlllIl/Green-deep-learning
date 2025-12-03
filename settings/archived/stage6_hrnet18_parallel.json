@@ -1,0 +1,83 @@
+{
+  "experiment_name": "stage6_hrnet18_parallel",
+  "description": "阶段6: Person_reID_hrnet18模型的并行实验 (预计40小时)",
+  "mode": "mutation",
+  "runs_per_config": 6,
+  "max_retries": 2,
+  "governor": "performance",
+  "use_deduplication": true,
+  "historical_csvs": [
+    "results/summary_all.csv"
+  ],
+  "experiments": [
+    {
+      "comment": "=== Person_reID_hrnet18 并行: 20个实验 (预计40小时) ===",
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "hrnet18",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "hrnet18",
+        "mode": "mutation",
+        "mutate": ["epochs"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {}
+      },
+      "comment": "epochs需要5个唯一值,运行5次"
+    },
+    {
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "hrnet18",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "hrnet18",
+        "mode": "mutation",
+        "mutate": ["learning_rate"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {}
+      },
+      "comment": "learning_rate需要5个唯一值,运行5次"
+    },
+    {
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "hrnet18",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "hrnet18",
+        "mode": "mutation",
+        "mutate": ["dropout"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {}
+      },
+      "comment": "dropout需要5个唯一值,运行5次"
+    },
+    {
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "hrnet18",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "hrnet18",
+        "mode": "mutation",
+        "mutate": ["seed"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {}
+      },
+      "comment": "seed需要5个唯一值,运行5次"
+    }
+  ]
+}

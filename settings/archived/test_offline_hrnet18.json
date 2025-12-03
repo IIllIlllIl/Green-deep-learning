@@ -1,0 +1,21 @@
+{
+  "experiment_name": "offline_hrnet18_test",
+  "description": "Test hrnet18 in offline mode to verify SSL fix",
+  "governor": "performance",
+  "runs_per_config": 1,
+  "max_retries": 0,
+  "experiments": [
+    {
+      "mode": "default",
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "hrnet18",
+      "hyperparameters": {
+        "epochs": 1,
+        "batch_size": 24,
+        "learning_rate": 0.05,
+        "dropout": 0.5,
+        "seed": 1334
+      }
+    }
+  ]
+}

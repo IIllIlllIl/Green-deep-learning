@@ -1,0 +1,874 @@
+{
+  "experiment_name": "mutation_final_completion",
+  "description": "Complete all remaining experiments to reach 5 unique values per parameter in both parallel and non-parallel modes",
+  "mode": "mutation",
+  "runs_per_config": 1,
+  "max_retries": 2,
+  "governor": "performance",
+  "use_deduplication": true,
+  "historical_csvs": [
+    "results/summary_all.csv"
+  ],
+  "experiments": [
+    {
+      "comment": "=== 1. MRT-OAST (非并行: 缺1个dropout值; 并行: 全部缺) ===",
+      "repo": "MRT-OAST",
+      "model": "default",
+      "mode": "mutation",
+      "mutate": ["dropout"],
+      "comment": "非并行: dropout需要1个新值"
+    },
+    {
+      "repo": "MRT-OAST",
+      "model": "default",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "MRT-OAST",
+        "model": "default",
+        "mode": "mutation",
+        "mutate": ["epochs"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {}
+      },
+      "comment": "并行: epochs需要5个新值 (run 5 times)"
+    },
+    {
+      "repo": "MRT-OAST",
+      "model": "default",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "MRT-OAST",
+        "model": "default",
+        "mode": "mutation",
+        "mutate": ["learning_rate"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {}
+      },
+      "comment": "并行: learning_rate需要5个新值 (run 5 times)"
+    },
+    {
+      "repo": "MRT-OAST",
+      "model": "default",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "MRT-OAST",
+        "model": "default",
+        "mode": "mutation",
+        "mutate": ["dropout"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {}
+      },
+      "comment": "并行: dropout需要5个新值 (run 5 times)"
+    },
+    {
+      "repo": "MRT-OAST",
+      "model": "default",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "MRT-OAST",
+        "model": "default",
+        "mode": "mutation",
+        "mutate": ["weight_decay"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {}
+      },
+      "comment": "并行: weight_decay需要5个新值 (run 5 times)"
+    },
+    {
+      "repo": "MRT-OAST",
+      "model": "default",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "MRT-OAST",
+        "model": "default",
+        "mode": "mutation",
+        "mutate": ["seed"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {}
+      },
+      "comment": "并行: seed需要5个新值 (run 5 times)"
+    },
+    {
+      "comment": "=== 2. bug-localization (非并行: 完成; 并行: 全部缺) ===",
+      "repo": "bug-localization-by-dnn-and-rvsm",
+      "model": "default",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "bug-localization-by-dnn-and-rvsm",
+        "model": "default",
+        "mode": "mutation",
+        "mutate": ["kfold"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {}
+      },
+      "comment": "并行: kfold需要5个新值 (run 5 times)"
+    },
+    {
+      "repo": "bug-localization-by-dnn-and-rvsm",
+      "model": "default",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "bug-localization-by-dnn-and-rvsm",
+        "model": "default",
+        "mode": "mutation",
+        "mutate": ["max_iter"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {}
+      },
+      "comment": "并行: max_iter需要5个新值 (run 5 times)"
+    },
+    {
+      "repo": "bug-localization-by-dnn-and-rvsm",
+      "model": "default",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "bug-localization-by-dnn-and-rvsm",
+        "model": "default",
+        "mode": "mutation",
+        "mutate": ["alpha"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {}
+      },
+      "comment": "并行: alpha需要5个新值 (run 5 times)"
+    },
+    {
+      "repo": "bug-localization-by-dnn-and-rvsm",
+      "model": "default",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "bug-localization-by-dnn-and-rvsm",
+        "model": "default",
+        "mode": "mutation",
+        "mutate": ["seed"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {}
+      },
+      "comment": "并行: seed需要5个新值 (run 5 times)"
+    },
+    {
+      "comment": "=== 3. pytorch_resnet_cifar10 (非并行: 完成; 并行: 全部缺) ===",
+      "repo": "pytorch_resnet_cifar10",
+      "model": "resnet20",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "pytorch_resnet_cifar10",
+        "model": "resnet20",
+        "mode": "mutation",
+        "mutate": ["epochs"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {}
+      },
+      "comment": "并行: epochs需要5个新值 (run 5 times)"
+    },
+    {
+      "repo": "pytorch_resnet_cifar10",
+      "model": "resnet20",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "pytorch_resnet_cifar10",
+        "model": "resnet20",
+        "mode": "mutation",
+        "mutate": ["learning_rate"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {}
+      },
+      "comment": "并行: learning_rate需要5个新值 (run 5 times)"
+    },
+    {
+      "repo": "pytorch_resnet_cifar10",
+      "model": "resnet20",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "pytorch_resnet_cifar10",
+        "model": "resnet20",
+        "mode": "mutation",
+        "mutate": ["weight_decay"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {}
+      },
+      "comment": "并行: weight_decay需要5个新值 (run 5 times)"
+    },
+    {
+      "repo": "pytorch_resnet_cifar10",
+      "model": "resnet20",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "pytorch_resnet_cifar10",
+        "model": "resnet20",
+        "mode": "mutation",
+        "mutate": ["seed"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {}
+      },
+      "comment": "并行: seed需要5个新值 (run 5 times)"
+    },
+    {
+      "comment": "=== 4. VulBERTa (非并行: 完成; 并行: 全部缺) ===",
+      "repo": "VulBERTa",
+      "model": "mlp",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "VulBERTa",
+        "model": "mlp",
+        "mode": "mutation",
+        "mutate": ["epochs"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {}
+      },
+      "comment": "并行: epochs需要5个新值 (run 5 times)"
+    },
+    {
+      "repo": "VulBERTa",
+      "model": "mlp",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "VulBERTa",
+        "model": "mlp",
+        "mode": "mutation",
+        "mutate": ["learning_rate"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {}
+      },
+      "comment": "并行: learning_rate需要5个新值 (run 5 times)"
+    },
+    {
+      "repo": "VulBERTa",
+      "model": "mlp",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "VulBERTa",
+        "model": "mlp",
+        "mode": "mutation",
+        "mutate": ["weight_decay"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {}
+      },
+      "comment": "并行: weight_decay需要5个新值 (run 5 times)"
+    },
+    {
+      "repo": "VulBERTa",
+      "model": "mlp",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "VulBERTa",
+        "model": "mlp",
+        "mode": "mutation",
+        "mutate": ["seed"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {}
+      },
+      "comment": "并行: seed需要5个新值 (run 5 times)"
+    },
+    {
+      "comment": "=== 5. Person_reID_densenet121 (非并行: 完成; 并行: 全部缺) ===",
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "densenet121",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "densenet121",
+        "mode": "mutation",
+        "mutate": ["epochs"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {}
+      },
+      "comment": "并行: epochs需要5个新值 (run 5 times)"
+    },
+    {
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "densenet121",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "densenet121",
+        "mode": "mutation",
+        "mutate": ["learning_rate"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {}
+      },
+      "comment": "并行: learning_rate需要5个新值 (run 5 times)"
+    },
+    {
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "densenet121",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "densenet121",
+        "mode": "mutation",
+        "mutate": ["dropout"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {}
+      },
+      "comment": "并行: dropout需要5个新值 (run 5 times)"
+    },
+    {
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "densenet121",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "densenet121",
+        "mode": "mutation",
+        "mutate": ["seed"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {}
+      },
+      "comment": "并行: seed需要5个新值 (run 5 times)"
+    },
+    {
+      "comment": "=== 6. Person_reID_hrnet18 (非并行: 缺3个各1值; 并行: 全部缺) ===",
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "hrnet18",
+      "mode": "mutation",
+      "mutate": ["learning_rate"],
+      "comment": "非并行: learning_rate需要1个新值"
+    },
+    {
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "hrnet18",
+      "mode": "mutation",
+      "mutate": ["dropout"],
+      "comment": "非并行: dropout需要1个新值"
+    },
+    {
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "hrnet18",
+      "mode": "mutation",
+      "mutate": ["seed"],
+      "comment": "非并行: seed需要1个新值"
+    },
+    {
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "hrnet18",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "hrnet18",
+        "mode": "mutation",
+        "mutate": ["epochs"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {}
+      },
+      "comment": "并行: epochs需要5个新值 (run 5 times)"
+    },
+    {
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "hrnet18",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "hrnet18",
+        "mode": "mutation",
+        "mutate": ["learning_rate"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {}
+      },
+      "comment": "并行: learning_rate需要5个新值 (run 5 times)"
+    },
+    {
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "hrnet18",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "hrnet18",
+        "mode": "mutation",
+        "mutate": ["dropout"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {}
+      },
+      "comment": "并行: dropout需要5个新值 (run 5 times)"
+    },
+    {
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "hrnet18",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "hrnet18",
+        "mode": "mutation",
+        "mutate": ["seed"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {}
+      },
+      "comment": "并行: seed需要5个新值 (run 5 times)"
+    },
+    {
+      "comment": "=== 7. Person_reID_pcb (非并行: 全部缺; 并行: 全部缺) ===",
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "pcb",
+      "mode": "mutation",
+      "mutate": ["epochs"],
+      "comment": "非并行: epochs需要5个新值 (run 5 times)"
+    },
+    {
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "pcb",
+      "mode": "mutation",
+      "mutate": ["learning_rate"],
+      "comment": "非并行: learning_rate需要5个新值 (run 5 times)"
+    },
+    {
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "pcb",
+      "mode": "mutation",
+      "mutate": ["dropout"],
+      "comment": "非并行: dropout需要5个新值 (run 5 times)"
+    },
+    {
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "pcb",
+      "mode": "mutation",
+      "mutate": ["seed"],
+      "comment": "非并行: seed需要5个新值 (run 5 times)"
+    },
+    {
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "pcb",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "pcb",
+        "mode": "mutation",
+        "mutate": ["epochs"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {}
+      },
+      "comment": "并行: epochs需要5个新值 (run 5 times)"
+    },
+    {
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "pcb",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "pcb",
+        "mode": "mutation",
+        "mutate": ["learning_rate"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {}
+      },
+      "comment": "并行: learning_rate需要5个新值 (run 5 times)"
+    },
+    {
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "pcb",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "pcb",
+        "mode": "mutation",
+        "mutate": ["dropout"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {}
+      },
+      "comment": "并行: dropout需要5个新值 (run 5 times)"
+    },
+    {
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "pcb",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "pcb",
+        "mode": "mutation",
+        "mutate": ["seed"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {}
+      },
+      "comment": "并行: seed需要5个新值 (run 5 times)"
+    },
+    {
+      "comment": "=== 8. examples/mnist (非并行: 完成; 并行: 全部缺) ===",
+      "repo": "examples",
+      "model": "mnist",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist",
+        "mode": "mutation",
+        "mutate": ["batch_size"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "siamese",
+        "hyperparameters": {}
+      },
+      "comment": "并行: batch_size需要5个新值 (run 5 times)"
+    },
+    {
+      "repo": "examples",
+      "model": "mnist",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist",
+        "mode": "mutation",
+        "mutate": ["epochs"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "siamese",
+        "hyperparameters": {}
+      },
+      "comment": "并行: epochs需要5个新值 (run 5 times)"
+    },
+    {
+      "repo": "examples",
+      "model": "mnist",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist",
+        "mode": "mutation",
+        "mutate": ["learning_rate"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "siamese",
+        "hyperparameters": {}
+      },
+      "comment": "并行: learning_rate需要5个新值 (run 5 times)"
+    },
+    {
+      "repo": "examples",
+      "model": "mnist",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist",
+        "mode": "mutation",
+        "mutate": ["seed"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "siamese",
+        "hyperparameters": {}
+      },
+      "comment": "并行: seed需要5个新值 (run 5 times)"
+    },
+    {
+      "comment": "=== 9. examples/mnist_rnn (非并行: 完成; 并行: 全部缺) ===",
+      "repo": "examples",
+      "model": "mnist_rnn",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "mode": "mutation",
+        "mutate": ["batch_size"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "siamese",
+        "hyperparameters": {}
+      },
+      "comment": "并行: batch_size需要5个新值 (run 5 times)"
+    },
+    {
+      "repo": "examples",
+      "model": "mnist_rnn",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "mode": "mutation",
+        "mutate": ["epochs"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "siamese",
+        "hyperparameters": {}
+      },
+      "comment": "并行: epochs需要5个新值 (run 5 times)"
+    },
+    {
+      "repo": "examples",
+      "model": "mnist_rnn",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "mode": "mutation",
+        "mutate": ["learning_rate"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "siamese",
+        "hyperparameters": {}
+      },
+      "comment": "并行: learning_rate需要5个新值 (run 5 times)"
+    },
+    {
+      "repo": "examples",
+      "model": "mnist_rnn",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "mode": "mutation",
+        "mutate": ["seed"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "siamese",
+        "hyperparameters": {}
+      },
+      "comment": "并行: seed需要5个新值 (run 5 times)"
+    },
+    {
+      "comment": "=== 10. examples/siamese (非并行: 完成; 并行: 全部缺) ===",
+      "repo": "examples",
+      "model": "siamese",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "siamese",
+        "mode": "mutation",
+        "mutate": ["batch_size"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {}
+      },
+      "comment": "并行: batch_size需要5个新值 (run 5 times)"
+    },
+    {
+      "repo": "examples",
+      "model": "siamese",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "siamese",
+        "mode": "mutation",
+        "mutate": ["epochs"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {}
+      },
+      "comment": "并行: epochs需要5个新值 (run 5 times)"
+    },
+    {
+      "repo": "examples",
+      "model": "siamese",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "siamese",
+        "mode": "mutation",
+        "mutate": ["learning_rate"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {}
+      },
+      "comment": "并行: learning_rate需要5个新值 (run 5 times)"
+    },
+    {
+      "repo": "examples",
+      "model": "siamese",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "siamese",
+        "mode": "mutation",
+        "mutate": ["seed"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {}
+      },
+      "comment": "并行: seed需要5个新值 (run 5 times)"
+    },
+    {
+      "comment": "=== 11. examples/mnist_ff (非并行: 全部缺; 并行: 全部缺) ===",
+      "repo": "examples",
+      "model": "mnist_ff",
+      "mode": "mutation",
+      "mutate": ["batch_size"],
+      "comment": "非并行: batch_size需要5个新值 (run 5 times)"
+    },
+    {
+      "repo": "examples",
+      "model": "mnist_ff",
+      "mode": "mutation",
+      "mutate": ["epochs"],
+      "comment": "非并行: epochs需要5个新值 (run 5 times)"
+    },
+    {
+      "repo": "examples",
+      "model": "mnist_ff",
+      "mode": "mutation",
+      "mutate": ["learning_rate"],
+      "comment": "非并行: learning_rate需要5个新值 (run 5 times)"
+    },
+    {
+      "repo": "examples",
+      "model": "mnist_ff",
+      "mode": "mutation",
+      "mutate": ["seed"],
+      "comment": "非并行: seed需要5个新值 (run 5 times)"
+    },
+    {
+      "repo": "examples",
+      "model": "mnist_ff",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist_ff",
+        "mode": "mutation",
+        "mutate": ["batch_size"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {}
+      },
+      "comment": "并行: batch_size需要5个新值 (run 5 times)"
+    },
+    {
+      "repo": "examples",
+      "model": "mnist_ff",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist_ff",
+        "mode": "mutation",
+        "mutate": ["epochs"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {}
+      },
+      "comment": "并行: epochs需要5个新值 (run 5 times)"
+    },
+    {
+      "repo": "examples",
+      "model": "mnist_ff",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist_ff",
+        "mode": "mutation",
+        "mutate": ["learning_rate"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {}
+      },
+      "comment": "并行: learning_rate需要5个新值 (run 5 times)"
+    },
+    {
+      "repo": "examples",
+      "model": "mnist_ff",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist_ff",
+        "mode": "mutation",
+        "mutate": ["seed"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {}
+      },
+      "comment": "并行: seed需要5个新值 (run 5 times)"
+    }
+  ]
+}

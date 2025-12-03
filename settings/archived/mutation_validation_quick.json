@@ -1,0 +1,192 @@
+{
+  "experiment_name": "mutation_validation_quick",
+  "description": "快速验证配置：每个参数变异1次，非epoch变异时epoch=1（加速训练）",
+  "governor": "performance",
+  "runs_per_config": 1,
+  "max_retries": 2,
+  "mode": "default",
+  "experiments": [
+    {
+      "repo": "examples",
+      "model": "mnist_ff",
+      "mode": "mutation",
+      "mutate": ["epochs"],
+      "note": "Sequential: mnist_ff - mutate epochs (正常epoch范围)"
+    },
+    {
+      "repo": "examples",
+      "model": "mnist_ff",
+      "mode": "mutation",
+      "mutate": ["learning_rate"],
+      "note": "Sequential: mnist_ff - mutate learning_rate (使用默认epoch=10)"
+    },
+    {
+      "repo": "examples",
+      "model": "mnist_ff",
+      "mode": "default",
+      "hyperparameters": {
+        "epochs": 1,
+        "learning_rate": 0.01,
+        "batch_size": 32,
+        "seed": 42
+      },
+      "note": "Sequential: mnist_ff - baseline with epochs=1"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist_ff",
+        "mode": "mutation",
+        "mutate": ["epochs"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {
+          "epochs": 1,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: mnist_ff - mutate epochs"
+    },
+    {
+      "repo": "pytorch_resnet_cifar10",
+      "model": "resnet20",
+      "mode": "mutation",
+      "mutate": ["epochs"],
+      "note": "Sequential: resnet20 - mutate epochs (正常epoch范围)"
+    },
+    {
+      "repo": "pytorch_resnet_cifar10",
+      "model": "resnet20",
+      "mode": "default",
+      "hyperparameters": {
+        "epochs": 1,
+        "learning_rate": 0.1,
+        "weight_decay": 0.0001,
+        "seed": 1334
+      },
+      "note": "Sequential: resnet20 - baseline with epochs=1"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "pytorch_resnet_cifar10",
+        "model": "resnet20",
+        "mode": "mutation",
+        "mutate": ["learning_rate"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist_ff",
+        "hyperparameters": {
+          "epochs": 1,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: resnet20 - mutate learning_rate (使用默认epochs=200)"
+    },
+    {
+      "repo": "VulBERTa",
+      "model": "mlp",
+      "mode": "mutation",
+      "mutate": ["epochs"],
+      "note": "Sequential: VulBERTa_mlp - mutate epochs"
+    },
+    {
+      "repo": "VulBERTa",
+      "model": "mlp",
+      "mode": "default",
+      "hyperparameters": {
+        "epochs": 1,
+        "learning_rate": 0.00003,
+        "weight_decay": 0.0,
+        "seed": 42
+      },
+      "note": "Sequential: VulBERTa_mlp - baseline with epochs=1"
+    },
+    {
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "densenet121",
+      "mode": "mutation",
+      "mutate": ["epochs"],
+      "note": "Sequential: densenet121 - mutate epochs"
+    },
+    {
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "densenet121",
+      "mode": "default",
+      "hyperparameters": {
+        "epochs": 1,
+        "learning_rate": 0.05,
+        "dropout": 0.5,
+        "seed": 1334
+      },
+      "note": "Sequential: densenet121 - baseline with epochs=1"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "densenet121",
+        "mode": "mutation",
+        "mutate": ["dropout"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {
+          "epochs": 1,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: densenet121 - mutate dropout (使用默认epochs=60)"
+    },
+    {
+      "repo": "bug-localization-by-dnn-and-rvsm",
+      "model": "default",
+      "mode": "mutation",
+      "mutate": ["max_iter"],
+      "note": "Sequential: bug-localization - mutate max_iter"
+    },
+    {
+      "repo": "bug-localization-by-dnn-and-rvsm",
+      "model": "default",
+      "mode": "default",
+      "hyperparameters": {
+        "max_iter": 100,
+        "alpha": 0.00001,
+        "kfold": 10,
+        "seed": 42
+      },
+      "note": "Sequential: bug-localization - baseline with max_iter=100 (快速验证)"
+    },
+    {
+      "repo": "MRT-OAST",
+      "model": "default",
+      "mode": "mutation",
+      "mutate": ["epochs"],
+      "note": "Sequential: MRT-OAST - mutate epochs"
+    },
+    {
+      "repo": "MRT-OAST",
+      "model": "default",
+      "mode": "default",
+      "hyperparameters": {
+        "epochs": 1,
+        "learning_rate": 0.0001,
+        "dropout": 0.2,
+        "weight_decay": 0.0,
+        "seed": 1334
+      },
+      "note": "Sequential: MRT-OAST - baseline with epochs=1"
+    }
+  ]
+}

@@ -1,0 +1,315 @@
+{
+  "experiment_name": "mutation_2x_supplement_complete",
+  "mode": "batch",
+  "runs_per_config": 2,
+  "max_retries": 2,
+  "governor": "performance",
+  "cleanup_gpu_memory": true,
+  "cleanup_between_experiments": true,
+  "use_deduplication": true,
+  "historical_csvs": [
+    "results/summary_all.csv"
+  ],
+  "experiments": [
+    {
+      "repo": "VulBERTa",
+      "model": "cnn",
+      "mode": "default",
+      "comment": "VulBERTa-CNN: 默认值实验（2次）"
+    },
+    {
+      "repo": "VulBERTa",
+      "model": "cnn",
+      "num_mutations": 5,
+      "mutate": [
+        "epochs"
+      ],
+      "comment": "VulBERTa-CNN: epochs需要5个新值（10次实验）"
+    },
+    {
+      "repo": "VulBERTa",
+      "model": "cnn",
+      "num_mutations": 5,
+      "mutate": [
+        "learning_rate"
+      ],
+      "comment": "VulBERTa-CNN: learning_rate需要5个新值（10次实验）"
+    },
+    {
+      "repo": "VulBERTa",
+      "model": "cnn",
+      "num_mutations": 5,
+      "mutate": [
+        "seed"
+      ],
+      "comment": "VulBERTa-CNN: seed需要5个新值（10次实验）"
+    },
+    {
+      "repo": "VulBERTa",
+      "model": "cnn",
+      "num_mutations": 5,
+      "mutate": [
+        "weight_decay"
+      ],
+      "comment": "VulBERTa-CNN: weight_decay需要5个新值（10次实验）"
+    },
+    {
+      "repo": "bug-localization-by-dnn-and-rvsm",
+      "model": "default",
+      "num_mutations": 2,
+      "mutate": [
+        "kfold"
+      ],
+      "comment": "bug-localization: kfold还需2个新值（4次实验）"
+    },
+    {
+      "repo": "examples",
+      "model": "mnist",
+      "num_mutations": 2,
+      "mutate": [
+        "batch_size"
+      ],
+      "comment": "MNIST: batch_size还需2个新值（4次实验）"
+    },
+    {
+      "repo": "examples",
+      "model": "mnist_rnn",
+      "num_mutations": 2,
+      "mutate": [
+        "batch_size"
+      ],
+      "comment": "MNIST-RNN: batch_size还需2个新值（4次实验）"
+    },
+    {
+      "repo": "examples",
+      "model": "siamese",
+      "num_mutations": 2,
+      "mutate": [
+        "batch_size"
+      ],
+      "comment": "Siamese: batch_size还需2个新值（4次实验）"
+    },
+    {
+      "repo": "examples",
+      "model": "mnist_ff",
+      "mode": "default",
+      "fixed_hyperparams": {
+        "batch_size": 10000
+      },
+      "comment": "MNIST-FF: 默认值实验（2次）"
+    },
+    {
+      "repo": "examples",
+      "model": "mnist_ff",
+      "num_mutations": 4,
+      "mutate": [
+        "batch_size"
+      ],
+      "comment": "MNIST-FF: batch_size还需4个新值（8次实验）"
+    },
+    {
+      "repo": "examples",
+      "model": "mnist_ff",
+      "num_mutations": 3,
+      "mutate": [
+        "epochs"
+      ],
+      "fixed_hyperparams": {
+        "batch_size": 10000
+      },
+      "comment": "MNIST-FF: epochs还需3个新值（6次实验）"
+    },
+    {
+      "repo": "examples",
+      "model": "mnist_ff",
+      "num_mutations": 3,
+      "mutate": [
+        "learning_rate"
+      ],
+      "fixed_hyperparams": {
+        "batch_size": 10000
+      },
+      "comment": "MNIST-FF: learning_rate还需3个新值（6次实验）"
+    },
+    {
+      "repo": "examples",
+      "model": "mnist_ff",
+      "num_mutations": 3,
+      "mutate": [
+        "seed"
+      ],
+      "fixed_hyperparams": {
+        "batch_size": 10000
+      },
+      "comment": "MNIST-FF: seed还需3个新值（6次实验）"
+    },
+    {
+      "repo": "examples",
+      "model": "word_lm",
+      "mode": "default",
+      "comment": "Word-LM: 默认值实验（2次）"
+    },
+    {
+      "repo": "examples",
+      "model": "word_lm",
+      "num_mutations": 5,
+      "mutate": [
+        "batch_size"
+      ],
+      "comment": "Word-LM: batch_size需要5个新值（10次实验）"
+    },
+    {
+      "repo": "examples",
+      "model": "word_lm",
+      "num_mutations": 5,
+      "mutate": [
+        "epochs"
+      ],
+      "comment": "Word-LM: epochs需要5个新值（10次实验）"
+    },
+    {
+      "repo": "examples",
+      "model": "word_lm",
+      "num_mutations": 5,
+      "mutate": [
+        "learning_rate"
+      ],
+      "comment": "Word-LM: learning_rate需要5个新值（10次实验）"
+    },
+    {
+      "repo": "examples",
+      "model": "word_lm",
+      "num_mutations": 5,
+      "mutate": [
+        "seed"
+      ],
+      "comment": "Word-LM: seed需要5个新值（10次实验）"
+    },
+    {
+      "repo": "pytorch_resnet_cifar10",
+      "model": "resnet32",
+      "mode": "default",
+      "comment": "ResNet32: 默认值实验（2次）"
+    },
+    {
+      "repo": "pytorch_resnet_cifar10",
+      "model": "resnet32",
+      "num_mutations": 5,
+      "mutate": [
+        "epochs"
+      ],
+      "comment": "ResNet32: epochs需要5个新值（10次实验）"
+    },
+    {
+      "repo": "pytorch_resnet_cifar10",
+      "model": "resnet32",
+      "num_mutations": 5,
+      "mutate": [
+        "learning_rate"
+      ],
+      "comment": "ResNet32: learning_rate需要5个新值（10次实验）"
+    },
+    {
+      "repo": "pytorch_resnet_cifar10",
+      "model": "resnet32",
+      "num_mutations": 5,
+      "mutate": [
+        "seed"
+      ],
+      "comment": "ResNet32: seed需要5个新值（10次实验）"
+    },
+    {
+      "repo": "pytorch_resnet_cifar10",
+      "model": "resnet32",
+      "num_mutations": 5,
+      "mutate": [
+        "weight_decay"
+      ],
+      "comment": "ResNet32: weight_decay需要5个新值（10次实验）"
+    },
+    {
+      "repo": "pytorch_resnet_cifar10",
+      "model": "resnet44",
+      "mode": "default",
+      "comment": "ResNet44: 默认值实验（2次）"
+    },
+    {
+      "repo": "pytorch_resnet_cifar10",
+      "model": "resnet44",
+      "num_mutations": 5,
+      "mutate": [
+        "epochs"
+      ],
+      "comment": "ResNet44: epochs需要5个新值（10次实验）"
+    },
+    {
+      "repo": "pytorch_resnet_cifar10",
+      "model": "resnet44",
+      "num_mutations": 5,
+      "mutate": [
+        "learning_rate"
+      ],
+      "comment": "ResNet44: learning_rate需要5个新值（10次实验）"
+    },
+    {
+      "repo": "pytorch_resnet_cifar10",
+      "model": "resnet44",
+      "num_mutations": 5,
+      "mutate": [
+        "seed"
+      ],
+      "comment": "ResNet44: seed需要5个新值（10次实验）"
+    },
+    {
+      "repo": "pytorch_resnet_cifar10",
+      "model": "resnet44",
+      "num_mutations": 5,
+      "mutate": [
+        "weight_decay"
+      ],
+      "comment": "ResNet44: weight_decay需要5个新值（10次实验）"
+    },
+    {
+      "repo": "pytorch_resnet_cifar10",
+      "model": "resnet56",
+      "mode": "default",
+      "comment": "ResNet56: 默认值实验（2次）"
+    },
+    {
+      "repo": "pytorch_resnet_cifar10",
+      "model": "resnet56",
+      "num_mutations": 5,
+      "mutate": [
+        "epochs"
+      ],
+      "comment": "ResNet56: epochs需要5个新值（10次实验）"
+    },
+    {
+      "repo": "pytorch_resnet_cifar10",
+      "model": "resnet56",
+      "num_mutations": 5,
+      "mutate": [
+        "learning_rate"
+      ],
+      "comment": "ResNet56: learning_rate需要5个新值（10次实验）"
+    },
+    {
+      "repo": "pytorch_resnet_cifar10",
+      "model": "resnet56",
+      "num_mutations": 5,
+      "mutate": [
+        "seed"
+      ],
+      "comment": "ResNet56: seed需要5个新值（10次实验）"
+    },
+    {
+      "repo": "pytorch_resnet_cifar10",
+      "model": "resnet56",
+      "num_mutations": 5,
+      "mutate": [
+        "weight_decay"
+      ],
+      "comment": "ResNet56: weight_decay需要5个新值（10次实验）"
+    }
+  ]
+}

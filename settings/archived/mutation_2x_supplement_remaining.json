@@ -1,0 +1,96 @@
+{
+  "experiment_name": "mutation_2x_supplement_remaining_20251201",
+  "mode": "batch",
+  "runs_per_config": 2,
+  "max_retries": 2,
+  "governor": "performance",
+  "cleanup_gpu_memory": true,
+  "cleanup_between_experiments": true,
+  "use_deduplication": true,
+  "historical_csvs": [
+    "results/summary_all.csv"
+  ],
+  "experiments": [
+    {
+      "repo": "bug-localization-by-dnn-and-rvsm",
+      "model": "default",
+      "num_mutations": 1,
+      "mutate": [
+        "kfold"
+      ],
+      "comment": "bug-localization: kfold\u8fd8\u97001\u4e2a\u65b0\u503c\uff082\u6b21\u5b9e\u9a8c\uff09"
+    },
+    {
+      "repo": "examples",
+      "model": "mnist",
+      "num_mutations": 1,
+      "mutate": [
+        "batch_size"
+      ],
+      "comment": "MNIST: batch_size\u8fd8\u97001\u4e2a\u65b0\u503c\uff082\u6b21\u5b9e\u9a8c\uff09"
+    },
+    {
+      "repo": "examples",
+      "model": "mnist_rnn",
+      "num_mutations": 1,
+      "mutate": [
+        "batch_size"
+      ],
+      "comment": "MNIST-RNN: batch_size\u8fd8\u97001\u4e2a\u65b0\u503c\uff082\u6b21\u5b9e\u9a8c\uff09"
+    },
+    {
+      "repo": "examples",
+      "model": "siamese",
+      "num_mutations": 1,
+      "mutate": [
+        "batch_size"
+      ],
+      "comment": "Siamese: batch_size\u8fd8\u97001\u4e2a\u65b0\u503c\uff082\u6b21\u5b9e\u9a8c\uff09"
+    },
+    {
+      "repo": "examples",
+      "model": "mnist_ff",
+      "mode": "default",
+      "fixed_hyperparams": {
+        "batch_size": 10000
+      },
+      "comment": "MNIST-FF: \u9ed8\u8ba4\u503c\u5b9e\u9a8c\uff082\u6b21\uff1a\u975e\u5e76\u884c+\u5e76\u884c\uff09"
+    },
+    {
+      "repo": "examples",
+      "model": "mnist_ff",
+      "num_mutations": 3,
+      "mutate": [
+        "epochs"
+      ],
+      "fixed_hyperparams": {
+        "batch_size": 10000
+      },
+      "comment": "MNIST-FF: epochs\u8fd8\u97003\u4e2a\u65b0\u503c\uff086\u6b21\u5b9e\u9a8c\uff09"
+    },
+    {
+      "repo": "examples",
+      "model": "mnist_ff",
+      "num_mutations": 3,
+      "mutate": [
+        "learning_rate"
+      ],
+      "fixed_hyperparams": {
+        "batch_size": 10000
+      },
+      "comment": "MNIST-FF: learning_rate\u8fd8\u97003\u4e2a\u65b0\u503c\uff086\u6b21\u5b9e\u9a8c\uff09"
+    },
+    {
+      "repo": "examples",
+      "model": "mnist_ff",
+      "num_mutations": 3,
+      "mutate": [
+        "seed"
+      ],
+      "fixed_hyperparams": {
+        "batch_size": 10000
+      },
+      "comment": "MNIST-FF: seed\u8fd8\u97003\u4e2a\u65b0\u503c\uff086\u6b21\u5b9e\u9a8c\uff09"
+    }
+  ]
+}
