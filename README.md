@@ -2,7 +2,7 @@
 
 自动化深度学习模型训练的超参数变异与能耗性能分析框架
 
-**当前版本**: v4.5.0 (2025-12-03)
+**当前版本**: v4.5.0 (2025-12-04)
 **状态**: ✅ Production Ready
 
 ---
@@ -65,14 +65,11 @@ sudo -E python3 mutation.py -ec settings/11_models_sequential_and_parallel_train
 # 阶段1: 非并行补全 (已完成 ✓)
 # sudo -E python3 mutation.py -ec settings/stage1_nonparallel_completion.json
 
-# 阶段2: 非并行补充 + 快速模型并行 (20-24小时)
-sudo -E python3 mutation.py -ec settings/stage2_optimized_nonparallel_and_fast_parallel.json
+# 阶段2: 非并行补充 + 快速模型并行 (已完成 ✓)
+# sudo -E python3 mutation.py -ec settings/stage2_optimized_nonparallel_and_fast_parallel.json
 
-# 阶段3: mnist_ff剩余 + 中速模型并行 (36-40小时)
-sudo -E python3 mutation.py -ec settings/stage3_optimized_mnist_ff_and_medium_parallel.json
-
-# 阶段4: VulBERTa + densenet121并行 (32小时)
-sudo -E python3 mutation.py -ec settings/stage4_optimized_vulberta_densenet121_parallel.json
+# 阶段3-4合并: mnist_ff剩余 + 中速模型 + VulBERTa + densenet121 (预计57.1小时)
+sudo -E python3 mutation.py -ec settings/stage3_4_merged_optimized_parallel.json
 
 # 阶段5: hrnet18并行 (48小时)
 sudo -E python3 mutation.py -ec settings/stage5_optimized_hrnet18_parallel.json
@@ -194,12 +191,11 @@ sudo sysctl -w kernel.perf_event_paranoid=-1
 | 配置文件 | 说明 | 预计时间 | 实验数 | 状态 |
 |---------|------|---------|--------|------|
 | `stage1_nonparallel_completion.json` | 阶段1: 非并行补全 | 9小时 | 12 | ✅ 已完成 |
-| `stage2_optimized_nonparallel_and_fast_parallel.json` | 阶段2: 非并行补充 + 快速模型并行 | 20-24小时 | 44 | 🔄 待执行 |
-| `stage3_optimized_mnist_ff_and_medium_parallel.json` | 阶段3: mnist_ff剩余 + 中速模型并行 | 36-40小时 | 29 | 待执行 |
-| `stage4_optimized_vulberta_densenet121_parallel.json` | 阶段4: VulBERTa + densenet121并行 | 32小时 | 8 | 待执行 |
-| `stage5_optimized_hrnet18_parallel.json` | 阶段5: hrnet18并行 | 48小时 | 12 | 待执行 |
-| `stage6_optimized_pcb_parallel.json` | 阶段6: pcb并行 | 48小时 | 12 | 待执行 |
-| **总计** | **6个阶段** | **193-197小时** | **105** | **12/105完成** |
+| `stage2_optimized_nonparallel_and_fast_parallel.json` | 阶段2: 非并行补充 + 快速模型并行 | 7.3小时 (20-24小时预期) | 25 (44预期) | ✅ 已完成 |
+| `stage3_4_merged_optimized_parallel.json` | 阶段3-4合并: mnist_ff剩余 + 中速模型 + VulBERTa + densenet121 | 57.1小时 (基于Stage2经验重新预估) | 25个实验项，57个预期实验 | ⏳ 待执行 |
+| `stage5_optimized_hrnet18_parallel.json` | 阶段5: hrnet18并行 | 48小时 | 12 | ⏳ 待执行 |
+| `stage6_optimized_pcb_parallel.json` | 阶段6: pcb并行 | 48小时 | 12 | ⏳ 待执行 |
+| **总计** | **5个阶段** | **169.4小时** (重新预估) | **106** (37/106完成) | **37/106完成** |
 
 **优化效果**:
 - ✅ 参数精确优化: 每个参数使用不同的runs_per_config（基于实际需求）
@@ -251,15 +247,21 @@ sudo sysctl -w kernel.perf_event_paranoid=-1
 
 ## 版本信息
 
-**v4.5.0** (2025-12-03)
+**v4.5.0** (2025-12-04)
+- ✅ **Stage2执行完成**: 非并行补充 + 快速模型并行实验完成
+  - 实际运行: 7.3小时 (预期20-24小时)
+  - 实验数量: 25个实验 (预期44个)
+  - 核心目标达成: 所有29个目标参数达到5个唯一值
+  - 去重效果: 跳过40个重复实验 (61.5%跳过率)
 - ✅ **参数精确优化** (runs_per_config v2.0): 每个参数使用精确的runs_per_config值
   - 优化原理: runs_per_config = (5 - current_unique_count) + 1
   - 资源利用率: 从26.9%提升到>90%
   - 减少无效尝试: 从390次降低到105-145次（节省63%）
   - 节省GPU时间: 约160小时
-- ✅ **优化配置文件**: 创建5个新的优化stage配置（stage2-6）
-  - 每个参数都有详细注释说明当前状态和目标
-  - 保持每阶段约2天（20-48小时）运行时间
+- ✅ **配置文件合并**: 将Stage3和Stage4合并为单个配置文件
+  - 合并后配置: `stage3_4_merged_optimized_parallel.json`
+  - 实验项: 25个实验项，57个预期实验
+  - 时间预估: 57.1小时 (基于Stage2 38.5%完成率重新预估)
 - ✅ **完整文档**: 优化报告、快速参考、执行准备清单
 - ✅ **配置归档**: 旧版统一runs_per_config配置移至archive/目录
 
@@ -295,4 +297,4 @@ sudo sysctl -w kernel.perf_event_paranoid=-1
 
 ---
 
-**维护者**: Green | **状态**: ✅ Production Ready | **更新**: 2025-12-03
+**维护者**: Green | **状态**: ✅ Production Ready | **更新**: 2025-12-04

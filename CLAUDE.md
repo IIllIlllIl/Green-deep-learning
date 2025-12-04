@@ -1,7 +1,7 @@
 # Claude 助手指南 - Mutation-Based Training Energy Profiler
 
-**项目版本**: v4.5.0 (2025-12-03)
-**最后更新**: 2025-12-03
+**项目版本**: v4.5.0 (2025-12-04)
+**最后更新**: 2025-12-04
 **状态**: ✅ Production Ready
 
 ---
@@ -21,9 +21,11 @@
 - ✅ **参数精确优化** - 每个参数使用精确的runs_per_config值
 
 ### 当前状态
-- **实验总数**: 331个（results/summary_all.csv）
-- **完成度**: 非并行73.3%，并行0%（分阶段计划进行中）
-- **优化配置**: 已创建5个优化stage配置文件，预计184-192小时完成
+- **实验总数**: 356个（results/summary_all.csv）
+- **完成度**: 非并行73.3%，并行28.9%（Stage2已完成）
+- **参数达标率**: 51.1% (46/90个参数达到5个唯一值)
+- **剩余阶段**: Stage3-4合并 + Stage5-6优化配置，预计169.4小时完成
+- **最新进展**: Stage2成功完成，25个实验，7.3小时，所有目标参数达标
 
 ---
 
@@ -131,9 +133,8 @@ energy_dl/nightly/
 - `settings/EXECUTION_READY.md` - 执行准备清单（已归档）
 
 ### 配置文件
-- `settings/stage2_optimized_nonparallel_and_fast_parallel.json` - Stage2优化配置
-- `settings/stage3_optimized_mnist_ff_and_medium_parallel.json` - Stage3优化配置
-- `settings/stage4_optimized_vulberta_densenet121_parallel.json` - Stage4优化配置
+- `settings/stage2_optimized_nonparallel_and_fast_parallel.json` - Stage2优化配置 (已完成)
+- `settings/stage3_4_merged_optimized_parallel.json` - 阶段3-4合并配置 (mnist_ff剩余 + 中速模型 + VulBERTa + densenet121)
 - `settings/stage5_optimized_hrnet18_parallel.json` - Stage5优化配置
 - `settings/stage6_optimized_pcb_parallel.json` - Stage6优化配置
 
@@ -172,8 +173,8 @@ python3 -m pytest tests/unit/
 
 ### 执行实验
 ```bash
-# Stage2优化配置（20-24小时）
-sudo -E python3 mutation.py -ec settings/stage2_optimized_nonparallel_and_fast_parallel.json
+# Stage2优化配置（已完成 ✓）
+# sudo -E python3 mutation.py -ec settings/stage2_optimized_nonparallel_and_fast_parallel.json
 
 # 查看运行状态
 ls -lht results/run_* | head -3
@@ -216,9 +217,15 @@ python3 scripts/check_completion_status.py
 
 ## 🔄 版本历史摘要
 
-### v4.5.0 (2025-12-03) - 当前版本
+### v4.5.0 (2025-12-04) - 当前版本
+- ✅ **Stage2执行完成**：非并行补充 + 快速模型并行实验成功完成
+  - 实际运行: 7.3小时 (预期20-24小时)
+  - 实验数量: 25个 (预期44个)
+  - 核心目标: 所有29个目标参数达到5个唯一值
+  - 去重效果: 跳过40个重复实验 (61.5%跳过率)
 - ✅ **CSV列不匹配修复**：修复_append_to_summary_all()使用错误的fieldnames问题
 - ✅ **参数精确优化**：每个参数使用精确的runs_per_config值，资源利用率>90%
+- ✅ **配置文件合并**：将Stage3和Stage4合并为单个配置文件，重新预估时间至57.1小时
 
 ### v4.4.0 (2025-12-02)
 - ✅ **CSV追加bug修复**：修复数据覆盖问题，使用安全追加模式
@@ -285,7 +292,7 @@ python3 scripts/check_deduplication.py
 ## 📈 项目路线图
 
 ### 近期目标（1-2周）
-1. 完成Stage2-6优化配置执行（184-192小时）
+1. 完成Stage3-4合并 + Stage5-6优化配置执行（169.4小时，基于Stage2经验重新预估）
 2. 达到100%实验完成度（所有参数5个唯一值）
 3. 进行最终数据分析
 
@@ -321,7 +328,7 @@ python3 scripts/check_deduplication.py
 
 **维护者**: Green
 **Claude助手指南版本**: 1.0
-**最后更新**: 2025-12-03
+**最后更新**: 2025-12-04
 **状态**: ✅ 有效 - 请根据项目发展更新此文档
 
 > 提示：将此文件保存在项目根目录，作为Claude助手的主要参考。当项目结构或规范变更时，及时更新此文档。
