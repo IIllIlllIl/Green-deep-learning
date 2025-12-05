@@ -775,7 +775,8 @@ class MutationRunner:
             mutate_params=mutate_params,
             num_mutations=num_runs,
             random_seed=self.random_seed,
-            logger=self.logger
+            logger=self.logger,
+            mode="nonparallel"  # Default to non-parallel mode
         )
 
         # Run experiments
@@ -1012,7 +1013,8 @@ class MutationRunner:
                             num_mutations=runs_per_config,
                             random_seed=self.random_seed,
                             logger=self.logger,
-                            existing_mutations=dedup_set  # Inter-round deduplication
+                            existing_mutations=dedup_set,  # Inter-round deduplication
+                            mode="parallel"  # Distinguish parallel mode for deduplication
                         )
                     else:
                         # Use default hyperparameters
@@ -1109,7 +1111,8 @@ class MutationRunner:
                         num_mutations=runs_per_config,
                         random_seed=self.random_seed,
                         logger=self.logger,
-                        existing_mutations=dedup_set  # Inter-round deduplication
+                        existing_mutations=dedup_set,  # Inter-round deduplication
+                        mode="nonparallel"  # Distinguish non-parallel mode for deduplication
                     )
 
                     # Run each mutation

@@ -1,0 +1,26 @@
+{
+  "comment": "Stage10: 非并行模式超慢速模型pcb",
+  "version": "4.6.0",
+  "created": "2025-12-05",
+  "estimated_duration_hours": 23.7,
+  "estimated_experiments": 20,
+  "target_completion": {
+    "parameters": [
+      "Person_reID_baseline_pytorch/pcb: 4参数 × 5次"
+    ],
+    "goal": "完成非并行模式下pcb的所有参数，每个参数获得5个唯一值"
+  },
+  "use_deduplication": true,
+  "historical_csvs": ["results/summary_all.csv"],
+  "experiments": [
+    {
+      "repository": "Person_reID_baseline_pytorch",
+      "model": "pcb",
+      "baseline_runs": 0,
+      "runs_per_config": 5,
+      "mutate_params": ["epochs", "learning_rate", "seed", "dropout"],
+      "mode": "nonparallel",
+      "comment": "超慢速模型，平均71.1分钟/实验，预计20个实验约23.7小时"
+    }
+  ]
+}

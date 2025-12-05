@@ -1,27 +1,30 @@
 #!/usr/bin/env python3
 """
-Test Script for Inter-Round Deduplication Mechanism
+Test Script for Inter-Round Deduplication Mechanism (Mode-Aware)
 
 Purpose:
     Validate the inter-round hyperparameter deduplication system by:
-    1. Testing CSV extraction of historical hyperparameters
-    2. Testing deduplication set building
-    3. Testing that generate_mutations() respects historical data
+    1. Testing CSV extraction of historical hyperparameters (with mode)
+    2. Testing deduplication set building (mode-aware)
+    3. Testing that generate_mutations() respects historical data and mode
     4. Testing end-to-end integration with real CSV files
+    5. Testing mode distinction (parallel vs non-parallel)
 
 Test Cases:
     1. Extract mutations from single CSV file
     2. Extract mutations from multiple CSV files
     3. Filter by repository/model
-    4. Build deduplication set
-    5. Generate mutations with historical deduplication
-    6. Verify no duplicates across rounds (integration test)
+    4. Build deduplication set (with mode information)
+    5. Generate mutations with historical deduplication (mode-aware)
+    6. Verify no duplicates across rounds (integration test with mode)
+    7. Verify mode distinction (same params, different modes not deduplicated)
 
 Usage:
     python3 tests/unit/test_dedup_mechanism.py
 
 Author: Mutation Energy Profiler Team
 Created: 2025-11-26
+Updated: 2025-12-05 (Added mode distinction support)
 """
 
 import sys
@@ -183,17 +186,18 @@ class DedupTestRunner:
         print("\nTest 4: Build deduplication set")
         print("-" * 80)
 
-        # Create some test mutations
+        # Create some test mutations with mode information
         test_mutations = [
-            {"epochs": 10.0, "learning_rate": 0.001},
-            {"epochs": 20.0, "learning_rate": 0.01},
-            {"epochs": 10.0, "learning_rate": 0.001},  # Duplicate
+            {"epochs": 10.0, "learning_rate": 0.001, "__mode__": "nonparallel"},
+            {"epochs": 20.0, "learning_rate": 0.01, "__mode__": "parallel"},
+            {"epochs": 10.0, "learning_rate": 0.001, "__mode__": "nonparallel"},  # Duplicate
+            {"epochs": 10.0, "learning_rate": 0.001, "__mode__": "parallel"},  # Same params, different mode (NOT duplicate)
         ]
 
         dedup_set = build_dedup_set(test_mutations)
 
-        # Should have 2 unique mutations (third is duplicate)
-        test1 = self.assert_equal(len(dedup_set), 2, "Duplicate removed")
+        # Should have 3 unique mutations (third is duplicate, fourth is different mode)
+        test1 = self.assert_equal(len(dedup_set), 3, "Duplicate removed, different modes kept")
 
         # Check set contains normalized tuples
         test2 = self.assert_true(
@@ -201,10 +205,16 @@ class DedupTestRunner:
             "All keys are tuples"
         )
 
-        return all([test1, test2])
+        # Check that mode is included in keys
+        test3 = self.assert_true(
+            all(any('__mode__' in str(item) for item in key) for key in dedup_set),
+            "Mode information included in keys"
+        )
+
+        return all([test1, test2, test3])
 
     def test_generate_with_dedup(self) -> bool:
-        """Test 5: Generate mutations with historical deduplication"""
+        """Test 5: Generate mutations with historical deduplication (with mode support)"""
         print("\nTest 5: Generate mutations with historical deduplication")
         print("-" * 80)
 
@@ -226,30 +236,31 @@ class DedupTestRunner:
             }
         }
 
-        # Create historical mutations set
+        # Create historical mutations set WITH mode information
         historical_mutations = [
-            {"epochs": 8.0, "learning_rate": 0.005},
-            {"epochs": 12.0, "learning_rate": 0.02},
+            {"epochs": 8.0, "learning_rate": 0.005, "__mode__": "nonparallel"},
+            {"epochs": 12.0, "learning_rate": 0.02, "__mode__": "parallel"},
         ]
         dedup_set = build_dedup_set(historical_mutations)
 
         print(f"  Historical mutations: {len(dedup_set)}")
 
-        # Generate new mutations with deduplication
+        # Generate new mutations with deduplication in PARALLEL mode
         new_mutations = generate_mutations(
             supported_params=supported_params,
             mutate_params=["epochs", "learning_rate"],
             num_mutations=3,
-            existing_mutations=dedup_set
+            existing_mutations=dedup_set,
+            mode="parallel"  # Specify mode
         )
 
         # Check we generated mutations
         test1 = self.assert_greater(len(new_mutations), 0, "Generated mutations")
 
-        # Check none match historical mutations
+        # Check none match historical mutations (with mode consideration)
         test2 = True
         for mutation in new_mutations:
-            key = _normalize_mutation_key(mutation)
+            key = _normalize_mutation_key(mutation, mode="parallel")
             if key in dedup_set:
                 print(f"  ✗ Found duplicate in historical: {mutation}")
                 test2 = False
@@ -259,7 +270,7 @@ class DedupTestRunner:
             print(f"  ✓ No duplicates with historical mutations")
 
         # Check all generated mutations are unique
-        generated_keys = [_normalize_mutation_key(m) for m in new_mutations]
+        generated_keys = [_normalize_mutation_key(m, mode="parallel") for m in new_mutations]
         test3 = self.assert_equal(
             len(generated_keys),
             len(set(generated_keys)),
@@ -269,7 +280,7 @@ class DedupTestRunner:
         return all([test1, test2, test3])
 
     def test_integration_with_real_data(self) -> bool:
-        """Test 6: Integration test with real CSV files"""
+        """Test 6: Integration test with real CSV files (mode-aware)"""
         print("\nTest 6: Integration test with real CSV data")
         print("-" * 80)
 
@@ -279,17 +290,17 @@ class DedupTestRunner:
             print("  ⚠ No CSV files found")
             return False
 
-        # Load all historical mutations
+        # Load all historical mutations (with mode information)
         print(f"  Loading from {len(existing_files)} CSV files...")
         all_mutations, stats = load_historical_mutations(existing_files)
 
         print(f"  Loaded {len(all_mutations)} total mutations")
 
-        # Build deduplication set
+        # Build deduplication set (mode information automatically extracted from CSV)
         dedup_set = build_dedup_set(all_mutations)
         print(f"  Unique mutations: {len(dedup_set)}")
 
-        # Try to generate new mutations for a real model (examples/mnist)
+        # Try to generate new mutations for a real model (examples/mnist) in PARALLEL mode
         supported_params = {
             "epochs": {
                 "type": "int",
@@ -307,27 +318,93 @@ class DedupTestRunner:
             }
         }
 
-        # Generate 5 new mutations
-        print("\n  Generating 5 new mutations with historical deduplication...")
+        # Generate 5 new mutations in PARALLEL mode
+        print("\n  Generating 5 new mutations in PARALLEL mode with historical deduplication...")
         new_mutations = generate_mutations(
             supported_params=supported_params,
             mutate_params=["epochs", "learning_rate"],
             num_mutations=5,
-            existing_mutations=dedup_set
+            existing_mutations=dedup_set,
+            mode="parallel"  # Specify parallel mode
         )
 
-        # Verify no overlaps with historical data
+        # Verify no overlaps with historical data (considering mode)
         test1 = True
         for mutation in new_mutations:
-            key = _normalize_mutation_key(mutation)
+            key = _normalize_mutation_key(mutation, mode="parallel")
             if key in dedup_set:
                 print(f"  ✗ Generated duplicate mutation: {mutation}")
                 test1 = False
 
         if test1:
-            print(f"\n  ✓ All {len(new_mutations)} generated mutations are unique from historical data")
+            print(f"\n  ✓ All {len(new_mutations)} generated mutations (parallel mode) are unique from historical data")
 
         return test1
+
+    def test_mode_distinction(self) -> bool:
+        """Test 7: Verify parallel and non-parallel modes are distinguished"""
+        print("\nTest 7: Mode distinction in deduplication")
+        print("-" * 80)
+
+        # Create same hyperparameters in different modes
+        test_mutations = [
+            {"learning_rate": 0.01, "epochs": 10, "__mode__": "nonparallel"},
+            {"learning_rate": 0.01, "epochs": 10, "__mode__": "parallel"},
+        ]
+
+        dedup_set = build_dedup_set(test_mutations)
+
+        # Should have 2 unique mutations (same params but different modes)
+        test1 = self.assert_equal(len(dedup_set), 2, "Same params in different modes are distinct")
+
+        # Verify the keys are different
+        keys_list = list(dedup_set)
+        test2 = self.assert_true(
+            keys_list[0] != keys_list[1],
+            "Keys for different modes are different"
+        )
+
+        # Generate new mutations in parallel mode should NOT conflict with nonparallel historical data
+        supported_params = {
+            "learning_rate": {
+                "type": "float",
+                "flag": "--lr",
+                "range": [0.01, 0.01],  # Fixed to ensure same value
+                "default": 0.001,
+                "distribution": "uniform"
+            },
+            "epochs": {
+                "type": "int",
+                "flag": "--epochs",
+                "range": [10, 10],  # Fixed to ensure same value
+                "default": 5,
+                "distribution": "uniform"
+            }
+        }
+
+        # Build dedup set with only nonparallel mode
+        nonparallel_only = [{"learning_rate": 0.01, "epochs": 10, "__mode__": "nonparallel"}]
+        dedup_set_nonparallel = build_dedup_set(nonparallel_only)
+
+        # Generate in parallel mode - should NOT be blocked by nonparallel historical data
+        parallel_mutations = generate_mutations(
+            supported_params=supported_params,
+            mutate_params=["learning_rate", "epochs"],
+            num_mutations=1,
+            existing_mutations=dedup_set_nonparallel,
+            mode="parallel"
+        )
+
+        test3 = self.assert_equal(
+            len(parallel_mutations), 1,
+            "Parallel mutation generated despite same params in nonparallel mode"
+        )
+
+        print(f"  ✓ Mode distinction working correctly")
+        print(f"    - Nonparallel and parallel with same params are treated as different")
+        print(f"    - Parallel mutations not blocked by nonparallel historical data")
+
+        return all([test1, test2, test3])
 
     def run_all_tests(self) -> int:
         """Run all tests and return exit code"""
@@ -348,6 +425,7 @@ class DedupTestRunner:
             ("Build dedup set", self.test_build_dedup_set),
             ("Generate with dedup", self.test_generate_with_dedup),
             ("Integration test", self.test_integration_with_real_data),
+            ("Mode distinction", self.test_mode_distinction),
         ]
 
         for test_name, test_func in tests:

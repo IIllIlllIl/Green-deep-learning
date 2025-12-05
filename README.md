@@ -2,7 +2,7 @@
 
 自动化深度学习模型训练的超参数变异与能耗性能分析框架
 
-**当前版本**: v4.5.0 (2025-12-04)
+**当前版本**: v4.6.0 (2025-12-05)
 **状态**: ✅ Production Ready
 
 ---
@@ -17,7 +17,7 @@
 - ✅ **能耗监控** - CPU (perf) + GPU (nvidia-smi),CPU误差<2%
 - ✅ **并行训练** - 支持前台监控+后台负载的并行训练模式
 - ✅ **完整元数据** - 并行实验记录完整前景+背景模型信息
-- ✅ **去重机制** - 自动跳过重复实验，支持历史数据去重
+- ✅ **去重机制** - 自动跳过重复实验，支持历史数据去重，区分并行/非并行模式
 - ✅ **数据完整性** - CSV安全追加模式，防止数据覆盖丢失
 - ✅ **离线训练** - 支持完全离线运行，避免网络依赖
 - ✅ **快速验证** - 1-epoch配置，15-20分钟验证全部模型
@@ -68,16 +68,17 @@ sudo -E python3 mutation.py -ec settings/11_models_sequential_and_parallel_train
 # 阶段2: 非并行补充 + 快速模型并行 (已完成 ✓)
 # sudo -E python3 mutation.py -ec settings/stage2_optimized_nonparallel_and_fast_parallel.json
 
-# 阶段3-4合并: mnist_ff剩余 + 中速模型 + VulBERTa + densenet121 (预计57.1小时)
-sudo -E python3 mutation.py -ec settings/stage3_4_merged_optimized_parallel.json
+# 阶段3-4合并: mnist_ff剩余 + 中速模型 + VulBERTa + densenet121 (已完成 ✓)
+# sudo -E python3 mutation.py -ec settings/stage3_4_merged_optimized_parallel.json
 
-# 阶段5: hrnet18并行 (48小时)
-sudo -E python3 mutation.py -ec settings/stage5_optimized_hrnet18_parallel.json
+# 阶段7: 非并行快速模型 (38.3小时，199个实验)
+sudo -E python3 mutation.py -ec settings/stage7_nonparallel_fast_models.json
 
-# 阶段6: pcb并行 (48小时)
-sudo -E python3 mutation.py -ec settings/stage6_optimized_pcb_parallel.json
+# 阶段8: 非并行中慢速模型 (35.1小时，48个实验)
+sudo -E python3 mutation.py -ec settings/stage8_nonparallel_medium_slow_models.json
 
-# 更多详情请参考 settings/QUICK_REFERENCE_OPTIMIZED.md
+# 阶段9-13: 剩余非并行+并行模式补充 (120小时，103个实验)
+# 详见: docs/settings_reports/STAGE7_13_EXECUTION_PLAN.md
 ```
 
 ---
@@ -187,29 +188,33 @@ sudo sysctl -w kernel.perf_event_paranoid=-1
 
 #### 分阶段实验配置（推荐用于大规模实验）⭐
 
-**优化版配置** (v2.0 - 参数精确优化):
+**分阶段配置** (v3.0 - 模式区分优化):
 | 配置文件 | 说明 | 预计时间 | 实验数 | 状态 |
 |---------|------|---------|--------|------|
-| `stage1_nonparallel_completion.json` | 阶段1: 非并行补全 | 9小时 | 12 | ✅ 已完成 |
-| `stage2_optimized_nonparallel_and_fast_parallel.json` | 阶段2: 非并行补充 + 快速模型并行 | 7.3小时 (20-24小时预期) | 25 (44预期) | ✅ 已完成 |
-| `stage3_4_merged_optimized_parallel.json` | 阶段3-4合并: mnist_ff剩余 + 中速模型 + VulBERTa + densenet121 | 57.1小时 (基于Stage2经验重新预估) | 25个实验项，57个预期实验 | ⏳ 待执行 |
-| `stage5_optimized_hrnet18_parallel.json` | 阶段5: hrnet18并行 | 48小时 | 12 | ⏳ 待执行 |
-| `stage6_optimized_pcb_parallel.json` | 阶段6: pcb并行 | 48小时 | 12 | ⏳ 待执行 |
-| **总计** | **5个阶段** | **169.4小时** (重新预估) | **106** (37/106完成) | **37/106完成** |
+| `stage1_nonparallel_completion.json` | 阶段1: 非并行补全 | 9h | 12 | ✅ 已完成 |
+| `stage2_optimized_nonparallel_and_fast_parallel.json` | 阶段2: 非并行补充 + 快速模型并行 | 7.3h | 25 | ✅ 已完成 |
+| `stage3_4_merged_optimized_parallel.json` | 阶段3-4: 中速模型 + VulBERTa + densenet121 | 12.2h | 25 | ✅ 已完成 |
+| `stage7_nonparallel_fast_models.json` | 阶段7: 非并行快速模型 | 38.3h | 199 | ⏳ 待执行 |
+| `stage8_nonparallel_medium_slow_models.json` | 阶段8: 非并行中慢速模型 | 35.1h | 48 | ⏳ 待执行 |
+| `stage9_nonparallel_hrnet18.json` | 阶段9: 非并行hrnet18 | 25.0h | 20 | ⏳ 待执行 |
+| `stage10_nonparallel_pcb.json` | 阶段10: 非并行pcb | 23.7h | 20 | ⏳ 待执行 |
+| `stage11_parallel_hrnet18.json` | 阶段11: 并行hrnet18补充 | 28.6h | 20 | ⏳ 待执行 |
+| `stage12_parallel_pcb.json` | 阶段12: 并行pcb补充 | 23.1h | 20 | ⏳ 待执行 |
+| `stage13_parallel_fast_models_supplement.json` | 阶段13: 并行快速模型补充 | 5.0h | 43 | ⏳ 待执行 |
+| **总计** | **10个阶段** | **207.3h** | **432** | **62/432完成** |
 
-**优化效果**:
-- ✅ 参数精确优化: 每个参数使用不同的runs_per_config（基于实际需求）
-- ✅ 资源利用率: 从26.9%提升到>90%
-- ✅ 减少无效尝试: 从390次降低到105-145次（节省63%）
-- ✅ 节省GPU时间: 约160小时
+**v3.0优化重点** (2025-12-05):
+- ✅ **模式区分**: 修复去重机制，正确区分并行/非并行模式
+- ✅ **精确规划**: 基于实际完成度（28/90组合），重新设计Stage7-13
+- ✅ **效率提升**: Stage5-6被更优的Stage11-12替代（节省44.3小时）
+- ✅ **全面覆盖**: 完成后达到100%（90/90组合，450个唯一值）
 
-**详细优化报告**: [settings/OPTIMIZED_CONFIG_REPORT.md](settings/OPTIMIZED_CONFIG_REPORT.md)
-**快速参考指南**: [settings/QUICK_REFERENCE_OPTIMIZED.md](settings/QUICK_REFERENCE_OPTIMIZED.md)
-**执行准备清单**: [settings/EXECUTION_READY.md](settings/EXECUTION_READY.md)
+**详细执行计划**: [docs/settings_reports/STAGE7_13_EXECUTION_PLAN.md](docs/settings_reports/STAGE7_13_EXECUTION_PLAN.md)
+**需求分析报告**: [docs/results_reports/EXPERIMENT_REQUIREMENT_ANALYSIS.md](docs/results_reports/EXPERIMENT_REQUIREMENT_ANALYSIS.md)
 
-**旧版配置** (已归档至 `settings/archive/`):
-- 旧版使用统一runs_per_config=6，导致大量资源浪费
-- 已被参数精确优化的v2.0配置替代
+**归档配置** (`settings/archived/`):
+- Stage5-6配置已归档（被Stage11-12替代）
+- 旧版v1.0-v2.0配置已归档
 
 ### 配置格式
 
@@ -246,6 +251,27 @@ sudo sysctl -w kernel.perf_event_paranoid=-1
 ---
 
 ## 版本信息
+
+**v4.6.0** (2025-12-05)
+- ✅ **Stage3-4执行完成**: mnist_ff剩余 + 中速模型 + VulBERTa + densenet121
+  - 实际运行: 12.2小时 (预期57.1小时)
+  - 实验数量: 25个实验 (预期57个)
+  - 去重效果: 跳过32个重复实验 (56.1%跳过率)
+  - 总实验数: 381个 (356→381)
+- ✅ **去重模式区分修复**: 修复去重机制，区分并行/非并行模式
+  - 问题: 原去重机制未区分模式，导致并行实验被错误跳过
+  - 修复: 在去重key中包含mode信息，确保不同模式独立去重
+  - 修改文件: `hyperparams.py`, `dedup.py`, `runner.py` (共约30行代码)
+  - 测试验证: 创建2个测试套件（10个测试用例）全部通过
+  - 向后兼容: mode参数可选，旧代码仍可正常运行
+  - 详细报告: [docs/results_reports/DEDUP_MODE_FIX_REPORT.md](docs/results_reports/DEDUP_MODE_FIX_REPORT.md)
+- ✅ **实验进度分析**: 当前完成度评估
+  - 总实验数: 381个 (非并行261 + 并行120)
+  - 参数达标率: 100% (不区分模式) / 80% (区分模式)
+  - 非并行模式: 97.8% (44/45参数达标)
+  - 并行模式: 62.2% (28/45参数达标)
+  - 缺失: 18个参数-模式组合，需补充50个唯一值
+  - 详细分析: [docs/results_reports/EXPERIMENT_REQUIREMENT_ANALYSIS.md](docs/results_reports/EXPERIMENT_REQUIREMENT_ANALYSIS.md)
 
 **v4.5.0** (2025-12-04)
 - ✅ **Stage2执行完成**: 非并行补充 + 快速模型并行实验完成
@@ -297,4 +323,4 @@ sudo sysctl -w kernel.perf_event_paranoid=-1
 
 ---
 
-**维护者**: Green | **状态**: ✅ Production Ready | **更新**: 2025-12-04
+**维护者**: Green | **状态**: ✅ Production Ready | **更新**: 2025-12-05

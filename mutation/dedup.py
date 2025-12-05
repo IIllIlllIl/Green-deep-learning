@@ -106,6 +106,10 @@ def extract_mutations_from_csv(
                     stats["filtered"] += 1
                     continue
 
+                # Extract execution mode from experiment_id
+                exp_id = row.get("experiment_id", "")
+                mode = "parallel" if "parallel" in exp_id else "nonparallel"
+
                 # Extract hyperparameters (only non-None values)
                 mutation = {}
                 for csv_col, param_name in HYPERPARAM_COLUMNS.items():
@@ -115,6 +119,8 @@ def extract_mutations_from_csv(
 
                 # Only add if we extracted at least one hyperparameter
                 if mutation:
+                    # Include mode information in the mutation dict
+                    mutation['__mode__'] = mode
                     mutations.append(mutation)
                     stats["extracted"] += 1
 
@@ -202,7 +208,7 @@ def build_dedup_set(
     that can be used to initialize the seen_mutations set in generate_mutations().
 
     Args:
-        mutations: List of mutation dictionaries
+        mutations: List of mutation dictionaries (may include '__mode__' key)
         logger: Optional logger instance
 
     Returns:
@@ -214,7 +220,11 @@ def build_dedup_set(
     dedup_set = set()
 
     for mutation in mutations:
-        key = _normalize_mutation_key(mutation)
+        # Extract and remove mode from mutation dict
+        mode = mutation.pop('__mode__', None)
+
+        # Create normalized key with mode
+        key = _normalize_mutation_key(mutation, mode)
         dedup_set.add(key)
 
     logger.info(f"Built deduplication set with {len(dedup_set)} unique mutations")

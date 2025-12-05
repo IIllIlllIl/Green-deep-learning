@@ -1,7 +1,7 @@
 # Claude 助手指南 - Mutation-Based Training Energy Profiler
 
-**项目版本**: v4.5.0 (2025-12-04)
-**最后更新**: 2025-12-04
+**项目版本**: v4.6.0 (2025-12-05)
+**最后更新**: 2025-12-05
 **状态**: ✅ Production Ready
 
 ---
@@ -15,17 +15,20 @@
 - ✅ **超参数变异** - 自动生成超参数变体（log-uniform/uniform分布）
 - ✅ **能耗监控** - CPU (perf) + GPU (nvidia-smi), CPU误差<2%
 - ✅ **并行训练** - 支持前台监控+后台负载的并行训练模式
-- ✅ **去重机制** - 自动跳过重复实验，支持历史数据去重
+- ✅ **去重机制** - 自动跳过重复实验，支持历史数据去重，**区分并行/非并行模式**
 - ✅ **数据完整性** - CSV安全追加模式，防止数据覆盖丢失
 - ✅ **分阶段执行** - 大规模实验分割成可管理的阶段
 - ✅ **参数精确优化** - 每个参数使用精确的runs_per_config值
 
 ### 当前状态
-- **实验总数**: 356个（results/summary_all.csv）
-- **完成度**: 非并行73.3%，并行28.9%（Stage2已完成）
-- **参数达标率**: 51.1% (46/90个参数达到5个唯一值)
-- **剩余阶段**: Stage3-4合并 + Stage5-6优化配置，预计169.4小时完成
-- **最新进展**: Stage2成功完成，25个实验，7.3小时，所有目标参数达标
+- **实验总数**: 381个（results/summary_all.csv）
+- **完成度**: Stage1-4已完成（62/432个分阶段实验完成，14.4%）
+- **参数-模式组合**: 28/90已达标 (31.1%)
+  - 非并行模式: 0/45 (0% - 全部需要补充)
+  - 并行模式: 28/45 (62.2% - 部分需要补充)
+- **待补充**: 274个唯一值（62个参数-模式组合）
+- **剩余阶段**: Stage7-13配置已完成，待执行（预计178.8小时）
+- **最新进展**: Stage7-13配置设计完成；Stage5-6已归档（被Stage11-12替代）
 
 ---
 
@@ -128,18 +131,31 @@ energy_dl/nightly/
 - `config/models_config.json` - 模型配置
 
 ### 重要数据文件
-- `results/summary_all.csv` - 所有实验汇总（331行，37列）
+- `results/summary_all.csv` - 所有实验汇总（381行，37列）
 - `results/summary_all.csv.backup` - 数据备份
 - `settings/EXECUTION_READY.md` - 执行准备清单（已归档）
 
-### 配置文件
-- `settings/stage2_optimized_nonparallel_and_fast_parallel.json` - Stage2优化配置 (已完成)
-- `settings/stage3_4_merged_optimized_parallel.json` - 阶段3-4合并配置 (mnist_ff剩余 + 中速模型 + VulBERTa + densenet121)
-- `settings/stage5_optimized_hrnet18_parallel.json` - Stage5优化配置
-- `settings/stage6_optimized_pcb_parallel.json` - Stage6优化配置
+### 配置文件（已完成）
+- `settings/stage2_optimized_nonparallel_and_fast_parallel.json` - Stage2 (已完成)
+- `settings/stage3_4_merged_optimized_parallel.json` - Stage3-4合并 (已完成)
+
+### 配置文件（待执行）
+- `settings/stage7_nonparallel_fast_models.json` - Stage7: 非并行快速模型 (38.3h, 199实验)
+- `settings/stage8_nonparallel_medium_slow_models.json` - Stage8: 非并行中慢速模型 (35.1h, 48实验)
+- `settings/stage9_nonparallel_hrnet18.json` - Stage9: 非并行hrnet18 (25.0h, 20实验)
+- `settings/stage10_nonparallel_pcb.json` - Stage10: 非并行pcb (23.7h, 20实验)
+- `settings/stage11_parallel_hrnet18.json` - Stage11: 并行hrnet18补充 (28.6h, 20实验)
+- `settings/stage12_parallel_pcb.json` - Stage12: 并行pcb补充 (23.1h, 20实验)
+- `settings/stage13_parallel_fast_models_supplement.json` - Stage13: 并行快速模型补充 (5.0h, 43实验)
+
+### 归档配置
+- `settings/archived/stage5_optimized_hrnet18_parallel.json` - 被Stage11替代
+- `settings/archived/stage6_optimized_pcb_parallel.json` - 被Stage12替代
 
 ### 测试文件
 - `tests/verify_csv_append_fix.py` - CSV修复验证测试
+- `tests/test_dedup_mode_distinction.py` - 去重模式区分功能测试 (新增)
+- `tests/test_integration_after_mode_fix.py` - 修复后集成测试 (新增)
 - `tests/unit/test_append_to_summary_all.py` - 单元测试
 
 ### 文档索引
@@ -148,6 +164,11 @@ energy_dl/nightly/
 - `docs/SETTINGS_CONFIGURATION_GUIDE.md` - 配置指南
 - `docs/results_reports/CSV_FIX_COMPREHENSIVE_SUMMARY.md` - CSV修复综合报告
 - `docs/results_reports/MISSING_COLUMNS_DETAILED_ANALYSIS.md` - 缺失列详细分析
+- `docs/results_reports/DEDUP_MODE_FIX_REPORT.md` - 去重模式修复报告 (新增)
+- `docs/results_reports/EXPERIMENT_REQUIREMENT_ANALYSIS.md` - 实验需求分析 (新增)
+- `docs/results_reports/STAGE3_4_EXECUTION_REPORT.md` - Stage3-4执行报告 (新增)
+- `docs/settings_reports/STAGE7_13_EXECUTION_PLAN.md` - Stage7-13执行计划 (新增)
+- `docs/results_reports/STAGE7_13_DESIGN_SUMMARY.md` - Stage7-13设计总结 (新增)
 
 ---
 
@@ -217,7 +238,27 @@ python3 scripts/check_completion_status.py
 
 ## 🔄 版本历史摘要
 
-### v4.5.0 (2025-12-04) - 当前版本
+### v4.6.0 (2025-12-05) - 当前版本
+- ✅ **Stage3-4执行完成**: mnist_ff剩余 + 中速模型 + VulBERTa + densenet121
+  - 实际运行: 12.2小时 (预期57.1小时)
+  - 实验数量: 25个 (预期57个)
+  - 去重效果: 跳过32个重复实验 (56.1%跳过率)
+  - 总实验数: 381个 (356→381)
+- ✅ **去重模式区分修复**: 修复去重机制，区分并行/非并行模式
+  - 问题: 原去重机制未区分模式，导致并行实验被错误跳过
+  - 修复: 在去重key中包含mode信息 (`hyperparams.py`, `dedup.py`, `runner.py`)
+  - 测试: 创建2个测试套件（10个测试用例）全部通过
+  - 向后兼容: mode参数可选，旧代码仍可正常运行
+- ✅ **实验进度重新分析**:
+  - 基于summary_all.csv准确数据
+  - 参数-模式组合: 28/90 (31.1%)
+  - 非并行: 0/45 (0%), 并行: 28/45 (62.2%)
+  - 缺失: 62个组合，274个唯一值
+- ✅ **Stage7-13配置完成**: 7个配置文件设计并验证
+  - 预计新增: 370个实验，178.8小时
+  - Stage5-6已归档（被更优的Stage11-12替代，节省44.3小时）
+
+### v4.5.0 (2025-12-04)
 - ✅ **Stage2执行完成**：非并行补充 + 快速模型并行实验成功完成
   - 实际运行: 7.3小时 (预期20-24小时)
   - 实验数量: 25个 (预期44个)
@@ -292,9 +333,10 @@ python3 scripts/check_deduplication.py
 ## 📈 项目路线图
 
 ### 近期目标（1-2周）
-1. 完成Stage3-4合并 + Stage5-6优化配置执行（169.4小时，基于Stage2经验重新预估）
-2. 达到100%实验完成度（所有参数5个唯一值）
-3. 进行最终数据分析
+1. ✅ **Stage7-13配置完成** - 7个配置文件，370个实验，178.8小时
+2. 🔄 **执行Stage7-8** - 优先完成非并行快速和中慢速模型（73.4h, 247实验）
+3. 🔄 **执行Stage9-13** - 完成剩余非并行和并行模式补充（105.4h, 123实验）
+4. 🎯 **达到100%完成度** - 90/90参数-模式组合，450个唯一值
 
 ### 中期改进（1个月）
 1. 实现标准37列模板，避免列不匹配问题
@@ -327,8 +369,8 @@ python3 scripts/check_deduplication.py
 ---
 
 **维护者**: Green
-**Claude助手指南版本**: 1.0
-**最后更新**: 2025-12-04
+**Claude助手指南版本**: 1.1
+**最后更新**: 2025-12-05
 **状态**: ✅ 有效 - 请根据项目发展更新此文档
 
 > 提示：将此文件保存在项目根目录，作为Claude助手的主要参考。当项目结构或规范变更时，及时更新此文档。

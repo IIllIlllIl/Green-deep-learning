@@ -39,7 +39,7 @@ def _format_hyperparam_value(value: Any, param_type: str) -> str:
         return str(value)
 
 
-def _normalize_mutation_key(mutation: Dict[str, Any]) -> tuple:
+def _normalize_mutation_key(mutation: Dict[str, Any], mode: Optional[str] = None) -> tuple:
     """Create normalized, hashable key for mutation uniqueness check
 
     Normalizes float values to fixed precision and sorts parameters
@@ -47,11 +47,19 @@ def _normalize_mutation_key(mutation: Dict[str, Any]) -> tuple:
 
     Args:
         mutation: Hyperparameter mutation dictionary
+        mode: Optional execution mode ('parallel' or 'nonparallel').
+              If provided, the mode is included in the key to distinguish
+              the same hyperparameters run in different modes.
 
     Returns:
-        Sorted tuple of (param, normalized_value) pairs
+        Sorted tuple of (param, normalized_value) pairs, with optional mode prefix
     """
     normalized_items = []
+
+    # Add mode as the first element if provided
+    if mode is not None:
+        normalized_items.append(('__mode__', mode))
+
     for param, value in mutation.items():
         # Normalize float values to fixed precision
         if isinstance(value, float):
@@ -63,7 +71,7 @@ def _normalize_mutation_key(mutation: Dict[str, Any]) -> tuple:
 
         normalized_items.append((param, normalized_value))
 
-    # Sort by parameter name for deterministic order
+    # Sort by parameter name for deterministic order (mode will be first due to __)
     return tuple(sorted(normalized_items))
 
 
@@ -175,7 +183,8 @@ def generate_mutations(
     num_mutations: int = 1,
     random_seed: Optional[int] = None,
     logger: Optional[logging.Logger] = None,
-    existing_mutations: Optional[set] = None
+    existing_mutations: Optional[set] = None,
+    mode: Optional[str] = None
 ) -> List[Dict[str, Any]]:
     """Generate mutated hyperparameter sets with uniqueness guarantee
 
@@ -186,6 +195,7 @@ def generate_mutations(
         random_seed: Random seed for reproducibility (only used if provided)
         logger: Logger instance for debug messages
         existing_mutations: Optional set of normalized mutation keys to avoid (for inter-round deduplication)
+        mode: Optional execution mode ('parallel' or 'nonparallel') to distinguish deduplication by mode
 
     Returns:
         List of mutated hyperparameter dictionaries (all unique and different from defaults)
@@ -214,7 +224,7 @@ def generate_mutations(
         if default_value is not None:
             default_mutation[param] = default_value
 
-    default_key = _normalize_mutation_key(default_mutation) if default_mutation else None
+    default_key = _normalize_mutation_key(default_mutation, mode) if default_mutation else None
     if default_key:
         print(f"   Excluding default values: {default_mutation}")
 
@@ -247,7 +257,7 @@ def generate_mutations(
             )
 
         # Use normalized key for uniqueness check (handles float precision issues)
-        mutation_key = _normalize_mutation_key(mutation)
+        mutation_key = _normalize_mutation_key(mutation, mode)
 
         # Check if this mutation is unique (and not the default)
         if mutation_key not in seen_mutations:

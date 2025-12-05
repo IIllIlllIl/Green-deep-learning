@@ -1,0 +1,99 @@
+{
+  "comment": "Stage13: 并行模式快速模型补充 - mnist_ff全参数 + 其他模型个别参数",
+  "version": "4.6.0",
+  "created": "2025-12-05",
+  "estimated_duration_hours": 5.0,
+  "estimated_experiments": 43,
+  "target_completion": {
+    "parameters": [
+      "examples/mnist_ff并行: 4参数 × 5次 (batch_size,epochs,learning_rate,seed各缺3个)",
+      "examples/mnist并行: batch_size × 5次 (缺3个)",
+      "examples/mnist_rnn并行: batch_size × 5次, epochs × 3次 (batch_size缺3个,epochs缺1个)",
+      "examples/siamese并行: batch_size × 5次 (缺3个)",
+      "bug-localization-by-dnn-and-rvsm/default并行: kfold × 5次 (缺3个)"
+    ],
+    "goal": "补充快速模型并行模式的缺失参数，完成所有并行模式实验"
+  },
+  "use_deduplication": true,
+  "historical_csvs": ["results/summary_all.csv"],
+  "experiments": [
+    {
+      "repository": "examples",
+      "model": "mnist_ff",
+      "baseline_runs": 0,
+      "runs_per_config": 5,
+      "mutate_params": ["epochs", "learning_rate", "batch_size", "seed"],
+      "mode": "parallel",
+      "background_load": {
+        "repository": "Person_reID_baseline_pytorch",
+        "model": "densenet121"
+      },
+      "comment": "超快模型，并行模式平均0.2分钟/实验，预计20个实验约0.7小时"
+    },
+    {
+      "repository": "examples",
+      "model": "mnist",
+      "baseline_runs": 0,
+      "runs_per_config": 5,
+      "mutate_params": ["batch_size"],
+      "mode": "parallel",
+      "background_load": {
+        "repository": "Person_reID_baseline_pytorch",
+        "model": "densenet121"
+      },
+      "comment": "快速模型，并行模式平均4.3分钟/实验，只变异batch_size，预计5个实验约0.4小时"
+    },
+    {
+      "repository": "examples",
+      "model": "mnist_rnn",
+      "baseline_runs": 0,
+      "runs_per_config": 5,
+      "mutate_params": ["batch_size"],
+      "mode": "parallel",
+      "background_load": {
+        "repository": "Person_reID_baseline_pytorch",
+        "model": "densenet121"
+      },
+      "comment": "快速模型，并行模式平均6.6分钟/实验，只变异batch_size（缺3个），预计5个实验约0.6小时"
+    },
+    {
+      "repository": "examples",
+      "model": "mnist_rnn",
+      "baseline_runs": 0,
+      "runs_per_config": 3,
+      "mutate_params": ["epochs"],
+      "mode": "parallel",
+      "background_load": {
+        "repository": "Person_reID_baseline_pytorch",
+        "model": "densenet121"
+      },
+      "comment": "快速模型，并行模式平均6.6分钟/实验，只变异epochs（缺1个），预计3个实验约0.3小时"
+    },
+    {
+      "repository": "examples",
+      "model": "siamese",
+      "baseline_runs": 0,
+      "runs_per_config": 5,
+      "mutate_params": ["batch_size"],
+      "mode": "parallel",
+      "background_load": {
+        "repository": "Person_reID_baseline_pytorch",
+        "model": "densenet121"
+      },
+      "comment": "快速模型，并行模式平均11.1分钟/实验，只变异batch_size，预计5个实验约0.9小时"
+    },
+    {
+      "repository": "bug-localization-by-dnn-and-rvsm",
+      "model": "default",
+      "baseline_runs": 0,
+      "runs_per_config": 5,
+      "mutate_params": ["kfold"],
+      "mode": "parallel",
+      "background_load": {
+        "repository": "Person_reID_baseline_pytorch",
+        "model": "densenet121"
+      },
+      "comment": "中速模型，并行模式平均24.9分钟/实验，只变异kfold，预计5个实验约2.1小时"
+    }
+  ]
+}
