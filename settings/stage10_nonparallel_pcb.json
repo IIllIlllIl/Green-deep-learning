@@ -14,7 +14,7 @@
   "historical_csvs": ["results/summary_all.csv"],
   "experiments": [
     {
-      "repository": "Person_reID_baseline_pytorch",
+      "repo": "Person_reID_baseline_pytorch",
       "model": "pcb",
       "baseline_runs": 0,
       "runs_per_config": 5,

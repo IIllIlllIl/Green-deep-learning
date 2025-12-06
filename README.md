@@ -2,7 +2,7 @@
 
 自动化深度学习模型训练的超参数变异与能耗性能分析框架
 
-**当前版本**: v4.6.0 (2025-12-05)
+**当前版本**: v4.7.0 (2025-12-06)
 **状态**: ✅ Production Ready
 
 ---
@@ -251,6 +251,15 @@ sudo sysctl -w kernel.perf_event_paranoid=-1
 ---
 
 ## 版本信息
+
+**v4.7.0** (2025-12-06)
+- ✅ **Per-experiment runs_per_config bug修复**: 修复配置文件读取逻辑
+  - 问题: `runner.py`第881行全局`runs_per_config`默认为1，导致仅使用每个实验配置的runs_per_config
+  - 影响: Stage7等使用per-experiment值的配置只运行1个实验而非指定的7个
+  - 修复: 在mutation、parallel、default三种模式中添加per-experiment值读取逻辑
+  - 修改文件: `mutation/runner.py` (lines 1001-1126, 三个实验模式)
+  - 测试: 创建5个测试用例全部通过 (`tests/test_runs_per_config_fix.py`)
+  - 向后兼容: 保留全局fallback机制，旧配置仍可正常运行
 
 **v4.6.0** (2025-12-05)
 - ✅ **Stage3-4执行完成**: mnist_ff剩余 + 中速模型 + VulBERTa + densenet121

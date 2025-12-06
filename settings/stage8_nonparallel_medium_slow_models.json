@@ -15,7 +15,7 @@
   "historical_csvs": ["results/summary_all.csv"],
   "experiments": [
     {
-      "repository": "VulBERTa",
+      "repo": "VulBERTa",
       "model": "mlp",
       "baseline_runs": 0,
       "runs_per_config": 7,
@@ -24,7 +24,7 @@
       "comment": "中慢速模型，平均35.7分钟/实验，预计28个实验约16.6小时"
     },
     {
-      "repository": "Person_reID_baseline_pytorch",
+      "repo": "Person_reID_baseline_pytorch",
       "model": "densenet121",
       "baseline_runs": 0,
       "runs_per_config": 5,

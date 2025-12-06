@@ -20,7 +20,7 @@
   "historical_csvs": ["results/summary_all.csv"],
   "experiments": [
     {
-      "repository": "examples",
+      "repo": "examples",
       "model": "mnist",
       "baseline_runs": 0,
       "runs_per_config": 7,
@@ -29,7 +29,7 @@
       "comment": "快速模型，平均4.0分钟/实验，预计28个实验约1.9小时"
     },
     {
-      "repository": "examples",
+      "repo": "examples",
       "model": "mnist_ff",
       "baseline_runs": 0,
       "runs_per_config": 7,
@@ -38,7 +38,7 @@
       "comment": "超快模型，平均0.3分钟/实验，预计28个实验约0.1小时"
     },
     {
-      "repository": "examples",
+      "repo": "examples",
       "model": "mnist_rnn",
       "baseline_runs": 0,
       "runs_per_config": 7,
@@ -47,7 +47,7 @@
       "comment": "快速模型，平均6.0分钟/实验，预计28个实验约2.8小时"
     },
     {
-      "repository": "examples",
+      "repo": "examples",
       "model": "siamese",
       "baseline_runs": 0,
       "runs_per_config": 7,
@@ -56,7 +56,7 @@
       "comment": "快速模型，平均9.2分钟/实验，预计28个实验约4.3小时"
     },
     {
-      "repository": "MRT-OAST",
+      "repo": "MRT-OAST",
       "model": "default",
       "baseline_runs": 0,
       "runs_per_config": 7,
@@ -65,7 +65,7 @@
       "comment": "中速模型，平均13.4分钟/实验，预计35个实验约7.8小时"
     },
     {
-      "repository": "bug-localization-by-dnn-and-rvsm",
+      "repo": "bug-localization-by-dnn-and-rvsm",
       "model": "default",
       "baseline_runs": 0,
       "runs_per_config": 7,
@@ -74,7 +74,7 @@
       "comment": "中速模型，平均21.8分钟/实验，预计28个实验约10.1小时"
     },
     {
-      "repository": "pytorch_resnet_cifar10",
+      "repo": "pytorch_resnet_cifar10",
       "model": "resnet20",
       "baseline_runs": 0,
       "runs_per_config": 6,

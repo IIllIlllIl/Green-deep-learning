@@ -15,16 +15,19 @@
   "historical_csvs": ["results/summary_all.csv"],
   "experiments": [
     {
-      "repository": "Person_reID_baseline_pytorch",
-      "model": "pcb",
-      "baseline_runs": 0,
-      "runs_per_config": 5,
-      "mutate_params": ["epochs", "learning_rate", "seed", "dropout"],
       "mode": "parallel",
-      "background_load": {
-        "repository": "Person_reID_baseline_pytorch",
-        "model": "densenet121"
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "pcb",
+        "mode": "mutation",
+        "mutate": ["epochs", "learning_rate", "seed", "dropout"]
       },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "densenet121",
+        "hyperparameters": {}
+      },
+      "runs_per_config": 5,
       "comment": "超慢速模型，并行模式平均69.3分钟/实验，预计20个实验约23.1小时"
     }
   ]

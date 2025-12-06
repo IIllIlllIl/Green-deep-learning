@@ -1003,6 +1003,10 @@ class MutationRunner:
                         mutate_params = foreground_config.get("mutate", ["all"])
                         print(f"   Mutating foreground parameters: {mutate_params}")
 
+                        # Get per-experiment runs_per_config, fall back to global if not specified
+                        exp_runs_per_config = foreground_config.get("runs_per_config", runs_per_config)
+                        print(f"   Runs for this configuration: {exp_runs_per_config}")
+
                         # Get foreground repository configuration
                         fg_repo_config = self.config["models"][fg_repo]
                         fg_supported_params = fg_repo_config["supported_hyperparams"]
@@ -1010,7 +1014,7 @@ class MutationRunner:
                         fg_mutations = generate_mutations(
                             supported_params=fg_supported_params,
                             mutate_params=mutate_params,
-                            num_mutations=runs_per_config,
+                            num_mutations=exp_runs_per_config,  # Use per-experiment value
                             random_seed=self.random_seed,
                             logger=self.logger,
                             existing_mutations=dedup_set,  # Inter-round deduplication
@@ -1018,13 +1022,15 @@ class MutationRunner:
                         )
                     else:
                         # Use default hyperparameters
+                        exp_runs_per_config = foreground_config.get("runs_per_config", runs_per_config)
+                        print(f"   Runs for this configuration: {exp_runs_per_config}")
                         fg_hyperparams = foreground_config.get("hyperparameters", {})
-                        fg_mutations = [fg_hyperparams] * runs_per_config
+                        fg_mutations = [fg_hyperparams] * exp_runs_per_config
 
                     # Run each parallel experiment
                     for run, fg_mutation in enumerate(fg_mutations, 1):
                         print(f"\n{'─' * 80}")
-                        print(f"PARALLEL RUN {run}/{runs_per_config}")
+                        print(f"PARALLEL RUN {run}/{exp_runs_per_config}")
                         print(f"{'─' * 80}")
 
                         result = self.run_parallel_experiment(
@@ -1039,7 +1045,7 @@ class MutationRunner:
 
                         # CRITICAL: Stop background training and sleep to allow GPU cooling
                         # This ensures 60 seconds of GPU idle time between runs
-                        if run < runs_per_config:
+                        if run < exp_runs_per_config:
                             print(f"\nGPU Cooling Period:")
                             print(f"   All training stopped. GPU will cool down during {self.RUN_SLEEP_SECONDS}s idle time.")
                             print(f"Sleeping {self.RUN_SLEEP_SECONDS} seconds for GPU cooling...")
@@ -1064,11 +1070,15 @@ class MutationRunner:
                     hyperparams = exp.get("hyperparameters", {})
                     print(f"Using default hyperparameters: {hyperparams}")
 
+                    # Get per-experiment runs_per_config, fall back to global if not specified
+                    exp_runs_per_config = exp.get("runs_per_config", runs_per_config)
+                    print(f"Runs for this configuration: {exp_runs_per_config}")
+
                     # Run with specified hyperparameters (no mutation)
-                    for run in range(runs_per_config):
-                        if runs_per_config > 1:
+                    for run in range(exp_runs_per_config):
+                        if exp_runs_per_config > 1:
                             print(f"\n{'─' * 80}")
-                            print(f"RUN {run + 1}/{runs_per_config}")
+                            print(f"RUN {run + 1}/{exp_runs_per_config}")
                             print(f"{'─' * 80}")
 
                         result = self.run_experiment(repo, model, hyperparams, max_retries)
@@ -1078,7 +1088,7 @@ class MutationRunner:
                         self._cleanup_gpu_memory(verbose=True)
 
                         # Sleep between runs
-                        if run < runs_per_config - 1:
+                        if run < exp_runs_per_config - 1:
                             print(f"\nSleeping {self.RUN_SLEEP_SECONDS} seconds to prevent energy interference...")
                             time.sleep(self.RUN_SLEEP_SECONDS)
                 else:
@@ -1100,6 +1110,10 @@ class MutationRunner:
                     mutate_params = exp.get("mutate", ["all"])
                     print(f"Mutating parameters: {mutate_params}")
 
+                    # Get per-experiment runs_per_config, fall back to global if not specified
+                    exp_runs_per_config = exp.get("runs_per_config", runs_per_config)
+                    print(f"Runs for this configuration: {exp_runs_per_config}")
+
                     # Get repository configuration
                     repo_config = self.config["models"][repo]
                     supported_params = repo_config["supported_hyperparams"]
@@ -1108,7 +1122,7 @@ class MutationRunner:
                     mutations = generate_mutations(
                         supported_params=supported_params,
                         mutate_params=mutate_params,
-                        num_mutations=runs_per_config,
+                        num_mutations=exp_runs_per_config,  # Use per-experiment value
                         random_seed=self.random_seed,
                         logger=self.logger,
                         existing_mutations=dedup_set,  # Inter-round deduplication
