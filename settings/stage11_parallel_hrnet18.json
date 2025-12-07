@@ -1,6 +1,6 @@
 {
-  "comment": "Stage11: 并行模式hrnet18补充 - 需补充4参数各3个唯一值",
-  "version": "4.6.0",
+  "comment": "Stage11: 并行模式hrnet18补充 - 需补充4参数各3个唯一值 [已修复: 拆分多参数配置项]",
+  "version": "4.7.1-fixed",
   "created": "2025-12-05",
   "estimated_duration_hours": 28.6,
   "estimated_experiments": 20,
@@ -12,7 +12,9 @@
     "goal": "补充hrnet18并行模式，每个参数达到5个唯一值（需补充3个）"
   },
   "use_deduplication": true,
-  "historical_csvs": ["results/summary_all.csv"],
+  "historical_csvs": [
+    "results/summary_all.csv"
+  ],
   "experiments": [
     {
       "mode": "parallel",
@@ -20,7 +22,67 @@
         "repo": "Person_reID_baseline_pytorch",
         "model": "hrnet18",
         "mode": "mutation",
-        "mutate": ["epochs", "learning_rate", "seed", "dropout"]
+        "mutate": [
+          "epochs"
+        ],
+        "comment": "仅变异epochs参数"
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "densenet121",
+        "hyperparameters": {}
+      },
+      "runs_per_config": 5,
+      "comment": "超慢速模型，并行模式平均85.9分钟/实验，预计20个实验约28.6小时"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "hrnet18",
+        "mode": "mutation",
+        "mutate": [
+          "learning_rate"
+        ],
+        "comment": "仅变异learning_rate参数"
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "densenet121",
+        "hyperparameters": {}
+      },
+      "runs_per_config": 5,
+      "comment": "超慢速模型，并行模式平均85.9分钟/实验，预计20个实验约28.6小时"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "hrnet18",
+        "mode": "mutation",
+        "mutate": [
+          "seed"
+        ],
+        "comment": "仅变异seed参数"
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "densenet121",
+        "hyperparameters": {}
+      },
+      "runs_per_config": 5,
+      "comment": "超慢速模型，并行模式平均85.9分钟/实验，预计20个实验约28.6小时"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "hrnet18",
+        "mode": "mutation",
+        "mutate": [
+          "dropout"
+        ],
+        "comment": "仅变异dropout参数"
       },
       "background": {
         "repo": "Person_reID_baseline_pytorch",

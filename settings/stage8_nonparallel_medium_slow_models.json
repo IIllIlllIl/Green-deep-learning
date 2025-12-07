@@ -1,6 +1,6 @@
 {
-  "comment": "Stage8: 非并行模式中慢速模型 - VulBERTa/mlp + densenet121",
-  "version": "4.6.0",
+  "comment": "Stage8: 非并行模式中慢速模型 - VulBERTa/mlp + densenet121 [已修复: 拆分多参数配置项]",
+  "version": "4.7.1-fixed",
   "created": "2025-12-05",
   "estimated_duration_hours": 35.1,
   "estimated_experiments": 48,
@@ -12,25 +12,97 @@
     "goal": "完成非并行模式下中慢速模型的所有参数，每个参数获得5个唯一值"
   },
   "use_deduplication": true,
-  "historical_csvs": ["results/summary_all.csv"],
+  "historical_csvs": [
+    "results/summary_all.csv"
+  ],
   "experiments": [
     {
       "repo": "VulBERTa",
       "model": "mlp",
       "baseline_runs": 0,
       "runs_per_config": 7,
-      "mutate_params": ["epochs", "learning_rate", "seed", "weight_decay"],
+      "mutate_params": [
+        "epochs"
+      ],
       "mode": "nonparallel",
-      "comment": "中慢速模型，平均35.7分钟/实验，预计28个实验约16.6小时"
+      "comment": "仅变异epochs参数"
+    },
+    {
+      "repo": "VulBERTa",
+      "model": "mlp",
+      "baseline_runs": 0,
+      "runs_per_config": 7,
+      "mutate_params": [
+        "learning_rate"
+      ],
+      "mode": "nonparallel",
+      "comment": "仅变异learning_rate参数"
+    },
+    {
+      "repo": "VulBERTa",
+      "model": "mlp",
+      "baseline_runs": 0,
+      "runs_per_config": 7,
+      "mutate_params": [
+        "seed"
+      ],
+      "mode": "nonparallel",
+      "comment": "仅变异seed参数"
+    },
+    {
+      "repo": "VulBERTa",
+      "model": "mlp",
+      "baseline_runs": 0,
+      "runs_per_config": 7,
+      "mutate_params": [
+        "weight_decay"
+      ],
+      "mode": "nonparallel",
+      "comment": "仅变异weight_decay参数"
     },
     {
       "repo": "Person_reID_baseline_pytorch",
       "model": "densenet121",
       "baseline_runs": 0,
       "runs_per_config": 5,
-      "mutate_params": ["epochs", "learning_rate", "seed", "dropout"],
+      "mutate_params": [
+        "epochs"
+      ],
       "mode": "nonparallel",
-      "comment": "慢速模型，平均55.5分钟/实验，预计20个实验约18.5小时"
+      "comment": "仅变异epochs参数"
+    },
+    {
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "densenet121",
+      "baseline_runs": 0,
+      "runs_per_config": 5,
+      "mutate_params": [
+        "learning_rate"
+      ],
+      "mode": "nonparallel",
+      "comment": "仅变异learning_rate参数"
+    },
+    {
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "densenet121",
+      "baseline_runs": 0,
+      "runs_per_config": 5,
+      "mutate_params": [
+        "seed"
+      ],
+      "mode": "nonparallel",
+      "comment": "仅变异seed参数"
+    },
+    {
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "densenet121",
+      "baseline_runs": 0,
+      "runs_per_config": 5,
+      "mutate_params": [
+        "dropout"
+      ],
+      "mode": "nonparallel",
+      "comment": "仅变异dropout参数"
     }
   ]
 }

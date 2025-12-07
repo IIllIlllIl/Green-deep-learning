@@ -1,6 +1,6 @@
 {
-  "comment": "Stage13: 并行模式快速模型补充 - mnist_ff全参数 + 其他模型个别参数 [已修复: 拆分多参数配置项]",
-  "version": "4.7.1-fixed",
+  "comment": "Stage13: 并行模式快速模型补充 - mnist_ff全参数 + 其他模型个别参数",
+  "version": "4.6.0",
   "created": "2025-12-05",
   "estimated_duration_hours": 5.0,
   "estimated_experiments": 43,
@@ -15,9 +15,7 @@
     "goal": "补充快速模型并行模式的缺失参数，完成所有并行模式实验"
   },
   "use_deduplication": true,
-  "historical_csvs": [
-    "results/summary_all.csv"
-  ],
+  "historical_csvs": ["results/summary_all.csv"],
   "experiments": [
     {
       "mode": "parallel",
@@ -25,67 +23,7 @@
         "repo": "examples",
         "model": "mnist_ff",
         "mode": "mutation",
-        "mutate": [
-          "epochs"
-        ],
-        "comment": "仅变异epochs参数"
-      },
-      "background": {
-        "repo": "Person_reID_baseline_pytorch",
-        "model": "densenet121",
-        "hyperparameters": {}
-      },
-      "runs_per_config": 5,
-      "comment": "超快模型，并行模式平均0.2分钟/实验，预计20个实验约0.7小时"
-    },
-    {
-      "mode": "parallel",
-      "foreground": {
-        "repo": "examples",
-        "model": "mnist_ff",
-        "mode": "mutation",
-        "mutate": [
-          "learning_rate"
-        ],
-        "comment": "仅变异learning_rate参数"
-      },
-      "background": {
-        "repo": "Person_reID_baseline_pytorch",
-        "model": "densenet121",
-        "hyperparameters": {}
-      },
-      "runs_per_config": 5,
-      "comment": "超快模型，并行模式平均0.2分钟/实验，预计20个实验约0.7小时"
-    },
-    {
-      "mode": "parallel",
-      "foreground": {
-        "repo": "examples",
-        "model": "mnist_ff",
-        "mode": "mutation",
-        "mutate": [
-          "batch_size"
-        ],
-        "comment": "仅变异batch_size参数"
-      },
-      "background": {
-        "repo": "Person_reID_baseline_pytorch",
-        "model": "densenet121",
-        "hyperparameters": {}
-      },
-      "runs_per_config": 5,
-      "comment": "超快模型，并行模式平均0.2分钟/实验，预计20个实验约0.7小时"
-    },
-    {
-      "mode": "parallel",
-      "foreground": {
-        "repo": "examples",
-        "model": "mnist_ff",
-        "mode": "mutation",
-        "mutate": [
-          "seed"
-        ],
-        "comment": "仅变异seed参数"
+        "mutate": ["epochs", "learning_rate", "batch_size", "seed"]
       },
       "background": {
         "repo": "Person_reID_baseline_pytorch",
@@ -101,9 +39,7 @@
         "repo": "examples",
         "model": "mnist",
         "mode": "mutation",
-        "mutate": [
-          "batch_size"
-        ]
+        "mutate": ["batch_size"]
       },
       "background": {
         "repo": "Person_reID_baseline_pytorch",
@@ -119,9 +55,7 @@
         "repo": "examples",
         "model": "mnist_rnn",
         "mode": "mutation",
-        "mutate": [
-          "batch_size"
-        ]
+        "mutate": ["batch_size"]
       },
       "background": {
         "repo": "Person_reID_baseline_pytorch",
@@ -137,9 +71,7 @@
         "repo": "examples",
         "model": "mnist_rnn",
         "mode": "mutation",
-        "mutate": [
-          "epochs"
-        ]
+        "mutate": ["epochs"]
       },
       "background": {
         "repo": "Person_reID_baseline_pytorch",
@@ -155,9 +87,7 @@
         "repo": "examples",
         "model": "siamese",
         "mode": "mutation",
-        "mutate": [
-          "batch_size"
-        ]
+        "mutate": ["batch_size"]
       },
       "background": {
         "repo": "Person_reID_baseline_pytorch",
@@ -173,9 +103,7 @@
         "repo": "bug-localization-by-dnn-and-rvsm",
         "model": "default",
         "mode": "mutation",
-        "mutate": [
-          "kfold"
-        ]
+        "mutate": ["kfold"]
       },
       "background": {
         "repo": "Person_reID_baseline_pytorch",

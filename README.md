@@ -2,7 +2,7 @@
 
 自动化深度学习模型训练的超参数变异与能耗性能分析框架
 
-**当前版本**: v4.7.0 (2025-12-06)
+**当前版本**: v4.7.1 (2025-12-07)
 **状态**: ✅ Production Ready
 
 ---
@@ -62,23 +62,23 @@ sudo -E python3 mutation.py -ec settings/11_models_sequential_and_parallel_train
 ### 4. 分阶段实验（大规模实验推荐）
 
 ```bash
-# 阶段1: 非并行补全 (已完成 ✓)
+# 阶段1-4: 已完成 ✓
 # sudo -E python3 mutation.py -ec settings/stage1_nonparallel_completion.json
-
-# 阶段2: 非并行补充 + 快速模型并行 (已完成 ✓)
 # sudo -E python3 mutation.py -ec settings/stage2_optimized_nonparallel_and_fast_parallel.json
-
-# 阶段3-4合并: mnist_ff剩余 + 中速模型 + VulBERTa + densenet121 (已完成 ✓)
 # sudo -E python3 mutation.py -ec settings/stage3_4_merged_optimized_parallel.json
 
-# 阶段7: 非并行快速模型 (38.3小时，199个实验)
-sudo -E python3 mutation.py -ec settings/stage7_nonparallel_fast_models.json
+# 阶段7-8: 已完成 ✓ (2025-12-06~07)
+# sudo -E python3 mutation.py -ec settings/stage7_nonparallel_fast_models.json
+# sudo -E python3 mutation.py -ec settings/stage8_nonparallel_medium_slow_models.json
 
-# 阶段8: 非并行中慢速模型 (35.1小时，48个实验)
-sudo -E python3 mutation.py -ec settings/stage8_nonparallel_medium_slow_models.json
+# 阶段13: 最终补充 (推荐优先执行, 12.5h, 90实验)
+sudo -E python3 mutation.py -ec settings/stage13_merged_final_supplement.json
 
-# 阶段9-13: 剩余非并行+并行模式补充 (120小时，103个实验)
-# 详见: docs/settings_reports/STAGE7_13_EXECUTION_PLAN.md
+# 阶段11-12: 并行hrnet18/pcb补充 (51.7h, 40实验)
+sudo -E python3 mutation.py -ec settings/stage11_parallel_hrnet18.json
+sudo -E python3 mutation.py -ec settings/stage12_parallel_pcb.json
+
+# 注: Stage9-10已归档（非并行hrnet18/pcb已达标，节省48.7小时）
 ```
 
 ---
@@ -188,20 +188,48 @@ sudo sysctl -w kernel.perf_event_paranoid=-1
 
 #### 分阶段实验配置（推荐用于大规模实验）⭐
 
-**分阶段配置** (v3.0 - 模式区分优化):
+**分阶段配置** (v4.7.1 - 配置修复与优化):
 | 配置文件 | 说明 | 预计时间 | 实验数 | 状态 |
 |---------|------|---------|--------|------|
 | `stage1_nonparallel_completion.json` | 阶段1: 非并行补全 | 9h | 12 | ✅ 已完成 |
 | `stage2_optimized_nonparallel_and_fast_parallel.json` | 阶段2: 非并行补充 + 快速模型并行 | 7.3h | 25 | ✅ 已完成 |
 | `stage3_4_merged_optimized_parallel.json` | 阶段3-4: 中速模型 + VulBERTa + densenet121 | 12.2h | 25 | ✅ 已完成 |
-| `stage7_nonparallel_fast_models.json` | 阶段7: 非并行快速模型 | 38.3h | 199 | ⏳ 待执行 |
-| `stage8_nonparallel_medium_slow_models.json` | 阶段8: 非并行中慢速模型 | 35.1h | 48 | ⏳ 待执行 |
-| `stage9_nonparallel_hrnet18.json` | 阶段9: 非并行hrnet18 | 25.0h | 20 | ⏳ 待执行 |
-| `stage10_nonparallel_pcb.json` | 阶段10: 非并行pcb | 23.7h | 20 | ⏳ 待执行 |
+| `stage7_nonparallel_fast_models.json` | 阶段7: 非并行快速模型 | 0.7h | 7 | ✅ 已完成 |
+| `stage8_nonparallel_medium_slow_models.json` | 阶段8: 非并行中慢速模型 | ~13h | 12 | ✅ 已完成 |
 | `stage11_parallel_hrnet18.json` | 阶段11: 并行hrnet18补充 | 28.6h | 20 | ⏳ 待执行 |
 | `stage12_parallel_pcb.json` | 阶段12: 并行pcb补充 | 23.1h | 20 | ⏳ 待执行 |
-| `stage13_parallel_fast_models_supplement.json` | 阶段13: 并行快速模型补充 | 5.0h | 43 | ⏳ 待执行 |
-| **总计** | **10个阶段** | **207.3h** | **432** | **62/432完成** |
+| `stage13_merged_final_supplement.json` | 阶段13: 最终补充 **(合并+VulBERTa/cnn)** | 12.5h | 90 | ⏳ 推荐优先 |
+| **总计** | **8个阶段** | **106h** | **211** | **81/211完成** |
+| ~~stage9/10~~ | ~~非并行hrnet18/pcb~~ | ~~48.7h~~ | ~~40~~ | 🗑️ 已归档（冗余） |
+
+**v4.7.1修复与优化** (2025-12-07):
+- 🔴 **严重Bug修复**: Stage7-13配置文件存在多参数混合变异问题
+  - 问题: 配置使用`mutate_params=[多个参数]`导致混合变异而非单参数独立运行
+  - 影响: 预期370个实验，实际只会运行108个（缺失262个，70.8%）
+  - 修复: 自动拆分为单参数配置项（19项 → 62项）
+  - 工具: `scripts/fix_stage_configs.py`
+- ✅ **Stage7-8执行完成**:
+  - Stage7: 实际0.7小时（预期38.3h），去重率96.5%，7个新实验
+  - Stage8: 实际~13小时（预期35.1h），12个新实验
+  - 总实验数: 400→419（新增19个实验）
+- ✅ **Stage13配置合并**:
+  - 合并: Stage13 + Stage14 + VulBERTa/cnn完整覆盖
+  - 发现: VulBERTa/cnn模型在所有阶段中完全遗漏（0个实验）
+  - 新增: 8个VulBERTa/cnn配置项（非并行4个+并行4个）
+  - 配置: `stage13_merged_final_supplement.json` (18项, 90实验, 12.5h)
+- ✅ **Stage9-10冗余移除**:
+  - Stage9: hrnet18非并行全部达标（5-6个唯一值），已归档
+  - Stage10: pcb非并行全部达标（5-6个唯一值），已归档
+  - 节省时间: 48.7小时，节省实验: 40个
+- 📊 **最终实验计划**:
+  - 剩余3个必需阶段: Stage11, Stage12, Stage13
+  - 预计时间: 64.2小时（去重后可能<20小时）
+  - 预计实验: 130个
+  - 完成后: 100%覆盖（90/90参数-模式组合）
+- 📚 **文档完善**:
+  - [JSON配置最佳实践](docs/JSON_CONFIG_BEST_PRACTICES.md) - 防止配置错误 ⭐⭐⭐
+  - [Stage13-14合并报告](docs/results_reports/STAGE13_14_MERGE_AND_COMPLETION_REPORT.md) ⭐⭐
+  - [Stage9-13优化报告](docs/results_reports/STAGE9_13_OPTIMIZATION_REPORT.md) - 冗余分析 ⭐⭐
 
 **v3.0优化重点** (2025-12-05):
 - ✅ **模式区分**: 修复去重机制，正确区分并行/非并行模式
@@ -212,9 +240,13 @@ sudo sysctl -w kernel.perf_event_paranoid=-1
 **详细执行计划**: [docs/settings_reports/STAGE7_13_EXECUTION_PLAN.md](docs/settings_reports/STAGE7_13_EXECUTION_PLAN.md)
 **需求分析报告**: [docs/results_reports/EXPERIMENT_REQUIREMENT_ANALYSIS.md](docs/results_reports/EXPERIMENT_REQUIREMENT_ANALYSIS.md)
 
-**归档配置** (`settings/archived/`):
-- Stage5-6配置已归档（被Stage11-12替代）
-- 旧版v1.0-v2.0配置已归档
+**归档配置** (`settings/archived/` 和备份文件):
+- **Stage5-6**: 已归档（被Stage11-12替代）
+- **Stage9-10**: 已归档到`redundant_stages_20251207/`（参数全部达标，节省48.7小时）
+- **旧版配置**: v1.0-v2.0配置已归档
+- **Stage13/14原始**: 已备份（`.bak_20251207`）：
+  - `stage13_parallel_fast_models_supplement.json.bak_20251207`
+  - `stage14_stage7_8_supplement.json.bak_20251207`
 
 ### 配置格式
 
@@ -251,6 +283,24 @@ sudo sysctl -w kernel.perf_event_paranoid=-1
 ---
 
 ## 版本信息
+
+**v4.7.1** (2025-12-07)
+- 🔴 **严重配置Bug修复**: Stage7-13配置文件多参数混合变异问题
+  - 问题: 配置使用`mutate_params=[多个参数]`导致生成混合变异实验，而非每个参数独立运行
+  - 根因: 对`runs_per_config`和`mutate_params`语义理解错误
+  - 影响: 预期370个实验，实际只会运行108个（缺失262个，70.8%）
+  - 修复: 使用`scripts/fix_stage_configs.py`自动拆分为单参数配置（19项 → 62项）
+  - 详细分析: [Stage7-13配置Bug分析](docs/results_reports/STAGE7_13_CONFIG_BUG_ANALYSIS.md)
+- ✅ **Stage7-8执行情况分析**:
+  - Stage7: 虽然配置错误但去重率96.5%，大部分参数已达标（历史实验覆盖）
+  - Stage8: 所有参数已超标（≥10个唯一值），无需补充
+  - Stage14: 新增补充配置，仅需7个实验（2.5小时）补充MRT-OAST/default epochs
+  - 执行报告: [Stage7-8修复执行报告](docs/results_reports/STAGE7_8_FIX_EXECUTION_REPORT.md)
+- 📚 **配置最佳实践文档** (新增):
+  - 文档: [JSON配置最佳实践](docs/JSON_CONFIG_BEST_PRACTICES.md) ⭐⭐⭐
+  - 内容: 核心概念、常见错误、正确示例、验证清单、故障排查
+  - 重点: "单参数原则" - 每个配置项只变异一个参数
+  - 示例: 正确vs错误配置对比，参考Stage2作为最佳模板
 
 **v4.7.0** (2025-12-06)
 - ✅ **Per-experiment runs_per_config bug修复**: 修复配置文件读取逻辑
@@ -332,4 +382,4 @@ sudo sysctl -w kernel.perf_event_paranoid=-1
 
 ---
 
-**维护者**: Green | **状态**: ✅ Production Ready | **更新**: 2025-12-05
+**维护者**: Green | **状态**: ✅ Production Ready | **更新**: 2025-12-07

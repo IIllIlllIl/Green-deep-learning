@@ -1,6 +1,6 @@
 {
-  "comment": "Stage7: 非并行模式快速和中速模型 - 完成examples全系列 + MRT-OAST + bug-loc + resnet20",
-  "version": "4.6.0",
+  "comment": "Stage7: 非并行模式快速和中速模型 - 完成examples全系列 + MRT-OAST + bug-loc + resnet20 [已修复: 拆分多参数配置项]",
+  "version": "4.7.1-fixed",
   "created": "2025-12-05",
   "estimated_duration_hours": 38.3,
   "estimated_experiments": 199,
@@ -17,70 +17,328 @@
     "goal": "完成非并行模式下快速和中速模型的所有参数，每个参数获得5个唯一值"
   },
   "use_deduplication": true,
-  "historical_csvs": ["results/summary_all.csv"],
+  "historical_csvs": [
+    "results/summary_all.csv"
+  ],
   "experiments": [
     {
       "repo": "examples",
       "model": "mnist",
       "baseline_runs": 0,
       "runs_per_config": 7,
-      "mutate_params": ["epochs", "learning_rate", "batch_size", "seed"],
+      "mutate_params": [
+        "epochs"
+      ],
       "mode": "nonparallel",
-      "comment": "快速模型，平均4.0分钟/实验，预计28个实验约1.9小时"
+      "comment": "仅变异epochs参数"
+    },
+    {
+      "repo": "examples",
+      "model": "mnist",
+      "baseline_runs": 0,
+      "runs_per_config": 7,
+      "mutate_params": [
+        "learning_rate"
+      ],
+      "mode": "nonparallel",
+      "comment": "仅变异learning_rate参数"
+    },
+    {
+      "repo": "examples",
+      "model": "mnist",
+      "baseline_runs": 0,
+      "runs_per_config": 7,
+      "mutate_params": [
+        "batch_size"
+      ],
+      "mode": "nonparallel",
+      "comment": "仅变异batch_size参数"
+    },
+    {
+      "repo": "examples",
+      "model": "mnist",
+      "baseline_runs": 0,
+      "runs_per_config": 7,
+      "mutate_params": [
+        "seed"
+      ],
+      "mode": "nonparallel",
+      "comment": "仅变异seed参数"
     },
     {
       "repo": "examples",
       "model": "mnist_ff",
       "baseline_runs": 0,
       "runs_per_config": 7,
-      "mutate_params": ["epochs", "learning_rate", "batch_size", "seed"],
+      "mutate_params": [
+        "epochs"
+      ],
       "mode": "nonparallel",
-      "comment": "超快模型，平均0.3分钟/实验，预计28个实验约0.1小时"
+      "comment": "仅变异epochs参数"
+    },
+    {
+      "repo": "examples",
+      "model": "mnist_ff",
+      "baseline_runs": 0,
+      "runs_per_config": 7,
+      "mutate_params": [
+        "learning_rate"
+      ],
+      "mode": "nonparallel",
+      "comment": "仅变异learning_rate参数"
+    },
+    {
+      "repo": "examples",
+      "model": "mnist_ff",
+      "baseline_runs": 0,
+      "runs_per_config": 7,
+      "mutate_params": [
+        "batch_size"
+      ],
+      "mode": "nonparallel",
+      "comment": "仅变异batch_size参数"
+    },
+    {
+      "repo": "examples",
+      "model": "mnist_ff",
+      "baseline_runs": 0,
+      "runs_per_config": 7,
+      "mutate_params": [
+        "seed"
+      ],
+      "mode": "nonparallel",
+      "comment": "仅变异seed参数"
     },
     {
       "repo": "examples",
       "model": "mnist_rnn",
       "baseline_runs": 0,
       "runs_per_config": 7,
-      "mutate_params": ["epochs", "learning_rate", "batch_size", "seed"],
+      "mutate_params": [
+        "epochs"
+      ],
       "mode": "nonparallel",
-      "comment": "快速模型，平均6.0分钟/实验，预计28个实验约2.8小时"
+      "comment": "仅变异epochs参数"
+    },
+    {
+      "repo": "examples",
+      "model": "mnist_rnn",
+      "baseline_runs": 0,
+      "runs_per_config": 7,
+      "mutate_params": [
+        "learning_rate"
+      ],
+      "mode": "nonparallel",
+      "comment": "仅变异learning_rate参数"
+    },
+    {
+      "repo": "examples",
+      "model": "mnist_rnn",
+      "baseline_runs": 0,
+      "runs_per_config": 7,
+      "mutate_params": [
+        "batch_size"
+      ],
+      "mode": "nonparallel",
+      "comment": "仅变异batch_size参数"
+    },
+    {
+      "repo": "examples",
+      "model": "mnist_rnn",
+      "baseline_runs": 0,
+      "runs_per_config": 7,
+      "mutate_params": [
+        "seed"
+      ],
+      "mode": "nonparallel",
+      "comment": "仅变异seed参数"
     },
     {
       "repo": "examples",
       "model": "siamese",
       "baseline_runs": 0,
       "runs_per_config": 7,
-      "mutate_params": ["epochs", "learning_rate", "batch_size", "seed"],
+      "mutate_params": [
+        "epochs"
+      ],
       "mode": "nonparallel",
-      "comment": "快速模型，平均9.2分钟/实验，预计28个实验约4.3小时"
+      "comment": "仅变异epochs参数"
+    },
+    {
+      "repo": "examples",
+      "model": "siamese",
+      "baseline_runs": 0,
+      "runs_per_config": 7,
+      "mutate_params": [
+        "learning_rate"
+      ],
+      "mode": "nonparallel",
+      "comment": "仅变异learning_rate参数"
+    },
+    {
+      "repo": "examples",
+      "model": "siamese",
+      "baseline_runs": 0,
+      "runs_per_config": 7,
+      "mutate_params": [
+        "batch_size"
+      ],
+      "mode": "nonparallel",
+      "comment": "仅变异batch_size参数"
+    },
+    {
+      "repo": "examples",
+      "model": "siamese",
+      "baseline_runs": 0,
+      "runs_per_config": 7,
+      "mutate_params": [
+        "seed"
+      ],
+      "mode": "nonparallel",
+      "comment": "仅变异seed参数"
     },
     {
       "repo": "MRT-OAST",
       "model": "default",
       "baseline_runs": 0,
       "runs_per_config": 7,
-      "mutate_params": ["epochs", "learning_rate", "seed", "dropout", "weight_decay"],
+      "mutate_params": [
+        "epochs"
+      ],
       "mode": "nonparallel",
-      "comment": "中速模型，平均13.4分钟/实验，预计35个实验约7.8小时"
+      "comment": "仅变异epochs参数"
+    },
+    {
+      "repo": "MRT-OAST",
+      "model": "default",
+      "baseline_runs": 0,
+      "runs_per_config": 7,
+      "mutate_params": [
+        "learning_rate"
+      ],
+      "mode": "nonparallel",
+      "comment": "仅变异learning_rate参数"
+    },
+    {
+      "repo": "MRT-OAST",
+      "model": "default",
+      "baseline_runs": 0,
+      "runs_per_config": 7,
+      "mutate_params": [
+        "seed"
+      ],
+      "mode": "nonparallel",
+      "comment": "仅变异seed参数"
+    },
+    {
+      "repo": "MRT-OAST",
+      "model": "default",
+      "baseline_runs": 0,
+      "runs_per_config": 7,
+      "mutate_params": [
+        "dropout"
+      ],
+      "mode": "nonparallel",
+      "comment": "仅变异dropout参数"
+    },
+    {
+      "repo": "MRT-OAST",
+      "model": "default",
+      "baseline_runs": 0,
+      "runs_per_config": 7,
+      "mutate_params": [
+        "weight_decay"
+      ],
+      "mode": "nonparallel",
+      "comment": "仅变异weight_decay参数"
     },
     {
       "repo": "bug-localization-by-dnn-and-rvsm",
       "model": "default",
       "baseline_runs": 0,
       "runs_per_config": 7,
-      "mutate_params": ["max_iter", "kfold", "alpha", "seed"],
+      "mutate_params": [
+        "max_iter"
+      ],
       "mode": "nonparallel",
-      "comment": "中速模型，平均21.8分钟/实验，预计28个实验约10.1小时"
+      "comment": "仅变异max_iter参数"
+    },
+    {
+      "repo": "bug-localization-by-dnn-and-rvsm",
+      "model": "default",
+      "baseline_runs": 0,
+      "runs_per_config": 7,
+      "mutate_params": [
+        "kfold"
+      ],
+      "mode": "nonparallel",
+      "comment": "仅变异kfold参数"
+    },
+    {
+      "repo": "bug-localization-by-dnn-and-rvsm",
+      "model": "default",
+      "baseline_runs": 0,
+      "runs_per_config": 7,
+      "mutate_params": [
+        "alpha"
+      ],
+      "mode": "nonparallel",
+      "comment": "仅变异alpha参数"
+    },
+    {
+      "repo": "bug-localization-by-dnn-and-rvsm",
+      "model": "default",
+      "baseline_runs": 0,
+      "runs_per_config": 7,
+      "mutate_params": [
+        "seed"
+      ],
+      "mode": "nonparallel",
+      "comment": "仅变异seed参数"
     },
     {
       "repo": "pytorch_resnet_cifar10",
       "model": "resnet20",
       "baseline_runs": 0,
       "runs_per_config": 6,
-      "mutate_params": ["epochs", "learning_rate", "seed", "weight_decay"],
+      "mutate_params": [
+        "epochs"
+      ],
       "mode": "nonparallel",
-      "comment": "中速模型，平均28.4分钟/实验，预计24个实验约11.3小时"
+      "comment": "仅变异epochs参数"
+    },
+    {
+      "repo": "pytorch_resnet_cifar10",
+      "model": "resnet20",
+      "baseline_runs": 0,
+      "runs_per_config": 6,
+      "mutate_params": [
+        "learning_rate"
+      ],
+      "mode": "nonparallel",
+      "comment": "仅变异learning_rate参数"
+    },
+    {
+      "repo": "pytorch_resnet_cifar10",
+      "model": "resnet20",
+      "baseline_runs": 0,
+      "runs_per_config": 6,
+      "mutate_params": [
+        "seed"
+      ],
+      "mode": "nonparallel",
+      "comment": "仅变异seed参数"
+    },
+    {
+      "repo": "pytorch_resnet_cifar10",
+      "model": "resnet20",
+      "baseline_runs": 0,
+      "runs_per_config": 6,
+      "mutate_params": [
+        "weight_decay"
+      ],
+      "mode": "nonparallel",
+      "comment": "仅变异weight_decay参数"
     }
   ]
 }

@@ -1,0 +1,34 @@
+{
+  "comment": "Stage12: 并行模式pcb补充 - 需补充4参数各3个唯一值",
+  "version": "4.6.0",
+  "created": "2025-12-05",
+  "estimated_duration_hours": 23.1,
+  "estimated_experiments": 20,
+  "target_completion": {
+    "parameters": [
+      "Person_reID_baseline_pytorch/pcb并行: 4参数 × 5次"
+    ],
+    "current_status": "dropout(2/5), epochs(2/5), learning_rate(2/5), seed(2/5)",
+    "goal": "补充pcb并行模式，每个参数达到5个唯一值（需补充3个）"
+  },
+  "use_deduplication": true,
+  "historical_csvs": ["results/summary_all.csv"],
+  "experiments": [
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "pcb",
+        "mode": "mutation",
+        "mutate": ["epochs", "learning_rate", "seed", "dropout"]
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "densenet121",
+        "hyperparameters": {}
+      },
+      "runs_per_config": 5,
+      "comment": "超慢速模型，并行模式平均69.3分钟/实验，预计20个实验约23.1小时"
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 # Claude 助手指南 - Mutation-Based Training Energy Profiler
 
-**项目版本**: v4.7.0 (2025-12-06)
-**最后更新**: 2025-12-06
+**项目版本**: v4.7.1 (2025-12-07)
+**最后更新**: 2025-12-07
 **状态**: ✅ Production Ready
 
 ---
@@ -21,16 +21,24 @@
 - ✅ **参数精确优化** - 每个参数使用精确的runs_per_config值
 
 ### 当前状态
-- **实验总数**: 388个（results/summary_all.csv）
-- **完成度**: Stage1-4, Stage7已完成（69/432个分阶段实验完成，16.0%）
-- **参数-模式组合**: Stage7目标模型已全部达标
-  - 非并行模式: Stage7涉及的7个模型已全部达到5+个唯一值
-  - 并行模式: 28/45 (62.2% - 部分需要补充)
-- **剩余阶段**: Stage8-13配置就绪，准备执行
+- **实验总数**: 400个（results/summary_all.csv）
+- **完成度**: Stage1-4已完成（62/439个分阶段实验完成，14.1%）
+- **参数-模式组合**:
+  - 非并行模式: 44/45参数达标（97.8%）- Stage7-8分析显示大部分已超标
+  - 并行模式: 28/45参数达标（62.2%）
+- **配置修复**: Stage7-13所有配置文件已修复（多参数拆分为单参数）
 - **最新进展**:
-  - ✅ Stage7执行完成（2025-12-06 22:02）
-  - ✅ 去重效果优秀：96.5%跳过率，节省37.6小时
-  - ✅ 新增7个实验，数据质量完美
+  - 🔴 **Stage7-13配置Bug修复完成**（2025-12-07）
+    - 发现严重配置错误：多参数混合变异导致70.8%实验缺失
+    - 自动修复：19个配置项 → 62个配置项
+    - 工具：`scripts/fix_stage_configs.py`
+  - ✅ **Stage7-8完成度分析**（2025-12-07）
+    - Stage7: 大部分参数已达标，仅需补充MRT-OAST/default epochs
+    - Stage8: 所有参数超标（≥10个唯一值），无需补充
+    - Stage14: 新增补充配置（7个实验，2.5小时）
+  - 📚 **配置最佳实践文档**（新增）
+    - [JSON配置最佳实践](docs/JSON_CONFIG_BEST_PRACTICES.md)
+    - 核心原则："单参数原则" - 每个配置项只变异一个参数
   - Stage5-6已归档（被Stage11-12替代）
 
 ---
@@ -141,15 +149,16 @@ energy_dl/nightly/
 ### 配置文件（已完成）
 - `settings/stage2_optimized_nonparallel_and_fast_parallel.json` - Stage2 (已完成 ✓)
 - `settings/stage3_4_merged_optimized_parallel.json` - Stage3-4合并 (已完成 ✓)
-- `settings/stage7_nonparallel_fast_models.json` - Stage7: 非并行快速模型 (已完成 ✓, 96.5%去重)
 
-### 配置文件（待执行）
-- `settings/stage8_nonparallel_medium_slow_models.json` - Stage8: 非并行中慢速模型 (35.1h, 48实验)
-- `settings/stage9_nonparallel_hrnet18.json` - Stage9: 非并行hrnet18 (25.0h, 20实验)
-- `settings/stage10_nonparallel_pcb.json` - Stage10: 非并行pcb (23.7h, 20实验)
-- `settings/stage11_parallel_hrnet18.json` - Stage11: 并行hrnet18补充 (28.6h, 20实验)
-- `settings/stage12_parallel_pcb.json` - Stage12: 并行pcb补充 (23.1h, 20实验)
-- `settings/stage13_parallel_fast_models_supplement.json` - Stage13: 并行快速模型补充 (5.0h, 43实验)
+### 配置文件（已修复，待执行）⭐
+- `settings/stage7_nonparallel_fast_models.json` - Stage7: 非并行快速模型 (38.3h, 199实验) **[v4.7.1修复]**
+- `settings/stage8_nonparallel_medium_slow_models.json` - Stage8: 非并行中慢速模型 (35.1h, 48实验) **[v4.7.1修复]**
+- `settings/stage9_nonparallel_hrnet18.json` - Stage9: 非并行hrnet18 (25.0h, 20实验) **[v4.7.1修复]**
+- `settings/stage10_nonparallel_pcb.json` - Stage10: 非并行pcb (23.7h, 20实验) **[v4.7.1修复]**
+- `settings/stage11_parallel_hrnet18.json` - Stage11: 并行hrnet18补充 (28.6h, 20实验) **[v4.7.1修复]**
+- `settings/stage12_parallel_pcb.json` - Stage12: 并行pcb补充 (23.1h, 20实验) **[v4.7.1修复]**
+- `settings/stage13_parallel_fast_models_supplement.json` - Stage13: 并行快速模型补充 (5.0h, 43实验) **[v4.7.1修复]**
+- `settings/stage14_stage7_8_supplement.json` - Stage14: Stage7-8补充 (2.5h, 7实验) **[v4.7.1新增]**
 
 ### 归档配置
 - `settings/archived/stage5_optimized_hrnet18_parallel.json` - 被Stage11替代
@@ -166,13 +175,16 @@ energy_dl/nightly/
 - `docs/FEATURES_OVERVIEW.md` - 功能特性总览
 - `docs/QUICK_REFERENCE.md` - 快速参考
 - `docs/SETTINGS_CONFIGURATION_GUIDE.md` - 配置指南
+- `docs/JSON_CONFIG_BEST_PRACTICES.md` - JSON配置最佳实践 ⭐⭐⭐ **[v4.7.1新增]**
 - `docs/results_reports/CSV_FIX_COMPREHENSIVE_SUMMARY.md` - CSV修复综合报告
 - `docs/results_reports/MISSING_COLUMNS_DETAILED_ANALYSIS.md` - 缺失列详细分析
 - `docs/results_reports/DEDUP_MODE_FIX_REPORT.md` - 去重模式修复报告
 - `docs/results_reports/EXPERIMENT_REQUIREMENT_ANALYSIS.md` - 实验需求分析
 - `docs/results_reports/STAGE3_4_EXECUTION_REPORT.md` - Stage3-4执行报告
 - `docs/results_reports/STAGE7_CONFIG_FIX_REPORT.md` - Stage7-13配置修复报告
-- `docs/results_reports/STAGE7_EXECUTION_REPORT.md` - Stage7执行报告 (新增)
+- `docs/results_reports/STAGE7_EXECUTION_REPORT.md` - Stage7执行报告
+- `docs/results_reports/STAGE7_13_CONFIG_BUG_ANALYSIS.md` - Stage7-13配置Bug详细分析 **[v4.7.1新增]**
+- `docs/results_reports/STAGE7_8_FIX_EXECUTION_REPORT.md` - Stage7-8修复执行报告 **[v4.7.1新增]**
 - `docs/results_reports/DAILY_SUMMARY_20251205.md` - 2025-12-05每日总结
 - `docs/settings_reports/STAGE7_13_EXECUTION_PLAN.md` - Stage7-13执行计划
 - `docs/results_reports/STAGE7_13_DESIGN_SUMMARY.md` - Stage7-13设计总结
