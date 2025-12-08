@@ -2,7 +2,7 @@
 
 自动化深度学习模型训练的超参数变异与能耗性能分析框架
 
-**当前版本**: v4.7.1 (2025-12-07)
+**当前版本**: v4.7.2 (2025-12-08)
 **状态**: ✅ Production Ready
 
 ---
@@ -71,14 +71,10 @@ sudo -E python3 mutation.py -ec settings/11_models_sequential_and_parallel_train
 # sudo -E python3 mutation.py -ec settings/stage7_nonparallel_fast_models.json
 # sudo -E python3 mutation.py -ec settings/stage8_nonparallel_medium_slow_models.json
 
-# 阶段13: 最终补充 (推荐优先执行, 12.5h, 90实验)
-sudo -E python3 mutation.py -ec settings/stage13_merged_final_supplement.json
+# 阶段最终: 所有剩余实验 (37.8h, 78实验) **[一次性完成]**
+sudo -E python3 mutation.py -ec settings/stage_final_all_remaining.json
 
-# 阶段11-12: 并行hrnet18/pcb补充 (51.7h, 40实验)
-sudo -E python3 mutation.py -ec settings/stage11_parallel_hrnet18.json
-sudo -E python3 mutation.py -ec settings/stage12_parallel_pcb.json
-
-# 注: Stage9-10已归档（非并行hrnet18/pcb已达标，节省48.7小时）
+# 注: Stage11-13已合并为单一配置，Stage9-10已归档
 ```
 
 ---
@@ -188,7 +184,7 @@ sudo sysctl -w kernel.perf_event_paranoid=-1
 
 #### 分阶段实验配置（推荐用于大规模实验）⭐
 
-**分阶段配置** (v4.7.1 - 配置修复与优化):
+**最终分阶段配置** (v4.7.2 - 最终合并):
 | 配置文件 | 说明 | 预计时间 | 实验数 | 状态 |
 |---------|------|---------|--------|------|
 | `stage1_nonparallel_completion.json` | 阶段1: 非并行补全 | 9h | 12 | ✅ 已完成 |
@@ -196,11 +192,9 @@ sudo sysctl -w kernel.perf_event_paranoid=-1
 | `stage3_4_merged_optimized_parallel.json` | 阶段3-4: 中速模型 + VulBERTa + densenet121 | 12.2h | 25 | ✅ 已完成 |
 | `stage7_nonparallel_fast_models.json` | 阶段7: 非并行快速模型 | 0.7h | 7 | ✅ 已完成 |
 | `stage8_nonparallel_medium_slow_models.json` | 阶段8: 非并行中慢速模型 | ~13h | 12 | ✅ 已完成 |
-| `stage11_parallel_hrnet18.json` | 阶段11: 并行hrnet18补充 | 28.6h | 20 | ⏳ 待执行 |
-| `stage12_parallel_pcb.json` | 阶段12: 并行pcb补充 | 23.1h | 20 | ⏳ 待执行 |
-| `stage13_merged_final_supplement.json` | 阶段13: 最终补充 **(合并+VulBERTa/cnn)** | 12.5h | 90 | ⏳ 推荐优先 |
-| **总计** | **8个阶段** | **106h** | **211** | **81/211完成** |
-| ~~stage9/10~~ | ~~非并行hrnet18/pcb~~ | ~~48.7h~~ | ~~40~~ | 🗑️ 已归档（冗余） |
+| `stage_final_all_remaining.json` | **最终阶段**: 所有剩余实验 **(pcb+hrnet18+快速模型+MRT-OAST+VulBERTa/cnn)** | 37.8h | 78 | **⏳ 一次性完成** |
+| **总计** | **6个阶段** | **79.96h** | **159** | **81/159完成 (51%)** |
+| ~~stage9/10/11/12/13~~ | ~~独立Stage配置~~ | ~~71.6h~~ | ~~104~~ | 🗑️ 已归档或合并 |
 
 **v4.7.1修复与优化** (2025-12-07):
 - 🔴 **严重Bug修复**: Stage7-13配置文件存在多参数混合变异问题
@@ -283,6 +277,32 @@ sudo sysctl -w kernel.perf_event_paranoid=-1
 ---
 
 ## 版本信息
+
+**v4.7.2** (2025-12-08)
+- 🔴 **并行模式runs_per_config Bug修复**: 修复v4.7.0遗留问题
+  - 问题: Stage11只运行4个实验而非20个（缺失80%）
+  - 根因: v4.7.0修复仅覆盖mutation/default模式，未修复parallel模式
+  - 修复: 修改并行模式读取逻辑，支持外层experiment定义runs_per_config
+  - 优先级: 外层exp > foreground > 全局（三级fallback）
+  - 测试: 创建`test_parallel_runs_per_config_fix.py`，全部通过
+  - 详细报告: [Stage11 Bug修复报告](docs/results_reports/STAGE11_BUG_FIX_REPORT.md)
+- ✅ **配置最终合并** (单一Stage方案):
+  - **最终整合**: 将Stage11+12+13合并为单一配置文件
+  - **配置文件**: `settings/stage_final_all_remaining.json`
+  - **实验数**: 78个（pcb:12 + hrnet18:8 + 快速模型:43 + MRT-OAST:7 + VulBERTa/cnn:8）
+  - **预计时间**: 37.8小时（一次性完成所有剩余实验）
+  - **资源节省**: 78个实验（原126），37.8小时（原58.5h），仅需执行1个阶段
+  - 详细报告: [最终配置整合报告](docs/results_reports/FINAL_CONFIG_INTEGRATION_REPORT.md)
+- 📊 **数据审计修正**:
+  - hrnet18并行: 实际已有3个唯一值（非1个），节省8个实验
+  - pcb并行: 实际已有2个唯一值，节省8个实验
+  - 修正报告: [Stage11实际状态修正](docs/results_reports/STAGE11_ACTUAL_STATE_CORRECTION.md)
+- 🧹 **项目清理**:
+  - 归档10个过时文档（减少35.7%）
+  - 归档4个过时配置（Stage11/12/13独立配置）
+  - 归档3个根目录文档（Stage11相关执行指南）
+  - 删除9个错误备份文件（100%清理）
+- ✅ **向后兼容性**: 完全兼容，支持三种配置方式
 
 **v4.7.1** (2025-12-07)
 - 🔴 **严重配置Bug修复**: Stage7-13配置文件多参数混合变异问题
@@ -382,4 +402,4 @@ sudo sysctl -w kernel.perf_event_paranoid=-1
 
 ---
 
-**维护者**: Green | **状态**: ✅ Production Ready | **更新**: 2025-12-07
+**维护者**: Green | **状态**: ✅ Production Ready | **更新**: 2025-12-08

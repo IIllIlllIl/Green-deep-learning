@@ -1,0 +1,45 @@
+{
+  "experiment_id": "pytorch_resnet_cifar10_resnet20_031_parallel",
+  "timestamp": "2025-11-21T00:09:38.408199",
+  "mode": "parallel",
+  "foreground": {
+    "repository": "pytorch_resnet_cifar10",
+    "model": "resnet20",
+    "hyperparameters": {
+      "weight_decay": 0.0002164455264458175
+    },
+    "duration_seconds": 1141.9575247764587,
+    "energy_metrics": {
+      "cpu_energy_pkg_joules": 51293.12,
+      "cpu_energy_ram_joules": 3184.75,
+      "cpu_energy_total_joules": 54477.87,
+      "gpu_power_avg_watts": 225.39089108910883,
+      "gpu_power_max_watts": 247.56,
+      "gpu_power_min_watts": 76.43,
+      "gpu_energy_total_joules": 250409.2799999999,
+      "gpu_temp_avg_celsius": 78.02790279027903,
+      "gpu_temp_max_celsius": 80.0,
+      "gpu_util_avg_percent": 54.31413141314131,
+      "gpu_util_max_percent": 73.0
+    },
+    "performance_metrics": {
+      "test_accuracy": 92.05,
+      "best_val_accuracy": 92.05
+    },
+    "training_success": true,
+    "retries": 0,
+    "error_message": "Training completed successfully"
+  },
+  "background": {
+    "repository": "examples",
+    "model": "mnist_ff",
+    "hyperparameters": {
+      "epochs": 10,
+      "learning_rate": 0.01,
+      "batch_size": 32,
+      "seed": 1
+    },
+    "log_directory": "/home/green/energy_dl/nightly/results/run_20251120_194804/pytorch_resnet_cifar10_resnet20_031_parallel/background_logs",
+    "note": "Background training served as GPU load only (not monitored)"
+  }
+}

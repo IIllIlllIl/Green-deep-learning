@@ -1,0 +1,42 @@
+{
+  "experiment_id": "examples_mnist_ff_010_parallel",
+  "timestamp": "2025-11-22T20:03:26.397546",
+  "mode": "parallel",
+  "foreground": {
+    "repository": "examples",
+    "model": "mnist_ff",
+    "hyperparameters": {
+      "learning_rate": 0.007524504130296422
+    },
+    "duration_seconds": 245.28788995742798,
+    "energy_metrics": {
+      "cpu_energy_pkg_joules": 16785.18,
+      "cpu_energy_ram_joules": 1177.09,
+      "cpu_energy_total_joules": 17962.27,
+      "gpu_power_avg_watts": 193.23072033898302,
+      "gpu_power_max_watts": 318.47,
+      "gpu_power_min_watts": 164.28,
+      "gpu_energy_total_joules": 45602.44999999999,
+      "gpu_temp_avg_celsius": 70.22881355932203,
+      "gpu_temp_max_celsius": 76.0,
+      "gpu_util_avg_percent": 99.98728813559322,
+      "gpu_util_max_percent": 100.0
+    },
+    "performance_metrics": {},
+    "training_success": false,
+    "retries": 3,
+    "error_message": "Error pattern found: CUDA out of memory"
+  },
+  "background": {
+    "repository": "Person_reID_baseline_pytorch",
+    "model": "densenet121",
+    "hyperparameters": {
+      "epochs": 60,
+      "learning_rate": 0.05,
+      "dropout": 0.5,
+      "seed": 1334
+    },
+    "log_directory": "/home/green/energy_dl/nightly/results/run_20251122_175401/examples_mnist_ff_010_parallel/background_logs",
+    "note": "Background training served as GPU load only (not monitored)"
+  }
+}

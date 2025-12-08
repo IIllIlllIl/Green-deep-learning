@@ -1,7 +1,7 @@
 # Claude 助手指南 - Mutation-Based Training Energy Profiler
 
-**项目版本**: v4.7.1 (2025-12-07)
-**最后更新**: 2025-12-07
+**项目版本**: v4.7.2 (2025-12-08)
+**最后更新**: 2025-12-08
 **状态**: ✅ Production Ready
 
 ---
@@ -21,25 +21,19 @@
 - ✅ **参数精确优化** - 每个参数使用精确的runs_per_config值
 
 ### 当前状态
-- **实验总数**: 400个（results/summary_all.csv）
-- **完成度**: Stage1-4已完成（62/439个分阶段实验完成，14.1%）
-- **参数-模式组合**:
-  - 非并行模式: 44/45参数达标（97.8%）- Stage7-8分析显示大部分已超标
-  - 并行模式: 28/45参数达标（62.2%）
-- **配置修复**: Stage7-13所有配置文件已修复（多参数拆分为单参数）
-- **最新进展**:
-  - 🔴 **Stage7-13配置Bug修复完成**（2025-12-07）
-    - 发现严重配置错误：多参数混合变异导致70.8%实验缺失
-    - 自动修复：19个配置项 → 62个配置项
-    - 工具：`scripts/fix_stage_configs.py`
-  - ✅ **Stage7-8完成度分析**（2025-12-07）
-    - Stage7: 大部分参数已达标，仅需补充MRT-OAST/default epochs
-    - Stage8: 所有参数超标（≥10个唯一值），无需补充
-    - Stage14: 新增补充配置（7个实验，2.5小时）
-  - 📚 **配置最佳实践文档**（新增）
-    - [JSON配置最佳实践](docs/JSON_CONFIG_BEST_PRACTICES.md)
-    - 核心原则："单参数原则" - 每个配置项只变异一个参数
-  - Stage5-6已归档（被Stage11-12替代）
+- **实验总数**: 404个（results/summary_all.csv）
+- **完成度**: Stage1-4, Stage7-8完成（81/159实验，51%）
+- **剩余任务**: 最终阶段（78个实验，37.8小时）**[一次性完成所有剩余实验]**
+- **参数-模式组合**: 需补充17个组合达到100%覆盖
+- **配置状态**: 已完成最终整合和优化
+- **最新进展** (2025-12-08):
+  - ✅ **配置最终合并完成** ⭐⭐⭐
+    - **最终整合**: 将Stage11+12+13合并为单一配置文件
+    - **配置文件**: `settings/stage_final_all_remaining.json`
+    - **实验数**: 78个（pcb:12 + hrnet18:8 + 快速模型:43 + MRT-OAST:7 + VulBERTa/cnn:8）
+    - **预计时间**: 37.8小时（一次性完成所有剩余实验）
+    - **资源节省**: 78个实验（原126），37.8小时（原58.5h），仅需执行1个阶段
+    - **详细**: [最终配置整合报告](docs/results_reports/FINAL_CONFIG_INTEGRATION_REPORT.md)
 
 ---
 
@@ -149,26 +143,35 @@ energy_dl/nightly/
 ### 配置文件（已完成）
 - `settings/stage2_optimized_nonparallel_and_fast_parallel.json` - Stage2 (已完成 ✓)
 - `settings/stage3_4_merged_optimized_parallel.json` - Stage3-4合并 (已完成 ✓)
+- `settings/stage7_nonparallel_fast_models.json` - Stage7 (已完成 ✓, 7实验)
+- `settings/stage8_nonparallel_medium_slow_models.json` - Stage8 (已完成 ✓, 12实验)
 
-### 配置文件（已修复，待执行）⭐
-- `settings/stage7_nonparallel_fast_models.json` - Stage7: 非并行快速模型 (38.3h, 199实验) **[v4.7.1修复]**
-- `settings/stage8_nonparallel_medium_slow_models.json` - Stage8: 非并行中慢速模型 (35.1h, 48实验) **[v4.7.1修复]**
-- `settings/stage9_nonparallel_hrnet18.json` - Stage9: 非并行hrnet18 (25.0h, 20实验) **[v4.7.1修复]**
-- `settings/stage10_nonparallel_pcb.json` - Stage10: 非并行pcb (23.7h, 20实验) **[v4.7.1修复]**
-- `settings/stage11_parallel_hrnet18.json` - Stage11: 并行hrnet18补充 (28.6h, 20实验) **[v4.7.1修复]**
-- `settings/stage12_parallel_pcb.json` - Stage12: 并行pcb补充 (23.1h, 20实验) **[v4.7.1修复]**
-- `settings/stage13_parallel_fast_models_supplement.json` - Stage13: 并行快速模型补充 (5.0h, 43实验) **[v4.7.1修复]**
-- `settings/stage14_stage7_8_supplement.json` - Stage14: Stage7-8补充 (2.5h, 7实验) **[v4.7.1新增]**
+### 配置文件（最终执行）⭐⭐⭐
+- `settings/stage_final_all_remaining.json` - **最终阶段**: 所有剩余实验 **[一次性完成]**
+  - 版本: v4.7.2-final
+  - 合并内容: pcb并行(12) + hrnet18并行(8) + 快速模型(43) + MRT-OAST(7) + VulBERTa/cnn(8)
+  - 实验数: 78个
+  - 预计时间: ~37.8小时
+  - 目标: 100%覆盖（90/90参数-模式组合，159/159实验完成）
+  - 执行命令: `sudo -E python3 mutation.py -ec settings/stage_final_all_remaining.json`
+  - 详细报告: [最终配置整合报告](docs/results_reports/FINAL_CONFIG_INTEGRATION_REPORT.md)
 
 ### 归档配置
 - `settings/archived/stage5_optimized_hrnet18_parallel.json` - 被Stage11替代
 - `settings/archived/stage6_optimized_pcb_parallel.json` - 被Stage12替代
+- `settings/archived/redundant_stages_20251207/` - Stage9-10归档（非并行已达标）
+- `settings/archived/20251208_final_merge/` - Stage11/12/13独立配置（已合并为最终配置）
+  - `stage11_supplement_parallel_hrnet18.json`
+  - `stage12_parallel_pcb.json`
+  - `stage13_final_merged.json`
+  - `stage13_merged_final_supplement.json`
 
 ### 测试文件
 - `tests/verify_csv_append_fix.py` - CSV修复验证测试
 - `tests/test_dedup_mode_distinction.py` - 去重模式区分功能测试
 - `tests/test_integration_after_mode_fix.py` - 修复后集成测试
-- `tests/test_runs_per_config_fix.py` - Per-experiment runs_per_config修复测试 (新增)
+- `tests/test_runs_per_config_fix.py` - Per-experiment runs_per_config修复测试 (v4.7.0)
+- `tests/test_parallel_runs_per_config_fix.py` - 并行模式runs_per_config修复测试 (v4.7.2) ⭐
 - `tests/unit/test_append_to_summary_all.py` - 单元测试
 
 ### 文档索引
@@ -183,8 +186,14 @@ energy_dl/nightly/
 - `docs/results_reports/STAGE3_4_EXECUTION_REPORT.md` - Stage3-4执行报告
 - `docs/results_reports/STAGE7_CONFIG_FIX_REPORT.md` - Stage7-13配置修复报告
 - `docs/results_reports/STAGE7_EXECUTION_REPORT.md` - Stage7执行报告
-- `docs/results_reports/STAGE7_13_CONFIG_BUG_ANALYSIS.md` - Stage7-13配置Bug详细分析 **[v4.7.1新增]**
-- `docs/results_reports/STAGE7_8_FIX_EXECUTION_REPORT.md` - Stage7-8修复执行报告 **[v4.7.1新增]**
+- `docs/results_reports/STAGE7_13_CONFIG_BUG_ANALYSIS.md` - Stage7-13配置Bug详细分析 **[v4.7.1]**
+- `docs/results_reports/STAGE7_8_FIX_EXECUTION_REPORT.md` - Stage7-8修复执行报告 **[v4.7.1]**
+- `docs/results_reports/STAGE11_BUG_FIX_REPORT.md` - Stage11 Bug修复报告 ⭐⭐⭐ **[v4.7.2]**
+- `docs/results_reports/STAGE11_ACTUAL_STATE_CORRECTION.md` - Stage11实际状态修正 ⭐⭐ **[v4.7.2新增]**
+- `docs/results_reports/FINAL_CONFIG_INTEGRATION_REPORT.md` - 最终配置整合报告 ⭐⭐⭐ **[v4.7.2新增]**
+- `docs/results_reports/DEDUPLICATION_RANDOM_MUTATION_ANALYSIS.md` - 去重与随机变异分析 ⭐ **[v4.7.2]**
+- `docs/results_reports/PROJECT_CLEANUP_SUMMARY_20251208.md` - 项目清理总结 **[v4.7.2]**
+- `docs/SCRIPTS_DOCUMENTATION.md` - Scripts目录完整文档 **[v4.7.2新增]**
 - `docs/results_reports/DAILY_SUMMARY_20251205.md` - 2025-12-05每日总结
 - `docs/settings_reports/STAGE7_13_EXECUTION_PLAN.md` - Stage7-13执行计划
 - `docs/results_reports/STAGE7_13_DESIGN_SUMMARY.md` - Stage7-13设计总结
@@ -262,7 +271,45 @@ python3 scripts/check_completion_status.py
 
 ## 🔄 版本历史摘要
 
-### v4.7.0 (2025-12-06) - 当前版本
+### v4.7.2 (2025-12-08) - 当前版本 ⭐
+- 🔴 **并行模式runs_per_config Bug修复**: 修复v4.7.0遗留问题
+  - **问题**: Stage11只运行4个实验而非20个（缺失80%）
+  - **根因**: v4.7.0修复仅覆盖mutation/default模式，未修复parallel模式
+  - **原因**: 并行模式的配置嵌套更复杂（foreground/background结构）
+  - **修复**: 修改并行模式的两处（mutation和default分支）
+    - 修改位置: `runner.py:1010-1011, 1030-1031`
+    - 新逻辑: `exp.get("runs_per_config", foreground_config.get("runs_per_config", runs_per_config))`
+    - 优先级: 外层exp > foreground > 全局（三级fallback）
+  - **测试**: 创建`test_parallel_runs_per_config_fix.py`，全部通过
+  - **详细报告**: [Stage11 Bug修复报告](docs/results_reports/STAGE11_BUG_FIX_REPORT.md)
+- ✅ **配置最终合并** (单一Stage方案):
+  - **最终整合**: 将Stage11+12+13合并为单一配置文件
+  - **配置文件**: `settings/stage_final_all_remaining.json`
+  - **实验数**: 78个（pcb:12 + hrnet18:8 + 快速模型:43 + MRT-OAST:7 + VulBERTa/cnn:8）
+  - **预计时间**: 37.8小时（一次性完成所有剩余实验）
+  - **资源节省**: 78个实验（原126），37.8小时（原58.5h），仅需执行1个阶段
+  - 详细报告: [最终配置整合报告](docs/results_reports/FINAL_CONFIG_INTEGRATION_REPORT.md)
+- 📊 **数据审计修正**:
+  - hrnet18并行: 实际已有3个唯一值（非1个），节省8个实验
+  - pcb并行: 实际已有2个唯一值，节省8个实验
+  - 修正报告: [Stage11实际状态修正](docs/results_reports/STAGE11_ACTUAL_STATE_CORRECTION.md)
+- 🧹 **项目清理**:
+  - 归档10个过时文档（减少35.7%）
+  - 归档4个过时配置（Stage11/12/13独立配置）
+  - 归档3个根目录文档（Stage11相关执行指南）
+  - 删除9个错误备份文件（100%清理）
+- ✅ **向后兼容性**: 完全兼容，支持三种配置方式
+
+### v4.7.1 (2025-12-07)
+- ✅ **Stage7-13配置Bug修复**: 多参数混合变异问题
+  - 自动修复工具: `scripts/fix_stage_configs.py`
+  - 19个配置项 → 62个配置项（单参数原则）
+- ✅ **Stage7-8执行完成**:
+  - Stage7: 7个实验，0.74小时，96.5%去重率
+  - Stage8: 12个实验，~13小时
+- ✅ **JSON配置最佳实践文档**: 新增配置规范指南
+
+### v4.7.0 (2025-12-06)
 - ✅ **Per-experiment runs_per_config bug修复**: 修复配置文件读取逻辑
   - 问题: `runner.py`第881行全局`runs_per_config`默认为1，导致每个实验配置无法使用独立的runs_per_config值
   - 影响: Stage7等使用per-experiment值的配置只运行1个实验而非指定的7个
@@ -407,13 +454,17 @@ python3 scripts/check_deduplication.py
 
 ## 📈 项目路线图
 
-### 近期目标（1-2周）
-1. ✅ **Stage7执行完成** - 7个实验，0.74小时，96.5%去重率
-2. 🔄 **执行Stage8验证** - 快速测试非并行中慢速模型去重效果（预计<1小时）
-3. 🎯 **根据Stage8结果决策**:
-   - 若去重率>90%: 跳过Stage9-10，直接执行Stage11-13
-   - 若去重率<90%: 继续执行Stage9-10
-4. 🔄 **执行Stage11-13** - 完成并行模式补充（预计时间远低于76.7小时）
+### 近期目标（1-2周）⭐
+1. ✅ **Stage7-8执行完成** - 19个实验，13.74小时
+2. ✅ **配置最终合并完成** - Stage11+12+13整合为单一配置
+   - 配置文件: `settings/stage_final_all_remaining.json`
+   - 实验数: 78个（pcb:12 + hrnet18:8 + 快速模型:43 + MRT-OAST:7 + VulBERTa/cnn:8）
+   - 预计时间: 37.8小时（一次性完成）
+   - 资源节省: 38.1%实验数，35.4%时间
+3. 🔄 **执行最终阶段** - 完成所有剩余实验 **[下一步]**
+   - 执行命令: `sudo -E python3 mutation.py -ec settings/stage_final_all_remaining.json`
+   - 预计时间: ~37.8小时
+   - 预期: 78个新实验，100%覆盖（90/90参数-模式组合，159/159实验完成）
 
 ### 中期改进（1个月）
 1. 实现标准37列模板，避免列不匹配问题
@@ -446,8 +497,8 @@ python3 scripts/check_deduplication.py
 ---
 
 **维护者**: Green
-**Claude助手指南版本**: 1.2
-**最后更新**: 2025-12-06
-**状态**: ✅ 有效 - 请根据项目发展更新此文档
+**Claude助手指南版本**: 1.3
+**最后更新**: 2025-12-08
+**状态**: ✅ 有效 - v4.7.2修复了并行模式runs_per_config bug
 
 > 提示：将此文件保存在项目根目录，作为Claude助手的主要参考。当项目结构或规范变更时，及时更新此文档。

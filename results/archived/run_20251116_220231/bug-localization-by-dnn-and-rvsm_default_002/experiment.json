@@ -1,0 +1,30 @@
+{
+  "experiment_id": "bug-localization-by-dnn-and-rvsm_default_002",
+  "timestamp": "2025-11-16T22:40:17.637858",
+  "repository": "bug-localization-by-dnn-and-rvsm",
+  "model": "default",
+  "hyperparameters": {
+    "max_iter": 10000,
+    "kfold": 10,
+    "alpha": 1e-05,
+    "seed": 42
+  },
+  "duration_seconds": 919.3961427211761,
+  "energy_metrics": {
+    "cpu_energy_pkg_joules": 60019.91,
+    "cpu_energy_ram_joules": 2282.73,
+    "cpu_energy_total_joules": 62302.64,
+    "gpu_power_avg_watts": 75.38239344262294,
+    "gpu_power_max_watts": 85.06,
+    "gpu_power_min_watts": 45.41,
+    "gpu_energy_total_joules": 22991.629999999997,
+    "gpu_temp_avg_celsius": 56.26229508196721,
+    "gpu_temp_max_celsius": 64.0,
+    "gpu_util_avg_percent": 0.6754098360655738,
+    "gpu_util_max_percent": 3.0
+  },
+  "performance_metrics": {},
+  "training_success": true,
+  "retries": 0,
+  "error_message": "Training completed successfully"
+}

@@ -1,0 +1,290 @@
+{
+  "experiment_name": "stage2_fast_models_parallel",
+  "description": "阶段2: 快速模型的并行实验 (预计20小时)",
+  "mode": "mutation",
+  "runs_per_config": 1,
+  "max_retries": 2,
+  "governor": "performance",
+  "use_deduplication": true,
+  "historical_csvs": [
+    "results/summary_all.csv"
+  ],
+  "experiments": [
+    {
+      "comment": "=== examples/mnist 并行: 20个实验 (预计5小时) ===",
+      "repo": "examples",
+      "model": "mnist",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist",
+        "mode": "mutation",
+        "mutate": ["batch_size"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "siamese",
+        "hyperparameters": {}
+      },
+      "comment": "batch_size需要5个唯一值,运行5次"
+    },
+    {
+      "repo": "examples",
+      "model": "mnist",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist",
+        "mode": "mutation",
+        "mutate": ["epochs"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "siamese",
+        "hyperparameters": {}
+      },
+      "comment": "epochs需要5个唯一值,运行5次"
+    },
+    {
+      "repo": "examples",
+      "model": "mnist",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist",
+        "mode": "mutation",
+        "mutate": ["learning_rate"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "siamese",
+        "hyperparameters": {}
+      },
+      "comment": "learning_rate需要5个唯一值,运行5次"
+    },
+    {
+      "repo": "examples",
+      "model": "mnist",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist",
+        "mode": "mutation",
+        "mutate": ["seed"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "siamese",
+        "hyperparameters": {}
+      },
+      "comment": "seed需要5个唯一值,运行5次"
+    },
+    {
+      "comment": "=== examples/mnist_rnn 并行: 20个实验 (预计5小时) ===",
+      "repo": "examples",
+      "model": "mnist_rnn",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "mode": "mutation",
+        "mutate": ["batch_size"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "siamese",
+        "hyperparameters": {}
+      },
+      "comment": "batch_size需要5个唯一值,运行5次"
+    },
+    {
+      "repo": "examples",
+      "model": "mnist_rnn",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "mode": "mutation",
+        "mutate": ["epochs"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "siamese",
+        "hyperparameters": {}
+      },
+      "comment": "epochs需要5个唯一值,运行5次"
+    },
+    {
+      "repo": "examples",
+      "model": "mnist_rnn",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "mode": "mutation",
+        "mutate": ["learning_rate"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "siamese",
+        "hyperparameters": {}
+      },
+      "comment": "learning_rate需要5个唯一值,运行5次"
+    },
+    {
+      "repo": "examples",
+      "model": "mnist_rnn",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "mode": "mutation",
+        "mutate": ["seed"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "siamese",
+        "hyperparameters": {}
+      },
+      "comment": "seed需要5个唯一值,运行5次"
+    },
+    {
+      "comment": "=== examples/siamese 并行: 20个实验 (预计5小时) ===",
+      "repo": "examples",
+      "model": "siamese",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "siamese",
+        "mode": "mutation",
+        "mutate": ["batch_size"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {}
+      },
+      "comment": "batch_size需要5个唯一值,运行5次"
+    },
+    {
+      "repo": "examples",
+      "model": "siamese",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "siamese",
+        "mode": "mutation",
+        "mutate": ["epochs"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {}
+      },
+      "comment": "epochs需要5个唯一值,运行5次"
+    },
+    {
+      "repo": "examples",
+      "model": "siamese",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "siamese",
+        "mode": "mutation",
+        "mutate": ["learning_rate"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {}
+      },
+      "comment": "learning_rate需要5个唯一值,运行5次"
+    },
+    {
+      "repo": "examples",
+      "model": "siamese",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "siamese",
+        "mode": "mutation",
+        "mutate": ["seed"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {}
+      },
+      "comment": "seed需要5个唯一值,运行5次"
+    },
+    {
+      "comment": "=== examples/mnist_ff 并行: 20个实验 (预计5小时) ===",
+      "repo": "examples",
+      "model": "mnist_ff",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist_ff",
+        "mode": "mutation",
+        "mutate": ["batch_size"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {}
+      },
+      "comment": "batch_size需要5个唯一值,运行5次"
+    },
+    {
+      "repo": "examples",
+      "model": "mnist_ff",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist_ff",
+        "mode": "mutation",
+        "mutate": ["epochs"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {}
+      },
+      "comment": "epochs需要5个唯一值,运行5次"
+    },
+    {
+      "repo": "examples",
+      "model": "mnist_ff",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist_ff",
+        "mode": "mutation",
+        "mutate": ["learning_rate"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {}
+      },
+      "comment": "learning_rate需要5个唯一值,运行5次"
+    },
+    {
+      "repo": "examples",
+      "model": "mnist_ff",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist_ff",
+        "mode": "mutation",
+        "mutate": ["seed"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {}
+      },
+      "comment": "seed需要5个唯一值,运行5次"
+    }
+  ]
+}

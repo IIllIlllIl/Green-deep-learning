@@ -1,0 +1,42 @@
+{
+  "experiment_id": "bug-localization-by-dnn-and-rvsm_default_054_parallel",
+  "timestamp": "2025-11-21T13:56:10.450482",
+  "mode": "parallel",
+  "foreground": {
+    "repository": "bug-localization-by-dnn-and-rvsm",
+    "model": "default",
+    "hyperparameters": {
+      "max_iter": 1253
+    },
+    "duration_seconds": 1119.231038093567,
+    "energy_metrics": {
+      "cpu_energy_pkg_joules": 76473.08,
+      "cpu_energy_ram_joules": 2955.95,
+      "cpu_energy_total_joules": 79429.03,
+      "gpu_power_avg_watts": 237.47970967741927,
+      "gpu_power_max_watts": 314.33,
+      "gpu_power_min_watts": 113.04,
+      "gpu_energy_total_joules": 220856.12999999992,
+      "gpu_temp_avg_celsius": 77.10537634408603,
+      "gpu_temp_max_celsius": 84.0,
+      "gpu_util_avg_percent": 63.20537634408602,
+      "gpu_util_max_percent": 99.0
+    },
+    "performance_metrics": {},
+    "training_success": true,
+    "retries": 0,
+    "error_message": "Training completed successfully"
+  },
+  "background": {
+    "repository": "Person_reID_baseline_pytorch",
+    "model": "pcb",
+    "hyperparameters": {
+      "epochs": 60,
+      "learning_rate": 0.05,
+      "dropout": 0.5,
+      "seed": 1334
+    },
+    "log_directory": "/home/green/energy_dl/nightly/results/run_20251120_194804/bug-localization-by-dnn-and-rvsm_default_054_parallel/background_logs",
+    "note": "Background training served as GPU load only (not monitored)"
+  }
+}

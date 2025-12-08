@@ -1003,8 +1003,12 @@ class MutationRunner:
                         mutate_params = foreground_config.get("mutate", ["all"])
                         print(f"   Mutating foreground parameters: {mutate_params}")
 
-                        # Get per-experiment runs_per_config, fall back to global if not specified
-                        exp_runs_per_config = foreground_config.get("runs_per_config", runs_per_config)
+                        # Get per-experiment runs_per_config with proper priority:
+                        # 1. Outer experiment level (exp["runs_per_config"])
+                        # 2. Foreground level (foreground_config["runs_per_config"])
+                        # 3. Global level (runs_per_config)
+                        exp_runs_per_config = exp.get("runs_per_config",
+                                                      foreground_config.get("runs_per_config", runs_per_config))
                         print(f"   Runs for this configuration: {exp_runs_per_config}")
 
                         # Get foreground repository configuration
@@ -1022,7 +1026,9 @@ class MutationRunner:
                         )
                     else:
                         # Use default hyperparameters
-                        exp_runs_per_config = foreground_config.get("runs_per_config", runs_per_config)
+                        # Get per-experiment runs_per_config with proper priority (same as mutation mode)
+                        exp_runs_per_config = exp.get("runs_per_config",
+                                                      foreground_config.get("runs_per_config", runs_per_config))
                         print(f"   Runs for this configuration: {exp_runs_per_config}")
                         fg_hyperparams = foreground_config.get("hyperparameters", {})
                         fg_mutations = [fg_hyperparams] * exp_runs_per_config

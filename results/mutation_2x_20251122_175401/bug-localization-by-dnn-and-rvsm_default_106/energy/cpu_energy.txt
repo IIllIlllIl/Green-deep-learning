@@ -1,0 +1,8 @@
+CPU Energy Consumption Summary
+==============================
+Package Energy (Joules): 166581.38
+RAM Energy (Joules): 10129.97
+Total CPU Energy (Joules): 176711.35
+
+Note: Measured using perf stat with direct command wrapping
+This method provides more accurate results than interval sampling

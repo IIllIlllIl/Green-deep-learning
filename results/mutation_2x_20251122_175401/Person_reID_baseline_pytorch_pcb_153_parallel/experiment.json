@@ -1,0 +1,42 @@
+{
+  "experiment_id": "Person_reID_baseline_pytorch_pcb_153_parallel",
+  "timestamp": "2025-11-26T06:03:26.410287",
+  "mode": "parallel",
+  "foreground": {
+    "repository": "Person_reID_baseline_pytorch",
+    "model": "pcb",
+    "hyperparameters": {
+      "epochs": 32
+    },
+    "duration_seconds": 20.02170205116272,
+    "energy_metrics": {
+      "cpu_energy_pkg_joules": 802.44,
+      "cpu_energy_ram_joules": 47.36,
+      "cpu_energy_total_joules": 849.8,
+      "gpu_power_avg_watts": 61.333684210526314,
+      "gpu_power_max_watts": 146.64,
+      "gpu_power_min_watts": 4.17,
+      "gpu_energy_total_joules": 1165.34,
+      "gpu_temp_avg_celsius": 41.1578947368421,
+      "gpu_temp_max_celsius": 43.0,
+      "gpu_util_avg_percent": 0.21052631578947367,
+      "gpu_util_max_percent": 4.0
+    },
+    "performance_metrics": {},
+    "training_success": false,
+    "retries": 3,
+    "error_message": "Error pattern found: CUDA out of memory"
+  },
+  "background": {
+    "repository": "examples",
+    "model": "mnist_rnn",
+    "hyperparameters": {
+      "epochs": 10,
+      "learning_rate": 0.01,
+      "batch_size": 32,
+      "seed": 1
+    },
+    "log_directory": "/home/green/energy_dl/nightly/results/run_20251122_175401/Person_reID_baseline_pytorch_pcb_153_parallel/background_logs",
+    "note": "Background training served as GPU load only (not monitored)"
+  }
+}

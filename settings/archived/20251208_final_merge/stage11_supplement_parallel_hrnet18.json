@@ -1,0 +1,107 @@
+{
+  "comment": "Stage11补充: 并行模式hrnet18 - 精确补充每个参数2个唯一值（已有3个+新增2个=目标5个）",
+  "version": "4.7.2",
+  "created": "2025-12-08",
+  "updated": "2025-12-08 (修正: 实际已有3个唯一值，非1个)",
+  "estimated_duration_hours": 11.44,
+  "estimated_experiments": 8,
+  "rationale": "方案A精确控制 - 每个参数当前3个唯一值（来自9个历史实验），目标5个，需补充2个",
+  "target_completion": {
+    "parameters": [
+      "Person_reID_baseline_pytorch/hrnet18并行: 4参数 × 2次补充"
+    ],
+    "current_status": {
+      "dropout": "3/5 (已有0.5, 0.466, 0.544)",
+      "epochs": "3/5 (已有60, 79, 53)",
+      "learning_rate": "3/5 (已有0.05, 0.0517, 0.0302)",
+      "seed": "3/5 (已有1334, 1928, 6621)"
+    },
+    "goal": "每个参数精确达到5个唯一值"
+  },
+  "deduplication": {
+    "enabled": true,
+    "mechanism": "去重机制会自动跳过已存在的值（碰撞概率<0.1%）"
+  },
+  "use_deduplication": true,
+  "historical_csvs": [
+    "results/summary_all.csv"
+  ],
+  "experiments": [
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "hrnet18",
+        "mode": "mutation",
+        "mutate": [
+          "epochs"
+        ],
+        "comment": "仅变异epochs参数 - 补充2个新值（当前已有3个: 60, 79, 53）"
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "densenet121",
+        "hyperparameters": {}
+      },
+      "runs_per_config": 2,
+      "comment": "超慢速模型，并行模式平均85.9分钟/实验，2个实验约2.86小时"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "hrnet18",
+        "mode": "mutation",
+        "mutate": [
+          "learning_rate"
+        ],
+        "comment": "仅变异learning_rate参数 - 补充2个新值（当前已有3个: 0.05, 0.0517, 0.0302）"
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "densenet121",
+        "hyperparameters": {}
+      },
+      "runs_per_config": 2,
+      "comment": "超慢速模型，并行模式平均85.9分钟/实验，2个实验约2.86小时"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "hrnet18",
+        "mode": "mutation",
+        "mutate": [
+          "seed"
+        ],
+        "comment": "仅变异seed参数 - 补充2个新值（当前已有3个: 1334, 1928, 6621）"
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "densenet121",
+        "hyperparameters": {}
+      },
+      "runs_per_config": 2,
+      "comment": "超慢速模型，并行模式平均85.9分钟/实验，2个实验约2.86小时"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "hrnet18",
+        "mode": "mutation",
+        "mutate": [
+          "dropout"
+        ],
+        "comment": "仅变异dropout参数 - 补充2个新值（当前已有3个: 0.5, 0.466, 0.544）"
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "densenet121",
+        "hyperparameters": {}
+      },
+      "runs_per_config": 2,
+      "comment": "超慢速模型，并行模式平均85.9分钟/实验，2个实验约2.86小时"
+    }
+  ]
+}

@@ -1,0 +1,139 @@
+{
+  "experiment_name": "11_models_default_training",
+  "description": "Default parameter training for all 11 models: MRT-OAST, DNN-RVSM, CIFAR10, VulBERTa, Person_reID (3 models), Examples (4 models)",
+  "governor": "performance",
+  "runs_per_config": 1,
+  "max_retries": 1,
+  "mode": "default",
+  "experiments": [
+    {
+      "repo": "MRT-OAST",
+      "model": "default",
+      "mode": "default",
+      "hyperparameters": {
+        "epochs": 10,
+        "learning_rate": 0.0001,
+        "seed": 1334,
+        "dropout": 0.2,
+        "weight_decay": 0.0
+      },
+      "note": "MRT-OAST default parameters"
+    },
+    {
+      "repo": "bug-localization-by-dnn-and-rvsm",
+      "model": "default",
+      "mode": "default",
+      "hyperparameters": {
+        "max_iter": 10000,
+        "kfold": 10,
+        "alpha": 0.00001,
+        "seed": 42
+      },
+      "note": "DNN-RVSM default parameters"
+    },
+    {
+      "repo": "pytorch_resnet_cifar10",
+      "model": "resnet20",
+      "mode": "default",
+      "hyperparameters": {
+        "epochs": 200,
+        "learning_rate": 0.1,
+        "weight_decay": 0.0001
+      },
+      "note": "CIFAR10 ResNet20 default parameters"
+    },
+    {
+      "repo": "VulBERTa",
+      "model": "mlp",
+      "mode": "default",
+      "hyperparameters": {
+        "epochs": 10,
+        "learning_rate": 0.00003,
+        "seed": 42,
+        "weight_decay": 0.0
+      },
+      "note": "VulBERTa MLP default parameters"
+    },
+    {
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "densenet121",
+      "mode": "default",
+      "hyperparameters": {
+        "epochs": 60,
+        "learning_rate": 0.05,
+        "dropout": 0.5
+      },
+      "note": "Person_reID DenseNet121 default parameters"
+    },
+    {
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "hrnet18",
+      "mode": "default",
+      "hyperparameters": {
+        "epochs": 60,
+        "learning_rate": 0.05,
+        "dropout": 0.5
+      },
+      "note": "Person_reID HRNet18 default parameters"
+    },
+    {
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "pcb",
+      "mode": "default",
+      "hyperparameters": {
+        "epochs": 60,
+        "learning_rate": 0.05,
+        "dropout": 0.5
+      },
+      "note": "Person_reID PCB default parameters"
+    },
+    {
+      "repo": "examples",
+      "model": "mnist",
+      "mode": "default",
+      "hyperparameters": {
+        "epochs": 10,
+        "learning_rate": 0.01,
+        "batch_size": 32,
+        "seed": 1
+      },
+      "note": "MNIST CNN default parameters"
+    },
+    {
+      "repo": "examples",
+      "model": "mnist_rnn",
+      "mode": "default",
+      "hyperparameters": {
+        "epochs": 10,
+        "learning_rate": 0.01,
+        "batch_size": 32,
+        "seed": 1
+      },
+      "note": "MNIST RNN default parameters"
+    },
+    {
+      "repo": "examples",
+      "model": "mnist_ff",
+      "mode": "default",
+      "hyperparameters": {
+        "epochs": 10,
+        "learning_rate": 0.01,
+        "batch_size": 32,
+        "seed": 1
+      },
+      "note": "MNIST Forward-Forward default parameters"
+    },
+    {
+      "repo": "examples",
+      "model": "siamese",
+      "mode": "default",
+      "hyperparameters": {
+        "epochs": 10,
+        "learning_rate": 0.01,
+        "batch_size": 32,
+        "seed": 1
+      },
+      "note": "Siamese Network default parameters"
+    }
+  ]
+}

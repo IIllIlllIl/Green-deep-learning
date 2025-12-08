@@ -1,0 +1,1090 @@
+{
+  "experiment_name": "mutation_all_models_3x_dynamic",
+  "description": "完整变异测试：11个模型，每个超参数使用mutation框架动态变异3次（顺序+并行训练）",
+  "governor": "performance",
+  "runs_per_config": 3,
+  "max_retries": 2,
+  "mode": "mutation",
+  "experiments": [
+    {
+      "repo": "examples",
+      "model": "mnist_ff",
+      "mode": "mutation",
+      "mutate": ["epochs"],
+      "note": "Sequential: mnist_ff - mutate epochs"
+    },
+    {
+      "repo": "examples",
+      "model": "mnist_ff",
+      "mode": "mutation",
+      "mutate": ["learning_rate"],
+      "note": "Sequential: mnist_ff - mutate learning_rate"
+    },
+    {
+      "repo": "examples",
+      "model": "mnist_ff",
+      "mode": "mutation",
+      "mutate": ["seed"],
+      "note": "Sequential: mnist_ff - mutate seed"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist_ff",
+        "mode": "mutation",
+        "mutate": ["epochs"]
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "densenet121",
+        "hyperparameters": {
+          "epochs": 60,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "note": "Parallel: mnist_ff - mutate epochs"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist_ff",
+        "mode": "mutation",
+        "mutate": ["learning_rate"]
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "densenet121",
+        "hyperparameters": {
+          "epochs": 60,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "note": "Parallel: mnist_ff - mutate learning_rate"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist_ff",
+        "mode": "mutation",
+        "mutate": ["seed"]
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "densenet121",
+        "hyperparameters": {
+          "epochs": 60,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "note": "Parallel: mnist_ff - mutate seed"
+    },
+    {
+      "repo": "examples",
+      "model": "mnist",
+      "mode": "mutation",
+      "mutate": ["epochs"],
+      "note": "Sequential: mnist - mutate epochs"
+    },
+    {
+      "repo": "examples",
+      "model": "mnist",
+      "mode": "mutation",
+      "mutate": ["learning_rate"],
+      "note": "Sequential: mnist - mutate learning_rate"
+    },
+    {
+      "repo": "examples",
+      "model": "mnist",
+      "mode": "mutation",
+      "mutate": ["seed"],
+      "note": "Sequential: mnist - mutate seed"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist",
+        "mode": "mutation",
+        "mutate": ["epochs"]
+      },
+      "background": {
+        "repo": "VulBERTa",
+        "model": "mlp",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.00003,
+          "weight_decay": 0.0,
+          "seed": 42
+        }
+      },
+      "note": "Parallel: mnist - mutate epochs"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist",
+        "mode": "mutation",
+        "mutate": ["learning_rate"]
+      },
+      "background": {
+        "repo": "VulBERTa",
+        "model": "mlp",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.00003,
+          "weight_decay": 0.0,
+          "seed": 42
+        }
+      },
+      "note": "Parallel: mnist - mutate learning_rate"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist",
+        "mode": "mutation",
+        "mutate": ["seed"]
+      },
+      "background": {
+        "repo": "VulBERTa",
+        "model": "mlp",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.00003,
+          "weight_decay": 0.0,
+          "seed": 42
+        }
+      },
+      "note": "Parallel: mnist - mutate seed"
+    },
+    {
+      "repo": "examples",
+      "model": "mnist_rnn",
+      "mode": "mutation",
+      "mutate": ["epochs"],
+      "note": "Sequential: mnist_rnn - mutate epochs"
+    },
+    {
+      "repo": "examples",
+      "model": "mnist_rnn",
+      "mode": "mutation",
+      "mutate": ["learning_rate"],
+      "note": "Sequential: mnist_rnn - mutate learning_rate"
+    },
+    {
+      "repo": "examples",
+      "model": "mnist_rnn",
+      "mode": "mutation",
+      "mutate": ["seed"],
+      "note": "Sequential: mnist_rnn - mutate seed"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "mode": "mutation",
+        "mutate": ["epochs"]
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "pcb",
+        "hyperparameters": {
+          "epochs": 60,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "note": "Parallel: mnist_rnn - mutate epochs"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "mode": "mutation",
+        "mutate": ["learning_rate"]
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "pcb",
+        "hyperparameters": {
+          "epochs": 60,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "note": "Parallel: mnist_rnn - mutate learning_rate"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "mode": "mutation",
+        "mutate": ["seed"]
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "pcb",
+        "hyperparameters": {
+          "epochs": 60,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "note": "Parallel: mnist_rnn - mutate seed"
+    },
+    {
+      "repo": "examples",
+      "model": "siamese",
+      "mode": "mutation",
+      "mutate": ["epochs"],
+      "note": "Sequential: siamese - mutate epochs"
+    },
+    {
+      "repo": "examples",
+      "model": "siamese",
+      "mode": "mutation",
+      "mutate": ["learning_rate"],
+      "note": "Sequential: siamese - mutate learning_rate"
+    },
+    {
+      "repo": "examples",
+      "model": "siamese",
+      "mode": "mutation",
+      "mutate": ["seed"],
+      "note": "Sequential: siamese - mutate seed"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "siamese",
+        "mode": "mutation",
+        "mutate": ["epochs"]
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "pcb",
+        "hyperparameters": {
+          "epochs": 60,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "note": "Parallel: siamese - mutate epochs"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "siamese",
+        "mode": "mutation",
+        "mutate": ["learning_rate"]
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "pcb",
+        "hyperparameters": {
+          "epochs": 60,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "note": "Parallel: siamese - mutate learning_rate"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "siamese",
+        "mode": "mutation",
+        "mutate": ["seed"]
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "pcb",
+        "hyperparameters": {
+          "epochs": 60,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "note": "Parallel: siamese - mutate seed"
+    },
+    {
+      "repo": "pytorch_resnet_cifar10",
+      "model": "resnet20",
+      "mode": "mutation",
+      "mutate": ["epochs"],
+      "note": "Sequential: resnet20 - mutate epochs"
+    },
+    {
+      "repo": "pytorch_resnet_cifar10",
+      "model": "resnet20",
+      "mode": "mutation",
+      "mutate": ["learning_rate"],
+      "note": "Sequential: resnet20 - mutate learning_rate"
+    },
+    {
+      "repo": "pytorch_resnet_cifar10",
+      "model": "resnet20",
+      "mode": "mutation",
+      "mutate": ["weight_decay"],
+      "note": "Sequential: resnet20 - mutate weight_decay"
+    },
+    {
+      "repo": "pytorch_resnet_cifar10",
+      "model": "resnet20",
+      "mode": "mutation",
+      "mutate": ["seed"],
+      "note": "Sequential: resnet20 - mutate seed"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "pytorch_resnet_cifar10",
+        "model": "resnet20",
+        "mode": "mutation",
+        "mutate": ["epochs"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist_ff",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: resnet20 - mutate epochs"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "pytorch_resnet_cifar10",
+        "model": "resnet20",
+        "mode": "mutation",
+        "mutate": ["learning_rate"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist_ff",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: resnet20 - mutate learning_rate"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "pytorch_resnet_cifar10",
+        "model": "resnet20",
+        "mode": "mutation",
+        "mutate": ["weight_decay"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist_ff",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: resnet20 - mutate weight_decay"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "pytorch_resnet_cifar10",
+        "model": "resnet20",
+        "mode": "mutation",
+        "mutate": ["seed"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist_ff",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: resnet20 - mutate seed"
+    },
+    {
+      "repo": "MRT-OAST",
+      "model": "default",
+      "mode": "mutation",
+      "mutate": ["epochs"],
+      "note": "Sequential: MRT-OAST - mutate epochs"
+    },
+    {
+      "repo": "MRT-OAST",
+      "model": "default",
+      "mode": "mutation",
+      "mutate": ["learning_rate"],
+      "note": "Sequential: MRT-OAST - mutate learning_rate"
+    },
+    {
+      "repo": "MRT-OAST",
+      "model": "default",
+      "mode": "mutation",
+      "mutate": ["dropout"],
+      "note": "Sequential: MRT-OAST - mutate dropout"
+    },
+    {
+      "repo": "MRT-OAST",
+      "model": "default",
+      "mode": "mutation",
+      "mutate": ["weight_decay"],
+      "note": "Sequential: MRT-OAST - mutate weight_decay"
+    },
+    {
+      "repo": "MRT-OAST",
+      "model": "default",
+      "mode": "mutation",
+      "mutate": ["seed"],
+      "note": "Sequential: MRT-OAST - mutate seed"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "MRT-OAST",
+        "model": "default",
+        "mode": "mutation",
+        "mutate": ["epochs"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: MRT-OAST - mutate epochs"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "MRT-OAST",
+        "model": "default",
+        "mode": "mutation",
+        "mutate": ["learning_rate"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: MRT-OAST - mutate learning_rate"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "MRT-OAST",
+        "model": "default",
+        "mode": "mutation",
+        "mutate": ["dropout"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: MRT-OAST - mutate dropout"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "MRT-OAST",
+        "model": "default",
+        "mode": "mutation",
+        "mutate": ["weight_decay"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: MRT-OAST - mutate weight_decay"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "MRT-OAST",
+        "model": "default",
+        "mode": "mutation",
+        "mutate": ["seed"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: MRT-OAST - mutate seed"
+    },
+    {
+      "repo": "VulBERTa",
+      "model": "mlp",
+      "mode": "mutation",
+      "mutate": ["epochs"],
+      "note": "Sequential: VulBERTa_mlp - mutate epochs"
+    },
+    {
+      "repo": "VulBERTa",
+      "model": "mlp",
+      "mode": "mutation",
+      "mutate": ["learning_rate"],
+      "note": "Sequential: VulBERTa_mlp - mutate learning_rate"
+    },
+    {
+      "repo": "VulBERTa",
+      "model": "mlp",
+      "mode": "mutation",
+      "mutate": ["weight_decay"],
+      "note": "Sequential: VulBERTa_mlp - mutate weight_decay"
+    },
+    {
+      "repo": "VulBERTa",
+      "model": "mlp",
+      "mode": "mutation",
+      "mutate": ["seed"],
+      "note": "Sequential: VulBERTa_mlp - mutate seed"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "VulBERTa",
+        "model": "mlp",
+        "mode": "mutation",
+        "mutate": ["epochs"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: VulBERTa_mlp - mutate epochs"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "VulBERTa",
+        "model": "mlp",
+        "mode": "mutation",
+        "mutate": ["learning_rate"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: VulBERTa_mlp - mutate learning_rate"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "VulBERTa",
+        "model": "mlp",
+        "mode": "mutation",
+        "mutate": ["weight_decay"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: VulBERTa_mlp - mutate weight_decay"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "VulBERTa",
+        "model": "mlp",
+        "mode": "mutation",
+        "mutate": ["seed"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: VulBERTa_mlp - mutate seed"
+    },
+    {
+      "repo": "bug-localization-by-dnn-and-rvsm",
+      "model": "default",
+      "mode": "mutation",
+      "mutate": ["max_iter"],
+      "note": "Sequential: bug-localization - mutate max_iter"
+    },
+    {
+      "repo": "bug-localization-by-dnn-and-rvsm",
+      "model": "default",
+      "mode": "mutation",
+      "mutate": ["alpha"],
+      "note": "Sequential: bug-localization - mutate alpha"
+    },
+    {
+      "repo": "bug-localization-by-dnn-and-rvsm",
+      "model": "default",
+      "mode": "mutation",
+      "mutate": ["seed"],
+      "note": "Sequential: bug-localization - mutate seed"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "bug-localization-by-dnn-and-rvsm",
+        "model": "default",
+        "mode": "mutation",
+        "mutate": ["max_iter"]
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "pcb",
+        "hyperparameters": {
+          "epochs": 60,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "note": "Parallel: bug-localization - mutate max_iter"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "bug-localization-by-dnn-and-rvsm",
+        "model": "default",
+        "mode": "mutation",
+        "mutate": ["alpha"]
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "pcb",
+        "hyperparameters": {
+          "epochs": 60,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "note": "Parallel: bug-localization - mutate alpha"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "bug-localization-by-dnn-and-rvsm",
+        "model": "default",
+        "mode": "mutation",
+        "mutate": ["seed"]
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "pcb",
+        "hyperparameters": {
+          "epochs": 60,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "note": "Parallel: bug-localization - mutate seed"
+    },
+    {
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "densenet121",
+      "mode": "mutation",
+      "mutate": ["epochs"],
+      "note": "Sequential: densenet121 - mutate epochs"
+    },
+    {
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "densenet121",
+      "mode": "mutation",
+      "mutate": ["learning_rate"],
+      "note": "Sequential: densenet121 - mutate learning_rate"
+    },
+    {
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "densenet121",
+      "mode": "mutation",
+      "mutate": ["dropout"],
+      "note": "Sequential: densenet121 - mutate dropout"
+    },
+    {
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "densenet121",
+      "mode": "mutation",
+      "mutate": ["seed"],
+      "note": "Sequential: densenet121 - mutate seed"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "densenet121",
+        "mode": "mutation",
+        "mutate": ["epochs"]
+      },
+      "background": {
+        "repo": "VulBERTa",
+        "model": "mlp",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.00003,
+          "weight_decay": 0.0,
+          "seed": 42
+        }
+      },
+      "note": "Parallel: densenet121 - mutate epochs"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "densenet121",
+        "mode": "mutation",
+        "mutate": ["learning_rate"]
+      },
+      "background": {
+        "repo": "VulBERTa",
+        "model": "mlp",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.00003,
+          "weight_decay": 0.0,
+          "seed": 42
+        }
+      },
+      "note": "Parallel: densenet121 - mutate learning_rate"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "densenet121",
+        "mode": "mutation",
+        "mutate": ["dropout"]
+      },
+      "background": {
+        "repo": "VulBERTa",
+        "model": "mlp",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.00003,
+          "weight_decay": 0.0,
+          "seed": 42
+        }
+      },
+      "note": "Parallel: densenet121 - mutate dropout"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "densenet121",
+        "mode": "mutation",
+        "mutate": ["seed"]
+      },
+      "background": {
+        "repo": "VulBERTa",
+        "model": "mlp",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.00003,
+          "weight_decay": 0.0,
+          "seed": 42
+        }
+      },
+      "note": "Parallel: densenet121 - mutate seed"
+    },
+    {
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "hrnet18",
+      "mode": "mutation",
+      "mutate": ["epochs"],
+      "note": "Sequential: hrnet18 - mutate epochs"
+    },
+    {
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "hrnet18",
+      "mode": "mutation",
+      "mutate": ["learning_rate"],
+      "note": "Sequential: hrnet18 - mutate learning_rate"
+    },
+    {
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "hrnet18",
+      "mode": "mutation",
+      "mutate": ["dropout"],
+      "note": "Sequential: hrnet18 - mutate dropout"
+    },
+    {
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "hrnet18",
+      "mode": "mutation",
+      "mutate": ["seed"],
+      "note": "Sequential: hrnet18 - mutate seed"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "hrnet18",
+        "mode": "mutation",
+        "mutate": ["epochs"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: hrnet18 - mutate epochs"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "hrnet18",
+        "mode": "mutation",
+        "mutate": ["learning_rate"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: hrnet18 - mutate learning_rate"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "hrnet18",
+        "mode": "mutation",
+        "mutate": ["dropout"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: hrnet18 - mutate dropout"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "hrnet18",
+        "mode": "mutation",
+        "mutate": ["seed"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: hrnet18 - mutate seed"
+    },
+    {
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "pcb",
+      "mode": "mutation",
+      "mutate": ["epochs"],
+      "note": "Sequential: pcb - mutate epochs"
+    },
+    {
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "pcb",
+      "mode": "mutation",
+      "mutate": ["learning_rate"],
+      "note": "Sequential: pcb - mutate learning_rate"
+    },
+    {
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "pcb",
+      "mode": "mutation",
+      "mutate": ["dropout"],
+      "note": "Sequential: pcb - mutate dropout"
+    },
+    {
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "pcb",
+      "mode": "mutation",
+      "mutate": ["seed"],
+      "note": "Sequential: pcb - mutate seed"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "pcb",
+        "mode": "mutation",
+        "mutate": ["epochs"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: pcb - mutate epochs"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "pcb",
+        "mode": "mutation",
+        "mutate": ["learning_rate"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: pcb - mutate learning_rate"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "pcb",
+        "mode": "mutation",
+        "mutate": ["dropout"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: pcb - mutate dropout"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "pcb",
+        "mode": "mutation",
+        "mutate": ["seed"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: pcb - mutate seed"
+    }
+  ]
+}

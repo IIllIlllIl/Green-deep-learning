@@ -1,0 +1,538 @@
+{
+  "comment": "Stage12-13最终合并: pcb并行(12) + hrnet18并行(8) + 快速模型(43) + MRT-OAST(7) + VulBERTa/cnn(8) [v4.7.2-final]",
+  "version": "4.7.2-final",
+  "created": "2025-12-08",
+  "estimated_duration_hours": 37.8,
+  "estimated_experiments": 78,
+  "merge_info": {
+    "stage12": "pcb并行补充 (12实验, 13.86h)",
+    "stage13_part1": "hrnet18并行补充 (8实验, 11.44h)",
+    "stage13_part2": "其他并行快速模型 (43实验, 5.0h)",
+    "stage13_part3": "MRT-OAST/default epochs (7实验, 2.5h)",
+    "stage13_part4": "VulBERTa/cnn全覆盖 (8实验, 5.0h)",
+    "total": "78实验, ~37.8小时"
+  },
+  "target_completion": {
+    "parameters": [
+      "pcb并行: 4参数×3次 (当前2个→5个)",
+      "hrnet18并行: 4参数×2次 (当前3个→5个)",
+      "其他并行快速模型: mnist_ff(4参数), mnist(batch_size), mnist_rnn(2参数), siamese(batch_size), bug-localization(kfold)",
+      "非并行MRT-OAST: epochs×7次 (当前4个→5个)",
+      "VulBERTa/cnn: 非并行和并行各4参数 (从0开始)"
+    ],
+    "goal": "完成所有剩余实验，达到100%覆盖（90/90参数-模式组合）"
+  },
+  "use_deduplication": true,
+  "historical_csvs": [
+    "results/summary_all.csv"
+  ],
+  "experiments": [
+    {
+      "comment": "=== 第一部分: pcb并行补充 (Stage12, 4个配置项, 12实验, 13.86h) ==="
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "pcb",
+        "mode": "mutation",
+        "mutate": [
+          "epochs"
+        ],
+        "comment": "仅变异epochs参数 - 补充3个新值（当前已有2个: 60, 57）"
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "densenet121",
+        "hyperparameters": {}
+      },
+      "runs_per_config": 3,
+      "comment": "超慢速模型，并行模式平均69.3分钟/实验，3个实验约3.47小时"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "pcb",
+        "mode": "mutation",
+        "mutate": [
+          "learning_rate"
+        ],
+        "comment": "仅变异learning_rate参数 - 补充3个新值（当前已有2个: 0.05, 0.0254）"
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "densenet121",
+        "hyperparameters": {}
+      },
+      "runs_per_config": 3,
+      "comment": "超慢速模型，并行模式平均69.3分钟/实验，3个实验约3.47小时"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "pcb",
+        "mode": "mutation",
+        "mutate": [
+          "seed"
+        ],
+        "comment": "仅变异seed参数 - 补充3个新值（当前已有2个: 1334, 7650）"
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "densenet121",
+        "hyperparameters": {}
+      },
+      "runs_per_config": 3,
+      "comment": "超慢速模型，并行模式平均69.3分钟/实验，3个实验约3.47小时"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "pcb",
+        "mode": "mutation",
+        "mutate": [
+          "dropout"
+        ],
+        "comment": "仅变异dropout参数 - 补充3个新值（当前已有2个: 0.5, 0.403）"
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "densenet121",
+        "hyperparameters": {}
+      },
+      "runs_per_config": 3,
+      "comment": "超慢速模型，并行模式平均69.3分钟/实验，3个实验约3.47小时"
+    },
+    {
+      "comment": "=== 第二部分: hrnet18并行补充 (Stage13-part1, 4个配置项, 8实验, 11.44h) ==="
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "hrnet18",
+        "mode": "mutation",
+        "mutate": [
+          "epochs"
+        ],
+        "comment": "仅变异epochs参数 - 补充2个新值（当前已有3个: 60, 79, 53）"
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "densenet121",
+        "hyperparameters": {}
+      },
+      "runs_per_config": 2,
+      "comment": "超慢速模型，并行模式平均85.9分钟/实验，2个实验约2.86小时"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "hrnet18",
+        "mode": "mutation",
+        "mutate": [
+          "learning_rate"
+        ],
+        "comment": "仅变异learning_rate参数 - 补充2个新值（当前已有3个: 0.05, 0.0517, 0.0302）"
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "densenet121",
+        "hyperparameters": {}
+      },
+      "runs_per_config": 2,
+      "comment": "超慢速模型，并行模式平均85.9分钟/实验，2个实验约2.86小时"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "hrnet18",
+        "mode": "mutation",
+        "mutate": [
+          "seed"
+        ],
+        "comment": "仅变异seed参数 - 补充2个新值（当前已有3个: 1334, 1928, 6621）"
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "densenet121",
+        "hyperparameters": {}
+      },
+      "runs_per_config": 2,
+      "comment": "超慢速模型，并行模式平均85.9分钟/实验，2个实验约2.86小时"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "hrnet18",
+        "mode": "mutation",
+        "mutate": [
+          "dropout"
+        ],
+        "comment": "仅变异dropout参数 - 补充2个新值（当前已有3个: 0.5, 0.466, 0.544）"
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "densenet121",
+        "hyperparameters": {}
+      },
+      "runs_per_config": 2,
+      "comment": "超慢速模型，并行模式平均85.9分钟/实验，2个实验约2.86小时"
+    },
+    {
+      "comment": "=== 第三部分: 其他并行模式快速模型补充 (Stage13-part2, 9个配置项, 43实验, 5.0h) ==="
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist_ff",
+        "mode": "mutation",
+        "mutate": [
+          "epochs"
+        ],
+        "comment": "仅变异epochs参数"
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "densenet121",
+        "hyperparameters": {}
+      },
+      "runs_per_config": 5,
+      "comment": "超快模型，并行模式平均0.2分钟/实验"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist_ff",
+        "mode": "mutation",
+        "mutate": [
+          "learning_rate"
+        ],
+        "comment": "仅变异learning_rate参数"
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "densenet121",
+        "hyperparameters": {}
+      },
+      "runs_per_config": 5,
+      "comment": "超快模型，并行模式平均0.2分钟/实验"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist_ff",
+        "mode": "mutation",
+        "mutate": [
+          "batch_size"
+        ],
+        "comment": "仅变异batch_size参数"
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "densenet121",
+        "hyperparameters": {}
+      },
+      "runs_per_config": 5,
+      "comment": "超快模型，并行模式平均0.2分钟/实验"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist_ff",
+        "mode": "mutation",
+        "mutate": [
+          "seed"
+        ],
+        "comment": "仅变异seed参数"
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "densenet121",
+        "hyperparameters": {}
+      },
+      "runs_per_config": 5,
+      "comment": "超快模型，并行模式平均0.2分钟/实验"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist",
+        "mode": "mutation",
+        "mutate": [
+          "batch_size"
+        ]
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "densenet121",
+        "hyperparameters": {}
+      },
+      "runs_per_config": 5,
+      "comment": "快速模型，并行模式平均4.3分钟/实验"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "mode": "mutation",
+        "mutate": [
+          "batch_size"
+        ]
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "densenet121",
+        "hyperparameters": {}
+      },
+      "runs_per_config": 5,
+      "comment": "快速模型，并行模式平均6.6分钟/实验"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "mode": "mutation",
+        "mutate": [
+          "epochs"
+        ]
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "densenet121",
+        "hyperparameters": {}
+      },
+      "runs_per_config": 3,
+      "comment": "快速模型，并行模式平均6.6分钟/实验，仅需1个补充值"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "siamese",
+        "mode": "mutation",
+        "mutate": [
+          "batch_size"
+        ]
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "densenet121",
+        "hyperparameters": {}
+      },
+      "runs_per_config": 5,
+      "comment": "快速模型，并行模式平均11.1分钟/实验"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "bug-localization-by-dnn-and-rvsm",
+        "model": "default",
+        "mode": "mutation",
+        "mutate": [
+          "kfold"
+        ]
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "densenet121",
+        "hyperparameters": {}
+      },
+      "runs_per_config": 5,
+      "comment": "中速模型，并行模式平均24.9分钟/实验"
+    },
+    {
+      "comment": "=== 第四部分: 非并行MRT-OAST补充 (Stage13-part3, 1个配置项, 7实验, 2.5h) ==="
+    },
+    {
+      "repo": "MRT-OAST",
+      "model": "default",
+      "baseline_runs": 0,
+      "runs_per_config": 7,
+      "mutate_params": [
+        "epochs"
+      ],
+      "mode": "nonparallel",
+      "comment": "补充MRT-OAST/default epochs参数：当前4个唯一值，目标5个"
+    },
+    {
+      "comment": "=== 第五部分: VulBERTa/cnn完整覆盖 (Stage13-part4, 8个配置项, 8实验, 5.0h) ==="
+    },
+    {
+      "repo": "VulBERTa",
+      "model": "cnn",
+      "baseline_runs": 0,
+      "runs_per_config": 5,
+      "mutate_params": [
+        "epochs"
+      ],
+      "mode": "nonparallel",
+      "comment": "VulBERTa/cnn非并行 - 仅变异epochs参数 (从0开始)"
+    },
+    {
+      "repo": "VulBERTa",
+      "model": "cnn",
+      "baseline_runs": 0,
+      "runs_per_config": 5,
+      "mutate_params": [
+        "learning_rate"
+      ],
+      "mode": "nonparallel",
+      "comment": "VulBERTa/cnn非并行 - 仅变异learning_rate参数 (从0开始)"
+    },
+    {
+      "repo": "VulBERTa",
+      "model": "cnn",
+      "baseline_runs": 0,
+      "runs_per_config": 5,
+      "mutate_params": [
+        "weight_decay"
+      ],
+      "mode": "nonparallel",
+      "comment": "VulBERTa/cnn非并行 - 仅变异weight_decay参数 (从0开始)"
+    },
+    {
+      "repo": "VulBERTa",
+      "model": "cnn",
+      "baseline_runs": 0,
+      "runs_per_config": 5,
+      "mutate_params": [
+        "seed"
+      ],
+      "mode": "nonparallel",
+      "comment": "VulBERTa/cnn非并行 - 仅变异seed参数 (从0开始)"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "VulBERTa",
+        "model": "cnn",
+        "mode": "mutation",
+        "mutate": [
+          "epochs"
+        ],
+        "comment": "仅变异epochs参数"
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "densenet121",
+        "hyperparameters": {}
+      },
+      "runs_per_config": 5,
+      "comment": "VulBERTa/cnn并行 - 中速模型 (从0开始)"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "VulBERTa",
+        "model": "cnn",
+        "mode": "mutation",
+        "mutate": [
+          "learning_rate"
+        ],
+        "comment": "仅变异learning_rate参数"
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "densenet121",
+        "hyperparameters": {}
+      },
+      "runs_per_config": 5,
+      "comment": "VulBERTa/cnn并行 - 中速模型 (从0开始)"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "VulBERTa",
+        "model": "cnn",
+        "mode": "mutation",
+        "mutate": [
+          "weight_decay"
+        ],
+        "comment": "仅变异weight_decay参数"
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "densenet121",
+        "hyperparameters": {}
+      },
+      "runs_per_config": 5,
+      "comment": "VulBERTa/cnn并行 - 中速模型 (从0开始)"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "VulBERTa",
+        "model": "cnn",
+        "mode": "mutation",
+        "mutate": [
+          "seed"
+        ],
+        "comment": "仅变异seed参数"
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "densenet121",
+        "hyperparameters": {}
+      },
+      "runs_per_config": 5,
+      "comment": "VulBERTa/cnn并行 - 中速模型 (从0开始)"
+    }
+  ],
+  "execution_summary": {
+    "part1_pcb_parallel": {
+      "experiments": 12,
+      "duration_hours": 13.86,
+      "description": "pcb并行补充 (Stage12)"
+    },
+    "part2_hrnet18_parallel": {
+      "experiments": 8,
+      "duration_hours": 11.44,
+      "description": "hrnet18并行补充 (Stage13-part1)"
+    },
+    "part3_other_parallel_fast": {
+      "experiments": 43,
+      "duration_hours": 5.0,
+      "description": "其他并行快速模型 (Stage13-part2)"
+    },
+    "part4_nonparallel_mrt": {
+      "experiments": 7,
+      "duration_hours": 2.5,
+      "description": "MRT-OAST epochs补充 (Stage13-part3)"
+    },
+    "part5_vulberta_cnn": {
+      "experiments": 8,
+      "duration_hours": 5.0,
+      "description": "VulBERTa/cnn全覆盖 (Stage13-part4)"
+    },
+    "total": {
+      "experiments": 78,
+      "duration_hours": 37.8,
+      "config_items": 26
+    }
+  },
+  "completion_status": {
+    "before": "81/159实验完成 (51%)",
+    "after": "159/159实验完成 (100%)",
+    "coverage": "100%覆盖（90/90参数-模式组合）"
+  },
+  "notes": {
+    "final_merge": "合并Stage12和Stage13为单一配置，一次性完成所有剩余实验",
+    "estimated_time": "预计37.8小时，考虑去重后实际可能更短",
+    "deduplication": "启用去重机制，自动跳过已存在的值",
+    "execution_order": "pcb并行(慢) → hrnet18并行(慢) → 其他并行快速模型 → MRT-OAST → VulBERTa/cnn"
+  }
+}

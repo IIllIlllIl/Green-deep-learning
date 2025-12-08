@@ -1,0 +1,45 @@
+{
+  "experiment_id": "examples_mnist_rnn_017_parallel",
+  "timestamp": "2025-11-20T20:54:52.170037",
+  "mode": "parallel",
+  "foreground": {
+    "repository": "examples",
+    "model": "mnist_rnn",
+    "hyperparameters": {
+      "learning_rate": 0.018760266157448684
+    },
+    "duration_seconds": 336.5597879886627,
+    "energy_metrics": {
+      "cpu_energy_pkg_joules": 15207.07,
+      "cpu_energy_ram_joules": 932.66,
+      "cpu_energy_total_joules": 16139.73,
+      "gpu_power_avg_watts": 288.5563914373088,
+      "gpu_power_max_watts": 318.2,
+      "gpu_power_min_watts": 214.13,
+      "gpu_energy_total_joules": 94357.93999999997,
+      "gpu_temp_avg_celsius": 81.41896024464832,
+      "gpu_temp_max_celsius": 84.0,
+      "gpu_util_avg_percent": 98.30581039755351,
+      "gpu_util_max_percent": 99.0
+    },
+    "performance_metrics": {
+      "test_accuracy": 74.0,
+      "test_loss": 0.8218
+    },
+    "training_success": true,
+    "retries": 0,
+    "error_message": "Training completed successfully"
+  },
+  "background": {
+    "repository": "Person_reID_baseline_pytorch",
+    "model": "pcb",
+    "hyperparameters": {
+      "epochs": 60,
+      "learning_rate": 0.05,
+      "dropout": 0.5,
+      "seed": 1334
+    },
+    "log_directory": "/home/green/energy_dl/nightly/results/run_20251120_194804/examples_mnist_rnn_017_parallel/background_logs",
+    "note": "Background training served as GPU load only (not monitored)"
+  }
+}

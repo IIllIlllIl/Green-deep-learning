@@ -1,0 +1,57 @@
+{
+  "experiment_name": "gpu_memory_cleanup_test",
+  "description": "测试GPU内存清理机制：运行容易OOM的模型，验证清理是否有效",
+  "mode": "default",
+  "runs_per_config": 2,
+  "max_retries": 1,
+  "governor": "performance",
+  "experiments": [
+    {
+      "comment": "1. 先运行小模型建立baseline",
+      "repo": "VulBERTa",
+      "model": "mlp",
+      "mode": "default",
+      "hyperparameters": {
+        "epochs": 5
+      }
+    },
+    {
+      "comment": "2. 运行mnist_ff（之前失败的模型）- 使用更小的batch size",
+      "repo": "examples",
+      "model": "mnist_ff",
+      "mode": "default",
+      "hyperparameters": {
+        "epochs": 5,
+        "batch_size": 10000
+      }
+    },
+    {
+      "comment": "3. 再次运行VulBERTa验证GPU恢复",
+      "repo": "VulBERTa",
+      "model": "mlp",
+      "mode": "default",
+      "hyperparameters": {
+        "epochs": 7
+      }
+    },
+    {
+      "comment": "4. 运行PCB模型（之前失败的模型）- 使用小epoch数减少训练时间",
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "pcb",
+      "mode": "default",
+      "hyperparameters": {
+        "epochs": 3,
+        "batchsize": 16
+      }
+    },
+    {
+      "comment": "5. 最后再次运行小模型确认清理有效",
+      "repo": "VulBERTa",
+      "model": "mlp",
+      "mode": "default",
+      "hyperparameters": {
+        "epochs": 5
+      }
+    }
+  ]
+}
