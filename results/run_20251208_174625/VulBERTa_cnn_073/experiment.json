@@ -1,0 +1,30 @@
+{
+  "experiment_id": "VulBERTa_cnn_073",
+  "timestamp": "2025-12-10T17:58:13.423630",
+  "repository": "VulBERTa",
+  "model": "cnn",
+  "hyperparameters": {
+    "epochs": 18,
+    "learning_rate": 1.8285533114037848e-05,
+    "seed": 1853,
+    "weight_decay": 1.1098465025663965e-05
+  },
+  "duration_seconds": 3.5998761653900146,
+  "energy_metrics": {
+    "cpu_energy_pkg_joules": 78.96,
+    "cpu_energy_ram_joules": 5.9,
+    "cpu_energy_total_joules": 84.86,
+    "gpu_power_avg_watts": 78.98,
+    "gpu_power_max_watts": 78.98,
+    "gpu_power_min_watts": 78.98,
+    "gpu_energy_total_joules": 78.98,
+    "gpu_temp_avg_celsius": 65.0,
+    "gpu_temp_max_celsius": 65.0,
+    "gpu_util_avg_percent": 0.0,
+    "gpu_util_max_percent": 0.0
+  },
+  "performance_metrics": {},
+  "training_success": true,
+  "retries": 0,
+  "error_message": "Training completed successfully"
+}

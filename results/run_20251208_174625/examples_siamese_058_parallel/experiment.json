@@ -1,0 +1,40 @@
+{
+  "experiment_id": "examples_siamese_058_parallel",
+  "timestamp": "2025-12-10T14:09:39.769715",
+  "mode": "parallel",
+  "foreground": {
+    "repository": "examples",
+    "model": "siamese",
+    "hyperparameters": {
+      "batch_size": 49
+    },
+    "duration_seconds": 425.7684636116028,
+    "energy_metrics": {
+      "cpu_energy_pkg_joules": 16129.87,
+      "cpu_energy_ram_joules": 1129.24,
+      "cpu_energy_total_joules": 17259.11,
+      "gpu_power_avg_watts": 239.53417874396152,
+      "gpu_power_max_watts": 282.81,
+      "gpu_power_min_watts": 223.15,
+      "gpu_energy_total_joules": 99167.15000000007,
+      "gpu_temp_avg_celsius": 82.54589371980677,
+      "gpu_temp_max_celsius": 84.0,
+      "gpu_util_avg_percent": 98.05797101449275,
+      "gpu_util_max_percent": 100.0
+    },
+    "performance_metrics": {
+      "test_accuracy": 100.0,
+      "test_loss": 0.0
+    },
+    "training_success": true,
+    "retries": 0,
+    "error_message": "Training completed successfully"
+  },
+  "background": {
+    "repository": "Person_reID_baseline_pytorch",
+    "model": "densenet121",
+    "hyperparameters": {},
+    "log_directory": "/home/green/energy_dl/nightly/results/run_20251208_174625/examples_siamese_058_parallel/background_logs",
+    "note": "Background training served as GPU load only (not monitored)"
+  }
+}

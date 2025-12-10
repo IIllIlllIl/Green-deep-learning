@@ -1,0 +1,37 @@
+{
+  "experiment_id": "VulBERTa_cnn_110_parallel",
+  "timestamp": "2025-12-10T18:35:12.847894",
+  "mode": "parallel",
+  "foreground": {
+    "repository": "VulBERTa",
+    "model": "cnn",
+    "hyperparameters": {
+      "seed": 3412
+    },
+    "duration_seconds": 3.2428388595581055,
+    "energy_metrics": {
+      "cpu_energy_pkg_joules": 80.37,
+      "cpu_energy_ram_joules": 5.52,
+      "cpu_energy_total_joules": 85.89,
+      "gpu_power_avg_watts": 245.95333333333335,
+      "gpu_power_max_watts": 251.2,
+      "gpu_power_min_watts": 242.93,
+      "gpu_energy_total_joules": 737.86,
+      "gpu_temp_avg_celsius": 75.33333333333333,
+      "gpu_temp_max_celsius": 76.0,
+      "gpu_util_avg_percent": 62.333333333333336,
+      "gpu_util_max_percent": 66.0
+    },
+    "performance_metrics": {},
+    "training_success": true,
+    "retries": 0,
+    "error_message": "Training completed successfully"
+  },
+  "background": {
+    "repository": "Person_reID_baseline_pytorch",
+    "model": "densenet121",
+    "hyperparameters": {},
+    "log_directory": "/home/green/energy_dl/nightly/results/run_20251208_174625/VulBERTa_cnn_110_parallel/background_logs",
+    "note": "Background training served as GPU load only (not monitored)"
+  }
+}
