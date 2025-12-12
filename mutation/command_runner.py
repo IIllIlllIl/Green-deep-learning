@@ -113,7 +113,8 @@ class CommandRunner:
         cmd: List[str],
         log_file: str,
         exp_dir: Path,
-        timeout: Optional[int] = None
+        timeout: Optional[int] = None,
+        capture_stdout: bool = True
     ) -> Tuple[int, float, Dict[str, Any]]:
         """Run training with energy monitoring
 
@@ -125,6 +126,8 @@ class CommandRunner:
             log_file: Path to log file
             exp_dir: Experiment directory (energy/ subdirectory will be used)
             timeout: Maximum training time in seconds (default: None, no limit)
+            capture_stdout: If True, capture and save stdout/stderr to terminal_output.txt
+                           (default: True for debugging data extraction issues)
 
         Returns:
             Tuple of (exit_code, duration_seconds, energy_metrics)
@@ -141,23 +144,83 @@ class CommandRunner:
             print(f"   Timeout: {timeout}s ({timeout/3600:.1f}h)")
         else:
             print(f"   Timeout: None (no limit)")
+        if capture_stdout:
+            terminal_output_file = exp_dir / "terminal_output.txt"
+            print(f"   Terminal output: {terminal_output_file}")
 
         start_time = time.time()
 
         # Run training with integrated energy monitoring
         # run.sh handles both training and energy monitoring
         try:
-            train_process = subprocess.run(
-                cmd,
-                capture_output=False,  # Output is handled by run.sh (tee to log)
-                text=True,
-                timeout=timeout
-            )
-            exit_code = train_process.returncode
+            if capture_stdout:
+                # Capture stdout and stderr for debugging
+                train_process = subprocess.run(
+                    cmd,
+                    capture_output=True,  # Capture both stdout and stderr
+                    text=True,
+                    timeout=timeout
+                )
+                exit_code = train_process.returncode
 
-        except subprocess.TimeoutExpired:
+                # Save captured output to terminal_output.txt
+                try:
+                    terminal_output_file = exp_dir / "terminal_output.txt"
+                    with open(terminal_output_file, 'w', encoding='utf-8') as f:
+                        f.write("=" * 80 + "\n")
+                        f.write("STDOUT:\n")
+                        f.write("=" * 80 + "\n")
+                        f.write(train_process.stdout if train_process.stdout else "(empty)\n")
+                        f.write("\n" + "=" * 80 + "\n")
+                        f.write("STDERR:\n")
+                        f.write("=" * 80 + "\n")
+                        f.write(train_process.stderr if train_process.stderr else "(empty)\n")
+                    self.logger.debug(f"Saved terminal output to {terminal_output_file}")
+                except Exception as e:
+                    self.logger.warning(f"Failed to save terminal output: {e}")
+            else:
+                # Original behavior: don't capture output
+                train_process = subprocess.run(
+                    cmd,
+                    capture_output=False,  # Output is handled by run.sh (tee to log)
+                    text=True,
+                    timeout=timeout
+                )
+                exit_code = train_process.returncode
+
+        except subprocess.TimeoutExpired as e:
             print(f"⚠️  Warning: Training timed out after {timeout}s")
             exit_code = -1
+
+            # Save partial output if available
+            if capture_stdout:
+                try:
+                    terminal_output_file = exp_dir / "terminal_output.txt"
+                    with open(terminal_output_file, 'w', encoding='utf-8') as f:
+                        f.write("=" * 80 + "\n")
+                        f.write("TIMEOUT - PARTIAL OUTPUT\n")
+                        f.write("=" * 80 + "\n")
+                        f.write("STDOUT:\n")
+                        f.write("=" * 80 + "\n")
+                        # Handle both str and bytes types
+                        stdout_text = e.stdout
+                        if stdout_text is None:
+                            stdout_text = "(empty)"
+                        elif isinstance(stdout_text, bytes):
+                            stdout_text = stdout_text.decode('utf-8', errors='replace')
+                        f.write(stdout_text + "\n")
+                        f.write("\n" + "=" * 80 + "\n")
+                        f.write("STDERR:\n")
+                        f.write("=" * 80 + "\n")
+                        # Handle both str and bytes types
+                        stderr_text = e.stderr
+                        if stderr_text is None:
+                            stderr_text = "(empty)"
+                        elif isinstance(stderr_text, bytes):
+                            stderr_text = stderr_text.decode('utf-8', errors='replace')
+                        f.write(stderr_text + "\n")
+                except Exception as save_err:
+                    self.logger.warning(f"Failed to save timeout output: {save_err}")
         except Exception as e:
             print(f"❌ Error running training: {e}")
             self.logger.error(f"Training execution error: {e}", exc_info=True)

@@ -124,9 +124,9 @@ Examples:
     )
 
     parser.add_argument(
-        "-S", "--skip-summary-append",
+        "-S", "--enable-summary-append",
         action="store_true",
-        help="Skip appending results to results/summary_all.csv (for test/validation runs)"
+        help="Enable appending results to results/summary_all.csv (deprecated, use raw_data.csv instead)"
     )
 
     args = parser.parse_args()
@@ -136,7 +136,7 @@ Examples:
         runner = MutationRunner(
             config_path=args.config,
             random_seed=args.seed,
-            append_to_summary=not args.skip_summary_append
+            append_to_summary=args.enable_summary_append  # Changed: now default to False
         )
     except Exception as e:
         print(f"❌ Error: {e}")

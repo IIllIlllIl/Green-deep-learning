@@ -1,22 +1,22 @@
 {
-  "comment": "Stage13: 并行模式快速模型补充 - mnist_ff全参数 + 其他模型个别参数 [已修复: 拆分多参数配置项]",
+  "comment": "Stage13: \u5e76\u884c\u6a21\u5f0f\u5feb\u901f\u6a21\u578b\u8865\u5145 - mnist_ff\u5168\u53c2\u6570 + \u5176\u4ed6\u6a21\u578b\u4e2a\u522b\u53c2\u6570 [\u5df2\u4fee\u590d: \u62c6\u5206\u591a\u53c2\u6570\u914d\u7f6e\u9879]",
   "version": "4.7.1-fixed",
   "created": "2025-12-05",
   "estimated_duration_hours": 5.0,
   "estimated_experiments": 43,
   "target_completion": {
     "parameters": [
-      "examples/mnist_ff并行: 4参数 × 5次 (batch_size,epochs,learning_rate,seed各缺3个)",
-      "examples/mnist并行: batch_size × 5次 (缺3个)",
-      "examples/mnist_rnn并行: batch_size × 5次, epochs × 3次 (batch_size缺3个,epochs缺1个)",
-      "examples/siamese并行: batch_size × 5次 (缺3个)",
-      "bug-localization-by-dnn-and-rvsm/default并行: kfold × 5次 (缺3个)"
+      "examples/mnist_ff\u5e76\u884c: 4\u53c2\u6570 \u00d7 5\u6b21 (batch_size,epochs,learning_rate,seed\u5404\u7f3a3\u4e2a)",
+      "examples/mnist\u5e76\u884c: batch_size \u00d7 5\u6b21 (\u7f3a3\u4e2a)",
+      "examples/mnist_rnn\u5e76\u884c: batch_size \u00d7 5\u6b21, epochs \u00d7 3\u6b21 (batch_size\u7f3a3\u4e2a,epochs\u7f3a1\u4e2a)",
+      "examples/siamese\u5e76\u884c: batch_size \u00d7 5\u6b21 (\u7f3a3\u4e2a)",
+      "bug-localization-by-dnn-and-rvsm/default\u5e76\u884c: kfold \u00d7 5\u6b21 (\u7f3a3\u4e2a)"
     ],
-    "goal": "补充快速模型并行模式的缺失参数，完成所有并行模式实验"
+    "goal": "\u8865\u5145\u5feb\u901f\u6a21\u578b\u5e76\u884c\u6a21\u5f0f\u7684\u7f3a\u5931\u53c2\u6570\uff0c\u5b8c\u6210\u6240\u6709\u5e76\u884c\u6a21\u5f0f\u5b9e\u9a8c"
   },
   "use_deduplication": true,
   "historical_csvs": [
-    "results/summary_all.csv"
+    "results/raw_data.csv"
   ],
   "experiments": [
     {
@@ -28,7 +28,7 @@
         "mutate": [
           "epochs"
         ],
-        "comment": "仅变异epochs参数"
+        "comment": "\u4ec5\u53d8\u5f02epochs\u53c2\u6570"
       },
       "background": {
         "repo": "Person_reID_baseline_pytorch",
@@ -36,7 +36,7 @@
         "hyperparameters": {}
       },
       "runs_per_config": 5,
-      "comment": "超快模型，并行模式平均0.2分钟/实验，预计20个实验约0.7小时"
+      "comment": "\u8d85\u5feb\u6a21\u578b\uff0c\u5e76\u884c\u6a21\u5f0f\u5e73\u57470.2\u5206\u949f/\u5b9e\u9a8c\uff0c\u9884\u8ba120\u4e2a\u5b9e\u9a8c\u7ea60.7\u5c0f\u65f6"
     },
     {
       "mode": "parallel",
@@ -47,7 +47,7 @@
         "mutate": [
           "learning_rate"
         ],
-        "comment": "仅变异learning_rate参数"
+        "comment": "\u4ec5\u53d8\u5f02learning_rate\u53c2\u6570"
       },
       "background": {
         "repo": "Person_reID_baseline_pytorch",
@@ -55,7 +55,7 @@
         "hyperparameters": {}
       },
       "runs_per_config": 5,
-      "comment": "超快模型，并行模式平均0.2分钟/实验，预计20个实验约0.7小时"
+      "comment": "\u8d85\u5feb\u6a21\u578b\uff0c\u5e76\u884c\u6a21\u5f0f\u5e73\u57470.2\u5206\u949f/\u5b9e\u9a8c\uff0c\u9884\u8ba120\u4e2a\u5b9e\u9a8c\u7ea60.7\u5c0f\u65f6"
     },
     {
       "mode": "parallel",
@@ -66,7 +66,7 @@
         "mutate": [
           "batch_size"
         ],
-        "comment": "仅变异batch_size参数"
+        "comment": "\u4ec5\u53d8\u5f02batch_size\u53c2\u6570"
       },
       "background": {
         "repo": "Person_reID_baseline_pytorch",
@@ -74,7 +74,7 @@
         "hyperparameters": {}
       },
       "runs_per_config": 5,
-      "comment": "超快模型，并行模式平均0.2分钟/实验，预计20个实验约0.7小时"
+      "comment": "\u8d85\u5feb\u6a21\u578b\uff0c\u5e76\u884c\u6a21\u5f0f\u5e73\u57470.2\u5206\u949f/\u5b9e\u9a8c\uff0c\u9884\u8ba120\u4e2a\u5b9e\u9a8c\u7ea60.7\u5c0f\u65f6"
     },
     {
       "mode": "parallel",
@@ -85,7 +85,7 @@
         "mutate": [
           "seed"
         ],
-        "comment": "仅变异seed参数"
+        "comment": "\u4ec5\u53d8\u5f02seed\u53c2\u6570"
       },
       "background": {
         "repo": "Person_reID_baseline_pytorch",
@@ -93,7 +93,7 @@
         "hyperparameters": {}
       },
       "runs_per_config": 5,
-      "comment": "超快模型，并行模式平均0.2分钟/实验，预计20个实验约0.7小时"
+      "comment": "\u8d85\u5feb\u6a21\u578b\uff0c\u5e76\u884c\u6a21\u5f0f\u5e73\u57470.2\u5206\u949f/\u5b9e\u9a8c\uff0c\u9884\u8ba120\u4e2a\u5b9e\u9a8c\u7ea60.7\u5c0f\u65f6"
     },
     {
       "mode": "parallel",
@@ -111,7 +111,7 @@
         "hyperparameters": {}
       },
       "runs_per_config": 5,
-      "comment": "快速模型，并行模式平均4.3分钟/实验，只变异batch_size，预计5个实验约0.4小时"
+      "comment": "\u5feb\u901f\u6a21\u578b\uff0c\u5e76\u884c\u6a21\u5f0f\u5e73\u57474.3\u5206\u949f/\u5b9e\u9a8c\uff0c\u53ea\u53d8\u5f02batch_size\uff0c\u9884\u8ba15\u4e2a\u5b9e\u9a8c\u7ea60.4\u5c0f\u65f6"
     },
     {
       "mode": "parallel",
@@ -129,7 +129,7 @@
         "hyperparameters": {}
       },
       "runs_per_config": 5,
-      "comment": "快速模型，并行模式平均6.6分钟/实验，只变异batch_size（缺3个），预计5个实验约0.6小时"
+      "comment": "\u5feb\u901f\u6a21\u578b\uff0c\u5e76\u884c\u6a21\u5f0f\u5e73\u57476.6\u5206\u949f/\u5b9e\u9a8c\uff0c\u53ea\u53d8\u5f02batch_size\uff08\u7f3a3\u4e2a\uff09\uff0c\u9884\u8ba15\u4e2a\u5b9e\u9a8c\u7ea60.6\u5c0f\u65f6"
     },
     {
       "mode": "parallel",
@@ -147,7 +147,7 @@
         "hyperparameters": {}
       },
       "runs_per_config": 3,
-      "comment": "快速模型，并行模式平均6.6分钟/实验，只变异epochs（缺1个），预计3个实验约0.3小时"
+      "comment": "\u5feb\u901f\u6a21\u578b\uff0c\u5e76\u884c\u6a21\u5f0f\u5e73\u57476.6\u5206\u949f/\u5b9e\u9a8c\uff0c\u53ea\u53d8\u5f02epochs\uff08\u7f3a1\u4e2a\uff09\uff0c\u9884\u8ba13\u4e2a\u5b9e\u9a8c\u7ea60.3\u5c0f\u65f6"
     },
     {
       "mode": "parallel",
@@ -165,7 +165,7 @@
         "hyperparameters": {}
       },
       "runs_per_config": 5,
-      "comment": "快速模型，并行模式平均11.1分钟/实验，只变异batch_size，预计5个实验约0.9小时"
+      "comment": "\u5feb\u901f\u6a21\u578b\uff0c\u5e76\u884c\u6a21\u5f0f\u5e73\u574711.1\u5206\u949f/\u5b9e\u9a8c\uff0c\u53ea\u53d8\u5f02batch_size\uff0c\u9884\u8ba15\u4e2a\u5b9e\u9a8c\u7ea60.9\u5c0f\u65f6"
     },
     {
       "mode": "parallel",
@@ -183,7 +183,7 @@
         "hyperparameters": {}
       },
       "runs_per_config": 5,
-      "comment": "中速模型，并行模式平均24.9分钟/实验，只变异kfold，预计5个实验约2.1小时"
+      "comment": "\u4e2d\u901f\u6a21\u578b\uff0c\u5e76\u884c\u6a21\u5f0f\u5e73\u574724.9\u5206\u949f/\u5b9e\u9a8c\uff0c\u53ea\u53d8\u5f02kfold\uff0c\u9884\u8ba15\u4e2a\u5b9e\u9a8c\u7ea62.1\u5c0f\u65f6"
     }
   ]
 }

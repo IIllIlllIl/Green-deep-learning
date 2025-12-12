@@ -1,24 +1,24 @@
 {
-  "comment": "Stage7: 非并行模式快速和中速模型 - 完成examples全系列 + MRT-OAST + bug-loc + resnet20 [已修复: 拆分多参数配置项]",
+  "comment": "Stage7: \u975e\u5e76\u884c\u6a21\u5f0f\u5feb\u901f\u548c\u4e2d\u901f\u6a21\u578b - \u5b8c\u6210examples\u5168\u7cfb\u5217 + MRT-OAST + bug-loc + resnet20 [\u5df2\u4fee\u590d: \u62c6\u5206\u591a\u53c2\u6570\u914d\u7f6e\u9879]",
   "version": "4.7.1-fixed",
   "created": "2025-12-05",
   "estimated_duration_hours": 38.3,
   "estimated_experiments": 199,
   "target_completion": {
     "parameters": [
-      "examples/mnist: 4参数 × 7次",
-      "examples/mnist_ff: 4参数 × 7次",
-      "examples/mnist_rnn: 4参数 × 7次",
-      "examples/siamese: 4参数 × 7次",
-      "MRT-OAST/default: 5参数 × 7次",
-      "bug-localization-by-dnn-and-rvsm/default: 4参数 × 7次",
-      "pytorch_resnet_cifar10/resnet20: 4参数 × 6次"
+      "examples/mnist: 4\u53c2\u6570 \u00d7 7\u6b21",
+      "examples/mnist_ff: 4\u53c2\u6570 \u00d7 7\u6b21",
+      "examples/mnist_rnn: 4\u53c2\u6570 \u00d7 7\u6b21",
+      "examples/siamese: 4\u53c2\u6570 \u00d7 7\u6b21",
+      "MRT-OAST/default: 5\u53c2\u6570 \u00d7 7\u6b21",
+      "bug-localization-by-dnn-and-rvsm/default: 4\u53c2\u6570 \u00d7 7\u6b21",
+      "pytorch_resnet_cifar10/resnet20: 4\u53c2\u6570 \u00d7 6\u6b21"
     ],
-    "goal": "完成非并行模式下快速和中速模型的所有参数，每个参数获得5个唯一值"
+    "goal": "\u5b8c\u6210\u975e\u5e76\u884c\u6a21\u5f0f\u4e0b\u5feb\u901f\u548c\u4e2d\u901f\u6a21\u578b\u7684\u6240\u6709\u53c2\u6570\uff0c\u6bcf\u4e2a\u53c2\u6570\u83b7\u5f975\u4e2a\u552f\u4e00\u503c"
   },
   "use_deduplication": true,
   "historical_csvs": [
-    "results/summary_all.csv"
+    "results/raw_data.csv"
   ],
   "experiments": [
     {
@@ -30,7 +30,7 @@
         "epochs"
       ],
       "mode": "nonparallel",
-      "comment": "仅变异epochs参数"
+      "comment": "\u4ec5\u53d8\u5f02epochs\u53c2\u6570"
     },
     {
       "repo": "examples",
@@ -41,7 +41,7 @@
         "learning_rate"
       ],
       "mode": "nonparallel",
-      "comment": "仅变异learning_rate参数"
+      "comment": "\u4ec5\u53d8\u5f02learning_rate\u53c2\u6570"
     },
     {
       "repo": "examples",
@@ -52,7 +52,7 @@
         "batch_size"
       ],
       "mode": "nonparallel",
-      "comment": "仅变异batch_size参数"
+      "comment": "\u4ec5\u53d8\u5f02batch_size\u53c2\u6570"
     },
     {
       "repo": "examples",
@@ -63,7 +63,7 @@
         "seed"
       ],
       "mode": "nonparallel",
-      "comment": "仅变异seed参数"
+      "comment": "\u4ec5\u53d8\u5f02seed\u53c2\u6570"
     },
     {
       "repo": "examples",
@@ -74,7 +74,7 @@
         "epochs"
       ],
       "mode": "nonparallel",
-      "comment": "仅变异epochs参数"
+      "comment": "\u4ec5\u53d8\u5f02epochs\u53c2\u6570"
     },
     {
       "repo": "examples",
@@ -85,7 +85,7 @@
         "learning_rate"
       ],
       "mode": "nonparallel",
-      "comment": "仅变异learning_rate参数"
+      "comment": "\u4ec5\u53d8\u5f02learning_rate\u53c2\u6570"
     },
     {
       "repo": "examples",
@@ -96,7 +96,7 @@
         "batch_size"
       ],
       "mode": "nonparallel",
-      "comment": "仅变异batch_size参数"
+      "comment": "\u4ec5\u53d8\u5f02batch_size\u53c2\u6570"
     },
     {
       "repo": "examples",
@@ -107,7 +107,7 @@
         "seed"
       ],
       "mode": "nonparallel",
-      "comment": "仅变异seed参数"
+      "comment": "\u4ec5\u53d8\u5f02seed\u53c2\u6570"
     },
     {
       "repo": "examples",
@@ -118,7 +118,7 @@
         "epochs"
       ],
       "mode": "nonparallel",
-      "comment": "仅变异epochs参数"
+      "comment": "\u4ec5\u53d8\u5f02epochs\u53c2\u6570"
     },
     {
       "repo": "examples",
@@ -129,7 +129,7 @@
         "learning_rate"
       ],
       "mode": "nonparallel",
-      "comment": "仅变异learning_rate参数"
+      "comment": "\u4ec5\u53d8\u5f02learning_rate\u53c2\u6570"
     },
     {
       "repo": "examples",
@@ -140,7 +140,7 @@
         "batch_size"
       ],
       "mode": "nonparallel",
-      "comment": "仅变异batch_size参数"
+      "comment": "\u4ec5\u53d8\u5f02batch_size\u53c2\u6570"
     },
     {
       "repo": "examples",
@@ -151,7 +151,7 @@
         "seed"
       ],
       "mode": "nonparallel",
-      "comment": "仅变异seed参数"
+      "comment": "\u4ec5\u53d8\u5f02seed\u53c2\u6570"
     },
     {
       "repo": "examples",
@@ -162,7 +162,7 @@
         "epochs"
       ],
       "mode": "nonparallel",
-      "comment": "仅变异epochs参数"
+      "comment": "\u4ec5\u53d8\u5f02epochs\u53c2\u6570"
     },
     {
       "repo": "examples",
@@ -173,7 +173,7 @@
         "learning_rate"
       ],
       "mode": "nonparallel",
-      "comment": "仅变异learning_rate参数"
+      "comment": "\u4ec5\u53d8\u5f02learning_rate\u53c2\u6570"
     },
     {
       "repo": "examples",
@@ -184,7 +184,7 @@
         "batch_size"
       ],
       "mode": "nonparallel",
-      "comment": "仅变异batch_size参数"
+      "comment": "\u4ec5\u53d8\u5f02batch_size\u53c2\u6570"
     },
     {
       "repo": "examples",
@@ -195,7 +195,7 @@
         "seed"
       ],
       "mode": "nonparallel",
-      "comment": "仅变异seed参数"
+      "comment": "\u4ec5\u53d8\u5f02seed\u53c2\u6570"
     },
     {
       "repo": "MRT-OAST",
@@ -206,7 +206,7 @@
         "epochs"
       ],
       "mode": "nonparallel",
-      "comment": "仅变异epochs参数"
+      "comment": "\u4ec5\u53d8\u5f02epochs\u53c2\u6570"
     },
     {
       "repo": "MRT-OAST",
@@ -217,7 +217,7 @@
         "learning_rate"
       ],
       "mode": "nonparallel",
-      "comment": "仅变异learning_rate参数"
+      "comment": "\u4ec5\u53d8\u5f02learning_rate\u53c2\u6570"
     },
     {
       "repo": "MRT-OAST",
@@ -228,7 +228,7 @@
         "seed"
       ],
       "mode": "nonparallel",
-      "comment": "仅变异seed参数"
+      "comment": "\u4ec5\u53d8\u5f02seed\u53c2\u6570"
     },
     {
       "repo": "MRT-OAST",
@@ -239,7 +239,7 @@
         "dropout"
       ],
       "mode": "nonparallel",
-      "comment": "仅变异dropout参数"
+      "comment": "\u4ec5\u53d8\u5f02dropout\u53c2\u6570"
     },
     {
       "repo": "MRT-OAST",
@@ -250,7 +250,7 @@
         "weight_decay"
       ],
       "mode": "nonparallel",
-      "comment": "仅变异weight_decay参数"
+      "comment": "\u4ec5\u53d8\u5f02weight_decay\u53c2\u6570"
     },
     {
       "repo": "bug-localization-by-dnn-and-rvsm",
@@ -261,7 +261,7 @@
         "max_iter"
       ],
       "mode": "nonparallel",
-      "comment": "仅变异max_iter参数"
+      "comment": "\u4ec5\u53d8\u5f02max_iter\u53c2\u6570"
     },
     {
       "repo": "bug-localization-by-dnn-and-rvsm",
@@ -272,7 +272,7 @@
         "kfold"
       ],
       "mode": "nonparallel",
-      "comment": "仅变异kfold参数"
+      "comment": "\u4ec5\u53d8\u5f02kfold\u53c2\u6570"
     },
     {
       "repo": "bug-localization-by-dnn-and-rvsm",
@@ -283,7 +283,7 @@
         "alpha"
       ],
       "mode": "nonparallel",
-      "comment": "仅变异alpha参数"
+      "comment": "\u4ec5\u53d8\u5f02alpha\u53c2\u6570"
     },
     {
       "repo": "bug-localization-by-dnn-and-rvsm",
@@ -294,7 +294,7 @@
         "seed"
       ],
       "mode": "nonparallel",
-      "comment": "仅变异seed参数"
+      "comment": "\u4ec5\u53d8\u5f02seed\u53c2\u6570"
     },
     {
       "repo": "pytorch_resnet_cifar10",
@@ -305,7 +305,7 @@
         "epochs"
       ],
       "mode": "nonparallel",
-      "comment": "仅变异epochs参数"
+      "comment": "\u4ec5\u53d8\u5f02epochs\u53c2\u6570"
     },
     {
       "repo": "pytorch_resnet_cifar10",
@@ -316,7 +316,7 @@
         "learning_rate"
       ],
       "mode": "nonparallel",
-      "comment": "仅变异learning_rate参数"
+      "comment": "\u4ec5\u53d8\u5f02learning_rate\u53c2\u6570"
     },
     {
       "repo": "pytorch_resnet_cifar10",
@@ -327,7 +327,7 @@
         "seed"
       ],
       "mode": "nonparallel",
-      "comment": "仅变异seed参数"
+      "comment": "\u4ec5\u53d8\u5f02seed\u53c2\u6570"
     },
     {
       "repo": "pytorch_resnet_cifar10",
@@ -338,7 +338,7 @@
         "weight_decay"
       ],
       "mode": "nonparallel",
-      "comment": "仅变异weight_decay参数"
+      "comment": "\u4ec5\u53d8\u5f02weight_decay\u53c2\u6570"
     }
   ]
 }

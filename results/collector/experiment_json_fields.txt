@@ -1,0 +1,193 @@
+扫描时间: 2025-12-11T20:52:22.854269
+总实验数: 307
+总字段数: 86
+
+======================================================================
+
+【基本信息】 (8 个字段)
+----------------------------------------------------------------------
+  duration_seconds
+    示例: 4374.965131282806, 3.5988969802856445, 429.6096022129059
+  error_message
+    示例: Training completed successfully
+  experiment_id
+    示例: Person_reID_baseline_pytorch_hrnet18_050, examples_mnist_rnn_016_parallel, bug-localization-by-dnn-and-rvsm_default_060_paral
+  model
+    示例: hrnet18, mlp, default
+  repository
+    示例: MRT-OAST, VulBERTa, bug-localization-by-dnn-and-rvsm
+  retries
+    示例: 0
+  timestamp
+    示例: 2025-12-10T17:58:20.054364, 2025-11-27T00:17:51.991618, 2025-12-10T18:20:46.075848
+  training_success
+    示例: True
+
+【hyperparameters】 (9 个字段)
+----------------------------------------------------------------------
+  hyperparameters_alpha
+    示例: 1.6156185103320122e-05, 9.823897846577587e-06, 1.9782394923552734e-05
+  hyperparameters_batch_size
+    示例: 121, 58, 127
+  hyperparameters_dropout
+    示例: 0.3905070975289366, 0.1944277935309872, 0.4384615268137537
+  hyperparameters_epochs
+    示例: 51, 44, 45
+  hyperparameters_kfold
+    示例: 7, 6, 5
+  hyperparameters_learning_rate
+    示例: 2.8477877040847345e-05, 0.008560621072376855, 9.400121124861953e-05
+  hyperparameters_max_iter
+    示例: 11879, 10494, 1209
+  hyperparameters_seed
+    示例: 4162, 7319, 2339
+  hyperparameters_weight_decay
+    示例: 0.00048126390037846184, 0.0008136061951120813, 1.7778253650744965e-05
+
+【energy_metrics】 (11 个字段)
+----------------------------------------------------------------------
+  energy_metrics_cpu_energy_pkg_joules
+    示例: 492.32, 93415.71, 55133.0
+  energy_metrics_cpu_energy_ram_joules
+    示例: 22.16, 15489.01, 10990.47
+  energy_metrics_cpu_energy_total_joules
+    示例: 84.76, 41494.99, 8080.1
+  energy_metrics_gpu_energy_total_joules
+    示例: 875021.9400000005, 198311.05000000025, 301697.3300000005
+  energy_metrics_gpu_power_avg_watts
+    示例: 185.11853012048186, 229.78077043044325, 234.78553543307137
+  energy_metrics_gpu_power_max_watts
+    示例: 318.96, 258.64, 178.66
+  energy_metrics_gpu_power_min_watts
+    示例: 71.92, 67.78, 14.55
+  energy_metrics_gpu_temp_avg_celsius
+    示例: 77.96637168141594, 79.77273795534666, 58.994949494949495
+  energy_metrics_gpu_temp_max_celsius
+    示例: 64.0, 80.0, 78.0
+  energy_metrics_gpu_util_avg_percent
+    示例: 96.89989071038251, 13.04040404040404, 40.46666666666667
+  energy_metrics_gpu_util_max_percent
+    示例: 80.0, 24.0, 78.0
+
+【performance_metrics】 (9 个字段)
+----------------------------------------------------------------------
+  performance_metrics_accuracy
+    示例: 4115.0, 4583.0, 4800.0
+  performance_metrics_best_val_accuracy
+    示例: 91.77, 92.45, 91.21
+  performance_metrics_map
+    示例: 0.770546, 0.772052, 0.745096
+  performance_metrics_precision
+    示例: 0.981461, 0.999577, 0.98178
+  performance_metrics_rank1
+    示例: 0.894002, 0.887173, 0.92785
+  performance_metrics_rank5
+    示例: 0.962292, 0.958729, 0.960214
+  performance_metrics_recall
+    示例: 0.724866, 0.744725, 0.549028
+  performance_metrics_test_accuracy
+    示例: 100.0, 92.0, 63.0
+  performance_metrics_test_loss
+    示例: 1.154, 0.157, 0.1632
+
+【其他】 (49 个字段)
+----------------------------------------------------------------------
+  background
+    示例: 
+  background_hyperparameters
+    示例: 
+  background_log_directory
+    示例: /home/green/energy_dl/nightly/results/run_20251203, /home/green/energy_dl/nightly/results/run_20251204, /home/green/energy_dl/nightly/results/run_20251208
+  background_model
+    示例: siamese, densenet121, mnist
+  background_note
+    示例: Background training served as GPU load only (not m
+  background_repository
+    示例: examples, Person_reID_baseline_pytorch
+  energy_metrics
+    示例: 
+  foreground
+    示例: 
+  foreground_duration_seconds
+    示例: 3.3627848625183105, 10.412285804748535, 188.88989877700806
+  foreground_energy_metrics
+    示例: 
+  foreground_energy_metrics_cpu_energy_pkg_joules
+    示例: 49235.44, 63325.21, 57306.47
+  foreground_energy_metrics_cpu_energy_ram_joules
+    示例: 3351.69, 6686.98, 18803.33
+  foreground_energy_metrics_cpu_energy_total_joules
+    示例: 143695.83, 11924.2, 285342.76
+  foreground_energy_metrics_gpu_energy_total_joules
+    示例: 832648.0699999991, 788.19, 54907.789999999986
+  foreground_energy_metrics_gpu_power_avg_watts
+    示例: 87.53455120101137, 209.47180790960462, 218.61871300081697
+  foreground_energy_metrics_gpu_power_max_watts
+    示例: 315.1, 129.02, 140.83
+  foreground_energy_metrics_gpu_power_min_watts
+    示例: 228.68, 130.03, 82.89
+  foreground_energy_metrics_gpu_temp_avg_celsius
+    示例: 77.39523903206768, 79.28471474703983, 80.75503155889008
+  foreground_energy_metrics_gpu_temp_max_celsius
+    示例: 78.0, 84.0, 82.0
+  foreground_energy_metrics_gpu_util_avg_percent
+    示例: 98.146288209607, 99.61519979767324, 94.55816993464052
+  foreground_energy_metrics_gpu_util_max_percent
+    示例: 80.0, 84.0, 46.0
+  foreground_error_message
+    示例: Training completed successfully
+  foreground_hyperparameters
+    示例: 
+  foreground_hyperparameters_alpha
+    示例: 1.4622212778224795e-05
+  foreground_hyperparameters_batch_size
+    示例: 43, 98, 127
+  foreground_hyperparameters_dropout
+    示例: 0.5658201898936376, 0.4394570986695282, 0.5435809256467599
+  foreground_hyperparameters_epochs
+    示例: 7, 31, 56
+  foreground_hyperparameters_kfold
+    示例: 4, 7, 6
+  foreground_hyperparameters_learning_rate
+    示例: 0.014367616725826666, 0.00982507734230921, 0.017077784491099503
+  foreground_hyperparameters_max_iter
+    示例: 1864
+  foreground_hyperparameters_seed
+    示例: 2419, 9670, 1
+  foreground_hyperparameters_weight_decay
+    示例: 6.718459474977566e-05, 5.026401340836871e-05, 0.00027928862227181967
+  foreground_model
+    示例: hrnet18, mlp, default
+  foreground_performance_metrics
+    示例: 
+  foreground_performance_metrics_accuracy
+    示例: 4029.0, 4755.0, 4640.0
+  foreground_performance_metrics_best_val_accuracy
+    示例: 92.05, 92.07, 92.25
+  foreground_performance_metrics_map
+    示例: 0.78039, 0.740315, 0.734265
+  foreground_performance_metrics_precision
+    示例: 0.985024, 0.958284, 0.983744
+  foreground_performance_metrics_rank1
+    示例: 0.901722, 0.928444, 0.929929
+  foreground_performance_metrics_rank5
+    示例: 0.938242, 0.975356, 0.964074
+  foreground_performance_metrics_recall
+    示例: 0.536202, 0.665288, 0.843608
+  foreground_performance_metrics_test_accuracy
+    示例: 100.0, 92.25, 70.0
+  foreground_performance_metrics_test_loss
+    示例: 0.1576, 0.0252, 0.0271
+  foreground_repository
+    示例: MRT-OAST, VulBERTa, bug-localization-by-dnn-and-rvsm
+  foreground_retries
+    示例: 1, 0
+  foreground_training_success
+    示例: True
+  hyperparameters
+    示例: 
+  mode
+    示例: parallel
+  performance_metrics
+    示例: 
+

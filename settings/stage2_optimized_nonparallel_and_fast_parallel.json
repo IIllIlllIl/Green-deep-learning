@@ -1,89 +1,106 @@
 {
   "experiment_name": "stage2_optimized_nonparallel_and_fast_parallel",
-  "description": "阶段2优化版: 非并行补充(10个) + 快速模型并行(34个) = 44个实验 (预计20-24小时)",
+  "description": "\u9636\u6bb52\u4f18\u5316\u7248: \u975e\u5e76\u884c\u8865\u5145(10\u4e2a) + \u5feb\u901f\u6a21\u578b\u5e76\u884c(34\u4e2a) = 44\u4e2a\u5b9e\u9a8c (\u9884\u8ba120-24\u5c0f\u65f6)",
   "mode": "mutation",
   "max_retries": 2,
   "governor": "performance",
   "use_deduplication": true,
   "historical_csvs": [
-    "results/summary_all.csv"
+    "results/raw_data.csv"
   ],
   "experiments": [
     {
-      "comment": "=== 非并行补充: 10个实验 (预计3小时) ===",
+      "comment": "epochs: 4\u21925\u4e2a\uff0c\u9700\u89811\u4e2a\uff0c\u8bbe\u7f6e2\u4ee5\u786e\u4fdd",
       "repo": "MRT-OAST",
       "model": "default",
       "mode": "mutation",
-      "mutate": ["epochs"],
-      "runs_per_config": 2,
-      "comment": "epochs: 4→5个，需要1个，设置2以确保"
+      "mutate": [
+        "epochs"
+      ],
+      "runs_per_config": 2
     },
     {
       "repo": "Person_reID_baseline_pytorch",
       "model": "hrnet18",
       "mode": "mutation",
-      "mutate": ["learning_rate"],
+      "mutate": [
+        "learning_rate"
+      ],
       "runs_per_config": 2,
-      "comment": "learning_rate: 4→5个，需要1个"
+      "comment": "learning_rate: 4\u21925\u4e2a\uff0c\u9700\u89811\u4e2a"
     },
     {
       "repo": "Person_reID_baseline_pytorch",
       "model": "hrnet18",
       "mode": "mutation",
-      "mutate": ["dropout"],
+      "mutate": [
+        "dropout"
+      ],
       "runs_per_config": 2,
-      "comment": "dropout: 4→5个，需要1个"
+      "comment": "dropout: 4\u21925\u4e2a\uff0c\u9700\u89811\u4e2a"
     },
     {
       "repo": "Person_reID_baseline_pytorch",
       "model": "hrnet18",
       "mode": "mutation",
-      "mutate": ["seed"],
+      "mutate": [
+        "seed"
+      ],
       "runs_per_config": 2,
-      "comment": "seed: 4→5个，需要1个"
+      "comment": "seed: 4\u21925\u4e2a\uff0c\u9700\u89811\u4e2a"
     },
     {
       "repo": "Person_reID_baseline_pytorch",
       "model": "pcb",
       "mode": "mutation",
-      "mutate": ["learning_rate"],
+      "mutate": [
+        "learning_rate"
+      ],
       "runs_per_config": 2,
-      "comment": "learning_rate: 4→5个，需要1个"
+      "comment": "learning_rate: 4\u21925\u4e2a\uff0c\u9700\u89811\u4e2a"
     },
     {
       "repo": "Person_reID_baseline_pytorch",
       "model": "pcb",
       "mode": "mutation",
-      "mutate": ["seed"],
+      "mutate": [
+        "seed"
+      ],
       "runs_per_config": 2,
-      "comment": "seed: 4→5个，需要1个"
+      "comment": "seed: 4\u21925\u4e2a\uff0c\u9700\u89811\u4e2a"
     },
     {
       "repo": "examples",
       "model": "mnist_ff",
       "mode": "mutation",
-      "mutate": ["batch_size"],
+      "mutate": [
+        "batch_size"
+      ],
       "runs_per_config": 3,
-      "comment": "batch_size: 3→5个，需要2个，设置3以确保"
+      "comment": "batch_size: 3\u21925\u4e2a\uff0c\u9700\u89812\u4e2a\uff0c\u8bbe\u7f6e3\u4ee5\u786e\u4fdd"
     },
     {
       "repo": "examples",
       "model": "mnist_ff",
       "mode": "mutation",
-      "mutate": ["learning_rate"],
+      "mutate": [
+        "learning_rate"
+      ],
       "runs_per_config": 2,
-      "comment": "learning_rate: 4→5个，需要1个"
+      "comment": "learning_rate: 4\u21925\u4e2a\uff0c\u9700\u89811\u4e2a"
     },
     {
       "repo": "examples",
       "model": "mnist_ff",
       "mode": "mutation",
-      "mutate": ["seed"],
+      "mutate": [
+        "seed"
+      ],
       "runs_per_config": 2,
-      "comment": "seed: 4→5个，需要1个"
+      "comment": "seed: 4\u21925\u4e2a\uff0c\u9700\u89811\u4e2a"
     },
     {
-      "comment": "=== examples/mnist 并行: 7个实验 (预计4小时) ===",
+      "comment": "batch_size: 1\u21925\u4e2a\uff0c\u9700\u89814\u4e2a\uff0c\u8bbe\u7f6e5\u4ee5\u786e\u4fdd",
       "repo": "examples",
       "model": "mnist",
       "mode": "parallel",
@@ -91,33 +108,16 @@
         "repo": "examples",
         "model": "mnist",
         "mode": "mutation",
-        "mutate": ["batch_size"]
+        "mutate": [
+          "batch_size"
+        ]
       },
       "background": {
         "repo": "examples",
         "model": "siamese",
         "hyperparameters": {}
       },
-      "runs_per_config": 5,
-      "comment": "batch_size: 1→5个，需要4个，设置5以确保"
-    },
-    {
-      "repo": "examples",
-      "model": "mnist",
-      "mode": "parallel",
-      "foreground": {
-        "repo": "examples",
-        "model": "mnist",
-        "mode": "mutation",
-        "mutate": ["epochs"]
-      },
-      "background": {
-        "repo": "examples",
-        "model": "siamese",
-        "hyperparameters": {}
-      },
-      "runs_per_config": 2,
-      "comment": "epochs: 4→5个，需要1个"
+      "runs_per_config": 5
     },
     {
       "repo": "examples",
@@ -127,7 +127,9 @@
         "repo": "examples",
         "model": "mnist",
         "mode": "mutation",
-        "mutate": ["learning_rate"]
+        "mutate": [
+          "epochs"
+        ]
       },
       "background": {
         "repo": "examples",
@@ -135,7 +137,7 @@
         "hyperparameters": {}
       },
       "runs_per_config": 2,
-      "comment": "learning_rate: 4→5个，需要1个"
+      "comment": "epochs: 4\u21925\u4e2a\uff0c\u9700\u89811\u4e2a"
     },
     {
       "repo": "examples",
@@ -145,7 +147,9 @@
         "repo": "examples",
         "model": "mnist",
         "mode": "mutation",
-        "mutate": ["seed"]
+        "mutate": [
+          "learning_rate"
+        ]
       },
       "background": {
         "repo": "examples",
@@ -153,54 +157,19 @@
         "hyperparameters": {}
       },
       "runs_per_config": 2,
-      "comment": "seed: 4→5个，需要1个"
-    },
-    {
-      "comment": "=== examples/mnist_rnn 并行: 8个实验 (预计4小时) ===",
-      "repo": "examples",
-      "model": "mnist_rnn",
-      "mode": "parallel",
-      "foreground": {
-        "repo": "examples",
-        "model": "mnist_rnn",
-        "mode": "mutation",
-        "mutate": ["batch_size"]
-      },
-      "background": {
-        "repo": "examples",
-        "model": "siamese",
-        "hyperparameters": {}
-      },
-      "runs_per_config": 5,
-      "comment": "batch_size: 1→5个，需要4��"
+      "comment": "learning_rate: 4\u21925\u4e2a\uff0c\u9700\u89811\u4e2a"
     },
     {
       "repo": "examples",
-      "model": "mnist_rnn",
+      "model": "mnist",
       "mode": "parallel",
       "foreground": {
         "repo": "examples",
-        "model": "mnist_rnn",
+        "model": "mnist",
         "mode": "mutation",
-        "mutate": ["epochs"]
-      },
-      "background": {
-        "repo": "examples",
-        "model": "siamese",
-        "hyperparameters": {}
-      },
-      "runs_per_config": 3,
-      "comment": "epochs: 3→5个，需要2个"
-    },
-    {
-      "repo": "examples",
-      "model": "mnist_rnn",
-      "mode": "parallel",
-      "foreground": {
-        "repo": "examples",
-        "model": "mnist_rnn",
-        "mode": "mutation",
-        "mutate": ["learning_rate"]
+        "mutate": [
+          "seed"
+        ]
       },
       "background": {
         "repo": "examples",
@@ -208,7 +177,27 @@
         "hyperparameters": {}
       },
       "runs_per_config": 2,
-      "comment": "learning_rate: 4→5个，需要1个"
+      "comment": "seed: 4\u21925\u4e2a\uff0c\u9700\u89811\u4e2a"
+    },
+    {
+      "comment": "batch_size: 1\u21925\u4e2a\uff0c\u9700\u89814\ufffd\ufffd",
+      "repo": "examples",
+      "model": "mnist_rnn",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "mode": "mutation",
+        "mutate": [
+          "batch_size"
+        ]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "siamese",
+        "hyperparameters": {}
+      },
+      "runs_per_config": 5
     },
     {
       "repo": "examples",
@@ -218,7 +207,29 @@
         "repo": "examples",
         "model": "mnist_rnn",
         "mode": "mutation",
-        "mutate": ["seed"]
+        "mutate": [
+          "epochs"
+        ]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "siamese",
+        "hyperparameters": {}
+      },
+      "runs_per_config": 3,
+      "comment": "epochs: 3\u21925\u4e2a\uff0c\u9700\u89812\u4e2a"
+    },
+    {
+      "repo": "examples",
+      "model": "mnist_rnn",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "mode": "mutation",
+        "mutate": [
+          "learning_rate"
+        ]
       },
       "background": {
         "repo": "examples",
@@ -226,10 +237,30 @@
         "hyperparameters": {}
       },
       "runs_per_config": 2,
-      "comment": "seed: 4→5个，需要1个"
+      "comment": "learning_rate: 4\u21925\u4e2a\uff0c\u9700\u89811\u4e2a"
     },
     {
-      "comment": "=== examples/siamese 并行: 7个实验 (预计4小时) ===",
+      "repo": "examples",
+      "model": "mnist_rnn",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "mode": "mutation",
+        "mutate": [
+          "seed"
+        ]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "siamese",
+        "hyperparameters": {}
+      },
+      "runs_per_config": 2,
+      "comment": "seed: 4\u21925\u4e2a\uff0c\u9700\u89811\u4e2a"
+    },
+    {
+      "comment": "batch_size: 1\u21925\u4e2a\uff0c\u9700\u89814\u4e2a",
       "repo": "examples",
       "model": "siamese",
       "mode": "parallel",
@@ -237,15 +268,16 @@
         "repo": "examples",
         "model": "siamese",
         "mode": "mutation",
-        "mutate": ["batch_size"]
+        "mutate": [
+          "batch_size"
+        ]
       },
       "background": {
         "repo": "examples",
         "model": "mnist",
         "hyperparameters": {}
       },
-      "runs_per_config": 5,
-      "comment": "batch_size: 1→5个，需要4个"
+      "runs_per_config": 5
     },
     {
       "repo": "examples",
@@ -255,7 +287,9 @@
         "repo": "examples",
         "model": "siamese",
         "mode": "mutation",
-        "mutate": ["epochs"]
+        "mutate": [
+          "epochs"
+        ]
       },
       "background": {
         "repo": "examples",
@@ -263,7 +297,7 @@
         "hyperparameters": {}
       },
       "runs_per_config": 2,
-      "comment": "epochs: 4→5个，需要1个"
+      "comment": "epochs: 4\u21925\u4e2a\uff0c\u9700\u89811\u4e2a"
     },
     {
       "repo": "examples",
@@ -273,7 +307,9 @@
         "repo": "examples",
         "model": "siamese",
         "mode": "mutation",
-        "mutate": ["learning_rate"]
+        "mutate": [
+          "learning_rate"
+        ]
       },
       "background": {
         "repo": "examples",
@@ -281,7 +317,7 @@
         "hyperparameters": {}
       },
       "runs_per_config": 2,
-      "comment": "learning_rate: 4→5个，需要1个"
+      "comment": "learning_rate: 4\u21925\u4e2a\uff0c\u9700\u89811\u4e2a"
     },
     {
       "repo": "examples",
@@ -291,7 +327,9 @@
         "repo": "examples",
         "model": "siamese",
         "mode": "mutation",
-        "mutate": ["seed"]
+        "mutate": [
+          "seed"
+        ]
       },
       "background": {
         "repo": "examples",
@@ -299,10 +337,10 @@
         "hyperparameters": {}
       },
       "runs_per_config": 2,
-      "comment": "seed: 4→5个，需要1个"
+      "comment": "seed: 4\u21925\u4e2a\uff0c\u9700\u89811\u4e2a"
     },
     {
-      "comment": "=== examples/mnist_ff 并行: 12个实验（部分，避免超时） (预计6小时) ===",
+      "comment": "batch_size: 0\u21923\u4e2a\uff0c\u5206\u9636\u6bb5\u5b8c\u6210",
       "repo": "examples",
       "model": "mnist_ff",
       "mode": "parallel",
@@ -310,33 +348,16 @@
         "repo": "examples",
         "model": "mnist_ff",
         "mode": "mutation",
-        "mutate": ["batch_size"]
+        "mutate": [
+          "batch_size"
+        ]
       },
       "background": {
         "repo": "examples",
         "model": "mnist",
         "hyperparameters": {}
       },
-      "runs_per_config": 3,
-      "comment": "batch_size: 0→3个，分阶段完成"
-    },
-    {
-      "repo": "examples",
-      "model": "mnist_ff",
-      "mode": "parallel",
-      "foreground": {
-        "repo": "examples",
-        "model": "mnist_ff",
-        "mode": "mutation",
-        "mutate": ["epochs"]
-      },
-      "background": {
-        "repo": "examples",
-        "model": "mnist",
-        "hyperparameters": {}
-      },
-      "runs_per_config": 3,
-      "comment": "epochs: 0→3个，分阶段完成"
+      "runs_per_config": 3
     },
     {
       "repo": "examples",
@@ -346,7 +367,9 @@
         "repo": "examples",
         "model": "mnist_ff",
         "mode": "mutation",
-        "mutate": ["learning_rate"]
+        "mutate": [
+          "epochs"
+        ]
       },
       "background": {
         "repo": "examples",
@@ -354,7 +377,7 @@
         "hyperparameters": {}
       },
       "runs_per_config": 3,
-      "comment": "learning_rate: 0→3个，分阶段完成"
+      "comment": "epochs: 0\u21923\u4e2a\uff0c\u5206\u9636\u6bb5\u5b8c\u6210"
     },
     {
       "repo": "examples",
@@ -364,7 +387,9 @@
         "repo": "examples",
         "model": "mnist_ff",
         "mode": "mutation",
-        "mutate": ["seed"]
+        "mutate": [
+          "learning_rate"
+        ]
       },
       "background": {
         "repo": "examples",
@@ -372,7 +397,27 @@
         "hyperparameters": {}
       },
       "runs_per_config": 3,
-      "comment": "seed: 0→3个，分阶段完成"
+      "comment": "learning_rate: 0\u21923\u4e2a\uff0c\u5206\u9636\u6bb5\u5b8c\u6210"
+    },
+    {
+      "repo": "examples",
+      "model": "mnist_ff",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist_ff",
+        "mode": "mutation",
+        "mutate": [
+          "seed"
+        ]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {}
+      },
+      "runs_per_config": 3,
+      "comment": "seed: 0\u21923\u4e2a\uff0c\u5206\u9636\u6bb5\u5b8c\u6210"
     }
   ]
 }

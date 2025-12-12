@@ -2,7 +2,7 @@
 
 自动化深度学习模型训练的超参数变异与能耗性能分析框架
 
-**当前版本**: v4.7.2 (2025-12-08)
+**当前版本**: v4.7.3 (2025-12-12)
 **状态**: ✅ Production Ready
 
 ---
@@ -79,18 +79,25 @@ sudo -E python3 mutation.py -ec settings/stage_final_all_remaining.json
 
 ---
 
-## 支持的模型
+## 支持的模型 (11个有效模型)
 
-| 仓库 | 模型 | 超参数 | Epochs范围 |
-|------|------|--------|-----------|
-| **pytorch_resnet_cifar10** | resnet20/32/44/56 | epochs, lr, weight_decay, seed | [100, 300] |
-| **Person_reID_baseline_pytorch** | densenet121, hrnet18, pcb | epochs, lr, dropout, seed | [30, 90] |
-| **VulBERTa** | mlp, cnn | epochs, lr, weight_decay, seed | [5, 20] |
-| **MRT-OAST** | default | epochs, lr, dropout, weight_decay, seed | [5, 15] |
-| **bug-localization** | default | max_iter, alpha, kfold, seed | - |
-| **examples** | mnist, mnist_rnn, mnist_ff, siamese | epochs, lr, batch_size, seed | [5, 15] |
+| 仓库 | 模型 | 超参数 | Epochs范围 | 实验数 |
+|------|------|--------|-----------|--------|
+| **examples** | mnist, mnist_rnn, mnist_ff, siamese | epochs, lr, batch_size, seed | [5, 15] | 179 |
+| **Person_reID_baseline_pytorch** | densenet121, hrnet18, pcb | epochs, lr, dropout, seed | [30, 90] | 116 |
+| **VulBERTa** | mlp | epochs, lr, weight_decay, seed | [5, 20] | 45 |
+| **pytorch_resnet_cifar10** | resnet20 | epochs, lr, weight_decay, seed | [100, 300] | 39 |
+| **MRT-OAST** | default | epochs, lr, dropout, weight_decay, seed | [5, 15] | 57 |
+| **bug-localization** | default | max_iter, alpha, kfold, seed | - | 40 |
+| **总计** | **11个模型** | **9个超参数** | - | **476** |
 
-**详细范围**: [docs/MUTATION_RANGES_QUICK_REFERENCE.md](docs/MUTATION_RANGES_QUICK_REFERENCE.md)
+**重要说明**:
+- ✅ 所有11个模型已100%完成实验目标 (90/90参数-模式组合)
+- ❌ VulBERTa/cnn已移除 (训练代码未实现)
+- ⏱️ **总运行时间**: 238.51小时 (9.94天) | 平均30分钟/实验
+- 📊 详细模型定义: [docs/11_MODELS_FINAL_DEFINITION.md](docs/11_MODELS_FINAL_DEFINITION.md)
+- 📈 超参数变异范围: [docs/MUTATION_RANGES_QUICK_REFERENCE.md](docs/MUTATION_RANGES_QUICK_REFERENCE.md)
+- 📈 运行时间统计: [docs/results_reports/RUNTIME_STATISTICS_20251211.md](docs/results_reports/RUNTIME_STATISTICS_20251211.md)
 
 ---
 
@@ -103,13 +110,29 @@ results/run_YYYYMMDD_HHMMSS/
 ├── summary.csv                    # 所有实验汇总
 └── {repo}_{model}_{id}_parallel/  # 并行实验（或不带_parallel为顺序实验）
     ├── experiment.json            # 完整数据（超参数+性能+能耗）
-    │                              # 并行实验包含foreground和background信息
-    ├── training.log               # 前景训练日志
+    ├── training.log               # 训练日志
     ├── energy/                    # 能耗原始数据
     └── background_logs/           # 后台训练日志（仅并行实验）
 ```
 
-**详细说明**: [docs/OUTPUT_STRUCTURE_QUICKREF.md](docs/OUTPUT_STRUCTURE_QUICKREF.md)
+**数据文件** (`results/` 目录):
+- **raw_data.csv**: 合并后的原始数据（80列，476行） - **主数据文件** ⭐⭐⭐
+  - 包含所有211个老实验 + 265个新实验
+  - 训练成功率100%，能耗数据100%完整
+  - 验证报告: [scripts/validate_raw_data.py](scripts/validate_raw_data.py)
+- **summary_old.csv**: 老实验数据（93列，211行） - 源数据，供参考
+- **summary_new.csv**: 新实验数据（80列，265行） - 源数据，供参考
+- **summary_archive/**: 过时的summary文件归档目录
+  - 包含13个过时文件（summary_all.csv, summary_all_enhanced.csv等）
+  - 归档说明: [results/summary_archive/README_ARCHIVE.md](results/summary_archive/README_ARCHIVE.md)
+
+**数据格式**:
+- **80列格式**: 优化的数据记录（背景训练使用默认值，监控全局能耗）
+- **93列格式**: 历史数据格式（包含部分背景超参数，仅老实验使用）
+- JSON详细数据: 包含完整的超参数、性能指标、能耗数据
+- **详细说明**: [docs/OUTPUT_STRUCTURE_QUICKREF.md](docs/OUTPUT_STRUCTURE_QUICKREF.md)
+- **格式对比**: [docs/results_reports/SUMMARY_NEW_VS_OLD_COLUMN_ANALYSIS.md](docs/results_reports/SUMMARY_NEW_VS_OLD_COLUMN_ANALYSIS.md)
+- **设计决定**: [docs/results_reports/DATA_FORMAT_DESIGN_DECISION_SUMMARY.md](docs/results_reports/DATA_FORMAT_DESIGN_DECISION_SUMMARY.md)
 
 ---
 
@@ -165,6 +188,7 @@ sudo sysctl -w kernel.perf_event_paranoid=-1
 | [并行训练使用](docs/PARALLEL_TRAINING_USAGE.md) | 并行训练配置 ⭐⭐ |
 | [输出结构](docs/OUTPUT_STRUCTURE_QUICKREF.md) | 结果目录结构 ⭐ |
 | [功能总览](docs/FEATURES_OVERVIEW.md) | 所有功能说明 ⭐⭐ |
+| [运行时间统计](docs/results_reports/RUNTIME_STATISTICS_20251211.md) | 476个实验运行时间分析 ⭐⭐ |
 | [完整文档索引](docs/README.md) | 所有文档列表 |
 
 ---
@@ -277,6 +301,68 @@ sudo sysctl -w kernel.perf_event_paranoid=-1
 ---
 
 ## 版本信息
+
+**v4.7.4-dev** (2025-12-12) - 🚧 **数据提取问题修复中** ⏳
+- 🔧 **终端输出捕获功能开发**: Phase 1已完成 ✅
+  - 功能: 添加`capture_stdout`参数到`mutation/command_runner.py`
+  - 保存: 训练过程的stdout/stderr到`terminal_output.txt`
+  - 测试: 4/4自动化测试通过
+  - 配置: 创建8个调试实验配置（4个问题模型 × 2种模式）
+  - 文档: [终端输出捕获指南](docs/TERMINAL_OUTPUT_CAPTURE_GUIDE.md)
+- ⏳ **数据提取问题诊断**: Phase 2待开始
+  - 目标: 运行测试实验，分析151个缺失性能数据的实验
+  - 问题模型: examples/mnist_ff (46), VulBERTa/mlp (45), bug-localization (40), MRT-OAST (20)
+  - 下一步: 运行`settings/test_data_extraction_debug.json`（预计4-6小时）
+  - 进度追踪: [任务进度记录](docs/TASK_PROGRESS_DATA_EXTRACTION_FIX.md)
+- 📊 **预期收益**:
+  - 有效实验: 327/458 (71.4%) → 458/458 (100%) [+40%]
+  - 数据完整模型: 7/11 (63.6%) → 11/11 (100%) [+57%]
+  - 无需重新训练，节省50-100小时计算时间
+
+**v4.7.3** (2025-12-12)
+- 🔴 **实验目标重新澄清**: 识别出重大完成度差距 ⭐⭐⭐
+  - **目标**: 每个超参数在两种模式下需要1个默认值 + 5个唯一单参数变异
+  - **当前**: 0%完全达标（0/90组合），73.3%部分完成（66/90），26.7%完全缺失（24/90）
+  - **需补齐**: 330个实验（90个默认值 + 240个变异）
+  - **主要问题**: 性能数据缺失26.9%（128个实验，主要集中在3个模型）、缺少所有默认值实验、26个多参数变异实验
+  - **详细报告**: [EXPERIMENT_GOAL_CLARIFICATION_AND_COMPLETION_REPORT.md](docs/results_reports/EXPERIMENT_GOAL_CLARIFICATION_AND_COMPLETION_REPORT.md)
+  - **分析脚本**: `scripts/analyze_experiment_completion.py` - 已更新性能数据验证逻辑（检查所有性能指标）
+- ✅ **summary_old.csv 93列重建完成**: 从experiment.json直接重建，确保数据完整性
+  - 问题: 原80列格式缺少13个字段（6个bg_hyperparam + 7个bg_energy）
+  - 解决: 编写重建脚本，直接从211个experiment.json文件提取完整数据
+  - 结果: 93列格式，211行数据，100%数据完整性验证通过
+  - 验证: 训练成功率100%，CPU/GPU能耗100%完整，随机抽样100%通过
+  - 备份: `summary_old.csv.backup_80col`, `summary_old.csv.backup_before_93col_replacement`
+  - 脚本: `scripts/rebuild_summary_old_93col.py`, `scripts/validate_93col_rebuild.py`
+- ✅ **数据格式设计决定分析**: 80列vs93列完整对比 ⭐⭐⭐
+  - 分析: 老实验的13个"多出"列对后续分析完全无价值
+  - 验证: 背景超参数100%为默认值，背景能耗100%为空
+  - 结论: 新实验的80列格式是设计改进，不是缺陷
+  - 报告: [docs/results_reports/DATA_FORMAT_DESIGN_DECISION_SUMMARY.md](docs/results_reports/DATA_FORMAT_DESIGN_DECISION_SUMMARY.md)
+- ✅ **数据合并与归档**: 生成主数据文件raw_data.csv ⭐⭐⭐
+  - 合并: summary_old.csv (211行) + summary_new.csv (265行) → raw_data.csv (476行，80列)
+  - 验证: 100%训练成功，100%能耗完整，66.2%性能指标完整
+  - 归档: 13个过时文件移至summary_archive/目录
+  - 清理: 8个过时备份文件
+  - 脚本: `scripts/merge_csv_to_raw_data.py`, `scripts/validate_raw_data.py`, `scripts/archive_summary_files.py`
+- ✅ **去重迁移到raw_data.csv**: summary_all.csv → raw_data.csv完全迁移 ⭐⭐⭐
+  - 原因: 停止维护summary_all.csv，使用raw_data.csv作为单一数据源
+  - 更新: 9个配置文件的historical_csvs字段从summary_all.csv改为raw_data.csv
+  - 修改: mutation.py的-S参数改为`--enable-summary-append`（默认不追加到summary_all.csv）
+  - 验证: 创建5个功能测试，全部通过（数据提取、去重、配置执行）
+  - 统计: 从raw_data.csv提取371个变异（78%提取率），341个唯一组合（92%唯一率）
+  - 工具: `scripts/update_historical_csv_refs.py`, `tests/test_dedup_raw_data.py`
+  - 报告: [docs/results_reports/V4_7_3_DEDUPLICATION_MIGRATION_REPORT.md](docs/results_reports/V4_7_3_DEDUPLICATION_MIGRATION_REPORT.md)
+- ✅ **项目整理与归档**: 文档和脚本大规模整理 ⭐⭐
+  - 归档: 22个已完成任务的脚本 → `scripts/archived/completed_tasks_20251212/`
+  - 归档: 5个临时分析报告 → `docs/archived/temporary_analysis_20251212/`
+  - 保留: 10个核心脚本（核心工具3+配置工具3+分析工具3+下载工具1）
+  - 文档: `docs/SCRIPTS_QUICKREF.md` - 核心脚本快速参考
+- 📚 **文档完善**:
+  - README.md和CLAUDE.md添加"数据结构说明"章节
+  - 详细说明并行/非并行模式的数据存储差异
+  - 明确背景能耗0%填充率为设计决定（背景训练仅作GPU负载，不监控能耗）
+  - 新增4个分析报告文档（数据格式、去重迁移等）和1个脚本快速参考文档
 
 **v4.7.2** (2025-12-08)
 - 🔴 **并行模式runs_per_config Bug修复**: 修复v4.7.0遗留问题

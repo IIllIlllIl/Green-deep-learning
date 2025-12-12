@@ -1,7 +1,7 @@
 # Claude 助手指南 - Mutation-Based Training Energy Profiler
 
-**项目版本**: v4.7.2 (2025-12-08)
-**最后更新**: 2025-12-08
+**项目版本**: v4.7.3 (2025-12-12)
+**最后更新**: 2025-12-12
 **状态**: ✅ Production Ready
 
 ---
@@ -20,13 +20,123 @@
 - ✅ **分阶段执行** - 大规模实验分割成可管理的阶段
 - ✅ **参数精确优化** - 每个参数使用精确的runs_per_config值
 
-### 当前状态
-- **实验总数**: 404个（results/summary_all.csv）
-- **完成度**: Stage1-4, Stage7-8完成（81/159实验，51%）
-- **剩余任务**: 最终阶段（78个实验，37.8小时）**[一次性完成所有剩余实验]**
-- **参数-模式组合**: 需补充17个组合达到100%覆盖
-- **配置状态**: 已完成最终整合和优化
-- **最新进展** (2025-12-08):
+### 当前状态 ⚠️
+
+**⚠️ 重要更新 (2025-12-12)**: 实验目标重新澄清后发现完成度差距
+
+- **实验总数**: 476个（322个有效，154个无效）
+- **有效模型**: 11个（VulBERTa/cnn已移除）
+- **完成度（重新评估）**: **0.0%** (0/90组合完全达标) ⚠️
+  - 部分完成: 73.3% (66/90组合)
+  - 完全缺失: 26.7% (24/90组合)
+- **数据质量状况**:
+  - ✅ 能耗数据: 100%完整
+  - ⚠️ 性能数据: 67.6%有数据（使用更宽松的验证逻辑后）
+  - ❌ 默认值实验: 0/90（100%缺失）
+  - ❌ 多参数变异: 26个实验（需要重新运行单参数版本）
+
+### 实验目标（重新澄清）
+
+**每个超参数在两种模式（并行/非并行）下都需要**:
+1. **1个默认值实验** - 建立基线
+2. **5个唯一单参数变异实验** - 研究单参数影响
+3. **完整数据**: 能耗 + 任意性能指标（accuracy、mAP、test_accuracy等）
+
+**总目标**: 45参数 × 2模式 × 6实验 = **540个有效实验**
+
+**当前缺口**: 需补齐**330个实验**
+- 默认值: 90个
+- 单参数变异: 240个
+- 性能数据缺失: 128个（主要集中在3个模型：mnist_ff, VulBERTa/mlp, bug-localization）
+
+**详细分析**: [实验目标澄清报告](docs/results_reports/EXPERIMENT_GOAL_CLARIFICATION_AND_COMPLETION_REPORT.md)
+
+### 最新进展
+
+**2025-12-12** - v4.7.3更新完成 ⭐⭐⭐
+- ✅ **数据格式设计决定分析**: 80列vs93列完整对比
+  - 分析: 老实验的13个"多出"列对后续分析完全无价值
+  - 验证: 背景超参数100%为默认值，背景能耗100%为空
+  - 结论: 新实验的80列格式是设计改进，不是缺陷
+  - 详细报告: [DATA_FORMAT_DESIGN_DECISION_SUMMARY.md](docs/results_reports/DATA_FORMAT_DESIGN_DECISION_SUMMARY.md)
+- ✅ **数据合并与归档**: 生成主数据文件raw_data.csv
+  - 合并: summary_old.csv (211行) + summary_new.csv (265行) → raw_data.csv (476行，80列)
+  - 验证: 100%训练成功，100%能耗完整，66.2%性能指标完整
+  - 归档: 13个过时文件移至summary_archive/目录
+  - 清理: 8个过时备份文件
+  - 脚本: `merge_csv_to_raw_data.py`, `validate_raw_data.py`, `archive_summary_files.py`
+- ✅ **去重迁移到raw_data.csv**: summary_all.csv → raw_data.csv完全迁移 ⭐⭐⭐
+  - **原因**: 停止维护summary_all.csv，使用raw_data.csv作为单一数据源
+  - **更新**: 9个配置文件的historical_csvs字段从summary_all.csv改为raw_data.csv
+  - **修改**: mutation.py的-S参数改为`--enable-summary-append`（默认不追加到summary_all.csv）
+  - **验证**: 创建5个功能测试，全部通过（配置文件、数据提取、去重、配置执行）
+  - **统计**: 从raw_data.csv提取371个变异（78%提取率），341个唯一组合（92%唯一率）
+  - **依赖检查**: mutation/目录仅runner.py有25个引用（全部在_append_to_summary_all方法中，默认禁用）
+  - **工具**:
+    - `scripts/update_historical_csv_refs.py` - 批量更新配置文件
+    - `tests/test_dedup_raw_data.py` - 功能测试套件（5个测试全部通过）
+  - **报告**: [V4_7_3_DEDUPLICATION_MIGRATION_REPORT.md](docs/results_reports/V4_7_3_DEDUPLICATION_MIGRATION_REPORT.md) - 完整迁移报告
+  - **影响**: 零破坏性变更，完全向后兼容（可选-S标志恢复旧行为）
+- ✅ **项目整理与归档**: 文档和脚本大规模整理 ⭐⭐
+  - **归档脚本** (22个):
+    - 数据重建 (7个): rebuild_summary_old_from_json_93col.py等
+    - 数据修复 (7个): step1_fix_experiment_source.py等
+    - 配置修复 (1个): fix_stage_configs.py
+    - 数据分离 (2个): separate_old_new_experiments.py等
+    - 临时分析 (3个): analyze_summary_all_columns.py等
+    - 验证脚本 (1个): validate_93col_rebuild.py
+    - 已废弃 (1个): aggregate_csvs.py
+  - **归档文档** (5个): CSV_FIX_COMPREHENSIVE_SUMMARY.md, DEDUP_MODE_FIX_REPORT.md等
+  - **保留脚本** (10个):
+    - 核心工具 (3个): merge_csv_to_raw_data.py, validate_raw_data.py, archive_summary_files.py
+    - 配置工具 (3个): generate/validate/verify配置
+    - 分析工具 (3个): analyze_baseline.py, analyze_experiments.py, analyze_archive_plan.py
+    - 下载工具 (1个): download_pretrained_models.py
+- 📚 **文档完善**:
+  - README.md和CLAUDE.md更新数据文件说明，添加去重迁移说明
+  - 新增 [SCRIPTS_QUICKREF.md](docs/SCRIPTS_QUICKREF.md) - 脚本快速参考
+  - 新增4个分析报告（数据格式分析2+去重迁移1+脚本文档1）
+
+**2025-12-12** - summary_old.csv 93列重建完成 ⭐⭐⭐
+- ✅ **数据重建**: 从experiment.json直接重建，确保数据完整性
+  - 原问题: 80列格式缺少13个字段（6个bg_hyperparam + 7个bg_energy）
+  - 解决方案: 编写专用重建脚本，直接从211个JSON文件提取
+  - 重建结果: 93列格式，211行数据，100%完整性验证通过
+- ✅ **数据验证**:
+  - 训练成功率: 211/211 (100.0%)
+  - CPU能耗完整: 211/211 (100.0%)
+  - GPU能耗完整: 211/211 (100.0%)
+  - 随机抽样: 10/10 (100%) 通过
+  - **关键发现**: 背景能耗0%填充率为正确行为（设计决定：背景训练仅作GPU负载，不监控能耗）
+- 📚 **数据结构文档化**:
+  - 详细记录并行/非并行模式的数据存储差异
+  - 明确说明93列结构和字段含义
+  - 添加到README.md和CLAUDE.md
+- 🔧 **工具和脚本**:
+  - `scripts/rebuild_summary_old_93col.py` - 重建脚本
+  - `scripts/validate_93col_rebuild.py` - 验证脚本
+- 💾 **备份管理**:
+  - `summary_old.csv.backup_80col` - 原始80列版本
+  - `summary_old.csv.backup_before_93col_replacement` - 替换前备份
+
+**2025-12-11** - VulBERTa/cnn清理与100%完成确认 ⭐⭐⭐
+- 🔍 **问题发现**: VulBERTa/cnn训练代码未实现
+  - 根因: `train_vulberta.py` 中 `train_cnn()` 函数仅打印消息,无实际训练
+  - 影响: 42个实验记录全部无效(平均3.92秒,性能指标全空)
+- 🧹 **数据清理**: 从summary_all.csv移除42条无效记录
+  - 清理前: 518条记录, 12个模型
+  - 清理后: 476条记录, 11个有效模型
+  - 备份: `summary_all.csv.backup_20251211_144013`
+- ✅ **100%完成确认**: 清理后重新验证,所有实验目标已达成
+  - 90/90 参数-模式组合全部达标 (100.0%)
+  - 11个有效模型全部100%完成
+  - 476个有效实验数据完整
+- 📚 **文档更新**:
+  - [11个模型最终定义](docs/11_MODELS_FINAL_DEFINITION.md) - 正式确认11个有效模型
+  - [VulBERTa/cnn清理报告](docs/results_reports/VULBERTA_CNN_CLEANUP_REPORT_20251211.md) - 详细清理过程
+  - 更新README.md和CLAUDE.md中的模型列表
+
+**2025-12-08** - 配置最终合并完成 ⭐⭐⭐
   - ✅ **配置最终合并完成** ⭐⭐⭐
     - **最终整合**: 将Stage11+12+13合并为单一配置文件
     - **配置文件**: `settings/stage_final_all_remaining.json`
@@ -99,6 +209,92 @@ energy_dl/nightly/
 
 ---
 
+## 📋 数据格式设计决定 (新实验 vs 老实验)
+
+### summary_new.csv (80列) vs summary_old.csv (93列)
+
+**设计理念**: 新实验优化了数据记录策略，仅记录有分析价值的数据
+
+#### 格式对比
+
+| 数据类型 | 老实验 (93列) | 新实验 (80列) | 设计决定 |
+|---------|--------------|--------------|---------|
+| 前景超参数 | ✅ 完整 | ✅ 完整 | 核心数据 |
+| 前景性能 | ✅ 完整 | ✅ 完整 | 核心数据 |
+| 前景能耗 | ✅ 完整 | ✅ 完整 | 核心数据 |
+| 背景超参数 | ⚠️ 部分有数据 | ❌ 无数据 | **设计改进**: 背景使用默认值，无需记录 |
+| 背景能耗 | ❌ 无数据 | ❌ 无数据 | **设计决定**: 监控全局能耗，无需拆分 |
+
+#### 13个"缺失"列的设计理由
+
+**背景超参数字段 (6列) - 无需记录**:
+- `bg_hyperparam_batch_size`
+- `bg_hyperparam_dropout`
+- `bg_hyperparam_epochs`
+- `bg_hyperparam_learning_rate`
+- `bg_hyperparam_seed`
+- `bg_hyperparam_weight_decay`
+
+**理由**:
+1. 背景训练仅作为GPU负载，使用默认超参数配置
+2. 老实验验证：105个并行实验中，100%背景超参数为默认值（无变异）
+3. 记录默认值没有实际分析意义
+4. 减少数据冗余，提高可维护性
+
+**背景能耗字段 (7列) - 监控全局能耗**:
+- `bg_energy_cpu_pkg_joules`
+- `bg_energy_cpu_ram_joules`
+- `bg_energy_cpu_total_joules`
+- `bg_energy_gpu_avg_watts`
+- `bg_energy_gpu_max_watts`
+- `bg_energy_gpu_min_watts`
+- `bg_energy_gpu_total_joules`
+
+**理由**:
+1. 能耗监控粒度：系统级监控（CPU + GPU全局）
+2. 并行实验：前景+背景同时运行，前景能耗数据**已包含总能耗**
+3. 无法单独拆分：无法也无需测量背景训练的能耗
+4. 研究重点：关注前景模型训练，背景仅作GPU负载
+5. 老实验验证：105个并行实验中，100%背景能耗字段为空
+
+#### 数据完整性分析结果
+
+**老实验深度分析** (105个并行实验):
+
+| 背景模型 | 使用次数 | 超参数状态 |
+|---------|---------|-----------|
+| Person_reID/pcb | 30 | epochs=60, lr=0.05, dropout=0.5, seed=1334 (固定) |
+| VulBERTa/mlp | 23 | epochs=10, lr=3e-05, seed=42, weight_decay=0.0 (固定) |
+| examples/mnist | 13 | epochs=10, lr=0.01, batch_size=32, seed=1 (固定) |
+| examples/mnist_rnn | 26 | epochs=10, lr=0.01, batch_size=32, seed=1 (固定) |
+| examples/mnist_ff | 13 | epochs=10, lr=0.01, batch_size=32, seed=1或1334 (仅1个变化) |
+
+**关键发现**:
+- ✅ **100%使用默认值**（仅1个实验的seed有微小变化）
+- ✅ **背景能耗100%为空**
+- ✅ **13个"缺失"列对后续分析无价值**
+
+#### 最终建议
+
+**推荐方案**: 保持80列格式 ⭐⭐⭐
+
+**优点**:
+- ✅ 符合精简数据的设计理念
+- ✅ 不引入无意义的空列
+- ✅ 80列已包含所有核心数据
+- ✅ 反映了项目的设计演进
+
+**不推荐扩展为93列的原因**:
+- ❌ 违背设计初衷（精简数据）
+- ❌ 引入13个永久为空的列
+- ❌ 可能误导使用者（空列看起来像数据缺失）
+
+**详细分析报告**:
+- [格式对比分析](docs/results_reports/SUMMARY_NEW_VS_OLD_COLUMN_ANALYSIS.md) - 80列vs93列完整对比 ⭐⭐⭐
+- [老实验背景超参数分析](docs/results_reports/OLD_EXPERIMENT_BG_HYPERPARAM_ANALYSIS.md) - 证明100%使用默认值 ⭐⭐
+
+---
+
 ## 🔧 开发工作流程
 
 ### 1. 添加新功能
@@ -136,9 +332,64 @@ energy_dl/nightly/
 - `config/models_config.json` - 模型配置
 
 ### 重要数据文件
-- `results/summary_all.csv` - 所有实验汇总（388行，37列）
-- `results/summary_all.csv.backup` - 数据备份
+- `results/raw_data.csv` - **主数据文件** (476行，80列) ⭐⭐⭐
+  - 合并所有实验数据（211老实验 + 265新实验）
+  - 100%训练成功，100%能耗完整
+  - 验证脚本: `scripts/validate_raw_data.py`
+- `results/summary_old.csv` - 历史实验数据（211行，93列）
+- `results/summary_new.csv` - 新实验数据（265行，80列）
+- `results/summary_archive/` - 过时文件归档目录
+  - 13个过时summary文件
+  - 8个过时备份文件
+  - 归档说明: `summary_archive/README_ARCHIVE.md`
+- `results/summary_all.csv.backup` - 数据备份（已归档）
 - `settings/EXECUTION_READY.md` - 执行准备清单（已归档）
+
+#### summary_old.csv数据结构 (93列)
+
+**非并行模式实验** (106个, 50.2%):
+- **数据存储**: 顶层字段（`training_success`, `energy_cpu_total_joules`, `energy_gpu_avg_watts`等）
+- **超参数**: `hyperparam_*` 字段（9个）
+- **性能指标**: `perf_*` 字段（9个）
+- **能耗数据**: `energy_*` 字段（11个）
+- **前景/背景字段**: 全部为空（`fg_*`, `bg_*`字段不适用）
+
+**并行模式实验** (105个, 49.8%):
+- **前景模型数据** (被监控的主实验):
+  - 训练状态: `fg_training_success`
+  - 超参数: `fg_hyperparam_*` 字段（9个）
+  - 性能指标: `fg_perf_*` 字段（9个）
+  - 能耗数据: `fg_energy_*` 字段（11个，CPU+GPU完整监控）
+- **背景模型数据** (GPU负载辅助训练):
+  - 基本信息: `bg_repository`, `bg_model`, `bg_note`, `bg_log_directory`
+  - 超参数: `bg_hyperparam_*` 字段（6个，部分填充，取决于模型）
+  - **能耗数据**: `bg_energy_*` 字段（7个）**全部为空** ⚠️
+    - **设计决定**: 背景训练仅作为GPU负载使用，不监控其能耗
+    - **验证**: bg_note字段确认 "Background training served as GPU load only (not monitored)"
+- **顶层字段**: 全部为空（数据在`fg_*`字段中）
+
+**列结构总览** (93列):
+1. 基础字段: 7列（experiment_id, timestamp, repository, model, training_success, duration_seconds, retries）
+2. 顶层超参数: 9列（hyperparam_alpha, hyperparam_batch_size等）
+3. 顶层性能指标: 9列（perf_accuracy, perf_precision等）
+4. 顶层能耗: 11列（energy_cpu_pkg_joules, energy_gpu_avg_watts等）
+5. 实验元数据: 5列（experiment_source, num_mutated_params, mutated_param, mode, error_message）
+6. 前景字段: 42列（fg_repository, fg_model, fg_duration_seconds, fg_training_success, fg_hyperparam_*, fg_perf_*, fg_energy_*）
+7. 背景字段: 10列（bg_repository, bg_model, bg_note, bg_log_directory, bg_hyperparam_*, bg_energy_*）
+
+**数据完整性验证** (2025-12-12):
+- ✅ 所有211个实验数据成功从experiment.json提取
+- ✅ 训练成功率: 211/211 (100.0%)
+- ✅ CPU能耗完整: 211/211 (100.0%)
+- ✅ GPU能耗完整: 211/211 (100.0%)
+- ✅ 随机抽样验证: 10/10 (100%) 通过
+- ✅ 背景能耗0%填充率为正确行为（设计决定）
+
+**重建历史** (2025-12-12):
+- 原始格式: 80列（缺少6个bg_hyperparam + 7个bg_energy字段）
+- 重建过程: 直接从211个experiment.json文件提取，确保无数据丢失
+- 备份文件: `summary_old.csv.backup_80col`, `summary_old.csv.backup_before_93col_replacement`
+- 验证脚本: `scripts/validate_93col_rebuild.py`
 
 ### 配置文件（已完成）
 - `settings/stage2_optimized_nonparallel_and_fast_parallel.json` - Stage2 (已完成 ✓)
@@ -175,28 +426,43 @@ energy_dl/nightly/
 - `tests/unit/test_append_to_summary_all.py` - 单元测试
 
 ### 文档索引
+
+#### 功能与配置指南
 - `docs/FEATURES_OVERVIEW.md` - 功能特性总览
 - `docs/QUICK_REFERENCE.md` - 快速参考
 - `docs/SETTINGS_CONFIGURATION_GUIDE.md` - 配置指南
 - `docs/JSON_CONFIG_BEST_PRACTICES.md` - JSON配置最佳实践 ⭐⭐⭐ **[v4.7.1新增]**
-- `docs/results_reports/CSV_FIX_COMPREHENSIVE_SUMMARY.md` - CSV修复综合报告
-- `docs/results_reports/MISSING_COLUMNS_DETAILED_ANALYSIS.md` - 缺失列详细分析
-- `docs/results_reports/DEDUP_MODE_FIX_REPORT.md` - 去重模式修复报告
-- `docs/results_reports/EXPERIMENT_REQUIREMENT_ANALYSIS.md` - 实验需求分析
+- `docs/SCRIPTS_DOCUMENTATION.md` - Scripts目录完整文档 **[v4.7.2新增]**
+
+#### 数据格式与结构 ⭐⭐⭐
+- `docs/results_reports/SUMMARY_NEW_VS_OLD_COLUMN_ANALYSIS.md` - 80列vs93列完整对比 ⭐⭐⭐ **[v4.7.3新增]**
+- `docs/results_reports/OLD_EXPERIMENT_BG_HYPERPARAM_ANALYSIS.md` - 老实验背景超参数深度分析 ⭐⭐ **[v4.7.3新增]**
+- `docs/OUTPUT_STRUCTURE_QUICKREF.md` - 输出结构快速参考
+
+#### 实验执行报告
 - `docs/results_reports/STAGE3_4_EXECUTION_REPORT.md` - Stage3-4执行报告
-- `docs/results_reports/STAGE7_CONFIG_FIX_REPORT.md` - Stage7-13配置修复报告
 - `docs/results_reports/STAGE7_EXECUTION_REPORT.md` - Stage7执行报告
-- `docs/results_reports/STAGE7_13_CONFIG_BUG_ANALYSIS.md` - Stage7-13配置Bug详细分析 **[v4.7.1]**
 - `docs/results_reports/STAGE7_8_FIX_EXECUTION_REPORT.md` - Stage7-8修复执行报告 **[v4.7.1]**
+
+#### Bug修复与优化
+- `docs/results_reports/CSV_FIX_COMPREHENSIVE_SUMMARY.md` - CSV修复综合报告
+- `docs/results_reports/DEDUP_MODE_FIX_REPORT.md` - 去重模式修复报告
+- `docs/results_reports/STAGE7_CONFIG_FIX_REPORT.md` - Stage7-13配置修复报告
+- `docs/results_reports/STAGE7_13_CONFIG_BUG_ANALYSIS.md` - Stage7-13配置Bug详细分析 **[v4.7.1]**
 - `docs/results_reports/STAGE11_BUG_FIX_REPORT.md` - Stage11 Bug修复报告 ⭐⭐⭐ **[v4.7.2]**
+
+#### 实验规划与分析
+- `docs/results_reports/EXPERIMENT_REQUIREMENT_ANALYSIS.md` - 实验需求分析
+- `docs/results_reports/MISSING_COLUMNS_DETAILED_ANALYSIS.md` - 缺失列详细分析
 - `docs/results_reports/STAGE11_ACTUAL_STATE_CORRECTION.md` - Stage11实际状态修正 ⭐⭐ **[v4.7.2新增]**
 - `docs/results_reports/FINAL_CONFIG_INTEGRATION_REPORT.md` - 最终配置整合报告 ⭐⭐⭐ **[v4.7.2新增]**
 - `docs/results_reports/DEDUPLICATION_RANDOM_MUTATION_ANALYSIS.md` - 去重与随机变异分析 ⭐ **[v4.7.2]**
-- `docs/results_reports/PROJECT_CLEANUP_SUMMARY_20251208.md` - 项目清理总结 **[v4.7.2]**
-- `docs/SCRIPTS_DOCUMENTATION.md` - Scripts目录完整文档 **[v4.7.2新增]**
-- `docs/results_reports/DAILY_SUMMARY_20251205.md` - 2025-12-05每日总结
 - `docs/settings_reports/STAGE7_13_EXECUTION_PLAN.md` - Stage7-13执行计划
 - `docs/results_reports/STAGE7_13_DESIGN_SUMMARY.md` - Stage7-13设计总结
+
+#### 项目总结
+- `docs/results_reports/PROJECT_CLEANUP_SUMMARY_20251208.md` - 项目清理总结 **[v4.7.2]**
+- `docs/results_reports/DAILY_SUMMARY_20251205.md` - 2025-12-05每日总结
 
 ---
 
@@ -271,7 +537,55 @@ python3 scripts/check_completion_status.py
 
 ## 🔄 版本历史摘要
 
-### v4.7.2 (2025-12-08) - 当前版本 ⭐
+### v4.7.3 (2025-12-12) - 当前版本 ⭐
+- ✅ **summary_old.csv 93列重建完成**: 从experiment.json直接重建，确保数据完整性
+  - **问题**: 原80列格式缺少13个字段（6个bg_hyperparam + 7个bg_energy）
+  - **根因**: 历史数据生成时未提取背景模型的超参数和能耗字段
+  - **解决**: 编写重建脚本，直接从211个experiment.json文件提取完整数据
+  - **结果**: 93列格式，211行数据，100%数据完整性验证通过
+  - **验证**:
+    - 训练成功率: 211/211 (100.0%)
+    - CPU/GPU能耗: 211/211 (100.0%)
+    - 随机抽样: 10/10 (100%) 通过
+    - 背景能耗0%为设计决定（背景训练仅作GPU负载，不监控能耗）
+  - **备份**: `summary_old.csv.backup_80col`, `summary_old.csv.backup_before_93col_replacement`
+  - **重建脚本**: `scripts/rebuild_summary_old_93col.py`
+  - **验证脚本**: `scripts/validate_93col_rebuild.py`
+- ✅ **数据格式设计决定分析**: 80列vs93列完整对比 ⭐⭐⭐
+  - **分析**: 老实验的13个"多出"列对后续分析完全无价值
+  - **验证**:
+    - 背景超参数: 100%为默认值（无变异）
+    - 背景能耗: 100%为空（设计决定）
+  - **结论**: 新实验的80列格式是设计改进，不是缺陷
+  - **报告**:
+    - [SUMMARY_NEW_VS_OLD_COLUMN_ANALYSIS.md](docs/results_reports/SUMMARY_NEW_VS_OLD_COLUMN_ANALYSIS.md) - 格式对比
+    - [OLD_EXPERIMENT_BG_HYPERPARAM_ANALYSIS.md](docs/results_reports/OLD_EXPERIMENT_BG_HYPERPARAM_ANALYSIS.md) - 深度分析
+    - [DATA_FORMAT_DESIGN_DECISION_SUMMARY.md](docs/results_reports/DATA_FORMAT_DESIGN_DECISION_SUMMARY.md) - 总结报告
+- ✅ **数据合并与归档**: 生成主数据文件raw_data.csv ⭐⭐⭐
+  - **合并**: summary_old.csv (211行) + summary_new.csv (265行) → raw_data.csv (476行，80列)
+  - **验证**:
+    - 100%训练成功
+    - 100%能耗完整（CPU + GPU）
+    - 66.2%性能指标完整
+  - **归档**: 13个过时文件移至summary_archive/目录
+  - **清理**: 8个过时备份文件
+  - **脚本**:
+    - `scripts/merge_csv_to_raw_data.py` - 合并脚本
+    - `scripts/validate_raw_data.py` - 验证脚本
+    - `scripts/archive_summary_files.py` - 归档脚本
+- ✅ **项目整理与归档**: 文档和脚本大规模整理 ⭐⭐
+  - **归档脚本** (22个): 已完成任务的脚本归档至`scripts/archived/completed_tasks_20251212/`
+  - **归档文档** (5个): 临时分析报告归档至`docs/archived/temporary_analysis_20251212/`
+  - **保留脚本** (10个): 核心工具3 + 配置工具3 + 分析工具3 + 下载工具1
+  - **参数修改**: mutation.py的-S参数改为`--enable-summary-append`（默认不追加到summary_all.csv）
+- 📚 **文档更新**:
+  - README.md: 更新"结果输出"章节，添加raw_data.csv说明，更新v4.7.3版本信息
+  - CLAUDE.md: 更新"重要数据文件"章节，添加数据格式设计决定说明，更新最新进展
+  - 新增: [SCRIPTS_QUICKREF.md](docs/SCRIPTS_QUICKREF.md) - 脚本快速参考（10个核心脚本说明）
+  - 新增3个分析报告文档
+  - 明确说明背景能耗0%填充率为正确行为（项目设计决定）
+
+### v4.7.2 (2025-12-08) ⭐
 - 🔴 **并行模式runs_per_config Bug修复**: 修复v4.7.0遗留问题
   - **问题**: Stage11只运行4个实验而非20个（缺失80%）
   - **根因**: v4.7.0修复仅覆盖mutation/default模式，未修复parallel模式
@@ -497,8 +811,8 @@ python3 scripts/check_deduplication.py
 ---
 
 **维护者**: Green
-**Claude助手指南版本**: 1.3
-**最后更新**: 2025-12-08
-**状态**: ✅ 有效 - v4.7.2修复了并行模式runs_per_config bug
+**Claude助手指南版本**: 1.4
+**最后更新**: 2025-12-12
+**状态**: ✅ 有效 - v4.7.3完成summary_old.csv 93列重建
 
 > 提示：将此文件保存在项目根目录，作为Claude助手的主要参考。当项目结构或规范变更时，及时更新此文档。

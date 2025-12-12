@@ -1,19 +1,19 @@
 {
-  "comment": "Stage8: 非并行模式中慢速模型 - VulBERTa/mlp + densenet121 [已修复: 拆分多参数配置项]",
+  "comment": "Stage8: \u975e\u5e76\u884c\u6a21\u5f0f\u4e2d\u6162\u901f\u6a21\u578b - VulBERTa/mlp + densenet121 [\u5df2\u4fee\u590d: \u62c6\u5206\u591a\u53c2\u6570\u914d\u7f6e\u9879]",
   "version": "4.7.1-fixed",
   "created": "2025-12-05",
   "estimated_duration_hours": 35.1,
   "estimated_experiments": 48,
   "target_completion": {
     "parameters": [
-      "VulBERTa/mlp: 4参数 × 7次",
-      "Person_reID_baseline_pytorch/densenet121: 4参数 × 5次"
+      "VulBERTa/mlp: 4\u53c2\u6570 \u00d7 7\u6b21",
+      "Person_reID_baseline_pytorch/densenet121: 4\u53c2\u6570 \u00d7 5\u6b21"
     ],
-    "goal": "完成非并行模式下中慢速模型的所有参数，每个参数获得5个唯一值"
+    "goal": "\u5b8c\u6210\u975e\u5e76\u884c\u6a21\u5f0f\u4e0b\u4e2d\u6162\u901f\u6a21\u578b\u7684\u6240\u6709\u53c2\u6570\uff0c\u6bcf\u4e2a\u53c2\u6570\u83b7\u5f975\u4e2a\u552f\u4e00\u503c"
   },
   "use_deduplication": true,
   "historical_csvs": [
-    "results/summary_all.csv"
+    "results/raw_data.csv"
   ],
   "experiments": [
     {
@@ -25,7 +25,7 @@
         "epochs"
       ],
       "mode": "nonparallel",
-      "comment": "仅变异epochs参数"
+      "comment": "\u4ec5\u53d8\u5f02epochs\u53c2\u6570"
     },
     {
       "repo": "VulBERTa",
@@ -36,7 +36,7 @@
         "learning_rate"
       ],
       "mode": "nonparallel",
-      "comment": "仅变异learning_rate参数"
+      "comment": "\u4ec5\u53d8\u5f02learning_rate\u53c2\u6570"
     },
     {
       "repo": "VulBERTa",
@@ -47,7 +47,7 @@
         "seed"
       ],
       "mode": "nonparallel",
-      "comment": "仅变异seed参数"
+      "comment": "\u4ec5\u53d8\u5f02seed\u53c2\u6570"
     },
     {
       "repo": "VulBERTa",
@@ -58,7 +58,7 @@
         "weight_decay"
       ],
       "mode": "nonparallel",
-      "comment": "仅变异weight_decay参数"
+      "comment": "\u4ec5\u53d8\u5f02weight_decay\u53c2\u6570"
     },
     {
       "repo": "Person_reID_baseline_pytorch",
@@ -69,7 +69,7 @@
         "epochs"
       ],
       "mode": "nonparallel",
-      "comment": "仅变异epochs参数"
+      "comment": "\u4ec5\u53d8\u5f02epochs\u53c2\u6570"
     },
     {
       "repo": "Person_reID_baseline_pytorch",
@@ -80,7 +80,7 @@
         "learning_rate"
       ],
       "mode": "nonparallel",
-      "comment": "仅变异learning_rate参数"
+      "comment": "\u4ec5\u53d8\u5f02learning_rate\u53c2\u6570"
     },
     {
       "repo": "Person_reID_baseline_pytorch",
@@ -91,7 +91,7 @@
         "seed"
       ],
       "mode": "nonparallel",
-      "comment": "仅变异seed参数"
+      "comment": "\u4ec5\u53d8\u5f02seed\u53c2\u6570"
     },
     {
       "repo": "Person_reID_baseline_pytorch",
@@ -102,7 +102,7 @@
         "dropout"
       ],
       "mode": "nonparallel",
-      "comment": "仅变异dropout参数"
+      "comment": "\u4ec5\u53d8\u5f02dropout\u53c2\u6570"
     }
   ]
 }

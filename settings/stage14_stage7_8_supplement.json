@@ -1,24 +1,24 @@
 {
-  "comment": "Stage14: Stage7-8补充实验 - 仅补充未达标参数",
+  "comment": "Stage14: Stage7-8\u8865\u5145\u5b9e\u9a8c - \u4ec5\u8865\u5145\u672a\u8fbe\u6807\u53c2\u6570",
   "version": "4.7.1",
   "created": "2025-12-07",
   "estimated_duration_hours": 2.5,
   "estimated_experiments": 7,
   "background": {
-    "issue": "Stage7-8由于配置错误生成了混合变异实验，导致未按单参数独立运行",
-    "status": "Stage8所有参数已达标(>=10个唯一值)，Stage7大部分参数已达标，仅MRT-OAST/default的epochs需补充",
+    "issue": "Stage7-8\u7531\u4e8e\u914d\u7f6e\u9519\u8bef\u751f\u6210\u4e86\u6df7\u5408\u53d8\u5f02\u5b9e\u9a8c\uff0c\u5bfc\u81f4\u672a\u6309\u5355\u53c2\u6570\u72ec\u7acb\u8fd0\u884c",
+    "status": "Stage8\u6240\u6709\u53c2\u6570\u5df2\u8fbe\u6807(>=10\u4e2a\u552f\u4e00\u503c)\uff0cStage7\u5927\u90e8\u5206\u53c2\u6570\u5df2\u8fbe\u6807\uff0c\u4ec5MRT-OAST/default\u7684epochs\u9700\u8865\u5145",
     "analysis_date": "2025-12-07",
-    "data_source": "results/summary_all.csv (400个实验)"
+    "data_source": "results/summary_all.csv (400\u4e2a\u5b9e\u9a8c)"
   },
   "target_completion": {
     "parameters": [
-      "MRT-OAST/default非并行: epochs × 7次 (当前4个，目标5个，补充3个足够)"
+      "MRT-OAST/default\u975e\u5e76\u884c: epochs \u00d7 7\u6b21 (\u5f53\u524d4\u4e2a\uff0c\u76ee\u68075\u4e2a\uff0c\u8865\u51453\u4e2a\u8db3\u591f)"
     ],
-    "goal": "补充Stage7未达标参数，完成所有非并行模式实验目标"
+    "goal": "\u8865\u5145Stage7\u672a\u8fbe\u6807\u53c2\u6570\uff0c\u5b8c\u6210\u6240\u6709\u975e\u5e76\u884c\u6a21\u5f0f\u5b9e\u9a8c\u76ee\u6807"
   },
   "use_deduplication": true,
   "historical_csvs": [
-    "results/summary_all.csv"
+    "results/raw_data.csv"
   ],
   "experiments": [
     {
@@ -30,69 +30,69 @@
         "epochs"
       ],
       "mode": "nonparallel",
-      "comment": "补充epochs参数：当前4个唯一值，目标5个。运行7次确保至少1个新唯一值通过去重"
+      "comment": "\u8865\u5145epochs\u53c2\u6570\uff1a\u5f53\u524d4\u4e2a\u552f\u4e00\u503c\uff0c\u76ee\u68075\u4e2a\u3002\u8fd0\u884c7\u6b21\u786e\u4fdd\u81f3\u5c111\u4e2a\u65b0\u552f\u4e00\u503c\u901a\u8fc7\u53bb\u91cd"
     }
   ],
   "completion_status": {
     "stage7_analysis": {
       "examples/mnist": {
-        "epochs": "5/5 ✓",
-        "learning_rate": "7/5 ✓",
-        "batch_size": "6/5 ✓",
-        "seed": "7/5 ✓"
+        "epochs": "5/5 \u2713",
+        "learning_rate": "7/5 \u2713",
+        "batch_size": "6/5 \u2713",
+        "seed": "7/5 \u2713"
       },
       "examples/mnist_ff": {
-        "epochs": "5/5 ✓",
-        "learning_rate": "7/5 ✓",
-        "batch_size": "6/5 ✓",
-        "seed": "7/5 ✓"
+        "epochs": "5/5 \u2713",
+        "learning_rate": "7/5 \u2713",
+        "batch_size": "6/5 \u2713",
+        "seed": "7/5 \u2713"
       },
       "examples/mnist_rnn": {
-        "epochs": "6/5 ✓",
-        "learning_rate": "7/5 ✓",
-        "batch_size": "6/5 ✓",
-        "seed": "7/5 ✓"
+        "epochs": "6/5 \u2713",
+        "learning_rate": "7/5 \u2713",
+        "batch_size": "6/5 \u2713",
+        "seed": "7/5 \u2713"
       },
       "examples/siamese": {
-        "epochs": "6/5 ✓",
-        "learning_rate": "7/5 ✓",
-        "batch_size": "6/5 ✓",
-        "seed": "7/5 ✓"
+        "epochs": "6/5 \u2713",
+        "learning_rate": "7/5 \u2713",
+        "batch_size": "6/5 \u2713",
+        "seed": "7/5 \u2713"
       },
       "MRT-OAST/default": {
-        "epochs": "4/5 ❌ 需补充",
-        "learning_rate": "7/5 ✓",
-        "seed": "7/5 ✓",
-        "dropout": "8/5 ✓",
-        "weight_decay": "7/5 ✓"
+        "epochs": "4/5 \u274c \u9700\u8865\u5145",
+        "learning_rate": "7/5 \u2713",
+        "seed": "7/5 \u2713",
+        "dropout": "8/5 \u2713",
+        "weight_decay": "7/5 \u2713"
       },
       "bug-localization-by-dnn-and-rvsm/default": {
-        "max_iter": "7/5 ✓",
-        "kfold": "5/5 ✓",
-        "alpha": "7/5 ✓",
-        "seed": "7/5 ✓"
+        "max_iter": "7/5 \u2713",
+        "kfold": "5/5 \u2713",
+        "alpha": "7/5 \u2713",
+        "seed": "7/5 \u2713"
       },
       "pytorch_resnet_cifar10/resnet20": {
-        "epochs": "7/5 ✓",
-        "learning_rate": "7/5 ✓",
-        "seed": "7/5 ✓",
-        "weight_decay": "7/5 ✓"
+        "epochs": "7/5 \u2713",
+        "learning_rate": "7/5 \u2713",
+        "seed": "7/5 \u2713",
+        "weight_decay": "7/5 \u2713"
       }
     },
     "stage8_analysis": {
       "VulBERTa/mlp": {
-        "epochs": "11/5 ✓",
-        "learning_rate": "13/5 ✓",
-        "seed": "13/5 ✓",
-        "weight_decay": "13/5 ✓"
+        "epochs": "11/5 \u2713",
+        "learning_rate": "13/5 \u2713",
+        "seed": "13/5 \u2713",
+        "weight_decay": "13/5 \u2713"
       },
       "Person_reID_baseline_pytorch/densenet121": {
-        "epochs": "10/5 ✓",
-        "learning_rate": "11/5 ✓",
-        "seed": "11/5 ✓",
-        "dropout": "11/5 ✓"
+        "epochs": "10/5 \u2713",
+        "learning_rate": "11/5 \u2713",
+        "seed": "11/5 \u2713",
+        "dropout": "11/5 \u2713"
       }
     },
-    "conclusion": "Stage8无需补充，Stage7仅需补充MRT-OAST/default的epochs参数"
+    "conclusion": "Stage8\u65e0\u9700\u8865\u5145\uff0cStage7\u4ec5\u9700\u8865\u5145MRT-OAST/default\u7684epochs\u53c2\u6570"
   }
 }

@@ -1,17 +1,17 @@
 {
   "experiment_name": "stage3_4_merged_optimized_parallel",
-  "description": "阶段3-4合并优化版: mnist_ff剩余(8个) + 中速模型并行(21个) + VulBERTa(4个) + densenet121(4个) = 25个实验项 (预计57.1小时，基于Stage2 38.5%完成率重新预估)",
+  "description": "\u9636\u6bb53-4\u5408\u5e76\u4f18\u5316\u7248: mnist_ff\u5269\u4f59(8\u4e2a) + \u4e2d\u901f\u6a21\u578b\u5e76\u884c(21\u4e2a) + VulBERTa(4\u4e2a) + densenet121(4\u4e2a) = 25\u4e2a\u5b9e\u9a8c\u9879 (\u9884\u8ba157.1\u5c0f\u65f6\uff0c\u57fa\u4e8eStage2 38.5%\u5b8c\u6210\u7387\u91cd\u65b0\u9884\u4f30)",
   "mode": "mutation",
   "max_retries": 2,
   "governor": "performance",
   "use_deduplication": true,
   "historical_csvs": [
-    "results/summary_all.csv"
+    "results/raw_data.csv"
   ],
   "experiments": [
     {
-      "comment": "=== 合并配置说明 ===",
-      "note": "本配置合并了原Stage3和Stage4，共25个实验项，57个预期实验",
+      "comment": "=== \u5408\u5e76\u914d\u7f6e\u8bf4\u660e ===",
+      "note": "\u672c\u914d\u7f6e\u5408\u5e76\u4e86\u539fStage3\u548cStage4\uff0c\u517125\u4e2a\u5b9e\u9a8c\u9879\uff0c57\u4e2a\u9884\u671f\u5b9e\u9a8c",
       "estimated_actual_runs": 21,
       "estimated_time_hours": "57.1",
       "original_stage3_runs": 41,
@@ -19,7 +19,7 @@
       "merge_date": "2025-12-04"
     },
     {
-      "comment": "batch_size: 3→5个，需要2个，设置3以确保",
+      "comment": "batch_size: 3\u21925\u4e2a\uff0c\u9700\u89812\u4e2a\uff0c\u8bbe\u7f6e3\u4ee5\u786e\u4fdd",
       "repo": "examples",
       "model": "mnist_ff",
       "mode": "parallel",
@@ -56,7 +56,7 @@
         "hyperparameters": {}
       },
       "runs_per_config": 3,
-      "comment": "epochs: 3→5个，需要2个"
+      "comment": "epochs: 3\u21925\u4e2a\uff0c\u9700\u89812\u4e2a"
     },
     {
       "repo": "examples",
@@ -76,7 +76,7 @@
         "hyperparameters": {}
       },
       "runs_per_config": 3,
-      "comment": "learning_rate: 3→5个，需要2个"
+      "comment": "learning_rate: 3\u21925\u4e2a\uff0c\u9700\u89812\u4e2a"
     },
     {
       "repo": "examples",
@@ -96,10 +96,10 @@
         "hyperparameters": {}
       },
       "runs_per_config": 3,
-      "comment": "seed: 3→5个，需要2个"
+      "comment": "seed: 3\u21925\u4e2a\uff0c\u9700\u89812\u4e2a"
     },
     {
-      "comment": "kfold: 1→5个，需要4个",
+      "comment": "kfold: 1\u21925\u4e2a\uff0c\u9700\u89814\u4e2a",
       "repo": "bug-localization-by-dnn-and-rvsm",
       "model": "default",
       "mode": "parallel",
@@ -136,7 +136,7 @@
         "hyperparameters": {}
       },
       "runs_per_config": 2,
-      "comment": "max_iter: 4→5个，需要1个"
+      "comment": "max_iter: 4\u21925\u4e2a\uff0c\u9700\u89811\u4e2a"
     },
     {
       "repo": "bug-localization-by-dnn-and-rvsm",
@@ -156,7 +156,7 @@
         "hyperparameters": {}
       },
       "runs_per_config": 2,
-      "comment": "alpha: 4→5个，需要1个"
+      "comment": "alpha: 4\u21925\u4e2a\uff0c\u9700\u89811\u4e2a"
     },
     {
       "repo": "bug-localization-by-dnn-and-rvsm",
@@ -176,10 +176,10 @@
         "hyperparameters": {}
       },
       "runs_per_config": 2,
-      "comment": "seed: 4→5个，需要1个"
+      "comment": "seed: 4\u21925\u4e2a\uff0c\u9700\u89811\u4e2a"
     },
     {
-      "comment": "epochs: 4→5个，需要1个",
+      "comment": "epochs: 4\u21925\u4e2a\uff0c\u9700\u89811\u4e2a",
       "repo": "pytorch_resnet_cifar10",
       "model": "resnet20",
       "mode": "parallel",
@@ -216,7 +216,7 @@
         "hyperparameters": {}
       },
       "runs_per_config": 2,
-      "comment": "learning_rate: 4→5个，需要1个"
+      "comment": "learning_rate: 4\u21925\u4e2a\uff0c\u9700\u89811\u4e2a"
     },
     {
       "repo": "pytorch_resnet_cifar10",
@@ -236,7 +236,7 @@
         "hyperparameters": {}
       },
       "runs_per_config": 2,
-      "comment": "weight_decay: 4→5个，需要1个"
+      "comment": "weight_decay: 4\u21925\u4e2a\uff0c\u9700\u89811\u4e2a"
     },
     {
       "repo": "pytorch_resnet_cifar10",
@@ -256,10 +256,10 @@
         "hyperparameters": {}
       },
       "runs_per_config": 2,
-      "comment": "seed: 4→5个，需要1个"
+      "comment": "seed: 4\u21925\u4e2a\uff0c\u9700\u89811\u4e2a"
     },
     {
-      "comment": "epochs: 4→5个，需要1个",
+      "comment": "epochs: 4\u21925\u4e2a\uff0c\u9700\u89811\u4e2a",
       "repo": "MRT-OAST",
       "model": "default",
       "mode": "parallel",
@@ -296,7 +296,7 @@
         "hyperparameters": {}
       },
       "runs_per_config": 2,
-      "comment": "learning_rate: 4→5个，需要1个"
+      "comment": "learning_rate: 4\u21925\u4e2a\uff0c\u9700\u89811\u4e2a"
     },
     {
       "repo": "MRT-OAST",
@@ -316,7 +316,7 @@
         "hyperparameters": {}
       },
       "runs_per_config": 2,
-      "comment": "dropout: 4→5个，需要1个"
+      "comment": "dropout: 4\u21925\u4e2a\uff0c\u9700\u89811\u4e2a"
     },
     {
       "repo": "MRT-OAST",
@@ -336,7 +336,7 @@
         "hyperparameters": {}
       },
       "runs_per_config": 2,
-      "comment": "weight_decay: 4→5个，需要1个"
+      "comment": "weight_decay: 4\u21925\u4e2a\uff0c\u9700\u89811\u4e2a"
     },
     {
       "repo": "MRT-OAST",
@@ -356,10 +356,10 @@
         "hyperparameters": {}
       },
       "runs_per_config": 2,
-      "comment": "seed: 4→5个，需要1个"
+      "comment": "seed: 4\u21925\u4e2a\uff0c\u9700\u89811\u4e2a"
     },
     {
-      "comment": "epochs: 4→5个，需要1个",
+      "comment": "epochs: 4\u21925\u4e2a\uff0c\u9700\u89811\u4e2a",
       "repo": "VulBERTa",
       "model": "mlp",
       "mode": "parallel",
@@ -396,7 +396,7 @@
         "hyperparameters": {}
       },
       "runs_per_config": 2,
-      "comment": "learning_rate: 4→5个，需要1个"
+      "comment": "learning_rate: 4\u21925\u4e2a\uff0c\u9700\u89811\u4e2a"
     },
     {
       "repo": "VulBERTa",
@@ -416,7 +416,7 @@
         "hyperparameters": {}
       },
       "runs_per_config": 2,
-      "comment": "weight_decay: 4→5个，需要1个"
+      "comment": "weight_decay: 4\u21925\u4e2a\uff0c\u9700\u89811\u4e2a"
     },
     {
       "repo": "VulBERTa",
@@ -436,10 +436,10 @@
         "hyperparameters": {}
       },
       "runs_per_config": 2,
-      "comment": "seed: 4→5个，需要1个"
+      "comment": "seed: 4\u21925\u4e2a\uff0c\u9700\u89811\u4e2a"
     },
     {
-      "comment": "epochs: 4→5个，需要1个",
+      "comment": "epochs: 4\u21925\u4e2a\uff0c\u9700\u89811\u4e2a",
       "repo": "Person_reID_baseline_pytorch",
       "model": "densenet121",
       "mode": "parallel",
@@ -476,7 +476,7 @@
         "hyperparameters": {}
       },
       "runs_per_config": 2,
-      "comment": "learning_rate: 4→5个，需要1个"
+      "comment": "learning_rate: 4\u21925\u4e2a\uff0c\u9700\u89811\u4e2a"
     },
     {
       "repo": "Person_reID_baseline_pytorch",
@@ -496,7 +496,7 @@
         "hyperparameters": {}
       },
       "runs_per_config": 2,
-      "comment": "dropout: 4→5个，需要1个"
+      "comment": "dropout: 4\u21925\u4e2a\uff0c\u9700\u89811\u4e2a"
     },
     {
       "repo": "Person_reID_baseline_pytorch",
@@ -516,7 +516,7 @@
         "hyperparameters": {}
       },
       "runs_per_config": 2,
-      "comment": "seed: 4→5个，需要1个"
+      "comment": "seed: 4\u21925\u4e2a\uff0c\u9700\u89811\u4e2a"
     }
   ]
 }
