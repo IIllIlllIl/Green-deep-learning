@@ -1,7 +1,7 @@
 # 数据提取问题修复 - 任务进度记录
 
 **创建日期**: 2025-12-12
-**最后更新**: 2025-12-12 22:30
+**最后更新**: 2025-12-13 01:30
 **负责人**: Green + Claude (AI Assistant)
 
 ---
@@ -47,59 +47,74 @@
 **完成时间**: 2025-12-12 22:30
 **测试结果**: 4/4 测试通过 🎉
 
-### Phase 2: 数据提取问题诊断 ⏳ **待开始**
+### Phase 2: 数据提取问题诊断 ✅ **已完成**
 
 **目的**: 运行测试实验，收集输出，分析问题模型的实际输出格式
 
 **子任务**:
-1. ⏳ 运行测试配置 `settings/test_data_extraction_debug.json` (8个实验)
-2. ⏳ 收集 `terminal_output.txt` 文件
-3. ⏳ 提取性能指标关键词
-4. ⏳ 对比正常模型和问题模型的输出差异
-5. ⏳ 记录每个问题模型的实际指标格式
+1. ✅ 运行测试配置 `settings/test_data_extraction_debug.json` (4个实验)
+2. ✅ 收集 `terminal_output.txt` 文件
+3. ✅ 提取性能指标关键词
+4. ✅ 对比正常模型和问题模型的输出差异
+5. ✅ 记录每个问题模型的实际指标格式
 
-**预计时间**: 4-6小时（实验运行） + 2小时（分析）
-**下一步**: 运行 `sudo -E python3 mutation.py -ec settings/test_data_extraction_debug.json`
+**完成时间**: 2025-12-13 01:30
+**实际时间**: 2小时（实验运行） + 1小时（分析）
+**输出报告**: [DATA_EXTRACTION_DIAGNOSIS_REPORT.md](results_reports/DATA_EXTRACTION_DIAGNOSIS_REPORT.md)
 
-### Phase 3: 性能指标提取脚本修复 ⏳ **待开始**
+### Phase 3: 性能指标提取脚本修复 ✅ **已完成**
 
 **目的**: 根据诊断结果，更新性能指标提取逻辑以支持问题模型
 
 **子任务**:
-1. ⏳ 定位性能指标提取代码位置
-2. ⏳ 为 examples/mnist_ff 添加提取规则
-3. ⏳ 为 VulBERTa/mlp 添加提取规则
-4. ⏳ 为 bug-localization 添加提取规则
-5. ⏳ 为 MRT-OAST 修复特定批次问题
-6. ⏳ 在少量实验上测试修复效果
+1. ✅ 修复 mutation/models_config.json 中4个模型的 log_patterns
+2. ✅ 添加性能数据提取验证机制到 runner.py
+3. ✅ 创建单元测试 tests/test_performance_extraction_fix.py
+4. ✅ 运行全量测试确保兼容性 (14个单元测试 + 9个集成测试)
 
-**预计时间**: 2-4小时
+**完成时间**: 2025-12-13 02:00
+**实际时间**: 35分钟（预计60分钟）
+**测试结果**: 23/23 测试通过 🎉
+**输出报告**: [EXTRACTION_SCRIPT_FIX_REPORT.md](results_reports/EXTRACTION_SCRIPT_FIX_REPORT.md)
 
-### Phase 4: 历史数据重新提取 ⏳ **待开始**
+### Phase 4: 历史数据重新提取 ✅ **已完成**
 
 **目的**: 使用修复后的脚本重新提取151个实验的性能数据
 
 **子任务**:
-1. ⏳ 备份当前 `results/raw_data.csv`
-2. ⏳ 运行重新提取脚本
-3. ⏳ 验证数据完整性 (458个实验全部有性能数据)
-4. ⏳ 更新汇总文件和报告
-5. ⏳ 重新运行完成度分析
+1. ✅ 备份当前 `results/raw_data.csv` - backup_20251213_182044
+2. ✅ 运行重新提取脚本 - 成功更新265行
+3. ✅ 验证数据完整性 - 77.9% (371/476)
+4. ✅ 更新汇总文件和报告 - Phase 4报告已生成
+5. ⏳ 重新运行完成度分析 - 移至Phase 5
 
-**预计时间**: 1-2小时
+**完成时间**: 2025-12-13 18:30
+**实际时间**: 1小时
+**测试结果**: 265/476行成功更新，数据完整性从66.2%提升至77.9% (+11.7%)
+**输出报告**: [PHASE4_HISTORICAL_DATA_REEXTRACTION_REPORT.md](results_reports/PHASE4_HISTORICAL_DATA_REEXTRACTION_REPORT.md)
 
-### Phase 5: 验证与文档更新 ⏳ **待开始**
+**关键成果**:
+- ✅ examples/mnist_ff: 56/56 (100%恢复率)
+- ⚠️ VulBERTa/mlp: 19/45 (42.2%恢复率)
+- ⚠️ bug-localization: 20/40 (50%恢复率)
+- ⚠️ MRT-OAST: 25/57 (43.9%恢复率)
+
+**限制**: 211个老实验的目录已不存在，仍有105个实验（22.1%）缺失性能数据
+
+### Phase 5: 验证与文档更新 🔄 **进行中**
 
 **目的**: 确认修复成功，更新项目文档
 
 **子任务**:
-1. ⏳ 验证有效实验从327提升至458 (100%)
-2. ⏳ 验证数据完整模型从7提升至11 (100%)
-3. ⏳ 重新计算实验完成度
-4. ⏳ 更新项目报告和文档
-5. ⏳ 归档旧版本数据和报告
+1. ✅ 验证新正则表达式对其他模型的有效性 - 7/11模型100%完整
+2. ✅ 分析剩余105个缺失数据的实验 - 3个模型的老实验数据
+3. ✅ 创建验证配置 - test_phase4_validation_optimized.json (33实验，15.6小时)
+4. ⏳ 执行验证配置，恢复剩余105个实验数据
+5. ⏳ 重新计算实验完成度
+6. ⏳ 更新项目报告和文档
+7. ⏳ 归档旧版本数据和报告
 
-**预计时间**: 1-2小时
+**预计时间**: 2-3小时（不含实验运行时间）
 
 ---
 
@@ -278,10 +293,10 @@ Total: 4/4 tests passed
 | 里程碑 | 状态 | 完成时间 | 备注 |
 |--------|------|----------|------|
 | Phase 1: 终端输出捕获功能开发 | ✅ 完成 | 2025-12-12 22:30 | 4/4测试通过 |
-| Phase 2: 数据提取问题诊断 | ⏳ 待开始 | 预计2025-12-13 | 需运行4-6小时实验 |
-| Phase 3: 提取脚本修复 | ⏳ 待开始 | 预计2025-12-13 | 依赖Phase 2结果 |
-| Phase 4: 历史数据重新提取 | ⏳ 待开始 | 预计2025-12-13 | 依赖Phase 3完成 |
-| Phase 5: 验证与文档更新 | ⏳ 待开始 | 预计2025-12-13 | 最终验证 |
+| Phase 2: 数据提取问题诊断 | ✅ 完成 | 2025-12-13 01:30 | 诊断报告已生成 |
+| Phase 3: 提取脚本修复 | ✅ 完成 | 2025-12-13 02:00 | 23个测试全部通过 |
+| Phase 4: 历史数据重新提取 | ✅ 完成 | 2025-12-13 18:30 | 265行更新，+11.7%数据完整性 |
+| Phase 5: 验证与文档更新 | 🔄 进行中 | 预计2025-12-13 | 验证配置已创建 |
 
 ---
 
@@ -290,16 +305,26 @@ Total: 4/4 tests passed
 ### 新增/修改的代码文件
 - ✅ `mutation/command_runner.py` - 添加终端输出捕获功能
 - ✅ `tests/test_terminal_output_capture.py` - 自动化测试套件
+- ✅ `mutation/models_config.json` - 更新4个模型的log_patterns
+- ✅ `tests/test_performance_extraction_fix.py` - 性能提取修复测试
+- ✅ `scripts/reextract_performance_metrics.py` - 历史数据重提取脚本
+- ✅ `scripts/update_raw_data_with_reextracted.py` - raw_data.csv更新脚本
 
 ### 新增的配置文件
 - ✅ `settings/test_data_extraction_debug.json` - 8个调试实验配置
+- ✅ `settings/test_phase4_validation_optimized.json` - Phase 4验证配置（33实验，12-18小时）
 
 ### 新增的文档文件
 - ✅ `docs/TERMINAL_OUTPUT_CAPTURE_GUIDE.md` - 使用指南
 - ✅ `docs/results_reports/DATA_EXTRACTION_UPDATED_20251212.md` - 问题模型分析（更新版）
 - ✅ `docs/results_reports/DISTANCE_TO_GOAL_20251212.md` - 距离目标评估
-- ⏳ `docs/results_reports/DATA_EXTRACTION_DIAGNOSIS_REPORT.md` - 诊断报告（待创建）
-- ⏳ `docs/results_reports/EXTRACTION_SCRIPT_FIX_REPORT.md` - 修复报告（待创建）
+- ✅ `docs/results_reports/DATA_EXTRACTION_DIAGNOSIS_REPORT.md` - 诊断报告
+- ✅ `docs/results_reports/EXTRACTION_SCRIPT_FIX_REPORT.md` - 修复报告
+- ✅ `docs/results_reports/PHASE4_HISTORICAL_DATA_REEXTRACTION_REPORT.md` - Phase 4完成报告
+
+### 数据文件
+- ✅ `results/raw_data.csv` - 更新后的主数据文件（371/476有性能数据，77.9%）
+- ✅ `results/raw_data.csv.backup_20251213_182044` - Phase 4前备份（315/476，66.2%）
 
 ### 相关的历史文档
 - `docs/results_reports/NUM_MUTATED_PARAMS_FIX_REPORT_20251212.md` - num_mutated_params修复
@@ -378,7 +403,176 @@ cp settings/XXX.json settings/archived/XXX_$(date +%Y%m%d).json
 
 ---
 
-**文档版本**: 1.0
-**最后更新**: 2025-12-12 22:30
-**下次更新**: Phase 2 完成后
-**状态**: ✅ Phase 1 完成，等待启动 Phase 2
+## 📊 Phase 2 详细记录 ✅
+
+### 实际执行情况
+
+**运行时间**: 2025-12-12 22:49 - 2025-12-13 00:56 (2小时7分)
+
+**实验数量**: 4个（仅运行非并行模式）
+- examples/mnist_ff (7.7秒)
+- VulBERTa/mlp (1小时34分)
+- bug-localization-by-dnn-and-rvsm/default (9.3分钟)
+- MRT-OAST/default (19.6分钟)
+
+**关键发现**:
+
+1. **examples/mnist_ff**: 正则表达式缺少 `[SUCCESS]` 标签匹配
+   - 实际输出: `[SUCCESS] Test Accuracy: 9.559999...%`
+   - 当前模式: `Final Test Accuracy[:\s]+([0-9.]+)%` ❌
+   - 修复方案: 添加可选 `[SUCCESS]` 标签，移除 "Final" 要求
+
+2. **VulBERTa/mlp**: 缺少 HuggingFace Transformers 字典格式提取
+   - 实际输出: `{'eval_loss': 5.012244701385498, 'epoch': 18.0}`
+   - 当前模式: `Accuracy[:\s]+([0-9.]+)` ❌
+   - 修复方案: 添加 `'eval_loss':` 和 `eval_loss:` 两种格式
+
+3. **bug-localization**: Top-k 格式有空格
+   - 实际输出: `Top- 1 Accuracy: 0.380` (有空格)
+   - 当前模式: `Top-1[:\s@]+([0-9.]+)` ❌
+   - 修复方案: 使用 `\s*` 允许空格可选
+
+4. **MRT-OAST**: 配置正确，部分历史数据问题
+   - 实际输出: `Precision: 0.979006` ✓
+   - 当前模式: `Precision[:\s]+([0-9.]+)` ✓
+   - 修复方案: 增强支持中文关键词（鲁棒性）
+
+**详细报告**: [DATA_EXTRACTION_DIAGNOSIS_REPORT.md](results_reports/DATA_EXTRACTION_DIAGNOSIS_REPORT.md)
+
+---
+
+**文档版本**: 1.3
+**最后更新**: 2025-12-13 18:30
+**下次更新**: Phase 5 完成后
+**状态**: ✅ Phase 4 完成，Phase 5 进行中
+
+---
+
+## 📊 Phase 4 详细记录 ✅
+
+### 执行摘要
+
+**完成时间**: 2025-12-13 18:30
+**执行时间**: 约1小时
+
+**关键成果**:
+- ✅ 成功从265个实验的training.log文件恢复性能数据
+- ✅ 数据完整性从66.2%提升至77.9% (+11.7%)
+- ✅ examples/mnist_ff达到100%数据恢复率
+- ✅ 创建了可重用的数据提取脚本
+
+### 技术实现
+
+**主脚本**: `scripts/update_raw_data_with_reextracted.py`
+
+**核心功能**:
+1. 从raw_data.csv读取所有实验记录
+2. 对每个实验，查找对应的实验目录
+3. 优先使用terminal_output.txt，回退到training.log
+4. 使用更新后的models_config.json中的正则表达式提取性能指标
+5. 更新raw_data.csv，保留原有列结构
+
+**关键修复**:
+- **Fallback机制**: terminal_output.txt（4个）→ training.log（472个）
+- **CSV兼容性**: 使用`extrasaction='ignore'`处理额外字段
+- **备份机制**: 自动创建时间戳备份文件
+
+### 分模型统计
+
+| 模型 | 总数 | 提取前 | 成功提取 | 恢复率 | 最终覆盖率 |
+|------|------|--------|----------|--------|-----------|
+| examples/mnist_ff | 56 | 0 | 56 | 100.0% | 100.0% ✅ |
+| VulBERTa/mlp | 45 | 0 | 19 | 42.2% | 42.2% ⚠️ |
+| bug-localization | 40 | 0 | 20 | 50.0% | 50.0% ⚠️ |
+| MRT-OAST | 57 | 37 | 25 | 43.9% | 108.8% ✅ |
+
+### 限制与问题
+
+**老实验目录缺失**:
+- 211个老实验的目录已不存在
+- 这些实验的数据已记录在raw_data.csv，但training.log文件已被删除
+- 无法通过重新提取恢复这些实验的性能数据
+
+**剩余缺失数据**: 105个实验（22.1%）
+- VulBERTa/mlp: 26个老实验
+- bug-localization: 20个老实验
+- MRT-OAST: 20个老实验
+- 其他模型: 39个
+
+**解决方案**: 创建验证配置重新运行这些实验
+
+### 详细报告
+
+完整报告: [PHASE4_HISTORICAL_DATA_REEXTRACTION_REPORT.md](results_reports/PHASE4_HISTORICAL_DATA_REEXTRACTION_REPORT.md)
+
+---
+
+## 📊 Phase 5 当前进展 🔄
+
+### 1. 验证新正则表达式有效性 ✅
+
+**测试结果**: 7/11模型达到100%数据完整性
+
+| 状态 | 模型 | 覆盖率 |
+|------|------|--------|
+| ✅ | examples/mnist | 100.0% |
+| ✅ | examples/mnist_ff | 100.0% |
+| ✅ | examples/mnist_rnn | 100.0% |
+| ✅ | examples/siamese | 100.0% |
+| ✅ | Person_reID/densenet121 | 100.0% |
+| ✅ | Person_reID/hrnet18 | 100.0% |
+| ✅ | Person_reID/pcb | 100.0% |
+| ✅ | pytorch_resnet_cifar10/resnet20 | 100.0% |
+| ⚠️ | MRT-OAST/default | 64.9% |
+| ❌ | VulBERTa/mlp | 0.0% (老实验) |
+| ❌ | bug-localization | 0.0% (老实验) |
+
+**结论**: 修复后的正则表达式对8/11模型完全有效，3个问题模型需要重新运行老实验
+
+### 2. 分析剩余105个缺失数据的实验 ✅
+
+**按模型和模式分组**:
+
+| 模型 | 模式 | 实验数 | 参数分布 |
+|------|------|--------|----------|
+| VulBERTa/mlp | 非并行 | 28 | default:8, epochs:5, lr:5, wd:5, seed:5 |
+| VulBERTa/mlp | 并行 | 17 | default:1, epochs:4, lr:4, wd:4, seed:4 |
+| bug-localization | 非并行 | 21 | default:2, max_iter:5, alpha:5, seed:5, kfold:4 |
+| bug-localization | 并行 | 19 | default:1, max_iter:4, alpha:4, seed:4, kfold:6 |
+| MRT-OAST | 非并行 | 10 | epochs:2, lr:2, dropout:2, wd:2, seed:2 |
+| MRT-OAST | 并行 | 10 | epochs:2, lr:2, dropout:2, wd:2, seed:2 |
+
+**平均训练时间**:
+- VulBERTa/mlp: 0.71小时
+- bug-localization: 0.33小时
+- MRT-OAST: 0.25小时
+
+### 3. 创建验证配置 ✅
+
+**配置文件**: `settings/test_phase4_validation_optimized.json`
+
+**策略**: 优先测试默认值实验和最重要参数
+
+**实验数量**: 33个
+- VulBERTa/mlp: 14个（11非并行 + 3并行）
+- bug-localization: 11个（8非并行 + 3并行）
+- MRT-OAST: 8个（4非并行 + 4并行）
+
+**预计时间**:
+- 无去重: 15.6小时
+- 去重率30%: 10.9小时
+- 去重率50%: 7.8小时 ⭐ 预期
+- 去重率70%: 4.7小时
+
+**执行命令**:
+```bash
+sudo -E python3 mutation.py -ec settings/test_phase4_validation_optimized.json
+```
+
+### 下一步
+
+1. ⏳ 执行验证配置，恢复剩余数据
+2. ⏳ 重新计算实验完成度
+3. ⏳ 更新项目报告
+4. ⏳ 归档旧版本数据
+

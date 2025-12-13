@@ -689,7 +689,18 @@ class MutationRunner:
                     logger=self.logger
                 )
                 if performance_metrics:
-                    print(f"Performance metrics: {performance_metrics}")
+                    print(f"✓ Performance metrics extracted: {performance_metrics}")
+                else:
+                    # ⚠️ WARNING: Training succeeded but no performance metrics extracted
+                    print(f"⚠️  WARNING: No performance metrics extracted")
+                    print(f"   This may indicate a log pattern mismatch.")
+                    print(f"   Check terminal_output.txt for actual output format.")
+                    terminal_output_file = exp_dir / "terminal_output.txt"
+                    if terminal_output_file.exists():
+                        print(f"   Terminal output available at: {terminal_output_file}")
+                    else:
+                        print(f"   Terminal output not captured (enable with capture_stdout=True)")
+                    self.logger.warning(f"No performance metrics extracted for {repo}/{model}")
             else:
                 print(f"Training failed: {error_message}")
                 retries += 1
