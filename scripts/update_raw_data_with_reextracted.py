@@ -61,18 +61,58 @@ def extract_performance_from_log_file(
     return metrics
 
 
-def find_experiment_dir(results_dir: Path, experiment_id: str) -> Optional[Path]:
-    """Find experiment directory by experiment_id"""
-    for run_dir in results_dir.glob("run_*"):
-        if not run_dir.is_dir():
-            continue
+def find_experiment_dir(results_dir: Path, experiment_id: str, timestamp: str = None) -> Optional[Path]:
+    """
+    Find experiment directory by experiment_id and timestamp
 
-        for exp_dir in run_dir.iterdir():
-            if not exp_dir.is_dir():
+    IMPORTANT: Multiple experiments can share the same experiment_id across different batches.
+    Always use both experiment_id + timestamp to uniquely identify an experiment.
+
+    Args:
+        results_dir: Root results directory
+        experiment_id: Experiment ID (not unique across batches)
+        timestamp: Experiment timestamp (for unique identification)
+
+    Returns:
+        Path to experiment directory if found, None otherwise
+    """
+    # If timestamp provided, match both experiment_id and timestamp
+    if timestamp:
+        for run_dir in sorted(results_dir.glob("run_*")):
+            if not run_dir.is_dir():
                 continue
 
-            if exp_dir.name == experiment_id:
-                return exp_dir
+            for exp_dir in run_dir.iterdir():
+                if not exp_dir.is_dir():
+                    continue
+
+                if experiment_id not in exp_dir.name:
+                    continue
+
+                # Check experiment.json for timestamp match
+                json_file = exp_dir / "experiment.json"
+                if json_file.exists():
+                    try:
+                        import json
+                        with open(json_file, 'r') as f:
+                            data = json.load(f)
+
+                        if data.get('timestamp') == timestamp:
+                            return exp_dir
+                    except:
+                        continue
+    else:
+        # Fallback: find first matching experiment_id (not recommended)
+        for run_dir in results_dir.glob("run_*"):
+            if not run_dir.is_dir():
+                continue
+
+            for exp_dir in run_dir.iterdir():
+                if not exp_dir.is_dir():
+                    continue
+
+                if exp_dir.name == experiment_id:
+                    return exp_dir
 
     return None
 
@@ -162,6 +202,7 @@ def main():
 
     for i, row in enumerate(rows, 1):
         experiment_id = row.get('experiment_id', '')
+        timestamp = row.get('timestamp', '')  # Get timestamp for unique identification
         repo = row.get('repository', '')
         model = row.get('model', '')
         mode = row.get('mode', '')
@@ -184,8 +225,8 @@ def main():
         if had_perf:
             stats[key]['had_perf'] += 1
 
-        # Find experiment directory
-        exp_dir = find_experiment_dir(results_dir, experiment_id)
+        # Find experiment directory using experiment_id + timestamp
+        exp_dir = find_experiment_dir(results_dir, experiment_id, timestamp)
         if not exp_dir:
             updated_rows.append(row)
             continue

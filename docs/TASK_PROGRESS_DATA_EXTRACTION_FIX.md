@@ -551,18 +551,33 @@ cp settings/XXX.json settings/archived/XXX_$(date +%Y%m%d).json
 
 **配置文件**: `settings/test_phase4_validation_optimized.json`
 
-**策略**: 优先测试默认值实验和最重要参数
+**策略**: 优先测试默认值实验和最重要参数，**确保单参数变异**
 
-**实验数量**: 33个
-- VulBERTa/mlp: 14个（11非并行 + 3并行）
-- bug-localization: 11个（8非并行 + 3并行）
-- MRT-OAST: 8个（4非并行 + 4并行）
+**配置修正** (2025-12-13 19:00):
+- ❌ 初版使用`mutate_params`对象（多参数变异）
+- ✅ 修正为`mutate`数组格式（单参数变异）
+- ✅ 参考`stage2`配置的正确格式
+- 📝 修正报告: [PHASE4_CONFIG_FIX_REPORT.md](results_reports/PHASE4_CONFIG_FIX_REPORT.md)
+
+**实验数量**: 17个
+- VulBERTa/mlp: 7个（5非并行 + 2并行）
+- bug-localization: 6个（4非并行 + 2并行）
+- MRT-OAST: 4个（2非并行 + 2并行）
+
+**单参数变异验证**:
+- learning_rate: 4次
+- alpha: 2次
+- dropout: 2次
+- seed: 2次
+- epochs: 1次
+- max_iter: 1次
+- weight_decay: 1次
 
 **预计时间**:
-- 无去重: 15.6小时
-- 去重率30%: 10.9小时
-- 去重率50%: 7.8小时 ⭐ 预期
-- 去重率70%: 4.7小时
+- 无去重: 10.5小时
+- 去重率30%: 7.4小时
+- 去重率50%: 5.3小时 ⭐ 预期
+- 去重率70%: 3.2小时
 
 **执行命令**:
 ```bash

@@ -2,7 +2,7 @@
 
 自动化深度学习模型训练的超参数变异与能耗性能分析框架
 
-**当前版本**: v4.7.3 (2025-12-12)
+**当前版本**: v4.7.6 (2025-12-15)
 **状态**: ✅ Production Ready
 
 ---
@@ -116,10 +116,12 @@ results/run_YYYYMMDD_HHMMSS/
 ```
 
 **数据文件** (`results/` 目录):
-- **raw_data.csv**: 合并后的原始数据（80列，476行） - **主数据文件** ⭐⭐⭐
-  - 包含所有211个老实验 + 265个新实验
-  - 训练成功率100%，能耗数据100%完整
+- **raw_data.csv**: 合并后的原始数据（80列，584行） - **主数据文件** ⭐⭐⭐
+  - 包含所有211个老实验 + 268个新实验 + 33个Phase 4实验 + 72个Phase 5实验
+  - 训练成功率86.0%，能耗数据81.3%完整，性能数据64.4%完整
   - 验证报告: [scripts/validate_raw_data.py](scripts/validate_raw_data.py)
+  - Phase 4报告: [docs/results_reports/PHASE4_VALIDATION_EXECUTION_REPORT.md](docs/results_reports/PHASE4_VALIDATION_EXECUTION_REPORT.md)
+  - Phase 5报告: [docs/results_reports/PHASE5_PARALLEL_SUPPLEMENT_EXECUTION_REPORT.md](docs/results_reports/PHASE5_PARALLEL_SUPPLEMENT_EXECUTION_REPORT.md) ⭐⭐⭐
 - **summary_old.csv**: 老实验数据（93列，211行） - 源数据，供参考
 - **summary_new.csv**: 新实验数据（80列，265行） - 源数据，供参考
 - **summary_archive/**: 过时的summary文件归档目录
@@ -301,6 +303,51 @@ sudo sysctl -w kernel.perf_event_paranoid=-1
 ---
 
 ## 版本信息
+
+**v4.7.6** (2025-12-15) - 🎯 **Phase 5并行模式补充完成** ✅
+- ✅ **Phase 5并行模式优先补充执行成功**: 2个模型完全达标，3个模型接近达标
+  - 执行日期: 2025-12-14 16:09 - 2025-12-15 17:05
+  - 实验数: 72个 (VulBERTa/mlp:12, bug-localization:8, MRT-OAST:12, mnist:20, mnist_ff:20)
+  - 执行时长: ~24.9小时 (时间预测误差<0.1% ⭐)
+  - 数据完整性: 100% (训练成功、能耗、性能指标)
+  - 详细报告: [Phase 5执行报告](docs/results_reports/PHASE5_PARALLEL_SUPPLEMENT_EXECUTION_REPORT.md) ⭐⭐⭐
+- ✅ **并行模式达标情况**:
+  - examples/mnist: 所有参数 ≥6个唯一值 ✅ **完全达标**
+  - examples/mnist_ff: 所有参数 ≥8个唯一值 ✅ **完全达标**
+  - VulBERTa/mlp: 3/4参数达标，learning_rate缺2个 ⚠️
+  - bug-localization: 3/4参数达标，alpha缺2个 ⚠️
+  - MRT-OAST: 3/5参数达标，dropout和learning_rate各缺2个 ⚠️
+- ✅ **非并行模式完成情况**: 11/11模型全部达标 ✅
+- ✅ **数据追加完成**: raw_data.csv更新（512→584行）
+  - 新增: 72行Phase 5实验数据
+  - 验证: 数据完整性验证通过
+  - 备份: `raw_data.csv.backup_20251215_171809`
+- 📊 **下一步**: Phase 6精细补充（8个实验，~4-5小时）完成3个接近达标的模型
+
+**v4.7.5** (2025-12-14) - 🎯 **Phase 4验证完成** ✅
+- ✅ **Phase 4验证配置执行成功**: 补充3个关键模型的实验数据
+  - 执行日期: 2025-12-13 20:35 - 2025-12-14 15:02
+  - 实验数: 33个 (VulBERTa/mlp:14, bug-localization:11, MRT-OAST:8)
+  - 执行时长: ~18.5小时
+  - 数据完整性: 100% (训练成功、能耗、性能指标)
+  - 详细报告: [Phase 4执行报告](docs/results_reports/PHASE4_VALIDATION_EXECUTION_REPORT.md) ⭐⭐⭐
+- ✅ **并行模式数据提取修复**: `append_session_to_raw_data.py`完全支持并行实验
+  - 问题: 并行实验的experiment.json结构不同（repository/model在foreground中）
+  - 修复: 区分并行/非并行模式，从foreground提取数据
+  - 验证: 修复前跳过10个并行实验，修复后成功提取所有33个实验
+  - 映射: 正确映射energy_metrics和performance_metrics字段名
+- ✅ **非并行模式3个模型达标**:
+  - VulBERTa/mlp: 所有参数 ≥12个唯一值 ✅
+  - bug-localization: 所有参数 ≥10个唯一值 ✅
+  - MRT-OAST: 所有参数 ≥9个唯一值 ✅
+- ✅ **数据追加完成**: raw_data.csv更新（479→512行）
+  - 新增: 33行Phase 4实验数据
+  - 验证: 数据完整性验证通过
+  - 备份: `raw_data.csv.backup_20251214_153258`
+- 📊 **实验目标距离更新**:
+  - 非并行模式: 3个模型达标 + 8个模型待补充
+  - 并行模式: 11个模型全部待补充
+  - 下一步: Phase 5大规模并行补充（~300实验，~150小时）
 
 **v4.7.4-dev** (2025-12-12) - 🚧 **数据提取问题修复中** ⏳
 - 🔧 **终端输出捕获功能开发**: Phase 1已完成 ✅

@@ -1,7 +1,7 @@
 # Claude 助手指南 - Mutation-Based Training Energy Profiler
 
-**项目版本**: v4.7.3 (2025-12-12)
-**最后更新**: 2025-12-12
+**项目版本**: v4.7.5 (2025-12-14)
+**最后更新**: 2025-12-14
 **状态**: ✅ Production Ready
 
 ---
@@ -22,18 +22,28 @@
 
 ### 当前状态 ⚠️
 
-**⚠️ 重要更新 (2025-12-12)**: 实验目标重新澄清后发现完成度差距
+**⚠️ 重要更新 (2025-12-14)**: Phase 4验证完成，raw_data.csv更新至512行
 
-- **实验总数**: 476个（322个有效，154个无效）
+- **实验总数**: 512个（追加Phase 4后，原479个）
 - **有效模型**: 11个（VulBERTa/cnn已移除）
-- **完成度（重新评估）**: **0.0%** (0/90组合完全达标) ⚠️
-  - 部分完成: 73.3% (66/90组合)
-  - 完全缺失: 26.7% (24/90组合)
 - **数据质量状况**:
-  - ✅ 能耗数据: 100%完整
-  - ⚠️ 性能数据: 67.6%有数据（使用更宽松的验证逻辑后）
-  - ❌ 默认值实验: 0/90（100%缺失）
-  - ❌ 多参数变异: 26个实验（需要重新运行单参数版本）
+  - ✅ 训练成功: 502/512 (98.0%)
+  - ✅ 能耗数据: 475/512 (92.8%)
+  - ⚠️ 性能数据: 376/512 (73.4%)
+- **Phase 4补充**:
+  - 新增实验: 33个 (VulBERTa/mlp:14, bug-localization:11, MRT-OAST:8)
+  - 数据完整性: 100% (训练、能耗、性能全部完整)
+  - 执行时长: ~18.5小时
+  - 详细报告: [PHASE4_VALIDATION_EXECUTION_REPORT.md](docs/results_reports/PHASE4_VALIDATION_EXECUTION_REPORT.md)
+- **非并行模式3个模型达标**:
+  - VulBERTa/mlp: 所有参数 ≥12个唯一值 ✅
+  - bug-localization: 所有参数 ≥10个唯一值 ✅
+  - MRT-OAST: 所有参数 ≥9个唯一值 ✅
+- **数据追加**:
+  - 追加前: 479行
+  - 追加后: 512行
+  - 新增: 33行Phase 4实验数据
+  - 备份: `raw_data.csv.backup_20251214_153258`
 
 ### 实验目标（重新澄清）
 
@@ -52,6 +62,32 @@
 **详细分析**: [实验目标澄清报告](docs/results_reports/EXPERIMENT_GOAL_CLARIFICATION_AND_COMPLETION_REPORT.md)
 
 ### 最新进展
+
+**2025-12-14** - v4.7.5 Phase 4验证完成 ⭐⭐⭐
+- ✅ **Phase 4验证配置执行成功**: 补充3个关键模型的实验数据
+  - **执行日期**: 2025-12-13 20:35 - 2025-12-14 15:02
+  - **实验数**: 33个 (VulBERTa/mlp:14, bug-localization:11, MRT-OAST:8)
+  - **执行时长**: ~18.5小时
+  - **数据完整性**: 100% (训练成功、能耗、性能指标)
+  - **详细报告**: [PHASE4_VALIDATION_EXECUTION_REPORT.md](docs/results_reports/PHASE4_VALIDATION_EXECUTION_REPORT.md)
+- ✅ **并行模式数据提取修复**: `append_session_to_raw_data.py`完全支持并行实验
+  - **问题**: 并行实验的experiment.json结构不同（repository/model在foreground中）
+  - **修复**: 区分并行/非并行模式，从foreground提取数据
+  - **验证**: 修复前跳过10个并行实验，修复后成功提取所有33个实验
+  - **映射**: 正确映射energy_metrics和performance_metrics字段名
+  - **修改位置**: `scripts/append_session_to_raw_data.py` (行 119-227, 236-242)
+- ✅ **非并行模式3个模型达标**:
+  - VulBERTa/mlp: 所有参数 ≥12个唯一值 ✅
+  - bug-localization: 所有参数 ≥10个唯一值 ✅
+  - MRT-OAST: 所有参数 ≥9个唯一值 ✅
+- ✅ **数据追加完成**: raw_data.csv更新（479→512行）
+  - 新增: 33行Phase 4实验数据
+  - 验证: 数据完整性验证通过
+  - 备份: `raw_data.csv.backup_20251214_153258`
+- 📊 **实验目标距离更新**:
+  - 非并行模式: 3个模型达标 + 8个模型待补充
+  - 并行模式: 11个模型全部待补充
+  - 下一步: Phase 5大规模并行补充（~300实验，~150小时）
 
 **2025-12-12** - v4.7.3更新完成 ⭐⭐⭐
 - ✅ **数据格式设计决定分析**: 80列vs93列完整对比
@@ -332,10 +368,11 @@ energy_dl/nightly/
 - `config/models_config.json` - 模型配置
 
 ### 重要数据文件
-- `results/raw_data.csv` - **主数据文件** (476行，80列) ⭐⭐⭐
-  - 合并所有实验数据（211老实验 + 265新实验）
-  - 100%训练成功，100%能耗完整
+- `results/raw_data.csv` - **主数据文件** (512行，80列) ⭐⭐⭐
+  - 合并所有实验数据（211老实验 + 268新实验 + 33个Phase 4实验）
+  - 98.0%训练成功，92.8%能耗完整，73.4%性能数据完整
   - 验证脚本: `scripts/validate_raw_data.py`
+  - Phase 4报告: [PHASE4_VALIDATION_EXECUTION_REPORT.md](docs/results_reports/PHASE4_VALIDATION_EXECUTION_REPORT.md)
 - `results/summary_old.csv` - 历史实验数据（211行，93列）
 - `results/summary_new.csv` - 新实验数据（265行，80列）
 - `results/summary_archive/` - 过时文件归档目录
@@ -431,6 +468,7 @@ energy_dl/nightly/
 - `docs/FEATURES_OVERVIEW.md` - 功能特性总览
 - `docs/QUICK_REFERENCE.md` - 快速参考
 - `docs/SETTINGS_CONFIGURATION_GUIDE.md` - 配置指南
+- `docs/JSON_CONFIG_WRITING_STANDARDS.md` - JSON配置书写规范 ⭐⭐⭐ **[v4.7.3新增]**
 - `docs/JSON_CONFIG_BEST_PRACTICES.md` - JSON配置最佳实践 ⭐⭐⭐ **[v4.7.1新增]**
 - `docs/SCRIPTS_DOCUMENTATION.md` - Scripts目录完整文档 **[v4.7.2新增]**
 
@@ -443,6 +481,7 @@ energy_dl/nightly/
 - `docs/results_reports/STAGE3_4_EXECUTION_REPORT.md` - Stage3-4执行报告
 - `docs/results_reports/STAGE7_EXECUTION_REPORT.md` - Stage7执行报告
 - `docs/results_reports/STAGE7_8_FIX_EXECUTION_REPORT.md` - Stage7-8修复执行报告 **[v4.7.1]**
+- `docs/results_reports/PHASE4_VALIDATION_EXECUTION_REPORT.md` - Phase 4验证执行报告 ⭐⭐⭐ **[v4.7.5新增]**
 
 #### Bug修复与优化
 - `docs/results_reports/CSV_FIX_COMPREHENSIVE_SUMMARY.md` - CSV修复综合报告
@@ -508,27 +547,89 @@ python3 scripts/check_completion_status.py
 
 ## ⚠️ 注意事项
 
-### 1. CSV数据完整性
+### 1. 实验ID唯一性 ⭐⭐⭐ **[关键经验]**
+**实验ID不唯一，必须使用复合键**
+
+**问题**: 不同批次的实验会产生相同的experiment_id（如 `VulBERTa_mlp_001_parallel`）
+
+**正确做法**: 使用 **experiment_id + timestamp** 作为唯一标识符
+
+**示例**:
+```python
+# ❌ 错误 - 仅使用experiment_id查询
+phase5_rows = [row for row in reader if 'mlp' in row['experiment_id']]
+# 结果: 混合了不同批次的实验（Phase 4 + Phase 5）
+
+# ✅ 正确 - 使用复合键
+composite_key = f"{row['experiment_id']}|{row['timestamp']}"
+if composite_key in existing_keys:
+    ...
+
+# ✅ 或使用时间范围过滤
+phase5_start = datetime.fromisoformat('2025-12-14T17:48:00')
+phase5_end = datetime.fromisoformat('2025-12-15T17:06:00')
+if phase5_start <= timestamp <= phase5_end:
+    phase5_rows.append(row)
+```
+
+**影响**:
+- 数据查询错误（混合不同批次）
+- 去重机制失效（误判为重复）
+- 统计分析不准确（计数错误）
+
+**已更新**:
+- ✅ `scripts/append_session_to_raw_data.py` 已使用复合键去重（行236-256）
+- ✅ `docs/results_reports/PHASE5_PERFORMANCE_METRICS_MISSING_ISSUE.md` 记录此教训
+
+**相关报告**: [Phase 5性能指标缺失问题分析](docs/results_reports/PHASE5_PERFORMANCE_METRICS_MISSING_ISSUE.md) - 详细说明此问题 ⭐⭐⭐
+
+### 2. CSV数据完整性
 - `summary_all.csv`必须保持37列格式
 - 追加数据时使用`extrasaction='ignore'`自动对齐列
 - 每次修改前备份：`cp summary_all.csv summary_all.csv.backup`
 
-### 2. 配置版本控制
+### 3. 配置版本控制
 - 创建新配置时保留旧版本在`settings/archived/`
 - 在配置文件中添加`comment`字段说明变更原因
 - 更新`docs/settings_reports/`中的相关文档
-- **配置格式规范**：
-  - 使用`"repo"`而非`"repository"`（与runner.py一致）
-  - 非并行模式：直接在实验定义中指定`repo`、`model`、`mutate_params`
-  - 并行模式：使用`foreground/background`嵌套结构
-  - 参考已验证的配置文件（如Stage2）作为模板
 
-### 3. 测试要求
+### 3. JSON配置书写规范 ⭐⭐⭐
+**核心原则**: 每个实验配置只能变异一个超参数
+
+**必须遵循**:
+- ✅ 使用`"mutate": ["参数名"]`数组格式（**单参数变异**）
+- ✅ 使用`"repo"`而非`"repository"`
+- ✅ 使用`"mode"`而非`"mutation_type"`
+- ❌ **禁止**使用`"mutate_params"`对象格式（会导致多参数同时变异）
+
+**配置类型**:
+1. **默认值实验**: `"mode": "default"` - 建立基线
+2. **单参数变异**: `"mode": "mutation"`, `"mutate": ["参数名"]` - 研究单参数影响
+3. **并行模式**: 使用`foreground/background`嵌套结构
+
+**示例**:
+```json
+{
+  "comment": "VulBERTa/mlp - learning_rate变异",
+  "repo": "VulBERTa",
+  "model": "mlp",
+  "mode": "mutation",
+  "mutate": ["learning_rate"],
+  "runs_per_config": 5
+}
+```
+
+**详细文档**:
+- `docs/JSON_CONFIG_WRITING_STANDARDS.md` - 完整配置书写规范 ⭐⭐⭐
+- `docs/JSON_CONFIG_BEST_PRACTICES.md` - 配置最佳实践
+- 参考`settings/stage2_optimized_nonparallel_and_fast_parallel.json` - 已验证的标准配置
+
+### 4. 测试要求
 - 所有代码变更必须通过现有测试
 - 新功能必须添加测试用例
 - CSV格式变更必须运行`verify_csv_append_fix.py`
 
-### 4. 文档同步
+### 5. 文档同步
 - 代码变更时更新相关文档
 - 使用标准Markdown格式
 - 在文档头部包含版本和日期信息
@@ -811,8 +912,8 @@ python3 scripts/check_deduplication.py
 ---
 
 **维护者**: Green
-**Claude助手指南版本**: 1.4
-**最后更新**: 2025-12-12
-**状态**: ✅ 有效 - v4.7.3完成summary_old.csv 93列重建
+**Claude助手指南版本**: 1.5
+**最后更新**: 2025-12-14
+**状态**: ✅ 有效 - v4.7.5完成Phase 4验证，3个模型非并行模式达标
 
 > 提示：将此文件保存在项目根目录，作为Claude助手的主要参考。当项目结构或规范变更时，及时更新此文档。
