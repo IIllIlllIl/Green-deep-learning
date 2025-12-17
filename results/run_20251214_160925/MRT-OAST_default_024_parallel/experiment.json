@@ -1,0 +1,47 @@
+{
+  "experiment_id": "MRT-OAST_default_024_parallel",
+  "timestamp": "2025-12-15T11:13:48.916209",
+  "mode": "parallel",
+  "foreground": {
+    "repository": "MRT-OAST",
+    "model": "default",
+    "hyperparameters": {
+      "epochs": 13
+    },
+    "duration_seconds": 2027.9183514118195,
+    "energy_metrics": {
+      "cpu_energy_pkg_joules": 73515.89,
+      "cpu_energy_ram_joules": 4840.84,
+      "cpu_energy_total_joules": 78356.73,
+      "gpu_power_avg_watts": 235.29990384615354,
+      "gpu_power_max_watts": 312.96,
+      "gpu_power_min_watts": 90.45,
+      "gpu_energy_total_joules": 464952.6099999994,
+      "gpu_temp_avg_celsius": 80.17611336032388,
+      "gpu_temp_max_celsius": 84.0,
+      "gpu_util_avg_percent": 94.7494939271255,
+      "gpu_util_max_percent": 100.0
+    },
+    "performance_metrics": {
+      "accuracy": 0.9278,
+      "precision": 0.99,
+      "recall": 0.8595,
+      "f1": 0.920044
+    },
+    "training_success": true,
+    "retries": 0,
+    "error_message": "Training completed successfully"
+  },
+  "background": {
+    "repository": "examples",
+    "model": "mnist",
+    "hyperparameters": {
+      "epochs": 10,
+      "learning_rate": 0.01,
+      "batch_size": 32,
+      "seed": 1
+    },
+    "log_directory": "/home/green/energy_dl/nightly/results/run_20251214_160925/MRT-OAST_default_024_parallel/background_logs",
+    "note": "Background training served as GPU load only (not monitored)"
+  }
+}

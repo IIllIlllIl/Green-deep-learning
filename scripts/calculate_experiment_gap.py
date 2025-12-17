@@ -111,19 +111,41 @@ def analyze_current_status():
 
         # 根据模式获取正确的字段
         if mode == 'parallel':
-            repo = row.get('fg_repository', '')
-            model = row.get('fg_model', '')
-            training_success = row.get('fg_training_success', '').lower() == 'true'
-            has_perf = any(v for k, v in row.items() if k.startswith('fg_perf_') and v)
-            has_energy = (row.get('fg_energy_cpu_total_joules', '') and
-                         row.get('fg_energy_gpu_total_joules', ''))
-            hyperparam_prefix = 'fg_hyperparam_'
+            # 并行模式：支持两种数据格式
+            # 格式1（老）：fg_*字段
+            # 格式2（新）：顶层字段
+
+            # 先尝试fg_*字段
+            repo = row.get('fg_repository', '') or row.get('repository', '')
+            model = row.get('fg_model', '') or row.get('model', '')
+
+            # 训练成功：先尝试fg_training_success，否则用training_success
+            fg_training = row.get('fg_training_success', '')
+            top_training = row.get('training_success', '')
+            training_success = (fg_training.lower() == 'true') if fg_training else (top_training.lower() == 'true')
+
+            # 性能数据：fg_perf_* 或 perf_*
+            has_fg_perf = any(v for k, v in row.items() if k.startswith('fg_perf_') and v)
+            has_top_perf = any(v for k, v in row.items() if k.startswith('perf_') and not k.startswith('fg_perf_') and v)
+            has_perf = has_fg_perf or has_top_perf
+
+            # 能耗数据：fg_energy_* 或 energy_*
+            has_fg_energy = bool(row.get('fg_energy_cpu_total_joules', '') and
+                           row.get('fg_energy_gpu_total_joules', ''))
+            has_top_energy = bool(row.get('energy_cpu_total_joules', '') and
+                            row.get('energy_gpu_total_joules', ''))
+            has_energy = has_fg_energy or has_top_energy
+
+            # 超参数前缀：优先使用fg_，但要检查是否有值
+            # 注意：raw_data.csv表头可能包含fg_hyperparam_*列，但实际数据在hyperparam_*
+            has_fg_hyperparam_data = any(v for k, v in row.items() if k.startswith('fg_hyperparam_') and v)
+            hyperparam_prefix = 'fg_hyperparam_' if has_fg_hyperparam_data else 'hyperparam_'
         else:
             repo = row.get('repository', '')
             model = row.get('model', '')
             training_success = row.get('training_success', '').lower() == 'true'
             has_perf = any(v for k, v in row.items() if k.startswith('perf_') and v)
-            has_energy = (row.get('energy_cpu_total_joules', '') and
+            has_energy = bool(row.get('energy_cpu_total_joules', '') and
                          row.get('energy_gpu_total_joules', ''))
             hyperparam_prefix = 'hyperparam_'
 

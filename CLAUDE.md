@@ -1,7 +1,7 @@
 # Claude 助手指南 - Mutation-Based Training Energy Profiler
 
-**项目版本**: v4.7.5 (2025-12-14)
-**最后更新**: 2025-12-14
+**项目版本**: v4.7.8 (2025-12-17)
+**最后更新**: 2025-12-17
 **状态**: ✅ Production Ready
 
 ---
@@ -22,28 +22,29 @@
 
 ### 当前状态 ⚠️
 
-**⚠️ 重要更新 (2025-12-14)**: Phase 4验证完成，raw_data.csv更新至512行
+**⚠️ 重要更新 (2025-12-17)**: Phase 6完成，VulBERTa/mlp达标，raw_data.csv更新至624行
 
-- **实验总数**: 512个（追加Phase 4后，原479个）
+- **实验总数**: 624个（追加Phase 6后40个，原584个）
 - **有效模型**: 11个（VulBERTa/cnn已移除）
 - **数据质量状况**:
-  - ✅ 训练成功: 502/512 (98.0%)
-  - ✅ 能耗数据: 475/512 (92.8%)
-  - ⚠️ 性能数据: 376/512 (73.4%)
-- **Phase 4补充**:
-  - 新增实验: 33个 (VulBERTa/mlp:14, bug-localization:11, MRT-OAST:8)
-  - 数据完整性: 100% (训练、能耗、性能全部完整)
-  - 执行时长: ~18.5小时
-  - 详细报告: [PHASE4_VALIDATION_EXECUTION_REPORT.md](docs/results_reports/PHASE4_VALIDATION_EXECUTION_REPORT.md)
-- **非并行模式3个模型达标**:
-  - VulBERTa/mlp: 所有参数 ≥12个唯一值 ✅
-  - bug-localization: 所有参数 ≥10个唯一值 ✅
-  - MRT-OAST: 所有参数 ≥9个唯一值 ✅
-- **数据追加**:
-  - 追加前: 479行
-  - 追加后: 512行
-  - 新增: 33行Phase 4实验数据
-  - 备份: `raw_data.csv.backup_20251214_153258`
+  - ✅ 训练成功: 502/624 (80.4%)
+  - ✅ 能耗数据: 564/624 (90.4%)
+  - ✅ 性能数据: 564/624 (90.4%)
+- **Phase 6补充成果**:
+  - 新增实验: 40个 (VulBERTa/mlp: 20非并行 + 20并行)
+  - 数据完整性: 100% (训练成功、能耗、性能全部完整)
+  - 执行时长: ~40小时
+  - 详细报告: [PHASE6_EXECUTION_REPORT.md](docs/results_reports/PHASE6_EXECUTION_REPORT.md)
+- **达标模型** (10个):
+  - examples/mnist, mnist_ff, mnist_rnn, siamese ✅
+  - Person_reID: densenet121, hrnet18, pcb ✅
+  - pytorch_resnet_cifar10/resnet20 ✅
+  - MRT-OAST/default ✅ (Phase 6达标)
+  - **VulBERTa/mlp - 并行模式** ⭐ (Phase 6达标)
+- **剩余目标**:
+  - VulBERTa/mlp非并行: 20个实验，20.86小时
+  - bug-localization两种模式: 32个实验，8.72小时
+  - **总计**: 52个实验，29.58小时
 
 ### 实验目标（重新澄清）
 
@@ -54,40 +55,32 @@
 
 **总目标**: 45参数 × 2模式 × 6实验 = **540个有效实验**
 
-**当前缺口**: 需补齐**330个实验**
-- 默认值: 90个
-- 单参数变异: 240个
-- 性能数据缺失: 128个（主要集中在3个模型：mnist_ff, VulBERTa/mlp, bug-localization）
+**当前进度**: 19/90参数-模式组合达标 (21.1%)
+
+**剩余缺口**: 52个实验，29.58小时 (1.23天)
 
 **详细分析**: [实验目标澄清报告](docs/results_reports/EXPERIMENT_GOAL_CLARIFICATION_AND_COMPLETION_REPORT.md)
 
 ### 最新进展
 
-**2025-12-14** - v4.7.5 Phase 4验证完成 ⭐⭐⭐
-- ✅ **Phase 4验证配置执行成功**: 补充3个关键模型的实验数据
-  - **执行日期**: 2025-12-13 20:35 - 2025-12-14 15:02
-  - **实验数**: 33个 (VulBERTa/mlp:14, bug-localization:11, MRT-OAST:8)
-  - **执行时长**: ~18.5小时
+**2025-12-17** - v4.7.8 Phase 6完成 ⭐⭐⭐
+- ✅ **Phase 6执行完成**: VulBERTa/mlp完全补齐（40实验，~40小时）
+  - **执行日期**: 2025-12-15 23:43 - 2025-12-17 15:40
+  - **实验数**: 40个 (VulBERTa/mlp: 20非并行 + 20并行)
   - **数据完整性**: 100% (训练成功、能耗、性能指标)
-  - **详细报告**: [PHASE4_VALIDATION_EXECUTION_REPORT.md](docs/results_reports/PHASE4_VALIDATION_EXECUTION_REPORT.md)
-- ✅ **并行模式数据提取修复**: `append_session_to_raw_data.py`完全支持并行实验
-  - **问题**: 并行实验的experiment.json结构不同（repository/model在foreground中）
-  - **修复**: 区分并行/非并行模式，从foreground提取数据
-  - **验证**: 修复前跳过10个并行实验，修复后成功提取所有33个实验
-  - **映射**: 正确映射energy_metrics和performance_metrics字段名
-  - **修改位置**: `scripts/append_session_to_raw_data.py` (行 119-227, 236-242)
-- ✅ **非并行模式3个模型达标**:
-  - VulBERTa/mlp: 所有参数 ≥12个唯一值 ✅
-  - bug-localization: 所有参数 ≥10个唯一值 ✅
-  - MRT-OAST: 所有参数 ≥9个唯一值 ✅
-- ✅ **数据追加完成**: raw_data.csv更新（479→512行）
-  - 新增: 33行Phase 4实验数据
-  - 验证: 数据完整性验证通过
-  - 备份: `raw_data.csv.backup_20251214_153258`
+  - **详细报告**: [PHASE6_EXECUTION_REPORT.md](docs/results_reports/PHASE6_EXECUTION_REPORT.md)
+- ✅ **关键Bug修复** (3个) ⭐⭐:
+  1. **数据格式不一致**: 并行实验数据混合两种格式（fg_* vs 顶层字段）
+  2. **布尔值判断错误**: `has_energy`被赋值为数值字符串而非bool
+  3. **超参数前缀判断错误**: 检查列名存在而非检查是否有值 ⭐⭐⭐
+- ✅ **calculate_experiment_gap.py增强**: 支持两种并行数据格式（fg_* fallback到顶层）
+- ✅ **VulBERTa/mlp并行模式达标**: 所有4个参数达到5个唯一值 ✅
+- ✅ **MRT-OAST完全达标**: 并行模式所有参数达标（从3/5 → 5/5）✅
+- ✅ **bug-localization部分改善**: 并行模式max_iter和seed达到4/5
 - 📊 **实验目标距离更新**:
-  - 非并行模式: 3个模型达标 + 8个模型待补充
-  - 并行模式: 11个模型全部待补充
-  - 下一步: Phase 5大规模并行补充（~300实验，~150小时）
+  - 达标: 19/90 (21.1%) - 从17/90 (18.9%)提升
+  - 有效实验: 564个（从475提升89个）
+  - 剩余缺口: 52个实验，29.58小时（从90个减少）
 
 **2025-12-12** - v4.7.3更新完成 ⭐⭐⭐
 - ✅ **数据格式设计决定分析**: 80列vs93列完整对比
@@ -368,11 +361,11 @@ energy_dl/nightly/
 - `config/models_config.json` - 模型配置
 
 ### 重要数据文件
-- `results/raw_data.csv` - **主数据文件** (512行，80列) ⭐⭐⭐
-  - 合并所有实验数据（211老实验 + 268新实验 + 33个Phase 4实验）
-  - 98.0%训练成功，92.8%能耗完整，73.4%性能数据完整
+- `results/raw_data.csv` - **主数据文件** (624行，87列) ⭐⭐⭐
+  - 合并所有实验数据（211老实验 + 268新实验 + 33个Phase 4实验 + 40个Phase 6实验 + 72个Phase 5实验）
+  - 90.4%能耗完整，90.4%性能数据完整
   - 验证脚本: `scripts/validate_raw_data.py`
-  - Phase 4报告: [PHASE4_VALIDATION_EXECUTION_REPORT.md](docs/results_reports/PHASE4_VALIDATION_EXECUTION_REPORT.md)
+  - Phase 6报告: [PHASE6_EXECUTION_REPORT.md](docs/results_reports/PHASE6_EXECUTION_REPORT.md)
 - `results/summary_old.csv` - 历史实验数据（211行，93列）
 - `results/summary_new.csv` - 新实验数据（265行，80列）
 - `results/summary_archive/` - 过时文件归档目录
