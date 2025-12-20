@@ -219,14 +219,50 @@ class SessionDataAppender:
                 if col_name in fieldnames:
                     row[col_name] = str(value)
 
-            # 填充能耗数据
-            energy = exp_data.get('energy_consumption', {})
-            for key, value in energy.items():
-                col_name = f'energy_{key}'
-                if col_name in fieldnames:
-                    row[col_name] = str(value)
+            # 填充能耗数据（使用energy_metrics）
+            energy = exp_data.get('energy_metrics', {})
+            # 映射energy_metrics的字段名到CSV列名
+            energy_mapping = {
+                'cpu_energy_pkg_joules': 'energy_cpu_pkg_joules',
+                'cpu_energy_ram_joules': 'energy_cpu_ram_joules',
+                'cpu_energy_total_joules': 'energy_cpu_total_joules',
+                'gpu_power_avg_watts': 'energy_gpu_avg_watts',
+                'gpu_power_max_watts': 'energy_gpu_max_watts',
+                'gpu_power_min_watts': 'energy_gpu_min_watts',
+                'gpu_energy_total_joules': 'energy_gpu_total_joules',
+                'gpu_temp_avg_celsius': 'energy_gpu_temp_avg_celsius',
+                'gpu_temp_max_celsius': 'energy_gpu_temp_max_celsius',
+                'gpu_util_avg_percent': 'energy_gpu_util_avg_percent',
+                'gpu_util_max_percent': 'energy_gpu_util_max_percent'
+            }
+            for src_key, dst_key in energy_mapping.items():
+                if src_key in energy and dst_key in fieldnames:
+                    row[dst_key] = str(energy[src_key])
 
-            # 填充性能数据
+            # 填充性能数据（从experiment.json的performance_metrics和terminal_output）
+            exp_perf = exp_data.get('performance_metrics', {})
+            # 先填充experiment.json中的性能指标
+            perf_mapping = {
+                'eval_loss': 'perf_eval_loss',
+                'final_training_loss': 'perf_final_training_loss',
+                'eval_samples_per_second': 'perf_eval_samples_per_second',
+                'accuracy': 'perf_accuracy',
+                'precision': 'perf_precision',
+                'recall': 'perf_recall',
+                'f1': 'perf_f1',
+                'top1_accuracy': 'perf_top1_accuracy',
+                'top5_accuracy': 'perf_top5_accuracy',
+                'top10_accuracy': 'perf_top10_accuracy',
+                'top20_accuracy': 'perf_top20_accuracy',
+                'test_accuracy': 'perf_test_accuracy',
+                'test_error': 'perf_test_error',
+                'train_error': 'perf_train_error'
+            }
+            for src_key, dst_key in perf_mapping.items():
+                if src_key in exp_perf and dst_key in fieldnames:
+                    row[dst_key] = str(exp_perf[src_key])
+
+            # 再填充从terminal_output提取的性能指标（可能会覆盖）
             for key, value in perf_metrics.items():
                 if key in fieldnames:
                     row[key] = str(value)

@@ -2,7 +2,7 @@
 
 自动化深度学习模型训练的超参数变异与能耗性能分析框架
 
-**当前版本**: v4.7.6 (2025-12-15)
+**当前版本**: v4.7.11 (2025-12-19)
 **状态**: ✅ Production Ready
 
 ---
@@ -116,17 +116,37 @@ results/run_YYYYMMDD_HHMMSS/
 ```
 
 **数据文件** (`results/` 目录):
-- **raw_data.csv**: 合并后的原始数据（80列，584行） - **主数据文件** ⭐⭐⭐
-  - 包含所有211个老实验 + 268个新实验 + 33个Phase 4实验 + 72个Phase 5实验
-  - 训练成功率86.0%，能耗数据81.3%完整，性能数据64.4%完整
+- **raw_data.csv**: 合并后的原始数据（87列，676行） - **原始数据源** ⭐⭐⭐
+  - 包含所有实验的原始数据（211老实验 + 465新实验）
+  - 100%训练成功，91.1%能耗完整，91.1%性能数据完整
   - 验证报告: [scripts/validate_raw_data.py](scripts/validate_raw_data.py)
-  - Phase 4报告: [docs/results_reports/PHASE4_VALIDATION_EXECUTION_REPORT.md](docs/results_reports/PHASE4_VALIDATION_EXECUTION_REPORT.md)
-  - Phase 5报告: [docs/results_reports/PHASE5_PARALLEL_SUPPLEMENT_EXECUTION_REPORT.md](docs/results_reports/PHASE5_PARALLEL_SUPPLEMENT_EXECUTION_REPORT.md) ⭐⭐⭐
+- **data.csv**: 统一性能指标数据（54列，676行） - **主分析文件** ⭐⭐⭐
+  - 基于raw_data.csv生成，统一了并行/非并行字段
+  - **列结构优化** (v4.7.11): 54列精简设计（从87列原始数据）
+    - 删除2个空列: perf_accuracy, perf_eval_loss
+    - 14个有效性能指标列（从16个减少）
+    - 0个空列剩余
+  - **性能指标合并** (v4.7.10): 统一命名提升填充率
+    - 合并: `accuracy` → `test_accuracy`, `eval_loss` → `test_loss`
+    - 填充率提升: test_accuracy +6.8%, test_loss +10.7%
+    - 无数据丢失，100%实验目标达成维持
+  - **数据质量评估** (v4.7.11): ⭐⭐⭐ 优秀 ✅
+    - 数据一致性: 2704/2704检查点 (100.0%)
+    - 数据完整性: 676行100%保留
+    - 无冲突，无缺失，设计合理
+  - 质量报告: [数据质量评估报告](docs/results_reports/DATA_CSV_QUALITY_ASSESSMENT_REPORT.md) ⭐⭐⭐
+  - 合并报告: [性能指标合并完成报告](docs/results_reports/PERFORMANCE_METRICS_MERGE_COMPLETION_REPORT.md) ⭐⭐
+  - 列优化: [备份清理与列优化报告](docs/results_reports/BACKUP_CLEANUP_AND_COLUMN_OPTIMIZATION_REPORT.md) ⭐⭐
+  - 生成脚本: [scripts/create_unified_data_csv.py](scripts/create_unified_data_csv.py)
 - **summary_old.csv**: 老实验数据（93列，211行） - 源数据，供参考
 - **summary_new.csv**: 新实验数据（80列，265行） - 源数据，供参考
 - **summary_archive/**: 过时的summary文件归档目录
   - 包含13个过时文件（summary_all.csv, summary_all_enhanced.csv等）
-  - 归档说明: [results/summary_archive/README_ARCHIVE.md](results/summary_archive/README_ARCHIVE.md)
+  - 归档说明: [results/archived/summary_archive/README_ARCHIVE.md](results/archived/summary_archive/README_ARCHIVE.md)
+- **backup_archive_20251219/**: Phase 4-7备份归档目录
+  - 保留9个关键备份（phase/fix/dedup等 + 最新2个时间戳备份）
+  - 已清理11个过时中间备份（2025-12-19清理，节省2.8MB）
+  - 归档说明: [results/backup_archive_20251219/README_ARCHIVE.md](results/backup_archive_20251219/README_ARCHIVE.md)
 
 **数据格式**:
 - **80列格式**: 优化的数据记录（背景训练使用默认值，监控全局能耗）
@@ -303,6 +323,63 @@ sudo sysctl -w kernel.perf_event_paranoid=-1
 ---
 
 ## 版本信息
+
+**v4.7.11** (2025-12-19) - 🎯 **列结构最终优化** ✅
+- ✅ **删除2个空列**: perf_accuracy, perf_eval_loss（v4.7.10合并后变空）
+  - 列数: 56 → 54 (精简3.6%)
+  - 性能指标: 16列 → 14个有效列
+  - 空列: 2个 → 0个 ✅
+- ✅ **备份清理**: 删除2个冗余备份文件，节省0.56MB
+  - 清理前: 35个备份文件，6.96MB
+  - 清理后: 34个备份文件，6.66MB
+  - 保留: 3个最新关键备份
+- ✅ **数据质量评估完成**: ⭐⭐⭐ 优秀
+  - 数据一致性: 2704/2704检查点 (100.0%)
+  - 数据完整性: 676行100%保留，无数据丢失
+  - 与raw_data.csv对比: 无冲突，无缺失
+  - 统一视图设计: 正确合并并行/非并行格式
+- 📚 **文档完善**:
+  - 质量评估报告: [数据质量评估报告](docs/results_reports/DATA_CSV_QUALITY_ASSESSMENT_REPORT.md) ⭐⭐⭐
+  - 列优化报告: [备份清理与列优化报告](docs/results_reports/BACKUP_CLEANUP_AND_COLUMN_OPTIMIZATION_REPORT.md) ⭐⭐
+  - 列分析报告: [data.csv列结构分析](docs/results_reports/DATA_CSV_COLUMN_ANALYSIS_AND_MERGE_RECOMMENDATIONS.md) ⭐
+- 🔧 **执行脚本**:
+  - `scripts/cleanup_backups.py` - 备份分析与清理
+  - `scripts/remove_empty_performance_columns.py` - 删除空列
+  - `scripts/evaluate_data_quality.py` - 数据质量评估
+- 💾 **备份文件**:
+  - `results/data.csv.backup_before_column_removal_20251219_182227` - 删列前备份
+  - `results/data.csv.backup_before_merge_20251219_180149` - 合并前备份
+
+**v4.7.10** (2025-12-19) - 🎯 **性能指标保守合并完成** ✅
+- ✅ **性能指标统一命名**: 保守合并方案成功执行
+  - 合并1: `accuracy` → `test_accuracy` (MRT-OAST的46个实验)
+  - 合并2: `eval_loss` → `test_loss` (VulBERTa/mlp的72个实验)
+  - 影响: 118个实验（17.5%），100%正确迁移
+- ✅ **数据质量验证通过**:
+  - 数据完整性: 676行无变化，无数据丢失 ✅
+  - 合并正确性: 46+72=118个实验 100%正确 ✅
+  - 实验目标: 90/90组合（100%）维持不变 ✅
+- ✅ **填充率显著提升**:
+  - `test_accuracy`: 38.2% → 45.0% (+6.8%) ✅
+  - `test_loss`: 18.0% → 28.7% (+10.7%) ✅
+- ✅ **有效列数优化**: 16列 → 14个有效列
+  - 保留: test_accuracy, test_loss（统一命名）
+  - 清空: accuracy, eval_loss（源列保留但已清空）
+- 📊 **合并效果评估**:
+  - 语义统一: 相同含义指标使用统一命名 ✅
+  - 数据集中: 主要指标填充率提升 ✅
+  - 降低复杂度: 有效指标从16减少到14 ✅
+  - 向后兼容: CSV结构保持稳定 ✅
+- 📚 **文档完善**:
+  - 可行性分析: [性能指标合并可行性分析](docs/results_reports/PERFORMANCE_METRICS_MERGE_FEASIBILITY_ANALYSIS.md) ⭐⭐⭐
+  - 完成报告: [性能指标合并完成报告](docs/results_reports/PERFORMANCE_METRICS_MERGE_COMPLETION_REPORT.md) ⭐⭐
+  - 分类分析: [性能指标分类与含义分析](docs/results_reports/PERFORMANCE_METRICS_CLASSIFICATION_AND_ANALYSIS.md) ⭐
+  - 数据精度: [数据精度分析报告](docs/results_reports/DATA_PRECISION_ANALYSIS_REPORT.md) ⭐
+- 🔧 **执行脚本**:
+  - `scripts/merge_performance_metrics.py` - 合并脚本
+  - `scripts/validate_merged_metrics.py` - 验证脚本
+- 💾 **备份文件**:
+  - `results/data.csv.backup_before_merge_20251219_180149` - 合并前备份
 
 **v4.7.6** (2025-12-15) - 🎯 **Phase 5并行模式补充完成** ✅
 - ✅ **Phase 5并行模式优先补充执行成功**: 2个模型完全达标，3个模型接近达标
