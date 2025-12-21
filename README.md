@@ -201,15 +201,30 @@ sudo sysctl -w kernel.perf_event_paranoid=-1
 
 ## 📚 文档
 
+### 核心文档
 | 文档 | 说明 |
 |-----|------|
+| [项目进度完整总结](docs/results_reports/PROJECT_PROGRESS_COMPLETE_SUMMARY.md) | **项目总体状况与完成情况** ⭐⭐⭐ |
+| [CLAUDE.md](CLAUDE.md) | **Claude助手指南（简洁版）** ⭐⭐⭐ |
 | [超参数变异范围](docs/MUTATION_RANGES_QUICK_REFERENCE.md) | 变异范围速查 ⭐⭐⭐ |
 | [快速参考](docs/QUICK_REFERENCE.md) | 命令速查表 ⭐⭐ |
 | [实验配置指南](docs/SETTINGS_CONFIGURATION_GUIDE.md) | Settings JSON编写 ⭐⭐ |
+| [JSON配置书写规范](docs/JSON_CONFIG_WRITING_STANDARDS.md) | **JSON配置标准** ⭐⭐⭐ |
+
+### 模型与功能
+| 文档 | 说明 |
+|-----|------|
 | [11个模型概览](docs/11_MODELS_OVERVIEW.md) | 模型详细信息 ⭐⭐ |
+| [11个模型最终定义](docs/11_MODELS_FINAL_DEFINITION.md) | 模型完整定义 ⭐⭐ |
 | [并行训练使用](docs/PARALLEL_TRAINING_USAGE.md) | 并行训练配置 ⭐⭐ |
 | [输出结构](docs/OUTPUT_STRUCTURE_QUICKREF.md) | 结果目录结构 ⭐ |
 | [功能总览](docs/FEATURES_OVERVIEW.md) | 所有功能说明 ⭐⭐ |
+| [脚本快速参考](docs/SCRIPTS_QUICKREF.md) | 核心脚本工具 ⭐⭐ |
+
+### 数据分析报告
+| 文档 | 说明 |
+|-----|------|
+| [数据格式设计决定](docs/results_reports/DATA_FORMAT_DESIGN_DECISION_SUMMARY.md) | **数据格式设计理念** ⭐⭐⭐ |
 | [运行时间统计](docs/results_reports/RUNTIME_STATISTICS_20251211.md) | 476个实验运行时间分析 ⭐⭐ |
 | [完整文档索引](docs/README.md) | 所有文档列表 |
 

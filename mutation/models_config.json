@@ -115,7 +115,7 @@
         "seed": {
           "flag": "--seed",
           "type": "int",
-          "default": null,
+          "default": 1334,
           "range": [0, 9999],
           "distribution": "uniform"
         },
@@ -204,7 +204,7 @@
         "seed": {
           "flag": "--seed",
           "type": "int",
-          "default": null,
+          "default": 1334,
           "range": [0, 9999],
           "distribution": "uniform"
         },
