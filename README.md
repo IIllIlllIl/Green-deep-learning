@@ -228,6 +228,33 @@ sudo sysctl -w kernel.perf_event_paranoid=-1
 | [运行时间统计](docs/results_reports/RUNTIME_STATISTICS_20251211.md) | 476个实验运行时间分析 ⭐⭐ |
 | [完整文档索引](docs/README.md) | 所有文档列表 |
 
+### 🔬 因果推断分析模块
+**analysis/** - ASE 2023论文复现（独立模块）
+
+| 文档 | 说明 |
+|-----|------|
+| [analysis/README.md](analysis/README.md) | **因果分析模块总览** ⭐⭐⭐ |
+| [analysis/docs/INDEX.md](analysis/docs/INDEX.md) | 文档总索引 ⭐⭐⭐ |
+| [analysis/docs/MIGRATION_GUIDE.md](analysis/docs/MIGRATION_GUIDE.md) | **数据迁移指南** - 应用到新数据集 ⭐⭐⭐ |
+| [analysis/docs/CODE_WORKFLOW_EXPLAINED.md](analysis/docs/CODE_WORKFLOW_EXPLAINED.md) | 代码流程详解（DiBS+DML） |
+| [CLAUDE.md](CLAUDE.md) - 因果分析章节 | 如何将主项目数据应用到因果分析 ⭐⭐ |
+
+**核心功能**:
+- **DiBS因果图学习**: 从观测数据学习变量间的因果关系（有向无环图）
+- **DML因果推断**: 估计因果效应大小和统计显著性（平均因果效应ATE）
+- **权衡检测**: 自动识别指标间的权衡模式（如准确率 vs 公平性）
+
+**主要成就** (2025-12-21):
+- ✅ 首次完成Adult数据集完整因果分析（61.4分钟，GPU加速）
+- ✅ 检测6条因果边，4条统计显著（p < 0.05）
+- ✅ 发现过拟合证据：训练F1提高1单位 → 测试准确率降低5.2%
+- ✅ 复现质量：90% (4.5/5)
+
+**应用场景**:
+1. 分析主项目"能耗 vs 性能"权衡（将raw_data.csv应用到因果分析）
+2. 研究超参数的因果影响（如learning_rate → 能耗/准确率）
+3. 论文复现（Adult, COMPAS, German数据集）
+
 ---
 
 ## Settings配置文件
