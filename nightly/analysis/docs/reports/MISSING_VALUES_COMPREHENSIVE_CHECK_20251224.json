@@ -1,0 +1,86 @@
+{
+  "summary": {
+    "total_new_rows": 372,
+    "total_new_cols": 67,
+    "total_missing_cols": 0,
+    "avg_complete_rate": 100.0
+  },
+  "new_data_missing": [
+    {
+      "dataset": "image_classification (\u65b0\u6570\u636e)",
+      "total_rows": 116,
+      "total_cols": 16,
+      "missing_cols": [],
+      "missing_cols_count": 0,
+      "complete_rows": 116,
+      "complete_rate": 100.0
+    },
+    {
+      "dataset": "person_reid (\u65b0\u6570\u636e)",
+      "total_rows": 69,
+      "total_cols": 20,
+      "missing_cols": [],
+      "missing_cols_count": 0,
+      "complete_rows": 69,
+      "complete_rate": 100.0
+    },
+    {
+      "dataset": "vulberta (\u65b0\u6570\u636e)",
+      "total_rows": 96,
+      "total_cols": 15,
+      "missing_cols": [],
+      "missing_cols_count": 0,
+      "complete_rows": 96,
+      "complete_rate": 100.0
+    },
+    {
+      "dataset": "bug_localization (\u65b0\u6570\u636e)",
+      "total_rows": 91,
+      "total_cols": 16,
+      "missing_cols": [],
+      "missing_cols_count": 0,
+      "complete_rows": 91,
+      "complete_rate": 100.0
+    }
+  ],
+  "column_comparisons": [
+    {
+      "task": "image_classification",
+      "new_cols_count": 16,
+      "old_cols_count": 17,
+      "common_cols_count": 16,
+      "added_cols": [],
+      "removed_cols": [
+        "l2_regularization"
+      ],
+      "missing_comparison": []
+    },
+    {
+      "task": "person_reid",
+      "new_cols_count": 20,
+      "old_cols_count": 20,
+      "common_cols_count": 20,
+      "added_cols": [],
+      "removed_cols": [],
+      "missing_comparison": []
+    },
+    {
+      "task": "vulberta",
+      "new_cols_count": 15,
+      "old_cols_count": 15,
+      "common_cols_count": 15,
+      "added_cols": [],
+      "removed_cols": [],
+      "missing_comparison": []
+    },
+    {
+      "task": "bug_localization",
+      "new_cols_count": 16,
+      "old_cols_count": 16,
+      "common_cols_count": 16,
+      "added_cols": [],
+      "removed_cols": [],
+      "missing_comparison": []
+    }
+  ]
+}

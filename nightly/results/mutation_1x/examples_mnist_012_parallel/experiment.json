@@ -1,0 +1,45 @@
+{
+  "experiment_id": "examples_mnist_012_parallel",
+  "timestamp": "2025-11-20T20:24:29.017589",
+  "mode": "parallel",
+  "foreground": {
+    "repository": "examples",
+    "model": "mnist",
+    "hyperparameters": {
+      "seed": 4387
+    },
+    "duration_seconds": 199.36053729057312,
+    "energy_metrics": {
+      "cpu_energy_pkg_joules": 7134.54,
+      "cpu_energy_ram_joules": 487.23,
+      "cpu_energy_total_joules": 7621.77,
+      "gpu_power_avg_watts": 256.01561855670127,
+      "gpu_power_max_watts": 282.26,
+      "gpu_power_min_watts": 5.19,
+      "gpu_energy_total_joules": 49667.03000000004,
+      "gpu_temp_avg_celsius": 74.97422680412372,
+      "gpu_temp_max_celsius": 79.0,
+      "gpu_util_avg_percent": 87.40721649484536,
+      "gpu_util_max_percent": 97.0
+    },
+    "performance_metrics": {
+      "test_accuracy": 99.0,
+      "test_loss": 0.0272
+    },
+    "training_success": true,
+    "retries": 0,
+    "error_message": "Training completed successfully"
+  },
+  "background": {
+    "repository": "VulBERTa",
+    "model": "mlp",
+    "hyperparameters": {
+      "epochs": 10,
+      "learning_rate": 3e-05,
+      "weight_decay": 0.0,
+      "seed": 42
+    },
+    "log_directory": "/home/green/energy_dl/nightly/results/run_20251120_194804/examples_mnist_012_parallel/background_logs",
+    "note": "Background training served as GPU load only (not monitored)"
+  }
+}

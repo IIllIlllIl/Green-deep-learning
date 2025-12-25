@@ -1,0 +1,231 @@
+{
+  "experiment_name": "boundary_test_elite_4models",
+  "description": "Complete boundary value test for 4 elite models - validate hyperparameter ranges using standardized multiplier expressions",
+  "mode": "default",
+  "governor": "performance",
+  "runs_per_config": 1,
+  "max_retries": 2,
+  "experiments": [
+
+    {
+      "repo": "examples",
+      "model": "mnist",
+      "mode": "default",
+      "hyperparameters": {"epochs": 10, "learning_rate": 0.01},
+      "description": "MNIST Baseline: epochs=default, lr=default"
+    },
+    {
+      "repo": "examples",
+      "model": "mnist",
+      "mode": "default",
+      "hyperparameters": {"epochs": 5, "learning_rate": 0.01},
+      "description": "MNIST: epochs=0.5×default (min), lr=default"
+    },
+    {
+      "repo": "examples",
+      "model": "mnist",
+      "mode": "default",
+      "hyperparameters": {"epochs": 20, "learning_rate": 0.01},
+      "description": "MNIST: epochs=2.0×default (max), lr=default"
+    },
+    {
+      "repo": "examples",
+      "model": "mnist",
+      "mode": "default",
+      "hyperparameters": {"epochs": 10, "learning_rate": 0.001},
+      "description": "MNIST: epochs=default, lr=0.1×default (min)"
+    },
+    {
+      "repo": "examples",
+      "model": "mnist",
+      "mode": "default",
+      "hyperparameters": {"epochs": 10, "learning_rate": 0.1},
+      "description": "MNIST: epochs=default, lr=10×default (max)"
+    },
+    {
+      "repo": "examples",
+      "model": "mnist",
+      "mode": "default",
+      "hyperparameters": {"epochs": 5, "learning_rate": 0.001},
+      "description": "MNIST: epochs=0.5×default, lr=0.1×default (min+min)"
+    },
+    {
+      "repo": "examples",
+      "model": "mnist",
+      "mode": "default",
+      "hyperparameters": {"epochs": 20, "learning_rate": 0.1},
+      "description": "MNIST: epochs=2.0×default, lr=10×default (max+max)"
+    },
+
+    {
+      "repo": "pytorch_resnet_cifar10",
+      "model": "resnet20",
+      "mode": "default",
+      "hyperparameters": {"epochs": 200, "learning_rate": 0.1, "weight_decay": 0.0001},
+      "description": "ResNet20 Baseline: epochs=default, lr=default, wd=default"
+    },
+    {
+      "repo": "pytorch_resnet_cifar10",
+      "model": "resnet20",
+      "mode": "default",
+      "hyperparameters": {"epochs": 100, "learning_rate": 0.1, "weight_decay": 0.0001},
+      "description": "ResNet20: epochs=0.5×default (min), lr=default, wd=default"
+    },
+    {
+      "repo": "pytorch_resnet_cifar10",
+      "model": "resnet20",
+      "mode": "default",
+      "hyperparameters": {"epochs": 400, "learning_rate": 0.1, "weight_decay": 0.0001},
+      "description": "ResNet20: epochs=2.0×default (max), lr=default, wd=default"
+    },
+    {
+      "repo": "pytorch_resnet_cifar10",
+      "model": "resnet20",
+      "mode": "default",
+      "hyperparameters": {"epochs": 200, "learning_rate": 0.01, "weight_decay": 0.0001},
+      "description": "ResNet20: epochs=default, lr=0.1×default (min), wd=default"
+    },
+    {
+      "repo": "pytorch_resnet_cifar10",
+      "model": "resnet20",
+      "mode": "default",
+      "hyperparameters": {"epochs": 200, "learning_rate": 1.0, "weight_decay": 0.0001},
+      "description": "ResNet20: epochs=default, lr=10×default (max), wd=default"
+    },
+    {
+      "repo": "pytorch_resnet_cifar10",
+      "model": "resnet20",
+      "mode": "default",
+      "hyperparameters": {"epochs": 200, "learning_rate": 0.1, "weight_decay": 0.00001},
+      "description": "ResNet20: epochs=default, lr=default, wd=0.1×default (min)"
+    },
+    {
+      "repo": "pytorch_resnet_cifar10",
+      "model": "resnet20",
+      "mode": "default",
+      "hyperparameters": {"epochs": 200, "learning_rate": 0.1, "weight_decay": 0.01},
+      "description": "ResNet20: epochs=default, lr=default, wd=100×default (max)"
+    },
+    {
+      "repo": "pytorch_resnet_cifar10",
+      "model": "resnet20",
+      "mode": "default",
+      "hyperparameters": {"epochs": 200, "learning_rate": 0.1, "weight_decay": 0.0},
+      "description": "ResNet20: epochs=default, lr=default, wd=0.0 (zero case)"
+    },
+
+    {
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "densenet121",
+      "mode": "default",
+      "hyperparameters": {"epochs": 60, "learning_rate": 0.05, "dropout": 0.5},
+      "description": "DenseNet121 Baseline: epochs=default, lr=default, dropout=default"
+    },
+    {
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "densenet121",
+      "mode": "default",
+      "hyperparameters": {"epochs": 30, "learning_rate": 0.05, "dropout": 0.5},
+      "description": "DenseNet121: epochs=0.5×default (min), lr=default, dropout=default"
+    },
+    {
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "densenet121",
+      "mode": "default",
+      "hyperparameters": {"epochs": 120, "learning_rate": 0.05, "dropout": 0.5},
+      "description": "DenseNet121: epochs=2.0×default (max), lr=default, dropout=default"
+    },
+    {
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "densenet121",
+      "mode": "default",
+      "hyperparameters": {"epochs": 60, "learning_rate": 0.005, "dropout": 0.5},
+      "description": "DenseNet121: epochs=default, lr=0.1×default (min), dropout=default"
+    },
+    {
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "densenet121",
+      "mode": "default",
+      "hyperparameters": {"epochs": 60, "learning_rate": 0.5, "dropout": 0.5},
+      "description": "DenseNet121: epochs=default, lr=10×default (max), dropout=default"
+    },
+    {
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "densenet121",
+      "mode": "default",
+      "hyperparameters": {"epochs": 60, "learning_rate": 0.05, "dropout": 0.0},
+      "description": "DenseNet121: epochs=default, lr=default, dropout=0.0 (min)"
+    },
+    {
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "densenet121",
+      "mode": "default",
+      "hyperparameters": {"epochs": 60, "learning_rate": 0.05, "dropout": 0.7},
+      "description": "DenseNet121: epochs=default, lr=default, dropout=0.7 (max)"
+    },
+
+    {
+      "repo": "MRT-OAST",
+      "model": "default",
+      "mode": "default",
+      "hyperparameters": {"epochs": 10, "learning_rate": 0.0001, "dropout": 0.2, "weight_decay": 0.0},
+      "description": "MRT-OAST Baseline: epochs=default, lr=default, dropout=default, wd=default(0.0)"
+    },
+    {
+      "repo": "MRT-OAST",
+      "model": "default",
+      "mode": "default",
+      "hyperparameters": {"epochs": 5, "learning_rate": 0.0001, "dropout": 0.2, "weight_decay": 0.0},
+      "description": "MRT-OAST: epochs=0.5×default (min), lr=default, dropout=default, wd=default"
+    },
+    {
+      "repo": "MRT-OAST",
+      "model": "default",
+      "mode": "default",
+      "hyperparameters": {"epochs": 20, "learning_rate": 0.0001, "dropout": 0.2, "weight_decay": 0.0},
+      "description": "MRT-OAST: epochs=2.0×default (max), lr=default, dropout=default, wd=default"
+    },
+    {
+      "repo": "MRT-OAST",
+      "model": "default",
+      "mode": "default",
+      "hyperparameters": {"epochs": 10, "learning_rate": 0.00001, "dropout": 0.2, "weight_decay": 0.0},
+      "description": "MRT-OAST: epochs=default, lr=0.1×default (min), dropout=default, wd=default"
+    },
+    {
+      "repo": "MRT-OAST",
+      "model": "default",
+      "mode": "default",
+      "hyperparameters": {"epochs": 10, "learning_rate": 0.001, "dropout": 0.2, "weight_decay": 0.0},
+      "description": "MRT-OAST: epochs=default, lr=10×default (max), dropout=default, wd=default"
+    },
+    {
+      "repo": "MRT-OAST",
+      "model": "default",
+      "mode": "default",
+      "hyperparameters": {"epochs": 10, "learning_rate": 0.0001, "dropout": 0.0, "weight_decay": 0.0},
+      "description": "MRT-OAST: epochs=default, lr=default, dropout=0.0 (min), wd=default"
+    },
+    {
+      "repo": "MRT-OAST",
+      "model": "default",
+      "mode": "default",
+      "hyperparameters": {"epochs": 10, "learning_rate": 0.0001, "dropout": 0.7, "weight_decay": 0.0},
+      "description": "MRT-OAST: epochs=default, lr=default, dropout=0.7 (max), wd=default"
+    },
+    {
+      "repo": "MRT-OAST",
+      "model": "default",
+      "mode": "default",
+      "hyperparameters": {"epochs": 10, "learning_rate": 0.0001, "dropout": 0.2, "weight_decay": 0.00001},
+      "description": "MRT-OAST: epochs=default, lr=default, dropout=default, wd=0.00001 (min, absolute)"
+    },
+    {
+      "repo": "MRT-OAST",
+      "model": "default",
+      "mode": "default",
+      "hyperparameters": {"epochs": 10, "learning_rate": 0.0001, "dropout": 0.2, "weight_decay": 0.01},
+      "description": "MRT-OAST: epochs=default, lr=default, dropout=default, wd=0.01 (max, absolute)"
+    }
+  ]
+}

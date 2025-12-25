@@ -1,0 +1,102 @@
+{
+  "comment": "Stage12: 并行模式pcb补充 - 需补充4参数各3个唯一值 [v4.7.2修正]",
+  "version": "4.7.2-corrected",
+  "created": "2025-12-05",
+  "updated": "2025-12-08 (修正: 实际已有2个唯一值，需补充3个)",
+  "estimated_duration_hours": 13.86,
+  "estimated_experiments": 12,
+  "target_completion": {
+    "parameters": [
+      "Person_reID_baseline_pytorch/pcb并行: 4参数 × 3次"
+    ],
+    "current_status": {
+      "dropout": "2/5 (已有0.5, 0.403)",
+      "epochs": "2/5 (已有60, 57)",
+      "learning_rate": "2/5 (已有0.05, 0.0254)",
+      "seed": "2/5 (已有1334, 7650)"
+    },
+    "goal": "补充pcb并行模式，每个参数达到5个唯一值（已有2个+补充3个=5个）"
+  },
+  "use_deduplication": true,
+  "historical_csvs": [
+    "results/summary_all.csv"
+  ],
+  "experiments": [
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "pcb",
+        "mode": "mutation",
+        "mutate": [
+          "epochs"
+        ],
+        "comment": "仅变异epochs参数"
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "densenet121",
+        "hyperparameters": {}
+      },
+      "runs_per_config": 3,
+      "comment": "超慢速模型，并行模式平均69.3分钟/实验，3个实验约3.47小时"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "pcb",
+        "mode": "mutation",
+        "mutate": [
+          "learning_rate"
+        ],
+        "comment": "仅变异learning_rate参数"
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "densenet121",
+        "hyperparameters": {}
+      },
+      "runs_per_config": 3,
+      "comment": "超慢速模型，并行模式平均69.3分钟/实验，3个实验约3.47小时"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "pcb",
+        "mode": "mutation",
+        "mutate": [
+          "seed"
+        ],
+        "comment": "仅变异seed参数"
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "densenet121",
+        "hyperparameters": {}
+      },
+      "runs_per_config": 3,
+      "comment": "超慢速模型，并行模式平均69.3分钟/实验，3个实验约3.47小时"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "pcb",
+        "mode": "mutation",
+        "mutate": [
+          "dropout"
+        ],
+        "comment": "仅变异dropout参数"
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "densenet121",
+        "hyperparameters": {}
+      },
+      "runs_per_config": 3,
+      "comment": "超慢速模型，并行模式平均69.3分钟/实验，3个实验约3.47小时"
+    }
+  ]
+}

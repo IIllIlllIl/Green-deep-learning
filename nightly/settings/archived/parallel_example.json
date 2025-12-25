@@ -1,0 +1,42 @@
+{
+  "experiment_name": "parallel_training_example",
+  "description": "Example parallel training configuration - Foreground ResNet20 with mutated LR + Background VulBERTa MLP for GPU load",
+  "mode": "parallel",
+  "governor": "performance",
+  "runs_per_config": 2,
+  "max_retries": 2,
+  "experiments": [
+    {
+      "repo": "placeholder",
+      "model": "placeholder",
+      "mode": "parallel",
+      "description": "Parallel experiment: ResNet20 (foreground, monitored) + VulBERTa MLP (background, GPU load)",
+      "foreground": {
+        "repo": "pytorch_resnet_cifar10",
+        "model": "resnet20",
+        "mode": "mutation",
+        "mutate": ["learning_rate"],
+        "description": "Foreground training with mutated learning rate"
+      },
+      "background": {
+        "repo": "VulBERTa",
+        "model": "mlp",
+        "hyperparameters": {
+          "epochs": 1,
+          "learning_rate": 0.001,
+          "dropout": 0.2,
+          "weight_decay": 0.0
+        },
+        "description": "Background training loops continuously until foreground completes"
+      }
+    }
+  ],
+  "notes": [
+    "1. The 'repo' and 'model' at experiment level are placeholders (required by schema but not used in parallel mode)",
+    "2. Foreground training is fully monitored with energy metrics",
+    "3. Background training provides GPU load only (not monitored)",
+    "4. Energy metrics include both foreground + background (cannot be separated at hardware level)",
+    "5. Background training loops continuously and is automatically terminated when foreground completes",
+    "6. Foreground mode can be 'mutation' (mutate specified parameters) or 'default' (use fixed hyperparameters)"
+  ]
+}

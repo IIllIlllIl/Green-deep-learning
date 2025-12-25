@@ -1,0 +1,63 @@
+{
+  "comment": "Stage10: 非并行模式超慢速模型pcb [已修复: 拆分多参数配置项]",
+  "version": "4.7.1-fixed",
+  "created": "2025-12-05",
+  "estimated_duration_hours": 23.7,
+  "estimated_experiments": 20,
+  "target_completion": {
+    "parameters": [
+      "Person_reID_baseline_pytorch/pcb: 4参数 × 5次"
+    ],
+    "goal": "完成非并行模式下pcb的所有参数，每个参数获得5个唯一值"
+  },
+  "use_deduplication": true,
+  "historical_csvs": [
+    "results/summary_all.csv"
+  ],
+  "experiments": [
+    {
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "pcb",
+      "baseline_runs": 0,
+      "runs_per_config": 5,
+      "mutate_params": [
+        "epochs"
+      ],
+      "mode": "nonparallel",
+      "comment": "仅变异epochs参数"
+    },
+    {
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "pcb",
+      "baseline_runs": 0,
+      "runs_per_config": 5,
+      "mutate_params": [
+        "learning_rate"
+      ],
+      "mode": "nonparallel",
+      "comment": "仅变异learning_rate参数"
+    },
+    {
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "pcb",
+      "baseline_runs": 0,
+      "runs_per_config": 5,
+      "mutate_params": [
+        "seed"
+      ],
+      "mode": "nonparallel",
+      "comment": "仅变异seed参数"
+    },
+    {
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "pcb",
+      "baseline_runs": 0,
+      "runs_per_config": 5,
+      "mutate_params": [
+        "dropout"
+      ],
+      "mode": "nonparallel",
+      "comment": "仅变异dropout参数"
+    }
+  ]
+}

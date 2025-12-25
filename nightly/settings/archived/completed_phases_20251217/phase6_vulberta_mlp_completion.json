@@ -1,0 +1,114 @@
+{
+  "comment": "Phase 6: VulBERTa/mlp完全补齐 - 40个实验，预计41.72小时",
+  "description": "补齐VulBERTa/mlp的所有参数（非并行+并行模式），使该模型100%达标",
+  "version": "v4.7.6-phase6",
+  "creation_date": "2025-12-15",
+  "target_runtime_hours": "41.72 (36-42h目标范围内)",
+  "expected_experiments": 40,
+  "expected_completion": {
+    "VulBERTa/mlp_nonparallel": "10/10 (100%)",
+    "VulBERTa/mlp_parallel": "10/10 (100%)",
+    "total_达标": "19/90 (+2)"
+  },
+  "use_deduplication": true,
+  "historical_csvs": ["results/raw_data.csv"],
+  "runs_per_config": 5,
+  "experiments": [
+    {
+      "comment": "VulBERTa/mlp - epochs变异 (非并行)",
+      "repo": "VulBERTa",
+      "model": "mlp",
+      "mode": "mutation",
+      "mutate": ["epochs"],
+      "runs_per_config": 5
+    },
+    {
+      "comment": "VulBERTa/mlp - learning_rate变异 (非并行)",
+      "repo": "VulBERTa",
+      "model": "mlp",
+      "mode": "mutation",
+      "mutate": ["learning_rate"],
+      "runs_per_config": 5
+    },
+    {
+      "comment": "VulBERTa/mlp - seed变异 (非并行)",
+      "repo": "VulBERTa",
+      "model": "mlp",
+      "mode": "mutation",
+      "mutate": ["seed"],
+      "runs_per_config": 5
+    },
+    {
+      "comment": "VulBERTa/mlp - weight_decay变异 (非并行)",
+      "repo": "VulBERTa",
+      "model": "mlp",
+      "mode": "mutation",
+      "mutate": ["weight_decay"],
+      "runs_per_config": 5
+    },
+    {
+      "comment": "VulBERTa/mlp - epochs变异 (并行)",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "VulBERTa",
+        "model": "mlp",
+        "mode": "mutation",
+        "mutate": ["epochs"],
+        "runs_per_config": 5
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "mode": "default"
+      }
+    },
+    {
+      "comment": "VulBERTa/mlp - learning_rate变异 (并行)",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "VulBERTa",
+        "model": "mlp",
+        "mode": "mutation",
+        "mutate": ["learning_rate"],
+        "runs_per_config": 5
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "mode": "default"
+      }
+    },
+    {
+      "comment": "VulBERTa/mlp - seed变异 (并行)",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "VulBERTa",
+        "model": "mlp",
+        "mode": "mutation",
+        "mutate": ["seed"],
+        "runs_per_config": 5
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "mode": "default"
+      }
+    },
+    {
+      "comment": "VulBERTa/mlp - weight_decay变异 (并行)",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "VulBERTa",
+        "model": "mlp",
+        "mode": "mutation",
+        "mutate": ["weight_decay"],
+        "runs_per_config": 5
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "mode": "default"
+      }
+    }
+  ]
+}

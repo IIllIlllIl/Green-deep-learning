@@ -1,0 +1,209 @@
+{
+  "experiment_name": "test_phase4_validation_optimized",
+  "description": "Phase 4 验证配置 - 精简版（12-18小时目标）",
+  "comment": "测试修复后的正则表达式，优先恢复最重要的实验。使用mutate数组而非mutate_params对象，确保单参数变异",
+  "estimated_time_without_dedup": "15.6小时",
+  "estimated_time_with_50pct_dedup": "7.8小时",
+  "target_experiments": 33,
+
+  "mode": "mutation",
+  "max_retries": 2,
+  "governor": "performance",
+  "use_deduplication": true,
+  "historical_csvs": ["results/raw_data.csv"],
+
+  "experiments": [
+    {
+      "comment": "VulBERTa/mlp - 非并行 - 默认值实验（优先级最高，建立基线）",
+      "repo": "VulBERTa",
+      "model": "mlp",
+      "mode": "default",
+      "runs_per_config": 3
+    },
+    {
+      "comment": "VulBERTa/mlp - 非并行 - epochs变异（单参数）",
+      "repo": "VulBERTa",
+      "model": "mlp",
+      "mode": "mutation",
+      "mutate": ["epochs"],
+      "runs_per_config": 2
+    },
+    {
+      "comment": "VulBERTa/mlp - 非并行 - learning_rate变异（单参数）",
+      "repo": "VulBERTa",
+      "model": "mlp",
+      "mode": "mutation",
+      "mutate": ["learning_rate"],
+      "runs_per_config": 2
+    },
+    {
+      "comment": "VulBERTa/mlp - 非并行 - weight_decay变异（单参数）",
+      "repo": "VulBERTa",
+      "model": "mlp",
+      "mode": "mutation",
+      "mutate": ["weight_decay"],
+      "runs_per_config": 2
+    },
+    {
+      "comment": "VulBERTa/mlp - 非并行 - seed变异（单参数）",
+      "repo": "VulBERTa",
+      "model": "mlp",
+      "mode": "mutation",
+      "mutate": ["seed"],
+      "runs_per_config": 2
+    },
+    {
+      "comment": "VulBERTa/mlp - 并行 - 默认值实验",
+      "repo": "VulBERTa",
+      "model": "mlp",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "VulBERTa",
+        "model": "mlp",
+        "mode": "default"
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {}
+      },
+      "runs_per_config": 1
+    },
+    {
+      "comment": "VulBERTa/mlp - 并行 - learning_rate变异（单参数）",
+      "repo": "VulBERTa",
+      "model": "mlp",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "VulBERTa",
+        "model": "mlp",
+        "mode": "mutation",
+        "mutate": ["learning_rate"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {}
+      },
+      "runs_per_config": 2
+    },
+    {
+      "comment": "bug-localization - 非并行 - 默认值实验",
+      "repo": "bug-localization-by-dnn-and-rvsm",
+      "model": "default",
+      "mode": "default",
+      "runs_per_config": 2
+    },
+    {
+      "comment": "bug-localization - 非并行 - max_iter变异（单参数）",
+      "repo": "bug-localization-by-dnn-and-rvsm",
+      "model": "default",
+      "mode": "mutation",
+      "mutate": ["max_iter"],
+      "runs_per_config": 2
+    },
+    {
+      "comment": "bug-localization - 非并行 - alpha变异（单参数）",
+      "repo": "bug-localization-by-dnn-and-rvsm",
+      "model": "default",
+      "mode": "mutation",
+      "mutate": ["alpha"],
+      "runs_per_config": 2
+    },
+    {
+      "comment": "bug-localization - 非并行 - seed变异（单参数）",
+      "repo": "bug-localization-by-dnn-and-rvsm",
+      "model": "default",
+      "mode": "mutation",
+      "mutate": ["seed"],
+      "runs_per_config": 2
+    },
+    {
+      "comment": "bug-localization - 并行 - 默认值实验",
+      "repo": "bug-localization-by-dnn-and-rvsm",
+      "model": "default",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "bug-localization-by-dnn-and-rvsm",
+        "model": "default",
+        "mode": "default"
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {}
+      },
+      "runs_per_config": 1
+    },
+    {
+      "comment": "bug-localization - 并行 - alpha变异（单参数）",
+      "repo": "bug-localization-by-dnn-and-rvsm",
+      "model": "default",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "bug-localization-by-dnn-and-rvsm",
+        "model": "default",
+        "mode": "mutation",
+        "mutate": ["alpha"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {}
+      },
+      "runs_per_config": 2
+    },
+    {
+      "comment": "MRT-OAST - 非并行 - learning_rate变异（单参数）",
+      "repo": "MRT-OAST",
+      "model": "default",
+      "mode": "mutation",
+      "mutate": ["learning_rate"],
+      "runs_per_config": 2
+    },
+    {
+      "comment": "MRT-OAST - 非并行 - dropout变异（单参数）",
+      "repo": "MRT-OAST",
+      "model": "default",
+      "mode": "mutation",
+      "mutate": ["dropout"],
+      "runs_per_config": 2
+    },
+    {
+      "comment": "MRT-OAST - 并行 - learning_rate变异（单参数）",
+      "repo": "MRT-OAST",
+      "model": "default",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "MRT-OAST",
+        "model": "default",
+        "mode": "mutation",
+        "mutate": ["learning_rate"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {}
+      },
+      "runs_per_config": 2
+    },
+    {
+      "comment": "MRT-OAST - 并行 - dropout变异（单参数）",
+      "repo": "MRT-OAST",
+      "model": "default",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "MRT-OAST",
+        "model": "default",
+        "mode": "mutation",
+        "mutate": ["dropout"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {}
+      },
+      "runs_per_config": 2
+    }
+  ]
+}

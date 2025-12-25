@@ -1,0 +1,148 @@
+{
+  "comment": "Phase 7: 最终补齐 - 52个实验，预计29.58小时",
+  "description": "补齐VulBERTa/mlp非并行模式 + bug-localization两种模式，完成所有剩余实验目标",
+  "version": "v4.7.8-phase7",
+  "creation_date": "2025-12-17",
+  "target_runtime_hours": "29.58 (1.23天)",
+  "expected_experiments": 52,
+  "expected_completion": {
+    "VulBERTa/mlp_nonparallel": "20个实验 (4参数×5)",
+    "bug-localization_nonparallel": "20个实验 (4参数×5)",
+    "bug-localization_parallel": "12个实验 (2参数×5 + 2参数×1)",
+    "total_达标": "23/90 (100%完成)",
+    "完全达标模型": "11/11 (100%)"
+  },
+  "use_deduplication": true,
+  "historical_csvs": ["results/raw_data.csv"],
+  "runs_per_config": 5,
+  "experiments": [
+    {
+      "comment": "VulBERTa/mlp - epochs变异 (非并行)",
+      "repo": "VulBERTa",
+      "model": "mlp",
+      "mode": "mutation",
+      "mutate": ["epochs"],
+      "runs_per_config": 5
+    },
+    {
+      "comment": "VulBERTa/mlp - learning_rate变异 (非并行)",
+      "repo": "VulBERTa",
+      "model": "mlp",
+      "mode": "mutation",
+      "mutate": ["learning_rate"],
+      "runs_per_config": 5
+    },
+    {
+      "comment": "VulBERTa/mlp - seed变异 (非并行)",
+      "repo": "VulBERTa",
+      "model": "mlp",
+      "mode": "mutation",
+      "mutate": ["seed"],
+      "runs_per_config": 5
+    },
+    {
+      "comment": "VulBERTa/mlp - weight_decay变异 (非并行)",
+      "repo": "VulBERTa",
+      "model": "mlp",
+      "mode": "mutation",
+      "mutate": ["weight_decay"],
+      "runs_per_config": 5
+    },
+    {
+      "comment": "bug-localization - alpha变异 (非并行)",
+      "repo": "bug-localization-by-dnn-and-rvsm",
+      "model": "default",
+      "mode": "mutation",
+      "mutate": ["alpha"],
+      "runs_per_config": 5
+    },
+    {
+      "comment": "bug-localization - kfold变异 (非并行)",
+      "repo": "bug-localization-by-dnn-and-rvsm",
+      "model": "default",
+      "mode": "mutation",
+      "mutate": ["kfold"],
+      "runs_per_config": 5
+    },
+    {
+      "comment": "bug-localization - max_iter变异 (非并行)",
+      "repo": "bug-localization-by-dnn-and-rvsm",
+      "model": "default",
+      "mode": "mutation",
+      "mutate": ["max_iter"],
+      "runs_per_config": 5
+    },
+    {
+      "comment": "bug-localization - seed变异 (非并行)",
+      "repo": "bug-localization-by-dnn-and-rvsm",
+      "model": "default",
+      "mode": "mutation",
+      "mutate": ["seed"],
+      "runs_per_config": 5
+    },
+    {
+      "comment": "bug-localization - alpha变异 (并行)",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "bug-localization-by-dnn-and-rvsm",
+        "model": "default",
+        "mode": "mutation",
+        "mutate": ["alpha"],
+        "runs_per_config": 5
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "mode": "default"
+      }
+    },
+    {
+      "comment": "bug-localization - kfold变异 (并行)",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "bug-localization-by-dnn-and-rvsm",
+        "model": "default",
+        "mode": "mutation",
+        "mutate": ["kfold"],
+        "runs_per_config": 5
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "mode": "default"
+      }
+    },
+    {
+      "comment": "bug-localization - max_iter变异 (并行, 4/5已完成)",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "bug-localization-by-dnn-and-rvsm",
+        "model": "default",
+        "mode": "mutation",
+        "mutate": ["max_iter"],
+        "runs_per_config": 1
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "mode": "default"
+      }
+    },
+    {
+      "comment": "bug-localization - seed变异 (并行, 4/5已完成)",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "bug-localization-by-dnn-and-rvsm",
+        "model": "default",
+        "mode": "mutation",
+        "mutate": ["seed"],
+        "runs_per_config": 1
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "mode": "default"
+      }
+    }
+  ]
+}

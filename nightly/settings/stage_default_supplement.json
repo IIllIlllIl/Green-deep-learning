@@ -1,0 +1,85 @@
+{
+  "comment": "\u8865\u5145\u9ed8\u8ba4\u503c\u5b9e\u9a8c - \u786e\u4fdd\u6bcf\u4e2a\u53c2\u6570\u5728\u4e24\u79cd\u6a21\u5f0f\u4e0b\u90fd\u67091\u4e2a\u9ed8\u8ba4\u503c",
+  "version": "4.7.3-default-supplement",
+  "created": "2025-12-10",
+  "purpose": "\u8865\u5145VulBERTa/cnn\u548cexamples/mnist_ff\u7684\u9ed8\u8ba4\u503c\u5b9e\u9a8c",
+  "estimated_duration_minutes": 5,
+  "estimated_experiments": 4,
+  "target_completion": {
+    "models": [
+      "VulBERTa/cnn: \u8865\u5145\u975e\u5e76\u884c\u548c\u5e76\u884c\u6a21\u5f0f\u7684\u9ed8\u8ba4\u503c\uff084\u53c2\u6570 \u00d7 2\u6a21\u5f0f = 8\u4e2a\u9ed8\u8ba4\u503c\uff09",
+      "examples/mnist_ff: \u8865\u5145\u975e\u5e76\u884c\u548c\u5e76\u884c\u6a21\u5f0f\u7684\u9ed8\u8ba4\u503c\uff084\u53c2\u6570 \u00d7 2\u6a21\u5f0f = 8\u4e2a\u9ed8\u8ba4\u503c\uff09"
+    ],
+    "goal": "\u6240\u670949\u4e2a\u53c2\u6570\u5728\u4e24\u79cd\u6a21\u5f0f\u4e0b\u90fd\u67091\u4e2a\u9ed8\u8ba4\u503c + 5\u4e2a\u53d8\u5f02\u503c"
+  },
+  "use_deduplication": true,
+  "historical_csvs": [
+    "results/raw_data.csv"
+  ],
+  "experiments": [
+    {
+      "mode": "default",
+      "repo": "VulBERTa",
+      "model": "cnn",
+      "hyperparameters": {
+        "epochs": 10,
+        "learning_rate": 3e-05,
+        "seed": 42,
+        "weight_decay": 0.0
+      },
+      "comment": "VulBERTa/cnn\u975e\u5e76\u884c\u9ed8\u8ba4\u503c\u5b9e\u9a8c - \u8865\u51454\u4e2a\u53c2\u6570\u7684\u9ed8\u8ba4\u503c"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "VulBERTa",
+        "model": "cnn",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 3e-05,
+          "seed": 42,
+          "weight_decay": 0.0
+        }
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {}
+      },
+      "comment": "VulBERTa/cnn\u5e76\u884c\u9ed8\u8ba4\u503c\u5b9e\u9a8c - \u8865\u51454\u4e2a\u53c2\u6570\u7684\u9ed8\u8ba4\u503c\uff0c\u540e\u53f0\u8fd0\u884cmnist\u57fa\u7ebf"
+    },
+    {
+      "mode": "default",
+      "repo": "examples",
+      "model": "mnist_ff",
+      "hyperparameters": {
+        "batch_size": 32,
+        "epochs": 10,
+        "learning_rate": 0.01,
+        "seed": 1
+      },
+      "comment": "mnist_ff\u975e\u5e76\u884c\u9ed8\u8ba4\u503c\u5b9e\u9a8c - \u8865\u51454\u4e2a\u53c2\u6570\u7684\u9ed8\u8ba4\u503c"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist_ff",
+        "mode": "default",
+        "hyperparameters": {
+          "batch_size": 32,
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "seed": 1
+        }
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {}
+      },
+      "comment": "mnist_ff\u5e76\u884c\u9ed8\u8ba4\u503c\u5b9e\u9a8c - \u8865\u51454\u4e2a\u53c2\u6570\u7684\u9ed8\u8ba4\u503c\uff0c\u540e\u53f0\u8fd0\u884cmnist\u57fa\u7ebf"
+    }
+  ]
+}

@@ -1,0 +1,208 @@
+{
+  "experiment_name": "supplement_vulberta_buglocalization_parallel",
+  "description": "补充VulBERTa和Bug定位的并行实验: Bug定位40个(重点) + VulBERTa 10个 = 50个实验项 (预估16.2小时)",
+  "mode": "mutation",
+  "max_retries": 2,
+  "governor": "performance",
+  "use_deduplication": true,
+  "historical_csvs": [
+    "results/raw_data.csv"
+  ],
+  "experiments": [
+    {
+      "comment": "=== 配置说明 ===",
+      "note": "重点补充Bug定位和VulBERTa的并行实验（当前都缺少）",
+      "total_experiments": 50,
+      "estimated_time_hours": 16.2,
+      "bug_localization_experiments": 40,
+      "vulberta_experiments": 10,
+      "creation_date": "2025-12-22"
+    },
+    {
+      "comment": "=== Bug定位并行实验 (40个，12小时) ===",
+      "note": "Bug定位当前只有40个非并行实验，缺少所有并行实验，需重点补充"
+    },
+    {
+      "comment": "Bug定位 - default基线实验 (10个)",
+      "repo": "bug-localization-by-dnn-and-rvsm",
+      "model": "default",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "bug-localization-by-dnn-and-rvsm",
+        "model": "default",
+        "mode": "default",
+        "hyperparameters": {}
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {}
+      },
+      "runs_per_config": 10
+    },
+    {
+      "comment": "Bug定位 - kfold变异 (8个，目标5个唯一值)",
+      "repo": "bug-localization-by-dnn-and-rvsm",
+      "model": "default",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "bug-localization-by-dnn-and-rvsm",
+        "model": "default",
+        "mode": "mutation",
+        "mutate": [
+          "kfold"
+        ]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {}
+      },
+      "runs_per_config": 8
+    },
+    {
+      "comment": "Bug定位 - max_iter变异 (8个，目标5个唯一值)",
+      "repo": "bug-localization-by-dnn-and-rvsm",
+      "model": "default",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "bug-localization-by-dnn-and-rvsm",
+        "model": "default",
+        "mode": "mutation",
+        "mutate": [
+          "max_iter"
+        ]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {}
+      },
+      "runs_per_config": 8
+    },
+    {
+      "comment": "Bug定位 - alpha变异 (7个，目标5个唯一值)",
+      "repo": "bug-localization-by-dnn-and-rvsm",
+      "model": "default",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "bug-localization-by-dnn-and-rvsm",
+        "model": "default",
+        "mode": "mutation",
+        "mutate": [
+          "alpha"
+        ]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {}
+      },
+      "runs_per_config": 7
+    },
+    {
+      "comment": "Bug定位 - seed变异 (7个，目标5个唯一值)",
+      "repo": "bug-localization-by-dnn-and-rvsm",
+      "model": "default",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "bug-localization-by-dnn-and-rvsm",
+        "model": "default",
+        "mode": "mutation",
+        "mutate": [
+          "seed"
+        ]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {}
+      },
+      "runs_per_config": 7
+    },
+    {
+      "comment": "=== VulBERTa并行实验 (10个，4.2小时) ===",
+      "note": "VulBERTa当前只有52个非并行实验，缺少所有并行实验"
+    },
+    {
+      "comment": "VulBERTa - epochs变异 (3个，目标5个唯一值但已有18个非并行，补充少量)",
+      "repo": "VulBERTa",
+      "model": "mlp",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "VulBERTa",
+        "model": "mlp",
+        "mode": "mutation",
+        "mutate": [
+          "epochs"
+        ]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {}
+      },
+      "runs_per_config": 3
+    },
+    {
+      "comment": "VulBERTa - learning_rate变异 (3个)",
+      "repo": "VulBERTa",
+      "model": "mlp",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "VulBERTa",
+        "model": "mlp",
+        "mode": "mutation",
+        "mutate": [
+          "learning_rate"
+        ]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {}
+      },
+      "runs_per_config": 3
+    },
+    {
+      "comment": "VulBERTa - weight_decay变异 (2个)",
+      "repo": "VulBERTa",
+      "model": "mlp",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "VulBERTa",
+        "model": "mlp",
+        "mode": "mutation",
+        "mutate": [
+          "weight_decay"
+        ]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {}
+      },
+      "runs_per_config": 2
+    },
+    {
+      "comment": "VulBERTa - seed变异 (2个)",
+      "repo": "VulBERTa",
+      "model": "mlp",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "VulBERTa",
+        "model": "mlp",
+        "mode": "mutation",
+        "mutate": [
+          "seed"
+        ]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {}
+      },
+      "runs_per_config": 2
+    }
+  ]
+}

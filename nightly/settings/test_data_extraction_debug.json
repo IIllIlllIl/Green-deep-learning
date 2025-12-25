@@ -1,0 +1,130 @@
+{
+  "comment": "数据提取调试配置 - 4个问题模型的默认值实验",
+  "version": "1.0.0-debug",
+  "created": "2025-12-12",
+  "purpose": "诊断数据提取问题，获取命令行输出以分析性能指标提取失败原因",
+
+  "global_settings": {
+    "runs_per_config": 1,
+    "use_deduplication": false,
+    "comment": "关闭去重以确保实验运行，每个配置只运行1次"
+  },
+
+  "experiments": [
+    {
+      "comment": "1. examples/mnist_ff - 非并行模式默认值",
+      "experiment_type": "default",
+      "repo": "examples",
+      "model": "mnist_ff",
+      "mode": "nonparallel",
+      "timeout": 1800
+    },
+    {
+      "comment": "2. examples/mnist_ff - 并行模式默认值",
+      "experiment_type": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist_ff",
+        "mutate_params": {}
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "mutate_params": {}
+      },
+      "timeout": 1800
+    },
+    {
+      "comment": "3. VulBERTa/mlp - 非并行模式默认值",
+      "experiment_type": "default",
+      "repo": "VulBERTa",
+      "model": "mlp",
+      "mode": "nonparallel",
+      "timeout": 3600
+    },
+    {
+      "comment": "4. VulBERTa/mlp - 并行模式默认值",
+      "experiment_type": "parallel",
+      "foreground": {
+        "repo": "VulBERTa",
+        "model": "mlp",
+        "mutate_params": {}
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "mutate_params": {}
+      },
+      "timeout": 3600
+    },
+    {
+      "comment": "5. bug-localization-by-dnn-and-rvsm/default - 非并行模式默认值",
+      "experiment_type": "default",
+      "repo": "bug-localization-by-dnn-and-rvsm",
+      "model": "default",
+      "mode": "nonparallel",
+      "timeout": 7200
+    },
+    {
+      "comment": "6. bug-localization-by-dnn-and-rvsm/default - 并行模式默认值",
+      "experiment_type": "parallel",
+      "foreground": {
+        "repo": "bug-localization-by-dnn-and-rvsm",
+        "model": "default",
+        "mutate_params": {}
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "mutate_params": {}
+      },
+      "timeout": 7200
+    },
+    {
+      "comment": "7. MRT-OAST/default - 非并行模式默认值",
+      "experiment_type": "default",
+      "repo": "MRT-OAST",
+      "model": "default",
+      "mode": "nonparallel",
+      "timeout": 3600
+    },
+    {
+      "comment": "8. MRT-OAST/default - 并行模式默认值",
+      "experiment_type": "parallel",
+      "foreground": {
+        "repo": "MRT-OAST",
+        "model": "default",
+        "mutate_params": {}
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "mutate_params": {}
+      },
+      "timeout": 3600
+    }
+  ],
+
+  "expected_results": {
+    "total_experiments": 8,
+    "problem_models": [
+      "examples/mnist_ff (46个历史实验，0%性能数据)",
+      "VulBERTa/mlp (45个历史实验，0%性能数据)",
+      "bug-localization-by-dnn-and-rvsm/default (40个历史实验，0%性能数据)",
+      "MRT-OAST/default (20/54个历史实验缺失性能数据)"
+    ],
+    "outputs_to_check": [
+      "results/run_*/default__examples_mnist_ff_*/terminal_output.txt",
+      "results/run_*/default__VulBERTa_mlp_*/terminal_output.txt",
+      "results/run_*/default__bug-localization-by-dnn-and-rvsm_default_*/terminal_output.txt",
+      "results/run_*/default__MRT-OAST_default_*/terminal_output.txt"
+    ],
+    "diagnostic_steps": [
+      "1. 运行配置: sudo -E python3 mutation.py -ec settings/test_data_extraction_debug.json",
+      "2. 查找输出文件: find results/ -name 'terminal_output.txt' -newer settings/test_data_extraction_debug.json",
+      "3. 检查性能指标: grep -i 'accuracy\\|loss\\|precision\\|recall\\|map\\|rank' results/run_*/*/terminal_output.txt",
+      "4. 对比正常模型: diff <(cat mnist_ff_output.txt) <(cat mnist_output.txt)",
+      "5. 更新提取脚本: 基于发现的指标格式修改性能指标提取逻辑"
+    ]
+  }
+}

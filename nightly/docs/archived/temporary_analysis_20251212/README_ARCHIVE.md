@@ -1,0 +1,21 @@
+# Temporary Analysis Reports Archive
+
+**归档日期**: 2025-12-12 20:45:39
+
+## 归档原因
+
+这些临时分析报告完成了特定的数据分析和修复任务，归档以保持docs目录整洁。
+
+## 归档报告
+
+- CSV_FIX_COMPREHENSIVE_SUMMARY.md
+- MISSING_COLUMNS_DETAILED_ANALYSIS.md
+- DEDUP_MODE_FIX_REPORT.md
+- EXPERIMENT_REQUIREMENT_ANALYSIS.md
+- DEDUPLICATION_RANDOM_MUTATION_ANALYSIS.md
+- PROJECT_CLEANUP_SUMMARY_20251208.md
+- DAILY_SUMMARY_20251205.md
+
+---
+
+**项目版本**: v4.7.3

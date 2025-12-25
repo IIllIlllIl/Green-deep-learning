@@ -1,0 +1,102 @@
+================================================================================
+STDOUT:
+================================================================================
+[Train Wrapper] Repository: repos/bug-localization-by-dnn-and-rvsm
+[Train Wrapper] Training script: ./train.sh
+[Train Wrapper] Log file: results/run_20251222_214929/bug-localization-by-dnn-and-rvsm_default_012_parallel/training.log
+[Train Wrapper] Energy directory: results/run_20251222_214929/bug-localization-by-dnn-and-rvsm_default_012_parallel/energy
+[Train Wrapper] Arguments: --kfold 2
+[Train Wrapper] Changed to directory: /home/green/energy_dl/nightly/repos/bug-localization-by-dnn-and-rvsm
+[Train Wrapper] Starting GPU monitoring...
+[Train Wrapper] GPU monitoring PID: 1590043
+[Train Wrapper] Starting training with integrated energy monitoring...
+[Train Wrapper] Command: ./train.sh --kfold 2
+========================================
+========================================
+Bug Localization Training Configuration
+========================================
+Model: dnn
+Python: /home/green/miniconda3/envs/dnn_rvsm/bin/python
+Working directory: /home/green/energy_dl/nightly/repos/bug-localization-by-dnn-and-rvsm
+K-fold: 2
+Hidden sizes: 300
+Alpha: 1e-5
+Max iterations: 10000
+Early stopping: 30
+Solver: sgd
+Parallel jobs: -2
+Random seed: Not set (original non-deterministic behavior)
+========================================
+
+================================================================================
+Bug Localization Model Training - DNN
+================================================================================
+Start time: 2025-12-23 00:55:50
+
+DNN Hyperparameters:
+  - K-fold: 2
+  - Hidden layer sizes: (300,)
+  - Alpha (L2 penalty): 1e-05
+  - Max iterations: 10000
+  - Early stopping patience: 30
+  - Solver: sgd
+  - Parallel jobs: -2
+  - Random seed: Not set (original non-deterministic behavior)
+
+Training DNN model with k-fold cross-validation...
+--------------------------------------------------------------------------------
+
+Training completed successfully!
+
+================================================================================
+TRAINING REPORT
+================================================================================
+Model: DNN
+Start time: 2025-12-23 00:55:50
+End time: 2025-12-23 00:58:02
+Total duration: 132.19 seconds (2.20 minutes)
+
+MODEL PERFORMANCE (Top-k Accuracy):
+--------------------------------------------------------------------------------
+  Top- 1 Accuracy: 0.372 (37.2%)
+  Top- 5 Accuracy: 0.621 (62.1%)
+  Top-10 Accuracy: 0.732 (73.2%)
+  Top-20 Accuracy: 0.819 (81.9%)
+
+Detailed Results (All k values):
+  Top- 1: 0.372
+  Top- 2: 0.470
+  Top- 3: 0.542
+  Top- 4: 0.587
+  Top- 5: 0.621
+  Top- 6: 0.647
+  Top- 7: 0.673
+  Top- 8: 0.693
+  Top- 9: 0.717
+  Top-10: 0.732
+  Top-11: 0.742
+  Top-12: 0.753
+  Top-13: 0.766
+  Top-14: 0.776
+  Top-15: 0.783
+  Top-16: 0.794
+  Top-17: 0.802
+  Top-18: 0.808
+  Top-19: 0.813
+  Top-20: 0.819
+================================================================================
+Fold: 1 / 2
+Fold: 2 / 2
+Training completed successfully!
+========================================
+[Train Wrapper] Training finished with exit code: 0
+[Train Wrapper] Stopping GPU monitoring...
+[Train Wrapper] Processing CPU energy data...
+[Train Wrapper] CPU energy saved to: /home/green/energy_dl/nightly/results/run_20251222_214929/bug-localization-by-dnn-and-rvsm_default_012_parallel/energy/cpu_energy.txt
+[Train Wrapper] GPU monitoring data saved to: /home/green/energy_dl/nightly/results/run_20251222_214929/bug-localization-by-dnn-and-rvsm_default_012_parallel/energy
+[Train Wrapper] Energy monitoring completed
+
+================================================================================
+STDERR:
+================================================================================
+(empty)

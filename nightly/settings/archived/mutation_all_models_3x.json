@@ -1,0 +1,4480 @@
+{
+  "experiment_name": "mutation_all_models_3x_with_seed",
+  "description": "完整变异测试：11个模型，每个超参数(含seed)变异3次（低、中、高），顺序+并行训练",
+  "governor": "performance",
+  "runs_per_config": 1,
+  "max_retries": 2,
+  "mode": "mixed",
+  "experiments": [
+    {
+      "mode": "default",
+      "repo": "examples",
+      "model": "mnist_ff",
+      "hyperparameters": {
+        "epochs": 5,
+        "learning_rate": 0.01,
+        "batch_size": 32,
+        "seed": 1
+      },
+      "note": "Sequential: mnist_ff - epochs=0.5×"
+    },
+    {
+      "mode": "default",
+      "repo": "examples",
+      "model": "mnist_ff",
+      "hyperparameters": {
+        "epochs": 10,
+        "learning_rate": 0.01,
+        "batch_size": 32,
+        "seed": 1
+      },
+      "note": "Sequential: mnist_ff - epochs=1.0×"
+    },
+    {
+      "mode": "default",
+      "repo": "examples",
+      "model": "mnist_ff",
+      "hyperparameters": {
+        "epochs": 15,
+        "learning_rate": 0.01,
+        "batch_size": 32,
+        "seed": 1
+      },
+      "note": "Sequential: mnist_ff - epochs=1.5×"
+    },
+    {
+      "mode": "default",
+      "repo": "examples",
+      "model": "mnist_ff",
+      "hyperparameters": {
+        "epochs": 10,
+        "learning_rate": 0.005,
+        "batch_size": 32,
+        "seed": 1
+      },
+      "note": "Sequential: mnist_ff - learning_rate=0.5×"
+    },
+    {
+      "mode": "default",
+      "repo": "examples",
+      "model": "mnist_ff",
+      "hyperparameters": {
+        "epochs": 10,
+        "learning_rate": 0.01,
+        "batch_size": 32,
+        "seed": 1
+      },
+      "note": "Sequential: mnist_ff - learning_rate=1.0×"
+    },
+    {
+      "mode": "default",
+      "repo": "examples",
+      "model": "mnist_ff",
+      "hyperparameters": {
+        "epochs": 10,
+        "learning_rate": 0.02,
+        "batch_size": 32,
+        "seed": 1
+      },
+      "note": "Sequential: mnist_ff - learning_rate=2.0×"
+    },
+    {
+      "mode": "default",
+      "repo": "examples",
+      "model": "mnist_ff",
+      "hyperparameters": {
+        "epochs": 10,
+        "learning_rate": 0.01,
+        "batch_size": 32,
+        "seed": 1
+      },
+      "note": "Sequential: mnist_ff - seed=1"
+    },
+    {
+      "mode": "default",
+      "repo": "examples",
+      "model": "mnist_ff",
+      "hyperparameters": {
+        "epochs": 10,
+        "learning_rate": 0.01,
+        "batch_size": 32,
+        "seed": 1001
+      },
+      "note": "Sequential: mnist_ff - seed=1001"
+    },
+    {
+      "mode": "default",
+      "repo": "examples",
+      "model": "mnist_ff",
+      "hyperparameters": {
+        "epochs": 10,
+        "learning_rate": 0.01,
+        "batch_size": 32,
+        "seed": 2001
+      },
+      "note": "Sequential: mnist_ff - seed=2001"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist_ff",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 5,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "densenet121",
+        "hyperparameters": {
+          "epochs": 60,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "note": "Parallel: mnist_ff - epochs=0.5×"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist_ff",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "densenet121",
+        "hyperparameters": {
+          "epochs": 60,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "note": "Parallel: mnist_ff - epochs=1.0×"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist_ff",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 15,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "densenet121",
+        "hyperparameters": {
+          "epochs": 60,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "note": "Parallel: mnist_ff - epochs=1.5×"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist_ff",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.005,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "densenet121",
+        "hyperparameters": {
+          "epochs": 60,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "note": "Parallel: mnist_ff - learning_rate=0.5×"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist_ff",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "densenet121",
+        "hyperparameters": {
+          "epochs": 60,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "note": "Parallel: mnist_ff - learning_rate=1.0×"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist_ff",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.02,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "densenet121",
+        "hyperparameters": {
+          "epochs": 60,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "note": "Parallel: mnist_ff - learning_rate=2.0×"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist_ff",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "densenet121",
+        "hyperparameters": {
+          "epochs": 60,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "note": "Parallel: mnist_ff - seed=1"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist_ff",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1001
+        }
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "densenet121",
+        "hyperparameters": {
+          "epochs": 60,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "note": "Parallel: mnist_ff - seed=1001"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist_ff",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 2001
+        }
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "densenet121",
+        "hyperparameters": {
+          "epochs": 60,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "note": "Parallel: mnist_ff - seed=2001"
+    },
+    {
+      "mode": "default",
+      "repo": "examples",
+      "model": "mnist",
+      "hyperparameters": {
+        "epochs": 5,
+        "learning_rate": 0.01,
+        "batch_size": 32,
+        "seed": 1
+      },
+      "note": "Sequential: mnist - epochs=0.5×"
+    },
+    {
+      "mode": "default",
+      "repo": "examples",
+      "model": "mnist",
+      "hyperparameters": {
+        "epochs": 10,
+        "learning_rate": 0.01,
+        "batch_size": 32,
+        "seed": 1
+      },
+      "note": "Sequential: mnist - epochs=1.0×"
+    },
+    {
+      "mode": "default",
+      "repo": "examples",
+      "model": "mnist",
+      "hyperparameters": {
+        "epochs": 15,
+        "learning_rate": 0.01,
+        "batch_size": 32,
+        "seed": 1
+      },
+      "note": "Sequential: mnist - epochs=1.5×"
+    },
+    {
+      "mode": "default",
+      "repo": "examples",
+      "model": "mnist",
+      "hyperparameters": {
+        "epochs": 10,
+        "learning_rate": 0.005,
+        "batch_size": 32,
+        "seed": 1
+      },
+      "note": "Sequential: mnist - learning_rate=0.5×"
+    },
+    {
+      "mode": "default",
+      "repo": "examples",
+      "model": "mnist",
+      "hyperparameters": {
+        "epochs": 10,
+        "learning_rate": 0.01,
+        "batch_size": 32,
+        "seed": 1
+      },
+      "note": "Sequential: mnist - learning_rate=1.0×"
+    },
+    {
+      "mode": "default",
+      "repo": "examples",
+      "model": "mnist",
+      "hyperparameters": {
+        "epochs": 10,
+        "learning_rate": 0.02,
+        "batch_size": 32,
+        "seed": 1
+      },
+      "note": "Sequential: mnist - learning_rate=2.0×"
+    },
+    {
+      "mode": "default",
+      "repo": "examples",
+      "model": "mnist",
+      "hyperparameters": {
+        "epochs": 10,
+        "learning_rate": 0.01,
+        "batch_size": 32,
+        "seed": 1
+      },
+      "note": "Sequential: mnist - seed=1"
+    },
+    {
+      "mode": "default",
+      "repo": "examples",
+      "model": "mnist",
+      "hyperparameters": {
+        "epochs": 10,
+        "learning_rate": 0.01,
+        "batch_size": 32,
+        "seed": 1001
+      },
+      "note": "Sequential: mnist - seed=1001"
+    },
+    {
+      "mode": "default",
+      "repo": "examples",
+      "model": "mnist",
+      "hyperparameters": {
+        "epochs": 10,
+        "learning_rate": 0.01,
+        "batch_size": 32,
+        "seed": 2001
+      },
+      "note": "Sequential: mnist - seed=2001"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 5,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "background": {
+        "repo": "VulBERTa",
+        "model": "mlp",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 3e-05,
+          "weight_decay": 0.0,
+          "seed": 42
+        }
+      },
+      "note": "Parallel: mnist - epochs=0.5×"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "background": {
+        "repo": "VulBERTa",
+        "model": "mlp",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 3e-05,
+          "weight_decay": 0.0,
+          "seed": 42
+        }
+      },
+      "note": "Parallel: mnist - epochs=1.0×"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 15,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "background": {
+        "repo": "VulBERTa",
+        "model": "mlp",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 3e-05,
+          "weight_decay": 0.0,
+          "seed": 42
+        }
+      },
+      "note": "Parallel: mnist - epochs=1.5×"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.005,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "background": {
+        "repo": "VulBERTa",
+        "model": "mlp",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 3e-05,
+          "weight_decay": 0.0,
+          "seed": 42
+        }
+      },
+      "note": "Parallel: mnist - learning_rate=0.5×"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "background": {
+        "repo": "VulBERTa",
+        "model": "mlp",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 3e-05,
+          "weight_decay": 0.0,
+          "seed": 42
+        }
+      },
+      "note": "Parallel: mnist - learning_rate=1.0×"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.02,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "background": {
+        "repo": "VulBERTa",
+        "model": "mlp",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 3e-05,
+          "weight_decay": 0.0,
+          "seed": 42
+        }
+      },
+      "note": "Parallel: mnist - learning_rate=2.0×"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "background": {
+        "repo": "VulBERTa",
+        "model": "mlp",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 3e-05,
+          "weight_decay": 0.0,
+          "seed": 42
+        }
+      },
+      "note": "Parallel: mnist - seed=1"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1001
+        }
+      },
+      "background": {
+        "repo": "VulBERTa",
+        "model": "mlp",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 3e-05,
+          "weight_decay": 0.0,
+          "seed": 42
+        }
+      },
+      "note": "Parallel: mnist - seed=1001"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 2001
+        }
+      },
+      "background": {
+        "repo": "VulBERTa",
+        "model": "mlp",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 3e-05,
+          "weight_decay": 0.0,
+          "seed": 42
+        }
+      },
+      "note": "Parallel: mnist - seed=2001"
+    },
+    {
+      "mode": "default",
+      "repo": "examples",
+      "model": "mnist_rnn",
+      "hyperparameters": {
+        "epochs": 5,
+        "learning_rate": 0.01,
+        "batch_size": 32,
+        "seed": 1
+      },
+      "note": "Sequential: mnist_rnn - epochs=0.5×"
+    },
+    {
+      "mode": "default",
+      "repo": "examples",
+      "model": "mnist_rnn",
+      "hyperparameters": {
+        "epochs": 10,
+        "learning_rate": 0.01,
+        "batch_size": 32,
+        "seed": 1
+      },
+      "note": "Sequential: mnist_rnn - epochs=1.0×"
+    },
+    {
+      "mode": "default",
+      "repo": "examples",
+      "model": "mnist_rnn",
+      "hyperparameters": {
+        "epochs": 15,
+        "learning_rate": 0.01,
+        "batch_size": 32,
+        "seed": 1
+      },
+      "note": "Sequential: mnist_rnn - epochs=1.5×"
+    },
+    {
+      "mode": "default",
+      "repo": "examples",
+      "model": "mnist_rnn",
+      "hyperparameters": {
+        "epochs": 10,
+        "learning_rate": 0.005,
+        "batch_size": 32,
+        "seed": 1
+      },
+      "note": "Sequential: mnist_rnn - learning_rate=0.5×"
+    },
+    {
+      "mode": "default",
+      "repo": "examples",
+      "model": "mnist_rnn",
+      "hyperparameters": {
+        "epochs": 10,
+        "learning_rate": 0.01,
+        "batch_size": 32,
+        "seed": 1
+      },
+      "note": "Sequential: mnist_rnn - learning_rate=1.0×"
+    },
+    {
+      "mode": "default",
+      "repo": "examples",
+      "model": "mnist_rnn",
+      "hyperparameters": {
+        "epochs": 10,
+        "learning_rate": 0.02,
+        "batch_size": 32,
+        "seed": 1
+      },
+      "note": "Sequential: mnist_rnn - learning_rate=2.0×"
+    },
+    {
+      "mode": "default",
+      "repo": "examples",
+      "model": "mnist_rnn",
+      "hyperparameters": {
+        "epochs": 10,
+        "learning_rate": 0.01,
+        "batch_size": 32,
+        "seed": 1
+      },
+      "note": "Sequential: mnist_rnn - seed=1"
+    },
+    {
+      "mode": "default",
+      "repo": "examples",
+      "model": "mnist_rnn",
+      "hyperparameters": {
+        "epochs": 10,
+        "learning_rate": 0.01,
+        "batch_size": 32,
+        "seed": 1001
+      },
+      "note": "Sequential: mnist_rnn - seed=1001"
+    },
+    {
+      "mode": "default",
+      "repo": "examples",
+      "model": "mnist_rnn",
+      "hyperparameters": {
+        "epochs": 10,
+        "learning_rate": 0.01,
+        "batch_size": 32,
+        "seed": 2001
+      },
+      "note": "Sequential: mnist_rnn - seed=2001"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 5,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "pcb",
+        "hyperparameters": {
+          "epochs": 60,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "note": "Parallel: mnist_rnn - epochs=0.5×"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "pcb",
+        "hyperparameters": {
+          "epochs": 60,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "note": "Parallel: mnist_rnn - epochs=1.0×"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 15,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "pcb",
+        "hyperparameters": {
+          "epochs": 60,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "note": "Parallel: mnist_rnn - epochs=1.5×"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.005,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "pcb",
+        "hyperparameters": {
+          "epochs": 60,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "note": "Parallel: mnist_rnn - learning_rate=0.5×"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "pcb",
+        "hyperparameters": {
+          "epochs": 60,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "note": "Parallel: mnist_rnn - learning_rate=1.0×"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.02,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "pcb",
+        "hyperparameters": {
+          "epochs": 60,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "note": "Parallel: mnist_rnn - learning_rate=2.0×"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "pcb",
+        "hyperparameters": {
+          "epochs": 60,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "note": "Parallel: mnist_rnn - seed=1"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1001
+        }
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "pcb",
+        "hyperparameters": {
+          "epochs": 60,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "note": "Parallel: mnist_rnn - seed=1001"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 2001
+        }
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "pcb",
+        "hyperparameters": {
+          "epochs": 60,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "note": "Parallel: mnist_rnn - seed=2001"
+    },
+    {
+      "mode": "default",
+      "repo": "examples",
+      "model": "siamese",
+      "hyperparameters": {
+        "epochs": 5,
+        "learning_rate": 0.01,
+        "batch_size": 32,
+        "seed": 1
+      },
+      "note": "Sequential: siamese - epochs=0.5×"
+    },
+    {
+      "mode": "default",
+      "repo": "examples",
+      "model": "siamese",
+      "hyperparameters": {
+        "epochs": 10,
+        "learning_rate": 0.01,
+        "batch_size": 32,
+        "seed": 1
+      },
+      "note": "Sequential: siamese - epochs=1.0×"
+    },
+    {
+      "mode": "default",
+      "repo": "examples",
+      "model": "siamese",
+      "hyperparameters": {
+        "epochs": 15,
+        "learning_rate": 0.01,
+        "batch_size": 32,
+        "seed": 1
+      },
+      "note": "Sequential: siamese - epochs=1.5×"
+    },
+    {
+      "mode": "default",
+      "repo": "examples",
+      "model": "siamese",
+      "hyperparameters": {
+        "epochs": 10,
+        "learning_rate": 0.005,
+        "batch_size": 32,
+        "seed": 1
+      },
+      "note": "Sequential: siamese - learning_rate=0.5×"
+    },
+    {
+      "mode": "default",
+      "repo": "examples",
+      "model": "siamese",
+      "hyperparameters": {
+        "epochs": 10,
+        "learning_rate": 0.01,
+        "batch_size": 32,
+        "seed": 1
+      },
+      "note": "Sequential: siamese - learning_rate=1.0×"
+    },
+    {
+      "mode": "default",
+      "repo": "examples",
+      "model": "siamese",
+      "hyperparameters": {
+        "epochs": 10,
+        "learning_rate": 0.02,
+        "batch_size": 32,
+        "seed": 1
+      },
+      "note": "Sequential: siamese - learning_rate=2.0×"
+    },
+    {
+      "mode": "default",
+      "repo": "examples",
+      "model": "siamese",
+      "hyperparameters": {
+        "epochs": 10,
+        "learning_rate": 0.01,
+        "batch_size": 32,
+        "seed": 1
+      },
+      "note": "Sequential: siamese - seed=1"
+    },
+    {
+      "mode": "default",
+      "repo": "examples",
+      "model": "siamese",
+      "hyperparameters": {
+        "epochs": 10,
+        "learning_rate": 0.01,
+        "batch_size": 32,
+        "seed": 1001
+      },
+      "note": "Sequential: siamese - seed=1001"
+    },
+    {
+      "mode": "default",
+      "repo": "examples",
+      "model": "siamese",
+      "hyperparameters": {
+        "epochs": 10,
+        "learning_rate": 0.01,
+        "batch_size": 32,
+        "seed": 2001
+      },
+      "note": "Sequential: siamese - seed=2001"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "siamese",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 5,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "pcb",
+        "hyperparameters": {
+          "epochs": 60,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "note": "Parallel: siamese - epochs=0.5×"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "siamese",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "pcb",
+        "hyperparameters": {
+          "epochs": 60,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "note": "Parallel: siamese - epochs=1.0×"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "siamese",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 15,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "pcb",
+        "hyperparameters": {
+          "epochs": 60,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "note": "Parallel: siamese - epochs=1.5×"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "siamese",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.005,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "pcb",
+        "hyperparameters": {
+          "epochs": 60,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "note": "Parallel: siamese - learning_rate=0.5×"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "siamese",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "pcb",
+        "hyperparameters": {
+          "epochs": 60,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "note": "Parallel: siamese - learning_rate=1.0×"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "siamese",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.02,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "pcb",
+        "hyperparameters": {
+          "epochs": 60,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "note": "Parallel: siamese - learning_rate=2.0×"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "siamese",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "pcb",
+        "hyperparameters": {
+          "epochs": 60,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "note": "Parallel: siamese - seed=1"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "siamese",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1001
+        }
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "pcb",
+        "hyperparameters": {
+          "epochs": 60,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "note": "Parallel: siamese - seed=1001"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "siamese",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 2001
+        }
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "pcb",
+        "hyperparameters": {
+          "epochs": 60,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "note": "Parallel: siamese - seed=2001"
+    },
+    {
+      "mode": "default",
+      "repo": "pytorch_resnet_cifar10",
+      "model": "resnet20",
+      "hyperparameters": {
+        "epochs": 100,
+        "learning_rate": 0.1,
+        "weight_decay": 0.0001,
+        "seed": 1334
+      },
+      "note": "Sequential: resnet20 - epochs=0.5×"
+    },
+    {
+      "mode": "default",
+      "repo": "pytorch_resnet_cifar10",
+      "model": "resnet20",
+      "hyperparameters": {
+        "epochs": 200,
+        "learning_rate": 0.1,
+        "weight_decay": 0.0001,
+        "seed": 1334
+      },
+      "note": "Sequential: resnet20 - epochs=1.0×"
+    },
+    {
+      "mode": "default",
+      "repo": "pytorch_resnet_cifar10",
+      "model": "resnet20",
+      "hyperparameters": {
+        "epochs": 300,
+        "learning_rate": 0.1,
+        "weight_decay": 0.0001,
+        "seed": 1334
+      },
+      "note": "Sequential: resnet20 - epochs=1.5×"
+    },
+    {
+      "mode": "default",
+      "repo": "pytorch_resnet_cifar10",
+      "model": "resnet20",
+      "hyperparameters": {
+        "epochs": 200,
+        "learning_rate": 0.05,
+        "weight_decay": 0.0001,
+        "seed": 1334
+      },
+      "note": "Sequential: resnet20 - learning_rate=0.5×"
+    },
+    {
+      "mode": "default",
+      "repo": "pytorch_resnet_cifar10",
+      "model": "resnet20",
+      "hyperparameters": {
+        "epochs": 200,
+        "learning_rate": 0.1,
+        "weight_decay": 0.0001,
+        "seed": 1334
+      },
+      "note": "Sequential: resnet20 - learning_rate=1.0×"
+    },
+    {
+      "mode": "default",
+      "repo": "pytorch_resnet_cifar10",
+      "model": "resnet20",
+      "hyperparameters": {
+        "epochs": 200,
+        "learning_rate": 0.2,
+        "weight_decay": 0.0001,
+        "seed": 1334
+      },
+      "note": "Sequential: resnet20 - learning_rate=2.0×"
+    },
+    {
+      "mode": "default",
+      "repo": "pytorch_resnet_cifar10",
+      "model": "resnet20",
+      "hyperparameters": {
+        "epochs": 200,
+        "learning_rate": 0.1,
+        "weight_decay": 1e-05,
+        "seed": 1334
+      },
+      "note": "Sequential: resnet20 - weight_decay=0.1×"
+    },
+    {
+      "mode": "default",
+      "repo": "pytorch_resnet_cifar10",
+      "model": "resnet20",
+      "hyperparameters": {
+        "epochs": 200,
+        "learning_rate": 0.1,
+        "weight_decay": 0.0001,
+        "seed": 1334
+      },
+      "note": "Sequential: resnet20 - weight_decay=1.0×"
+    },
+    {
+      "mode": "default",
+      "repo": "pytorch_resnet_cifar10",
+      "model": "resnet20",
+      "hyperparameters": {
+        "epochs": 200,
+        "learning_rate": 0.1,
+        "weight_decay": 0.001,
+        "seed": 1334
+      },
+      "note": "Sequential: resnet20 - weight_decay=10×"
+    },
+    {
+      "mode": "default",
+      "repo": "pytorch_resnet_cifar10",
+      "model": "resnet20",
+      "hyperparameters": {
+        "epochs": 200,
+        "learning_rate": 0.1,
+        "weight_decay": 0.0001,
+        "seed": 1334
+      },
+      "note": "Sequential: resnet20 - seed=1334"
+    },
+    {
+      "mode": "default",
+      "repo": "pytorch_resnet_cifar10",
+      "model": "resnet20",
+      "hyperparameters": {
+        "epochs": 200,
+        "learning_rate": 0.1,
+        "weight_decay": 0.0001,
+        "seed": 2334
+      },
+      "note": "Sequential: resnet20 - seed=2334"
+    },
+    {
+      "mode": "default",
+      "repo": "pytorch_resnet_cifar10",
+      "model": "resnet20",
+      "hyperparameters": {
+        "epochs": 200,
+        "learning_rate": 0.1,
+        "weight_decay": 0.0001,
+        "seed": 3334
+      },
+      "note": "Sequential: resnet20 - seed=3334"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "pytorch_resnet_cifar10",
+        "model": "resnet20",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 100,
+          "learning_rate": 0.1,
+          "weight_decay": 0.0001,
+          "seed": 1334
+        }
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist_ff",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: resnet20 - epochs=0.5×"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "pytorch_resnet_cifar10",
+        "model": "resnet20",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 200,
+          "learning_rate": 0.1,
+          "weight_decay": 0.0001,
+          "seed": 1334
+        }
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist_ff",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: resnet20 - epochs=1.0×"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "pytorch_resnet_cifar10",
+        "model": "resnet20",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 300,
+          "learning_rate": 0.1,
+          "weight_decay": 0.0001,
+          "seed": 1334
+        }
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist_ff",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: resnet20 - epochs=1.5×"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "pytorch_resnet_cifar10",
+        "model": "resnet20",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 200,
+          "learning_rate": 0.05,
+          "weight_decay": 0.0001,
+          "seed": 1334
+        }
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist_ff",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: resnet20 - learning_rate=0.5×"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "pytorch_resnet_cifar10",
+        "model": "resnet20",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 200,
+          "learning_rate": 0.1,
+          "weight_decay": 0.0001,
+          "seed": 1334
+        }
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist_ff",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: resnet20 - learning_rate=1.0×"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "pytorch_resnet_cifar10",
+        "model": "resnet20",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 200,
+          "learning_rate": 0.2,
+          "weight_decay": 0.0001,
+          "seed": 1334
+        }
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist_ff",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: resnet20 - learning_rate=2.0×"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "pytorch_resnet_cifar10",
+        "model": "resnet20",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 200,
+          "learning_rate": 0.1,
+          "weight_decay": 1e-05,
+          "seed": 1334
+        }
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist_ff",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: resnet20 - weight_decay=0.1×"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "pytorch_resnet_cifar10",
+        "model": "resnet20",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 200,
+          "learning_rate": 0.1,
+          "weight_decay": 0.0001,
+          "seed": 1334
+        }
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist_ff",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: resnet20 - weight_decay=1.0×"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "pytorch_resnet_cifar10",
+        "model": "resnet20",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 200,
+          "learning_rate": 0.1,
+          "weight_decay": 0.001,
+          "seed": 1334
+        }
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist_ff",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: resnet20 - weight_decay=10×"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "pytorch_resnet_cifar10",
+        "model": "resnet20",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 200,
+          "learning_rate": 0.1,
+          "weight_decay": 0.0001,
+          "seed": 1334
+        }
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist_ff",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: resnet20 - seed=1334"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "pytorch_resnet_cifar10",
+        "model": "resnet20",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 200,
+          "learning_rate": 0.1,
+          "weight_decay": 0.0001,
+          "seed": 2334
+        }
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist_ff",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: resnet20 - seed=2334"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "pytorch_resnet_cifar10",
+        "model": "resnet20",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 200,
+          "learning_rate": 0.1,
+          "weight_decay": 0.0001,
+          "seed": 3334
+        }
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist_ff",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: resnet20 - seed=3334"
+    },
+    {
+      "mode": "default",
+      "repo": "MRT-OAST",
+      "model": "default",
+      "hyperparameters": {
+        "epochs": 5,
+        "learning_rate": 0.0001,
+        "dropout": 0.2,
+        "weight_decay": 0.0,
+        "seed": 1334
+      },
+      "note": "Sequential: MRT-OAST - epochs=0.5×"
+    },
+    {
+      "mode": "default",
+      "repo": "MRT-OAST",
+      "model": "default",
+      "hyperparameters": {
+        "epochs": 10,
+        "learning_rate": 0.0001,
+        "dropout": 0.2,
+        "weight_decay": 0.0,
+        "seed": 1334
+      },
+      "note": "Sequential: MRT-OAST - epochs=1.0×"
+    },
+    {
+      "mode": "default",
+      "repo": "MRT-OAST",
+      "model": "default",
+      "hyperparameters": {
+        "epochs": 15,
+        "learning_rate": 0.0001,
+        "dropout": 0.2,
+        "weight_decay": 0.0,
+        "seed": 1334
+      },
+      "note": "Sequential: MRT-OAST - epochs=1.5×"
+    },
+    {
+      "mode": "default",
+      "repo": "MRT-OAST",
+      "model": "default",
+      "hyperparameters": {
+        "epochs": 10,
+        "learning_rate": 5e-05,
+        "dropout": 0.2,
+        "weight_decay": 0.0,
+        "seed": 1334
+      },
+      "note": "Sequential: MRT-OAST - learning_rate=0.5×"
+    },
+    {
+      "mode": "default",
+      "repo": "MRT-OAST",
+      "model": "default",
+      "hyperparameters": {
+        "epochs": 10,
+        "learning_rate": 0.0001,
+        "dropout": 0.2,
+        "weight_decay": 0.0,
+        "seed": 1334
+      },
+      "note": "Sequential: MRT-OAST - learning_rate=1.0×"
+    },
+    {
+      "mode": "default",
+      "repo": "MRT-OAST",
+      "model": "default",
+      "hyperparameters": {
+        "epochs": 10,
+        "learning_rate": 0.0002,
+        "dropout": 0.2,
+        "weight_decay": 0.0,
+        "seed": 1334
+      },
+      "note": "Sequential: MRT-OAST - learning_rate=2.0×"
+    },
+    {
+      "mode": "default",
+      "repo": "MRT-OAST",
+      "model": "default",
+      "hyperparameters": {
+        "epochs": 10,
+        "learning_rate": 0.0001,
+        "dropout": 0.0,
+        "weight_decay": 0.0,
+        "seed": 1334
+      },
+      "note": "Sequential: MRT-OAST - dropout=0.0"
+    },
+    {
+      "mode": "default",
+      "repo": "MRT-OAST",
+      "model": "default",
+      "hyperparameters": {
+        "epochs": 10,
+        "learning_rate": 0.0001,
+        "dropout": 0.2,
+        "weight_decay": 0.0,
+        "seed": 1334
+      },
+      "note": "Sequential: MRT-OAST - dropout=0.2"
+    },
+    {
+      "mode": "default",
+      "repo": "MRT-OAST",
+      "model": "default",
+      "hyperparameters": {
+        "epochs": 10,
+        "learning_rate": 0.0001,
+        "dropout": 0.4,
+        "weight_decay": 0.0,
+        "seed": 1334
+      },
+      "note": "Sequential: MRT-OAST - dropout=0.4"
+    },
+    {
+      "mode": "default",
+      "repo": "MRT-OAST",
+      "model": "default",
+      "hyperparameters": {
+        "epochs": 10,
+        "learning_rate": 0.0001,
+        "dropout": 0.2,
+        "weight_decay": 0.0,
+        "seed": 1334
+      },
+      "note": "Sequential: MRT-OAST - weight_decay=0"
+    },
+    {
+      "mode": "default",
+      "repo": "MRT-OAST",
+      "model": "default",
+      "hyperparameters": {
+        "epochs": 10,
+        "learning_rate": 0.0001,
+        "dropout": 0.2,
+        "weight_decay": 0.0001,
+        "seed": 1334
+      },
+      "note": "Sequential: MRT-OAST - weight_decay=1e-4"
+    },
+    {
+      "mode": "default",
+      "repo": "MRT-OAST",
+      "model": "default",
+      "hyperparameters": {
+        "epochs": 10,
+        "learning_rate": 0.0001,
+        "dropout": 0.2,
+        "weight_decay": 0.001,
+        "seed": 1334
+      },
+      "note": "Sequential: MRT-OAST - weight_decay=1e-3"
+    },
+    {
+      "mode": "default",
+      "repo": "MRT-OAST",
+      "model": "default",
+      "hyperparameters": {
+        "epochs": 10,
+        "learning_rate": 0.0001,
+        "dropout": 0.2,
+        "weight_decay": 0.0,
+        "seed": 1334
+      },
+      "note": "Sequential: MRT-OAST - seed=1334"
+    },
+    {
+      "mode": "default",
+      "repo": "MRT-OAST",
+      "model": "default",
+      "hyperparameters": {
+        "epochs": 10,
+        "learning_rate": 0.0001,
+        "dropout": 0.2,
+        "weight_decay": 0.0,
+        "seed": 2334
+      },
+      "note": "Sequential: MRT-OAST - seed=2334"
+    },
+    {
+      "mode": "default",
+      "repo": "MRT-OAST",
+      "model": "default",
+      "hyperparameters": {
+        "epochs": 10,
+        "learning_rate": 0.0001,
+        "dropout": 0.2,
+        "weight_decay": 0.0,
+        "seed": 3334
+      },
+      "note": "Sequential: MRT-OAST - seed=3334"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "MRT-OAST",
+        "model": "default",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 5,
+          "learning_rate": 0.0001,
+          "dropout": 0.2,
+          "weight_decay": 0.0,
+          "seed": 1334
+        }
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: MRT-OAST - epochs=0.5×"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "MRT-OAST",
+        "model": "default",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.0001,
+          "dropout": 0.2,
+          "weight_decay": 0.0,
+          "seed": 1334
+        }
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: MRT-OAST - epochs=1.0×"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "MRT-OAST",
+        "model": "default",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 15,
+          "learning_rate": 0.0001,
+          "dropout": 0.2,
+          "weight_decay": 0.0,
+          "seed": 1334
+        }
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: MRT-OAST - epochs=1.5×"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "MRT-OAST",
+        "model": "default",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 5e-05,
+          "dropout": 0.2,
+          "weight_decay": 0.0,
+          "seed": 1334
+        }
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: MRT-OAST - learning_rate=0.5×"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "MRT-OAST",
+        "model": "default",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.0001,
+          "dropout": 0.2,
+          "weight_decay": 0.0,
+          "seed": 1334
+        }
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: MRT-OAST - learning_rate=1.0×"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "MRT-OAST",
+        "model": "default",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.0002,
+          "dropout": 0.2,
+          "weight_decay": 0.0,
+          "seed": 1334
+        }
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: MRT-OAST - learning_rate=2.0×"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "MRT-OAST",
+        "model": "default",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.0001,
+          "dropout": 0.0,
+          "weight_decay": 0.0,
+          "seed": 1334
+        }
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: MRT-OAST - dropout=0.0"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "MRT-OAST",
+        "model": "default",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.0001,
+          "dropout": 0.2,
+          "weight_decay": 0.0,
+          "seed": 1334
+        }
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: MRT-OAST - dropout=0.2"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "MRT-OAST",
+        "model": "default",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.0001,
+          "dropout": 0.4,
+          "weight_decay": 0.0,
+          "seed": 1334
+        }
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: MRT-OAST - dropout=0.4"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "MRT-OAST",
+        "model": "default",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.0001,
+          "dropout": 0.2,
+          "weight_decay": 0.0,
+          "seed": 1334
+        }
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: MRT-OAST - weight_decay=0"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "MRT-OAST",
+        "model": "default",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.0001,
+          "dropout": 0.2,
+          "weight_decay": 0.0001,
+          "seed": 1334
+        }
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: MRT-OAST - weight_decay=1e-4"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "MRT-OAST",
+        "model": "default",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.0001,
+          "dropout": 0.2,
+          "weight_decay": 0.001,
+          "seed": 1334
+        }
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: MRT-OAST - weight_decay=1e-3"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "MRT-OAST",
+        "model": "default",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.0001,
+          "dropout": 0.2,
+          "weight_decay": 0.0,
+          "seed": 1334
+        }
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: MRT-OAST - seed=1334"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "MRT-OAST",
+        "model": "default",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.0001,
+          "dropout": 0.2,
+          "weight_decay": 0.0,
+          "seed": 2334
+        }
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: MRT-OAST - seed=2334"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "MRT-OAST",
+        "model": "default",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.0001,
+          "dropout": 0.2,
+          "weight_decay": 0.0,
+          "seed": 3334
+        }
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: MRT-OAST - seed=3334"
+    },
+    {
+      "mode": "default",
+      "repo": "VulBERTa",
+      "model": "mlp",
+      "hyperparameters": {
+        "epochs": 5,
+        "learning_rate": 3e-05,
+        "weight_decay": 0.0,
+        "seed": 42
+      },
+      "note": "Sequential: VulBERTa_mlp - epochs=0.5×"
+    },
+    {
+      "mode": "default",
+      "repo": "VulBERTa",
+      "model": "mlp",
+      "hyperparameters": {
+        "epochs": 10,
+        "learning_rate": 3e-05,
+        "weight_decay": 0.0,
+        "seed": 42
+      },
+      "note": "Sequential: VulBERTa_mlp - epochs=1.0×"
+    },
+    {
+      "mode": "default",
+      "repo": "VulBERTa",
+      "model": "mlp",
+      "hyperparameters": {
+        "epochs": 15,
+        "learning_rate": 3e-05,
+        "weight_decay": 0.0,
+        "seed": 42
+      },
+      "note": "Sequential: VulBERTa_mlp - epochs=1.5×"
+    },
+    {
+      "mode": "default",
+      "repo": "VulBERTa",
+      "model": "mlp",
+      "hyperparameters": {
+        "epochs": 10,
+        "learning_rate": 1.5e-05,
+        "weight_decay": 0.0,
+        "seed": 42
+      },
+      "note": "Sequential: VulBERTa_mlp - learning_rate=0.5×"
+    },
+    {
+      "mode": "default",
+      "repo": "VulBERTa",
+      "model": "mlp",
+      "hyperparameters": {
+        "epochs": 10,
+        "learning_rate": 3e-05,
+        "weight_decay": 0.0,
+        "seed": 42
+      },
+      "note": "Sequential: VulBERTa_mlp - learning_rate=1.0×"
+    },
+    {
+      "mode": "default",
+      "repo": "VulBERTa",
+      "model": "mlp",
+      "hyperparameters": {
+        "epochs": 10,
+        "learning_rate": 6e-05,
+        "weight_decay": 0.0,
+        "seed": 42
+      },
+      "note": "Sequential: VulBERTa_mlp - learning_rate=2.0×"
+    },
+    {
+      "mode": "default",
+      "repo": "VulBERTa",
+      "model": "mlp",
+      "hyperparameters": {
+        "epochs": 10,
+        "learning_rate": 3e-05,
+        "weight_decay": 0.0,
+        "seed": 42
+      },
+      "note": "Sequential: VulBERTa_mlp - weight_decay=0"
+    },
+    {
+      "mode": "default",
+      "repo": "VulBERTa",
+      "model": "mlp",
+      "hyperparameters": {
+        "epochs": 10,
+        "learning_rate": 3e-05,
+        "weight_decay": 0.0001,
+        "seed": 42
+      },
+      "note": "Sequential: VulBERTa_mlp - weight_decay=1e-4"
+    },
+    {
+      "mode": "default",
+      "repo": "VulBERTa",
+      "model": "mlp",
+      "hyperparameters": {
+        "epochs": 10,
+        "learning_rate": 3e-05,
+        "weight_decay": 0.001,
+        "seed": 42
+      },
+      "note": "Sequential: VulBERTa_mlp - weight_decay=1e-3"
+    },
+    {
+      "mode": "default",
+      "repo": "VulBERTa",
+      "model": "mlp",
+      "hyperparameters": {
+        "epochs": 10,
+        "learning_rate": 3e-05,
+        "weight_decay": 0.0,
+        "seed": 42
+      },
+      "note": "Sequential: VulBERTa_mlp - seed=42"
+    },
+    {
+      "mode": "default",
+      "repo": "VulBERTa",
+      "model": "mlp",
+      "hyperparameters": {
+        "epochs": 10,
+        "learning_rate": 3e-05,
+        "weight_decay": 0.0,
+        "seed": 1042
+      },
+      "note": "Sequential: VulBERTa_mlp - seed=1042"
+    },
+    {
+      "mode": "default",
+      "repo": "VulBERTa",
+      "model": "mlp",
+      "hyperparameters": {
+        "epochs": 10,
+        "learning_rate": 3e-05,
+        "weight_decay": 0.0,
+        "seed": 2042
+      },
+      "note": "Sequential: VulBERTa_mlp - seed=2042"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "VulBERTa",
+        "model": "mlp",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 5,
+          "learning_rate": 3e-05,
+          "weight_decay": 0.0,
+          "seed": 42
+        }
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: VulBERTa_mlp - epochs=0.5×"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "VulBERTa",
+        "model": "mlp",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 3e-05,
+          "weight_decay": 0.0,
+          "seed": 42
+        }
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: VulBERTa_mlp - epochs=1.0×"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "VulBERTa",
+        "model": "mlp",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 15,
+          "learning_rate": 3e-05,
+          "weight_decay": 0.0,
+          "seed": 42
+        }
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: VulBERTa_mlp - epochs=1.5×"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "VulBERTa",
+        "model": "mlp",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 1.5e-05,
+          "weight_decay": 0.0,
+          "seed": 42
+        }
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: VulBERTa_mlp - learning_rate=0.5×"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "VulBERTa",
+        "model": "mlp",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 3e-05,
+          "weight_decay": 0.0,
+          "seed": 42
+        }
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: VulBERTa_mlp - learning_rate=1.0×"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "VulBERTa",
+        "model": "mlp",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 6e-05,
+          "weight_decay": 0.0,
+          "seed": 42
+        }
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: VulBERTa_mlp - learning_rate=2.0×"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "VulBERTa",
+        "model": "mlp",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 3e-05,
+          "weight_decay": 0.0,
+          "seed": 42
+        }
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: VulBERTa_mlp - weight_decay=0"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "VulBERTa",
+        "model": "mlp",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 3e-05,
+          "weight_decay": 0.0001,
+          "seed": 42
+        }
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: VulBERTa_mlp - weight_decay=1e-4"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "VulBERTa",
+        "model": "mlp",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 3e-05,
+          "weight_decay": 0.001,
+          "seed": 42
+        }
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: VulBERTa_mlp - weight_decay=1e-3"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "VulBERTa",
+        "model": "mlp",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 3e-05,
+          "weight_decay": 0.0,
+          "seed": 42
+        }
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: VulBERTa_mlp - seed=42"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "VulBERTa",
+        "model": "mlp",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 3e-05,
+          "weight_decay": 0.0,
+          "seed": 1042
+        }
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: VulBERTa_mlp - seed=1042"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "VulBERTa",
+        "model": "mlp",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 3e-05,
+          "weight_decay": 0.0,
+          "seed": 2042
+        }
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: VulBERTa_mlp - seed=2042"
+    },
+    {
+      "mode": "default",
+      "repo": "bug-localization-by-dnn-and-rvsm",
+      "model": "default",
+      "hyperparameters": {
+        "max_iter": 5000,
+        "alpha": 1e-05,
+        "kfold": 10,
+        "seed": 42
+      },
+      "note": "Sequential: bug-localization - max_iter=0.5×"
+    },
+    {
+      "mode": "default",
+      "repo": "bug-localization-by-dnn-and-rvsm",
+      "model": "default",
+      "hyperparameters": {
+        "max_iter": 10000,
+        "alpha": 1e-05,
+        "kfold": 10,
+        "seed": 42
+      },
+      "note": "Sequential: bug-localization - max_iter=1.0×"
+    },
+    {
+      "mode": "default",
+      "repo": "bug-localization-by-dnn-and-rvsm",
+      "model": "default",
+      "hyperparameters": {
+        "max_iter": 15000,
+        "alpha": 1e-05,
+        "kfold": 10,
+        "seed": 42
+      },
+      "note": "Sequential: bug-localization - max_iter=1.5×"
+    },
+    {
+      "mode": "default",
+      "repo": "bug-localization-by-dnn-and-rvsm",
+      "model": "default",
+      "hyperparameters": {
+        "max_iter": 10000,
+        "alpha": 5e-06,
+        "kfold": 10,
+        "seed": 42
+      },
+      "note": "Sequential: bug-localization - alpha=0.5×"
+    },
+    {
+      "mode": "default",
+      "repo": "bug-localization-by-dnn-and-rvsm",
+      "model": "default",
+      "hyperparameters": {
+        "max_iter": 10000,
+        "alpha": 1e-05,
+        "kfold": 10,
+        "seed": 42
+      },
+      "note": "Sequential: bug-localization - alpha=1.0×"
+    },
+    {
+      "mode": "default",
+      "repo": "bug-localization-by-dnn-and-rvsm",
+      "model": "default",
+      "hyperparameters": {
+        "max_iter": 10000,
+        "alpha": 2e-05,
+        "kfold": 10,
+        "seed": 42
+      },
+      "note": "Sequential: bug-localization - alpha=2.0×"
+    },
+    {
+      "mode": "default",
+      "repo": "bug-localization-by-dnn-and-rvsm",
+      "model": "default",
+      "hyperparameters": {
+        "max_iter": 10000,
+        "alpha": 1e-05,
+        "kfold": 10,
+        "seed": 42
+      },
+      "note": "Sequential: bug-localization - seed=42"
+    },
+    {
+      "mode": "default",
+      "repo": "bug-localization-by-dnn-and-rvsm",
+      "model": "default",
+      "hyperparameters": {
+        "max_iter": 10000,
+        "alpha": 1e-05,
+        "kfold": 10,
+        "seed": 1042
+      },
+      "note": "Sequential: bug-localization - seed=1042"
+    },
+    {
+      "mode": "default",
+      "repo": "bug-localization-by-dnn-and-rvsm",
+      "model": "default",
+      "hyperparameters": {
+        "max_iter": 10000,
+        "alpha": 1e-05,
+        "kfold": 10,
+        "seed": 2042
+      },
+      "note": "Sequential: bug-localization - seed=2042"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "bug-localization-by-dnn-and-rvsm",
+        "model": "default",
+        "mode": "default",
+        "hyperparameters": {
+          "max_iter": 5000,
+          "alpha": 1e-05,
+          "kfold": 10,
+          "seed": 42
+        }
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "pcb",
+        "hyperparameters": {
+          "epochs": 60,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "note": "Parallel: bug-localization - max_iter=0.5×"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "bug-localization-by-dnn-and-rvsm",
+        "model": "default",
+        "mode": "default",
+        "hyperparameters": {
+          "max_iter": 10000,
+          "alpha": 1e-05,
+          "kfold": 10,
+          "seed": 42
+        }
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "pcb",
+        "hyperparameters": {
+          "epochs": 60,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "note": "Parallel: bug-localization - max_iter=1.0×"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "bug-localization-by-dnn-and-rvsm",
+        "model": "default",
+        "mode": "default",
+        "hyperparameters": {
+          "max_iter": 15000,
+          "alpha": 1e-05,
+          "kfold": 10,
+          "seed": 42
+        }
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "pcb",
+        "hyperparameters": {
+          "epochs": 60,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "note": "Parallel: bug-localization - max_iter=1.5×"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "bug-localization-by-dnn-and-rvsm",
+        "model": "default",
+        "mode": "default",
+        "hyperparameters": {
+          "max_iter": 10000,
+          "alpha": 5e-06,
+          "kfold": 10,
+          "seed": 42
+        }
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "pcb",
+        "hyperparameters": {
+          "epochs": 60,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "note": "Parallel: bug-localization - alpha=0.5×"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "bug-localization-by-dnn-and-rvsm",
+        "model": "default",
+        "mode": "default",
+        "hyperparameters": {
+          "max_iter": 10000,
+          "alpha": 1e-05,
+          "kfold": 10,
+          "seed": 42
+        }
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "pcb",
+        "hyperparameters": {
+          "epochs": 60,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "note": "Parallel: bug-localization - alpha=1.0×"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "bug-localization-by-dnn-and-rvsm",
+        "model": "default",
+        "mode": "default",
+        "hyperparameters": {
+          "max_iter": 10000,
+          "alpha": 2e-05,
+          "kfold": 10,
+          "seed": 42
+        }
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "pcb",
+        "hyperparameters": {
+          "epochs": 60,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "note": "Parallel: bug-localization - alpha=2.0×"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "bug-localization-by-dnn-and-rvsm",
+        "model": "default",
+        "mode": "default",
+        "hyperparameters": {
+          "max_iter": 10000,
+          "alpha": 1e-05,
+          "kfold": 10,
+          "seed": 42
+        }
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "pcb",
+        "hyperparameters": {
+          "epochs": 60,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "note": "Parallel: bug-localization - seed=42"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "bug-localization-by-dnn-and-rvsm",
+        "model": "default",
+        "mode": "default",
+        "hyperparameters": {
+          "max_iter": 10000,
+          "alpha": 1e-05,
+          "kfold": 10,
+          "seed": 1042
+        }
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "pcb",
+        "hyperparameters": {
+          "epochs": 60,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "note": "Parallel: bug-localization - seed=1042"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "bug-localization-by-dnn-and-rvsm",
+        "model": "default",
+        "mode": "default",
+        "hyperparameters": {
+          "max_iter": 10000,
+          "alpha": 1e-05,
+          "kfold": 10,
+          "seed": 2042
+        }
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "pcb",
+        "hyperparameters": {
+          "epochs": 60,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "note": "Parallel: bug-localization - seed=2042"
+    },
+    {
+      "mode": "default",
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "densenet121",
+      "hyperparameters": {
+        "epochs": 30,
+        "learning_rate": 0.05,
+        "dropout": 0.5,
+        "seed": 1334
+      },
+      "note": "Sequential: densenet121 - epochs=0.5×"
+    },
+    {
+      "mode": "default",
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "densenet121",
+      "hyperparameters": {
+        "epochs": 60,
+        "learning_rate": 0.05,
+        "dropout": 0.5,
+        "seed": 1334
+      },
+      "note": "Sequential: densenet121 - epochs=1.0×"
+    },
+    {
+      "mode": "default",
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "densenet121",
+      "hyperparameters": {
+        "epochs": 90,
+        "learning_rate": 0.05,
+        "dropout": 0.5,
+        "seed": 1334
+      },
+      "note": "Sequential: densenet121 - epochs=1.5×"
+    },
+    {
+      "mode": "default",
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "densenet121",
+      "hyperparameters": {
+        "epochs": 60,
+        "learning_rate": 0.025,
+        "dropout": 0.5,
+        "seed": 1334
+      },
+      "note": "Sequential: densenet121 - learning_rate=0.5×"
+    },
+    {
+      "mode": "default",
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "densenet121",
+      "hyperparameters": {
+        "epochs": 60,
+        "learning_rate": 0.05,
+        "dropout": 0.5,
+        "seed": 1334
+      },
+      "note": "Sequential: densenet121 - learning_rate=1.0×"
+    },
+    {
+      "mode": "default",
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "densenet121",
+      "hyperparameters": {
+        "epochs": 60,
+        "learning_rate": 0.1,
+        "dropout": 0.5,
+        "seed": 1334
+      },
+      "note": "Sequential: densenet121 - learning_rate=2.0×"
+    },
+    {
+      "mode": "default",
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "densenet121",
+      "hyperparameters": {
+        "epochs": 60,
+        "learning_rate": 0.05,
+        "dropout": 0.3,
+        "seed": 1334
+      },
+      "note": "Sequential: densenet121 - dropout=0.3"
+    },
+    {
+      "mode": "default",
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "densenet121",
+      "hyperparameters": {
+        "epochs": 60,
+        "learning_rate": 0.05,
+        "dropout": 0.5,
+        "seed": 1334
+      },
+      "note": "Sequential: densenet121 - dropout=0.5"
+    },
+    {
+      "mode": "default",
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "densenet121",
+      "hyperparameters": {
+        "epochs": 60,
+        "learning_rate": 0.05,
+        "dropout": 0.7,
+        "seed": 1334
+      },
+      "note": "Sequential: densenet121 - dropout=0.7"
+    },
+    {
+      "mode": "default",
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "densenet121",
+      "hyperparameters": {
+        "epochs": 60,
+        "learning_rate": 0.05,
+        "dropout": 0.5,
+        "seed": 1334
+      },
+      "note": "Sequential: densenet121 - seed=1334"
+    },
+    {
+      "mode": "default",
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "densenet121",
+      "hyperparameters": {
+        "epochs": 60,
+        "learning_rate": 0.05,
+        "dropout": 0.5,
+        "seed": 2334
+      },
+      "note": "Sequential: densenet121 - seed=2334"
+    },
+    {
+      "mode": "default",
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "densenet121",
+      "hyperparameters": {
+        "epochs": 60,
+        "learning_rate": 0.05,
+        "dropout": 0.5,
+        "seed": 3334
+      },
+      "note": "Sequential: densenet121 - seed=3334"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "densenet121",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 30,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "background": {
+        "repo": "VulBERTa",
+        "model": "mlp",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 3e-05,
+          "weight_decay": 0.0,
+          "seed": 42
+        }
+      },
+      "note": "Parallel: densenet121 - epochs=0.5×"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "densenet121",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 60,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "background": {
+        "repo": "VulBERTa",
+        "model": "mlp",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 3e-05,
+          "weight_decay": 0.0,
+          "seed": 42
+        }
+      },
+      "note": "Parallel: densenet121 - epochs=1.0×"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "densenet121",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 90,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "background": {
+        "repo": "VulBERTa",
+        "model": "mlp",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 3e-05,
+          "weight_decay": 0.0,
+          "seed": 42
+        }
+      },
+      "note": "Parallel: densenet121 - epochs=1.5×"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "densenet121",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 60,
+          "learning_rate": 0.025,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "background": {
+        "repo": "VulBERTa",
+        "model": "mlp",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 3e-05,
+          "weight_decay": 0.0,
+          "seed": 42
+        }
+      },
+      "note": "Parallel: densenet121 - learning_rate=0.5×"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "densenet121",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 60,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "background": {
+        "repo": "VulBERTa",
+        "model": "mlp",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 3e-05,
+          "weight_decay": 0.0,
+          "seed": 42
+        }
+      },
+      "note": "Parallel: densenet121 - learning_rate=1.0×"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "densenet121",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 60,
+          "learning_rate": 0.1,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "background": {
+        "repo": "VulBERTa",
+        "model": "mlp",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 3e-05,
+          "weight_decay": 0.0,
+          "seed": 42
+        }
+      },
+      "note": "Parallel: densenet121 - learning_rate=2.0×"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "densenet121",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 60,
+          "learning_rate": 0.05,
+          "dropout": 0.3,
+          "seed": 1334
+        }
+      },
+      "background": {
+        "repo": "VulBERTa",
+        "model": "mlp",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 3e-05,
+          "weight_decay": 0.0,
+          "seed": 42
+        }
+      },
+      "note": "Parallel: densenet121 - dropout=0.3"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "densenet121",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 60,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "background": {
+        "repo": "VulBERTa",
+        "model": "mlp",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 3e-05,
+          "weight_decay": 0.0,
+          "seed": 42
+        }
+      },
+      "note": "Parallel: densenet121 - dropout=0.5"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "densenet121",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 60,
+          "learning_rate": 0.05,
+          "dropout": 0.7,
+          "seed": 1334
+        }
+      },
+      "background": {
+        "repo": "VulBERTa",
+        "model": "mlp",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 3e-05,
+          "weight_decay": 0.0,
+          "seed": 42
+        }
+      },
+      "note": "Parallel: densenet121 - dropout=0.7"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "densenet121",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 60,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "background": {
+        "repo": "VulBERTa",
+        "model": "mlp",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 3e-05,
+          "weight_decay": 0.0,
+          "seed": 42
+        }
+      },
+      "note": "Parallel: densenet121 - seed=1334"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "densenet121",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 60,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 2334
+        }
+      },
+      "background": {
+        "repo": "VulBERTa",
+        "model": "mlp",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 3e-05,
+          "weight_decay": 0.0,
+          "seed": 42
+        }
+      },
+      "note": "Parallel: densenet121 - seed=2334"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "densenet121",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 60,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 3334
+        }
+      },
+      "background": {
+        "repo": "VulBERTa",
+        "model": "mlp",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 3e-05,
+          "weight_decay": 0.0,
+          "seed": 42
+        }
+      },
+      "note": "Parallel: densenet121 - seed=3334"
+    },
+    {
+      "mode": "default",
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "hrnet18",
+      "hyperparameters": {
+        "epochs": 30,
+        "learning_rate": 0.05,
+        "dropout": 0.5,
+        "seed": 1334
+      },
+      "note": "Sequential: hrnet18 - epochs=0.5×"
+    },
+    {
+      "mode": "default",
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "hrnet18",
+      "hyperparameters": {
+        "epochs": 60,
+        "learning_rate": 0.05,
+        "dropout": 0.5,
+        "seed": 1334
+      },
+      "note": "Sequential: hrnet18 - epochs=1.0×"
+    },
+    {
+      "mode": "default",
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "hrnet18",
+      "hyperparameters": {
+        "epochs": 90,
+        "learning_rate": 0.05,
+        "dropout": 0.5,
+        "seed": 1334
+      },
+      "note": "Sequential: hrnet18 - epochs=1.5×"
+    },
+    {
+      "mode": "default",
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "hrnet18",
+      "hyperparameters": {
+        "epochs": 60,
+        "learning_rate": 0.025,
+        "dropout": 0.5,
+        "seed": 1334
+      },
+      "note": "Sequential: hrnet18 - learning_rate=0.5×"
+    },
+    {
+      "mode": "default",
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "hrnet18",
+      "hyperparameters": {
+        "epochs": 60,
+        "learning_rate": 0.05,
+        "dropout": 0.5,
+        "seed": 1334
+      },
+      "note": "Sequential: hrnet18 - learning_rate=1.0×"
+    },
+    {
+      "mode": "default",
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "hrnet18",
+      "hyperparameters": {
+        "epochs": 60,
+        "learning_rate": 0.1,
+        "dropout": 0.5,
+        "seed": 1334
+      },
+      "note": "Sequential: hrnet18 - learning_rate=2.0×"
+    },
+    {
+      "mode": "default",
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "hrnet18",
+      "hyperparameters": {
+        "epochs": 60,
+        "learning_rate": 0.05,
+        "dropout": 0.3,
+        "seed": 1334
+      },
+      "note": "Sequential: hrnet18 - dropout=0.3"
+    },
+    {
+      "mode": "default",
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "hrnet18",
+      "hyperparameters": {
+        "epochs": 60,
+        "learning_rate": 0.05,
+        "dropout": 0.5,
+        "seed": 1334
+      },
+      "note": "Sequential: hrnet18 - dropout=0.5"
+    },
+    {
+      "mode": "default",
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "hrnet18",
+      "hyperparameters": {
+        "epochs": 60,
+        "learning_rate": 0.05,
+        "dropout": 0.7,
+        "seed": 1334
+      },
+      "note": "Sequential: hrnet18 - dropout=0.7"
+    },
+    {
+      "mode": "default",
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "hrnet18",
+      "hyperparameters": {
+        "epochs": 60,
+        "learning_rate": 0.05,
+        "dropout": 0.5,
+        "seed": 1334
+      },
+      "note": "Sequential: hrnet18 - seed=1334"
+    },
+    {
+      "mode": "default",
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "hrnet18",
+      "hyperparameters": {
+        "epochs": 60,
+        "learning_rate": 0.05,
+        "dropout": 0.5,
+        "seed": 2334
+      },
+      "note": "Sequential: hrnet18 - seed=2334"
+    },
+    {
+      "mode": "default",
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "hrnet18",
+      "hyperparameters": {
+        "epochs": 60,
+        "learning_rate": 0.05,
+        "dropout": 0.5,
+        "seed": 3334
+      },
+      "note": "Sequential: hrnet18 - seed=3334"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "hrnet18",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 30,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: hrnet18 - epochs=0.5×"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "hrnet18",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 60,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: hrnet18 - epochs=1.0×"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "hrnet18",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 90,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: hrnet18 - epochs=1.5×"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "hrnet18",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 60,
+          "learning_rate": 0.025,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: hrnet18 - learning_rate=0.5×"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "hrnet18",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 60,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: hrnet18 - learning_rate=1.0×"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "hrnet18",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 60,
+          "learning_rate": 0.1,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: hrnet18 - learning_rate=2.0×"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "hrnet18",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 60,
+          "learning_rate": 0.05,
+          "dropout": 0.3,
+          "seed": 1334
+        }
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: hrnet18 - dropout=0.3"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "hrnet18",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 60,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: hrnet18 - dropout=0.5"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "hrnet18",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 60,
+          "learning_rate": 0.05,
+          "dropout": 0.7,
+          "seed": 1334
+        }
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: hrnet18 - dropout=0.7"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "hrnet18",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 60,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: hrnet18 - seed=1334"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "hrnet18",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 60,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 2334
+        }
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: hrnet18 - seed=2334"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "hrnet18",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 60,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 3334
+        }
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: hrnet18 - seed=3334"
+    },
+    {
+      "mode": "default",
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "pcb",
+      "hyperparameters": {
+        "epochs": 30,
+        "learning_rate": 0.05,
+        "dropout": 0.5,
+        "seed": 1334
+      },
+      "note": "Sequential: pcb - epochs=0.5×"
+    },
+    {
+      "mode": "default",
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "pcb",
+      "hyperparameters": {
+        "epochs": 60,
+        "learning_rate": 0.05,
+        "dropout": 0.5,
+        "seed": 1334
+      },
+      "note": "Sequential: pcb - epochs=1.0×"
+    },
+    {
+      "mode": "default",
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "pcb",
+      "hyperparameters": {
+        "epochs": 90,
+        "learning_rate": 0.05,
+        "dropout": 0.5,
+        "seed": 1334
+      },
+      "note": "Sequential: pcb - epochs=1.5×"
+    },
+    {
+      "mode": "default",
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "pcb",
+      "hyperparameters": {
+        "epochs": 60,
+        "learning_rate": 0.025,
+        "dropout": 0.5,
+        "seed": 1334
+      },
+      "note": "Sequential: pcb - learning_rate=0.5×"
+    },
+    {
+      "mode": "default",
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "pcb",
+      "hyperparameters": {
+        "epochs": 60,
+        "learning_rate": 0.05,
+        "dropout": 0.5,
+        "seed": 1334
+      },
+      "note": "Sequential: pcb - learning_rate=1.0×"
+    },
+    {
+      "mode": "default",
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "pcb",
+      "hyperparameters": {
+        "epochs": 60,
+        "learning_rate": 0.1,
+        "dropout": 0.5,
+        "seed": 1334
+      },
+      "note": "Sequential: pcb - learning_rate=2.0×"
+    },
+    {
+      "mode": "default",
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "pcb",
+      "hyperparameters": {
+        "epochs": 60,
+        "learning_rate": 0.05,
+        "dropout": 0.3,
+        "seed": 1334
+      },
+      "note": "Sequential: pcb - dropout=0.3"
+    },
+    {
+      "mode": "default",
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "pcb",
+      "hyperparameters": {
+        "epochs": 60,
+        "learning_rate": 0.05,
+        "dropout": 0.5,
+        "seed": 1334
+      },
+      "note": "Sequential: pcb - dropout=0.5"
+    },
+    {
+      "mode": "default",
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "pcb",
+      "hyperparameters": {
+        "epochs": 60,
+        "learning_rate": 0.05,
+        "dropout": 0.7,
+        "seed": 1334
+      },
+      "note": "Sequential: pcb - dropout=0.7"
+    },
+    {
+      "mode": "default",
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "pcb",
+      "hyperparameters": {
+        "epochs": 60,
+        "learning_rate": 0.05,
+        "dropout": 0.5,
+        "seed": 1334
+      },
+      "note": "Sequential: pcb - seed=1334"
+    },
+    {
+      "mode": "default",
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "pcb",
+      "hyperparameters": {
+        "epochs": 60,
+        "learning_rate": 0.05,
+        "dropout": 0.5,
+        "seed": 2334
+      },
+      "note": "Sequential: pcb - seed=2334"
+    },
+    {
+      "mode": "default",
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "pcb",
+      "hyperparameters": {
+        "epochs": 60,
+        "learning_rate": 0.05,
+        "dropout": 0.5,
+        "seed": 3334
+      },
+      "note": "Sequential: pcb - seed=3334"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "pcb",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 30,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: pcb - epochs=0.5×"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "pcb",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 60,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: pcb - epochs=1.0×"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "pcb",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 90,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: pcb - epochs=1.5×"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "pcb",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 60,
+          "learning_rate": 0.025,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: pcb - learning_rate=0.5×"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "pcb",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 60,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: pcb - learning_rate=1.0×"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "pcb",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 60,
+          "learning_rate": 0.1,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: pcb - learning_rate=2.0×"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "pcb",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 60,
+          "learning_rate": 0.05,
+          "dropout": 0.3,
+          "seed": 1334
+        }
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: pcb - dropout=0.3"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "pcb",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 60,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: pcb - dropout=0.5"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "pcb",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 60,
+          "learning_rate": 0.05,
+          "dropout": 0.7,
+          "seed": 1334
+        }
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: pcb - dropout=0.7"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "pcb",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 60,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: pcb - seed=1334"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "pcb",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 60,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 2334
+        }
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: pcb - seed=2334"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "pcb",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 60,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 3334
+        }
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "hyperparameters": {
+          "epochs": 10,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1
+        }
+      },
+      "note": "Parallel: pcb - seed=3334"
+    }
+  ]
+}

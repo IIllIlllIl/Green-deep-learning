@@ -1,0 +1,312 @@
+{
+  "session_name": "optimized_mutation_v1",
+  "description": "Optimized hyperparameter mutation with unified range formula: LR [0.5×, 2×], Dropout [d-0.3, d+0.2]",
+  "max_retries": 2,
+  "base_results_dir": "results",
+
+  "mutation_strategy": {
+    "learning_rate": {
+      "type": "multiplier",
+      "description": "Learning rate mutation using multipliers of default value",
+      "multipliers": [0.5, 0.75, 1.0, 1.5, 2.0],
+      "formula": "LR_mutated = LR_default × multiplier"
+    },
+    "dropout": {
+      "type": "offset",
+      "description": "Dropout mutation using offset from default value, clipped to [0, 1]",
+      "offsets": [-0.3, -0.15, 0.0, 0.1, 0.2],
+      "clip_range": [0.0, 1.0],
+      "formula": "Dropout_mutated = clip(Dropout_default + offset, 0, 1)"
+    }
+  },
+
+  "experiments": [
+    {
+      "experiment_id": 1,
+      "description": "DenseNet121 - LR 0.5× (验证下界)",
+      "repository": "Person_reID_baseline_pytorch",
+      "model": "densenet121",
+      "hyperparameters": {
+        "epochs": 60,
+        "learning_rate": 0.025,
+        "dropout": 0.5
+      },
+      "mutation_note": "LR = 0.05 × 0.5 = 0.025"
+    },
+    {
+      "experiment_id": 2,
+      "description": "DenseNet121 - LR 0.75× (填补空白)",
+      "repository": "Person_reID_baseline_pytorch",
+      "model": "densenet121",
+      "hyperparameters": {
+        "epochs": 60,
+        "learning_rate": 0.0375,
+        "dropout": 0.5
+      },
+      "mutation_note": "LR = 0.05 × 0.75 = 0.0375"
+    },
+    {
+      "experiment_id": 3,
+      "description": "DenseNet121 - Baseline (已测试，用于对比)",
+      "repository": "Person_reID_baseline_pytorch",
+      "model": "densenet121",
+      "hyperparameters": {
+        "epochs": 60,
+        "learning_rate": 0.05,
+        "dropout": 0.5
+      },
+      "mutation_note": "LR = 0.05 × 1.0 = 0.05 (Baseline)"
+    },
+    {
+      "experiment_id": 4,
+      "description": "DenseNet121 - LR 1.5× (填补空白)",
+      "repository": "Person_reID_baseline_pytorch",
+      "model": "densenet121",
+      "hyperparameters": {
+        "epochs": 60,
+        "learning_rate": 0.075,
+        "dropout": 0.5
+      },
+      "mutation_note": "LR = 0.05 × 1.5 = 0.075"
+    },
+    {
+      "experiment_id": 5,
+      "description": "DenseNet121 - LR 2× (验证上界)",
+      "repository": "Person_reID_baseline_pytorch",
+      "model": "densenet121",
+      "hyperparameters": {
+        "epochs": 60,
+        "learning_rate": 0.1,
+        "dropout": 0.5
+      },
+      "mutation_note": "LR = 0.05 × 2.0 = 0.1"
+    },
+    {
+      "experiment_id": 6,
+      "description": "DenseNet121 - Dropout -0.3 (已测试为0.0，用于对比)",
+      "repository": "Person_reID_baseline_pytorch",
+      "model": "densenet121",
+      "hyperparameters": {
+        "epochs": 60,
+        "learning_rate": 0.05,
+        "dropout": 0.2
+      },
+      "mutation_note": "Dropout = max(0, 0.5 - 0.3) = 0.2"
+    },
+    {
+      "experiment_id": 7,
+      "description": "DenseNet121 - Dropout -0.15 (填补空白)",
+      "repository": "Person_reID_baseline_pytorch",
+      "model": "densenet121",
+      "hyperparameters": {
+        "epochs": 60,
+        "learning_rate": 0.05,
+        "dropout": 0.35
+      },
+      "mutation_note": "Dropout = 0.5 - 0.15 = 0.35"
+    },
+    {
+      "experiment_id": 8,
+      "description": "DenseNet121 - Dropout +0.1 (填补空白)",
+      "repository": "Person_reID_baseline_pytorch",
+      "model": "densenet121",
+      "hyperparameters": {
+        "epochs": 60,
+        "learning_rate": 0.05,
+        "dropout": 0.6
+      },
+      "mutation_note": "Dropout = 0.5 + 0.1 = 0.6"
+    },
+    {
+      "experiment_id": 9,
+      "description": "DenseNet121 - Dropout +0.2 (验证上界)",
+      "repository": "Person_reID_baseline_pytorch",
+      "model": "densenet121",
+      "hyperparameters": {
+        "epochs": 60,
+        "learning_rate": 0.05,
+        "dropout": 0.7
+      },
+      "mutation_note": "Dropout = 0.5 + 0.2 = 0.7"
+    },
+    {
+      "experiment_id": 10,
+      "description": "ResNet20 - LR 0.5× (验证下界)",
+      "repository": "pytorch_resnet_cifar10",
+      "model": "resnet20",
+      "hyperparameters": {
+        "epochs": 200,
+        "learning_rate": 0.05,
+        "weight_decay": 0.0001
+      },
+      "mutation_note": "LR = 0.1 × 0.5 = 0.05"
+    },
+    {
+      "experiment_id": 11,
+      "description": "ResNet20 - LR 0.75× (填补空白)",
+      "repository": "pytorch_resnet_cifar10",
+      "model": "resnet20",
+      "hyperparameters": {
+        "epochs": 200,
+        "learning_rate": 0.075,
+        "weight_decay": 0.0001
+      },
+      "mutation_note": "LR = 0.1 × 0.75 = 0.075"
+    },
+    {
+      "experiment_id": 12,
+      "description": "ResNet20 - Baseline (已测试，用于对比)",
+      "repository": "pytorch_resnet_cifar10",
+      "model": "resnet20",
+      "hyperparameters": {
+        "epochs": 200,
+        "learning_rate": 0.1,
+        "weight_decay": 0.0001
+      },
+      "mutation_note": "LR = 0.1 × 1.0 = 0.1 (Baseline)"
+    },
+    {
+      "experiment_id": 13,
+      "description": "ResNet20 - LR 1.5× (填补空白)",
+      "repository": "pytorch_resnet_cifar10",
+      "model": "resnet20",
+      "hyperparameters": {
+        "epochs": 200,
+        "learning_rate": 0.15,
+        "weight_decay": 0.0001
+      },
+      "mutation_note": "LR = 0.1 × 1.5 = 0.15"
+    },
+    {
+      "experiment_id": 14,
+      "description": "ResNet20 - LR 2× (验证上界)",
+      "repository": "pytorch_resnet_cifar10",
+      "model": "resnet20",
+      "hyperparameters": {
+        "epochs": 200,
+        "learning_rate": 0.2,
+        "weight_decay": 0.0001
+      },
+      "mutation_note": "LR = 0.1 × 2.0 = 0.2"
+    },
+    {
+      "experiment_id": 15,
+      "description": "MRT-OAST - LR 0.5× (验证下界)",
+      "repository": "MRT-OAST",
+      "model": "default",
+      "hyperparameters": {
+        "epochs": 10,
+        "learning_rate": 0.00005,
+        "dropout": 0.2,
+        "weight_decay": 0.0
+      },
+      "mutation_note": "LR = 0.0001 × 0.5 = 0.00005"
+    },
+    {
+      "experiment_id": 16,
+      "description": "MRT-OAST - LR 0.75× (填补空白)",
+      "repository": "MRT-OAST",
+      "model": "default",
+      "hyperparameters": {
+        "epochs": 10,
+        "learning_rate": 0.000075,
+        "dropout": 0.2,
+        "weight_decay": 0.0
+      },
+      "mutation_note": "LR = 0.0001 × 0.75 = 0.000075"
+    },
+    {
+      "experiment_id": 17,
+      "description": "MRT-OAST - Baseline (已测试，用于对比)",
+      "repository": "MRT-OAST",
+      "model": "default",
+      "hyperparameters": {
+        "epochs": 10,
+        "learning_rate": 0.0001,
+        "dropout": 0.2,
+        "weight_decay": 0.0
+      },
+      "mutation_note": "LR = 0.0001 × 1.0 = 0.0001 (Baseline)"
+    },
+    {
+      "experiment_id": 18,
+      "description": "MRT-OAST - LR 1.5× (填补空白)",
+      "repository": "MRT-OAST",
+      "model": "default",
+      "hyperparameters": {
+        "epochs": 10,
+        "learning_rate": 0.00015,
+        "dropout": 0.2,
+        "weight_decay": 0.0
+      },
+      "mutation_note": "LR = 0.0001 × 1.5 = 0.00015"
+    },
+    {
+      "experiment_id": 19,
+      "description": "MRT-OAST - LR 2× (验证上界)",
+      "repository": "MRT-OAST",
+      "model": "default",
+      "hyperparameters": {
+        "epochs": 10,
+        "learning_rate": 0.0002,
+        "dropout": 0.2,
+        "weight_decay": 0.0
+      },
+      "mutation_note": "LR = 0.0001 × 2.0 = 0.0002"
+    },
+    {
+      "experiment_id": 20,
+      "description": "MRT-OAST - Dropout -0.2 (验证下界，clip到0)",
+      "repository": "MRT-OAST",
+      "model": "default",
+      "hyperparameters": {
+        "epochs": 10,
+        "learning_rate": 0.0001,
+        "dropout": 0.0,
+        "weight_decay": 0.0
+      },
+      "mutation_note": "Dropout = max(0, 0.2 - 0.3) = 0.0"
+    },
+    {
+      "experiment_id": 21,
+      "description": "MRT-OAST - Dropout -0.1 (填补空白)",
+      "repository": "MRT-OAST",
+      "model": "default",
+      "hyperparameters": {
+        "epochs": 10,
+        "learning_rate": 0.0001,
+        "dropout": 0.1,
+        "weight_decay": 0.0
+      },
+      "mutation_note": "Dropout = 0.2 - 0.1 = 0.1"
+    },
+    {
+      "experiment_id": 22,
+      "description": "MRT-OAST - Dropout +0.1 (填补空白)",
+      "repository": "MRT-OAST",
+      "model": "default",
+      "hyperparameters": {
+        "epochs": 10,
+        "learning_rate": 0.0001,
+        "dropout": 0.3,
+        "weight_decay": 0.0
+      },
+      "mutation_note": "Dropout = 0.2 + 0.1 = 0.3"
+    },
+    {
+      "experiment_id": 23,
+      "description": "MRT-OAST - Dropout +0.2 (验证上界)",
+      "repository": "MRT-OAST",
+      "model": "default",
+      "hyperparameters": {
+        "epochs": 10,
+        "learning_rate": 0.0001,
+        "dropout": 0.4,
+        "weight_decay": 0.0
+      },
+      "mutation_note": "Dropout = 0.2 + 0.2 = 0.4"
+    }
+  ],
+
+  "validation_note": "This configuration implements the optimized mutation range formula. Expected performance impact: <3% for all models. Total experiments: 23 (some reuse boundary_test_v2 results for comparison)."
+}

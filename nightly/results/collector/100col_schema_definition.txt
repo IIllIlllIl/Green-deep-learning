@@ -1,0 +1,202 @@
+================================================================================
+100列CSV格式完整定义
+================================================================================
+
+总列数: 93
+JSON文件数: 569
+JSON字段数: 92
+已映射字段: 83
+缺失字段: 0
+
+100列表头:
+--------------------------------------------------------------------------------
+  1. experiment_id
+  2. timestamp
+  3. repository
+  4. model
+  5. training_success
+  6. duration_seconds
+  7. retries
+  8. hyperparam_alpha
+  9. hyperparam_batch_size
+ 10. hyperparam_dropout
+ 11. hyperparam_epochs
+ 12. hyperparam_kfold
+ 13. hyperparam_learning_rate
+ 14. hyperparam_max_iter
+ 15. hyperparam_seed
+ 16. hyperparam_weight_decay
+ 17. perf_accuracy
+ 18. perf_best_val_accuracy
+ 19. perf_map
+ 20. perf_precision
+ 21. perf_rank1
+ 22. perf_rank5
+ 23. perf_recall
+ 24. perf_test_accuracy
+ 25. perf_test_loss
+ 26. energy_cpu_pkg_joules
+ 27. energy_cpu_ram_joules
+ 28. energy_cpu_total_joules
+ 29. energy_gpu_avg_watts
+ 30. energy_gpu_max_watts
+ 31. energy_gpu_min_watts
+ 32. energy_gpu_total_joules
+ 33. energy_gpu_temp_avg_celsius
+ 34. energy_gpu_temp_max_celsius
+ 35. energy_gpu_util_avg_percent
+ 36. energy_gpu_util_max_percent
+ 37. experiment_source
+ 38. num_mutated_params
+ 39. mutated_param
+ 40. mode
+ 41. error_message
+ 42. fg_repository
+ 43. fg_model
+ 44. fg_duration_seconds
+ 45. fg_training_success
+ 46. fg_retries
+ 47. fg_error_message
+ 48. fg_hyperparam_alpha
+ 49. fg_hyperparam_batch_size
+ 50. fg_hyperparam_dropout
+ 51. fg_hyperparam_epochs
+ 52. fg_hyperparam_kfold
+ 53. fg_hyperparam_learning_rate
+ 54. fg_hyperparam_max_iter
+ 55. fg_hyperparam_seed
+ 56. fg_hyperparam_weight_decay
+ 57. fg_perf_accuracy
+ 58. fg_perf_best_val_accuracy
+ 59. fg_perf_map
+ 60. fg_perf_precision
+ 61. fg_perf_rank1
+ 62. fg_perf_rank5
+ 63. fg_perf_recall
+ 64. fg_perf_test_accuracy
+ 65. fg_perf_test_loss
+ 66. fg_energy_cpu_pkg_joules
+ 67. fg_energy_cpu_ram_joules
+ 68. fg_energy_cpu_total_joules
+ 69. fg_energy_gpu_avg_watts
+ 70. fg_energy_gpu_max_watts
+ 71. fg_energy_gpu_min_watts
+ 72. fg_energy_gpu_total_joules
+ 73. fg_energy_gpu_temp_avg_celsius
+ 74. fg_energy_gpu_temp_max_celsius
+ 75. fg_energy_gpu_util_avg_percent
+ 76. fg_energy_gpu_util_max_percent
+ 77. bg_repository
+ 78. bg_model
+ 79. bg_note
+ 80. bg_log_directory
+ 81. bg_hyperparam_batch_size
+ 82. bg_hyperparam_dropout
+ 83. bg_hyperparam_epochs
+ 84. bg_hyperparam_learning_rate
+ 85. bg_hyperparam_seed
+ 86. bg_hyperparam_weight_decay
+ 87. bg_energy_cpu_pkg_joules
+ 88. bg_energy_cpu_ram_joules
+ 89. bg_energy_cpu_total_joules
+ 90. bg_energy_gpu_avg_watts
+ 91. bg_energy_gpu_max_watts
+ 92. bg_energy_gpu_min_watts
+ 93. bg_energy_gpu_total_joules
+
+================================================================================
+JSON字段映射详情
+================================================================================
+
+✗ background                                                   -> 未映射
+✗ background.hyperparameters                                   -> 未映射
+✓ background.hyperparameters.batch_size                        -> bg_hyperparam_batch_size
+✓ background.hyperparameters.dropout                           -> bg_hyperparam_dropout
+✓ background.hyperparameters.epochs                            -> bg_hyperparam_epochs
+✓ background.hyperparameters.learning_rate                     -> bg_hyperparam_learning_rate
+✓ background.hyperparameters.seed                              -> bg_hyperparam_seed
+✓ background.hyperparameters.weight_decay                      -> bg_hyperparam_weight_decay
+✓ background.log_directory                                     -> bg_log_directory
+✓ background.model                                             -> bg_model
+✓ background.note                                              -> bg_note
+✓ background.repository                                        -> bg_repository
+✓ duration_seconds                                             -> duration_seconds
+✗ energy_metrics                                               -> 未映射
+✓ energy_metrics.cpu_energy_pkg_joules                         -> energy_cpu_pkg_joules
+✓ energy_metrics.cpu_energy_ram_joules                         -> energy_cpu_ram_joules
+✓ energy_metrics.cpu_energy_total_joules                       -> energy_cpu_total_joules
+✓ energy_metrics.gpu_energy_total_joules                       -> energy_gpu_total_joules
+✓ energy_metrics.gpu_power_avg_watts                           -> energy_gpu_avg_watts
+✓ energy_metrics.gpu_power_max_watts                           -> energy_gpu_max_watts
+✓ energy_metrics.gpu_power_min_watts                           -> energy_gpu_min_watts
+✓ energy_metrics.gpu_temp_avg_celsius                          -> energy_gpu_temp_avg_celsius
+✓ energy_metrics.gpu_temp_max_celsius                          -> energy_gpu_temp_max_celsius
+✓ energy_metrics.gpu_util_avg_percent                          -> energy_gpu_util_avg_percent
+✓ energy_metrics.gpu_util_max_percent                          -> energy_gpu_util_max_percent
+✓ error_message                                                -> error_message
+✓ experiment_id                                                -> experiment_id
+✗ foreground                                                   -> 未映射
+✓ foreground.duration_seconds                                  -> fg_duration_seconds
+✗ foreground.energy_metrics                                    -> 未映射
+✓ foreground.energy_metrics.cpu_energy_pkg_joules              -> fg_energy_cpu_pkg_joules
+✓ foreground.energy_metrics.cpu_energy_ram_joules              -> fg_energy_cpu_ram_joules
+✓ foreground.energy_metrics.cpu_energy_total_joules            -> fg_energy_cpu_total_joules
+✓ foreground.energy_metrics.gpu_energy_total_joules            -> fg_energy_gpu_total_joules
+✓ foreground.energy_metrics.gpu_power_avg_watts                -> fg_energy_gpu_avg_watts
+✓ foreground.energy_metrics.gpu_power_max_watts                -> fg_energy_gpu_max_watts
+✓ foreground.energy_metrics.gpu_power_min_watts                -> fg_energy_gpu_min_watts
+✓ foreground.energy_metrics.gpu_temp_avg_celsius               -> fg_energy_gpu_temp_avg_celsius
+✓ foreground.energy_metrics.gpu_temp_max_celsius               -> fg_energy_gpu_temp_max_celsius
+✓ foreground.energy_metrics.gpu_util_avg_percent               -> fg_energy_gpu_util_avg_percent
+✓ foreground.energy_metrics.gpu_util_max_percent               -> fg_energy_gpu_util_max_percent
+✓ foreground.error_message                                     -> fg_error_message
+✗ foreground.hyperparameters                                   -> 未映射
+✓ foreground.hyperparameters.alpha                             -> fg_hyperparam_alpha
+✓ foreground.hyperparameters.batch_size                        -> fg_hyperparam_batch_size
+✓ foreground.hyperparameters.dropout                           -> fg_hyperparam_dropout
+✓ foreground.hyperparameters.epochs                            -> fg_hyperparam_epochs
+✓ foreground.hyperparameters.kfold                             -> fg_hyperparam_kfold
+✓ foreground.hyperparameters.learning_rate                     -> fg_hyperparam_learning_rate
+✓ foreground.hyperparameters.max_iter                          -> fg_hyperparam_max_iter
+✓ foreground.hyperparameters.seed                              -> fg_hyperparam_seed
+✓ foreground.hyperparameters.weight_decay                      -> fg_hyperparam_weight_decay
+✓ foreground.model                                             -> fg_model
+✗ foreground.performance_metrics                               -> 未映射
+✓ foreground.performance_metrics.accuracy                      -> fg_perf_accuracy
+✓ foreground.performance_metrics.best_val_accuracy             -> fg_perf_best_val_accuracy
+✓ foreground.performance_metrics.map                           -> fg_perf_map
+✓ foreground.performance_metrics.precision                     -> fg_perf_precision
+✓ foreground.performance_metrics.rank1                         -> fg_perf_rank1
+✓ foreground.performance_metrics.rank5                         -> fg_perf_rank5
+✓ foreground.performance_metrics.recall                        -> fg_perf_recall
+✓ foreground.performance_metrics.test_accuracy                 -> fg_perf_test_accuracy
+✓ foreground.performance_metrics.test_loss                     -> fg_perf_test_loss
+✓ foreground.repository                                        -> fg_repository
+✓ foreground.retries                                           -> fg_retries
+✓ foreground.training_success                                  -> fg_training_success
+✗ hyperparameters                                              -> 未映射
+✓ hyperparameters.alpha                                        -> hyperparam_alpha
+✓ hyperparameters.batch_size                                   -> hyperparam_batch_size
+✓ hyperparameters.dropout                                      -> hyperparam_dropout
+✓ hyperparameters.epochs                                       -> hyperparam_epochs
+✓ hyperparameters.kfold                                        -> hyperparam_kfold
+✓ hyperparameters.learning_rate                                -> hyperparam_learning_rate
+✓ hyperparameters.max_iter                                     -> hyperparam_max_iter
+✓ hyperparameters.seed                                         -> hyperparam_seed
+✓ hyperparameters.weight_decay                                 -> hyperparam_weight_decay
+✓ mode                                                         -> mode
+✓ model                                                        -> model
+✗ performance_metrics                                          -> 未映射
+✓ performance_metrics.accuracy                                 -> perf_accuracy
+✓ performance_metrics.best_val_accuracy                        -> perf_best_val_accuracy
+✓ performance_metrics.map                                      -> perf_map
+✓ performance_metrics.precision                                -> perf_precision
+✓ performance_metrics.rank1                                    -> perf_rank1
+✓ performance_metrics.rank5                                    -> perf_rank5
+✓ performance_metrics.recall                                   -> perf_recall
+✓ performance_metrics.test_accuracy                            -> perf_test_accuracy
+✓ performance_metrics.test_loss                                -> perf_test_loss
+✓ repository                                                   -> repository
+✓ retries                                                      -> retries
+✓ timestamp                                                    -> timestamp
+✓ training_success                                             -> training_success

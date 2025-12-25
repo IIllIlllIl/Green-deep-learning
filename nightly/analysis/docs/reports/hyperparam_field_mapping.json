@@ -1,0 +1,25 @@
+{
+  "global": {
+    "epochs": "training_duration",
+    "max_iter": "training_duration",
+    "num_iters": "training_duration",
+    "weight_decay": "l2_regularization",
+    "learning_rate": "hyperparam_learning_rate",
+    "lr": "hyperparam_learning_rate",
+    "batch_size": "hyperparam_batch_size",
+    "train_batch_size": "hyperparam_batch_size",
+    "dropout": "hyperparam_dropout",
+    "droprate": "hyperparam_dropout",
+    "dropout_rate": "hyperparam_dropout",
+    "seed": "seed",
+    "kfold": "hyperparam_kfold"
+  },
+  "repo_specific": {
+    "bug-localization-by-dnn-and-rvsm": {
+      "alpha": "l2_regularization"
+    },
+    "MRT-OAST": {
+      "alpha": "l2_regularization"
+    }
+  }
+}

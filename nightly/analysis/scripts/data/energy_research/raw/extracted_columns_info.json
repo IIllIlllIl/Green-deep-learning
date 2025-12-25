@@ -1,0 +1,68 @@
+{
+  "all_columns": [
+    "experiment_id",
+    "timestamp",
+    "repository",
+    "model",
+    "mode",
+    "is_parallel",
+    "training_duration",
+    "hyperparam_learning_rate",
+    "hyperparam_batch_size",
+    "seed",
+    "energy_cpu_total_joules",
+    "energy_gpu_total_joules",
+    "gpu_power_avg_watts",
+    "gpu_power_max_watts",
+    "gpu_power_min_watts",
+    "gpu_util_avg",
+    "gpu_temp_max",
+    "gpu_temp_avg",
+    "perf_test_accuracy",
+    "cpu_pkg_ratio",
+    "gpu_power_fluctuation",
+    "gpu_temp_fluctuation",
+    "hyperparam_dropout",
+    "perf_map",
+    "perf_rank1",
+    "perf_rank5",
+    "hyperparam_kfold",
+    "l2_regularization",
+    "perf_top1_accuracy",
+    "perf_top5_accuracy",
+    "perf_accuracy",
+    "perf_precision",
+    "perf_recall",
+    "perf_eval_loss"
+  ],
+  "hyperparam_columns": [
+    "training_duration",
+    "hyperparam_learning_rate",
+    "hyperparam_batch_size",
+    "seed",
+    "hyperparam_dropout",
+    "hyperparam_kfold",
+    "l2_regularization"
+  ],
+  "energy_columns": [
+    "energy_cpu_total_joules",
+    "energy_gpu_total_joules"
+  ],
+  "performance_columns": [
+    "perf_test_accuracy",
+    "perf_map",
+    "perf_rank1",
+    "perf_rank5",
+    "perf_top1_accuracy",
+    "perf_top5_accuracy",
+    "perf_accuracy",
+    "perf_precision",
+    "perf_recall",
+    "perf_eval_loss"
+  ],
+  "derived_columns": [
+    "cpu_pkg_ratio",
+    "gpu_power_fluctuation",
+    "gpu_temp_fluctuation"
+  ]
+}

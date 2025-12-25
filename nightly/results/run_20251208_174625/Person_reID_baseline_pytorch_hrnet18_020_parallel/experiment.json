@@ -1,0 +1,41 @@
+{
+  "experiment_id": "Person_reID_baseline_pytorch_hrnet18_020_parallel",
+  "timestamp": "2025-12-10T11:41:25.897999",
+  "mode": "parallel",
+  "foreground": {
+    "repository": "Person_reID_baseline_pytorch",
+    "model": "hrnet18",
+    "hyperparameters": {
+      "dropout": 0.5549998038248569
+    },
+    "duration_seconds": 6245.4961314201355,
+    "energy_metrics": {
+      "cpu_energy_pkg_joules": 234669.15,
+      "cpu_energy_ram_joules": 16935.35,
+      "cpu_energy_total_joules": 251604.5,
+      "gpu_power_avg_watts": 221.63234549638392,
+      "gpu_power_max_watts": 281.7,
+      "gpu_power_min_watts": 186.78,
+      "gpu_energy_total_joules": 1348411.1899999997,
+      "gpu_temp_avg_celsius": 80.6482577251808,
+      "gpu_temp_max_celsius": 85.0,
+      "gpu_util_avg_percent": 98.77432610124917,
+      "gpu_util_max_percent": 100.0
+    },
+    "performance_metrics": {
+      "rank1": 0.893112,
+      "rank5": 0.956057,
+      "map": 0.72453
+    },
+    "training_success": true,
+    "retries": 0,
+    "error_message": "Training completed successfully"
+  },
+  "background": {
+    "repository": "Person_reID_baseline_pytorch",
+    "model": "densenet121",
+    "hyperparameters": {},
+    "log_directory": "/home/green/energy_dl/nightly/results/run_20251208_174625/Person_reID_baseline_pytorch_hrnet18_020_parallel/background_logs",
+    "note": "Background training served as GPU load only (not monitored)"
+  }
+}

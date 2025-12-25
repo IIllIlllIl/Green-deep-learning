@@ -1,0 +1,31 @@
+{
+  "experiment_id": "MRT-OAST_default_005",
+  "timestamp": "2025-11-27T00:40:39.697491",
+  "repository": "MRT-OAST",
+  "model": "default",
+  "hyperparameters": {
+    "seed": 2339
+  },
+  "duration_seconds": 1304.6129689216614,
+  "energy_metrics": {
+    "cpu_energy_pkg_joules": 38529.08,
+    "cpu_energy_ram_joules": 2965.91,
+    "cpu_energy_total_joules": 41494.99,
+    "gpu_power_avg_watts": 236.38840316205517,
+    "gpu_power_max_watts": 317.53,
+    "gpu_power_min_watts": 76.63,
+    "gpu_energy_total_joules": 299031.3299999998,
+    "gpu_temp_avg_celsius": 79.4901185770751,
+    "gpu_temp_max_celsius": 84.0,
+    "gpu_util_avg_percent": 92.71304347826087,
+    "gpu_util_max_percent": 98.0
+  },
+  "performance_metrics": {
+    "accuracy": 4622.0,
+    "precision": 0.98178,
+    "recall": 0.780306
+  },
+  "training_success": true,
+  "retries": 0,
+  "error_message": "Training completed successfully"
+}

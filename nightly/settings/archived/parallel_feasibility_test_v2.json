@@ -1,0 +1,282 @@
+{
+  "experiment_name": "parallel_feasibility_test",
+  "description": "Parallel training feasibility test - 11 model combinations with 1 epoch each to verify GPU memory compatibility and training stability",
+  "governor": "performance",
+  "runs_per_config": 1,
+  "max_retries": 1,
+  "mode": "parallel",
+  "experiments": [
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist_ff",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 1,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1334
+        }
+      },
+      "background": {
+        "repo": "pytorch_resnet_cifar10",
+        "model": "resnet20",
+        "hyperparameters": {
+          "epochs": 1,
+          "learning_rate": 0.1,
+          "seed": 1334
+        }
+      },
+      "note": "Group 1: \u8d85\u4f4e\u663e\u5b58 (1300MB) - mnist_ff + resnet20"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 1,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1334
+        }
+      },
+      "background": {
+        "repo": "VulBERTa",
+        "model": "mlp",
+        "hyperparameters": {
+          "epochs": 1,
+          "learning_rate": 3e-05,
+          "seed": 1334
+        }
+      },
+      "note": "Group 2: \u4f4e\u663e\u5b58 (2000MB) - mnist + VulBERTa_mlp"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 1,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1334
+        }
+      },
+      "background": {
+        "repo": "examples",
+        "model": "siamese",
+        "hyperparameters": {
+          "epochs": 1,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1334
+        }
+      },
+      "note": "Group 3: \u4f4e\u663e\u5b58 (2000MB) - mnist + siamese"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 1,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1334
+        }
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "pcb",
+        "hyperparameters": {
+          "epochs": 1,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "note": "Group 4: \u4f4e\u663e\u5b58 (2500MB) - mnist_rnn + pcb"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 1,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1334
+        }
+      },
+      "background": {
+        "repo": "MRT-OAST",
+        "model": "default",
+        "hyperparameters": {
+          "epochs": 1,
+          "learning_rate": 0.0001,
+          "dropout": 0.2,
+          "seed": 1334
+        }
+      },
+      "note": "Group 5: \u4f4e\u663e\u5b58 (2700MB) - mnist_rnn + MRT-OAST"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 1,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1334
+        }
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "hrnet18",
+        "hyperparameters": {
+          "epochs": 1,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "note": "Group 6: \u4e2d\u663e\u5b58 (3000MB) - mnist_rnn + hrnet18"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "siamese",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 1,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1334
+        }
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "pcb",
+        "hyperparameters": {
+          "epochs": 1,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "note": "Group 8: \u4e2d\u663e\u5b58 (3500MB) - siamese + pcb"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "pcb",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 1,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "background": {
+        "repo": "VulBERTa",
+        "model": "mlp",
+        "hyperparameters": {
+          "epochs": 1,
+          "learning_rate": 3e-05,
+          "seed": 1334
+        }
+      },
+      "note": "Group 9: \u4e2d\u663e\u5b58 (3500MB) - pcb + VulBERTa_mlp"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist_ff",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 1,
+          "learning_rate": 0.01,
+          "batch_size": 32,
+          "seed": 1334
+        }
+      },
+      "background": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "densenet121",
+        "hyperparameters": {
+          "epochs": 1,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "note": "Group 10: \u4e2d\u663e\u5b58 (4000MB) - mnist_ff + densenet121"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "pcb",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 1,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "background": {
+        "repo": "bug-localization-by-dnn-and-rvsm",
+        "model": "default",
+        "hyperparameters": {
+          "epochs": 1,
+          "max_iter": 10000,
+          "alpha": 1e-05,
+          "kfold": 10,
+          "seed": 1334
+        }
+      },
+      "note": "Group 11: \u4e2d\u663e\u5b58 (4000MB) - pcb + bug-localization"
+    },
+    {
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "densenet121",
+        "mode": "default",
+        "hyperparameters": {
+          "epochs": 1,
+          "learning_rate": 0.05,
+          "dropout": 0.5,
+          "seed": 1334
+        }
+      },
+      "background": {
+        "repo": "VulBERTa",
+        "model": "mlp",
+        "hyperparameters": {
+          "epochs": 1,
+          "learning_rate": 3e-05,
+          "seed": 1334
+        }
+      },
+      "note": "Group 12: \u9ad8\u663e\u5b58 (5000MB) - densenet121 + VulBERTa_mlp"
+    }
+  ]
+}
