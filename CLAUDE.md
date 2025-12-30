@@ -1,7 +1,7 @@
 # Claude 助手指南 - Mutation-Based Training Energy Profiler
 
-**项目版本**: v4.7.9 (2025-12-20)
-**最后更新**: 2025-12-20
+**项目版本**: v4.8.0 (2025-12-23)
+**最后更新**: 2025-12-23
 **状态**: 🎉 Complete - All 11 Models 100% Achieved!
 
 ---
@@ -11,9 +11,67 @@
 **重要**: 每次执行任务前必须遵循以下流程：
 
 1. **理解与规划**：首先确认从 `CLAUDE.md` 中获取的当前进度和规范，并列出本次任务的具体步骤。
-2. **开发与检查**：若需修改、生成或删除代码，请先编写/更新测试验证，再运行全量测试确保兼容性。
+2. **开发与检查** ⭐⭐⭐：
+   - **必须先编写测试脚本**：每个功能脚本都必须有对应的测试文件（如 `test_*.py`）
+   - **必须先执行Dry Run**：在少量数据（如前10-20行）上验证逻辑正确性
+   - **验证通过后再全量执行**：确保Dry Run无误后，才能在完整数据集上运行
+   - **运行全量测试**：确保新代码不破坏现有功能
 3. **维护与归档**：任务完成后，更新 `README.md`、`CLAUDE.md` 中的进度，并归档旧文件。
 4. **使用中文回答**：所有回复和文档必须使用中文。
+
+### 脚本开发规范 ⭐⭐⭐
+
+**每个脚本必须遵循以下开发流程**：
+
+```
+1. 编写主脚本 (script.py)
+   ↓
+2. 编写测试脚本 (test_script.py)
+   - 单元测试：测试各个函数
+   - 集成测试：测试完整流程
+   - Mock数据测试：使用少量数据
+   ↓
+3. 执行Dry Run
+   - 使用 --dry-run 参数
+   - 或使用 --limit N 参数（如 --limit 10）
+   - 验证输出格式、逻辑正确性
+   ↓
+4. 检查Dry Run结果
+   - 输出文件格式正确
+   - 数值范围合理
+   - 无异常或警告
+   ↓
+5. 全量执行
+   - 移除 --dry-run/--limit 参数
+   - 监控运行进度
+   - 记录运行日志
+   ↓
+6. 验证最终结果
+   - 运行验证脚本
+   - 生成质量报告
+   - 更新文档
+```
+
+**示例**：
+
+```bash
+# ❌ 错误做法：直接全量执行
+python3 extract_data.py --input data.csv --output result.csv
+
+# ✅ 正确做法：测试 → Dry Run → 全量执行
+# 步骤1: 编写测试
+python3 test_extract_data.py
+
+# 步骤2: Dry Run（前10行）
+python3 extract_data.py --input data.csv --output result.csv --dry-run --limit 10
+
+# 步骤3: 检查Dry Run结果
+head -20 result.csv
+python3 verify_result.py --file result.csv
+
+# 步骤4: 全量执行
+python3 extract_data.py --input data.csv --output result.csv
+```
 
 ---
 
@@ -24,15 +82,15 @@
 
 ### 当前状态 🎉
 
-**🎉 重大成就 (2025-12-19)**: Phase 7完成，项目目标100%达成！
+**🎉 重大成就 (2025-12-23)**: 补齐VulBERTa和Bug定位并行实验，项目持续扩展！
 
 | 指标 | 当前值 | 状态 |
 |------|--------|------|
-| **实验总数** | 676个 | ✅ 完成 |
+| **实验总数** | 726个 | ✅ 完成 (+50新增) |
 | **有效模型** | 11个 | ✅ 100%达标 |
-| **训练成功率** | 676/676 (100.0%) | ✅ 完美 |
-| **能耗数据** | 616/676 (91.1%) | ✅ 优秀 |
-| **性能数据** | 616/676 (91.1%) | ✅ 优秀 |
+| **训练成功率** | 726/726 (100.0%) | ✅ 完美 |
+| **能耗数据** | 666/726 (91.7%) | ✅ 优秀 |
+| **性能数据** | 666/726 (91.7%) | ✅ 优秀 |
 | **参数-模式组合** | 90/90 (100%) | ✅ 完成 |
 
 **详细进度**: 查看 [项目进度完整总结](docs/results_reports/PROJECT_PROGRESS_COMPLETE_SUMMARY.md) ⭐⭐⭐
@@ -45,7 +103,7 @@
 3. **完整数据**: 能耗 + 性能指标
 
 **总目标**: 45参数 × 2模式 × 6实验 = **540个有效实验**
-**实际达成**: 616个有效实验，90/90参数-模式组合全部达标 (100%) 🎊
+**实际达成**: 666个有效实验，90/90参数-模式组合全部达标 (100%) 🎊
 
 ---
 
@@ -101,10 +159,13 @@ energy_dl/nightly/
 - `config/models_config.json` - 模型配置
 
 **数据文件**:
-- `results/raw_data.csv` - **主数据文件** (676行，87列) ⭐⭐⭐
+- `results/raw_data.csv` - **主数据文件** (726行，87列) ⭐⭐⭐
   - 验证脚本: `scripts/validate_raw_data.py`
   - 追加脚本: `scripts/append_session_to_raw_data.py`
-  - 备份文件: `results/raw_data.csv.backup_20251219_154656`
+  - 备份文件: `results/raw_data.csv.backup_20251223_195253`
+- `results/data.csv` - **精简数据文件** (726行，56列) ⭐⭐
+  - 生成脚本: `scripts/create_unified_data_csv.py`
+  - 备份文件: `results/data.csv.backup_20251223_195253`
 
 **配置文件**:
 - 已完成: `settings/stage2_optimized_*.json`, `stage3_4_merged_*.json`
@@ -127,6 +188,7 @@ energy_dl/nightly/
 - [11_MODELS_FINAL_DEFINITION.md](docs/11_MODELS_FINAL_DEFINITION.md) - 11个模型最终定义
 
 ### 执行报告
+- [SUPPLEMENT_EXPERIMENTS_REPORT_20251223.md](docs/results_reports/SUPPLEMENT_EXPERIMENTS_REPORT_20251223.md) - **补齐VulBERTa和Bug定位并行实验** (最新) ⭐⭐⭐
 - [PHASE7_EXECUTION_REPORT.md](docs/results_reports/PHASE7_EXECUTION_REPORT.md) - **Phase 7最终补齐** ⭐⭐⭐
 - [PHASE6_EXECUTION_REPORT.md](docs/results_reports/PHASE6_EXECUTION_REPORT.md) - Phase 6 VulBERTa补齐
 - [PHASE5_PERFORMANCE_METRICS_MISSING_ISSUE.md](docs/results_reports/PHASE5_PERFORMANCE_METRICS_MISSING_ISSUE.md) - Phase 5执行
@@ -175,7 +237,7 @@ analysis/
 │   │   └── adult_training_data.csv  (10个配置，2方法×5alpha)
 │   └── energy_research/        # 能耗研究数据（主项目扩展）
 │       ├── raw/                # 原始数据（从主项目复制）
-│       │   └── energy_data_original.csv  (data.csv副本, 54列)
+│       │   └── energy_data_original.csv  (data.csv精简副本, 56列, 726行) ✅ **[2025-12-23纠正]**
 │       └── processed/          # 预处理后的因果分析数据（待生成）
 │           └── training_data_*.csv  (4个任务组，分层分析)
 │
@@ -196,7 +258,7 @@ analysis/
 
 **关键说明**:
 - `paper_replication/` - 用于ASE 2023论文方法复现（Adult, COMPAS, German数据集）
-- `energy_research/` - 用于主项目能耗数据的因果分析（616个实验，11个模型）
+- `energy_research/` - 用于主项目能耗数据的因果分析（726个实验，11个模型，使用data.csv精简格式）✅ **[2025-12-23纠正: 使用data.csv而非raw_data.csv]**
 - 两类数据和结果完全隔离，避免混淆和误用
 
 **详细文档**: 查看 [analysis/data/README.md](analysis/data/README.md) 和 [analysis/results/README.md](analysis/results/README.md)
@@ -206,7 +268,7 @@ analysis/
 | 维度 | 主项目 (energy_dl/nightly) | 分析模块 (analysis/) |
 |------|-------------------------|-------------------|
 | **研究目标** | 训练超参数 → 能耗 + 性能 | 超参数/方法 → 公平性 + 性能 |
-| **数据收集** | ✅ 676个实验，91.1%有效 | 使用主项目数据或独立数据 |
+| **数据收集** | ✅ 726个实验，91.1%有效 ✅ **[2025-12-23更新]** | 使用主项目数据或独立数据 |
 | **核心分析** | 描述性统计、可视化 | 因果图学习、因果效应估计 |
 | **主要输出** | `raw_data.csv`（能耗+性能） | 因果图、因果效应、权衡模式 |
 | **技术栈** | PyTorch, perf, nvidia-smi | DiBS (JAX), DML (EconML), AIF360 |
@@ -341,6 +403,7 @@ python scripts/demos/demo_energy_analysis.py
 - [analysis/docs/COLUMN_USAGE_ANALYSIS.md](analysis/docs/COLUMN_USAGE_ANALYSIS.md) - 54列完整使用分析（已纳入/未纳入原因说明）⭐
 - [analysis/docs/DATA_FILES_COMPARISON.md](analysis/docs/DATA_FILES_COMPARISON.md) - data.csv vs raw_data.csv 文件对比说明
 - [analysis/docs/DATA_ISOLATION_MIGRATION_REPORT.md](analysis/docs/DATA_ISOLATION_MIGRATION_REPORT.md) - 数据隔离迁移报告（按用途分类）
+- [analysis/docs/reports/DATA_LOADING_CORRECTION_REPORT_20251223.md](analysis/docs/reports/DATA_LOADING_CORRECTION_REPORT_20251223.md) - **数据加载纠正报告**（纠正使用data.csv而非raw_data.csv）⭐ **[2025-12-23 新增]**
 
 ### 技术栈与依赖
 
@@ -442,59 +505,161 @@ numpy
 - 有明确的输出变量（性能、能耗、公平性等）
 - 样本量 > 10（越多越好）
 
-### 当前任务：变量扩展计划 (2025-12-22) ✅ **[方案确认完成 - v3.0最终版]**
+### 当前任务：能耗数据因果与回归分析 (2025-12-29) ⏳ **[主要项目任务]**
 
-**背景**: 原始因果分析只使用了15个变量（27.8%列使用率），存在大量未利用的有价值列。
+**背景**: DiBS+DML因果图学习在能耗数据上失败（0条因果边），根本原因是数据聚合丢失了时间因果信息。转向使用替代因果分析方法（回归分析、中介效应分析、因果森林）来回答3个核心研究问题。
 
-**目标**: 扩展到更全面的变量集，提升因果发现能力。
+---
 
-**核心改进**:
-- 样本量从10个提升到370个（**37倍提升**）
-- 图像分类组从26个提升至185个（**7倍提升**，合并MNIST+CIFAR-10）
-- 新增One-Hot编码控制异质性（避免DiBS混淆基线差异和因果效应）
-- 变量数从15个优化至14-17个/任务组（动态选择）
+### 三个核心研究问题 ⭐⭐⭐
 
-**进度**:
+#### 问题1: 超参数对能耗的影响（方向和大小）🔬 **[2025-12-30 方案确认]**
 
-✅ **方案1：超参数统一** (已确认)
-- 统一 `training_duration` = epochs + max_iter
-- 统一 `l2_regularization` = weight_decay + alpha
-- 新增 `seed` = 随机种子（填充率34.5%）
-- 数据验证完成：互斥性100%，无冲突
+**研究目标**:
+- 识别哪些超参数显著影响GPU/CPU能耗
+- 量化每个超参数变化1单位时，能耗变化多少焦耳
+- 区分不同任务类型的超参数效应差异
 
-✅ **方案2：能耗中介变量** (已确认)
-- 新增5个中介变量（填充率79.4%）：
-  - `gpu_util_avg` - GPU利用率（主中介）
-  - `gpu_temp_max` - 最高温度（散热压力）
-  - `cpu_pkg_ratio` - CPU计算能耗比
-  - `gpu_power_fluctuation` = max_watts - min_watts（负载波动性）
-  - `gpu_temp_fluctuation` = temp_max - temp_avg（**温度波动性**，范围0-11°C）
-- **因果意义**: 探索"超参数 → 中介变量 → 能耗"的因果路径
+**方案设计** ✅ **已确认**:
+- **能耗指标选择** (4个):
+  - `energy_cpu_pkg_joules` - CPU Package能耗
+  - `energy_cpu_ram_joules` - CPU RAM能耗
+  - `energy_gpu_total_joules` - GPU总能耗 ⭐ **主要指标**
+  - `total_energy` - 系统总能耗（派生）
+- **超参数选择**: 使用统一后的合并超参数
+  - `training_duration` ← 统一 `epochs` + `max_iter`
+  - `l2_regularization` ← 统一 `weight_decay` + `alpha`
+  - 其他常规超参数: `learning_rate`, `batch_size`, `dropout`, `seed`
 
-✅ **方案3：分层因果分析 + One-Hot编码** (已确认 - v3.0最终版 - 2025-12-22)
-- **决策**: 采用**4个任务组**（合并MNIST+CIFAR-10为"图像分类"）
-- **任务分组**:
-  | 任务组 | 样本量 | 性能指标 | One-Hot变量 |
-  |--------|--------|----------|------------|
-  | 图像分类 (MNIST+CIFAR-10) | **185个** | test_accuracy | `is_mnist`, `is_cifar10` (2个) |
-  | Person_reID检索 | 93个 | mAP | `is_densenet121`, `is_hrnet18`, `is_pcb` (3个) |
-  | VulBERTa漏洞检测 | 52个 | eval_loss | 无（单模型） |
-  | Bug定位 | 40个 | top1_accuracy | 无（单模型） |
-- **关键突破**: One-Hot编码避免DiBS将数据集/模型基线差异误判为因果关系
-- **优势**: 保留语义完整性，样本量充足（全部满足DiBS要求），支持任务特定优化建议
+**详细文档**: 查看 [QUESTION1_REGRESSION_ANALYSIS_PLAN.md](analysis/docs/QUESTION1_REGRESSION_ANALYSIS_PLAN.md) ⭐⭐⭐
 
-**文档**:
-- [VARIABLE_EXPANSION_PLAN.md](analysis/docs/reports/VARIABLE_EXPANSION_PLAN.md) **v3.0** - 完整扩展方案（最终版） ⭐⭐⭐
-- [ENERGY_DATA_PROCESSING_PROPOSAL.md](analysis/docs/ENERGY_DATA_PROCESSING_PROPOSAL.md) - 能耗数据因果分析处理方案（3种模型处理方案对比）⭐⭐
-- [COLUMN_USAGE_ANALYSIS.md](analysis/docs/COLUMN_USAGE_ANALYSIS.md) - 54列完整使用分析（已纳入/未纳入原因说明）⭐
-- [DATA_FILES_COMPARISON.md](analysis/docs/DATA_FILES_COMPARISON.md) - data.csv vs raw_data.csv 文件对比说明
+**分析方法**:
+- 多元线性回归（基线，快速识别主效应）
+- 随机森林回归（验证非线性，特征重要性）
+- 因果森林（可选，异质性因果效应）
 
-**下一步**:
-1. ✅ 完成方案确认（方案1-3全部确认，v3.0最终版）
-2. ⏳ 实现预处理脚本 `analysis/scripts/preprocess_stratified_data.py`（支持One-Hot编码）
-3. ⏳ 运行**4个任务组**的分层DiBS分析（预估60分钟，可并行）
-4. ⏳ 生成任务特定和综合报告（对比跨任务共性）
-5. ⏳ 对比v1.0（Adult, 10样本）vs v3.0（能耗分层, 370样本）的因果发现改进
+**当前进度**: ⏳ **数据准备阶段**
+
+| 阶段 | 任务 | 状态 | 详情 |
+|------|------|------|------|
+| **1. 数据对比** | 新旧数据集差异分析 | ✅ 完成 | 见DATA_COMPARISON_OLD_VS_NEW_20251229.md |
+| **2. 方案设计** | 数据保留策略设计 | ✅ 完成 | 方案A': 6组分析，保留633/726行（87.1%） |
+| **3. 默认值回溯** | 实现超参数填充脚本 | ⏳ 待执行 | 将填充率从47%提升到95% |
+| **4. 回归分析** | 6组分层回归分析 | ⏳ 待执行 | - |
+| **5. 结果汇总** | 生成分析报告 | ⏳ 待执行 | - |
+
+**数据状态**:
+- **旧数据** (energy_data_extracted_v2.csv): 418行×34列，已回溯，100%填充
+- **新数据** (energy_data_original.csv): 726行×56列，未回溯，47%填充
+- **对比结论**: 新数据样本量多73.6%，但需要默认值回溯才能发挥优势
+
+**方案A'（优化版）细节**:
+
+6个任务组定义:
+1. **组1a**: examples (mnist/mnist_ff/mnist_rnn/siamese) - 使用 `batch_size, epochs, learning_rate, seed`
+2. **组1b**: pytorch_resnet_cifar10 - 使用 `epochs, learning_rate, seed, weight_decay`
+3. **组2**: Person_reID - 使用 `dropout, epochs, learning_rate, seed`
+4. **组3**: VulBERTa - 使用 `epochs, learning_rate, weight_decay, seed`
+5. **组4**: Bug定位 - 使用 `alpha, kfold, max_iter, seed`
+6. **组5**: MRT-OAST - 使用 `dropout, epochs, learning_rate, weight_decay`
+
+数据保留预期（回溯后）:
+- 组1a: 139行 (vs 旧数据90行, +54.4%)
+- 组1b: 59行 (vs 旧数据13行, +353.8%)
+- 组2: 116行 (vs 旧数据69行, +68.1%)
+- 组3: 118行 (vs 旧数据96行, +22.9%)
+- 组4: 127行 (vs 旧数据91行, +39.6%)
+- 组5: 74行 (vs 旧数据46行, +60.9%)
+- **总计**: **633行 (vs 旧数据418行, +51.4%)** ✅
+
+#### 问题2: 能耗和性能之间的权衡关系 ⏳
+
+**研究目标**:
+- 检测是否存在"能耗 vs 性能"的Pareto权衡
+- 识别同时影响能耗和性能的超参数
+- 量化权衡强度（如：准确率提高1% → 能耗增加X焦耳）
+
+**分析方法**:
+- Pareto前沿分析
+- 多目标回归分析
+- 权衡检测算法（论文Algorithm 1）
+
+**当前进度**: ⏳ 待问题1完成后执行
+
+#### 问题3: 有哪些中间变量能解释其中的原因？⏳
+
+**研究目标**:
+- 识别超参数通过哪些中介变量影响能耗
+- 量化直接效应 vs 间接效应
+- 示例：learning_rate → GPU利用率 → GPU能耗
+
+**分析方法**:
+- 中介效应分析（causal mediation analysis）
+- 路径分析
+- Bootstrap置信区间
+
+**当前进度**: ⏳ 待问题1完成后执行
+
+**中介变量候选**:
+- `gpu_util_avg` - GPU利用率（主中介变量）
+- `gpu_temp_max` - 最高温度（散热压力）
+- `cpu_pkg_ratio` - CPU计算能耗比
+- `gpu_power_fluctuation` - GPU功率波动性
+- `duration_seconds` - 训练时长
+
+---
+
+### 相关文档（2025-12-30更新）
+
+**问题1方案文档** ⭐⭐⭐ **[2025-12-30 新增]**:
+- [QUESTION1_REGRESSION_ANALYSIS_PLAN.md](analysis/docs/QUESTION1_REGRESSION_ANALYSIS_PLAN.md) - **问题1回归分析方案**（能耗指标、超参数、分组策略、分析方法完整设计）⭐⭐⭐
+
+**新增文档**:
+- [DATA_COMPARISON_OLD_VS_NEW_20251229.md](analysis/docs/reports/DATA_COMPARISON_OLD_VS_NEW_20251229.md) - **新旧数据集详细对比** ⭐⭐⭐
+
+**DiBS失败分析**（重要历史背景）:
+- [DIBS_FINAL_FAILURE_REPORT_20251226.md](analysis/docs/reports/DIBS_FINAL_FAILURE_REPORT_20251226.md) - DiBS三次失败总结
+- [6GROUPS_DIBS_ZERO_EDGES_DIAGNOSIS_20251226.md](analysis/docs/reports/6GROUPS_DIBS_ZERO_EDGES_DIAGNOSIS_20251226.md) - 0因果边诊断
+- [CAUSAL_METHODS_COMPARISON_20251228.md](analysis/docs/reports/CAUSAL_METHODS_COMPARISON_20251228.md) - 9种因果方法对比
+
+**方案设计文档**:
+- [VARIABLE_EXPANSION_PLAN.md](analysis/docs/reports/VARIABLE_EXPANSION_PLAN.md) - v3.0变量扩展方案
+- [ENERGY_DATA_PROCESSING_PROPOSAL.md](analysis/docs/ENERGY_DATA_PROCESSING_PROPOSAL.md) - 能耗数据处理方案
+
+**已完成阶段**（DiBS尝试）:
+- [STAGE2_EXECUTION_REPORT_20251224.md](analysis/docs/reports/STAGE2_EXECUTION_REPORT_20251224.md) - 阶段2数据提取（418行）
+- [DATA_REEXTRACTION_PROPOSAL_V2_20251224.md](analysis/docs/reports/DATA_REEXTRACTION_PROPOSAL_V2_20251224.md) - v2.0数据重提取方案
+
+---
+
+### 下一步行动（问题1优先）
+
+**立即任务**:
+1. ⏳ 实现默认值回溯脚本（针对新数据energy_data_original.csv）
+   - 从默认值实验提取参数基线
+   - 从models_config.json读取默认配置
+   - 对单参数变异实验填充未变异参数
+   - 预期：超参数填充率 47% → 95%
+
+2. ⏳ 数据质量验证
+   - 检查回溯值的合理性
+   - 验证数据分布
+   - 生成数据质量报告
+
+3. ⏳ 运行方案A'回归分析
+   - 6个任务组分别建模
+   - 控制变量：is_parallel, duration_seconds
+   - 因变量：energy_gpu_total_joules
+   - 生成系数森林图（forest plot）
+
+4. ⏳ 生成问题1分析报告
+   - 全局趋势（横跨所有任务）
+   - 任务特定发现
+   - 可操作性建议
+
+**后续任务**:
+5. ⏳ 问题2: Pareto权衡分析
+6. ⏳ 问题3: 中介效应分析
 
 ---
 
@@ -650,7 +815,33 @@ python3 -m json.tool settings/stage2_optimized_*.json
 
 ## 📊 最新进展
 
-### v4.7.9 (2025-12-19) - 当前版本 🎉 **[项目完成]**
+### v4.8.0 (2025-12-23) - 当前版本 🎉 **[补齐并行实验]**
+
+**补齐VulBERTa和Bug定位并行实验**: 扩展实验覆盖率（+50实验，~17小时）
+- **实验数**: 50个 (VulBERTa并行:10 + Bug定位并行:40)
+- **执行时间**: 2025-12-22 21:49 - 2025-12-23 19:22
+- **数据完整性**: 100% (训练成功、能耗、性能指标)
+- **详细报告**: [SUPPLEMENT_EXPERIMENTS_REPORT_20251223.md](docs/results_reports/SUPPLEMENT_EXPERIMENTS_REPORT_20251223.md)
+
+**关键成果** ⭐⭐⭐:
+- ✅ **Bug定位并行模式完全补齐**: 40个实验（10默认值 + 30单参数变异）
+- ✅ **VulBERTa并行模式部分补齐**: 10个实验（epochs/lr/wd/seed变异）
+- ✅ **数据同步**: raw_data.csv和data.csv同步更新，格式统一
+- ✅ **超参数覆盖**: Bug定位每参数8个唯一值（超过5个目标）
+
+**数据更新摘要**:
+- 实验总数: 676 → 726 (+50, +7.4%)
+- 有效实验: 616 → 666 (+50, +8.1%)
+- Bug定位总计: 40非并行 → 80 (40非并行 + 40并行, +100%)
+- VulBERTa总计: 52非并行 → 62 (52非并行 + 10并行, +19.2%)
+
+**备份文件**:
+- `results/raw_data.csv.backup_20251223_195253` (726行)
+- `results/data.csv.backup_20251223_195253` (726行)
+
+---
+
+### v4.7.9 (2025-12-19) - 上个版本 🎉 **[项目完成]**
 
 **Phase 7执行完成**: 最终补齐所有剩余实验（52实验，26.79小时）
 - **实验数**: 52个 (VulBERTa/mlp非并行:20 + bug-localization非并行:20 + bug-localization并行:12)
@@ -741,14 +932,14 @@ python3 -m json.tool settings/stage2_optimized_*.json
 ### raw_data.csv (主数据文件) ⭐⭐⭐
 
 **文件信息**:
-- 总行数: 676行
+- 总行数: 726行（含header）
 - 列数: 87列
-- 数据来源: 合并所有实验数据（历史211 + 新265 + Phase4-7共200）
+- 数据来源: 合并所有实验数据（历史211 + 新265 + Phase4-7共200 + 补齐50）
 
 **数据完整性**:
-- ✅ 训练成功: 676/676 (100.0%)
-- ✅ 能耗数据: 616/676 (91.1%)
-- ✅ 性能数据: 616/676 (91.1%)
+- ✅ 训练成功: 726/726 (100.0%)
+- ✅ 能耗数据: 666/726 (91.7%)
+- ✅ 性能数据: 666/726 (91.7%)
 
 **相关脚本**:
 - `scripts/validate_raw_data.py` - 验证数据完整性
@@ -756,6 +947,21 @@ python3 -m json.tool settings/stage2_optimized_*.json
 - `scripts/merge_csv_to_raw_data.py` - 合并数据文件
 
 **数据格式设计**: 查看 [DATA_FORMAT_DESIGN_DECISION_SUMMARY.md](docs/results_reports/DATA_FORMAT_DESIGN_DECISION_SUMMARY.md) ⭐⭐⭐
+
+### data.csv (精简数据文件) ⭐⭐
+
+**文件信息**:
+- 总行数: 726行（含header）
+- 列数: 56列（从raw_data.csv的87列精简）
+- 生成方式: 从raw_data.csv统一并行/非并行字段后生成
+
+**关键特性**:
+- ✅ 统一并行/非并行字段（fg_ vs 顶层）
+- ✅ 添加 is_parallel 列区分模式
+- ✅ 保留所有性能指标列
+- ✅ 数据与raw_data.csv完全一致
+
+**生成脚本**: `scripts/create_unified_data_csv.py`
 
 ---
 
@@ -810,9 +1016,9 @@ python3 -m json.tool settings/stage2_optimized_*.json
 ---
 
 **维护者**: Green
-**Claude助手指南版本**: 2.0
-**最后更新**: 2025-12-20
-**项目状态**: 🎉 完成 - v4.7.9 项目目标100%达成，11个模型全部完全达标！
+**Claude助手指南版本**: 2.1
+**最后更新**: 2025-12-23
+**项目状态**: 🎉 完成 - v4.8.0 项目目标100%达成，11个模型全部完全达标！新增50个并行实验扩展覆盖率。
 
 > **提示**：
 > - 本文件为Claude助手的主要参考指南，保持简洁易读
