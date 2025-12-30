@@ -1,0 +1,27 @@
+任务组: 图像分类 (image_classification)
+生成时间: 2025-12-23 22:28:11
+
+数据统计:
+  样本数: 258
+  特征数: 13
+  缺失率: 6.75%
+
+DiBS适用性:
+  样本量: 258 (最低10, 推荐20)
+  填充率: 93.3% (最低70.0%)
+  整体就绪: ✅ 是
+
+特征列表:
+  1. hyperparam_learning_rate (67.4%)
+  2. hyperparam_batch_size (52.7%)
+  3. training_duration (67.8%)
+  4. gpu_util_avg (99.6%)
+  5. gpu_temp_max (99.6%)
+  6. cpu_pkg_ratio (99.6%)
+  7. gpu_power_fluctuation (99.6%)
+  8. gpu_temp_fluctuation (99.6%)
+  9. energy_cpu_total_joules (99.6%)
+  10. energy_gpu_total_joules (99.6%)
+  11. perf_test_accuracy (100.0%)
+  12. is_mnist (100.0%)
+  13. is_cifar10 (100.0%)

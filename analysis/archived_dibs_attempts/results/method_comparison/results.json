@@ -1,0 +1,352 @@
+[
+  {
+    "method": "Correlation Analysis",
+    "time_seconds": 0.0080413818359375,
+    "success": true,
+    "pearson_mean": 0.23155000515371482,
+    "pearson_max": 0.9305526195868173,
+    "pearson_strong_pairs": 5,
+    "spearman_mean": 0.2508496244272095,
+    "spearman_max": 0.9343916837400232,
+    "top_pairs": [
+      [
+        "energy_gpu_avg_watts",
+        "gpu_temp_max",
+        0.9305526195868173
+      ],
+      [
+        "energy_cpu_total_joules",
+        "energy_gpu_total_joules",
+        0.9069247689647743
+      ],
+      [
+        "energy_gpu_avg_watts",
+        "gpu_util_avg",
+        0.8415229516546526
+      ],
+      [
+        "gpu_util_avg",
+        "gpu_temp_max",
+        0.8014801873186602
+      ],
+      [
+        "gpu_power_fluctuation",
+        "gpu_temp_fluctuation",
+        0.7731738605422305
+      ],
+      [
+        "energy_gpu_total_joules",
+        "gpu_util_avg",
+        0.6795155705394812
+      ],
+      [
+        "is_mnist_ff",
+        "perf_test_accuracy",
+        -0.6684718243593327
+      ],
+      [
+        "is_siamese",
+        "energy_gpu_total_joules",
+        0.6476796158600377
+      ],
+      [
+        "is_mnist_rnn",
+        "cpu_pkg_ratio",
+        0.5691714814513991
+      ],
+      [
+        "energy_cpu_total_joules",
+        "gpu_util_avg",
+        0.553469334224238
+      ]
+    ]
+  },
+  {
+    "method": "Regression Analysis",
+    "time_seconds": 0.4173290729522705,
+    "success": true,
+    "targets": {
+      "energy_cpu_total_joules": {
+        "lr_r2": 0.8270666580062457,
+        "rf_r2": 0.9850146094759615,
+        "lr_top_features": [
+          {
+            "feature": "is_mnist_ff",
+            "coefficient": -2958.015485571859
+          },
+          {
+            "feature": "is_mnist_rnn",
+            "coefficient": 1883.5762137076683
+          },
+          {
+            "feature": "is_siamese",
+            "coefficient": 1843.9297267529762
+          },
+          {
+            "feature": "gpu_temp_fluctuation",
+            "coefficient": -1412.1935079858558
+          },
+          {
+            "feature": "gpu_power_fluctuation",
+            "coefficient": 1054.3412311147936
+          }
+        ],
+        "rf_top_features": [
+          {
+            "feature": "is_mnist_ff",
+            "importance": 0.6649214055990609
+          },
+          {
+            "feature": "gpu_util_avg",
+            "importance": 0.07526590284441106
+          },
+          {
+            "feature": "is_mnist",
+            "importance": 0.06252606469214905
+          },
+          {
+            "feature": "cpu_pkg_ratio",
+            "importance": 0.06064867744019116
+          },
+          {
+            "feature": "gpu_temp_fluctuation",
+            "importance": 0.04697764560616326
+          }
+        ]
+      },
+      "energy_gpu_total_joules": {
+        "lr_r2": 0.7974485905733583,
+        "rf_r2": 0.9860136839453394,
+        "lr_top_features": [
+          {
+            "feature": "gpu_temp_fluctuation",
+            "coefficient": -14166.877669622745
+          },
+          {
+            "feature": "is_mnist_ff",
+            "coefficient": -12877.956292118499
+          },
+          {
+            "feature": "gpu_power_fluctuation",
+            "coefficient": 10105.9713675445
+          },
+          {
+            "feature": "is_siamese",
+            "coefficient": 9803.781010732628
+          },
+          {
+            "feature": "is_mnist_rnn",
+            "coefficient": 6578.622099842103
+          }
+        ],
+        "rf_top_features": [
+          {
+            "feature": "gpu_temp_max",
+            "importance": 0.315768372275694
+          },
+          {
+            "feature": "is_siamese",
+            "importance": 0.24006458401749436
+          },
+          {
+            "feature": "gpu_util_avg",
+            "importance": 0.1511854574413487
+          },
+          {
+            "feature": "is_mnist_ff",
+            "importance": 0.1359444373721542
+          },
+          {
+            "feature": "gpu_temp_fluctuation",
+            "importance": 0.05818741490540517
+          }
+        ]
+      },
+      "energy_gpu_avg_watts": {
+        "lr_r2": 0.9755386621581605,
+        "rf_r2": 0.9988067503308202,
+        "lr_top_features": [
+          {
+            "feature": "gpu_util_avg",
+            "coefficient": 57.453174088260695
+          },
+          {
+            "feature": "gpu_temp_max",
+            "coefficient": 26.37468465698053
+          },
+          {
+            "feature": "gpu_temp_fluctuation",
+            "coefficient": -11.111402836933546
+          },
+          {
+            "feature": "is_siamese",
+            "coefficient": -9.973316811642412
+          },
+          {
+            "feature": "is_mnist_ff",
+            "coefficient": 6.883218580389181
+          }
+        ],
+        "rf_top_features": [
+          {
+            "feature": "gpu_util_avg",
+            "importance": 0.7688043654700394
+          },
+          {
+            "feature": "gpu_temp_max",
+            "importance": 0.16906184856671264
+          },
+          {
+            "feature": "gpu_power_fluctuation",
+            "importance": 0.0195146663202248
+          },
+          {
+            "feature": "gpu_temp_fluctuation",
+            "importance": 0.017069758609018812
+          },
+          {
+            "feature": "is_mnist_rnn",
+            "importance": 0.015931452853405137
+          }
+        ]
+      }
+    }
+  },
+  {
+    "method": "Partial Correlation",
+    "time_seconds": 0.08756041526794434,
+    "success": true,
+    "partial_corrs": [
+      [
+        "energy_cpu_total_joules",
+        "energy_gpu_total_joules",
+        0.9254485099249652
+      ],
+      [
+        "energy_gpu_total_joules",
+        "energy_gpu_avg_watts",
+        0.6169751947126285
+      ],
+      [
+        "energy_cpu_total_joules",
+        "energy_gpu_avg_watts",
+        -0.5411671918300447
+      ],
+      [
+        "training_duration",
+        "energy_cpu_total_joules",
+        0.22050932149230673
+      ],
+      [
+        "energy_gpu_total_joules",
+        "perf_test_accuracy",
+        0.20638461005234549
+      ],
+      [
+        "training_duration",
+        "energy_gpu_avg_watts",
+        0.11287332731453541
+      ],
+      [
+        "energy_cpu_total_joules",
+        "perf_test_accuracy",
+        -0.06783416105409741
+      ],
+      [
+        "training_duration",
+        "energy_gpu_total_joules",
+        -0.06318889783494028
+      ],
+      [
+        "energy_gpu_avg_watts",
+        "perf_test_accuracy",
+        -0.05929199223854595
+      ]
+    ]
+  },
+  {
+    "method": "PC Algorithm",
+    "time_seconds": 0.00017595291137695312,
+    "success": false,
+    "error": "causal-learn not installed"
+  },
+  {
+    "method": "Mutual Information",
+    "time_seconds": 0.056195974349975586,
+    "success": true,
+    "targets": {
+      "energy_cpu_total_joules": {
+        "top_features": [
+          {
+            "feature": "gpu_util_avg",
+            "mi_score": 1.1813097155245909
+          },
+          {
+            "feature": "gpu_power_fluctuation",
+            "mi_score": 0.9730675847971835
+          },
+          {
+            "feature": "gpu_temp_max",
+            "mi_score": 0.715674591444222
+          },
+          {
+            "feature": "is_mnist_ff",
+            "mi_score": 0.6917456220312447
+          },
+          {
+            "feature": "cpu_pkg_ratio",
+            "mi_score": 0.6807118616063654
+          }
+        ]
+      },
+      "energy_gpu_total_joules": {
+        "top_features": [
+          {
+            "feature": "gpu_util_avg",
+            "mi_score": 1.4989390899270476
+          },
+          {
+            "feature": "gpu_power_fluctuation",
+            "mi_score": 1.1396895487473055
+          },
+          {
+            "feature": "gpu_temp_max",
+            "mi_score": 1.0163693837478132
+          },
+          {
+            "feature": "is_mnist_ff",
+            "mi_score": 0.6315126319590103
+          },
+          {
+            "feature": "cpu_pkg_ratio",
+            "mi_score": 0.5861333665371702
+          }
+        ]
+      },
+      "energy_gpu_avg_watts": {
+        "top_features": [
+          {
+            "feature": "gpu_util_avg",
+            "mi_score": 1.9514162370215864
+          },
+          {
+            "feature": "gpu_temp_max",
+            "mi_score": 1.4411348013619354
+          },
+          {
+            "feature": "gpu_power_fluctuation",
+            "mi_score": 1.3829368390518697
+          },
+          {
+            "feature": "cpu_pkg_ratio",
+            "mi_score": 0.7335434651987618
+          },
+          {
+            "feature": "gpu_temp_fluctuation",
+            "mi_score": 0.6542037741061524
+          }
+        ]
+      }
+    }
+  }
+]

@@ -1,0 +1,2133 @@
+{
+  "stage0": {
+    "stage": "stage0",
+    "exists": true,
+    "filepath": "../data/energy_research/raw/energy_data_original.csv",
+    "rows": 726,
+    "columns": 56,
+    "total_cells": 40656,
+    "total_nulls": 20202,
+    "null_rate": 49.69,
+    "high_null_cols": [
+      [
+        "perf_best_val_accuracy",
+        94.63
+      ],
+      [
+        "hyperparam_kfold",
+        94.35
+      ],
+      [
+        "perf_accuracy",
+        93.66
+      ],
+      [
+        "hyperparam_max_iter",
+        93.25
+      ],
+      [
+        "hyperparam_alpha",
+        93.11
+      ],
+      [
+        "perf_precision",
+        92.01
+      ],
+      [
+        "perf_recall",
+        92.01
+      ],
+      [
+        "perf_top1_accuracy",
+        88.98
+      ],
+      [
+        "perf_top5_accuracy",
+        88.98
+      ],
+      [
+        "perf_top10_accuracy",
+        88.98
+      ]
+    ],
+    "full_cols": [
+      "experiment_id",
+      "timestamp",
+      "repository",
+      "model",
+      "is_parallel",
+      "training_success",
+      "duration_seconds",
+      "retries",
+      "error_message"
+    ],
+    "full_cols_count": 9,
+    "col_null_rates": {
+      "experiment_id": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "timestamp": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "repository": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "model": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "is_parallel": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "training_success": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "duration_seconds": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "retries": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "error_message": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "hyperparam_alpha": {
+        "null_count": 676,
+        "null_rate": 93.11
+      },
+      "hyperparam_batch_size": {
+        "null_count": 590,
+        "null_rate": 81.27
+      },
+      "hyperparam_dropout": {
+        "null_count": 603,
+        "null_rate": 83.06
+      },
+      "hyperparam_epochs": {
+        "null_count": 375,
+        "null_rate": 51.65
+      },
+      "hyperparam_kfold": {
+        "null_count": 685,
+        "null_rate": 94.35
+      },
+      "hyperparam_learning_rate": {
+        "null_count": 379,
+        "null_rate": 52.2
+      },
+      "hyperparam_max_iter": {
+        "null_count": 677,
+        "null_rate": 93.25
+      },
+      "hyperparam_seed": {
+        "null_count": 385,
+        "null_rate": 53.03
+      },
+      "hyperparam_weight_decay": {
+        "null_count": 616,
+        "null_rate": 84.85
+      },
+      "perf_accuracy": {
+        "null_count": 680,
+        "null_rate": 93.66
+      },
+      "perf_best_val_accuracy": {
+        "null_count": 687,
+        "null_rate": 94.63
+      },
+      "perf_map": {
+        "null_count": 610,
+        "null_rate": 84.02
+      },
+      "perf_precision": {
+        "null_count": 668,
+        "null_rate": 92.01
+      },
+      "perf_rank1": {
+        "null_count": 610,
+        "null_rate": 84.02
+      },
+      "perf_rank5": {
+        "null_count": 610,
+        "null_rate": 84.02
+      },
+      "perf_recall": {
+        "null_count": 668,
+        "null_rate": 92.01
+      },
+      "perf_test_accuracy": {
+        "null_count": 468,
+        "null_rate": 64.46
+      },
+      "perf_test_loss": {
+        "null_count": 604,
+        "null_rate": 83.2
+      },
+      "perf_eval_loss": {
+        "null_count": 644,
+        "null_rate": 88.71
+      },
+      "perf_final_training_loss": {
+        "null_count": 644,
+        "null_rate": 88.71
+      },
+      "perf_eval_samples_per_second": {
+        "null_count": 644,
+        "null_rate": 88.71
+      },
+      "perf_top1_accuracy": {
+        "null_count": 646,
+        "null_rate": 88.98
+      },
+      "perf_top5_accuracy": {
+        "null_count": 646,
+        "null_rate": 88.98
+      },
+      "perf_top10_accuracy": {
+        "null_count": 646,
+        "null_rate": 88.98
+      },
+      "perf_top20_accuracy": {
+        "null_count": 646,
+        "null_rate": 88.98
+      },
+      "energy_cpu_pkg_joules": {
+        "null_count": 34,
+        "null_rate": 4.68
+      },
+      "energy_cpu_ram_joules": {
+        "null_count": 34,
+        "null_rate": 4.68
+      },
+      "energy_cpu_total_joules": {
+        "null_count": 34,
+        "null_rate": 4.68
+      },
+      "energy_gpu_avg_watts": {
+        "null_count": 34,
+        "null_rate": 4.68
+      },
+      "energy_gpu_max_watts": {
+        "null_count": 34,
+        "null_rate": 4.68
+      },
+      "energy_gpu_min_watts": {
+        "null_count": 34,
+        "null_rate": 4.68
+      },
+      "energy_gpu_total_joules": {
+        "null_count": 34,
+        "null_rate": 4.68
+      },
+      "energy_gpu_temp_avg_celsius": {
+        "null_count": 34,
+        "null_rate": 4.68
+      },
+      "energy_gpu_temp_max_celsius": {
+        "null_count": 34,
+        "null_rate": 4.68
+      },
+      "energy_gpu_util_avg_percent": {
+        "null_count": 34,
+        "null_rate": 4.68
+      },
+      "energy_gpu_util_max_percent": {
+        "null_count": 34,
+        "null_rate": 4.68
+      },
+      "experiment_source": {
+        "null_count": 516,
+        "null_rate": 71.07
+      },
+      "num_mutated_params": {
+        "null_count": 50,
+        "null_rate": 6.89
+      },
+      "mutated_param": {
+        "null_count": 223,
+        "null_rate": 30.72
+      },
+      "mode": {
+        "null_count": 348,
+        "null_rate": 47.93
+      },
+      "bg_repository": {
+        "null_count": 512,
+        "null_rate": 70.52
+      },
+      "bg_model": {
+        "null_count": 512,
+        "null_rate": 70.52
+      },
+      "bg_note": {
+        "null_count": 512,
+        "null_rate": 70.52
+      },
+      "bg_log_directory": {
+        "null_count": 512,
+        "null_rate": 70.52
+      },
+      "fg_duration_seconds": {
+        "null_count": 512,
+        "null_rate": 70.52
+      },
+      "fg_retries": {
+        "null_count": 512,
+        "null_rate": 70.52
+      },
+      "fg_error_message": {
+        "null_count": 512,
+        "null_rate": 70.52
+      }
+    },
+    "unique_counts": {
+      "experiment_id": 637,
+      "timestamp": 726,
+      "repository": 6,
+      "model": 10,
+      "is_parallel": 2,
+      "training_success": 1,
+      "duration_seconds": 726,
+      "retries": 2,
+      "error_message": 1,
+      "hyperparam_alpha": 33,
+      "hyperparam_batch_size": 49,
+      "hyperparam_dropout": 56,
+      "hyperparam_epochs": 52,
+      "hyperparam_kfold": 9,
+      "hyperparam_learning_rate": 162,
+      "hyperparam_max_iter": 32,
+      "hyperparam_seed": 191,
+      "hyperparam_weight_decay": 74,
+      "perf_accuracy": 43,
+      "perf_best_val_accuracy": 35,
+      "perf_map": 114,
+      "perf_precision": 52,
+      "perf_rank1": 83,
+      "perf_rank5": 61,
+      "perf_recall": 51,
+      "perf_test_accuracy": 105,
+      "perf_test_loss": 74,
+      "perf_eval_loss": 49,
+      "perf_final_training_loss": 48,
+      "perf_eval_samples_per_second": 77,
+      "perf_top1_accuracy": 15,
+      "perf_top5_accuracy": 13,
+      "perf_top10_accuracy": 14,
+      "perf_top20_accuracy": 13,
+      "energy_cpu_pkg_joules": 692,
+      "energy_cpu_ram_joules": 689,
+      "energy_cpu_total_joules": 692,
+      "energy_gpu_avg_watts": 692,
+      "energy_gpu_max_watts": 591,
+      "energy_gpu_min_watts": 607,
+      "energy_gpu_total_joules": 692,
+      "energy_gpu_temp_avg_celsius": 674,
+      "energy_gpu_temp_max_celsius": 46,
+      "energy_gpu_util_avg_percent": 638,
+      "energy_gpu_util_max_percent": 60,
+      "experiment_source": 3,
+      "num_mutated_params": 4,
+      "mutated_param": 9,
+      "mode": 1,
+      "bg_repository": 3,
+      "bg_model": 7,
+      "bg_note": 1,
+      "bg_log_directory": 214,
+      "fg_duration_seconds": 214,
+      "fg_retries": 2,
+      "fg_error_message": 1
+    }
+  },
+  "stage1": {
+    "stage": "stage1",
+    "exists": true,
+    "filepath": "../data/energy_research/processed.backup_4groups_20251224/stage1_unified.csv",
+    "rows": 726,
+    "columns": 58,
+    "total_cells": 42108,
+    "total_nulls": 21094,
+    "null_rate": 50.09,
+    "high_null_cols": [
+      [
+        "perf_best_val_accuracy",
+        94.63
+      ],
+      [
+        "hyperparam_kfold",
+        94.35
+      ],
+      [
+        "perf_accuracy",
+        93.66
+      ],
+      [
+        "hyperparam_max_iter",
+        93.25
+      ],
+      [
+        "hyperparam_alpha",
+        93.11
+      ],
+      [
+        "perf_precision",
+        92.01
+      ],
+      [
+        "perf_recall",
+        92.01
+      ],
+      [
+        "perf_top1_accuracy",
+        88.98
+      ],
+      [
+        "perf_top5_accuracy",
+        88.98
+      ],
+      [
+        "perf_top10_accuracy",
+        88.98
+      ]
+    ],
+    "full_cols": [
+      "experiment_id",
+      "timestamp",
+      "repository",
+      "model",
+      "is_parallel",
+      "training_success",
+      "duration_seconds",
+      "retries",
+      "error_message"
+    ],
+    "full_cols_count": 9,
+    "col_null_rates": {
+      "experiment_id": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "timestamp": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "repository": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "model": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "is_parallel": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "training_success": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "duration_seconds": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "retries": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "error_message": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "hyperparam_alpha": {
+        "null_count": 676,
+        "null_rate": 93.11
+      },
+      "hyperparam_batch_size": {
+        "null_count": 590,
+        "null_rate": 81.27
+      },
+      "hyperparam_dropout": {
+        "null_count": 603,
+        "null_rate": 83.06
+      },
+      "hyperparam_epochs": {
+        "null_count": 375,
+        "null_rate": 51.65
+      },
+      "hyperparam_kfold": {
+        "null_count": 685,
+        "null_rate": 94.35
+      },
+      "hyperparam_learning_rate": {
+        "null_count": 379,
+        "null_rate": 52.2
+      },
+      "hyperparam_max_iter": {
+        "null_count": 677,
+        "null_rate": 93.25
+      },
+      "hyperparam_seed": {
+        "null_count": 385,
+        "null_rate": 53.03
+      },
+      "hyperparam_weight_decay": {
+        "null_count": 616,
+        "null_rate": 84.85
+      },
+      "perf_accuracy": {
+        "null_count": 680,
+        "null_rate": 93.66
+      },
+      "perf_best_val_accuracy": {
+        "null_count": 687,
+        "null_rate": 94.63
+      },
+      "perf_map": {
+        "null_count": 610,
+        "null_rate": 84.02
+      },
+      "perf_precision": {
+        "null_count": 668,
+        "null_rate": 92.01
+      },
+      "perf_rank1": {
+        "null_count": 610,
+        "null_rate": 84.02
+      },
+      "perf_rank5": {
+        "null_count": 610,
+        "null_rate": 84.02
+      },
+      "perf_recall": {
+        "null_count": 668,
+        "null_rate": 92.01
+      },
+      "perf_test_accuracy": {
+        "null_count": 468,
+        "null_rate": 64.46
+      },
+      "perf_test_loss": {
+        "null_count": 604,
+        "null_rate": 83.2
+      },
+      "perf_eval_loss": {
+        "null_count": 644,
+        "null_rate": 88.71
+      },
+      "perf_final_training_loss": {
+        "null_count": 644,
+        "null_rate": 88.71
+      },
+      "perf_eval_samples_per_second": {
+        "null_count": 644,
+        "null_rate": 88.71
+      },
+      "perf_top1_accuracy": {
+        "null_count": 646,
+        "null_rate": 88.98
+      },
+      "perf_top5_accuracy": {
+        "null_count": 646,
+        "null_rate": 88.98
+      },
+      "perf_top10_accuracy": {
+        "null_count": 646,
+        "null_rate": 88.98
+      },
+      "perf_top20_accuracy": {
+        "null_count": 646,
+        "null_rate": 88.98
+      },
+      "energy_cpu_pkg_joules": {
+        "null_count": 34,
+        "null_rate": 4.68
+      },
+      "energy_cpu_ram_joules": {
+        "null_count": 34,
+        "null_rate": 4.68
+      },
+      "energy_cpu_total_joules": {
+        "null_count": 34,
+        "null_rate": 4.68
+      },
+      "energy_gpu_avg_watts": {
+        "null_count": 34,
+        "null_rate": 4.68
+      },
+      "energy_gpu_max_watts": {
+        "null_count": 34,
+        "null_rate": 4.68
+      },
+      "energy_gpu_min_watts": {
+        "null_count": 34,
+        "null_rate": 4.68
+      },
+      "energy_gpu_total_joules": {
+        "null_count": 34,
+        "null_rate": 4.68
+      },
+      "energy_gpu_temp_avg_celsius": {
+        "null_count": 34,
+        "null_rate": 4.68
+      },
+      "energy_gpu_temp_max_celsius": {
+        "null_count": 34,
+        "null_rate": 4.68
+      },
+      "energy_gpu_util_avg_percent": {
+        "null_count": 34,
+        "null_rate": 4.68
+      },
+      "energy_gpu_util_max_percent": {
+        "null_count": 34,
+        "null_rate": 4.68
+      },
+      "experiment_source": {
+        "null_count": 516,
+        "null_rate": 71.07
+      },
+      "num_mutated_params": {
+        "null_count": 50,
+        "null_rate": 6.89
+      },
+      "mutated_param": {
+        "null_count": 223,
+        "null_rate": 30.72
+      },
+      "mode": {
+        "null_count": 348,
+        "null_rate": 47.93
+      },
+      "bg_repository": {
+        "null_count": 512,
+        "null_rate": 70.52
+      },
+      "bg_model": {
+        "null_count": 512,
+        "null_rate": 70.52
+      },
+      "bg_note": {
+        "null_count": 512,
+        "null_rate": 70.52
+      },
+      "bg_log_directory": {
+        "null_count": 512,
+        "null_rate": 70.52
+      },
+      "fg_duration_seconds": {
+        "null_count": 512,
+        "null_rate": 70.52
+      },
+      "fg_retries": {
+        "null_count": 512,
+        "null_rate": 70.52
+      },
+      "fg_error_message": {
+        "null_count": 512,
+        "null_rate": 70.52
+      },
+      "training_duration": {
+        "null_count": 326,
+        "null_rate": 44.9
+      },
+      "l2_regularization": {
+        "null_count": 566,
+        "null_rate": 77.96
+      }
+    },
+    "unique_counts": {
+      "experiment_id": 637,
+      "timestamp": 726,
+      "repository": 6,
+      "model": 10,
+      "is_parallel": 2,
+      "training_success": 1,
+      "duration_seconds": 726,
+      "retries": 2,
+      "error_message": 1,
+      "hyperparam_alpha": 33,
+      "hyperparam_batch_size": 49,
+      "hyperparam_dropout": 56,
+      "hyperparam_epochs": 52,
+      "hyperparam_kfold": 9,
+      "hyperparam_learning_rate": 162,
+      "hyperparam_max_iter": 32,
+      "hyperparam_seed": 191,
+      "hyperparam_weight_decay": 74,
+      "perf_accuracy": 43,
+      "perf_best_val_accuracy": 35,
+      "perf_map": 114,
+      "perf_precision": 52,
+      "perf_rank1": 83,
+      "perf_rank5": 61,
+      "perf_recall": 51,
+      "perf_test_accuracy": 105,
+      "perf_test_loss": 74,
+      "perf_eval_loss": 49,
+      "perf_final_training_loss": 48,
+      "perf_eval_samples_per_second": 77,
+      "perf_top1_accuracy": 15,
+      "perf_top5_accuracy": 13,
+      "perf_top10_accuracy": 14,
+      "perf_top20_accuracy": 13,
+      "energy_cpu_pkg_joules": 692,
+      "energy_cpu_ram_joules": 689,
+      "energy_cpu_total_joules": 692,
+      "energy_gpu_avg_watts": 692,
+      "energy_gpu_max_watts": 591,
+      "energy_gpu_min_watts": 607,
+      "energy_gpu_total_joules": 692,
+      "energy_gpu_temp_avg_celsius": 674,
+      "energy_gpu_temp_max_celsius": 46,
+      "energy_gpu_util_avg_percent": 638,
+      "energy_gpu_util_max_percent": 60,
+      "experiment_source": 3,
+      "num_mutated_params": 4,
+      "mutated_param": 9,
+      "mode": 1,
+      "bg_repository": 3,
+      "bg_model": 7,
+      "bg_note": 1,
+      "bg_log_directory": 214,
+      "fg_duration_seconds": 214,
+      "fg_retries": 2,
+      "fg_error_message": 1,
+      "training_duration": 84,
+      "l2_regularization": 107
+    }
+  },
+  "stage2": {
+    "stage": "stage2",
+    "exists": true,
+    "filepath": "../data/energy_research/processed.backup_4groups_20251224/stage2_mediators.csv",
+    "rows": 726,
+    "columns": 63,
+    "total_cells": 45738,
+    "total_nulls": 21264,
+    "null_rate": 46.49,
+    "high_null_cols": [
+      [
+        "perf_best_val_accuracy",
+        94.63
+      ],
+      [
+        "hyperparam_kfold",
+        94.35
+      ],
+      [
+        "perf_accuracy",
+        93.66
+      ],
+      [
+        "hyperparam_max_iter",
+        93.25
+      ],
+      [
+        "hyperparam_alpha",
+        93.11
+      ],
+      [
+        "perf_precision",
+        92.01
+      ],
+      [
+        "perf_recall",
+        92.01
+      ],
+      [
+        "perf_top1_accuracy",
+        88.98
+      ],
+      [
+        "perf_top5_accuracy",
+        88.98
+      ],
+      [
+        "perf_top10_accuracy",
+        88.98
+      ]
+    ],
+    "full_cols": [
+      "experiment_id",
+      "timestamp",
+      "repository",
+      "model",
+      "is_parallel",
+      "training_success",
+      "duration_seconds",
+      "retries",
+      "error_message"
+    ],
+    "full_cols_count": 9,
+    "col_null_rates": {
+      "experiment_id": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "timestamp": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "repository": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "model": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "is_parallel": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "training_success": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "duration_seconds": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "retries": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "error_message": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "hyperparam_alpha": {
+        "null_count": 676,
+        "null_rate": 93.11
+      },
+      "hyperparam_batch_size": {
+        "null_count": 590,
+        "null_rate": 81.27
+      },
+      "hyperparam_dropout": {
+        "null_count": 603,
+        "null_rate": 83.06
+      },
+      "hyperparam_epochs": {
+        "null_count": 375,
+        "null_rate": 51.65
+      },
+      "hyperparam_kfold": {
+        "null_count": 685,
+        "null_rate": 94.35
+      },
+      "hyperparam_learning_rate": {
+        "null_count": 379,
+        "null_rate": 52.2
+      },
+      "hyperparam_max_iter": {
+        "null_count": 677,
+        "null_rate": 93.25
+      },
+      "hyperparam_seed": {
+        "null_count": 385,
+        "null_rate": 53.03
+      },
+      "hyperparam_weight_decay": {
+        "null_count": 616,
+        "null_rate": 84.85
+      },
+      "perf_accuracy": {
+        "null_count": 680,
+        "null_rate": 93.66
+      },
+      "perf_best_val_accuracy": {
+        "null_count": 687,
+        "null_rate": 94.63
+      },
+      "perf_map": {
+        "null_count": 610,
+        "null_rate": 84.02
+      },
+      "perf_precision": {
+        "null_count": 668,
+        "null_rate": 92.01
+      },
+      "perf_rank1": {
+        "null_count": 610,
+        "null_rate": 84.02
+      },
+      "perf_rank5": {
+        "null_count": 610,
+        "null_rate": 84.02
+      },
+      "perf_recall": {
+        "null_count": 668,
+        "null_rate": 92.01
+      },
+      "perf_test_accuracy": {
+        "null_count": 468,
+        "null_rate": 64.46
+      },
+      "perf_test_loss": {
+        "null_count": 604,
+        "null_rate": 83.2
+      },
+      "perf_eval_loss": {
+        "null_count": 644,
+        "null_rate": 88.71
+      },
+      "perf_final_training_loss": {
+        "null_count": 644,
+        "null_rate": 88.71
+      },
+      "perf_eval_samples_per_second": {
+        "null_count": 644,
+        "null_rate": 88.71
+      },
+      "perf_top1_accuracy": {
+        "null_count": 646,
+        "null_rate": 88.98
+      },
+      "perf_top5_accuracy": {
+        "null_count": 646,
+        "null_rate": 88.98
+      },
+      "perf_top10_accuracy": {
+        "null_count": 646,
+        "null_rate": 88.98
+      },
+      "perf_top20_accuracy": {
+        "null_count": 646,
+        "null_rate": 88.98
+      },
+      "energy_cpu_pkg_joules": {
+        "null_count": 34,
+        "null_rate": 4.68
+      },
+      "energy_cpu_ram_joules": {
+        "null_count": 34,
+        "null_rate": 4.68
+      },
+      "energy_cpu_total_joules": {
+        "null_count": 34,
+        "null_rate": 4.68
+      },
+      "energy_gpu_avg_watts": {
+        "null_count": 34,
+        "null_rate": 4.68
+      },
+      "energy_gpu_max_watts": {
+        "null_count": 34,
+        "null_rate": 4.68
+      },
+      "energy_gpu_min_watts": {
+        "null_count": 34,
+        "null_rate": 4.68
+      },
+      "energy_gpu_total_joules": {
+        "null_count": 34,
+        "null_rate": 4.68
+      },
+      "energy_gpu_temp_avg_celsius": {
+        "null_count": 34,
+        "null_rate": 4.68
+      },
+      "energy_gpu_temp_max_celsius": {
+        "null_count": 34,
+        "null_rate": 4.68
+      },
+      "energy_gpu_util_avg_percent": {
+        "null_count": 34,
+        "null_rate": 4.68
+      },
+      "energy_gpu_util_max_percent": {
+        "null_count": 34,
+        "null_rate": 4.68
+      },
+      "experiment_source": {
+        "null_count": 516,
+        "null_rate": 71.07
+      },
+      "num_mutated_params": {
+        "null_count": 50,
+        "null_rate": 6.89
+      },
+      "mutated_param": {
+        "null_count": 223,
+        "null_rate": 30.72
+      },
+      "mode": {
+        "null_count": 348,
+        "null_rate": 47.93
+      },
+      "bg_repository": {
+        "null_count": 512,
+        "null_rate": 70.52
+      },
+      "bg_model": {
+        "null_count": 512,
+        "null_rate": 70.52
+      },
+      "bg_note": {
+        "null_count": 512,
+        "null_rate": 70.52
+      },
+      "bg_log_directory": {
+        "null_count": 512,
+        "null_rate": 70.52
+      },
+      "fg_duration_seconds": {
+        "null_count": 512,
+        "null_rate": 70.52
+      },
+      "fg_retries": {
+        "null_count": 512,
+        "null_rate": 70.52
+      },
+      "fg_error_message": {
+        "null_count": 512,
+        "null_rate": 70.52
+      },
+      "training_duration": {
+        "null_count": 326,
+        "null_rate": 44.9
+      },
+      "l2_regularization": {
+        "null_count": 566,
+        "null_rate": 77.96
+      },
+      "gpu_util_avg": {
+        "null_count": 34,
+        "null_rate": 4.68
+      },
+      "gpu_temp_max": {
+        "null_count": 34,
+        "null_rate": 4.68
+      },
+      "cpu_pkg_ratio": {
+        "null_count": 34,
+        "null_rate": 4.68
+      },
+      "gpu_power_fluctuation": {
+        "null_count": 34,
+        "null_rate": 4.68
+      },
+      "gpu_temp_fluctuation": {
+        "null_count": 34,
+        "null_rate": 4.68
+      }
+    },
+    "unique_counts": {
+      "experiment_id": 637,
+      "timestamp": 726,
+      "repository": 6,
+      "model": 10,
+      "is_parallel": 2,
+      "training_success": 1,
+      "duration_seconds": 726,
+      "retries": 2,
+      "error_message": 1,
+      "hyperparam_alpha": 33,
+      "hyperparam_batch_size": 49,
+      "hyperparam_dropout": 56,
+      "hyperparam_epochs": 52,
+      "hyperparam_kfold": 9,
+      "hyperparam_learning_rate": 162,
+      "hyperparam_max_iter": 32,
+      "hyperparam_seed": 191,
+      "hyperparam_weight_decay": 74,
+      "perf_accuracy": 43,
+      "perf_best_val_accuracy": 35,
+      "perf_map": 114,
+      "perf_precision": 52,
+      "perf_rank1": 83,
+      "perf_rank5": 61,
+      "perf_recall": 51,
+      "perf_test_accuracy": 105,
+      "perf_test_loss": 74,
+      "perf_eval_loss": 49,
+      "perf_final_training_loss": 48,
+      "perf_eval_samples_per_second": 77,
+      "perf_top1_accuracy": 15,
+      "perf_top5_accuracy": 13,
+      "perf_top10_accuracy": 14,
+      "perf_top20_accuracy": 13,
+      "energy_cpu_pkg_joules": 692,
+      "energy_cpu_ram_joules": 689,
+      "energy_cpu_total_joules": 692,
+      "energy_gpu_avg_watts": 692,
+      "energy_gpu_max_watts": 591,
+      "energy_gpu_min_watts": 607,
+      "energy_gpu_total_joules": 692,
+      "energy_gpu_temp_avg_celsius": 674,
+      "energy_gpu_temp_max_celsius": 46,
+      "energy_gpu_util_avg_percent": 638,
+      "energy_gpu_util_max_percent": 60,
+      "experiment_source": 3,
+      "num_mutated_params": 4,
+      "mutated_param": 9,
+      "mode": 1,
+      "bg_repository": 3,
+      "bg_model": 7,
+      "bg_note": 1,
+      "bg_log_directory": 214,
+      "fg_duration_seconds": 214,
+      "fg_retries": 2,
+      "fg_error_message": 1,
+      "training_duration": 84,
+      "l2_regularization": 107,
+      "gpu_util_avg": 638,
+      "gpu_temp_max": 46,
+      "cpu_pkg_ratio": 692,
+      "gpu_power_fluctuation": 667,
+      "gpu_temp_fluctuation": 653
+    }
+  },
+  "stage3": {
+    "stage": "stage3",
+    "exists": true,
+    "filepath": "../data/energy_research/processed.backup_4groups_20251224/stage3_image_classification.csv",
+    "rows": 258,
+    "columns": 63,
+    "total_cells": 16254,
+    "total_nulls": 7102,
+    "null_rate": 43.69,
+    "high_null_cols": [
+      [
+        "hyperparam_alpha",
+        100.0
+      ],
+      [
+        "hyperparam_dropout",
+        100.0
+      ],
+      [
+        "hyperparam_kfold",
+        100.0
+      ],
+      [
+        "hyperparam_max_iter",
+        100.0
+      ],
+      [
+        "perf_accuracy",
+        100.0
+      ],
+      [
+        "perf_map",
+        100.0
+      ],
+      [
+        "perf_precision",
+        100.0
+      ],
+      [
+        "perf_rank1",
+        100.0
+      ],
+      [
+        "perf_rank5",
+        100.0
+      ],
+      [
+        "perf_recall",
+        100.0
+      ]
+    ],
+    "full_cols": [
+      "experiment_id",
+      "timestamp",
+      "repository",
+      "model",
+      "is_parallel",
+      "training_success",
+      "duration_seconds",
+      "retries",
+      "error_message",
+      "perf_test_accuracy",
+      "num_mutated_params"
+    ],
+    "full_cols_count": 11,
+    "col_null_rates": {
+      "experiment_id": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "timestamp": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "repository": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "model": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "is_parallel": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "training_success": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "duration_seconds": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "retries": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "error_message": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "hyperparam_alpha": {
+        "null_count": 258,
+        "null_rate": 100.0
+      },
+      "hyperparam_batch_size": {
+        "null_count": 122,
+        "null_rate": 47.29
+      },
+      "hyperparam_dropout": {
+        "null_count": 258,
+        "null_rate": 100.0
+      },
+      "hyperparam_epochs": {
+        "null_count": 83,
+        "null_rate": 32.17
+      },
+      "hyperparam_kfold": {
+        "null_count": 258,
+        "null_rate": 100.0
+      },
+      "hyperparam_learning_rate": {
+        "null_count": 84,
+        "null_rate": 32.56
+      },
+      "hyperparam_max_iter": {
+        "null_count": 258,
+        "null_rate": 100.0
+      },
+      "hyperparam_seed": {
+        "null_count": 92,
+        "null_rate": 35.66
+      },
+      "hyperparam_weight_decay": {
+        "null_count": 237,
+        "null_rate": 91.86
+      },
+      "perf_accuracy": {
+        "null_count": 258,
+        "null_rate": 100.0
+      },
+      "perf_best_val_accuracy": {
+        "null_count": 219,
+        "null_rate": 84.88
+      },
+      "perf_map": {
+        "null_count": 258,
+        "null_rate": 100.0
+      },
+      "perf_precision": {
+        "null_count": 258,
+        "null_rate": 100.0
+      },
+      "perf_rank1": {
+        "null_count": 258,
+        "null_rate": 100.0
+      },
+      "perf_rank5": {
+        "null_count": 258,
+        "null_rate": 100.0
+      },
+      "perf_recall": {
+        "null_count": 258,
+        "null_rate": 100.0
+      },
+      "perf_test_accuracy": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "perf_test_loss": {
+        "null_count": 136,
+        "null_rate": 52.71
+      },
+      "perf_eval_loss": {
+        "null_count": 258,
+        "null_rate": 100.0
+      },
+      "perf_final_training_loss": {
+        "null_count": 258,
+        "null_rate": 100.0
+      },
+      "perf_eval_samples_per_second": {
+        "null_count": 258,
+        "null_rate": 100.0
+      },
+      "perf_top1_accuracy": {
+        "null_count": 258,
+        "null_rate": 100.0
+      },
+      "perf_top5_accuracy": {
+        "null_count": 258,
+        "null_rate": 100.0
+      },
+      "perf_top10_accuracy": {
+        "null_count": 258,
+        "null_rate": 100.0
+      },
+      "perf_top20_accuracy": {
+        "null_count": 258,
+        "null_rate": 100.0
+      },
+      "energy_cpu_pkg_joules": {
+        "null_count": 1,
+        "null_rate": 0.39
+      },
+      "energy_cpu_ram_joules": {
+        "null_count": 1,
+        "null_rate": 0.39
+      },
+      "energy_cpu_total_joules": {
+        "null_count": 1,
+        "null_rate": 0.39
+      },
+      "energy_gpu_avg_watts": {
+        "null_count": 1,
+        "null_rate": 0.39
+      },
+      "energy_gpu_max_watts": {
+        "null_count": 1,
+        "null_rate": 0.39
+      },
+      "energy_gpu_min_watts": {
+        "null_count": 1,
+        "null_rate": 0.39
+      },
+      "energy_gpu_total_joules": {
+        "null_count": 1,
+        "null_rate": 0.39
+      },
+      "energy_gpu_temp_avg_celsius": {
+        "null_count": 1,
+        "null_rate": 0.39
+      },
+      "energy_gpu_temp_max_celsius": {
+        "null_count": 1,
+        "null_rate": 0.39
+      },
+      "energy_gpu_util_avg_percent": {
+        "null_count": 1,
+        "null_rate": 0.39
+      },
+      "energy_gpu_util_max_percent": {
+        "null_count": 1,
+        "null_rate": 0.39
+      },
+      "experiment_source": {
+        "null_count": 173,
+        "null_rate": 67.05
+      },
+      "num_mutated_params": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "mutated_param": {
+        "null_count": 58,
+        "null_rate": 22.48
+      },
+      "mode": {
+        "null_count": 112,
+        "null_rate": 43.41
+      },
+      "bg_repository": {
+        "null_count": 152,
+        "null_rate": 58.91
+      },
+      "bg_model": {
+        "null_count": 152,
+        "null_rate": 58.91
+      },
+      "bg_note": {
+        "null_count": 152,
+        "null_rate": 58.91
+      },
+      "bg_log_directory": {
+        "null_count": 152,
+        "null_rate": 58.91
+      },
+      "fg_duration_seconds": {
+        "null_count": 152,
+        "null_rate": 58.91
+      },
+      "fg_retries": {
+        "null_count": 152,
+        "null_rate": 58.91
+      },
+      "fg_error_message": {
+        "null_count": 152,
+        "null_rate": 58.91
+      },
+      "training_duration": {
+        "null_count": 83,
+        "null_rate": 32.17
+      },
+      "l2_regularization": {
+        "null_count": 237,
+        "null_rate": 91.86
+      },
+      "gpu_util_avg": {
+        "null_count": 1,
+        "null_rate": 0.39
+      },
+      "gpu_temp_max": {
+        "null_count": 1,
+        "null_rate": 0.39
+      },
+      "cpu_pkg_ratio": {
+        "null_count": 1,
+        "null_rate": 0.39
+      },
+      "gpu_power_fluctuation": {
+        "null_count": 1,
+        "null_rate": 0.39
+      },
+      "gpu_temp_fluctuation": {
+        "null_count": 1,
+        "null_rate": 0.39
+      }
+    },
+    "unique_counts": {
+      "experiment_id": 243,
+      "timestamp": 258,
+      "repository": 2,
+      "model": 5,
+      "is_parallel": 2,
+      "training_success": 1,
+      "duration_seconds": 258,
+      "retries": 1,
+      "error_message": 1,
+      "hyperparam_alpha": 0,
+      "hyperparam_batch_size": 49,
+      "hyperparam_dropout": 0,
+      "hyperparam_epochs": 21,
+      "hyperparam_kfold": 0,
+      "hyperparam_learning_rate": 66,
+      "hyperparam_max_iter": 0,
+      "hyperparam_seed": 67,
+      "hyperparam_weight_decay": 11,
+      "perf_accuracy": 0,
+      "perf_best_val_accuracy": 35,
+      "perf_map": 0,
+      "perf_precision": 0,
+      "perf_rank1": 0,
+      "perf_rank5": 0,
+      "perf_recall": 0,
+      "perf_test_accuracy": 105,
+      "perf_test_loss": 74,
+      "perf_eval_loss": 0,
+      "perf_final_training_loss": 0,
+      "perf_eval_samples_per_second": 0,
+      "perf_top1_accuracy": 0,
+      "perf_top5_accuracy": 0,
+      "perf_top10_accuracy": 0,
+      "perf_top20_accuracy": 0,
+      "energy_cpu_pkg_joules": 257,
+      "energy_cpu_ram_joules": 255,
+      "energy_cpu_total_joules": 257,
+      "energy_gpu_avg_watts": 257,
+      "energy_gpu_max_watts": 244,
+      "energy_gpu_min_watts": 245,
+      "energy_gpu_total_joules": 257,
+      "energy_gpu_temp_avg_celsius": 256,
+      "energy_gpu_temp_max_celsius": 39,
+      "energy_gpu_util_avg_percent": 241,
+      "energy_gpu_util_max_percent": 49,
+      "experiment_source": 3,
+      "num_mutated_params": 3,
+      "mutated_param": 5,
+      "mode": 1,
+      "bg_repository": 3,
+      "bg_model": 6,
+      "bg_note": 1,
+      "bg_log_directory": 106,
+      "fg_duration_seconds": 106,
+      "fg_retries": 1,
+      "fg_error_message": 1,
+      "training_duration": 21,
+      "l2_regularization": 11,
+      "gpu_util_avg": 241,
+      "gpu_temp_max": 39,
+      "cpu_pkg_ratio": 257,
+      "gpu_power_fluctuation": 253,
+      "gpu_temp_fluctuation": 241
+    }
+  },
+  "stage4": {
+    "stage": "stage4",
+    "exists": true,
+    "filepath": "../data/energy_research/processed.backup_4groups_20251224/stage4_person_reid.csv",
+    "rows": 116,
+    "columns": 66,
+    "total_cells": 7656,
+    "total_nulls": 3004,
+    "null_rate": 39.24,
+    "high_null_cols": [
+      [
+        "hyperparam_alpha",
+        100.0
+      ],
+      [
+        "hyperparam_batch_size",
+        100.0
+      ],
+      [
+        "hyperparam_kfold",
+        100.0
+      ],
+      [
+        "hyperparam_max_iter",
+        100.0
+      ],
+      [
+        "hyperparam_weight_decay",
+        100.0
+      ],
+      [
+        "perf_accuracy",
+        100.0
+      ],
+      [
+        "perf_best_val_accuracy",
+        100.0
+      ],
+      [
+        "perf_precision",
+        100.0
+      ],
+      [
+        "perf_recall",
+        100.0
+      ],
+      [
+        "perf_test_accuracy",
+        100.0
+      ]
+    ],
+    "full_cols": [
+      "experiment_id",
+      "timestamp",
+      "repository",
+      "model",
+      "is_parallel",
+      "training_success",
+      "duration_seconds",
+      "retries",
+      "error_message",
+      "perf_map",
+      "perf_rank1",
+      "perf_rank5",
+      "energy_cpu_pkg_joules",
+      "energy_cpu_ram_joules",
+      "energy_cpu_total_joules",
+      "energy_gpu_avg_watts",
+      "energy_gpu_max_watts",
+      "energy_gpu_min_watts",
+      "energy_gpu_total_joules",
+      "energy_gpu_temp_avg_celsius",
+      "energy_gpu_temp_max_celsius",
+      "energy_gpu_util_avg_percent",
+      "energy_gpu_util_max_percent",
+      "num_mutated_params",
+      "gpu_util_avg",
+      "gpu_temp_max",
+      "cpu_pkg_ratio",
+      "gpu_power_fluctuation",
+      "gpu_temp_fluctuation",
+      "is_densenet121",
+      "is_hrnet18",
+      "is_pcb"
+    ],
+    "full_cols_count": 32,
+    "col_null_rates": {
+      "experiment_id": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "timestamp": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "repository": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "model": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "is_parallel": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "training_success": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "duration_seconds": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "retries": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "error_message": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "hyperparam_alpha": {
+        "null_count": 116,
+        "null_rate": 100.0
+      },
+      "hyperparam_batch_size": {
+        "null_count": 116,
+        "null_rate": 100.0
+      },
+      "hyperparam_dropout": {
+        "null_count": 31,
+        "null_rate": 26.72
+      },
+      "hyperparam_epochs": {
+        "null_count": 30,
+        "null_rate": 25.86
+      },
+      "hyperparam_kfold": {
+        "null_count": 116,
+        "null_rate": 100.0
+      },
+      "hyperparam_learning_rate": {
+        "null_count": 31,
+        "null_rate": 26.72
+      },
+      "hyperparam_max_iter": {
+        "null_count": 116,
+        "null_rate": 100.0
+      },
+      "hyperparam_seed": {
+        "null_count": 78,
+        "null_rate": 67.24
+      },
+      "hyperparam_weight_decay": {
+        "null_count": 116,
+        "null_rate": 100.0
+      },
+      "perf_accuracy": {
+        "null_count": 116,
+        "null_rate": 100.0
+      },
+      "perf_best_val_accuracy": {
+        "null_count": 116,
+        "null_rate": 100.0
+      },
+      "perf_map": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "perf_precision": {
+        "null_count": 116,
+        "null_rate": 100.0
+      },
+      "perf_rank1": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "perf_rank5": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "perf_recall": {
+        "null_count": 116,
+        "null_rate": 100.0
+      },
+      "perf_test_accuracy": {
+        "null_count": 116,
+        "null_rate": 100.0
+      },
+      "perf_test_loss": {
+        "null_count": 116,
+        "null_rate": 100.0
+      },
+      "perf_eval_loss": {
+        "null_count": 116,
+        "null_rate": 100.0
+      },
+      "perf_final_training_loss": {
+        "null_count": 116,
+        "null_rate": 100.0
+      },
+      "perf_eval_samples_per_second": {
+        "null_count": 116,
+        "null_rate": 100.0
+      },
+      "perf_top1_accuracy": {
+        "null_count": 116,
+        "null_rate": 100.0
+      },
+      "perf_top5_accuracy": {
+        "null_count": 116,
+        "null_rate": 100.0
+      },
+      "perf_top10_accuracy": {
+        "null_count": 116,
+        "null_rate": 100.0
+      },
+      "perf_top20_accuracy": {
+        "null_count": 116,
+        "null_rate": 100.0
+      },
+      "energy_cpu_pkg_joules": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "energy_cpu_ram_joules": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "energy_cpu_total_joules": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "energy_gpu_avg_watts": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "energy_gpu_max_watts": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "energy_gpu_min_watts": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "energy_gpu_total_joules": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "energy_gpu_temp_avg_celsius": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "energy_gpu_temp_max_celsius": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "energy_gpu_util_avg_percent": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "energy_gpu_util_max_percent": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "experiment_source": {
+        "null_count": 69,
+        "null_rate": 59.48
+      },
+      "num_mutated_params": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "mutated_param": {
+        "null_count": 11,
+        "null_rate": 9.48
+      },
+      "mode": {
+        "null_count": 65,
+        "null_rate": 56.03
+      },
+      "bg_repository": {
+        "null_count": 65,
+        "null_rate": 56.03
+      },
+      "bg_model": {
+        "null_count": 65,
+        "null_rate": 56.03
+      },
+      "bg_note": {
+        "null_count": 65,
+        "null_rate": 56.03
+      },
+      "bg_log_directory": {
+        "null_count": 65,
+        "null_rate": 56.03
+      },
+      "fg_duration_seconds": {
+        "null_count": 65,
+        "null_rate": 56.03
+      },
+      "fg_retries": {
+        "null_count": 65,
+        "null_rate": 56.03
+      },
+      "fg_error_message": {
+        "null_count": 65,
+        "null_rate": 56.03
+      },
+      "training_duration": {
+        "null_count": 30,
+        "null_rate": 25.86
+      },
+      "l2_regularization": {
+        "null_count": 116,
+        "null_rate": 100.0
+      },
+      "gpu_util_avg": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "gpu_temp_max": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "cpu_pkg_ratio": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "gpu_power_fluctuation": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "gpu_temp_fluctuation": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "is_densenet121": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "is_hrnet18": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "is_pcb": {
+        "null_count": 0,
+        "null_rate": 0.0
+      }
+    },
+    "unique_counts": {
+      "experiment_id": 111,
+      "timestamp": 116,
+      "repository": 1,
+      "model": 3,
+      "is_parallel": 2,
+      "training_success": 1,
+      "duration_seconds": 116,
+      "retries": 2,
+      "error_message": 1,
+      "hyperparam_alpha": 0,
+      "hyperparam_batch_size": 0,
+      "hyperparam_dropout": 32,
+      "hyperparam_epochs": 26,
+      "hyperparam_kfold": 0,
+      "hyperparam_learning_rate": 33,
+      "hyperparam_max_iter": 0,
+      "hyperparam_seed": 33,
+      "hyperparam_weight_decay": 0,
+      "perf_accuracy": 0,
+      "perf_best_val_accuracy": 0,
+      "perf_map": 114,
+      "perf_precision": 0,
+      "perf_rank1": 83,
+      "perf_rank5": 61,
+      "perf_recall": 0,
+      "perf_test_accuracy": 0,
+      "perf_test_loss": 0,
+      "perf_eval_loss": 0,
+      "perf_final_training_loss": 0,
+      "perf_eval_samples_per_second": 0,
+      "perf_top1_accuracy": 0,
+      "perf_top5_accuracy": 0,
+      "perf_top10_accuracy": 0,
+      "perf_top20_accuracy": 0,
+      "energy_cpu_pkg_joules": 116,
+      "energy_cpu_ram_joules": 116,
+      "energy_cpu_total_joules": 116,
+      "energy_gpu_avg_watts": 116,
+      "energy_gpu_max_watts": 113,
+      "energy_gpu_min_watts": 106,
+      "energy_gpu_total_joules": 116,
+      "energy_gpu_temp_avg_celsius": 116,
+      "energy_gpu_temp_max_celsius": 7,
+      "energy_gpu_util_avg_percent": 116,
+      "energy_gpu_util_max_percent": 21,
+      "experiment_source": 3,
+      "num_mutated_params": 3,
+      "mutated_param": 4,
+      "mode": 1,
+      "bg_repository": 3,
+      "bg_model": 4,
+      "bg_note": 1,
+      "bg_log_directory": 51,
+      "fg_duration_seconds": 51,
+      "fg_retries": 2,
+      "fg_error_message": 1,
+      "training_duration": 26,
+      "l2_regularization": 0,
+      "gpu_util_avg": 116,
+      "gpu_temp_max": 7,
+      "cpu_pkg_ratio": 116,
+      "gpu_power_fluctuation": 115,
+      "gpu_temp_fluctuation": 116,
+      "is_densenet121": 2,
+      "is_hrnet18": 2,
+      "is_pcb": 2
+    }
+  },
+  "stage5": {
+    "stage": "stage5",
+    "exists": true,
+    "filepath": "../data/energy_research/processed/stage5_vulberta.csv",
+    "rows": 142,
+    "columns": 14,
+    "total_cells": 1988,
+    "total_nulls": 410,
+    "null_rate": 20.62,
+    "high_null_cols": [
+      [
+        "hyperparam_learning_rate",
+        64.79
+      ],
+      [
+        "training_duration",
+        63.38
+      ]
+    ],
+    "full_cols": [
+      "experiment_id",
+      "repository",
+      "model",
+      "timestamp"
+    ],
+    "full_cols_count": 4,
+    "col_null_rates": {
+      "experiment_id": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "repository": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "model": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "timestamp": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "hyperparam_learning_rate": {
+        "null_count": 92,
+        "null_rate": 64.79
+      },
+      "training_duration": {
+        "null_count": 90,
+        "null_rate": 63.38
+      },
+      "gpu_util_avg": {
+        "null_count": 24,
+        "null_rate": 16.9
+      },
+      "gpu_temp_max": {
+        "null_count": 24,
+        "null_rate": 16.9
+      },
+      "cpu_pkg_ratio": {
+        "null_count": 24,
+        "null_rate": 16.9
+      },
+      "gpu_power_fluctuation": {
+        "null_count": 24,
+        "null_rate": 16.9
+      },
+      "gpu_temp_fluctuation": {
+        "null_count": 24,
+        "null_rate": 16.9
+      },
+      "energy_cpu_total_joules": {
+        "null_count": 24,
+        "null_rate": 16.9
+      },
+      "energy_gpu_total_joules": {
+        "null_count": 24,
+        "null_rate": 16.9
+      },
+      "perf_eval_loss": {
+        "null_count": 60,
+        "null_rate": 42.25
+      }
+    },
+    "unique_counts": {
+      "experiment_id": 101,
+      "repository": 1,
+      "model": 1,
+      "timestamp": 142,
+      "hyperparam_learning_rate": 40,
+      "training_duration": 16,
+      "gpu_util_avg": 111,
+      "gpu_temp_max": 9,
+      "cpu_pkg_ratio": 118,
+      "gpu_power_fluctuation": 103,
+      "gpu_temp_fluctuation": 117,
+      "energy_cpu_total_joules": 118,
+      "energy_gpu_total_joules": 118,
+      "perf_eval_loss": 49
+    }
+  },
+  "stage6": {
+    "stage": "stage6",
+    "exists": true,
+    "filepath": "../data/energy_research/processed.backup_4groups_20251224/stage6_person_reid.csv",
+    "rows": 116,
+    "columns": 20,
+    "total_cells": 2320,
+    "total_nulls": 92,
+    "null_rate": 3.97,
+    "high_null_cols": [],
+    "full_cols": [
+      "experiment_id",
+      "repository",
+      "model",
+      "timestamp",
+      "is_densenet121",
+      "is_hrnet18",
+      "is_pcb",
+      "gpu_util_avg",
+      "gpu_temp_max",
+      "cpu_pkg_ratio",
+      "gpu_power_fluctuation",
+      "gpu_temp_fluctuation",
+      "energy_cpu_total_joules",
+      "energy_gpu_total_joules",
+      "perf_map",
+      "perf_rank1",
+      "perf_rank5"
+    ],
+    "full_cols_count": 17,
+    "col_null_rates": {
+      "experiment_id": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "repository": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "model": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "timestamp": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "hyperparam_learning_rate": {
+        "null_count": 31,
+        "null_rate": 26.72
+      },
+      "hyperparam_dropout": {
+        "null_count": 31,
+        "null_rate": 26.72
+      },
+      "training_duration": {
+        "null_count": 30,
+        "null_rate": 25.86
+      },
+      "is_densenet121": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "is_hrnet18": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "is_pcb": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "gpu_util_avg": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "gpu_temp_max": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "cpu_pkg_ratio": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "gpu_power_fluctuation": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "gpu_temp_fluctuation": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "energy_cpu_total_joules": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "energy_gpu_total_joules": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "perf_map": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "perf_rank1": {
+        "null_count": 0,
+        "null_rate": 0.0
+      },
+      "perf_rank5": {
+        "null_count": 0,
+        "null_rate": 0.0
+      }
+    },
+    "unique_counts": {
+      "experiment_id": 111,
+      "repository": 1,
+      "model": 3,
+      "timestamp": 116,
+      "hyperparam_learning_rate": 33,
+      "hyperparam_dropout": 32,
+      "training_duration": 26,
+      "is_densenet121": 2,
+      "is_hrnet18": 2,
+      "is_pcb": 2,
+      "gpu_util_avg": 116,
+      "gpu_temp_max": 7,
+      "cpu_pkg_ratio": 116,
+      "gpu_power_fluctuation": 115,
+      "gpu_temp_fluctuation": 116,
+      "energy_cpu_total_joules": 116,
+      "energy_gpu_total_joules": 116,
+      "perf_map": 114,
+      "perf_rank1": 83,
+      "perf_rank5": 61
+    }
+  }
+}

@@ -1,0 +1,56 @@
+[
+  {
+    "task_name": "image_classification",
+    "rows": 116,
+    "columns": 17,
+    "output_path": "../data/energy_research/processed/training_data_image_classification.csv",
+    "performance_cols": [
+      "perf_test_accuracy"
+    ],
+    "missing_rate": {
+      "perf_test_accuracy": 0.0
+    }
+  },
+  {
+    "task_name": "person_reid",
+    "rows": 69,
+    "columns": 20,
+    "output_path": "../data/energy_research/processed/training_data_person_reid.csv",
+    "performance_cols": [
+      "perf_map",
+      "perf_rank1",
+      "perf_rank5"
+    ],
+    "missing_rate": {
+      "perf_map": 0.0,
+      "perf_rank1": 0.0,
+      "perf_rank5": 0.0
+    }
+  },
+  {
+    "task_name": "vulberta",
+    "rows": 96,
+    "columns": 15,
+    "output_path": "../data/energy_research/processed/training_data_vulberta.csv",
+    "performance_cols": [
+      "perf_eval_loss"
+    ],
+    "missing_rate": {
+      "perf_eval_loss": 0.0
+    }
+  },
+  {
+    "task_name": "bug_localization",
+    "rows": 91,
+    "columns": 16,
+    "output_path": "../data/energy_research/processed/training_data_bug_localization.csv",
+    "performance_cols": [
+      "perf_top1_accuracy",
+      "perf_top5_accuracy"
+    ],
+    "missing_rate": {
+      "perf_top1_accuracy": 0.0,
+      "perf_top5_accuracy": 0.0
+    }
+  }
+]

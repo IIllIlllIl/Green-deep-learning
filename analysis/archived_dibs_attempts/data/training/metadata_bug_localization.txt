@@ -1,0 +1,25 @@
+任务组: Bug定位 (bug_localization)
+生成时间: 2025-12-23 22:28:11
+
+数据统计:
+  样本数: 132
+  特征数: 11
+  缺失率: 17.88%
+
+DiBS适用性:
+  样本量: 132 (最低10, 推荐20)
+  填充率: 82.1% (最低70.0%)
+  整体就绪: ✅ 是
+
+特征列表:
+  1. hyperparam_learning_rate (0.0%)
+  2. training_duration (37.1%)
+  3. gpu_util_avg (96.2%)
+  4. gpu_temp_max (96.2%)
+  5. cpu_pkg_ratio (96.2%)
+  6. gpu_power_fluctuation (96.2%)
+  7. gpu_temp_fluctuation (96.2%)
+  8. energy_cpu_total_joules (96.2%)
+  9. energy_gpu_total_joules (96.2%)
+  10. perf_top1_accuracy (60.6%)
+  11. perf_top5_accuracy (60.6%)
