@@ -1,6 +1,6 @@
 # Session数据追加到raw_data.csv - 使用指南
 
-**脚本**: `scripts/append_session_to_raw_data.py`
+**脚本**: `tools/data_management/append_session_to_raw_data.py`
 **版本**: 1.0
 **创建日期**: 2025-12-13
 
@@ -27,24 +27,24 @@
 
 ```bash
 # 追加最新 session 的实验数据
-python3 scripts/append_session_to_raw_data.py results/run_20251213_100000
+python3 tools/data_management/append_session_to_raw_data.py results/run_20251213_100000
 ```
 
 ### 测试模式（推荐先运行）
 
 ```bash
 # Dry-run：查看将要添加什么，但不实际写入
-python3 scripts/append_session_to_raw_data.py results/run_20251213_100000 --dry-run
+python3 tools/data_management/append_session_to_raw_data.py results/run_20251213_100000 --dry-run
 ```
 
 ### 典型工作流程
 
 ```bash
 # 步骤1: 先用 dry-run 模式检查
-python3 scripts/append_session_to_raw_data.py results/run_20251213_100000 --dry-run
+python3 tools/data_management/append_session_to_raw_data.py results/run_20251213_100000 --dry-run
 
 # 步骤2: 确认无误后，实际执行
-python3 scripts/append_session_to_raw_data.py results/run_20251213_100000
+python3 tools/data_management/append_session_to_raw_data.py results/run_20251213_100000
 ```
 
 ---
@@ -61,7 +61,7 @@ python3 scripts/append_session_to_raw_data.py results/run_20251213_100000
 
 | 参数 | 说明 | 默认值 |
 |------|------|--------|
-| `--raw-data-csv PATH` | raw_data.csv文件路径 | `results/raw_data.csv` |
+| `--raw-data-csv PATH` | raw_data.csv文件路径 | `data/raw_data.csv` |
 | `--models-config PATH` | models_config.json路径 | `mutation/models_config.json` |
 | `--dry-run` | 测试运行，不实际写入文件 | 否 |
 | `--no-backup` | 不创建备份文件 | 否（默认创建备份） |
@@ -74,7 +74,7 @@ python3 scripts/append_session_to_raw_data.py results/run_20251213_100000
 ### 示例1: 基本追加
 
 ```bash
-python3 scripts/append_session_to_raw_data.py results/run_20251213_100000
+python3 tools/data_management/append_session_to_raw_data.py results/run_20251213_100000
 ```
 
 **输出**:
@@ -103,8 +103,8 @@ python3 scripts/append_session_to_raw_data.py results/run_20251213_100000
 跳过（重复）: 3个
 新增实验: 2个
 
-✅ 已备份: results/raw_data.csv.backup_20251213_120000
-✅ 已更新: results/raw_data.csv
+✅ 已备份: data/raw_data.csv.backup_20251213_120000
+✅ 已更新: data/raw_data.csv
    原始: 480行
    新增: 2行
    总计: 482行
@@ -120,7 +120,7 @@ python3 scripts/append_session_to_raw_data.py results/run_20251213_100000
 ### 示例2: Dry-run 测试
 
 ```bash
-python3 scripts/append_session_to_raw_data.py results/run_20251213_100000 --dry-run
+python3 tools/data_management/append_session_to_raw_data.py results/run_20251213_100000 --dry-run
 ```
 
 **输出**:
@@ -138,7 +138,7 @@ python3 scripts/append_session_to_raw_data.py results/run_20251213_100000 --dry-
 ### 示例3: 静默模式
 
 ```bash
-python3 scripts/append_session_to_raw_data.py results/run_20251213_100000 --quiet
+python3 tools/data_management/append_session_to_raw_data.py results/run_20251213_100000 --quiet
 ```
 
 **输出**: （仅错误信息，成功时无输出）
@@ -146,7 +146,7 @@ python3 scripts/append_session_to_raw_data.py results/run_20251213_100000 --quie
 ### 示例4: 不创建备份
 
 ```bash
-python3 scripts/append_session_to_raw_data.py results/run_20251213_100000 --no-backup
+python3 tools/data_management/append_session_to_raw_data.py results/run_20251213_100000 --no-backup
 ```
 
 **注意**: 不推荐在生产环境使用此选项
@@ -158,7 +158,7 @@ python3 scripts/append_session_to_raw_data.py results/run_20251213_100000 --no-b
 ### 数据提取流程
 
 1. **加载现有数据**
-   - 读取 `results/raw_data.csv`
+   - 读取 `data/raw_data.csv`
    - 提取所有已存在的 `experiment_id`
 
 2. **扫描 session 目录**
@@ -288,7 +288,7 @@ python3 tests/test_append_session_to_raw_data.py
 
 1. **始终先运行 dry-run**
    ```bash
-   python3 scripts/append_session_to_raw_data.py SESSION_DIR --dry-run
+   python3 tools/data_management/append_session_to_raw_data.py SESSION_DIR --dry-run
    ```
 
 2. **验证备份**
@@ -399,7 +399,7 @@ FileNotFoundError: Session directory not found: results/run_20251213_100000
 grep -r "experiment_id" results/run_20251213_100000/*/experiment.json
 
 # 检查 raw_data.csv 中的 ID
-cut -d',' -f1 results/raw_data.csv | sort
+cut -d',' -f1 data/raw_data.csv | sort
 ```
 
 ---

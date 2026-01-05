@@ -97,7 +97,7 @@
 **原始数据** ✅:
 - `data/energy_research/raw/energy_data_original.csv` (727行 = 726数据 + 1 header)
   - 56列
-  - 从主项目 `results/data.csv` 复制而来
+  - 从主项目 `data/data.csv` 复制而来
 
 **工作目录** ✅:
 - `data/energy_research/processed/` - 空目录（准备新方案数据）

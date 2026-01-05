@@ -1,0 +1,357 @@
+{
+  "validation_time": "2026-01-05 20:13:12",
+  "total_files": 6,
+  "critical_pass_count": 6,
+  "all_pass_count": 5,
+  "requirements": {
+    "data_type": {
+      "name": "数据类型",
+      "requirement": "DataFrame或numpy数组，可转换为float",
+      "critical": true
+    },
+    "shape": {
+      "name": "数据形状",
+      "requirement": "二维数组 (n_samples, n_vars)",
+      "critical": true
+    },
+    "non_empty": {
+      "name": "非空要求",
+      "requirement": "样本数 > 0, 变量数 > 0",
+      "critical": true
+    },
+    "no_nan": {
+      "name": "NaN值检查",
+      "requirement": "无NaN值（DiBS内部转换为float时会出错）",
+      "critical": true
+    },
+    "no_inf": {
+      "name": "无穷值检查",
+      "requirement": "无inf/-inf值",
+      "critical": true
+    },
+    "numeric": {
+      "name": "数值型要求",
+      "requirement": "所有值可转换为float",
+      "critical": true
+    },
+    "variance": {
+      "name": "方差检查",
+      "requirement": "所有特征方差 > 0（避免常数列）",
+      "critical": true
+    },
+    "sample_size": {
+      "name": "样本量推荐",
+      "requirement": "样本数 >= 50（推荐，非强制）",
+      "critical": false
+    },
+    "feature_count": {
+      "name": "特征数推荐",
+      "requirement": "特征数 >= 3, <= 100（推荐，非强制）",
+      "critical": false
+    },
+    "standardized": {
+      "name": "标准化推荐",
+      "requirement": "均值≈0，标准差≈1（推荐，非强制）",
+      "critical": false
+    }
+  },
+  "results": [
+    {
+      "file": "/home/green/energy_dl/nightly/analysis/data/energy_research/dibs_training/group1_examples.csv",
+      "checks": {
+        "data_type": {
+          "pass": true,
+          "message": "✓ 数据可转换为float数组"
+        },
+        "shape": {
+          "pass": true,
+          "message": "✓ 二维数据 (259, 18)"
+        },
+        "non_empty": {
+          "pass": true,
+          "message": "✓ 非空数据 (259行, 18列)"
+        },
+        "no_nan": {
+          "pass": true,
+          "message": "✓ 无NaN值"
+        },
+        "no_inf": {
+          "pass": true,
+          "message": "✓ 无inf值"
+        },
+        "numeric": {
+          "pass": true,
+          "message": "✓ 所有列均为数值型"
+        },
+        "variance": {
+          "pass": true,
+          "message": "✓ 所有特征方差 > 0"
+        },
+        "sample_size": {
+          "pass": true,
+          "message": "✓ 样本量充足 (259 >= 50)"
+        },
+        "feature_count": {
+          "pass": true,
+          "message": "✓ 特征数合理 (18)"
+        },
+        "standardized": {
+          "pass": true,
+          "message": "✓ 数据已标准化 (均值≈0.000, 标准差≈1.002)"
+        }
+      },
+      "critical_pass": true,
+      "all_pass": true,
+      "warnings": [],
+      "errors": []
+    },
+    {
+      "file": "/home/green/energy_dl/nightly/analysis/data/energy_research/dibs_training/group2_vulberta.csv",
+      "checks": {
+        "data_type": {
+          "pass": true,
+          "message": "✓ 数据可转换为float数组"
+        },
+        "shape": {
+          "pass": true,
+          "message": "✓ 二维数据 (152, 16)"
+        },
+        "non_empty": {
+          "pass": true,
+          "message": "✓ 非空数据 (152行, 16列)"
+        },
+        "no_nan": {
+          "pass": true,
+          "message": "✓ 无NaN值"
+        },
+        "no_inf": {
+          "pass": true,
+          "message": "✓ 无inf值"
+        },
+        "numeric": {
+          "pass": true,
+          "message": "✓ 所有列均为数值型"
+        },
+        "variance": {
+          "pass": true,
+          "message": "✓ 所有特征方差 > 0"
+        },
+        "sample_size": {
+          "pass": true,
+          "message": "✓ 样本量充足 (152 >= 50)"
+        },
+        "feature_count": {
+          "pass": true,
+          "message": "✓ 特征数合理 (16)"
+        },
+        "standardized": {
+          "pass": true,
+          "message": "✓ 数据已标准化 (均值≈0.000, 标准差≈1.003)"
+        }
+      },
+      "critical_pass": true,
+      "all_pass": true,
+      "warnings": [],
+      "errors": []
+    },
+    {
+      "file": "/home/green/energy_dl/nightly/analysis/data/energy_research/dibs_training/group3_person_reid.csv",
+      "checks": {
+        "data_type": {
+          "pass": true,
+          "message": "✓ 数据可转换为float数组"
+        },
+        "shape": {
+          "pass": true,
+          "message": "✓ 二维数据 (146, 20)"
+        },
+        "non_empty": {
+          "pass": true,
+          "message": "✓ 非空数据 (146行, 20列)"
+        },
+        "no_nan": {
+          "pass": true,
+          "message": "✓ 无NaN值"
+        },
+        "no_inf": {
+          "pass": true,
+          "message": "✓ 无inf值"
+        },
+        "numeric": {
+          "pass": true,
+          "message": "✓ 所有列均为数值型"
+        },
+        "variance": {
+          "pass": true,
+          "message": "✓ 所有特征方差 > 0"
+        },
+        "sample_size": {
+          "pass": true,
+          "message": "✓ 样本量充足 (146 >= 50)"
+        },
+        "feature_count": {
+          "pass": true,
+          "message": "✓ 特征数合理 (20)"
+        },
+        "standardized": {
+          "pass": true,
+          "message": "✓ 数据已标准化 (均值≈0.000, 标准差≈1.003)"
+        }
+      },
+      "critical_pass": true,
+      "all_pass": true,
+      "warnings": [],
+      "errors": []
+    },
+    {
+      "file": "/home/green/energy_dl/nightly/analysis/data/energy_research/dibs_training/group4_bug_localization.csv",
+      "checks": {
+        "data_type": {
+          "pass": true,
+          "message": "✓ 数据可转换为float数组"
+        },
+        "shape": {
+          "pass": true,
+          "message": "✓ 二维数据 (142, 17)"
+        },
+        "non_empty": {
+          "pass": true,
+          "message": "✓ 非空数据 (142行, 17列)"
+        },
+        "no_nan": {
+          "pass": true,
+          "message": "✓ 无NaN值"
+        },
+        "no_inf": {
+          "pass": true,
+          "message": "✓ 无inf值"
+        },
+        "numeric": {
+          "pass": true,
+          "message": "✓ 所有列均为数值型"
+        },
+        "variance": {
+          "pass": true,
+          "message": "✓ 所有特征方差 > 0"
+        },
+        "sample_size": {
+          "pass": true,
+          "message": "✓ 样本量充足 (142 >= 50)"
+        },
+        "feature_count": {
+          "pass": true,
+          "message": "✓ 特征数合理 (17)"
+        },
+        "standardized": {
+          "pass": true,
+          "message": "✓ 数据已标准化 (均值≈0.000, 标准差≈1.004)"
+        }
+      },
+      "critical_pass": true,
+      "all_pass": true,
+      "warnings": [],
+      "errors": []
+    },
+    {
+      "file": "/home/green/energy_dl/nightly/analysis/data/energy_research/dibs_training/group5_mrt_oast.csv",
+      "checks": {
+        "data_type": {
+          "pass": true,
+          "message": "✓ 数据可转换为float数组"
+        },
+        "shape": {
+          "pass": true,
+          "message": "✓ 二维数据 (88, 16)"
+        },
+        "non_empty": {
+          "pass": true,
+          "message": "✓ 非空数据 (88行, 16列)"
+        },
+        "no_nan": {
+          "pass": true,
+          "message": "✓ 无NaN值"
+        },
+        "no_inf": {
+          "pass": true,
+          "message": "✓ 无inf值"
+        },
+        "numeric": {
+          "pass": true,
+          "message": "✓ 所有列均为数值型"
+        },
+        "variance": {
+          "pass": true,
+          "message": "✓ 所有特征方差 > 0"
+        },
+        "sample_size": {
+          "pass": true,
+          "message": "✓ 样本量充足 (88 >= 50)"
+        },
+        "feature_count": {
+          "pass": true,
+          "message": "✓ 特征数合理 (16)"
+        },
+        "standardized": {
+          "pass": true,
+          "message": "✓ 数据已标准化 (均值≈0.000, 标准差≈1.006)"
+        }
+      },
+      "critical_pass": true,
+      "all_pass": true,
+      "warnings": [],
+      "errors": []
+    },
+    {
+      "file": "/home/green/energy_dl/nightly/analysis/data/energy_research/dibs_training/group6_resnet.csv",
+      "checks": {
+        "data_type": {
+          "pass": true,
+          "message": "✓ 数据可转换为float数组"
+        },
+        "shape": {
+          "pass": true,
+          "message": "✓ 二维数据 (49, 18)"
+        },
+        "non_empty": {
+          "pass": true,
+          "message": "✓ 非空数据 (49行, 18列)"
+        },
+        "no_nan": {
+          "pass": true,
+          "message": "✓ 无NaN值"
+        },
+        "no_inf": {
+          "pass": true,
+          "message": "✓ 无inf值"
+        },
+        "numeric": {
+          "pass": true,
+          "message": "✓ 所有列均为数值型"
+        },
+        "variance": {
+          "pass": true,
+          "message": "✓ 所有特征方差 > 0"
+        },
+        "sample_size": {
+          "pass": false,
+          "message": "⚠️  样本量偏少 (49 < 50)",
+          "severity": "warning"
+        },
+        "feature_count": {
+          "pass": true,
+          "message": "✓ 特征数合理 (18)"
+        },
+        "standardized": {
+          "pass": true,
+          "message": "✓ 数据已标准化 (均值≈0.000, 标准差≈1.010)"
+        }
+      },
+      "critical_pass": true,
+      "all_pass": false,
+      "warnings": [
+        "样本量偏少: 49 < 50（推荐>=50）"
+      ],
+      "errors": []
+    }
+  ]
+}

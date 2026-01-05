@@ -57,7 +57,7 @@ All configuration files had their `historical_csvs` field updated:
 **After**:
 ```json
 {
-  "historical_csvs": ["results/raw_data.csv"]
+  "historical_csvs": ["data/raw_data.csv"]
 }
 ```
 
@@ -198,7 +198,7 @@ Total: 5/5 tests passed
 
 ### 1. Data Extraction Quality
 
-**Source**: `results/raw_data.csv`
+**Source**: `data/raw_data.csv`
 - Total rows: 476 experiments
 - Mutations extracted: 371 (78%)
 - Filtered out: 0 (no filtering applied)

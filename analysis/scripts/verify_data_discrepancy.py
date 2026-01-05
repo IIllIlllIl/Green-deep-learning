@@ -18,7 +18,7 @@ def main():
 
     # 1. 检查主项目的 data.csv
     print("\n1️⃣ 检查主项目 data.csv:")
-    data_csv_path = Path("../../results/data.csv")
+    data_csv_path = Path("../../data/data.csv")
     if data_csv_path.exists():
         df_data = pd.read_csv(data_csv_path)
         print(f"   文件: {data_csv_path}")

@@ -305,7 +305,7 @@ df_all = df.sort_values(['experiment_id', 'timestamp'])
 import pandas as pd
 
 # 读取data.csv
-df = pd.read_csv('results/data.csv')  # 726行 × 56列
+df = pd.read_csv('data/data.csv')  # 726行 × 56列
 
 # ✅ 正确：所有样本训练成功
 df_success = df[df['training_success'] == 'True']  # 726个
@@ -331,7 +331,7 @@ analysis_data = df[[
 
 ```python
 # 仅在需要对比fg_和bg_时使用
-df_raw = pd.read_csv('results/raw_data.csv')  # 726行 × 87列
+df_raw = pd.read_csv('data/raw_data.csv')  # 726行 × 87列
 
 # 筛选并行模式
 df_parallel = df_raw[df_raw['mode'] == 'parallel']

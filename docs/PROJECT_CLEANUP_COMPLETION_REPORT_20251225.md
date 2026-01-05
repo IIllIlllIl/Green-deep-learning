@@ -255,7 +255,7 @@ cp tests/archived/completed_20251212/*.py tests/
 
 ```bash
 # 1. 验证主数据文件
-python3 scripts/validate_raw_data.py
+python3 tools/data_management/validate_raw_data.py
 
 # 2. 验证training数据
 cd analysis

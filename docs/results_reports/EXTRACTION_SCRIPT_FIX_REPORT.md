@@ -327,7 +327,7 @@ python3 -m json.tool mutation/models_config.json > /dev/null
 
 **Phase 4**: 历史数据重新提取
 
-1. 备份 `results/raw_data.csv`
+1. 备份 `data/raw_data.csv`
 2. 开发历史数据重提取脚本
 3. 重新提取151个实验的性能数据
 4. 验证数据完整性 (458个实验全部有性能数据)

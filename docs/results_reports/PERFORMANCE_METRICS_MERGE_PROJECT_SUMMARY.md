@@ -243,7 +243,7 @@ all_accuracy = df['perf_test_accuracy']  # 所有6个模型 ✅
 ```python
 import pandas as pd
 
-df = pd.read_csv('results/data.csv')
+df = pd.read_csv('data/data.csv')
 
 # ✅ 使用统一后的指标名
 test_accuracy = df['perf_test_accuracy']  # 包含6个模型
@@ -284,7 +284,7 @@ vulberta_loss = df[
 5. ✅ 语义统一，降低分析复杂度
 
 **最终状态**:
-- 数据文件: `results/data.csv` (676行 × 56列)
+- 数据文件: `data/data.csv` (676行 × 56列)
 - 有效指标: 14个（从16个优化）
 - 数据质量: 优秀 ⭐⭐⭐
 - 可用性: 可安全用于所有分析 ✅

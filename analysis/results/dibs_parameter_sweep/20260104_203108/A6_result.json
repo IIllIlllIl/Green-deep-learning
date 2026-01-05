@@ -1,0 +1,29 @@
+{
+  "exp_id": "A6",
+  "exp_name": "\u4f4ebeta\u7ea6\u675f (0.1)",
+  "status": "\u6210\u529f",
+  "success": true,
+  "elapsed_time_minutes": 10.597786716620128,
+  "parameters": {
+    "alpha": 0.05,
+    "n_particles": 20,
+    "beta": 0.1,
+    "tau": 1.0,
+    "n_steps": 5000,
+    "n_grad_mc_samples": 128
+  },
+  "graph_stats": {
+    "min": 0.0,
+    "max": 0.6500000357627869,
+    "mean": 0.0734567940235138,
+    "std": 0.12368728220462799
+  },
+  "edges": {
+    "threshold_0.01": 123,
+    "threshold_0.1": 78,
+    "threshold_0.2": 43,
+    "threshold_0.3": 23,
+    "threshold_0.5": 2
+  },
+  "error_message": null
+}

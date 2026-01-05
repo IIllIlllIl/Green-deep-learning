@@ -121,8 +121,8 @@ def calculate_num_mutated_params(row):
 ### 3. 应用修复
 
 ```bash
-cp results/raw_data.csv results/raw_data.csv.backup_before_fix
-mv results/raw_data_fixed.csv results/raw_data.csv
+cp data/raw_data.csv data/raw_data.csv.backup_before_fix
+mv results/raw_data_fixed.csv data/raw_data.csv
 ```
 
 ---
@@ -254,12 +254,12 @@ mv results/raw_data_fixed.csv results/raw_data.csv
 
 ### 修改文件
 
-1. **results/raw_data.csv** - 修正21行的`num_mutated_params`和`mutated_param`字段
+1. **data/raw_data.csv** - 修正21行的`num_mutated_params`和`mutated_param`字段
 2. **results/experiment_completion_report.json** - 自动重新生成（修正后的统计）
 
 ### 备份文件
 
-1. **results/raw_data.csv.backup_before_fix** - 修复前的原始数据
+1. **data/raw_data.csv.backup_before_fix** - 修复前的原始数据
 
 ---
 

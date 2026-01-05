@@ -1,0 +1,18 @@
+{
+  "experiment_name": "test_multi_param",
+  "mode": "mutation",
+  "max_retries": 2,
+  "governor": "performance",
+  "use_deduplication": true,
+  "historical_csvs": ["data/raw_data.csv"],
+  "experiments": [
+    {
+      "comment": "examples/mnist - 非并行 - 多参数变异测试",
+      "repo": "examples",
+      "model": "mnist",
+      "mode": "mutation",
+      "mutate": ["batch_size", "epochs", "learning_rate", "seed"],
+      "runs_per_config": 1
+    }
+  ]
+}

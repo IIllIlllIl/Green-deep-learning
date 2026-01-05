@@ -99,8 +99,8 @@ GPU能耗数据: 72/72 (100.0%) ✅
 ### 4. 数据追加验证
 
 ```
-✅ 已备份: results/raw_data.csv.backup_20251215_171809
-✅ 已更新: results/raw_data.csv
+✅ 已备份: data/raw_data.csv.backup_20251215_171809
+✅ 已更新: data/raw_data.csv
    原始: 512行
    新增: 72行
    总计: 584行
@@ -275,7 +275,7 @@ GPU能耗数据: 72/72 (100.0%) ✅
 **变更前**: 512行（包含header）
 **变更后**: 584行（包含header）
 **新增**: 72行Phase 5实验数据
-**备份**: `results/raw_data.csv.backup_20251215_171809`
+**备份**: `data/raw_data.csv.backup_20251215_171809`
 
 **数据验证**:
 ```

@@ -2,7 +2,7 @@
 
 **生成日期**: 2025-12-23
 **分析范围**: 最后50个实验（VulBERTa并行10个 + Bug定位并行40个）
-**数据文件**: results/raw_data.csv (行677-726)
+**数据文件**: data/raw_data.csv (行677-726)
 
 ---
 
@@ -217,13 +217,13 @@ if mode == 'parallel' and 'background' in exp_data:
 
 **补充步骤**:
 ```bash
-# 1. 修改 scripts/append_session_to_raw_data.py
+# 1. 修改 tools/data_management/append_session_to_raw_data.py
 # 2. 在extract_from_json()方法中添加bg_信息提取
 # 3. 重新运行追加脚本
-python3 scripts/append_session_to_raw_data.py results/run_20251222_214929
+python3 tools/data_management/append_session_to_raw_data.py results/run_20251222_214929
 
 # 4. 验证结果
-tail -5 results/raw_data.csv | cut -d',' -f84-86
+tail -5 data/raw_data.csv | cut -d',' -f84-86
 # 应该看到: examples,mnist,"Background training..."
 ```
 
@@ -244,7 +244,7 @@ import csv
 
 def fill_metadata():
     rows = []
-    with open('results/raw_data.csv', 'r') as f:
+    with open('data/raw_data.csv', 'r') as f:
         reader = csv.DictReader(f)
         fieldnames = reader.fieldnames
 
@@ -275,7 +275,7 @@ def fill_metadata():
             rows.append(row)
 
     # 写回CSV
-    with open('results/raw_data.csv', 'w', newline='') as f:
+    with open('data/raw_data.csv', 'w', newline='') as f:
         writer = csv.DictWriter(f, fieldnames=fieldnames)
         writer.writeheader()
         writer.writerows(rows)
@@ -352,4 +352,4 @@ if __name__ == '__main__':
 
 **报告生成时间**: 2025-12-23
 **分析工具**: 自定义Python脚本
-**数据源**: results/raw_data.csv (行677-726)
+**数据源**: data/raw_data.csv (行677-726)

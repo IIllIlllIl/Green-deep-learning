@@ -2,7 +2,7 @@
 
 **日期**: 2025-12-12
 **目的**: 识别性能数据提取失败的模型，优先修复
-**数据源**: results/raw_data.csv (458个唯一实验)
+**数据源**: data/raw_data.csv (458个唯一实验)
 **分析范围**: 11个模型，全部实验
 
 ---
@@ -360,6 +360,6 @@ grep -rn "experiment\.json\|performance" scripts/
 ---
 
 **报告作者**: Claude (AI Assistant)
-**数据来源**: results/raw_data.csv (458个唯一实验)
+**数据来源**: data/raw_data.csv (458个唯一实验)
 **分析日期**: 2025-12-12
 **状态**: ✅ 准备开始修复

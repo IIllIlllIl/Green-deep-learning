@@ -118,7 +118,7 @@ sudo -E python3 mutation.py -ec settings/test_phase5_parallel_supplement_20h.jso
 **注意事项**:
 1. 需要sudo权限以获取准确的CPU能量数据
 2. 配置已启用去重机制（`use_deduplication: true`）
-3. 历史数据文件设置为`results/raw_data.csv`
+3. 历史数据文件设置为`data/raw_data.csv`
 4. 预计运行时间17-18小时（假设30%去重率）
 
 ---
@@ -202,7 +202,7 @@ sudo -E python3 mutation.py -ec settings/test_phase5_parallel_supplement_20h.jso
 ### 去重机制
 
 - 启用: `"use_deduplication": true`
-- 历史数据: `"historical_csvs": ["results/raw_data.csv"]`
+- 历史数据: `"historical_csvs": ["data/raw_data.csv"]`
 - 去重逻辑: 基于`repository + model + 超参数组合 + mode`
 - 效果: 自动跳过已存在的超参数组合
 
@@ -226,7 +226,7 @@ sudo -E python3 mutation.py -ec settings/test_phase5_parallel_supplement_20h.jso
 执行后验证:
 - [ ] 所有实验训练成功
 - [ ] 数据已正确追加到raw_data.csv
-- [ ] 数据完整性验证通过 (`python3 scripts/validate_raw_data.py`)
+- [ ] 数据完整性验证通过 (`python3 tools/data_management/validate_raw_data.py`)
 - [ ] 并行模式实验数据提取正确（检查mode字段）
 - [ ] 目标模型达到≥5个唯一值
 

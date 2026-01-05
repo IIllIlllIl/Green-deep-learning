@@ -1,0 +1,42 @@
+{
+  "experiment_id": "bug-localization-by-dnn-and-rvsm_default_047_parallel",
+  "timestamp": "2025-12-18T23:45:40.173795",
+  "mode": "parallel",
+  "foreground": {
+    "repository": "bug-localization-by-dnn-and-rvsm",
+    "model": "default",
+    "hyperparameters": {
+      "kfold": 6
+    },
+    "duration_seconds": 750.0622673034668,
+    "energy_metrics": {
+      "cpu_energy_pkg_joules": 48965.87,
+      "cpu_energy_ram_joules": 1874.01,
+      "cpu_energy_total_joules": 50839.88,
+      "gpu_power_avg_watts": 3.6313311688311702,
+      "gpu_power_max_watts": 4.21,
+      "gpu_power_min_watts": 3.33,
+      "gpu_energy_total_joules": 2236.900000000001,
+      "gpu_temp_avg_celsius": 33.88798701298701,
+      "gpu_temp_max_celsius": 38.0,
+      "gpu_util_avg_percent": 0.0,
+      "gpu_util_max_percent": 0.0
+    },
+    "performance_metrics": {
+      "top1_accuracy": 0.377,
+      "top5_accuracy": 0.627,
+      "top10_accuracy": 0.739,
+      "top20_accuracy": 0.83
+    },
+    "training_success": true,
+    "retries": 0,
+    "error_message": "Training completed successfully"
+  },
+  "background": {
+    "repository": "examples",
+    "model": "mnist_rnn",
+    "hyperparameters": {},
+    "log_directory": "/home/green/energy_dl/nightly/results/run_20251217_211341/bug-localization-by-dnn-and-rvsm_default_047_parallel/background_logs",
+    "note": "Background training served as GPU load only (not monitored)"
+  }
+}

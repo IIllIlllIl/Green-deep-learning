@@ -1,0 +1,29 @@
+{
+  "exp_id": "A5",
+  "exp_name": "\u5927\u7c92\u5b50\u6570 (100)",
+  "status": "\u6210\u529f",
+  "success": true,
+  "elapsed_time_minutes": 51.255840297540026,
+  "parameters": {
+    "alpha": 0.05,
+    "n_particles": 100,
+    "beta": 1.0,
+    "tau": 1.0,
+    "n_steps": 5000,
+    "n_grad_mc_samples": 128
+  },
+  "graph_stats": {
+    "min": 0.0,
+    "max": 0.4099999964237213,
+    "mean": 0.069660484790802,
+    "std": 0.09323179721832275
+  },
+  "edges": {
+    "threshold_0.01": 164,
+    "threshold_0.1": 92,
+    "threshold_0.2": 39,
+    "threshold_0.3": 8,
+    "threshold_0.5": 0
+  },
+  "error_message": null
+}

@@ -1,0 +1,29 @@
+{
+  "exp_id": "A2",
+  "exp_name": "\u5c0falpha (0.01)",
+  "status": "\u6210\u529f",
+  "success": true,
+  "elapsed_time_minutes": 10.637433052062988,
+  "parameters": {
+    "alpha": 0.01,
+    "n_particles": 20,
+    "beta": 1.0,
+    "tau": 1.0,
+    "n_steps": 5000,
+    "n_grad_mc_samples": 128
+  },
+  "graph_stats": {
+    "min": 0.0,
+    "max": 0.6500000357627869,
+    "mean": 0.06496912986040115,
+    "std": 0.11928153783082962
+  },
+  "edges": {
+    "threshold_0.01": 111,
+    "threshold_0.1": 66,
+    "threshold_0.2": 33,
+    "threshold_0.3": 17,
+    "threshold_0.5": 1
+  },
+  "error_message": null
+}

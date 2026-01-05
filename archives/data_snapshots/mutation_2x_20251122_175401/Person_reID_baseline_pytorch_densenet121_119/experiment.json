@@ -1,0 +1,31 @@
+{
+  "experiment_id": "Person_reID_baseline_pytorch_densenet121_119",
+  "timestamp": "2025-11-24T10:08:57.127763",
+  "repository": "Person_reID_baseline_pytorch",
+  "model": "densenet121",
+  "hyperparameters": {
+    "seed": 5042
+  },
+  "duration_seconds": 5218.277374982834,
+  "energy_metrics": {
+    "cpu_energy_pkg_joules": 351711.26,
+    "cpu_energy_ram_joules": 25611.53,
+    "cpu_energy_total_joules": 377322.79,
+    "gpu_power_avg_watts": 220.0825686430556,
+    "gpu_power_max_watts": 320.22,
+    "gpu_power_min_watts": 8.77,
+    "gpu_energy_total_joules": 1106134.9899999974,
+    "gpu_temp_avg_celsius": 77.57879029048945,
+    "gpu_temp_max_celsius": 84.0,
+    "gpu_util_avg_percent": 71.8366494230004,
+    "gpu_util_max_percent": 100.0
+  },
+  "performance_metrics": {
+    "rank1": 0.904394,
+    "rank5": 0.967637,
+    "map": 0.751914
+  },
+  "training_success": true,
+  "retries": 0,
+  "error_message": "Training completed successfully"
+}

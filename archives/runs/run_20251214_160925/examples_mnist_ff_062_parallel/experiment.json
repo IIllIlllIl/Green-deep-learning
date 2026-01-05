@@ -1,0 +1,46 @@
+{
+  "experiment_id": "examples_mnist_ff_062_parallel",
+  "timestamp": "2025-12-15T16:47:15.156007",
+  "mode": "parallel",
+  "foreground": {
+    "repository": "examples",
+    "model": "mnist_ff",
+    "hyperparameters": {
+      "learning_rate": 0.019657321982762835
+    },
+    "duration_seconds": 18.928135871887207,
+    "energy_metrics": {
+      "cpu_energy_pkg_joules": 641.81,
+      "cpu_energy_ram_joules": 45.03,
+      "cpu_energy_total_joules": 686.84,
+      "gpu_power_avg_watts": 182.42888888888888,
+      "gpu_power_max_watts": 319.13,
+      "gpu_power_min_watts": 85.18,
+      "gpu_energy_total_joules": 3283.72,
+      "gpu_temp_avg_celsius": 63.333333333333336,
+      "gpu_temp_max_celsius": 71.0,
+      "gpu_util_avg_percent": 44.111111111111114,
+      "gpu_util_max_percent": 100.0
+    },
+    "performance_metrics": {
+      "test_accuracy": 90.77000021934509,
+      "test_error": 0.09229999780654907,
+      "train_error": 0.09140002727508545
+    },
+    "training_success": true,
+    "retries": 0,
+    "error_message": "Training completed successfully"
+  },
+  "background": {
+    "repository": "examples",
+    "model": "mnist",
+    "hyperparameters": {
+      "epochs": 10,
+      "learning_rate": 0.01,
+      "batch_size": 32,
+      "seed": 1
+    },
+    "log_directory": "/home/green/energy_dl/nightly/results/run_20251214_160925/examples_mnist_ff_062_parallel/background_logs",
+    "note": "Background training served as GPU load only (not monitored)"
+  }
+}

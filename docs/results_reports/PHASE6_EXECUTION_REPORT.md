@@ -234,13 +234,13 @@ hyperparam_prefix = 'fg_hyperparam_' if has_fg_hyperparam_data else 'hyperparam_
 ## 文件变更
 
 ### 修改文件
-1. `results/raw_data.csv` - 追加40行数据（584 → 624行）
+1. `data/raw_data.csv` - 追加40行数据（584 → 624行）
 2. `scripts/calculate_experiment_gap.py` - Bug修复（3个）
 3. `docs/results_reports/PHASE6_EXECUTION_REPORT.md` - 本报告（新增）
 
 ### 备份文件
-1. `results/raw_data.csv.backup_before_phase6_20251217_173220`
-2. `results/raw_data.csv.backup_20251217_173237`
+1. `data/raw_data.csv.backup_before_phase6_20251217_173220`
+2. `data/raw_data.csv.backup_20251217_173237`
 
 ---
 

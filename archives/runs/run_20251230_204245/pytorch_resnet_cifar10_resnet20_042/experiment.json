@@ -1,0 +1,33 @@
+{
+  "experiment_id": "pytorch_resnet_cifar10_resnet20_042",
+  "timestamp": "2025-12-30T23:53:07.238985",
+  "repository": "pytorch_resnet_cifar10",
+  "model": "resnet20",
+  "hyperparameters": {
+    "epochs": 174,
+    "learning_rate": 0.05819004814016975,
+    "weight_decay": 0.0005287122168060421,
+    "seed": 475
+  },
+  "duration_seconds": 1084.2347404956818,
+  "energy_metrics": {
+    "cpu_energy_pkg_joules": 54771.71,
+    "cpu_energy_ram_joules": 3835.69,
+    "cpu_energy_total_joules": 58607.4,
+    "gpu_power_avg_watts": 224.16428163653634,
+    "gpu_power_max_watts": 247.14,
+    "gpu_power_min_watts": 82.14,
+    "gpu_energy_total_joules": 235596.6599999997,
+    "gpu_temp_avg_celsius": 81.3510941960038,
+    "gpu_temp_max_celsius": 83.0,
+    "gpu_util_avg_percent": 55.163653663177925,
+    "gpu_util_max_percent": 71.0
+  },
+  "performance_metrics": {
+    "test_accuracy": 92.47,
+    "best_val_accuracy": 92.49
+  },
+  "training_success": true,
+  "retries": 0,
+  "error_message": "Training completed successfully"
+}

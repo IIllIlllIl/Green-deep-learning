@@ -1,0 +1,34 @@
+{
+  "experiment_id": "Person_reID_baseline_pytorch_hrnet18_065",
+  "timestamp": "2025-12-31T18:24:19.288893",
+  "repository": "Person_reID_baseline_pytorch",
+  "model": "hrnet18",
+  "hyperparameters": {
+    "dropout": 0.4259578399093254,
+    "epochs": 41,
+    "learning_rate": 0.05200035173571835,
+    "seed": 1329
+  },
+  "duration_seconds": 2971.2317135334015,
+  "energy_metrics": {
+    "cpu_energy_pkg_joules": 94001.88,
+    "cpu_energy_ram_joules": 7910.01,
+    "cpu_energy_total_joules": 101911.89,
+    "gpu_power_avg_watts": 236.07808930425756,
+    "gpu_power_max_watts": 258.02,
+    "gpu_power_min_watts": 13.68,
+    "gpu_energy_total_joules": 682029.6000000001,
+    "gpu_temp_avg_celsius": 82.44894427137417,
+    "gpu_temp_max_celsius": 84.0,
+    "gpu_util_avg_percent": 67.05019037729318,
+    "gpu_util_max_percent": 79.0
+  },
+  "performance_metrics": {
+    "rank1": 0.904988,
+    "rank5": 0.966746,
+    "map": 0.746462
+  },
+  "training_success": true,
+  "retries": 0,
+  "error_message": "Training completed successfully"
+}

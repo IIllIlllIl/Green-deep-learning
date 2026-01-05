@@ -2,7 +2,7 @@
   "comment": "Phase 5: 并行模式优先补充配置（~20小时）",
   "description": "优先补充VulBERTa/mlp、bug-localization、MRT-OAST的并行模式实验，以及部分快速模型的并行实验",
   "use_deduplication": true,
-  "historical_csvs": ["results/raw_data.csv"],
+  "historical_csvs": ["data/raw_data.csv"],
   "experiments": [
     {
       "comment": "VulBERTa/mlp - 并行模式 - epochs变异（需补充4个）",

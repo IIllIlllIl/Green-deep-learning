@@ -204,7 +204,7 @@ def recalculate_all():
         models_config = json.load(f)['models']
 
     # 读取CSV
-    with open('results/raw_data.csv') as f:
+    with open('data/raw_data.csv') as f:
         reader = csv.DictReader(f)
         rows = list(reader)
         fieldnames = reader.fieldnames
@@ -219,7 +219,7 @@ def recalculate_all():
         updated_rows.append(row)
 
     # 写回CSV
-    with open('results/raw_data.csv', 'w', newline='') as f:
+    with open('data/raw_data.csv', 'w', newline='') as f:
         writer = csv.DictWriter(f, fieldnames=fieldnames)
         writer.writeheader()
         writer.writerows(updated_rows)
@@ -312,7 +312,7 @@ with open('mutation/models_config.json') as f:
     models_config = json.load(f)['models']
 
 # 验证每一行
-with open('results/raw_data.csv') as f:
+with open('data/raw_data.csv') as f:
     reader = csv.DictReader(f)
 
     for row in reader:
@@ -357,5 +357,5 @@ with open('results/raw_data.csv') as f:
 
 **报告人**: Claude Code
 **验证日期**: 2025-12-21
-**数据源**: /home/green/energy_dl/nightly/results/raw_data.csv
+**数据源**: /home/green/energy_dl/nightly/data/raw_data.csv
 **总行数**: 676

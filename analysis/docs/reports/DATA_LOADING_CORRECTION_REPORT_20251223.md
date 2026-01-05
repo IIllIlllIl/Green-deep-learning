@@ -31,7 +31,7 @@ mv energy_data_original.csv \
    energy_data_original.csv.WRONG_raw_data_87col_20251223
 
 # 复制正确的data.csv
-cp /home/green/energy_dl/nightly/results/data.csv \
+cp /home/green/energy_dl/nightly/data/data.csv \
    energy_data_original.csv
 
 # 验证
@@ -276,16 +276,16 @@ error_message, experiment_source, num_mutated_params
 
 ```markdown
 **数据文件**:
-- `results/raw_data.csv` - **主数据文件** (726行，87列) ⭐⭐⭐
-  - 验证脚本: `scripts/validate_raw_data.py`
-  - 追加脚本: `scripts/append_session_to_raw_data.py`
-  - 备份文件: `results/raw_data.csv.backup_20251223_195253`
-- `results/data.csv` - **精简数据文件** (726行，56列) ⭐⭐
-  - 生成脚本: `scripts/create_unified_data_csv.py`
-  - 备份文件: `results/data.csv.backup_20251223_195253`
+- `data/raw_data.csv` - **主数据文件** (726行，87列) ⭐⭐⭐
+  - 验证脚本: `tools/data_management/validate_raw_data.py`
+  - 追加脚本: `tools/data_management/append_session_to_raw_data.py`
+  - 备份文件: `data/raw_data.csv.backup_20251223_195253`
+- `data/data.csv` - **精简数据文件** (726行，56列) ⭐⭐
+  - 生成脚本: `tools/data_management/create_unified_data_csv.py`
+  - 备份文件: `data/data.csv.backup_20251223_195253`
 ```
 
-**关键脚本**: `scripts/create_unified_data_csv.py` - 从raw_data.csv生成data.csv的脚本
+**关键脚本**: `tools/data_management/create_unified_data_csv.py` - 从raw_data.csv生成data.csv的脚本
 
 ---
 
@@ -386,7 +386,7 @@ error_message, experiment_source, num_mutated_params
 
 ```bash
 # 主项目数据文件（推荐）
-/home/green/energy_dl/nightly/results/data.csv
+/home/green/energy_dl/nightly/data/data.csv
   ↓ 复制到
 /home/green/energy_dl/nightly/analysis/data/energy_research/raw/energy_data_original.csv
   ↓ 预处理（阶段0-7）

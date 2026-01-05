@@ -401,8 +401,8 @@ def transform_row(row: Dict) -> Dict:
 
 def main():
     """主函数"""
-    input_file = 'results/raw_data.csv'
-    output_file = 'results/data.csv'
+    input_file = 'data/raw_data.csv'
+    output_file = 'data/data.csv'
 
     print("开始转换 raw_data.csv → data.csv")
     print(f"输入: {input_file}")
@@ -478,7 +478,7 @@ from collections import defaultdict
 
 def validate_data_csv():
     """验证data.csv"""
-    data_file = 'results/data.csv'
+    data_file = 'data/data.csv'
 
     print("=" * 80)
     print("Data CSV 验证报告")
@@ -574,7 +574,7 @@ python3 scripts/validate_data_csv.py
 ```python
 import pandas as pd
 
-df = pd.read_csv('results/data.csv')
+df = pd.read_csv('data/data.csv')
 
 # 按模型分组
 for model in df['model'].unique():
@@ -594,7 +594,7 @@ for model in df['model'].unique():
 ```python
 import pandas as pd
 
-df = pd.read_csv('results/data.csv')
+df = pd.read_csv('data/data.csv')
 
 # 转换能耗为数值
 df['energy_total'] = pd.to_numeric(df['energy_cpu_total_joules'], errors='coerce')

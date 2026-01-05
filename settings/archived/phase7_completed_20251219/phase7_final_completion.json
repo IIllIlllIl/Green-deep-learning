@@ -13,7 +13,7 @@
     "完全达标模型": "11/11 (100%)"
   },
   "use_deduplication": true,
-  "historical_csvs": ["results/raw_data.csv"],
+  "historical_csvs": ["data/raw_data.csv"],
   "runs_per_config": 5,
   "experiments": [
     {

@@ -50,14 +50,14 @@
 
 ### 1. 通用化脚本
 
-**新脚本**: `scripts/append_session_to_raw_data.py`
+**新脚本**: `tools/data_management/append_session_to_raw_data.py`
 
 **主要改进**:
 
 #### 1.1 命令行接口
 
 ```bash
-python3 scripts/append_session_to_raw_data.py <session_dir> [OPTIONS]
+python3 tools/data_management/append_session_to_raw_data.py <session_dir> [OPTIONS]
 ```
 
 **支持的选项**:
@@ -256,7 +256,7 @@ self.assertEqual(appender.stats['skipped_duplicate'], 0)
 #### 测试1: Dry-run 模式
 
 ```bash
-python3 scripts/append_session_to_raw_data.py results/run_20251212_224937 --dry-run
+python3 tools/data_management/append_session_to_raw_data.py results/run_20251212_224937 --dry-run
 ```
 
 **结果**:
@@ -277,7 +277,7 @@ python3 scripts/append_session_to_raw_data.py results/run_20251212_224937 --dry-
 #### 测试2: 旧 session 测试
 
 ```bash
-python3 scripts/append_session_to_raw_data.py results/run_20251126_224751 --dry-run
+python3 tools/data_management/append_session_to_raw_data.py results/run_20251126_224751 --dry-run
 ```
 
 **结果**:
@@ -472,7 +472,7 @@ def _is_duplicate(self, exp_data, existing_keys):
 
 ### 关键成果
 
-- **通用脚本**: `scripts/append_session_to_raw_data.py`
+- **通用脚本**: `tools/data_management/append_session_to_raw_data.py`
   - 420行代码
   - 支持5个命令行选项
   - 完整错误处理
@@ -502,17 +502,17 @@ def _is_duplicate(self, exp_data, existing_keys):
 
 1. 实验完成后，使用 dry-run 检查：
    ```bash
-   python3 scripts/append_session_to_raw_data.py results/run_YYYYMMDD_HHMMSS --dry-run
+   python3 tools/data_management/append_session_to_raw_data.py results/run_YYYYMMDD_HHMMSS --dry-run
    ```
 
 2. 确认无误后，实际执行：
    ```bash
-   python3 scripts/append_session_to_raw_data.py results/run_YYYYMMDD_HHMMSS
+   python3 tools/data_management/append_session_to_raw_data.py results/run_YYYYMMDD_HHMMSS
    ```
 
 3. 定期清理备份文件：
    ```bash
-   ls -lt results/raw_data.csv.backup_* | tail -n +6 | awk '{print $NF}' | xargs rm
+   ls -lt data/raw_data.csv.backup_* | tail -n +6 | awk '{print $NF}' | xargs rm
    ```
 
 ---

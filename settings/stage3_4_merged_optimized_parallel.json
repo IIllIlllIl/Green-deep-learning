@@ -6,7 +6,7 @@
   "governor": "performance",
   "use_deduplication": true,
   "historical_csvs": [
-    "results/raw_data.csv"
+    "data/raw_data.csv"
   ],
   "experiments": [
     {

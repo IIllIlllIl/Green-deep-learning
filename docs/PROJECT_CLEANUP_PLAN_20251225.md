@@ -99,9 +99,9 @@ EOF
 ```bash
 # 清理旧备份（保留最新的即可）
 rm results/raw_data.backup_20251221_215643.csv
-rm results/raw_data.csv.backup_before_clean
-rm results/data.csv.backup_before_column_removal_20251219_182227
-rm results/data.csv.backup_before_merge_20251219_180149
+rm data/raw_data.csv.backup_before_clean
+rm data/data.csv.backup_before_column_removal_20251219_182227
+rm data/data.csv.backup_before_merge_20251219_180149
 ```
 
 ---
@@ -342,13 +342,13 @@ ls -lh analysis/logs/experiments/*.log 2>/dev/null | tail -10
 
 ```bash
 # 1. 确认主数据文件完整
-wc -l results/raw_data.csv results/data.csv
-head -3 results/raw_data.csv
-tail -3 results/raw_data.csv
+wc -l data/raw_data.csv data/data.csv
+head -3 data/raw_data.csv
+tail -3 data/raw_data.csv
 
 # 2. 确认最新备份可用
-wc -l results/raw_data.csv.backup_20251223_195253
-diff <(head -1 results/raw_data.csv) <(head -1 results/raw_data.csv.backup_20251223_195253)
+wc -l data/raw_data.csv.backup_20251223_195253
+diff <(head -1 data/raw_data.csv) <(head -1 data/raw_data.csv.backup_20251223_195253)
 
 # 3. 确认training数据完整
 ls -lh analysis/data/energy_research/training/
@@ -417,7 +417,7 @@ tests/
 
 ```bash
 # 1. 验证主数据文件
-python3 scripts/validate_raw_data.py
+python3 tools/data_management/validate_raw_data.py
 
 # 2. 验证training数据可用
 cd analysis

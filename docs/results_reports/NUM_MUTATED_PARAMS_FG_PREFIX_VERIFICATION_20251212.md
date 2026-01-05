@@ -363,5 +363,5 @@ num_mutated_params: 0             ✅ 正确识别为默认值
 **报告作者**: Claude (AI Assistant)
 **验证状态**: ✅ 已验证
 **代码检查**: scripts/calculate_num_mutated_params_fixed.py
-**数据源**: results/raw_data.csv
+**数据源**: data/raw_data.csv
 **日期**: 2025-12-12

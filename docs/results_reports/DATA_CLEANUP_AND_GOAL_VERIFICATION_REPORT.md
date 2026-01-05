@@ -94,10 +94,10 @@ default__MRT-OAST_default_020_parallel - accuracy=4691.0 (样本数)
 ```bash
 # 1. 清理 raw_data.csv
 python3 scripts/clean_mrt_oast_accuracy.py
-mv results/raw_data_cleaned.csv results/raw_data.csv
+mv results/raw_data_cleaned.csv data/raw_data.csv
 
 # 2. 重新生成 data.csv
-python3 scripts/create_unified_data_csv.py
+python3 tools/data_management/create_unified_data_csv.py
 
 # 3. 验证实验目标
 python3 scripts/analyze_goals_after_clean.py
@@ -105,7 +105,7 @@ python3 scripts/analyze_goals_after_clean.py
 
 ### 备份文件
 
-- `results/raw_data.csv.backup_before_clean` - 清理前的raw_data.csv备份
+- `data/raw_data.csv.backup_before_clean` - 清理前的raw_data.csv备份
 
 ---
 
@@ -205,7 +205,7 @@ python3 scripts/analyze_goals_after_clean.py
 ```python
 import pandas as pd
 
-df = pd.read_csv('results/data.csv')
+df = pd.read_csv('data/data.csv')
 mrt_oast = df[df['repository'] == 'MRT-OAST']
 
 # 筛选有效的accuracy数据（百分比）
@@ -222,12 +222,12 @@ alternative_metrics = mrt_oast[['perf_precision', 'perf_recall']].dropna()
 ### 脚本文件
 - `scripts/clean_mrt_oast_accuracy.py` - 清理脚本
 - `scripts/analyze_goals_after_clean.py` - 目标验证脚本
-- `scripts/create_unified_data_csv.py` - 数据统一脚本
+- `tools/data_management/create_unified_data_csv.py` - 数据统一脚本
 
 ### 数据文件
-- `results/raw_data.csv` - 主数据文件（676行×87列）
-- `results/data.csv` - 统一数据文件（676行×56列）
-- `results/raw_data.csv.backup_before_clean` - 清理前备份
+- `data/raw_data.csv` - 主数据文件（676行×87列）
+- `data/data.csv` - 统一数据文件（676行×56列）
+- `data/raw_data.csv.backup_before_clean` - 清理前备份
 
 ### 报告文件
 - `docs/results_reports/DATA_QUALITY_CHECK_REPORT.md` - 数据质量检查报告

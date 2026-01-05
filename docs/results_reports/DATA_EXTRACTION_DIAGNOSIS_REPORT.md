@@ -339,13 +339,13 @@ Phase 4 将使用以下命令重新提取151个实验：
 
 ```bash
 # 备份当前数据
-cp results/raw_data.csv results/raw_data.csv.backup_before_fix
+cp data/raw_data.csv data/raw_data.csv.backup_before_fix
 
 # 运行重提取脚本 (待开发)
 python3 scripts/reextract_performance_from_terminal_output.py
 
 # 验证修复效果
-python3 scripts/validate_raw_data.py
+python3 tools/data_management/validate_raw_data.py
 ```
 
 **预期结果**:
@@ -369,7 +369,7 @@ python3 scripts/validate_raw_data.py
 
 **下下Phase (Phase 4)**:
 - ⏳ `scripts/reextract_performance_from_terminal_output.py` - 历史数据重提取脚本
-- ⏳ `results/raw_data.csv` - 更新后的主数据文件
+- ⏳ `data/raw_data.csv` - 更新后的主数据文件
 
 ---
 

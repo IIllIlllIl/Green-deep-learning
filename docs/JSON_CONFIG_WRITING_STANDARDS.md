@@ -30,7 +30,7 @@
   "max_retries": 2,
   "governor": "performance",
   "use_deduplication": true,
-  "historical_csvs": ["results/raw_data.csv"],
+  "historical_csvs": ["data/raw_data.csv"],
 
   "experiments": [
     // 实验配置列表
@@ -46,7 +46,7 @@
 | `max_retries` | number | 最大重试次数 | `2` |
 | `governor` | string | CPU调频策略 | `"performance"` |
 | `use_deduplication` | boolean | 启用去重 | `true` |
-| `historical_csvs` | array | 历史数据文件列表 | `["results/raw_data.csv"]` |
+| `historical_csvs` | array | 历史数据文件列表 | `["data/raw_data.csv"]` |
 | `experiments` | array | 实验配置列表 | **必需** |
 
 ---
@@ -294,7 +294,7 @@
   "max_retries": 2,
   "governor": "performance",
   "use_deduplication": true,
-  "historical_csvs": ["results/raw_data.csv"],
+  "historical_csvs": ["data/raw_data.csv"],
 
   "experiments": [
     {

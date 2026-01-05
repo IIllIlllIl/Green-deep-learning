@@ -35,7 +35,7 @@ python3 scripts/merge_csv_to_raw_data.py
 ```
 
 **输出**:
-- `results/raw_data.csv` - 主数据文件（476行，80列）
+- `data/raw_data.csv` - 主数据文件（476行，80列）
 
 ---
 
@@ -52,7 +52,7 @@ python3 scripts/merge_csv_to_raw_data.py
 
 **运行**:
 ```bash
-python3 scripts/validate_raw_data.py
+python3 tools/data_management/validate_raw_data.py
 ```
 
 **输出**: 详细验证报告（终端输出）
@@ -87,7 +87,7 @@ python3 scripts/archive_summary_files.py
 
 **运行**:
 ```bash
-python3 scripts/generate_mutation_config.py
+python3 tools/config_management/generate_mutation_config.py
 ```
 
 ---
@@ -102,7 +102,7 @@ python3 scripts/generate_mutation_config.py
 
 **运行**:
 ```bash
-python3 scripts/validate_mutation_config.py <config_file.json>
+python3 tools/config_management/validate_mutation_config.py <config_file.json>
 ```
 
 ---
@@ -269,7 +269,7 @@ cat scripts/archived/completed_tasks_20251212/README_ARCHIVE.md
 
 2. **验证数据**:
    ```bash
-   python3 scripts/validate_raw_data.py
+   python3 tools/data_management/validate_raw_data.py
    ```
 
 3. **归档文件**:
@@ -281,12 +281,12 @@ cat scripts/archived/completed_tasks_20251212/README_ARCHIVE.md
 
 1. **生成配置**:
    ```bash
-   python3 scripts/generate_mutation_config.py
+   python3 tools/config_management/generate_mutation_config.py
    ```
 
 2. **验证配置**:
    ```bash
-   python3 scripts/validate_mutation_config.py settings/your_config.json
+   python3 tools/config_management/validate_mutation_config.py settings/your_config.json
    ```
 
 ### 数据分析流程

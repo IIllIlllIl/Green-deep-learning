@@ -238,7 +238,7 @@ sudo -E python3 mutation.py -ec settings/phase6_vulberta_mlp_completion.json
 ### 7.2 数据验证
 ```bash
 # 验证数据安全性
-python3 scripts/validate_raw_data.py
+python3 tools/data_management/validate_raw_data.py
 
 # 重新计算实验差距
 python3 scripts/calculate_experiment_gap.py

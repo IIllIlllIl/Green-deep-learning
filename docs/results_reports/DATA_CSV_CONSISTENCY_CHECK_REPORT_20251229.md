@@ -1,7 +1,7 @@
 # data.csv vs raw_data.csv 数据一致性检查报告
 
 **日期**: 2025-12-29
-**检查工具**: `scripts/compare_data_vs_raw_data.py`
+**检查工具**: `tools/data_management/compare_data_vs_raw_data.py`
 **版本**: v1.0
 **状态**: ✅ 完全一致
 
@@ -37,14 +37,14 @@
 ## 🗂️ 文件信息
 
 ### data.csv
-- **文件路径**: `results/data.csv`
+- **文件路径**: `data/data.csv`
 - **行数**: 726行（含header）
 - **列数**: 56列
 - **用途**: 精简数据文件，统一并行/非并行字段
-- **生成脚本**: `scripts/create_unified_data_csv.py`
+- **生成脚本**: `tools/data_management/create_unified_data_csv.py`
 
 ### raw_data.csv
-- **文件路径**: `results/raw_data.csv`
+- **文件路径**: `data/raw_data.csv`
 - **行数**: 726行（含header）
 - **列数**: 87列
 - **用途**: 主数据文件，保留原始结构
@@ -249,7 +249,7 @@ raw_value = raw_row['fg_field'] if raw_row['fg_field'] else raw_row['field']
 ## 🛠️ 检查工具说明
 
 ### 脚本信息
-- **脚本路径**: `scripts/compare_data_vs_raw_data.py`
+- **脚本路径**: `tools/data_management/compare_data_vs_raw_data.py`
 - **版本**: v1.0
 - **创建日期**: 2025-12-29
 - **代码行数**: 462行
@@ -264,7 +264,7 @@ raw_value = raw_row['fg_field'] if raw_row['fg_field'] else raw_row['field']
 ### 使用方法
 ```bash
 # 运行完整检查
-python3 scripts/compare_data_vs_raw_data.py
+python3 tools/data_management/compare_data_vs_raw_data.py
 
 # 预期输出: 完整的检查报告和结论
 ```
@@ -292,7 +292,7 @@ def get_raw_field_value(raw_row, field, is_parallel):
 
 - [DATA_FORMAT_DESIGN_DECISION_SUMMARY.md](DATA_FORMAT_DESIGN_DECISION_SUMMARY.md) - 数据格式设计决定
 - [项目进度完整总结](PROJECT_PROGRESS_COMPLETE_SUMMARY.md) - 项目总体状况
-- [create_unified_data_csv.py](../../scripts/create_unified_data_csv.py) - data.csv生成脚本
+- [create_unified_data_csv.py](../../tools/data_management/create_unified_data_csv.py) - data.csv生成脚本
 
 ---
 

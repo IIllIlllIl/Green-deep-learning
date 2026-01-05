@@ -1,0 +1,316 @@
+{
+  "_description": "多参数组合变异实验 - 11个模型 × 2种模式（非并行+并行） × 5次重复",
+  "_total_configs": 22,
+  "_total_experiments": 110,
+  "_created": "2025-12-30",
+  "_purpose": "研究超参数组合效应，对比单参数变异与多参数同时变异的差异",
+
+  "experiment_name": "multi_param_mutation_all_models",
+  "description": "多参数组合变异 - 探索超参数交互效应",
+  "mode": "mutation",
+  "max_retries": 2,
+  "governor": "performance",
+  "use_deduplication": true,
+  "historical_csvs": [
+    "data/raw_data.csv"
+  ],
+
+  "experiments": [
+    {
+      "comment": "examples/mnist - 非并行 - 同时变异所有超参数",
+      "repo": "examples",
+      "model": "mnist",
+      "mode": "mutation",
+      "mutate": ["batch_size", "epochs", "learning_rate", "seed"],
+      "runs_per_config": 5
+    },
+    {
+      "comment": "examples/mnist - 并行 - 同时变异所有超参数",
+      "repo": "examples",
+      "model": "mnist",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist",
+        "mode": "mutation",
+        "mutate": ["batch_size", "epochs", "learning_rate", "seed"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "siamese",
+        "hyperparameters": {}
+      },
+      "runs_per_config": 5
+    },
+
+    {
+      "comment": "examples/mnist_ff - 非并行 - 同时变异所有超参数",
+      "repo": "examples",
+      "model": "mnist_ff",
+      "mode": "mutation",
+      "mutate": ["batch_size", "epochs", "learning_rate", "seed"],
+      "runs_per_config": 5
+    },
+    {
+      "comment": "examples/mnist_ff - 并行 - 同时变异所有超参数",
+      "repo": "examples",
+      "model": "mnist_ff",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist_ff",
+        "mode": "mutation",
+        "mutate": ["batch_size", "epochs", "learning_rate", "seed"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "siamese",
+        "hyperparameters": {}
+      },
+      "runs_per_config": 5
+    },
+
+    {
+      "comment": "examples/mnist_rnn - 非并行 - 同时变异所有超参数",
+      "repo": "examples",
+      "model": "mnist_rnn",
+      "mode": "mutation",
+      "mutate": ["batch_size", "epochs", "learning_rate", "seed"],
+      "runs_per_config": 5
+    },
+    {
+      "comment": "examples/mnist_rnn - 并行 - 同时变异所有超参数",
+      "repo": "examples",
+      "model": "mnist_rnn",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "mode": "mutation",
+        "mutate": ["batch_size", "epochs", "learning_rate", "seed"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "siamese",
+        "hyperparameters": {}
+      },
+      "runs_per_config": 5
+    },
+
+    {
+      "comment": "examples/siamese - 非并行 - 同时变异所有超参数",
+      "repo": "examples",
+      "model": "siamese",
+      "mode": "mutation",
+      "mutate": ["batch_size", "epochs", "learning_rate", "seed"],
+      "runs_per_config": 5
+    },
+    {
+      "comment": "examples/siamese - 并行 - 同时变异所有超参数",
+      "repo": "examples",
+      "model": "siamese",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "siamese",
+        "mode": "mutation",
+        "mutate": ["batch_size", "epochs", "learning_rate", "seed"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {}
+      },
+      "runs_per_config": 5
+    },
+
+    {
+      "comment": "pytorch_resnet_cifar10/resnet20 - 非并行 - 同时变异所有超参数",
+      "repo": "pytorch_resnet_cifar10",
+      "model": "resnet20",
+      "mode": "mutation",
+      "mutate": ["epochs", "learning_rate", "weight_decay", "seed"],
+      "runs_per_config": 5
+    },
+    {
+      "comment": "pytorch_resnet_cifar10/resnet20 - 并行 - 同时变异所有超参数",
+      "repo": "pytorch_resnet_cifar10",
+      "model": "resnet20",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "pytorch_resnet_cifar10",
+        "model": "resnet20",
+        "mode": "mutation",
+        "mutate": ["epochs", "learning_rate", "weight_decay", "seed"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {}
+      },
+      "runs_per_config": 5
+    },
+
+    {
+      "comment": "Person_reID_baseline_pytorch/densenet121 - 非并行 - 同时变异所有超参数",
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "densenet121",
+      "mode": "mutation",
+      "mutate": ["dropout", "epochs", "learning_rate", "seed"],
+      "runs_per_config": 5
+    },
+    {
+      "comment": "Person_reID_baseline_pytorch/densenet121 - 并行 - 同时变异所有超参数",
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "densenet121",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "densenet121",
+        "mode": "mutation",
+        "mutate": ["dropout", "epochs", "learning_rate", "seed"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {}
+      },
+      "runs_per_config": 5
+    },
+
+    {
+      "comment": "Person_reID_baseline_pytorch/hrnet18 - 非并行 - 同时变异所有超参数",
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "hrnet18",
+      "mode": "mutation",
+      "mutate": ["dropout", "epochs", "learning_rate", "seed"],
+      "runs_per_config": 5
+    },
+    {
+      "comment": "Person_reID_baseline_pytorch/hrnet18 - 并行 - 同时变异所有超参数",
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "hrnet18",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "hrnet18",
+        "mode": "mutation",
+        "mutate": ["dropout", "epochs", "learning_rate", "seed"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {}
+      },
+      "runs_per_config": 5
+    },
+
+    {
+      "comment": "Person_reID_baseline_pytorch/pcb - 非并行 - 同时变异所有超参数",
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "pcb",
+      "mode": "mutation",
+      "mutate": ["dropout", "epochs", "learning_rate", "seed"],
+      "runs_per_config": 5
+    },
+    {
+      "comment": "Person_reID_baseline_pytorch/pcb - 并行 - 同时变异所有超参数",
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "pcb",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "pcb",
+        "mode": "mutation",
+        "mutate": ["dropout", "epochs", "learning_rate", "seed"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {}
+      },
+      "runs_per_config": 5
+    },
+
+    {
+      "comment": "MRT-OAST/default - 非并行 - 同时变异所有超参数",
+      "repo": "MRT-OAST",
+      "model": "default",
+      "mode": "mutation",
+      "mutate": ["dropout", "epochs", "learning_rate", "weight_decay", "seed"],
+      "runs_per_config": 5
+    },
+    {
+      "comment": "MRT-OAST/default - 并行 - 同时变异所有超参数",
+      "repo": "MRT-OAST",
+      "model": "default",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "MRT-OAST",
+        "model": "default",
+        "mode": "mutation",
+        "mutate": ["dropout", "epochs", "learning_rate", "weight_decay", "seed"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {}
+      },
+      "runs_per_config": 5
+    },
+
+    {
+      "comment": "VulBERTa/mlp - 非并行 - 同时变异所有超参数",
+      "repo": "VulBERTa",
+      "model": "mlp",
+      "mode": "mutation",
+      "mutate": ["epochs", "learning_rate", "weight_decay", "seed"],
+      "runs_per_config": 5
+    },
+    {
+      "comment": "VulBERTa/mlp - 并行 - 同时变异所有超参数",
+      "repo": "VulBERTa",
+      "model": "mlp",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "VulBERTa",
+        "model": "mlp",
+        "mode": "mutation",
+        "mutate": ["epochs", "learning_rate", "weight_decay", "seed"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {}
+      },
+      "runs_per_config": 5
+    },
+
+    {
+      "comment": "bug-localization-by-dnn-and-rvsm/default - 非并行 - 同时变异所有超参数",
+      "repo": "bug-localization-by-dnn-and-rvsm",
+      "model": "default",
+      "mode": "mutation",
+      "mutate": ["alpha", "kfold", "max_iter", "seed"],
+      "runs_per_config": 5
+    },
+    {
+      "comment": "bug-localization-by-dnn-and-rvsm/default - 并行 - 同时变异所有超参数",
+      "repo": "bug-localization-by-dnn-and-rvsm",
+      "model": "default",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "bug-localization-by-dnn-and-rvsm",
+        "model": "default",
+        "mode": "mutation",
+        "mutate": ["alpha", "kfold", "max_iter", "seed"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {}
+      },
+      "runs_per_config": 5
+    }
+  ]
+}

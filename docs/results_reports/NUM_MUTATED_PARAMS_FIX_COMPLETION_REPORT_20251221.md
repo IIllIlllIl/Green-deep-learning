@@ -233,7 +233,7 @@ python3 scripts/recalculate_num_mutated_params_all.py
    - 修复 `pytorch_resnet_cifar10.seed.default`: null → 1334
    - 修复 `Person_reID_baseline_pytorch.seed.default`: null → 1334
 
-2. **results/raw_data.csv**
+2. **data/raw_data.csv**
    - 重新计算所有 `num_mutated_params` 和 `mutated_param` 字段
    - 修复209行 (30.9%)
 
@@ -337,7 +337,7 @@ if norm_def is None:
 
 ### 2. 数据完整性检查
 
-增强 `scripts/validate_raw_data.py`：
+增强 `tools/data_management/validate_raw_data.py`：
 - 检查 `num_mutated_params` 是否为空
 - 验证 `num_mutated_params` 计算正确性
 - 检查 `mutated_param` 与 `num_mutated_params` 的一致性
@@ -373,5 +373,5 @@ if norm_def is None:
 **修复耗时**: ~5分钟
 **修复文件**:
 - `mutation/models_config.json` (2处修改)
-- `results/raw_data.csv` (209行修改)
+- `data/raw_data.csv` (209行修改)
 - `scripts/recalculate_num_mutated_params_all.py` (新增)

@@ -220,7 +220,7 @@ energy_data_extracted_v2.csv (418行 × 34列)
 
 **数据来源**:
 ```
-主项目的 results/data.csv（精简格式）
+主项目的 data/data.csv（精简格式）
     ↓
 复制到 analysis/data/energy_research/raw/
     ↓

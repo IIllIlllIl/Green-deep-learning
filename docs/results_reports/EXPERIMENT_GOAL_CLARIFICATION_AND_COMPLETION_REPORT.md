@@ -69,7 +69,7 @@
 
 ### 数据源
 
-- **文件**: `results/raw_data.csv`
+- **文件**: `data/raw_data.csv`
 - **总实验数**: 476个
 - **有效实验数**: 322个（67.6%）
 - **无效实验数**: 154个（32.4%）
@@ -428,5 +428,5 @@
 
 **报告版本**: 1.1
 **生成时间**: 2025-12-12 (更新)
-**数据源**: results/raw_data.csv (476行)
+**数据源**: data/raw_data.csv (476行)
 **分析脚本**: scripts/analyze_experiment_completion.py（已更新性能数据验证逻辑）

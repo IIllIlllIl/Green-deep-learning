@@ -87,7 +87,7 @@ perf_recall: "0.844435"     ✅ 完整保留
 ```python
 import pandas as pd
 
-df = pd.read_csv('results/data.csv')
+df = pd.read_csv('data/data.csv')
 mrt_oast = df[df['repository'] == 'MRT-OAST']
 
 # 判断 accuracy 的含义
@@ -113,15 +113,15 @@ old_data = mrt_oast[mrt_oast['perf_accuracy'].astype(float) > 1.0]
    - 修复了36个新实验
    - 生成 `raw_data_fixed.csv`
 
-2. **scripts/create_unified_data_csv.py**
+2. **tools/data_management/create_unified_data_csv.py**
    - 重新生成 data.csv
    - 统一并行/非并行字段
    - 保留原始数据精度
 
 ### 备份文件
 
-- `results/raw_data.csv.backup_before_fix` - 修复前的 raw_data.csv
-- `results/data.csv.backup_before_refix` - 修复前的 data.csv
+- `data/raw_data.csv.backup_before_fix` - 修复前的 raw_data.csv
+- `data/data.csv.backup_before_refix` - 修复前的 data.csv
 
 ---
 
@@ -129,8 +129,8 @@ old_data = mrt_oast[mrt_oast['perf_accuracy'].astype(float) > 1.0]
 
 | 文件 | 状态 | 说明 |
 |------|------|------|
-| `results/raw_data.csv` | ✅ 已更新 | 36个MRT-OAST实验已修复 |
-| `results/data.csv` | ✅ 已更新 | 基于修复后的raw_data重新生成 |
+| `data/raw_data.csv` | ✅ 已更新 | 36个MRT-OAST实验已修复 |
+| `data/data.csv` | ✅ 已更新 | 基于修复后的raw_data重新生成 |
 | `results/summary_old.csv` | 🔒 未修改 | 保持原样（历史数据） |
 | `results/summary_new.csv` | 🔒 未修改 | 保持原样（历史数据） |
 
@@ -246,5 +246,5 @@ old_data = mrt_oast[mrt_oast['perf_accuracy'].astype(float) > 1.0]
 
 **修复完成日期**: 2025-12-19
 **修复脚本**: `scripts/fix_mrt_oast_accuracy.py`
-**生成脚本**: `scripts/create_unified_data_csv.py`
-**最终文件**: `results/data.csv` (676行 × 56列)
+**生成脚本**: `tools/data_management/create_unified_data_csv.py`
+**最终文件**: `data/data.csv` (676行 × 56列)

@@ -1,0 +1,33 @@
+{
+  "experiment_id": "Person_reID_baseline_pytorch_pcb_007",
+  "timestamp": "2025-11-17T02:48:26.598667",
+  "repository": "Person_reID_baseline_pytorch",
+  "model": "pcb",
+  "hyperparameters": {
+    "epochs": 60,
+    "learning_rate": 0.05,
+    "dropout": 0.5
+  },
+  "duration_seconds": 4031.8068141937256,
+  "energy_metrics": {
+    "cpu_energy_pkg_joules": 134130.12,
+    "cpu_energy_ram_joules": 10532.99,
+    "cpu_energy_total_joules": 144663.11,
+    "gpu_power_avg_watts": 227.4898495665479,
+    "gpu_power_max_watts": 319.17,
+    "gpu_power_min_watts": 9.92,
+    "gpu_energy_total_joules": 892215.1900000009,
+    "gpu_temp_avg_celsius": 77.79347271800101,
+    "gpu_temp_max_celsius": 84.0,
+    "gpu_util_avg_percent": 96.74451810300867,
+    "gpu_util_max_percent": 100.0
+  },
+  "performance_metrics": {
+    "rank1": 0.925772,
+    "rank5": 0.974169,
+    "map": 0.773408
+  },
+  "training_success": true,
+  "retries": 0,
+  "error_message": "Training completed successfully"
+}

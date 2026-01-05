@@ -421,7 +421,7 @@ cd /home/green/energy_dl/nightly
 # 1. 检查Bug定位的learning_rate原始字段名
 python3 -c "
 import pandas as pd
-df = pd.read_csv('results/data.csv')
+df = pd.read_csv('data/data.csv')
 bug_loc = df[df['repo'] == 'bug-localization-by-dnn-and-rvsm']
 print('Bug定位列名:', list(bug_loc.columns))
 print('前5行样例:')
@@ -431,7 +431,7 @@ print(bug_loc.head()[['repo', 'model']].to_string())
 # 2. 检查CIFAR-10的batch_size原始字段名
 python3 -c "
 import pandas as pd
-df = pd.read_csv('results/data.csv')
+df = pd.read_csv('data/data.csv')
 cifar = df[df['repo'] == 'pytorch_resnet_cifar10']
 print('CIFAR-10列名:', list(cifar.columns))
 print('前5行样例:')

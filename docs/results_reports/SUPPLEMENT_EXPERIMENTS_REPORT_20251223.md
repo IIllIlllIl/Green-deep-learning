@@ -139,7 +139,7 @@
 
 ### data.csv
 
-**更新方式**: 使用 `scripts/create_unified_data_csv.py` 从 raw_data.csv 重新生成
+**更新方式**: 使用 `tools/data_management/create_unified_data_csv.py` 从 raw_data.csv 重新生成
 
 **更新前**:
 - 总行数: 677行（含header）
@@ -173,8 +173,8 @@
 
 ```bash
 # 实验ID一致性
-tail -n +2 results/raw_data.csv | cut -d',' -f1 | sort > /tmp/raw_ids.txt
-tail -n +2 results/data.csv | cut -d',' -f1 | sort > /tmp/data_ids.txt
+tail -n +2 data/raw_data.csv | cut -d',' -f1 | sort > /tmp/raw_ids.txt
+tail -n +2 data/data.csv | cut -d',' -f1 | sort > /tmp/data_ids.txt
 diff /tmp/raw_ids.txt /tmp/data_ids.txt
 # 结果: 0行差异 ✅
 ```
@@ -253,7 +253,7 @@ VulBERTa_mlp_050_parallel,True,136731.12,223.91
   "max_retries": 2,
   "governor": "performance",
   "use_deduplication": true,
-  "historical_csvs": ["results/raw_data.csv"]
+  "historical_csvs": ["data/raw_data.csv"]
 }
 ```
 
@@ -391,8 +391,8 @@ VulBERTa_mlp_050_parallel,True,136731.12,223.91
 
 - **配置规范**: [JSON_CONFIG_WRITING_STANDARDS.md](../JSON_CONFIG_WRITING_STANDARDS.md)
 - **数据格式**: [DATA_FORMAT_DESIGN_DECISION_SUMMARY.md](DATA_FORMAT_DESIGN_DECISION_SUMMARY.md)
-- **数据追加脚本**: [scripts/append_session_to_raw_data.py](../../scripts/append_session_to_raw_data.py)
-- **数据转换脚本**: [scripts/create_unified_data_csv.py](../../scripts/create_unified_data_csv.py)
+- **数据追加脚本**: [tools/data_management/append_session_to_raw_data.py](../../tools/data_management/append_session_to_raw_data.py)
+- **数据转换脚本**: [tools/data_management/create_unified_data_csv.py](../../tools/data_management/create_unified_data_csv.py)
 
 ---
 

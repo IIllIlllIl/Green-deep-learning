@@ -171,7 +171,7 @@
 
 | 文件 | 路径 | 行数 | 列数 | 说明 |
 |------|------|------|------|------|
-| data.csv | `../../results/data.csv` | 726 | 56 | 主项目精简数据 |
+| data.csv | `../../data/data.csv` | 726 | 56 | 主项目精简数据 |
 | energy_data_original.csv | `../data/energy_research/raw/` | 726 | 56 | analysis 模块本地副本 |
 | stage2_mediators.csv | `../data/energy_research/processed.backup_*/` | 726 | 63 | 添加中介变量后的数据 |
 

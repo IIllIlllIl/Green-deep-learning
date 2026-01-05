@@ -11,7 +11,7 @@
     "total_达标": "19/90 (+2)"
   },
   "use_deduplication": true,
-  "historical_csvs": ["results/raw_data.csv"],
+  "historical_csvs": ["data/raw_data.csv"],
   "runs_per_config": 5,
   "experiments": [
     {

@@ -39,8 +39,8 @@ def get_field_value(row, field, is_parallel):
 
 | 文件 | 路径 | 行数 | 列数 | 大小 |
 |------|------|------|------|------|
-| **raw_data.csv** | `results/raw_data.csv` | 726 | **87** | ~302KB |
-| **data.csv** | `results/data.csv` | 726 | **56** | ~276KB |
+| **raw_data.csv** | `data/raw_data.csv` | 726 | **87** | ~302KB |
+| **data.csv** | `data/data.csv` | 726 | **56** | ~276KB |
 
 **共同点**:
 - 行数相同（726行，含header）
@@ -150,7 +150,7 @@ exp_012_parallel,pytorch_resnet,resnet20,True,True,224.6,...  # 并行：顶层=
 import pandas as pd
 
 # ✅ 正确：直接读取data.csv
-df = pd.read_csv('results/data.csv')
+df = pd.read_csv('data/data.csv')
 
 # ✅ 正确：直接使用字段名，无需考虑fg_前缀
 successful = df[df['training_success'] == 'True']  # 包含所有726个训练成功的样本
@@ -196,7 +196,7 @@ energy = row['energy_gpu_avg_watts']  # 已自动包含并行模式数据
 import pandas as pd
 
 # 读取raw_data.csv
-df = pd.read_csv('results/raw_data.csv')
+df = pd.read_csv('data/raw_data.csv')
 
 # 筛选并行实验（通过mode列）
 df_parallel = df[df['mode'] == 'parallel']  # 105个
@@ -299,7 +299,7 @@ data.csv统计：
 **复制到analysis模块**：
 ```bash
 # 已完成
-cp results/data.csv analysis/data/energy_research/raw/energy_data_original.csv
+cp data/data.csv analysis/data/energy_research/raw/energy_data_original.csv
 ```
 
 **选择理由**：

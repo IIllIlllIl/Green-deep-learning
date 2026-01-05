@@ -1,0 +1,29 @@
+{
+  "exp_id": "TEST3",
+  "exp_name": "Large particles",
+  "status": "\u6210\u529f",
+  "success": true,
+  "elapsed_time_minutes": 5.2250546058019,
+  "parameters": {
+    "alpha": 0.05,
+    "n_particles": 50,
+    "beta": 1.0,
+    "tau": 1.0,
+    "n_steps": 1000,
+    "n_grad_mc_samples": 128
+  },
+  "graph_stats": {
+    "min": 0.0,
+    "max": 0.4399999976158142,
+    "mean": 0.05524691194295883,
+    "std": 0.0935625433921814
+  },
+  "edges": {
+    "threshold_0.01": 128,
+    "threshold_0.1": 69,
+    "threshold_0.2": 30,
+    "threshold_0.3": 9,
+    "threshold_0.5": 0
+  },
+  "error_message": null
+}

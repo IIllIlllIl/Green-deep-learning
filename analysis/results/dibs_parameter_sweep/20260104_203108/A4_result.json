@@ -1,0 +1,29 @@
+{
+  "exp_id": "A4",
+  "exp_name": "\u4e2d\u7b49\u7c92\u5b50\u6570 (50)",
+  "status": "\u6210\u529f",
+  "success": true,
+  "elapsed_time_minutes": 25.814377363522848,
+  "parameters": {
+    "alpha": 0.05,
+    "n_particles": 50,
+    "beta": 1.0,
+    "tau": 1.0,
+    "n_steps": 5000,
+    "n_grad_mc_samples": 128
+  },
+  "graph_stats": {
+    "min": 0.0,
+    "max": 0.41999998688697815,
+    "mean": 0.06648147851228714,
+    "std": 0.09936199337244034
+  },
+  "edges": {
+    "threshold_0.01": 145,
+    "threshold_0.1": 83,
+    "threshold_0.2": 37,
+    "threshold_0.3": 10,
+    "threshold_0.5": 0
+  },
+  "error_message": null
+}

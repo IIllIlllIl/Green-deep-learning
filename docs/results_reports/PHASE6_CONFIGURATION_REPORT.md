@@ -151,7 +151,7 @@ sudo -E python3 mutation.py -ec settings/phase6_vulberta_mlp_completion.json
 ✅ 通过 - 41.72小时，在36-42h目标范围内
 
 ### 去重设置验证
-✅ 启用 - 使用`results/raw_data.csv`进行历史去重
+✅ 启用 - 使用`data/raw_data.csv`进行历史去重
 
 ### 配置标准验证
 ✅ 通过 - 符合JSON配置书写规范:
@@ -172,7 +172,7 @@ sudo -E python3 mutation.py -ec settings/phase6_vulberta_mlp_completion.json
 1. `scripts/calculate_experiment_gap.py` - 修复并行模式数据判断逻辑
 
 ### 备份文件
-1. `results/raw_data.csv.backup_before_fix_20251215_183412` - 修复前备份
+1. `data/raw_data.csv.backup_before_fix_20251215_183412` - 修复前备份
 
 ---
 

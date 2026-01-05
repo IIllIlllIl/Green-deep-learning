@@ -1,0 +1,30 @@
+{
+  "experiment_id": "VulBERTa_mlp_013",
+  "timestamp": "2025-11-16T01:13:09.850124",
+  "repository": "VulBERTa",
+  "model": "mlp",
+  "hyperparameters": {
+    "epochs": 10,
+    "learning_rate": 3e-05,
+    "weight_decay": 1e-05,
+    "seed": 1334
+  },
+  "duration_seconds": 3212.922306060791,
+  "energy_metrics": {
+    "cpu_energy_pkg_joules": 94691.6,
+    "cpu_energy_ram_joules": 7438.23,
+    "cpu_energy_total_joules": 102129.83,
+    "gpu_power_avg_watts": 229.5672401662931,
+    "gpu_power_max_watts": 319.2,
+    "gpu_power_min_watts": 5.1,
+    "gpu_energy_total_joules": 717856.7599999985,
+    "gpu_temp_avg_celsius": 78.35241445474897,
+    "gpu_temp_max_celsius": 83.0,
+    "gpu_util_avg_percent": 88.83946274384394,
+    "gpu_util_max_percent": 100.0
+  },
+  "performance_metrics": {},
+  "training_success": true,
+  "retries": 0,
+  "error_message": "Training completed successfully"
+}

@@ -1,0 +1,29 @@
+{
+  "exp_id": "A3",
+  "exp_name": "DiBS\u9ed8\u8ba4alpha (0.05)",
+  "status": "\u9519\u8bef",
+  "success": false,
+  "elapsed_time_minutes": 4.171133041381836e-05,
+  "parameters": {
+    "alpha": 0.05,
+    "n_particles": 20,
+    "beta": 1.0,
+    "tau": 1.0,
+    "n_steps": 5000,
+    "n_grad_mc_samples": 128
+  },
+  "graph_stats": {
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
+  },
+  "edges": {
+    "threshold_0.01": 0,
+    "threshold_0.1": 0,
+    "threshold_0.2": 0,
+    "threshold_0.3": 0,
+    "threshold_0.5": 0
+  },
+  "error_message": "DiBS\u62df\u5408\u5931\u8d25: LinearGaussian.__init__() got an unexpected keyword argument 'n_vars'"
+}

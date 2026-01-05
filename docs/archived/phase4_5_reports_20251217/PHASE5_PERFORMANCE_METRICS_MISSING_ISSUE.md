@@ -35,7 +35,7 @@ Phase 5执行的72个并行实验中，有20个实验的性能指标未能成功
 
 ### 2. 数据提取脚本分析
 
-`scripts/append_session_to_raw_data.py` 已包含正确的性能指标映射（修复后）:
+`tools/data_management/append_session_to_raw_data.py` 已包含正确的性能指标映射（修复后）:
 ```python
 perf_mapping = {
     'eval_loss': 'perf_eval_loss',
@@ -155,7 +155,7 @@ if phase5_start <= timestamp <= phase5_end:
 - 统计分析不准确
 
 **已更新**:
-- ✅ `scripts/append_session_to_raw_data.py` 已使用复合键去重
+- ✅ `tools/data_management/append_session_to_raw_data.py` 已使用复合键去重
 - ⚠️ 需要更新CLAUDE.md，添加此重要注意事项
 
 ### 2. **CSV列定义需要提前规划**
@@ -203,7 +203,7 @@ NEW_COLUMNS = [
     'perf_top20_accuracy'
 ]
 
-def expand_raw_data_columns(csv_path='results/raw_data.csv'):
+def expand_raw_data_columns(csv_path='data/raw_data.csv'):
     """扩展raw_data.csv的列定义"""
 
     # 备份

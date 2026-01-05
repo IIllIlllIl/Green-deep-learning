@@ -107,7 +107,7 @@
 **目的**：确保raw_data.csv数据质量
 
 **输入**：
-- `../../results/raw_data.csv` (676行×87列)
+- `../../data/raw_data.csv` (676行×87列)
 
 **处理**：
 1. 检查总行数、列数
@@ -140,7 +140,7 @@
 **目的**：合并语义相同的超参数
 
 **输入**：
-- `../../results/raw_data.csv`
+- `../../data/raw_data.csv`
 
 **处理**：
 ```python

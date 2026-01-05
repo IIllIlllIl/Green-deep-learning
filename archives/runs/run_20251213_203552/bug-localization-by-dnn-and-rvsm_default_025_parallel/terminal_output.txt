@@ -1,0 +1,111 @@
+================================================================================
+STDOUT:
+================================================================================
+[Train Wrapper] Repository: repos/bug-localization-by-dnn-and-rvsm
+[Train Wrapper] Training script: ./train.sh
+[Train Wrapper] Log file: results/run_20251213_203552/bug-localization-by-dnn-and-rvsm_default_025_parallel/training.log
+[Train Wrapper] Energy directory: results/run_20251213_203552/bug-localization-by-dnn-and-rvsm_default_025_parallel/energy
+[Train Wrapper] Arguments: --alpha 0.000005
+[Train Wrapper] Changed to directory: /home/green/energy_dl/nightly/repos/bug-localization-by-dnn-and-rvsm
+[Train Wrapper] Starting GPU monitoring...
+[Train Wrapper] GPU monitoring PID: 1460350
+[Train Wrapper] Starting training with integrated energy monitoring...
+[Train Wrapper] Command: ./train.sh --alpha 0.000005
+========================================
+========================================
+Bug Localization Training Configuration
+========================================
+Model: dnn
+Python: /home/green/miniconda3/envs/dnn_rvsm/bin/python
+Working directory: /home/green/energy_dl/nightly/repos/bug-localization-by-dnn-and-rvsm
+K-fold: 10
+Hidden sizes: 300
+Alpha: 0.000005
+Max iterations: 10000
+Early stopping: 30
+Solver: sgd
+Parallel jobs: -2
+Random seed: Not set (original non-deterministic behavior)
+========================================
+
+================================================================================
+Bug Localization Model Training - DNN
+================================================================================
+Start time: 2025-12-14 11:25:27
+
+DNN Hyperparameters:
+  - K-fold: 10
+  - Hidden layer sizes: (300,)
+  - Alpha (L2 penalty): 5e-06
+  - Max iterations: 10000
+  - Early stopping patience: 30
+  - Solver: sgd
+  - Parallel jobs: -2
+  - Random seed: Not set (original non-deterministic behavior)
+
+Training DNN model with k-fold cross-validation...
+--------------------------------------------------------------------------------
+/home/green/miniconda3/envs/dnn_rvsm/lib/python3.7/site-packages/joblib/externals/loky/process_executor.py:706: UserWarning: A worker stopped while some jobs were given to the executor. This can be caused by a too short worker timeout or by a memory leak.
+  "timeout or by a memory leak.", UserWarning
+Fold: 2 / 10
+Fold: 1 / 10
+Fold: 5 / 10
+Training completed successfully!
+
+================================================================================
+TRAINING REPORT
+================================================================================
+Model: DNN
+Start time: 2025-12-14 11:25:27
+End time: 2025-12-14 11:41:48
+Total duration: 981.08 seconds (16.35 minutes)
+
+MODEL PERFORMANCE (Top-k Accuracy):
+--------------------------------------------------------------------------------
+  Top- 1 Accuracy: 0.377 (37.7%)
+  Top- 5 Accuracy: 0.625 (62.5%)
+  Top-10 Accuracy: 0.738 (73.8%)
+  Top-20 Accuracy: 0.826 (82.6%)
+
+Detailed Results (All k values):
+  Top- 1: 0.377
+  Top- 2: 0.476
+  Top- 3: 0.547
+  Top- 4: 0.590
+  Top- 5: 0.625
+  Top- 6: 0.652
+  Top- 7: 0.678
+  Top- 8: 0.699
+  Top- 9: 0.722
+  Top-10: 0.738
+  Top-11: 0.749
+  Top-12: 0.761
+  Top-13: 0.774
+  Top-14: 0.784
+  Top-15: 0.792
+  Top-16: 0.801
+  Top-17: 0.808
+  Top-18: 0.815
+  Top-19: 0.819
+  Top-20: 0.826
+================================================================================
+Fold: 6 / 10
+Fold: 7 / 10
+Fold: 8 / 10
+Fold: 3 / 10
+Fold: 9 / 10
+Fold: 4 / 10
+Fold: 10 / 10
+Training completed successfully!
+========================================
+[Train Wrapper] Training finished with exit code: 0
+[Train Wrapper] Stopping GPU monitoring...
+[Train Wrapper] Processing CPU energy data...
+[Train Wrapper] CPU energy saved to: /home/green/energy_dl/nightly/results/run_20251213_203552/bug-localization-by-dnn-and-rvsm_default_025_parallel/energy/cpu_energy.txt
+[Train Wrapper] GPU monitoring data saved to: /home/green/energy_dl/nightly/results/run_20251213_203552/bug-localization-by-dnn-and-rvsm_default_025_parallel/energy
+[Train Wrapper] Energy monitoring completed
+
+================================================================================
+STDERR:
+================================================================================
+(empty)

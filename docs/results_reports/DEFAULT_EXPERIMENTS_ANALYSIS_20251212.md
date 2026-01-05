@@ -335,5 +335,5 @@ abs(exp_value - default_value) > abs(default_value * 1e-6)
 
 **报告作者**: Claude (AI Assistant)
 **验证状态**: ✅ 已验证
-**数据源**: results/raw_data.csv (476行，去重后458个唯一实验)
+**数据源**: data/raw_data.csv (476行，去重后458个唯一实验)
 **日期**: 2025-12-12

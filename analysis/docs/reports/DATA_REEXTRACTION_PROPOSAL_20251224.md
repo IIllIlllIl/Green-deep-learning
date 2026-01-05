@@ -116,7 +116,7 @@
 
 ### 2.1 append_session_to_raw_data.py的提取逻辑
 
-**代码** (`scripts/append_session_to_raw_data.py:146-150,216-220`):
+**代码** (`tools/data_management/append_session_to_raw_data.py:146-150,216-220`):
 
 ```python
 # 并行模式
@@ -960,8 +960,8 @@ def handle_missing_values(df):
 
 | 文件路径 | 类型 | 行数 | 列数 | 用途 |
 |---------|------|------|------|------|
-| `results/raw_data.csv` | 主数据 | 726 | 87 | 主项目汇总数据 |
-| `results/data.csv` | 精简 | 726 | 56 | 主项目精简数据 |
+| `data/raw_data.csv` | 主数据 | 726 | 87 | 主项目汇总数据 |
+| `data/data.csv` | 精简 | 726 | 56 | 主项目精简数据 |
 | `analysis/data/energy_research/raw/energy_data_original.csv` | 副本 | 726 | 56 | analysis模块原始数据 |
 | `analysis/data/energy_research/training/training_data_*.csv` | 训练 | 80-258 | 13-17 | **待重新生成** ⚠️ |
 
@@ -974,8 +974,8 @@ def handle_missing_values(df):
 ### 附录C: 相关脚本位置
 
 **主项目**:
-- `scripts/append_session_to_raw_data.py` - 从session追加数据
-- `scripts/create_unified_data_csv.py` - 生成data.csv
+- `tools/data_management/append_session_to_raw_data.py` - 从session追加数据
+- `tools/data_management/create_unified_data_csv.py` - 生成data.csv
 
 **analysis模块**:
 - `analysis/scripts/stage0_data_validation.py` - 数据验证

@@ -1,0 +1,67 @@
+================================================================================
+STDOUT:
+================================================================================
+[Train Wrapper] Repository: repos/examples
+[Train Wrapper] Training script: ./train.sh
+[Train Wrapper] Log file: results/run_20251230_204245/examples_mnist_ff_015/training.log
+[Train Wrapper] Energy directory: results/run_20251230_204245/examples_mnist_ff_015/energy
+[Train Wrapper] Arguments: -n mnist_ff -b 43 -e 10 -l 0.010681 --seed 5351
+[Train Wrapper] Changed to directory: /home/green/energy_dl/nightly/repos/examples
+[Train Wrapper] Starting GPU monitoring...
+[Train Wrapper] GPU monitoring PID: 3196244
+[Train Wrapper] Starting training with integrated energy monitoring...
+[Train Wrapper] Command: ./train.sh -n mnist_ff -b 43 -e 10 -l 0.010681 --seed 5351
+========================================
+[0;34m[INFO][0m Using Python: /home/green/energy_dl/nightly/repos/examples/venv/bin/python
+
+========================================
+  PyTorch Training Script
+========================================
+[0;34m[INFO][0m Model: mnist_ff
+[0;34m[INFO][0m Directory: /home/green/energy_dl/nightly/repos/examples/mnist_forward_forward
+[0;34m[INFO][0m Python: /home/green/energy_dl/nightly/repos/examples/venv/bin/python
+[0;34m[INFO][0m Epochs: 10
+[0;34m[INFO][0m Batch Size: 43
+[0;34m[INFO][0m Learning Rate: 0.010681
+[0;34m[INFO][0m Seed: 5351
+========================================
+
+[0;34m[INFO][0m Starting training at 2025-12-30 21:12:57...
+
+training layer:  0
+Loss:  1.1267645359039307
+training layer:  1
+Loss:  1.1266818046569824
+train error: 0.7906976789236069
+test error: 0.910800002515316
+
+========================================
+  TRAINING REPORT
+========================================
+[0;34m[INFO][0m Model: mnist_ff
+[0;34m[INFO][0m Training Start: 2025-12-30 21:12:57
+[0;34m[INFO][0m Training End: 2025-12-30 21:13:04
+[0;34m[INFO][0m Total Duration: 0h 0m 7s
+----------------------------------------
+[0;32m[SUCCESS][0m Training completed successfully!
+----------------------------------------
+[0;34m[INFO][0m Performance Metrics:
+[0;32m[SUCCESS][0m Test Accuracy: 8.919999748468400%
+[0;34m[INFO][0m Test Error: 0.910800002515316
+----------------------------------------
+[1;33m[WARNING][0m Errors/Warnings found during training:
+train error: 0.7906976789236069
+========================================
+
+========================================
+[Train Wrapper] Training finished with exit code: 0
+[Train Wrapper] Stopping GPU monitoring...
+[Train Wrapper] Processing CPU energy data...
+[Train Wrapper] CPU energy saved to: /home/green/energy_dl/nightly/results/run_20251230_204245/examples_mnist_ff_015/energy/cpu_energy.txt
+[Train Wrapper] GPU monitoring data saved to: /home/green/energy_dl/nightly/results/run_20251230_204245/examples_mnist_ff_015/energy
+[Train Wrapper] Energy monitoring completed
+
+================================================================================
+STDERR:
+================================================================================
+(empty)

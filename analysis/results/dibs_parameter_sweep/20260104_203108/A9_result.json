@@ -1,0 +1,29 @@
+{
+  "exp_id": "A9",
+  "exp_name": "\u9ad8MC\u6837\u672c\u6570 (256)",
+  "status": "\u6210\u529f",
+  "success": true,
+  "elapsed_time_minutes": 20.198058605194092,
+  "parameters": {
+    "alpha": 0.05,
+    "n_particles": 20,
+    "beta": 1.0,
+    "tau": 1.0,
+    "n_steps": 5000,
+    "n_grad_mc_samples": 256
+  },
+  "graph_stats": {
+    "min": 0.0,
+    "max": 0.6000000238418579,
+    "mean": 0.06388889253139496,
+    "std": 0.11483348160982132
+  },
+  "edges": {
+    "threshold_0.01": 111,
+    "threshold_0.1": 68,
+    "threshold_0.2": 33,
+    "threshold_0.3": 17,
+    "threshold_0.5": 2
+  },
+  "error_message": null
+}

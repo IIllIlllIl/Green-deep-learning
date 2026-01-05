@@ -156,7 +156,7 @@ for src_key, dst_key in perf_mapping.items():
 - ✅ 能耗数据: 100%
 - ✅ 性能数据: 100%
 
-**修复文件**: `scripts/append_session_to_raw_data.py:215-268`
+**修复文件**: `tools/data_management/append_session_to_raw_data.py:215-268`
 
 ---
 
@@ -225,7 +225,7 @@ for src_key, dst_key in perf_mapping.items():
 - **原始行数**: 624行
 - **新增行数**: 52行
 - **最终行数**: 676行
-- **备份文件**: `results/raw_data.csv.backup_20251219_154656`
+- **备份文件**: `data/raw_data.csv.backup_20251219_154656`
 
 ### 数据验证
 - ✅ 行数验证: 676 = 624 + 52
@@ -236,7 +236,7 @@ for src_key, dst_key in perf_mapping.items():
 ### 数据提取修复
 1. **修复前**: 能耗和性能字段全部为空
 2. **修复后**: 100%数据完整
-3. **修复文件**: `scripts/append_session_to_raw_data.py`
+3. **修复文件**: `tools/data_management/append_session_to_raw_data.py`
 4. **修复行数**: 第215-268行
 
 ---
@@ -268,11 +268,11 @@ for src_key, dst_key in perf_mapping.items():
 
 ### 数据文件
 - `results/run_20251217_211341/summary.csv` - Session汇总数据（52行）
-- `results/raw_data.csv` - 主数据文件（676行）
-- `results/raw_data.csv.backup_20251219_154656` - 合并前备份
+- `data/raw_data.csv` - 主数据文件（676行）
+- `data/raw_data.csv.backup_20251219_154656` - 合并前备份
 
 ### 脚本文件
-- `scripts/append_session_to_raw_data.py` - 数据合并脚本（已修复）
+- `tools/data_management/append_session_to_raw_data.py` - 数据合并脚本（已修复）
 - `scripts/calculate_experiment_gap.py` - 实验目标距离计算
 - `scripts/analyze_phase7_results.py` - Phase 7结果分析
 

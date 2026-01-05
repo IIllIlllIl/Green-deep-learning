@@ -1,0 +1,29 @@
+{
+  "exp_id": "TEST1",
+  "exp_name": "Extreme small alpha",
+  "status": "\u6210\u529f",
+  "success": true,
+  "elapsed_time_minutes": 2.1998130162556966,
+  "parameters": {
+    "alpha": 0.001,
+    "n_particles": 20,
+    "beta": 1.0,
+    "tau": 1.0,
+    "n_steps": 1000,
+    "n_grad_mc_samples": 128
+  },
+  "graph_stats": {
+    "min": 0.0,
+    "max": 0.5,
+    "mean": 0.04259259253740311,
+    "std": 0.09233296662569046
+  },
+  "edges": {
+    "threshold_0.01": 86,
+    "threshold_0.1": 46,
+    "threshold_0.2": 25,
+    "threshold_0.3": 7,
+    "threshold_0.5": 0
+  },
+  "error_message": null
+}

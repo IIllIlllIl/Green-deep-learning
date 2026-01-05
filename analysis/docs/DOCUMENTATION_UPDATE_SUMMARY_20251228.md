@@ -397,7 +397,7 @@
 import pandas as pd
 
 # ✅ 推荐：使用data.csv
-df = pd.read_csv('results/data.csv')
+df = pd.read_csv('data/data.csv')
 
 # ✅ 正确：所有样本训练成功
 df_success = df[df['training_success'] == 'True']  # 726个
@@ -442,7 +442,7 @@ df_parallel = df[df['is_parallel'] == 'True']      # 105个
 
 ### 主项目文档
 - [主项目CLAUDE.md](../../CLAUDE.md) - 项目总体指南
-- [create_unified_data_csv.py](../../scripts/create_unified_data_csv.py) - 数据统一脚本
+- [create_unified_data_csv.py](../../tools/data_management/create_unified_data_csv.py) - 数据统一脚本
 
 ### 研究方案
 - [研究问题方法推荐](reports/RESEARCH_QUESTIONS_METHOD_RECOMMENDATIONS_20251228.md)
@@ -450,8 +450,8 @@ df_parallel = df[df['is_parallel'] == 'True']      # 105个
 - [DiBS失败报告](reports/DIBS_FINAL_FAILURE_REPORT_20251226.md)
 
 ### 数据文件
-- `results/data.csv` - 推荐使用（56列，统一处理）⭐⭐⭐
-- `results/raw_data.csv` - 特殊需求使用（87列，原始结构）
+- `data/data.csv` - 推荐使用（56列，统一处理）⭐⭐⭐
+- `data/raw_data.csv` - 特殊需求使用（87列，原始结构）
 
 ---
 

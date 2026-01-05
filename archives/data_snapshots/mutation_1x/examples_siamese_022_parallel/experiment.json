@@ -1,0 +1,45 @@
+{
+  "experiment_id": "examples_siamese_022_parallel",
+  "timestamp": "2025-11-20T21:33:39.154416",
+  "mode": "parallel",
+  "foreground": {
+    "repository": "examples",
+    "model": "siamese",
+    "hyperparameters": {
+      "epochs": 8
+    },
+    "duration_seconds": 351.4954528808594,
+    "energy_metrics": {
+      "cpu_energy_pkg_joules": 12972.81,
+      "cpu_energy_ram_joules": 897.49,
+      "cpu_energy_total_joules": 13870.3,
+      "gpu_power_avg_watts": 285.14511695906447,
+      "gpu_power_max_watts": 311.73,
+      "gpu_power_min_watts": 259.85,
+      "gpu_energy_total_joules": 97519.63000000005,
+      "gpu_temp_avg_celsius": 82.40350877192982,
+      "gpu_temp_max_celsius": 84.0,
+      "gpu_util_avg_percent": 99.2953216374269,
+      "gpu_util_max_percent": 100.0
+    },
+    "performance_metrics": {
+      "test_accuracy": 100.0,
+      "test_loss": 0.0
+    },
+    "training_success": true,
+    "retries": 0,
+    "error_message": "Training completed successfully"
+  },
+  "background": {
+    "repository": "Person_reID_baseline_pytorch",
+    "model": "pcb",
+    "hyperparameters": {
+      "epochs": 60,
+      "learning_rate": 0.05,
+      "dropout": 0.5,
+      "seed": 1334
+    },
+    "log_directory": "/home/green/energy_dl/nightly/results/run_20251120_194804/examples_siamese_022_parallel/background_logs",
+    "note": "Background training served as GPU load only (not monitored)"
+  }
+}

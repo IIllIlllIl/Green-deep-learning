@@ -351,7 +351,7 @@ with open('results/paper_replication/adult_causal_edges.pkl', 'rb') as f:
 cd analysis/scripts/utils
 python convert_energy_data.py
 
-# 这会从 ../../results/raw_data.csv 提取数据
+# 这会从 ../../data/raw_data.csv 提取数据
 # 并保存到 data/energy_research/raw/
 ```
 

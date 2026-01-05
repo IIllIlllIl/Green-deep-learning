@@ -1,0 +1,29 @@
+{
+  "exp_id": "A2",
+  "exp_name": "\u5c0falpha (0.01)",
+  "status": "\u9519\u8bef",
+  "success": false,
+  "elapsed_time_minutes": 0.007193279266357422,
+  "parameters": {
+    "alpha": 0.01,
+    "n_particles": 20,
+    "beta": 1.0,
+    "tau": 1.0,
+    "n_steps": 5000,
+    "n_grad_mc_samples": 128
+  },
+  "graph_stats": {
+    "min": null,
+    "max": null,
+    "mean": null,
+    "std": null
+  },
+  "edges": {
+    "threshold_0.01": 0,
+    "threshold_0.1": 0,
+    "threshold_0.2": 0,
+    "threshold_0.3": 0,
+    "threshold_0.5": 0
+  },
+  "error_message": "DiBS\u62df\u5408\u5931\u8d25: not enough values to unpack (expected 3, got 2)"
+}

@@ -82,7 +82,7 @@
 **目的**: 使用修复后的脚本重新提取151个实验的性能数据
 
 **子任务**:
-1. ✅ 备份当前 `results/raw_data.csv` - backup_20251213_182044
+1. ✅ 备份当前 `data/raw_data.csv` - backup_20251213_182044
 2. ✅ 运行重新提取脚本 - 成功更新265行
 3. ✅ 验证数据完整性 - 77.9% (371/476)
 4. ✅ 更新汇总文件和报告 - Phase 4报告已生成
@@ -323,8 +323,8 @@ Total: 4/4 tests passed
 - ✅ `docs/results_reports/PHASE4_HISTORICAL_DATA_REEXTRACTION_REPORT.md` - Phase 4完成报告
 
 ### 数据文件
-- ✅ `results/raw_data.csv` - 更新后的主数据文件（371/476有性能数据，77.9%）
-- ✅ `results/raw_data.csv.backup_20251213_182044` - Phase 4前备份（315/476，66.2%）
+- ✅ `data/raw_data.csv` - 更新后的主数据文件（371/476有性能数据，77.9%）
+- ✅ `data/raw_data.csv.backup_20251213_182044` - Phase 4前备份（315/476，66.2%）
 
 ### 相关的历史文档
 - `docs/results_reports/NUM_MUTATED_PARAMS_FIX_REPORT_20251212.md` - num_mutated_params修复
@@ -349,7 +349,7 @@ rm -rf results/run_YYYYMMDD_HHMMSS
 ```
 
 **保护规则**:
-- ✅ `results/raw_data.csv` - 主数据文件，定期备份
+- ✅ `data/raw_data.csv` - 主数据文件，定期备份
 - ✅ `results/summary_all.csv` - 汇总文件（已归档）
 - ✅ `results/run_*` - 真实实验目录，不要删除
 - ⚠️  测试实验 - 确认后立即清理
@@ -359,7 +359,7 @@ rm -rf results/run_YYYYMMDD_HHMMSS
 **每次修改前备份**:
 ```bash
 # 备份 raw_data.csv
-cp results/raw_data.csv results/raw_data.csv.backup_$(date +%Y%m%d_%H%M%S)
+cp data/raw_data.csv data/raw_data.csv.backup_$(date +%Y%m%d_%H%M%S)
 
 # 备份配置文件
 cp settings/XXX.json settings/archived/XXX_$(date +%Y%m%d).json

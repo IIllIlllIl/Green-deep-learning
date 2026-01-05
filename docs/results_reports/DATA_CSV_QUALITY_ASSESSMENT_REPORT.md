@@ -277,7 +277,7 @@ training_success字段: 'True' (从fg_提取)
 
 1. **跨模型性能对比**:
    ```python
-   df = pd.read_csv('results/data.csv')
+   df = pd.read_csv('data/data.csv')
    df.groupby('repository')['perf_test_accuracy'].mean()
    ```
 

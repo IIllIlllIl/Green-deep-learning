@@ -13,7 +13,7 @@
 - **文件**: `energy_data_original.csv`
 - **行数**: 677行（676个实验 + 1行表头）
 - **列数**: 54列
-- **来源**: `/home/green/energy_dl/nightly/results/data.csv`
+- **来源**: `/home/green/energy_dl/nightly/data/data.csv`
 - **复制时间**: 2025-12-22
 
 ### 数据完整性

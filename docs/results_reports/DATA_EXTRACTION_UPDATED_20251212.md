@@ -2,7 +2,7 @@
 
 **日期**: 2025-12-12
 **更新**: 基于完整的18个性能指标列重新分析
-**数据源**: results/raw_data.csv (458个唯一实验)
+**数据源**: data/raw_data.csv (458个唯一实验)
 
 ---
 
@@ -351,6 +351,6 @@ find results/run_* -name "*mutation_1x__MRT-OAST*" -name "*.log" | head -1
 ---
 
 **报告作者**: Claude (AI Assistant)
-**数据来源**: results/raw_data.csv (458个唯一实验，80列)
+**数据来源**: data/raw_data.csv (458个唯一实验，80列)
 **分析日期**: 2025-12-12
 **状态**: ✅ 准备开始修复（优先级：mnist_ff → VulBERTa → bug-localization → MRT-OAST）

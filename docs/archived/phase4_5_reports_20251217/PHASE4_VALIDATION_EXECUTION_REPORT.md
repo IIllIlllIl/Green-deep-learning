@@ -148,7 +148,7 @@
    - `hyperparameters`、`energy_metrics`、`performance_metrics` 也在 `foreground` 中
 2. 脚本只检查顶层 `repository` 字段，导致并行实验被跳过
 
-**修复** (`scripts/append_session_to_raw_data.py`):
+**修复** (`tools/data_management/append_session_to_raw_data.py`):
 
 1. **repository/model提取逻辑修复** (行 236-242):
 ```python

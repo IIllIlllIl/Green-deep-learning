@@ -1,0 +1,353 @@
+[
+  {
+    "exp_id": "A1",
+    "exp_name": "\u6781\u5c0falpha (0.001)",
+    "status": "\u9519\u8bef",
+    "success": false,
+    "elapsed_time_minutes": 0.014696153004964192,
+    "parameters": {
+      "alpha": 0.001,
+      "n_particles": 20,
+      "beta": 1.0,
+      "tau": 1.0,
+      "n_steps": 5000,
+      "n_grad_mc_samples": 128
+    },
+    "graph_stats": {
+      "min": null,
+      "max": null,
+      "mean": null,
+      "std": null
+    },
+    "edges": {
+      "threshold_0.01": 0,
+      "threshold_0.1": 0,
+      "threshold_0.2": 0,
+      "threshold_0.3": 0,
+      "threshold_0.5": 0
+    },
+    "error_message": "DiBS\u62df\u5408\u5931\u8d25: JointDiBS.__init__() got an unexpected keyword argument 'graph_model'"
+  },
+  {
+    "exp_id": "A2",
+    "exp_name": "\u5c0falpha (0.01)",
+    "status": "\u9519\u8bef",
+    "success": false,
+    "elapsed_time_minutes": 5.333820978800456e-05,
+    "parameters": {
+      "alpha": 0.01,
+      "n_particles": 20,
+      "beta": 1.0,
+      "tau": 1.0,
+      "n_steps": 5000,
+      "n_grad_mc_samples": 128
+    },
+    "graph_stats": {
+      "min": null,
+      "max": null,
+      "mean": null,
+      "std": null
+    },
+    "edges": {
+      "threshold_0.01": 0,
+      "threshold_0.1": 0,
+      "threshold_0.2": 0,
+      "threshold_0.3": 0,
+      "threshold_0.5": 0
+    },
+    "error_message": "DiBS\u62df\u5408\u5931\u8d25: JointDiBS.__init__() got an unexpected keyword argument 'graph_model'"
+  },
+  {
+    "exp_id": "A3",
+    "exp_name": "DiBS\u9ed8\u8ba4alpha (0.05)",
+    "status": "\u9519\u8bef",
+    "success": false,
+    "elapsed_time_minutes": 4.814465840657552e-05,
+    "parameters": {
+      "alpha": 0.05,
+      "n_particles": 20,
+      "beta": 1.0,
+      "tau": 1.0,
+      "n_steps": 5000,
+      "n_grad_mc_samples": 128
+    },
+    "graph_stats": {
+      "min": null,
+      "max": null,
+      "mean": null,
+      "std": null
+    },
+    "edges": {
+      "threshold_0.01": 0,
+      "threshold_0.1": 0,
+      "threshold_0.2": 0,
+      "threshold_0.3": 0,
+      "threshold_0.5": 0
+    },
+    "error_message": "DiBS\u62df\u5408\u5931\u8d25: JointDiBS.__init__() got an unexpected keyword argument 'graph_model'"
+  },
+  {
+    "exp_id": "A3",
+    "exp_name": "DiBS\u9ed8\u8ba4alpha (0.05)",
+    "status": "\u9519\u8bef",
+    "success": false,
+    "elapsed_time_minutes": 0,
+    "parameters": {
+      "id": "A3",
+      "name": "DiBS\u9ed8\u8ba4alpha (0.05)",
+      "alpha": 0.05,
+      "n_particles": 20,
+      "beta": 1.0,
+      "tau": 1.0,
+      "n_steps": 5000,
+      "n_grad_mc_samples": 128,
+      "priority": 1
+    },
+    "graph_stats": {
+      "min": null,
+      "max": null,
+      "mean": null,
+      "std": null
+    },
+    "edges": {
+      "threshold_0.01": 0,
+      "threshold_0.1": 0,
+      "threshold_0.2": 0,
+      "threshold_0.3": 0,
+      "threshold_0.5": 0
+    },
+    "error_message": "EOF when reading a line"
+  },
+  {
+    "exp_id": "A4",
+    "exp_name": "\u4e2d\u7b49\u7c92\u5b50\u6570 (50)",
+    "status": "\u9519\u8bef",
+    "success": false,
+    "elapsed_time_minutes": 4.798571268717448e-05,
+    "parameters": {
+      "alpha": 0.05,
+      "n_particles": 50,
+      "beta": 1.0,
+      "tau": 1.0,
+      "n_steps": 5000,
+      "n_grad_mc_samples": 128
+    },
+    "graph_stats": {
+      "min": null,
+      "max": null,
+      "mean": null,
+      "std": null
+    },
+    "edges": {
+      "threshold_0.01": 0,
+      "threshold_0.1": 0,
+      "threshold_0.2": 0,
+      "threshold_0.3": 0,
+      "threshold_0.5": 0
+    },
+    "error_message": "DiBS\u62df\u5408\u5931\u8d25: JointDiBS.__init__() got an unexpected keyword argument 'graph_model'"
+  },
+  {
+    "exp_id": "A5",
+    "exp_name": "\u5927\u7c92\u5b50\u6570 (100)",
+    "status": "\u9519\u8bef",
+    "success": false,
+    "elapsed_time_minutes": 4.065831502278646e-05,
+    "parameters": {
+      "alpha": 0.05,
+      "n_particles": 100,
+      "beta": 1.0,
+      "tau": 1.0,
+      "n_steps": 5000,
+      "n_grad_mc_samples": 128
+    },
+    "graph_stats": {
+      "min": null,
+      "max": null,
+      "mean": null,
+      "std": null
+    },
+    "edges": {
+      "threshold_0.01": 0,
+      "threshold_0.1": 0,
+      "threshold_0.2": 0,
+      "threshold_0.3": 0,
+      "threshold_0.5": 0
+    },
+    "error_message": "DiBS\u62df\u5408\u5931\u8d25: JointDiBS.__init__() got an unexpected keyword argument 'graph_model'"
+  },
+  {
+    "exp_id": "A6",
+    "exp_name": "\u4f4ebeta\u7ea6\u675f (0.1)",
+    "status": "\u9519\u8bef",
+    "success": false,
+    "elapsed_time_minutes": 4.4055779774983724e-05,
+    "parameters": {
+      "alpha": 0.05,
+      "n_particles": 20,
+      "beta": 0.1,
+      "tau": 1.0,
+      "n_steps": 5000,
+      "n_grad_mc_samples": 128
+    },
+    "graph_stats": {
+      "min": null,
+      "max": null,
+      "mean": null,
+      "std": null
+    },
+    "edges": {
+      "threshold_0.01": 0,
+      "threshold_0.1": 0,
+      "threshold_0.2": 0,
+      "threshold_0.3": 0,
+      "threshold_0.5": 0
+    },
+    "error_message": "DiBS\u62df\u5408\u5931\u8d25: JointDiBS.__init__() got an unexpected keyword argument 'graph_model'"
+  },
+  {
+    "exp_id": "A7",
+    "exp_name": "\u4e2dbeta\u7ea6\u675f (0.5)",
+    "status": "\u9519\u8bef",
+    "success": false,
+    "elapsed_time_minutes": 4.4401486714680986e-05,
+    "parameters": {
+      "alpha": 0.05,
+      "n_particles": 20,
+      "beta": 0.5,
+      "tau": 1.0,
+      "n_steps": 5000,
+      "n_grad_mc_samples": 128
+    },
+    "graph_stats": {
+      "min": null,
+      "max": null,
+      "mean": null,
+      "std": null
+    },
+    "edges": {
+      "threshold_0.01": 0,
+      "threshold_0.1": 0,
+      "threshold_0.2": 0,
+      "threshold_0.3": 0,
+      "threshold_0.5": 0
+    },
+    "error_message": "DiBS\u62df\u5408\u5931\u8d25: JointDiBS.__init__() got an unexpected keyword argument 'graph_model'"
+  },
+  {
+    "exp_id": "A8",
+    "exp_name": "\u4f4etau\u6e29\u5ea6 (0.5)",
+    "status": "\u9519\u8bef",
+    "success": false,
+    "elapsed_time_minutes": 4.336833953857422e-05,
+    "parameters": {
+      "alpha": 0.05,
+      "n_particles": 20,
+      "beta": 1.0,
+      "tau": 0.5,
+      "n_steps": 5000,
+      "n_grad_mc_samples": 128
+    },
+    "graph_stats": {
+      "min": null,
+      "max": null,
+      "mean": null,
+      "std": null
+    },
+    "edges": {
+      "threshold_0.01": 0,
+      "threshold_0.1": 0,
+      "threshold_0.2": 0,
+      "threshold_0.3": 0,
+      "threshold_0.5": 0
+    },
+    "error_message": "DiBS\u62df\u5408\u5931\u8d25: JointDiBS.__init__() got an unexpected keyword argument 'graph_model'"
+  },
+  {
+    "exp_id": "A9",
+    "exp_name": "\u9ad8MC\u6837\u672c\u6570 (256)",
+    "status": "\u9519\u8bef",
+    "success": false,
+    "elapsed_time_minutes": 4.2057037353515626e-05,
+    "parameters": {
+      "alpha": 0.05,
+      "n_particles": 20,
+      "beta": 1.0,
+      "tau": 1.0,
+      "n_steps": 5000,
+      "n_grad_mc_samples": 256
+    },
+    "graph_stats": {
+      "min": null,
+      "max": null,
+      "mean": null,
+      "std": null
+    },
+    "edges": {
+      "threshold_0.01": 0,
+      "threshold_0.1": 0,
+      "threshold_0.2": 0,
+      "threshold_0.3": 0,
+      "threshold_0.5": 0
+    },
+    "error_message": "DiBS\u62df\u5408\u5931\u8d25: JointDiBS.__init__() got an unexpected keyword argument 'graph_model'"
+  },
+  {
+    "exp_id": "B1",
+    "exp_name": "\u7ec4\u5408\u4f18\u5316: \u6781\u5c0falpha + \u5927\u7c92\u5b50\u6570",
+    "status": "\u9519\u8bef",
+    "success": false,
+    "elapsed_time_minutes": 4.4075647989908856e-05,
+    "parameters": {
+      "alpha": 0.001,
+      "n_particles": 100,
+      "beta": 1.0,
+      "tau": 1.0,
+      "n_steps": 10000,
+      "n_grad_mc_samples": 128
+    },
+    "graph_stats": {
+      "min": null,
+      "max": null,
+      "mean": null,
+      "std": null
+    },
+    "edges": {
+      "threshold_0.01": 0,
+      "threshold_0.1": 0,
+      "threshold_0.2": 0,
+      "threshold_0.3": 0,
+      "threshold_0.5": 0
+    },
+    "error_message": "DiBS\u62df\u5408\u5931\u8d25: JointDiBS.__init__() got an unexpected keyword argument 'graph_model'"
+  },
+  {
+    "exp_id": "B2",
+    "exp_name": "\u7ec4\u5408\u4f18\u5316: \u5c0falpha + \u4f4e\u7ea6\u675f",
+    "status": "\u9519\u8bef",
+    "success": false,
+    "elapsed_time_minutes": 4.096825917561849e-05,
+    "parameters": {
+      "alpha": 0.01,
+      "n_particles": 50,
+      "beta": 0.1,
+      "tau": 1.0,
+      "n_steps": 10000,
+      "n_grad_mc_samples": 256
+    },
+    "graph_stats": {
+      "min": null,
+      "max": null,
+      "mean": null,
+      "std": null
+    },
+    "edges": {
+      "threshold_0.01": 0,
+      "threshold_0.1": 0,
+      "threshold_0.2": 0,
+      "threshold_0.3": 0,
+      "threshold_0.5": 0
+    },
+    "error_message": "DiBS\u62df\u5408\u5931\u8d25: JointDiBS.__init__() got an unexpected keyword argument 'graph_model'"
+  }
+]

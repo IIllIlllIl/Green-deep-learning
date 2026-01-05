@@ -1,0 +1,30 @@
+{
+  "experiment_id": "examples_mnist_rnn_014",
+  "timestamp": "2025-11-20T20:35:10.892706",
+  "repository": "examples",
+  "model": "mnist_rnn",
+  "hyperparameters": {
+    "learning_rate": 0.011795336261176143
+  },
+  "duration_seconds": 316.2724051475525,
+  "energy_metrics": {
+    "cpu_energy_pkg_joules": 12843.04,
+    "cpu_energy_ram_joules": 777.11,
+    "cpu_energy_total_joules": 13620.15,
+    "gpu_power_avg_watts": 7.639049180327864,
+    "gpu_power_max_watts": 80.62,
+    "gpu_power_min_watts": 3.6,
+    "gpu_energy_total_joules": 2329.9099999999985,
+    "gpu_temp_avg_celsius": 40.87868852459017,
+    "gpu_temp_max_celsius": 50.0,
+    "gpu_util_avg_percent": 0.009836065573770493,
+    "gpu_util_max_percent": 3.0
+  },
+  "performance_metrics": {
+    "test_accuracy": 65.0,
+    "test_loss": 1.1741
+  },
+  "training_success": true,
+  "retries": 0,
+  "error_message": "Training completed successfully"
+}

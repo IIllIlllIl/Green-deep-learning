@@ -49,7 +49,7 @@
 
 1. **备份原始数据**
    ```bash
-   cp results/raw_data.csv results/raw_data.csv.backup_before_dedup_20251213_HHMMSS
+   cp data/raw_data.csv data/raw_data.csv.backup_before_dedup_20251213_HHMMSS
    ```
 
 2. **删除重复记录**
@@ -64,7 +64,7 @@
 
 ### 去重后的数据验证
 
-运行 `scripts/validate_raw_data.py` 验证结果：
+运行 `tools/data_management/validate_raw_data.py` 验证结果：
 
 ```
 ✅ 验证完成: raw_data.csv 数据完整且安全

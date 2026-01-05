@@ -1,0 +1,110 @@
+================================================================================
+STDOUT:
+================================================================================
+[Train Wrapper] Repository: repos/bug-localization-by-dnn-and-rvsm
+[Train Wrapper] Training script: ./train.sh
+[Train Wrapper] Log file: results/run_20251230_204245/bug-localization-by-dnn-and-rvsm_default_105/training.log
+[Train Wrapper] Energy directory: results/run_20251230_204245/bug-localization-by-dnn-and-rvsm_default_105/energy
+[Train Wrapper] Arguments: --alpha 0.000018 --kfold 9 --max_iter 2183 --seed 4727
+[Train Wrapper] Changed to directory: /home/green/energy_dl/nightly/repos/bug-localization-by-dnn-and-rvsm
+[Train Wrapper] Starting GPU monitoring...
+[Train Wrapper] GPU monitoring PID: 4191406
+[Train Wrapper] Starting training with integrated energy monitoring...
+[Train Wrapper] Command: ./train.sh --alpha 0.000018 --kfold 9 --max_iter 2183 --seed 4727
+========================================
+========================================
+Bug Localization Training Configuration
+========================================
+Model: dnn
+Python: /home/green/miniconda3/envs/dnn_rvsm/bin/python
+Working directory: /home/green/energy_dl/nightly/repos/bug-localization-by-dnn-and-rvsm
+K-fold: 9
+Hidden sizes: 300
+Alpha: 0.000018
+Max iterations: 2183
+Early stopping: 30
+Solver: sgd
+Parallel jobs: -2
+Random seed: 4727
+========================================
+
+================================================================================
+Bug Localization Model Training - DNN
+================================================================================
+Start time: 2026-01-02 09:43:34
+
+DNN Hyperparameters:
+  - K-fold: 9
+  - Hidden layer sizes: (300,)
+  - Alpha (L2 penalty): 1.8e-05
+  - Max iterations: 2183
+  - Early stopping patience: 30
+  - Solver: sgd
+  - Parallel jobs: -2
+  - Random seed: 4727 (deterministic mode)
+
+Training DNN model with k-fold cross-validation...
+--------------------------------------------------------------------------------
+/home/green/miniconda3/envs/dnn_rvsm/lib/python3.7/site-packages/joblib/externals/loky/process_executor.py:706: UserWarning: A worker stopped while some jobs were given to the executor. This can be caused by a too short worker timeout or by a memory leak.
+  "timeout or by a memory leak.", UserWarning
+Fold: 3 / 9
+Fold: 4 / 9
+Training completed successfully!
+
+================================================================================
+TRAINING REPORT
+================================================================================
+Model: DNN
+Start time: 2026-01-02 09:43:34
+End time: 2026-01-02 09:55:54
+Total duration: 740.75 seconds (12.35 minutes)
+
+MODEL PERFORMANCE (Top-k Accuracy):
+--------------------------------------------------------------------------------
+  Top- 1 Accuracy: 0.383 (38.3%)
+  Top- 5 Accuracy: 0.626 (62.6%)
+  Top-10 Accuracy: 0.738 (73.8%)
+  Top-20 Accuracy: 0.828 (82.8%)
+
+Detailed Results (All k values):
+  Top- 1: 0.383
+  Top- 2: 0.482
+  Top- 3: 0.547
+  Top- 4: 0.590
+  Top- 5: 0.626
+  Top- 6: 0.653
+  Top- 7: 0.681
+  Top- 8: 0.700
+  Top- 9: 0.723
+  Top-10: 0.738
+  Top-11: 0.749
+  Top-12: 0.761
+  Top-13: 0.773
+  Top-14: 0.784
+  Top-15: 0.792
+  Top-16: 0.803
+  Top-17: 0.810
+  Top-18: 0.817
+  Top-19: 0.821
+  Top-20: 0.828
+================================================================================
+Fold: 5 / 9
+Fold: 1 / 9
+Fold: 6 / 9
+Fold: 2 / 9
+Fold: 7 / 9
+Fold: 8 / 9
+Fold: 9 / 9
+Training completed successfully!
+========================================
+[Train Wrapper] Training finished with exit code: 0
+[Train Wrapper] Stopping GPU monitoring...
+[Train Wrapper] Processing CPU energy data...
+[Train Wrapper] CPU energy saved to: /home/green/energy_dl/nightly/results/run_20251230_204245/bug-localization-by-dnn-and-rvsm_default_105/energy/cpu_energy.txt
+[Train Wrapper] GPU monitoring data saved to: /home/green/energy_dl/nightly/results/run_20251230_204245/bug-localization-by-dnn-and-rvsm_default_105/energy
+[Train Wrapper] Energy monitoring completed
+
+================================================================================
+STDERR:
+================================================================================
+(empty)

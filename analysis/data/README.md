@@ -51,7 +51,7 @@ data/
 
 **用途**: 分析训练超参数对深度学习能耗和性能的因果影响
 
-**数据来源**: 主项目 `../results/data.csv`（726个实验，经过处理的精简数据）⭐
+**数据来源**: 主项目 `../data/data.csv`（726个实验，经过处理的精简数据）⭐
 
 **最新更新**: 2025-12-23 - 纠正数据加载（使用data.csv而非raw_data.csv）
 
@@ -59,7 +59,7 @@ data/
 
 **存放内容**:
 - 从主项目提取的**经过处理的精简数据**（data.csv）
-- **来源**: `/home/green/energy_dl/nightly/results/data.csv` (726个实验)
+- **来源**: `/home/green/energy_dl/nightly/data/data.csv` (726个实验)
 
 **重要说明** ⚠️:
 - 此目录名为"raw"但存放的是主项目**已处理**的data.csv（非raw_data.csv）

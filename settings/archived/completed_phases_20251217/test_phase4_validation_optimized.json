@@ -10,7 +10,7 @@
   "max_retries": 2,
   "governor": "performance",
   "use_deduplication": true,
-  "historical_csvs": ["results/raw_data.csv"],
+  "historical_csvs": ["data/raw_data.csv"],
 
   "experiments": [
     {

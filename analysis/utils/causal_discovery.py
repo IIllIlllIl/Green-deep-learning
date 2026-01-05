@@ -34,6 +34,11 @@ class CausalGraphLearner:
                  n_vars: int = 46,
                  alpha: float = 0.9,
                  n_steps: int = 10000,
+                 n_particles: int = 20,
+                 beta: float = 1.0,
+                 tau: float = 1.0,
+                 n_grad_mc_samples: int = 128,
+                 n_acyclicity_mc_samples: int = 32,
                  random_seed: int = 42):
 
         # 输入验证
@@ -43,10 +48,17 @@ class CausalGraphLearner:
             raise ValueError(f"alpha must be in [0,1], got {alpha}")
         if n_steps <= 0:
             raise ValueError(f"n_steps must be positive, got {n_steps}")
+        if n_particles <= 0:
+            raise ValueError(f"n_particles must be positive, got {n_particles}")
 
         self.n_vars = n_vars
         self.alpha = alpha
         self.n_steps = n_steps
+        self.n_particles = n_particles
+        self.beta = beta
+        self.tau = tau
+        self.n_grad_mc_samples = n_grad_mc_samples
+        self.n_acyclicity_mc_samples = n_acyclicity_mc_samples
         self.random_seed = random_seed
 
         # 初始化DiBS模型
@@ -88,11 +100,15 @@ class CausalGraphLearner:
             print(f"  样本数: {len(data)}")
             print(f"  迭代次数: {self.n_steps}")
             print(f"  Alpha参数: {self.alpha}")
+            print(f"  粒子数: {self.n_particles}")
+            print(f"  Beta参数: {self.beta}")
+            print(f"  Tau参数: {self.tau}")
 
         try:
             # 尝试导入DiBS
             from dibs.inference import JointDiBS
-            from dibs.target import make_linear_gaussian_model
+            from dibs.models.graph import ErdosReniDAGDistribution
+            from dibs.models import LinearGaussian
             import jax.random as random
 
             # 运行DiBS（这是耗时操作）
@@ -102,31 +118,40 @@ class CausalGraphLearner:
             # 创建JAX随机密钥
             key = random.PRNGKey(self.random_seed)
 
-            # 创建图模型和似然模型
-            # 使用线性高斯模型作为默认模型
-            key, subk = random.split(key)
-            _, graph_model, likelihood_model = make_linear_gaussian_model(
-                key=subk,
+            # 创建图模型（Erdős-Rényi先验）
+            graph_model = ErdosReniDAGDistribution(
                 n_vars=self.n_vars,
-                n_observations=len(data_continuous),
-                graph_prior_str='er'  # Erdős-Rényi先验
+                n_edges_per_node=2  # 每个节点平均2条边
             )
 
-            # 初始化DiBS模型
+            # 创建似然模型（线性高斯模型）
+            # 注意：graph_dist参数是必需的
+            likelihood_model = LinearGaussian(
+                graph_dist=graph_model,
+                obs_noise=0.1,
+                mean_edge=0.0,
+                sig_edge=1.0,
+                min_edge=0.5
+            )
+
+            # 初始化DiBS模型（使用所有可配置参数）
+            # 注意：安装的DiBS版本使用inference_model参数，而不是graph_model和likelihood_model分开
             self.model = JointDiBS(
                 x=data_continuous,
                 interv_mask=None,  # 观测数据，无干预
-                graph_model=graph_model,
-                likelihood_model=likelihood_model,
-                alpha_linear=self.alpha  # DAG惩罚参数
+                inference_model=likelihood_model,  # 使用LinearGaussian作为inference模型
+                alpha_linear=self.alpha,  # DAG惩罚参数
+                beta_linear=self.beta,  # 无环约束惩罚斜率
+                tau=self.tau,  # Gumbel-softmax温度
+                n_grad_mc_samples=self.n_grad_mc_samples,  # 似然梯度MC样本数
+                n_acyclicity_mc_samples=self.n_acyclicity_mc_samples  # 无环约束MC样本数
             )
 
             # 运行SVGD采样
             key, subk = random.split(key)
-            n_particles = 20  # 粒子数量 (从10增加到20，2025-12-26修复)
             gs, thetas = self.model.sample(
                 key=subk,
-                n_particles=n_particles,
+                n_particles=self.n_particles,  # 使用可配置的粒子数
                 steps=self.n_steps,
                 callback_every=100 if verbose else None
             )

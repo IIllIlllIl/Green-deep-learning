@@ -171,10 +171,10 @@ python3 scripts/verify_stage_configs.py
 **使用方法**:
 ```bash
 # 查看统计信息
-python3 scripts/generate_mutation_config.py --stats-only
+python3 tools/config_management/generate_mutation_config.py --stats-only
 
 # 生成配置文件
-python3 scripts/generate_mutation_config.py --output settings/mutation_all.json
+python3 tools/config_management/generate_mutation_config.py --output settings/mutation_all.json
 ```
 
 **文件大小**: 465行
@@ -198,7 +198,7 @@ python3 scripts/generate_mutation_config.py --output settings/mutation_all.json
 
 **使用方法**:
 ```bash
-python3 scripts/validate_mutation_config.py
+python3 tools/config_management/validate_mutation_config.py
 ```
 
 **文件大小**: 238行
@@ -411,12 +411,12 @@ bash scripts/run_sequential_experiments.sh \
 
 2. **生成或修改配置**:
    ```bash
-   python3 scripts/generate_mutation_config.py
+   python3 tools/config_management/generate_mutation_config.py
    ```
 
 3. **验证配置**:
    ```bash
-   python3 scripts/validate_mutation_config.py
+   python3 tools/config_management/validate_mutation_config.py
    python3 scripts/verify_stage_configs.py
    ```
 

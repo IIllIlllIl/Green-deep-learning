@@ -171,7 +171,7 @@ def is_valid_row(row):
 
 def main():
     # 路径设置
-    input_path = '../../results/raw_data.csv'
+    input_path = '../../data/raw_data.csv'
     output_path = '../data/cleaned_data.csv'
     report_path = '../data/deletion_report.txt'
 
@@ -408,7 +408,7 @@ python3 scripts/validate_cleaned_data.py
 
 ```bash
 # 原始文件位置
-/home/green/energy_dl/nightly/results/raw_data.csv
+/home/green/energy_dl/nightly/data/raw_data.csv
 
 # 如果需要，可以重新生成cleaned文件
 cd /home/green/energy_dl/nightly/analysis
@@ -421,10 +421,10 @@ python3 scripts/create_cleaned_data.py
 
 ```bash
 # 备份原始数据
-cp results/raw_data.csv results/raw_data.csv.backup_$(date +%Y%m%d_%H%M%S)
+cp data/raw_data.csv data/raw_data.csv.backup_$(date +%Y%m%d_%H%M%S)
 
 # 如果需要回滚
-cp results/raw_data.csv.backup_YYYYMMDD_HHMMSS results/raw_data.csv
+cp data/raw_data.csv.backup_YYYYMMDD_HHMMSS data/raw_data.csv
 ```
 
 ---

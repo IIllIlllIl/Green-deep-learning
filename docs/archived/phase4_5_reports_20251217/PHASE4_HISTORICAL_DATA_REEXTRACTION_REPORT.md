@@ -231,7 +231,7 @@ Updated file: raw_data.csv
 
 ### 备份文件
 
-**位置**: `results/raw_data.csv.backup_20251213_182044`
+**位置**: `data/raw_data.csv.backup_20251213_182044`
 **大小**: 与原文件相同
 **内容**: 更新前的raw_data.csv完整备份
 
@@ -303,8 +303,8 @@ Updated file: raw_data.csv
 - `scripts/reextract_performance_metrics.py` - 备用脚本（更新experiment.json）
 
 ### 数据文件
-- `results/raw_data.csv` - 更新后的主数据文件（371/476有性能数据）
-- `results/raw_data.csv.backup_20251213_182044` - 更新前备份（315/476有性能数据）
+- `data/raw_data.csv` - 更新后的主数据文件（371/476有性能数据）
+- `data/raw_data.csv.backup_20251213_182044` - 更新前备份（315/476有性能数据）
 
 ### 配置文件
 - `mutation/models_config.json` - 包含更新后的正则表达式

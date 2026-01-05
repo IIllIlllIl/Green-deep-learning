@@ -1,0 +1,29 @@
+{
+  "exp_id": "B2",
+  "exp_name": "\u7ec4\u5408\u4f18\u5316: \u5c0falpha + \u4f4e\u7ea6\u675f",
+  "status": "\u6210\u529f",
+  "success": true,
+  "elapsed_time_minutes": 100.68705965280533,
+  "parameters": {
+    "alpha": 0.01,
+    "n_particles": 50,
+    "beta": 0.1,
+    "tau": 1.0,
+    "n_steps": 10000,
+    "n_grad_mc_samples": 256
+  },
+  "graph_stats": {
+    "min": 0.0,
+    "max": 0.6399999856948853,
+    "mean": 0.0743827149271965,
+    "std": 0.1142524778842926
+  },
+  "edges": {
+    "threshold_0.01": 144,
+    "threshold_0.1": 88,
+    "threshold_0.2": 49,
+    "threshold_0.3": 17,
+    "threshold_0.5": 1
+  },
+  "error_message": null
+}

@@ -236,14 +236,14 @@ tail -f logs/supplement_parallel_*.log
 实验完成后，运行以下脚本验证数据：
 ```bash
 # 验证数据完整性
-python3 scripts/validate_raw_data.py
+python3 tools/data_management/validate_raw_data.py
 
 # 检查新增的并行实验
 python3 << 'EOF'
 import csv
 bug_par = 0
 vul_par = 0
-with open('results/raw_data.csv', 'r') as f:
+with open('data/raw_data.csv', 'r') as f:
     reader = csv.DictReader(f)
     for row in reader:
         if row['is_parallel'] == 'True':
@@ -286,7 +286,7 @@ VulBERTa并行实验: 10
 | `experiment_name` | supplement_vulberta_buglocalization_parallel | 配置标识符 |
 | `mode` | mutation | 变异模式 |
 | `use_deduplication` | true | 启用去重（避免重复实验） |
-| `historical_csvs` | ["results/raw_data.csv"] | 去重参考文件 |
+| `historical_csvs` | ["data/raw_data.csv"] | 去重参考文件 |
 | `max_retries` | 2 | 失败重试次数 |
 | `governor` | performance | CPU性能模式 |
 
