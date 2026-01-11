@@ -1,0 +1,20 @@
+[
+  "duration_seconds",
+  "hyperparam_epochs",
+  "hyperparam_learning_rate",
+  "hyperparam_weight_decay",
+  "perf_best_val_accuracy",
+  "perf_test_accuracy",
+  "energy_cpu_pkg_joules",
+  "energy_cpu_ram_joules",
+  "energy_cpu_total_joules",
+  "energy_gpu_avg_watts",
+  "energy_gpu_max_watts",
+  "energy_gpu_min_watts",
+  "energy_gpu_total_joules",
+  "energy_gpu_temp_avg_celsius",
+  "energy_gpu_temp_max_celsius",
+  "energy_gpu_util_avg_percent",
+  "energy_gpu_util_max_percent",
+  "num_mutated_params"
+]

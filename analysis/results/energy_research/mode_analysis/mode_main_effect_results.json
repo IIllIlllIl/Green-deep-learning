@@ -1,0 +1,131 @@
+{
+  "overall": [
+    {
+      "metric": "energy_gpu_total_joules",
+      "parallel_mean": 375915.6979573171,
+      "parallel_std": 508649.0647922633,
+      "parallel_n": 328,
+      "non_parallel_mean": 367345.8627055703,
+      "non_parallel_std": 395474.55319151527,
+      "non_parallel_n": 377,
+      "mean_diff": 8569.835251746816,
+      "mean_diff_pct": 2.332906430095168,
+      "t_statistic": 0.251289730412318,
+      "p_value": 0.8016635488117956,
+      "cohens_d": 0.018974122579751763,
+      "is_significant": false
+    },
+    {
+      "metric": "energy_gpu_avg_watts",
+      "parallel_mean": 177.28511572004922,
+      "parallel_std": 72.82929511983718,
+      "parallel_n": 328,
+      "non_parallel_mean": 173.95897367644434,
+      "non_parallel_std": 71.65065160711,
+      "non_parallel_n": 377,
+      "mean_diff": 3.326142043604875,
+      "mean_diff_pct": 1.9120267114195246,
+      "t_statistic": 0.6101110227875496,
+      "p_value": 0.5419854284585592,
+      "cohens_d": 0.04606762606109758,
+      "is_significant": false
+    },
+    {
+      "metric": "energy_gpu_max_watts",
+      "parallel_mean": 222.11271341463416,
+      "parallel_std": 101.05309568266138,
+      "parallel_n": 328,
+      "non_parallel_mean": 232.94058355437667,
+      "non_parallel_std": 98.75590918047799,
+      "non_parallel_n": 377,
+      "mean_diff": -10.827870139742515,
+      "mean_diff_pct": -4.648339921933312,
+      "t_statistic": -1.4364501871253008,
+      "p_value": 0.1513191347536541,
+      "cohens_d": -0.10846198085971119,
+      "is_significant": false
+    },
+    {
+      "metric": "energy_gpu_min_watts",
+      "parallel_mean": 103.87521341463417,
+      "parallel_std": 63.58495732095628,
+      "parallel_n": 328,
+      "non_parallel_mean": 57.34641909814323,
+      "non_parallel_std": 50.276771487823105,
+      "non_parallel_n": 377,
+      "mean_diff": 46.528794316490945,
+      "mean_diff_pct": 81.13635523930641,
+      "t_statistic": 10.838256746035972,
+      "p_value": 2.0367173042609478e-25,
+      "cohens_d": 0.8183637736117667,
+      "is_significant": true
+    },
+    {
+      "metric": "energy_cpu_total_joules",
+      "parallel_mean": 81765.56588414634,
+      "parallel_std": 89400.47121846346,
+      "parallel_n": 328,
+      "non_parallel_mean": 73659.59872679044,
+      "non_parallel_std": 74941.36275929195,
+      "non_parallel_n": 377,
+      "mean_diff": 8105.967157355903,
+      "mean_diff_pct": 11.004631164801218,
+      "t_statistic": 1.3094362713348684,
+      "p_value": 0.19081440253961987,
+      "cohens_d": 0.0988715467278124,
+      "is_significant": false
+    }
+  ],
+  "by_group": [
+    {
+      "repo": "examples",
+      "parallel_n": 119,
+      "non_parallel_n": 110,
+      "parallel_mean": 24157.529159663867,
+      "non_parallel_mean": 29661.099090909087,
+      "mean_diff_pct": -18.554841526192885,
+      "p_value": 0.24828288462693462,
+      "is_significant": false
+    },
+    {
+      "repo": "VulBERTa",
+      "parallel_n": 54,
+      "non_parallel_n": 61,
+      "parallel_mean": 873117.9948148151,
+      "non_parallel_mean": 694768.1268852461,
+      "mean_diff_pct": 25.670415931303474,
+      "p_value": 0.0011520443871089621,
+      "is_significant": true
+    },
+    {
+      "repo": "Person_reID_baseline_pytorch",
+      "parallel_n": 43,
+      "non_parallel_n": 80,
+      "parallel_mean": 1322361.4000000001,
+      "non_parallel_mean": 879699.8795,
+      "mean_diff_pct": 50.31960681313247,
+      "p_value": 4.76897317801648e-12,
+      "is_significant": true
+    },
+    {
+      "repo": "bug-localization-by-dnn-and-rvsm",
+      "parallel_n": 77,
+      "non_parallel_n": 53,
+      "parallel_mean": 53434.022987013,
+      "non_parallel_mean": 56683.768490566,
+      "mean_diff_pct": -5.733114770048965,
+      "p_value": 0.7859691953862864,
+      "is_significant": false
+    },
+    {
+      "repo": "MRT-OAST",
+      "parallel_n": 26,
+      "non_parallel_n": 46,
+      "parallel_mean": 366977.8619230771,
+      "non_parallel_mean": 236728.41239130436,
+      "mean_diff_pct": 55.02062393612247,
+      "p_value": 2.2054215636690713e-05,
+      "is_significant": true
+    }
+  ]
+}

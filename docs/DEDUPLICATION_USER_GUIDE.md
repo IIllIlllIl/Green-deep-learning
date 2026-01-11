@@ -1,6 +1,6 @@
 # 轮间超参数去重机制 - 使用指南
 
-**版本**: 2.0 (Updated 2025-11-26)
+**版本**: 3.0 (Updated 2026-01-11)
 **状态**: ✅ 已测试并就绪
 
 ---
@@ -8,6 +8,12 @@
 ## 📋 概述
 
 轮间超参数去重机制通过读取历史实验数据，自动避免生成重复的超参数组合，确保每轮实验的超参数都是唯一的。
+
+### 核心改进（v3.0）⭐
+
+✅ **自动按模型过滤**: 去重时只比较同一模型的历史数据，避免跨模型误去重
+✅ **精确 Mode 识别**: 改用 `endswith("_parallel")` 避免误判
+✅ **改进日志输出**: 显示过滤的 repo/model 和排除的记录数
 
 ### 核心改进（v2.0）
 
@@ -350,20 +356,58 @@ python3 scripts/aggregate_csvs.py
 
 这些列由 `aggregate_csvs.py` 自动生成。
 
-### 3. 模型特定去重
+### 3. 模型特定去重 ⭐ (v3.0 更新)
 
-当前实现对所有模型使用全局去重集合。如果需要模型特定去重：
+**✅ 自动按模型过滤（默认行为）**
+
+从 v3.0 开始，去重机制**自动按 repository 和 model 过滤**，只比较同一模型的历史数据。
 
 ```python
-# 可选：按模型过滤历史数据
+# runner.py 中自动传递 repo/model 过滤参数
+dedup_set = build_dedup_set(
+    historical_mutations,
+    filter_params=filter_params,
+    filter_by_repo=repo,      # ← 自动过滤到当前 repo
+    filter_by_model=model,    # ← 自动过滤到当前 model
+    logger=self.logger
+)
+```
+
+**为什么需要按模型过滤？**
+
+即使不同模型的超参数范围不同，也可能出现相同的参数值组合，导致误去重：
+
+```python
+# 示例：两个模型恰好有相同的参数组合
+# examples/mnist: lr=0.01, batch_size=32
+# examples/cifar10: lr=0.01, batch_size=32
+
+# 旧行为（全局去重）:
+#   → cifar10 运行时会把 mnist 的 (0.01, 32) 也算作重复 ❌
+
+# 新行为（按模型过滤）:
+#   → cifar10 只看自己的历史数据，不受 mnist 影响 ✅
+```
+
+**手动控制过滤（高级用法）**
+
+如果需要手动控制过滤行为（例如测试或分析），可以直接调用：
+
+```python
+# 只加载特定模型的历史数据
 mutations, stats = load_historical_mutations(
     csv_files,
     filter_by_repo="examples",
     filter_by_model="mnist"
 )
-```
 
-不过通常不需要这样做，因为不同模型的超参数范围不同，自然不会冲突。
+# 或者不过滤（加载所有模型的数据）
+mutations, stats = load_historical_mutations(
+    csv_files,
+    filter_by_repo=None,    # 不按 repo 过滤
+    filter_by_model=None    # 不按 model 过滤
+)
+```
 
 ### 4. 性能考虑
 
@@ -558,7 +602,12 @@ grep "Loaded.*historical mutations" results/*/logs/*.log
 
 ---
 
-**版本**: 2.0
-**更新时间**: 2025-11-26
+**版本**: 3.0
+**更新时间**: 2026-01-11
 **维护者**: Mutation-Based Training Energy Profiler Team
 **状态**: ✅ 已测试并就绪
+
+**版本历史**:
+- v3.0 (2026-01-11): 添加自动按模型过滤，修复跨模型去重问题
+- v2.0 (2025-11-26): 简化数据源，改用 summary_all.csv
+- v1.0: 初始版本

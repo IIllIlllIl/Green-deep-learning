@@ -1,0 +1,206 @@
+{
+  "_description": "补齐实验到30次变异 - 每个模型-模式组合至少30次多参数变异",
+  "_total_configs_non_parallel": 6,
+  "_total_configs_parallel": 7,
+  "_total_new_experiments": 235,
+  "_created": "2026-01-06",
+  "_purpose": "补齐到每个模型在两个训练场景(并行/非并行)下至少各有30次多参数变异实验",
+
+  "experiment_name": "supplement_to_30_mutations",
+  "description": "补齐到30次变异 - 多参数组合变异实验",
+  "mode": "mutation",
+  "max_retries": 2,
+  "governor": "performance",
+  "use_deduplication": true,
+  "historical_csvs": [
+    "data/raw_data.csv"
+  ],
+
+  "experiments": [
+    {
+      "comment": "=== Non-Parallel补齐实验 (33个新实验) ===",
+      "note": "6个模型需要补齐non-parallel模式到30次"
+    },
+
+    {
+      "comment": "Person_reID_baseline_pytorch/hrnet18 - 非并行 - 补齐6次 (现有24次 → 目标30次)",
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "hrnet18",
+      "mode": "mutation",
+      "mutate": ["dropout", "epochs", "learning_rate", "seed"],
+      "runs_per_config": 6
+    },
+    {
+      "comment": "Person_reID_baseline_pytorch/pcb - 非并行 - 补齐7次 (现有23次 → 目标30次)",
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "pcb",
+      "mode": "mutation",
+      "mutate": ["dropout", "epochs", "learning_rate", "seed"],
+      "runs_per_config": 7
+    },
+    {
+      "comment": "examples/mnist - 非并行 - 补齐6次 (现有24次 → 目标30次)",
+      "repo": "examples",
+      "model": "mnist",
+      "mode": "mutation",
+      "mutate": ["batch_size", "epochs", "learning_rate", "seed"],
+      "runs_per_config": 6
+    },
+    {
+      "comment": "examples/mnist_rnn - 非并行 - 补齐5次 (现有25次 → 目标30次)",
+      "repo": "examples",
+      "model": "mnist_rnn",
+      "mode": "mutation",
+      "mutate": ["batch_size", "epochs", "learning_rate", "seed"],
+      "runs_per_config": 5
+    },
+    {
+      "comment": "examples/siamese - 非并行 - 补齐5次 (现有25次 → 目标30次)",
+      "repo": "examples",
+      "model": "siamese",
+      "mode": "mutation",
+      "mutate": ["batch_size", "epochs", "learning_rate", "seed"],
+      "runs_per_config": 5
+    },
+    {
+      "comment": "pytorch_resnet_cifar10/resnet20 - 非并行 - 补齐4次 (现有26次 → 目标30次)",
+      "repo": "pytorch_resnet_cifar10",
+      "model": "resnet20",
+      "mode": "mutation",
+      "mutate": ["epochs", "learning_rate", "weight_decay", "seed"],
+      "runs_per_config": 4
+    },
+
+    {
+      "comment": "=== Parallel补齐实验 (202个新实验 = 101次配置 × 2) ===",
+      "note": "7个模型需要补齐parallel模式到30次"
+    },
+
+    {
+      "comment": "MRT-OAST/default - 并行 - 补齐4次 (现有26次 → 目标30次)",
+      "repo": "MRT-OAST",
+      "model": "default",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "MRT-OAST",
+        "model": "default",
+        "mode": "mutation",
+        "mutate": ["dropout", "epochs", "learning_rate", "weight_decay", "seed"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {}
+      },
+      "runs_per_config": 4
+    },
+    {
+      "comment": "Person_reID_baseline_pytorch/densenet121 - 并行 - 补齐21次 (现有9次 → 目标30次)",
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "densenet121",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "densenet121",
+        "mode": "mutation",
+        "mutate": ["dropout", "epochs", "learning_rate", "seed"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {}
+      },
+      "runs_per_config": 21
+    },
+    {
+      "comment": "Person_reID_baseline_pytorch/hrnet18 - 并行 - 补齐13次 (现有17次 → 目标30次)",
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "hrnet18",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "hrnet18",
+        "mode": "mutation",
+        "mutate": ["dropout", "epochs", "learning_rate", "seed"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {}
+      },
+      "runs_per_config": 13
+    },
+    {
+      "comment": "Person_reID_baseline_pytorch/pcb - 并行 - 补齐13次 (现有17次 → 目标30次)",
+      "repo": "Person_reID_baseline_pytorch",
+      "model": "pcb",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "Person_reID_baseline_pytorch",
+        "model": "pcb",
+        "mode": "mutation",
+        "mutate": ["dropout", "epochs", "learning_rate", "seed"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {}
+      },
+      "runs_per_config": 13
+    },
+    {
+      "comment": "examples/mnist_rnn - 并行 - 补齐13次 (现有17次 → 目标30次)",
+      "repo": "examples",
+      "model": "mnist_rnn",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "mnist_rnn",
+        "mode": "mutation",
+        "mutate": ["batch_size", "epochs", "learning_rate", "seed"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "siamese",
+        "hyperparameters": {}
+      },
+      "runs_per_config": 13
+    },
+    {
+      "comment": "examples/siamese - 并行 - 补齐16次 (现有14次 → 目标30次)",
+      "repo": "examples",
+      "model": "siamese",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "examples",
+        "model": "siamese",
+        "mode": "mutation",
+        "mutate": ["batch_size", "epochs", "learning_rate", "seed"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {}
+      },
+      "runs_per_config": 16
+    },
+    {
+      "comment": "pytorch_resnet_cifar10/resnet20 - 并行 - 补齐21次 (现有9次 → 目标30次)",
+      "repo": "pytorch_resnet_cifar10",
+      "model": "resnet20",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "pytorch_resnet_cifar10",
+        "model": "resnet20",
+        "mode": "mutation",
+        "mutate": ["epochs", "learning_rate", "weight_decay", "seed"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {}
+      },
+      "runs_per_config": 21
+    }
+  ]
+}

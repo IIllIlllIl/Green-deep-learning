@@ -1,0 +1,65 @@
+{
+  "task_id": "group4_bug_localization",
+  "task_name": "bug-localization\uff08\u7f3a\u9677\u5b9a\u4f4d\uff09",
+  "success": true,
+  "elapsed_time_minutes": 6.30106137196223,
+  "n_samples": 142,
+  "n_features": 17,
+  "variable_classification": {
+    "n_hyperparams": 0,
+    "n_performance": 4,
+    "n_energy": 7,
+    "n_mediators": 4
+  },
+  "graph_stats": {
+    "min": 0.0,
+    "max": 0.6000000238418579,
+    "mean": 0.08771626651287079,
+    "std": 0.12032098323106766
+  },
+  "edges": {
+    "threshold_0.01": 142,
+    "threshold_0.1": 91,
+    "threshold_0.3": 18,
+    "threshold_0.5": 1
+  },
+  "question2_evidence": {
+    "direct_edges_perf_to_energy": [],
+    "direct_edges_energy_to_perf": [],
+    "common_hyperparams": [],
+    "mediated_tradeoffs": []
+  },
+  "question3_evidence": {
+    "mediation_paths_to_energy": [],
+    "mediation_paths_to_performance": [],
+    "multi_step_paths": []
+  },
+  "config": {
+    "alpha_linear": 0.05,
+    "beta_linear": 0.1,
+    "n_particles": 20,
+    "tau": 1.0,
+    "n_steps": 5000,
+    "n_grad_mc_samples": 128,
+    "n_acyclicity_mc_samples": 32
+  },
+  "feature_names": [
+    "duration_seconds",
+    "perf_top1_accuracy",
+    "perf_top5_accuracy",
+    "perf_top10_accuracy",
+    "perf_top20_accuracy",
+    "energy_cpu_pkg_joules",
+    "energy_cpu_ram_joules",
+    "energy_cpu_total_joules",
+    "energy_gpu_avg_watts",
+    "energy_gpu_max_watts",
+    "energy_gpu_min_watts",
+    "energy_gpu_total_joules",
+    "energy_gpu_temp_avg_celsius",
+    "energy_gpu_temp_max_celsius",
+    "energy_gpu_util_avg_percent",
+    "energy_gpu_util_max_percent",
+    "num_mutated_params"
+  ]
+}

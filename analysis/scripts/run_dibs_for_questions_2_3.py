@@ -1,0 +1,789 @@
+#!/usr/bin/env python3
+"""
+研究问题2和3的DiBS因果分析脚本
+
+目的: 在新生成的6组数据（40%阈值）上执行DiBS因果发现
+研究问题:
+  - 问题2: 能耗和性能之间的权衡关系
+  - 问题3: 中间变量的中介效应
+
+创建日期: 2026-01-05
+基于: dibs_parameter_sweep.py (成功配置: alpha=0.05, beta=0.1, particles=20)
+"""
+
+import numpy as np
+import pandas as pd
+import sys
+import os
+import time
+import json
+from datetime import datetime
+from pathlib import Path
+
+# 添加项目路径
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+from utils.causal_discovery import CausalGraphLearner
+
+# ========== 最优配置（基于2026-01-05参数调优结果） ==========
+OPTIMAL_CONFIG = {
+    "alpha_linear": 0.05,        # DiBS默认值，效果良好
+    "beta_linear": 0.1,          # 低无环约束，允许更多边探索 ⭐
+    "n_particles": 20,           # 最佳性价比
+    "tau": 1.0,                  # Gumbel-softmax温度
+    "n_steps": 5000,             # 足够收敛
+    "n_grad_mc_samples": 128,    # MC梯度样本数
+    "n_acyclicity_mc_samples": 32  # 无环性MC样本数
+}
+
+# ========== 6个任务组配置 ==========
+TASK_GROUPS = [
+    {
+        "id": "group1_examples",
+        "name": "examples（图像分类-小型）",
+        "csv_file": "group1_examples.csv",
+        "expected_samples": 259,
+        "expected_features": 18
+    },
+    {
+        "id": "group2_vulberta",
+        "name": "VulBERTa（代码漏洞检测）",
+        "csv_file": "group2_vulberta.csv",
+        "expected_samples": 152,
+        "expected_features": 16
+    },
+    {
+        "id": "group3_person_reid",
+        "name": "Person_reID（行人重识别）",
+        "csv_file": "group3_person_reid.csv",
+        "expected_samples": 146,
+        "expected_features": 20
+    },
+    {
+        "id": "group4_bug_localization",
+        "name": "bug-localization（缺陷定位）",
+        "csv_file": "group4_bug_localization.csv",
+        "expected_samples": 142,
+        "expected_features": 17
+    },
+    {
+        "id": "group5_mrt_oast",
+        "name": "MRT-OAST（缺陷定位）",
+        "csv_file": "group5_mrt_oast.csv",
+        "expected_samples": 88,
+        "expected_features": 16
+    },
+    {
+        "id": "group6_resnet",
+        "name": "pytorch_resnet（图像分类-ResNet）",
+        "csv_file": "group6_resnet.csv",
+        "expected_samples": 49,
+        "expected_features": 18
+    }
+]
+
+
+def load_task_group_data(task_config):
+    """
+    加载单个任务组的数据
+
+    参数:
+        task_config: 任务组配置字典
+
+    返回:
+        data: 标准化后的DataFrame
+        feature_names: 特征名称列表
+    """
+    data_dir = Path(__file__).parent.parent / "data" / "energy_research" / "dibs_training"
+    data_file = data_dir / task_config["csv_file"]
+
+    if not data_file.exists():
+        raise FileNotFoundError(f"数据文件不存在: {data_file}")
+
+    # 加载数据
+    df = pd.read_csv(data_file)
+
+    print(f"  数据规模: {len(df)}行 × {len(df.columns)}列")
+    print(f"  预期规模: {task_config['expected_samples']}行 × {task_config['expected_features']}列")
+
+    if len(df) != task_config["expected_samples"]:
+        print(f"  ⚠️ 警告: 样本数不符合预期（预期{task_config['expected_samples']}，实际{len(df)}）")
+
+    if len(df.columns) != task_config["expected_features"]:
+        print(f"  ⚠️ 警告: 特征数不符合预期（预期{task_config['expected_features']}，实际{len(df.columns)}）")
+
+    # 保存特征名称
+    feature_names = df.columns.tolist()
+
+    # 返回DataFrame（CausalGraphLearner期望DataFrame输入）
+    return df, feature_names
+
+
+def classify_variables(feature_names):
+    """
+    将变量分类为：超参数、性能、能耗、中介变量、其他
+
+    参数:
+        feature_names: 特征名称列表
+
+    返回:
+        classification: 字典，包含各类变量的索引
+    """
+    classification = {
+        "hyperparams": [],      # 超参数（X）
+        "performance": [],      # 性能指标（Y_perf）
+        "energy": [],           # 能耗指标（Y_energy）
+        "mediators": [],        # 中介变量（M）
+        "others": []            # 其他控制变量
+    }
+
+    for idx, name in enumerate(feature_names):
+        if name.startswith("hyperparam_"):
+            classification["hyperparams"].append(idx)
+        elif name.startswith("perf_"):
+            classification["performance"].append(idx)
+        elif name.startswith("energy_gpu") or name.startswith("energy_cpu"):
+            # 特殊处理：GPU利用率和温度是中介变量
+            if "util" in name or "temp" in name:
+                classification["mediators"].append(idx)
+            else:
+                classification["energy"].append(idx)
+        elif name in ["duration_seconds", "retries", "num_mutated_params"]:
+            classification["others"].append(idx)
+        else:
+            classification["others"].append(idx)
+
+    return classification
+
+
+def extract_research_question_2_evidence(causal_graph, feature_names, var_classification, threshold=0.3):
+    """
+    提取研究问题2的证据：能耗-性能权衡关系
+
+    参数:
+        causal_graph: 因果图矩阵 (n_vars × n_vars)
+        feature_names: 特征名称列表
+        var_classification: 变量分类字典
+        threshold: 边强度阈值
+
+    返回:
+        evidence: 包含权衡关系证据的字典
+    """
+    evidence = {
+        "direct_edges_perf_to_energy": [],
+        "direct_edges_energy_to_perf": [],
+        "common_hyperparams": [],
+        "mediated_tradeoffs": []
+    }
+
+    perf_vars = var_classification["performance"]
+    energy_vars = var_classification["energy"]
+    hyperparam_vars = var_classification["hyperparams"]
+    mediator_vars = var_classification["mediators"]
+
+    # 1. 检测性能→能耗的直接因果边
+    for i in perf_vars:
+        for j in energy_vars:
+            strength = causal_graph[i, j]
+            if strength > threshold:
+                evidence["direct_edges_perf_to_energy"].append({
+                    "from": feature_names[i],
+                    "to": feature_names[j],
+                    "strength": float(strength)
+                })
+
+    # 2. 检测能耗→性能的直接因果边
+    for i in energy_vars:
+        for j in perf_vars:
+            strength = causal_graph[i, j]
+            if strength > threshold:
+                evidence["direct_edges_energy_to_perf"].append({
+                    "from": feature_names[i],
+                    "to": feature_names[j],
+                    "strength": float(strength)
+                })
+
+    # 3. 检测同时影响性能和能耗的超参数（权衡候选）
+    for hp_idx in hyperparam_vars:
+        hp_name = feature_names[hp_idx]
+
+        # 找到该超参数影响的性能指标
+        perf_targets = []
+        for p_idx in perf_vars:
+            if causal_graph[hp_idx, p_idx] > threshold:
+                perf_targets.append({
+                    "var": feature_names[p_idx],
+                    "strength": float(causal_graph[hp_idx, p_idx])
+                })
+
+        # 找到该超参数影响的能耗指标
+        energy_targets = []
+        for e_idx in energy_vars:
+            if causal_graph[hp_idx, e_idx] > threshold:
+                energy_targets.append({
+                    "var": feature_names[e_idx],
+                    "strength": float(causal_graph[hp_idx, e_idx])
+                })
+
+        # 如果同时影响性能和能耗，记录为共同超参数
+        if perf_targets and energy_targets:
+            evidence["common_hyperparams"].append({
+                "hyperparam": hp_name,
+                "affects_performance": perf_targets,
+                "affects_energy": energy_targets
+            })
+
+    # 4. 检测通过中介变量的间接权衡关系
+    # 路径：性能 → 中介变量 → 能耗
+    for p_idx in perf_vars:
+        for m_idx in mediator_vars:
+            for e_idx in energy_vars:
+                # 检查路径: p → m → e
+                strength_pm = causal_graph[p_idx, m_idx]
+                strength_me = causal_graph[m_idx, e_idx]
+
+                if strength_pm > threshold and strength_me > threshold:
+                    evidence["mediated_tradeoffs"].append({
+                        "path": f"{feature_names[p_idx]} → {feature_names[m_idx]} → {feature_names[e_idx]}",
+                        "strength_step1": float(strength_pm),
+                        "strength_step2": float(strength_me),
+                        "path_strength": float(strength_pm * strength_me)
+                    })
+
+    return evidence
+
+
+def extract_research_question_3_evidence(causal_graph, feature_names, var_classification, threshold=0.3):
+    """
+    提取研究问题3的证据：中介效应路径
+
+    参数:
+        causal_graph: 因果图矩阵
+        feature_names: 特征名称列表
+        var_classification: 变量分类字典
+        threshold: 边强度阈值
+
+    返回:
+        evidence: 包含中介路径的字典
+    """
+    evidence = {
+        "mediation_paths_to_energy": [],
+        "mediation_paths_to_performance": [],
+        "multi_step_paths": []
+    }
+
+    hyperparam_vars = var_classification["hyperparams"]
+    perf_vars = var_classification["performance"]
+    energy_vars = var_classification["energy"]
+    mediator_vars = var_classification["mediators"]
+
+    # 1. 三节点路径：超参数 → 中介变量 → 能耗
+    for hp_idx in hyperparam_vars:
+        for m_idx in mediator_vars:
+            for e_idx in energy_vars:
+                strength_hm = causal_graph[hp_idx, m_idx]
+                strength_me = causal_graph[m_idx, e_idx]
+
+                if strength_hm > threshold and strength_me > threshold:
+                    # 检查是否也存在直接边（用于后续中介效应量化）
+                    direct_strength = causal_graph[hp_idx, e_idx]
+
+                    evidence["mediation_paths_to_energy"].append({
+                        "path_id": f"HP{hp_idx}_M{m_idx}_E{e_idx}",
+                        "hyperparam": feature_names[hp_idx],
+                        "mediator": feature_names[m_idx],
+                        "outcome": feature_names[e_idx],
+                        "strength_X_to_M": float(strength_hm),
+                        "strength_M_to_Y": float(strength_me),
+                        "indirect_strength": float(strength_hm * strength_me),
+                        "direct_strength": float(direct_strength),
+                        "mediation_type": "partial" if direct_strength > 0.01 else "full"
+                    })
+
+    # 2. 三节点路径：超参数 → 中介变量 → 性能
+    for hp_idx in hyperparam_vars:
+        for m_idx in mediator_vars:
+            for p_idx in perf_vars:
+                strength_hm = causal_graph[hp_idx, m_idx]
+                strength_mp = causal_graph[m_idx, p_idx]
+
+                if strength_hm > threshold and strength_mp > threshold:
+                    direct_strength = causal_graph[hp_idx, p_idx]
+
+                    evidence["mediation_paths_to_performance"].append({
+                        "path_id": f"HP{hp_idx}_M{m_idx}_P{p_idx}",
+                        "hyperparam": feature_names[hp_idx],
+                        "mediator": feature_names[m_idx],
+                        "outcome": feature_names[p_idx],
+                        "strength_X_to_M": float(strength_hm),
+                        "strength_M_to_Y": float(strength_mp),
+                        "indirect_strength": float(strength_hm * strength_mp),
+                        "direct_strength": float(direct_strength),
+                        "mediation_type": "partial" if direct_strength > 0.01 else "full"
+                    })
+
+    # 3. 四节点路径（可选）：超参数 → 中介1 → 中介2 → 能耗/性能
+    # 例如：learning_rate → gpu_util → gpu_temp → energy
+    for hp_idx in hyperparam_vars:
+        for m1_idx in mediator_vars:
+            for m2_idx in mediator_vars:
+                if m1_idx == m2_idx:
+                    continue
+
+                strength_hm1 = causal_graph[hp_idx, m1_idx]
+                strength_m1m2 = causal_graph[m1_idx, m2_idx]
+
+                if strength_hm1 > threshold and strength_m1m2 > threshold:
+                    # 检查m2是否影响能耗或性能
+                    for e_idx in energy_vars + perf_vars:
+                        strength_m2y = causal_graph[m2_idx, e_idx]
+
+                        if strength_m2y > threshold:
+                            evidence["multi_step_paths"].append({
+                                "path": f"{feature_names[hp_idx]} → {feature_names[m1_idx]} → {feature_names[m2_idx]} → {feature_names[e_idx]}",
+                                "strength_step1": float(strength_hm1),
+                                "strength_step2": float(strength_m1m2),
+                                "strength_step3": float(strength_m2y),
+                                "path_strength": float(strength_hm1 * strength_m1m2 * strength_m2y)
+                            })
+
+    return evidence
+
+
+def run_dibs_analysis(task_config, data, feature_names, config, output_dir):
+    """
+    运行单个任务组的DiBS分析
+
+    参数:
+        task_config: 任务组配置
+        data: 数据数组
+        feature_names: 特征名称列表
+        config: DiBS配置
+        output_dir: 输出目录
+
+    返回:
+        result: 分析结果字典
+    """
+    task_id = task_config["id"]
+    task_name = task_config["name"]
+
+    print("\n" + "="*80)
+    print(f"任务组: {task_id} - {task_name}")
+    print("="*80)
+
+    # 分类变量
+    var_classification = classify_variables(feature_names)
+
+    print(f"\n变量分类:")
+    print(f"  超参数: {len(var_classification['hyperparams'])}个")
+    print(f"  性能指标: {len(var_classification['performance'])}个")
+    print(f"  能耗指标: {len(var_classification['energy'])}个")
+    print(f"  中介变量: {len(var_classification['mediators'])}个")
+    print(f"  其他变量: {len(var_classification['others'])}个")
+
+    # 创建DiBS learner
+    learner = CausalGraphLearner(
+        n_vars=len(feature_names),
+        alpha=config["alpha_linear"],
+        n_particles=config["n_particles"],
+        beta=config["beta_linear"],
+        tau=config["tau"],
+        n_steps=config["n_steps"],
+        n_grad_mc_samples=config["n_grad_mc_samples"],
+        n_acyclicity_mc_samples=config["n_acyclicity_mc_samples"],
+        random_seed=42
+    )
+
+    # 执行DiBS
+    print(f"\n执行DiBS因果发现...")
+    print(f"  alpha_linear: {config['alpha_linear']}")
+    print(f"  beta_linear: {config['beta_linear']}")
+    print(f"  n_particles: {config['n_particles']}")
+    print(f"  n_steps: {config['n_steps']}")
+
+    start_time = time.time()
+
+    try:
+        causal_graph = learner.fit(data, verbose=True)
+        elapsed_time = time.time() - start_time
+        success = True
+        error_msg = None
+
+        print(f"\n✅ DiBS执行成功！耗时: {elapsed_time/60:.2f}分钟")
+
+    except Exception as e:
+        elapsed_time = time.time() - start_time
+        causal_graph = None
+        success = False
+        error_msg = str(e)
+        print(f"\n❌ DiBS执行失败: {error_msg}")
+
+        # 返回失败结果
+        return {
+            "task_id": task_id,
+            "task_name": task_name,
+            "success": False,
+            "elapsed_time_minutes": elapsed_time / 60,
+            "error_message": error_msg
+        }
+
+    # 分析因果图
+    graph_min = float(causal_graph.min())
+    graph_max = float(causal_graph.max())
+    graph_mean = float(causal_graph.mean())
+    graph_std = float(causal_graph.std())
+
+    # 不同阈值下的边数
+    edges_001 = int(np.sum(causal_graph > 0.01))
+    edges_01 = int(np.sum(causal_graph > 0.1))
+    edges_03 = int(np.sum(causal_graph > 0.3))
+    edges_05 = int(np.sum(causal_graph > 0.5))
+
+    print(f"\n因果图统计:")
+    print(f"  最小值: {graph_min:.6f}")
+    print(f"  最大值: {graph_max:.6f}")
+    print(f"  平均值: {graph_mean:.6f}")
+    print(f"  标准差: {graph_std:.6f}")
+    print(f"\n边数统计:")
+    print(f"  >0.01: {edges_001}条")
+    print(f"  >0.1:  {edges_01}条")
+    print(f"  >0.3:  {edges_03}条 ⭐ 强边")
+    print(f"  >0.5:  {edges_05}条")
+
+    # 提取研究问题证据
+    print(f"\n提取研究问题2证据（能耗-性能权衡）...")
+    q2_evidence = extract_research_question_2_evidence(
+        causal_graph, feature_names, var_classification, threshold=0.3
+    )
+
+    print(f"  直接边（性能→能耗）: {len(q2_evidence['direct_edges_perf_to_energy'])}条")
+    print(f"  直接边（能耗→性能）: {len(q2_evidence['direct_edges_energy_to_perf'])}条")
+    print(f"  共同超参数: {len(q2_evidence['common_hyperparams'])}个")
+    print(f"  中介权衡路径: {len(q2_evidence['mediated_tradeoffs'])}条")
+
+    print(f"\n提取研究问题3证据（中介效应）...")
+    q3_evidence = extract_research_question_3_evidence(
+        causal_graph, feature_names, var_classification, threshold=0.3
+    )
+
+    print(f"  超参数→中介→能耗: {len(q3_evidence['mediation_paths_to_energy'])}条")
+    print(f"  超参数→中介→性能: {len(q3_evidence['mediation_paths_to_performance'])}条")
+    print(f"  多步路径: {len(q3_evidence['multi_step_paths'])}条")
+
+    # 保存因果图矩阵
+    graph_file = output_dir / f"{task_id}_causal_graph.npy"
+    np.save(graph_file, causal_graph)
+    print(f"\n✅ 因果图矩阵已保存: {graph_file}")
+
+    # 保存特征名称
+    names_file = output_dir / f"{task_id}_feature_names.json"
+    with open(names_file, 'w') as f:
+        json.dump(feature_names, f, indent=2)
+
+    # 构建结果字典
+    result = {
+        "task_id": task_id,
+        "task_name": task_name,
+        "success": True,
+        "elapsed_time_minutes": elapsed_time / 60,
+        "n_samples": len(data),
+        "n_features": len(feature_names),
+        "variable_classification": {
+            "n_hyperparams": len(var_classification["hyperparams"]),
+            "n_performance": len(var_classification["performance"]),
+            "n_energy": len(var_classification["energy"]),
+            "n_mediators": len(var_classification["mediators"])
+        },
+        "graph_stats": {
+            "min": graph_min,
+            "max": graph_max,
+            "mean": graph_mean,
+            "std": graph_std
+        },
+        "edges": {
+            "threshold_0.01": edges_001,
+            "threshold_0.1": edges_01,
+            "threshold_0.3": edges_03,
+            "threshold_0.5": edges_05
+        },
+        "question2_evidence": q2_evidence,
+        "question3_evidence": q3_evidence,
+        "config": config,
+        "feature_names": feature_names
+    }
+
+    # 保存单个任务结果
+    result_file = output_dir / f"{task_id}_result.json"
+    with open(result_file, 'w') as f:
+        json.dump(result, f, indent=2)
+
+    print(f"✅ 分析结果已保存: {result_file}")
+
+    return result
+
+
+def generate_summary_report(all_results, output_dir):
+    """生成总结报告"""
+
+    report_file = output_dir / "QUESTIONS_2_3_DIBS_ANALYSIS_REPORT.md"
+
+    with open(report_file, 'w') as f:
+        f.write("# 研究问题2和3的DiBS因果分析报告\n\n")
+        f.write(f"**分析日期**: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
+        f.write(f"**任务组数**: {len(all_results)}个\n")
+        f.write(f"**DiBS配置**: alpha=0.05, beta=0.1, particles=20, steps=5000\n\n")
+
+        f.write("---\n\n")
+
+        # 总体统计
+        f.write("## 📊 总体统计\n\n")
+
+        successful = sum(1 for r in all_results if r['success'])
+        total_time = sum(r['elapsed_time_minutes'] for r in all_results)
+
+        f.write(f"- **成功任务组**: {successful}/{len(all_results)}\n")
+        f.write(f"- **总耗时**: {total_time:.1f}分钟 ({total_time/60:.2f}小时)\n")
+        f.write(f"- **平均耗时**: {total_time/len(all_results):.1f}分钟/组\n\n")
+
+        # 详细结果表格
+        f.write("## 📋 任务组详细结果\n\n")
+        f.write("| 任务组 | 状态 | 耗时(分) | 样本数 | 特征数 | 强边(>0.3) | 总边(>0.01) | 图Max |\n")
+        f.write("|--------|------|---------|-------|-------|-----------|------------|-------|\n")
+
+        for r in all_results:
+            status = "✅ 成功" if r['success'] else "❌ 失败"
+
+            if r['success']:
+                f.write(f"| {r['task_name'][:30]} | {status} | "
+                       f"{r['elapsed_time_minutes']:.1f} | {r['n_samples']} | "
+                       f"{r['n_features']} | {r['edges']['threshold_0.3']} | "
+                       f"{r['edges']['threshold_0.01']} | "
+                       f"{r['graph_stats']['max']:.4f} |\n")
+            else:
+                f.write(f"| {r['task_name'][:30]} | {status} | "
+                       f"{r['elapsed_time_minutes']:.1f} | - | - | - | - | - |\n")
+
+        f.write("\n")
+
+        # 问题2证据汇总
+        f.write("## 🔄 研究问题2：能耗-性能权衡关系\n\n")
+
+        successful_results = [r for r in all_results if r['success']]
+
+        if not successful_results:
+            f.write("❌ 所有任务组DiBS分析失败，无法提取证据。\n\n")
+        else:
+            # 统计直接边
+            total_direct_perf_to_energy = sum(len(r['question2_evidence']['direct_edges_perf_to_energy']) for r in successful_results)
+            total_direct_energy_to_perf = sum(len(r['question2_evidence']['direct_edges_energy_to_perf']) for r in successful_results)
+            total_common_hyperparams = sum(len(r['question2_evidence']['common_hyperparams']) for r in successful_results)
+            total_mediated_tradeoffs = sum(len(r['question2_evidence']['mediated_tradeoffs']) for r in successful_results)
+
+            f.write(f"### 总体发现\n\n")
+            f.write(f"- **直接因果边（性能→能耗）**: {total_direct_perf_to_energy}条\n")
+            f.write(f"- **直接因果边（能耗→性能）**: {total_direct_energy_to_perf}条\n")
+            f.write(f"- **共同超参数**: {total_common_hyperparams}个（同时影响能耗和性能）\n")
+            f.write(f"- **中介权衡路径**: {total_mediated_tradeoffs}条（性能通过中介影响能耗）\n\n")
+
+            # 详细列出共同超参数
+            f.write(f"### 共同超参数详情（存在权衡候选）\n\n")
+
+            for r in successful_results:
+                if r['question2_evidence']['common_hyperparams']:
+                    f.write(f"#### {r['task_name']}\n\n")
+
+                    for hp_info in r['question2_evidence']['common_hyperparams']:
+                        f.write(f"**{hp_info['hyperparam']}**:\n")
+                        f.write(f"- 影响性能: {', '.join([t['var'] for t in hp_info['affects_performance']])}\n")
+                        f.write(f"- 影响能耗: {', '.join([t['var'] for t in hp_info['affects_energy']])}\n")
+                        f.write(f"- **权衡类型**: 需要进一步分析方向（增加or降低）\n\n")
+
+        # 问题3证据汇总
+        f.write("## 🔬 研究问题3：中介效应路径\n\n")
+
+        if not successful_results:
+            f.write("❌ 所有任务组DiBS分析失败，无法提取证据。\n\n")
+        else:
+            total_mediation_to_energy = sum(len(r['question3_evidence']['mediation_paths_to_energy']) for r in successful_results)
+            total_mediation_to_perf = sum(len(r['question3_evidence']['mediation_paths_to_performance']) for r in successful_results)
+            total_multi_step = sum(len(r['question3_evidence']['multi_step_paths']) for r in successful_results)
+
+            f.write(f"### 总体发现\n\n")
+            f.write(f"- **中介路径（超参数→中介→能耗）**: {total_mediation_to_energy}条\n")
+            f.write(f"- **中介路径（超参数→中介→性能）**: {total_mediation_to_perf}条\n")
+            f.write(f"- **多步路径（≥4节点）**: {total_multi_step}条\n")
+            f.write(f"- **总中介路径**: {total_mediation_to_energy + total_mediation_to_perf + total_multi_step}条\n\n")
+
+            # 中介变量重要性排名
+            f.write(f"### 中介变量重要性排名\n\n")
+
+            mediator_counts = {}
+
+            for r in successful_results:
+                # 统计每个中介变量出现的次数
+                for path in r['question3_evidence']['mediation_paths_to_energy']:
+                    med = path['mediator']
+                    mediator_counts[med] = mediator_counts.get(med, 0) + 1
+
+                for path in r['question3_evidence']['mediation_paths_to_performance']:
+                    med = path['mediator']
+                    mediator_counts[med] = mediator_counts.get(med, 0) + 1
+
+            if mediator_counts:
+                f.write("| 中介变量 | 参与路径数 | 重要性 |\n")
+                f.write("|---------|-----------|--------|\n")
+
+                sorted_mediators = sorted(mediator_counts.items(), key=lambda x: x[1], reverse=True)
+
+                for med, count in sorted_mediators[:10]:  # Top 10
+                    importance = "⭐" * min(5, count // 5 + 1)
+                    f.write(f"| {med} | {count} | {importance} |\n")
+
+                f.write("\n")
+
+            # 核心中介路径示例
+            f.write(f"### 核心中介路径示例（Top 10）\n\n")
+
+            all_mediation_paths = []
+
+            for r in successful_results:
+                for path in r['question3_evidence']['mediation_paths_to_energy']:
+                    all_mediation_paths.append({
+                        "task": r['task_name'],
+                        "path": f"{path['hyperparam']} → {path['mediator']} → {path['outcome']}",
+                        "strength": path['indirect_strength'],
+                        "type": path['mediation_type']
+                    })
+
+            # 按强度排序
+            all_mediation_paths.sort(key=lambda x: x['strength'], reverse=True)
+
+            if all_mediation_paths:
+                f.write("| 排名 | 任务组 | 路径 | 间接强度 | 中介类型 |\n")
+                f.write("|------|--------|------|---------|----------|\n")
+
+                for i, path in enumerate(all_mediation_paths[:10], 1):
+                    f.write(f"| {i} | {path['task'][:20]} | {path['path']} | "
+                           f"{path['strength']:.4f} | {path['type']} |\n")
+
+                f.write("\n")
+
+        # 结论与建议
+        f.write("## 💡 结论与后续建议\n\n")
+
+        if successful:
+            f.write(f"### ✅ DiBS分析成功（{successful}/{len(all_results)}组）\n\n")
+            f.write("DiBS成功在能耗数据上检测到因果边，证明了DiBS参数调优的有效性。\n\n")
+
+            f.write("### 研究问题2（能耗-性能权衡）\n\n")
+            f.write("**发现**:\n")
+            f.write(f"- 共同超参数数量: {total_common_hyperparams}个\n")
+            f.write(f"- 中介权衡路径: {total_mediated_tradeoffs}条\n\n")
+
+            f.write("**后续建议**:\n")
+            f.write("1. 对每个共同超参数，使用回归分析量化对能耗和性能的影响方向\n")
+            f.write("2. 判断是否存在权衡（影响方向相反）或协同（影响方向相同）\n")
+            f.write("3. 生成Pareto前沿可视化，识别最优配置\n\n")
+
+            f.write("### 研究问题3（中介效应）\n\n")
+            f.write("**发现**:\n")
+            f.write(f"- 中介路径总数: {total_mediation_to_energy + total_mediation_to_perf}条\n")
+            f.write(f"- 核心中介变量: {list(mediator_counts.keys())[:3] if mediator_counts else []}\n\n")
+
+            f.write("**后续建议**:\n")
+            f.write("1. 对Top 10中介路径，使用中介效应分析（Sobel检验）量化中介比例\n")
+            f.write("2. 验证DiBS发现的路径是否与领域知识一致\n")
+            f.write("3. 结合回归分析，计算直接效应vs间接效应的百分比\n\n")
+        else:
+            f.write("### ❌ 所有任务组DiBS分析失败\n\n")
+            f.write("建议检查数据质量和DiBS配置，或使用备选方法（回归分析、中介效应分析）。\n\n")
+
+        f.write("---\n\n")
+        f.write(f"**报告生成时间**: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
+        f.write(f"**下一步**: 基于DiBS发现的因果结构，执行定量分析（回归、中介效应分析）\n")
+
+    print(f"\n✅ 总结报告已保存: {report_file}")
+
+    return report_file
+
+
+def main():
+    """主函数"""
+    print("="*80)
+    print("研究问题2和3的DiBS因果分析")
+    print("="*80)
+    print(f"开始时间: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+    print(f"任务组数: {len(TASK_GROUPS)}")
+    print(f"DiBS配置: alpha={OPTIMAL_CONFIG['alpha_linear']}, beta={OPTIMAL_CONFIG['beta_linear']}, particles={OPTIMAL_CONFIG['n_particles']}")
+    print("="*80)
+
+    # 创建输出目录
+    output_dir = Path(__file__).parent.parent / "results" / "energy_research" / "questions_2_3_dibs" / datetime.now().strftime('%Y%m%d_%H%M%S')
+    output_dir.mkdir(parents=True, exist_ok=True)
+    print(f"\n输出目录: {output_dir}")
+
+    # 运行所有任务组
+    all_results = []
+
+    for i, task_config in enumerate(TASK_GROUPS, 1):
+        print(f"\n{'='*80}")
+        print(f"进度: {i}/{len(TASK_GROUPS)}")
+        print(f"{'='*80}")
+
+        try:
+            # 加载数据
+            print(f"\n加载数据: {task_config['name']}")
+            data, feature_names = load_task_group_data(task_config)
+
+            # 运行DiBS分析
+            result = run_dibs_analysis(
+                task_config,
+                data,
+                feature_names,
+                OPTIMAL_CONFIG,
+                output_dir
+            )
+
+            all_results.append(result)
+
+        except KeyboardInterrupt:
+            print("\n\n用户中断分析")
+            break
+
+        except Exception as e:
+            print(f"\n❌ 任务组执行异常: {e}")
+            import traceback
+            traceback.print_exc()
+
+            # 记录错误并继续
+            all_results.append({
+                "task_id": task_config["id"],
+                "task_name": task_config["name"],
+                "success": False,
+                "elapsed_time_minutes": 0,
+                "error_message": str(e)
+            })
+
+    # 生成总结报告
+    print("\n" + "="*80)
+    print("生成总结报告...")
+    print("="*80)
+
+    if all_results:
+        report_file = generate_summary_report(all_results, output_dir)
+
+        print(f"\n{'='*80}")
+        print("✅ DiBS分析完成！")
+        print(f"{'='*80}")
+        print(f"  成功任务组: {sum(1 for r in all_results if r['success'])}/{len(all_results)}")
+        print(f"  结果目录: {output_dir}")
+        print(f"  总结报告: {report_file}")
+        print(f"{'='*80}\n")
+    else:
+        print("\n❌ 没有完成任何任务组")
+
+    print(f"\n结束时间: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+
+
+if __name__ == "__main__":
+    main()

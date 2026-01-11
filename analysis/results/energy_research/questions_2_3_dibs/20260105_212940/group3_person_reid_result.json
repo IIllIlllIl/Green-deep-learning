@@ -1,0 +1,91 @@
+{
+  "task_id": "group3_person_reid",
+  "task_name": "Person_reID\uff08\u884c\u4eba\u91cd\u8bc6\u522b\uff09",
+  "success": true,
+  "elapsed_time_minutes": 8.31880346139272,
+  "n_samples": 146,
+  "n_features": 20,
+  "variable_classification": {
+    "n_hyperparams": 3,
+    "n_performance": 3,
+    "n_energy": 7,
+    "n_mediators": 4
+  },
+  "graph_stats": {
+    "min": 0.0,
+    "max": 0.6000000238418579,
+    "mean": 0.08437500149011612,
+    "std": 0.12903337180614471
+  },
+  "edges": {
+    "threshold_0.01": 170,
+    "threshold_0.1": 105,
+    "threshold_0.3": 32,
+    "threshold_0.5": 1
+  },
+  "question2_evidence": {
+    "direct_edges_perf_to_energy": [
+      {
+        "from": "perf_rank1",
+        "to": "energy_gpu_max_watts",
+        "strength": 0.30000001192092896
+      },
+      {
+        "from": "perf_rank5",
+        "to": "energy_gpu_max_watts",
+        "strength": 0.30000001192092896
+      },
+      {
+        "from": "perf_rank5",
+        "to": "energy_gpu_min_watts",
+        "strength": 0.30000001192092896
+      }
+    ],
+    "direct_edges_energy_to_perf": [],
+    "common_hyperparams": [],
+    "mediated_tradeoffs": [
+      {
+        "path": "perf_rank1 \u2192 energy_gpu_util_avg_percent \u2192 energy_gpu_min_watts",
+        "strength_step1": 0.30000001192092896,
+        "strength_step2": 0.5,
+        "path_strength": 0.15000000596046448
+      }
+    ]
+  },
+  "question3_evidence": {
+    "mediation_paths_to_energy": [],
+    "mediation_paths_to_performance": [],
+    "multi_step_paths": []
+  },
+  "config": {
+    "alpha_linear": 0.05,
+    "beta_linear": 0.1,
+    "n_particles": 20,
+    "tau": 1.0,
+    "n_steps": 5000,
+    "n_grad_mc_samples": 128,
+    "n_acyclicity_mc_samples": 32
+  },
+  "feature_names": [
+    "duration_seconds",
+    "retries",
+    "hyperparam_dropout",
+    "hyperparam_epochs",
+    "hyperparam_learning_rate",
+    "perf_map",
+    "perf_rank1",
+    "perf_rank5",
+    "energy_cpu_pkg_joules",
+    "energy_cpu_ram_joules",
+    "energy_cpu_total_joules",
+    "energy_gpu_avg_watts",
+    "energy_gpu_max_watts",
+    "energy_gpu_min_watts",
+    "energy_gpu_total_joules",
+    "energy_gpu_temp_avg_celsius",
+    "energy_gpu_temp_max_celsius",
+    "energy_gpu_util_avg_percent",
+    "energy_gpu_util_max_percent",
+    "num_mutated_params"
+  ]
+}

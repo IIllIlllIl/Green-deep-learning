@@ -897,7 +897,7 @@ class MutationRunner:
         # Inter-round deduplication support
         use_deduplication = exp_config.get("use_deduplication", False)
         historical_csvs = exp_config.get("historical_csvs", [])
-        dedup_set = None
+        historical_mutations = None  # Store raw mutations instead of dedup_set
 
         print("\n" + "=" * 80)
         print(f"EXPERIMENT CONFIGURATION: {experiment_name}")
@@ -935,16 +935,19 @@ class MutationRunner:
             if existing_csvs:
                 print(f"Loading from {len(existing_csvs)} CSV files...")
                 try:
-                    mutations, stats = load_historical_mutations(existing_csvs, logger=self.logger)
-                    dedup_set = build_dedup_set(mutations, logger=self.logger)
-                    print_dedup_statistics(stats, dedup_set)
+                    # Load mutations but don't build dedup_set yet
+                    # We'll build it per-experiment with filter_params
+                    historical_mutations, stats = load_historical_mutations(existing_csvs, logger=self.logger)
+                    print_dedup_statistics(stats)
+                    print(f"✓ Loaded {len(historical_mutations)} mutations from historical data")
+                    print(f"  Dedup set will be built per-experiment based on mutated parameters")
                 except Exception as e:
                     print(f"⚠️  Error loading historical data: {e}")
                     print("   Continuing without inter-round deduplication")
-                    dedup_set = None
+                    historical_mutations = None
             else:
                 print("⚠️  No valid CSV files found, disabling inter-round deduplication")
-                dedup_set = None
+                historical_mutations = None
 
             print("=" * 80 + "\n")
 
@@ -1025,6 +1028,25 @@ class MutationRunner:
                         # Get foreground repository configuration
                         fg_repo_config = self.config["models"][fg_repo]
                         fg_supported_params = fg_repo_config["supported_hyperparams"]
+
+                        # Build dedup set for this specific experiment configuration
+                        dedup_set = None
+                        if historical_mutations is not None:
+                            # Determine actual params to filter
+                            if "all" in mutate_params:
+                                filter_params = list(fg_supported_params.keys())
+                            else:
+                                filter_params = mutate_params
+
+                            dedup_set = build_dedup_set(
+                                historical_mutations,
+                                filter_params=filter_params,
+                                filter_by_repo=fg_repo,  # Filter by current repo
+                                filter_by_model=fg_model,  # Filter by current model
+                                logger=self.logger
+                            )
+                            print(f"   Built dedup set: {len(dedup_set)} unique combinations for {filter_params}")
+                            print(f"   (filtered to {fg_repo}/{fg_model} only)")
 
                         fg_mutations = generate_mutations(
                             supported_params=fg_supported_params,
@@ -1134,6 +1156,25 @@ class MutationRunner:
                     # Get repository configuration
                     repo_config = self.config["models"][repo]
                     supported_params = repo_config["supported_hyperparams"]
+
+                    # Build dedup set for this specific experiment configuration
+                    dedup_set = None
+                    if historical_mutations is not None:
+                        # Determine actual params to filter
+                        if "all" in mutate_params:
+                            filter_params = list(supported_params.keys())
+                        else:
+                            filter_params = mutate_params
+
+                        dedup_set = build_dedup_set(
+                            historical_mutations,
+                            filter_params=filter_params,
+                            filter_by_repo=repo,  # Filter by current repo
+                            filter_by_model=model,  # Filter by current model
+                            logger=self.logger
+                        )
+                        print(f"   Built dedup set: {len(dedup_set)} unique combinations for {filter_params}")
+                        print(f"   (filtered to {repo}/{model} only)")
 
                     # Generate mutations
                     mutations = generate_mutations(

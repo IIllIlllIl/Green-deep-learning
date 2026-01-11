@@ -1,0 +1,344 @@
+{
+  "group1_examples": {
+    "group": "group1_examples",
+    "mode": "non_parallel",
+    "total_samples": 110,
+    "samples_after_cleaning": 62,
+    "total_features": 37,
+    "features_after_filtering": 23,
+    "removed_features": 14,
+    "removed_feature_names": [
+      "perf_top5_accuracy",
+      "perf_eval_samples_per_second",
+      "perf_eval_loss",
+      "perf_accuracy",
+      "perf_map",
+      "perf_top20_accuracy",
+      "perf_final_training_loss",
+      "perf_top1_accuracy",
+      "perf_rank1",
+      "perf_top10_accuracy",
+      "perf_rank5",
+      "perf_recall",
+      "perf_precision",
+      "perf_best_val_accuracy"
+    ],
+    "missing_threshold": 0.9,
+    "hyperparams": [
+      "hyperparam_alpha",
+      "hyperparam_batch_size",
+      "hyperparam_dropout",
+      "hyperparam_epochs",
+      "hyperparam_kfold",
+      "hyperparam_learning_rate",
+      "hyperparam_max_iter",
+      "hyperparam_seed",
+      "hyperparam_weight_decay"
+    ],
+    "performance": [
+      "perf_test_accuracy",
+      "perf_test_loss"
+    ],
+    "energy": [
+      "energy_cpu_pkg_joules",
+      "energy_cpu_ram_joules",
+      "energy_cpu_total_joules",
+      "energy_gpu_avg_watts",
+      "energy_gpu_max_watts",
+      "energy_gpu_min_watts",
+      "energy_gpu_total_joules",
+      "energy_gpu_temp_avg_celsius",
+      "energy_gpu_temp_max_celsius",
+      "energy_gpu_util_avg_percent",
+      "energy_gpu_util_max_percent"
+    ],
+    "controls": [
+      "duration_seconds"
+    ]
+  },
+  "group2_vulberta": {
+    "group": "group2_vulberta",
+    "mode": "non_parallel",
+    "total_samples": 85,
+    "samples_after_cleaning": 25,
+    "total_features": 37,
+    "features_after_filtering": 24,
+    "removed_features": 13,
+    "removed_feature_names": [
+      "perf_top5_accuracy",
+      "perf_accuracy",
+      "perf_map",
+      "perf_top20_accuracy",
+      "perf_test_accuracy",
+      "perf_test_loss",
+      "perf_top1_accuracy",
+      "perf_rank1",
+      "perf_top10_accuracy",
+      "perf_rank5",
+      "perf_recall",
+      "perf_precision",
+      "perf_best_val_accuracy"
+    ],
+    "missing_threshold": 0.9,
+    "hyperparams": [
+      "hyperparam_alpha",
+      "hyperparam_batch_size",
+      "hyperparam_dropout",
+      "hyperparam_epochs",
+      "hyperparam_kfold",
+      "hyperparam_learning_rate",
+      "hyperparam_max_iter",
+      "hyperparam_seed",
+      "hyperparam_weight_decay"
+    ],
+    "performance": [
+      "perf_eval_loss",
+      "perf_final_training_loss",
+      "perf_eval_samples_per_second"
+    ],
+    "energy": [
+      "energy_cpu_pkg_joules",
+      "energy_cpu_ram_joules",
+      "energy_cpu_total_joules",
+      "energy_gpu_avg_watts",
+      "energy_gpu_max_watts",
+      "energy_gpu_min_watts",
+      "energy_gpu_total_joules",
+      "energy_gpu_temp_avg_celsius",
+      "energy_gpu_temp_max_celsius",
+      "energy_gpu_util_avg_percent",
+      "energy_gpu_util_max_percent"
+    ],
+    "controls": [
+      "duration_seconds"
+    ]
+  },
+  "group3_person_reid": {
+    "group": "group3_person_reid",
+    "mode": "non_parallel",
+    "total_samples": 80,
+    "samples_after_cleaning": 80,
+    "total_features": 37,
+    "features_after_filtering": 24,
+    "removed_features": 13,
+    "removed_feature_names": [
+      "perf_top5_accuracy",
+      "perf_eval_samples_per_second",
+      "perf_eval_loss",
+      "perf_accuracy",
+      "perf_top20_accuracy",
+      "perf_test_accuracy",
+      "perf_test_loss",
+      "perf_final_training_loss",
+      "perf_top1_accuracy",
+      "perf_top10_accuracy",
+      "perf_recall",
+      "perf_precision",
+      "perf_best_val_accuracy"
+    ],
+    "missing_threshold": 0.9,
+    "hyperparams": [
+      "hyperparam_alpha",
+      "hyperparam_batch_size",
+      "hyperparam_dropout",
+      "hyperparam_epochs",
+      "hyperparam_kfold",
+      "hyperparam_learning_rate",
+      "hyperparam_max_iter",
+      "hyperparam_seed",
+      "hyperparam_weight_decay"
+    ],
+    "performance": [
+      "perf_map",
+      "perf_rank1",
+      "perf_rank5"
+    ],
+    "energy": [
+      "energy_cpu_pkg_joules",
+      "energy_cpu_ram_joules",
+      "energy_cpu_total_joules",
+      "energy_gpu_avg_watts",
+      "energy_gpu_max_watts",
+      "energy_gpu_min_watts",
+      "energy_gpu_total_joules",
+      "energy_gpu_temp_avg_celsius",
+      "energy_gpu_temp_max_celsius",
+      "energy_gpu_util_avg_percent",
+      "energy_gpu_util_max_percent"
+    ],
+    "controls": [
+      "duration_seconds"
+    ]
+  },
+  "group4_bug_localization": {
+    "group": "group4_bug_localization",
+    "mode": "non_parallel",
+    "total_samples": 55,
+    "samples_after_cleaning": 25,
+    "total_features": 37,
+    "features_after_filtering": 25,
+    "removed_features": 12,
+    "removed_feature_names": [
+      "perf_eval_samples_per_second",
+      "perf_eval_loss",
+      "perf_accuracy",
+      "perf_map",
+      "perf_test_accuracy",
+      "perf_test_loss",
+      "perf_final_training_loss",
+      "perf_rank1",
+      "perf_rank5",
+      "perf_recall",
+      "perf_precision",
+      "perf_best_val_accuracy"
+    ],
+    "missing_threshold": 0.9,
+    "hyperparams": [
+      "hyperparam_alpha",
+      "hyperparam_batch_size",
+      "hyperparam_dropout",
+      "hyperparam_epochs",
+      "hyperparam_kfold",
+      "hyperparam_learning_rate",
+      "hyperparam_max_iter",
+      "hyperparam_seed",
+      "hyperparam_weight_decay"
+    ],
+    "performance": [
+      "perf_top1_accuracy",
+      "perf_top5_accuracy",
+      "perf_top10_accuracy",
+      "perf_top20_accuracy"
+    ],
+    "energy": [
+      "energy_cpu_pkg_joules",
+      "energy_cpu_ram_joules",
+      "energy_cpu_total_joules",
+      "energy_gpu_avg_watts",
+      "energy_gpu_max_watts",
+      "energy_gpu_min_watts",
+      "energy_gpu_total_joules",
+      "energy_gpu_temp_avg_celsius",
+      "energy_gpu_temp_max_celsius",
+      "energy_gpu_util_avg_percent",
+      "energy_gpu_util_max_percent"
+    ],
+    "controls": [
+      "duration_seconds"
+    ]
+  },
+  "group5_mrt_oast": {
+    "group": "group5_mrt_oast",
+    "mode": "non_parallel",
+    "total_samples": 46,
+    "samples_after_cleaning": 30,
+    "total_features": 37,
+    "features_after_filtering": 24,
+    "removed_features": 13,
+    "removed_feature_names": [
+      "perf_top5_accuracy",
+      "perf_eval_samples_per_second",
+      "perf_eval_loss",
+      "perf_map",
+      "perf_top20_accuracy",
+      "perf_test_accuracy",
+      "perf_test_loss",
+      "perf_final_training_loss",
+      "perf_top1_accuracy",
+      "perf_rank1",
+      "perf_top10_accuracy",
+      "perf_rank5",
+      "perf_best_val_accuracy"
+    ],
+    "missing_threshold": 0.9,
+    "hyperparams": [
+      "hyperparam_alpha",
+      "hyperparam_batch_size",
+      "hyperparam_dropout",
+      "hyperparam_epochs",
+      "hyperparam_kfold",
+      "hyperparam_learning_rate",
+      "hyperparam_max_iter",
+      "hyperparam_seed",
+      "hyperparam_weight_decay"
+    ],
+    "performance": [
+      "perf_accuracy",
+      "perf_precision",
+      "perf_recall"
+    ],
+    "energy": [
+      "energy_cpu_pkg_joules",
+      "energy_cpu_ram_joules",
+      "energy_cpu_total_joules",
+      "energy_gpu_avg_watts",
+      "energy_gpu_max_watts",
+      "energy_gpu_min_watts",
+      "energy_gpu_total_joules",
+      "energy_gpu_temp_avg_celsius",
+      "energy_gpu_temp_max_celsius",
+      "energy_gpu_util_avg_percent",
+      "energy_gpu_util_max_percent"
+    ],
+    "controls": [
+      "duration_seconds"
+    ]
+  },
+  "group6_resnet": {
+    "group": "group6_resnet",
+    "mode": "non_parallel",
+    "total_samples": 27,
+    "samples_after_cleaning": 27,
+    "total_features": 37,
+    "features_after_filtering": 23,
+    "removed_features": 14,
+    "removed_feature_names": [
+      "perf_top5_accuracy",
+      "perf_eval_samples_per_second",
+      "perf_eval_loss",
+      "perf_accuracy",
+      "perf_map",
+      "perf_top20_accuracy",
+      "perf_test_loss",
+      "perf_final_training_loss",
+      "perf_top1_accuracy",
+      "perf_rank1",
+      "perf_top10_accuracy",
+      "perf_rank5",
+      "perf_recall",
+      "perf_precision"
+    ],
+    "missing_threshold": 0.9,
+    "hyperparams": [
+      "hyperparam_alpha",
+      "hyperparam_batch_size",
+      "hyperparam_dropout",
+      "hyperparam_epochs",
+      "hyperparam_kfold",
+      "hyperparam_learning_rate",
+      "hyperparam_max_iter",
+      "hyperparam_seed",
+      "hyperparam_weight_decay"
+    ],
+    "performance": [
+      "perf_best_val_accuracy",
+      "perf_test_accuracy"
+    ],
+    "energy": [
+      "energy_cpu_pkg_joules",
+      "energy_cpu_ram_joules",
+      "energy_cpu_total_joules",
+      "energy_gpu_avg_watts",
+      "energy_gpu_max_watts",
+      "energy_gpu_min_watts",
+      "energy_gpu_total_joules",
+      "energy_gpu_temp_avg_celsius",
+      "energy_gpu_temp_max_celsius",
+      "energy_gpu_util_avg_percent",
+      "energy_gpu_util_max_percent"
+    ],
+    "controls": [
+      "duration_seconds"
+    ]
+  }
+}

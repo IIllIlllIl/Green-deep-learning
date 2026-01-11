@@ -1,0 +1,75 @@
+{
+  "task_id": "group2_vulberta",
+  "task_name": "VulBERTa\uff08\u4ee3\u7801\u6f0f\u6d1e\u68c0\u6d4b\uff09",
+  "success": true,
+  "elapsed_time_minutes": 5.9530689795811975,
+  "n_samples": 152,
+  "n_features": 16,
+  "variable_classification": {
+    "n_hyperparams": 0,
+    "n_performance": 3,
+    "n_energy": 7,
+    "n_mediators": 3
+  },
+  "graph_stats": {
+    "min": 0.0,
+    "max": 0.699999988079071,
+    "mean": 0.0908203199505806,
+    "std": 0.13036797940731049
+  },
+  "edges": {
+    "threshold_0.01": 120,
+    "threshold_0.1": 76,
+    "threshold_0.3": 19,
+    "threshold_0.5": 2
+  },
+  "question2_evidence": {
+    "direct_edges_perf_to_energy": [],
+    "direct_edges_energy_to_perf": [
+      {
+        "from": "energy_gpu_avg_watts",
+        "to": "perf_eval_samples_per_second",
+        "strength": 0.30000001192092896
+      },
+      {
+        "from": "energy_gpu_min_watts",
+        "to": "perf_eval_samples_per_second",
+        "strength": 0.699999988079071
+      }
+    ],
+    "common_hyperparams": [],
+    "mediated_tradeoffs": []
+  },
+  "question3_evidence": {
+    "mediation_paths_to_energy": [],
+    "mediation_paths_to_performance": [],
+    "multi_step_paths": []
+  },
+  "config": {
+    "alpha_linear": 0.05,
+    "beta_linear": 0.1,
+    "n_particles": 20,
+    "tau": 1.0,
+    "n_steps": 5000,
+    "n_grad_mc_samples": 128,
+    "n_acyclicity_mc_samples": 32
+  },
+  "feature_names": [
+    "duration_seconds",
+    "retries",
+    "perf_eval_loss",
+    "perf_final_training_loss",
+    "perf_eval_samples_per_second",
+    "energy_cpu_pkg_joules",
+    "energy_cpu_ram_joules",
+    "energy_cpu_total_joules",
+    "energy_gpu_avg_watts",
+    "energy_gpu_max_watts",
+    "energy_gpu_min_watts",
+    "energy_gpu_total_joules",
+    "energy_gpu_temp_avg_celsius",
+    "energy_gpu_temp_max_celsius",
+    "energy_gpu_util_avg_percent",
+    "num_mutated_params"
+  ]
+}

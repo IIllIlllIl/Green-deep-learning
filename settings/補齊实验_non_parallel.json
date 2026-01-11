@@ -1,0 +1,68 @@
+[
+  {
+    "comment": "Person_reID_baseline_pytorch/hrnet18 - 补齐到30次变异 (non-parallel模式，需补齐6次)",
+    "repo": "Person_reID_baseline_pytorch",
+    "model": "hrnet18",
+    "mode": "mutation",
+    "mutate_strategy": "random_multi_param",
+    "runs_per_config": 6,
+    "num_params_per_mutation": [1, 3],
+    "use_deduplication": true,
+    "historical_csvs": ["data/raw_data.csv"]
+  },
+  {
+    "comment": "Person_reID_baseline_pytorch/pcb - 补齐到30次变异 (non-parallel模式，需补齐7次)",
+    "repo": "Person_reID_baseline_pytorch",
+    "model": "pcb",
+    "mode": "mutation",
+    "mutate_strategy": "random_multi_param",
+    "runs_per_config": 7,
+    "num_params_per_mutation": [1, 3],
+    "use_deduplication": true,
+    "historical_csvs": ["data/raw_data.csv"]
+  },
+  {
+    "comment": "examples/mnist - 补齐到30次变异 (non-parallel模式，需补齐6次)",
+    "repo": "examples",
+    "model": "mnist",
+    "mode": "mutation",
+    "mutate_strategy": "random_multi_param",
+    "runs_per_config": 6,
+    "num_params_per_mutation": [1, 3],
+    "use_deduplication": true,
+    "historical_csvs": ["data/raw_data.csv"]
+  },
+  {
+    "comment": "examples/mnist_rnn - 补齐到30次变异 (non-parallel模式，需补齐5次)",
+    "repo": "examples",
+    "model": "mnist_rnn",
+    "mode": "mutation",
+    "mutate_strategy": "random_multi_param",
+    "runs_per_config": 5,
+    "num_params_per_mutation": [1, 3],
+    "use_deduplication": true,
+    "historical_csvs": ["data/raw_data.csv"]
+  },
+  {
+    "comment": "examples/siamese - 补齐到30次变异 (non-parallel模式，需补齐5次)",
+    "repo": "examples",
+    "model": "siamese",
+    "mode": "mutation",
+    "mutate_strategy": "random_multi_param",
+    "runs_per_config": 5,
+    "num_params_per_mutation": [1, 3],
+    "use_deduplication": true,
+    "historical_csvs": ["data/raw_data.csv"]
+  },
+  {
+    "comment": "pytorch_resnet_cifar10/resnet20 - 补齐到30次变异 (non-parallel模式，需补齐4次)",
+    "repo": "pytorch_resnet_cifar10",
+    "model": "resnet20",
+    "mode": "mutation",
+    "mutate_strategy": "random_multi_param",
+    "runs_per_config": 4,
+    "num_params_per_mutation": [1, 3],
+    "use_deduplication": true,
+    "historical_csvs": ["data/raw_data.csv"]
+  }
+]

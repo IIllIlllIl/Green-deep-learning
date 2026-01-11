@@ -107,8 +107,9 @@ def extract_mutations_from_csv(
                     continue
 
                 # Extract execution mode from experiment_id
+                # Use endswith to avoid false positives (e.g., model name containing "parallel")
                 exp_id = row.get("experiment_id", "")
-                mode = "parallel" if "parallel" in exp_id else "nonparallel"
+                mode = "parallel" if exp_id.endswith("_parallel") else "nonparallel"
 
                 # Extract hyperparameters (only non-None values)
                 mutation = {}
@@ -119,8 +120,10 @@ def extract_mutations_from_csv(
 
                 # Only add if we extracted at least one hyperparameter
                 if mutation:
-                    # Include mode information in the mutation dict
+                    # Include metadata in the mutation dict (for filtering)
                     mutation['__mode__'] = mode
+                    mutation['__repo__'] = repo
+                    mutation['__model__'] = model
                     mutations.append(mutation)
                     stats["extracted"] += 1
 
@@ -200,6 +203,9 @@ def load_historical_mutations(
 
 def build_dedup_set(
     mutations: List[Dict],
+    filter_params: Optional[List[str]] = None,
+    filter_by_repo: Optional[str] = None,
+    filter_by_model: Optional[str] = None,
     logger: Optional[logging.Logger] = None
 ) -> Set[tuple]:
     """Build a set of normalized mutation keys for deduplication
@@ -207,8 +213,29 @@ def build_dedup_set(
     Converts a list of mutation dictionaries into a set of normalized keys
     that can be used to initialize the seen_mutations set in generate_mutations().
 
+    When filter_params is provided, only the specified parameters are compared
+    for deduplication. This allows comparing multi-parameter combinations even
+    when historical data contains additional parameters.
+
+    When filter_by_repo or filter_by_model is provided, only mutations from
+    the specified repository/model are included in the dedup set. This prevents
+    cross-model deduplication issues.
+
+    Example:
+        Historical data: {"lr": 0.01, "batch_size": 32, "dropout": 0.5}
+        Current mutation: {"lr": 0.01, "batch_size": 32}
+        With filter_params=["lr", "batch_size"], these will be treated as duplicates.
+        Without filter_params, they would be treated as different.
+
     Args:
-        mutations: List of mutation dictionaries (may include '__mode__' key)
+        mutations: List of mutation dictionaries (may include '__mode__', '__repo__', '__model__' keys)
+        filter_params: Optional list of parameter names to compare.
+                      If provided, only these parameters will be used for deduplication.
+                      If None, all parameters in each mutation will be used.
+        filter_by_repo: Optional repository name to filter by.
+                       Only mutations from this repository will be included.
+        filter_by_model: Optional model name to filter by.
+                        Only mutations from this model will be included.
         logger: Optional logger instance
 
     Returns:
@@ -218,16 +245,47 @@ def build_dedup_set(
         logger = logging.getLogger(__name__)
 
     dedup_set = set()
+    filtered_count = 0
 
     for mutation in mutations:
-        # Extract and remove mode from mutation dict
-        mode = mutation.pop('__mode__', None)
+        # Make a copy to avoid modifying the original
+        mutation_copy = mutation.copy()
 
-        # Create normalized key with mode
-        key = _normalize_mutation_key(mutation, mode)
-        dedup_set.add(key)
+        # Extract and remove metadata from mutation dict
+        mode = mutation_copy.pop('__mode__', None)
+        repo = mutation_copy.pop('__repo__', None)
+        model = mutation_copy.pop('__model__', None)
 
-    logger.info(f"Built deduplication set with {len(dedup_set)} unique mutations")
+        # Apply repo/model filters
+        if filter_by_repo and repo != filter_by_repo:
+            filtered_count += 1
+            continue
+        if filter_by_model and model != filter_by_model:
+            filtered_count += 1
+            continue
+
+        # Filter mutation to only include specified parameters
+        if filter_params is not None:
+            filtered_mutation = {k: v for k, v in mutation_copy.items() if k in filter_params}
+        else:
+            filtered_mutation = mutation_copy
+
+        # Only add to dedup set if we have at least one parameter to compare
+        if filtered_mutation:
+            # Create normalized key with mode
+            key = _normalize_mutation_key(filtered_mutation, mode)
+            dedup_set.add(key)
+
+    log_msg = f"Built deduplication set with {len(dedup_set)} unique mutations"
+    if filter_params:
+        log_msg += f" (filtered to parameters: {filter_params})"
+    if filter_by_repo:
+        log_msg += f" (repo: {filter_by_repo})"
+    if filter_by_model:
+        log_msg += f" (model: {filter_by_model})"
+    if filtered_count > 0:
+        log_msg += f" (excluded {filtered_count} mutations from other repos/models)"
+    logger.info(log_msg)
 
     return dedup_set
 

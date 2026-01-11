@@ -1,6 +1,6 @@
 # 项目文档总索引
 
-**最后更新**: 2026-01-05
+**最后更新**: 2026-01-10
 **项目**: Causality-Aided Fairness Trade-off Analysis (ASE 2023论文复现 + 能耗研究扩展)
 
 ---
@@ -50,7 +50,14 @@
    - 必须使用experiment_id + timestamp组合作为唯一标识
    - 不要用experiment_id作为唯一键（会丢失89条记录）
 
+5. ✅ **raw_data.csv 完整使用指南** ⭐⭐⭐⭐⭐ **[2026-01-10 新增]**
+   - **避免常见错误的必读文档**
+   - 详细说明如何正确读取并行/非并行模式数据
+   - 包含完整的代码示例和模型列表
+   - **强烈推荐在使用raw_data.csv前阅读**
+
 **详细说明**：
+- [../../docs/RAW_DATA_CSV_USAGE_GUIDE.md](../../docs/RAW_DATA_CSV_USAGE_GUIDE.md) 🚨 **必读：raw_data.csv使用指南** ⭐⭐⭐⭐⭐ **[2026-01-10新增]**
 - [DATA_UNDERSTANDING_CORRECTION_20251228.md](DATA_UNDERSTANDING_CORRECTION_20251228.md) 🚨 **必读（已更新：添加错误6）**
 - [DATA_UNIQUENESS_CLARIFICATION_20251228.md](DATA_UNIQUENESS_CLARIFICATION_20251228.md) 🚨 **必读：唯一标识说明** ⭐⭐⭐
 - [DATA_FILES_COMPARISON.md](DATA_FILES_COMPARISON.md) - 已更新
@@ -88,6 +95,7 @@
 
 | 文档 | 用途 | 实验日期 |
 |------|------|---------|
+| **QUESTIONS_2_3_DIBS_COMPLETE_REPORT_20260105.md** 🎯 ⭐⭐⭐⭐⭐ | **研究问题2和3的DiBS分析完整报告**（6/6组成功，825条总边，超参数影响分离，中介效应缺失） | 2026-01-05 |
 | **DATA_UPDATE_40PERCENT_THRESHOLD_20260105.md** 🔄 ⭐⭐⭐⭐⭐ | **6组数据更新报告**（40%阈值，所有6组包含性能指标，支持完整能耗-性能分析） | 2026-01-05 |
 | **PERFORMANCE_METRICS_MISSING_ANALYSIS_20260105.md** ⚠️ ⭐⭐⭐⭐⭐ | **性能指标缺失分析报告**（2/6组缺失性能指标，分层分析策略推荐） | 2026-01-05 |
 | **DIBS_DATA_AND_CODE_VERIFICATION_20260105.md** ✅ ⭐⭐⭐⭐⭐ | **DiBS数据与代码验证报告**（确认新数据可用性和代码安全性，全部DiBS分析准备就绪） | 2026-01-05 |

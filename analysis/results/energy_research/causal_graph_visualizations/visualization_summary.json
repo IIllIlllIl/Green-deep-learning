@@ -1,0 +1,32 @@
+[
+  {
+    "group": "group1_examples",
+    "status": "success",
+    "output_file": "/home/green/energy_dl/nightly/analysis/results/energy_research/causal_graph_visualizations/group1_examples_causal_graph.png"
+  },
+  {
+    "group": "group2_vulberta",
+    "status": "success",
+    "output_file": "/home/green/energy_dl/nightly/analysis/results/energy_research/causal_graph_visualizations/group2_vulberta_causal_graph.png"
+  },
+  {
+    "group": "group3_person_reid",
+    "status": "success",
+    "output_file": "/home/green/energy_dl/nightly/analysis/results/energy_research/causal_graph_visualizations/group3_person_reid_causal_graph.png"
+  },
+  {
+    "group": "group4_bug_localization",
+    "status": "success",
+    "output_file": "/home/green/energy_dl/nightly/analysis/results/energy_research/causal_graph_visualizations/group4_bug_localization_causal_graph.png"
+  },
+  {
+    "group": "group5_mrt_oast",
+    "status": "success",
+    "output_file": "/home/green/energy_dl/nightly/analysis/results/energy_research/causal_graph_visualizations/group5_mrt_oast_causal_graph.png"
+  },
+  {
+    "group": "group6_resnet",
+    "status": "success",
+    "output_file": "/home/green/energy_dl/nightly/analysis/results/energy_research/causal_graph_visualizations/group6_resnet_causal_graph.png"
+  }
+]
