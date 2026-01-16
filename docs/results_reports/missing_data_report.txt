@@ -1,0 +1,575 @@
+====================================================================================================
+🔍 全面缺失数据分析
+====================================================================================================
+
+数据文件: data/raw_data.csv
+
+总记录数: 970
+总字段数: 87
+
+====================================================================================================
+📊 各字段缺失统计
+====================================================================================================
+
+字段名                                                缺失数        缺失率        有效数       
+----------------------------------------------------------------------------------------------------
+fg_perf_best_val_accuracy                          948            97.7% 22        
+fg_hyperparam_kfold                                947            97.6% 23        
+fg_perf_accuracy                                   947            97.6% 23        
+fg_hyperparam_max_iter                             943            97.2% 27        
+fg_perf_precision                                  941            97.0% 29        
+fg_perf_recall                                     941            97.0% 29        
+fg_hyperparam_alpha                                937            96.6% 33        
+hyperparam_kfold                                   923            95.2% 47        
+hyperparam_max_iter                                923            95.2% 47        
+hyperparam_alpha                                   922            95.1% 48        
+fg_hyperparam_weight_decay                         918            94.6% 52        
+perf_accuracy                                      910            93.8% 60        
+perf_best_val_accuracy                             909            93.7% 61        
+fg_perf_test_loss                                  905            93.3% 65        
+perf_precision                                     904            93.2% 66        
+perf_recall                                        904            93.2% 66        
+fg_perf_map                                        904            93.2% 66        
+fg_perf_rank1                                      904            93.2% 66        
+fg_perf_rank5                                      904            93.2% 66        
+fg_hyperparam_dropout                              903            93.1% 67        
+perf_top1_accuracy                                 880            90.7% 90        
+perf_top5_accuracy                                 880            90.7% 90        
+perf_top10_accuracy                                880            90.7% 90        
+perf_top20_accuracy                                880            90.7% 90        
+perf_test_loss                                     878            90.5% 92        
+perf_eval_loss                                     878            90.5% 92        
+perf_final_training_loss                           878            90.5% 92        
+perf_eval_samples_per_second                       878            90.5% 92        
+fg_hyperparam_batch_size                           876            90.3% 94        
+hyperparam_weight_decay                            823            84.8% 147       
+fg_perf_test_accuracy                              799            82.4% 171       
+perf_map                                           787            81.1% 183       
+perf_rank1                                         787            81.1% 183       
+perf_rank5                                         787            81.1% 183       
+hyperparam_batch_size                              785            80.9% 185       
+hyperparam_dropout                                 780            80.4% 190       
+fg_hyperparam_learning_rate                        768            79.2% 202       
+fg_hyperparam_epochs                               762            78.6% 208       
+experiment_source                                  760            78.4% 210       
+fg_hyperparam_seed                                 757            78.0% 213       
+fg_retries                                         756            77.9% 214       
+fg_error_message                                   756            77.9% 214       
+bg_repository                                      756            77.9% 214       
+bg_model                                           756            77.9% 214       
+bg_note                                            756            77.9% 214       
+bg_log_directory                                   756            77.9% 214       
+perf_test_accuracy                                 664            68.5% 306       
+fg_repository                                      552            56.9% 418       
+fg_model                                           552            56.9% 418       
+fg_duration_seconds                                552            56.9% 418       
+fg_training_success                                552            56.9% 418       
+fg_energy_cpu_pkg_joules                           552            56.9% 418       
+fg_energy_cpu_ram_joules                           552            56.9% 418       
+fg_energy_cpu_total_joules                         552            56.9% 418       
+fg_energy_gpu_avg_watts                            552            56.9% 418       
+fg_energy_gpu_max_watts                            552            56.9% 418       
+fg_energy_gpu_min_watts                            552            56.9% 418       
+fg_energy_gpu_total_joules                         552            56.9% 418       
+fg_energy_gpu_temp_avg_celsius                     552            56.9% 418       
+fg_energy_gpu_temp_max_celsius                     552            56.9% 418       
+fg_energy_gpu_util_avg_percent                     552            56.9% 418       
+fg_energy_gpu_util_max_percent                     552            56.9% 418       
+hyperparam_learning_rate                           500            51.5% 470       
+hyperparam_epochs                                  493            50.8% 477       
+hyperparam_seed                                    484            49.9% 486       
+mutated_param                                      467            48.1% 503       
+mode                                               436            44.9% 534       
+num_mutated_params                                 294            30.3% 676       
+duration_seconds                                   214            22.1% 756       
+error_message                                      214            22.1% 756       
+energy_cpu_pkg_joules                              131            13.5% 839       
+energy_cpu_ram_joules                              131            13.5% 839       
+energy_cpu_total_joules                            131            13.5% 839       
+energy_gpu_avg_watts                               131            13.5% 839       
+energy_gpu_max_watts                               131            13.5% 839       
+energy_gpu_min_watts                               131            13.5% 839       
+energy_gpu_total_joules                            131            13.5% 839       
+energy_gpu_temp_avg_celsius                        131            13.5% 839       
+energy_gpu_temp_max_celsius                        131            13.5% 839       
+energy_gpu_util_avg_percent                        131            13.5% 839       
+energy_gpu_util_max_percent                        131            13.5% 839       
+repository                                         105            10.8% 865       
+model                                              105            10.8% 865       
+training_success                                   105            10.8% 865       
+retries                                            105            10.8% 865       
+
+总计: 85 个字段有缺失数据
+
+====================================================================================================
+📈 记录的缺失字段数量分布
+====================================================================================================
+
+缺失字段数           记录数        占比        
+----------------------------------------
+34              5               0.5%
+35              7               0.7%
+36              26              2.7%
+37              31              3.2%
+38              19              2.0%
+40              38              3.9%
+41              18              1.9%
+42              20              2.1%
+43              13              1.3%
+45              12              1.2%
+46              65              6.7%
+47              51              5.3%
+48              6               0.6%
+49              2               0.2%
+54              4               0.4%
+55              4               0.4%
+56              20              2.1%
+57              46              4.7%
+58              12              1.2%
+59              58              6.0%
+60              124            12.8%
+61              136            14.0%
+62              133            13.7%
+63              46              4.7%
+64              31              3.2%
+65              10              1.0%
+66              2               0.2%
+67              5               0.5%
+73              20              2.1%
+76              6               0.6%
+
+✅ 完全无缺失数据的记录: 0 条 (0.0%)
+⚠️  有缺失数据的记录: 970 条 (100.0%)
+
+====================================================================================================
+🔬 缺失模式分析（Top 10）
+====================================================================================================
+
+共发现 187 种不同的缺失模式
+
+Top 10 最常见的缺失模式:
+----------------------------------------------------------------------------------------------------
+
+模式 1: 47 条记录 (4.8%)
+缺失字段数: 60
+缺失字段:
+  - bg_log_directory
+  - bg_model
+  - bg_note
+  - bg_repository
+  - experiment_source
+  - fg_duration_seconds
+  - fg_energy_cpu_pkg_joules
+  - fg_energy_cpu_ram_joules
+  - fg_energy_cpu_total_joules
+  - fg_energy_gpu_avg_watts
+  ... 还有 50 个字段
+
+模式 2: 36 条记录 (3.7%)
+缺失字段数: 63
+缺失字段:
+  - bg_log_directory
+  - bg_model
+  - bg_note
+  - bg_repository
+  - experiment_source
+  - fg_duration_seconds
+  - fg_energy_cpu_pkg_joules
+  - fg_energy_cpu_ram_joules
+  - fg_energy_cpu_total_joules
+  - fg_energy_gpu_avg_watts
+  ... 还有 53 个字段
+
+模式 3: 30 条记录 (3.1%)
+缺失字段数: 60
+缺失字段:
+  - bg_log_directory
+  - bg_model
+  - bg_note
+  - bg_repository
+  - experiment_source
+  - fg_duration_seconds
+  - fg_energy_cpu_pkg_joules
+  - fg_energy_cpu_ram_joules
+  - fg_energy_cpu_total_joules
+  - fg_energy_gpu_avg_watts
+  ... 还有 50 个字段
+
+模式 4: 29 条记录 (3.0%)
+缺失字段数: 62
+缺失字段:
+  - bg_log_directory
+  - bg_model
+  - bg_note
+  - bg_repository
+  - experiment_source
+  - fg_duration_seconds
+  - fg_energy_cpu_pkg_joules
+  - fg_energy_cpu_ram_joules
+  - fg_energy_cpu_total_joules
+  - fg_energy_gpu_avg_watts
+  ... 还有 52 个字段
+
+模式 5: 28 条记录 (2.9%)
+缺失字段数: 61
+缺失字段:
+  - bg_log_directory
+  - bg_model
+  - bg_note
+  - bg_repository
+  - experiment_source
+  - fg_duration_seconds
+  - fg_energy_cpu_pkg_joules
+  - fg_energy_cpu_ram_joules
+  - fg_energy_cpu_total_joules
+  - fg_energy_gpu_avg_watts
+  ... 还有 51 个字段
+
+模式 6: 26 条记录 (2.7%)
+缺失字段数: 60
+缺失字段:
+  - bg_log_directory
+  - bg_model
+  - bg_note
+  - bg_repository
+  - experiment_source
+  - fg_duration_seconds
+  - fg_energy_cpu_pkg_joules
+  - fg_energy_cpu_ram_joules
+  - fg_energy_cpu_total_joules
+  - fg_energy_gpu_avg_watts
+  ... 还有 50 个字段
+
+模式 7: 23 条记录 (2.4%)
+缺失字段数: 61
+缺失字段:
+  - bg_log_directory
+  - bg_model
+  - bg_note
+  - bg_repository
+  - experiment_source
+  - fg_duration_seconds
+  - fg_energy_cpu_pkg_joules
+  - fg_energy_cpu_ram_joules
+  - fg_energy_cpu_total_joules
+  - fg_energy_gpu_avg_watts
+  ... 还有 51 个字段
+
+模式 8: 21 条记录 (2.2%)
+缺失字段数: 61
+缺失字段:
+  - bg_log_directory
+  - bg_model
+  - bg_note
+  - bg_repository
+  - experiment_source
+  - fg_duration_seconds
+  - fg_energy_cpu_pkg_joules
+  - fg_energy_cpu_ram_joules
+  - fg_energy_cpu_total_joules
+  - fg_energy_gpu_avg_watts
+  ... 还有 51 个字段
+
+模式 9: 20 条记录 (2.1%)
+缺失字段数: 42
+缺失字段:
+  - bg_log_directory
+  - bg_model
+  - bg_note
+  - bg_repository
+  - experiment_source
+  - fg_error_message
+  - fg_hyperparam_alpha
+  - fg_hyperparam_dropout
+  - fg_hyperparam_kfold
+  - fg_hyperparam_max_iter
+  ... 还有 32 个字段
+
+模式 10: 18 条记录 (1.9%)
+缺失字段数: 37
+缺失字段:
+  - duration_seconds
+  - error_message
+  - experiment_source
+  - fg_hyperparam_alpha
+  - fg_hyperparam_dropout
+  - fg_hyperparam_kfold
+  - fg_hyperparam_max_iter
+  - fg_hyperparam_weight_decay
+  - fg_perf_accuracy
+  - fg_perf_best_val_accuracy
+  ... 还有 27 个字段
+
+====================================================================================================
+📂 按字段类别分析缺失情况
+====================================================================================================
+
+hyperparam:
+  字段数: 9
+  总单元格数: 8730
+  缺失单元格数: 6633
+  缺失率: 76.0%
+
+perf:
+  字段数: 16
+  总单元格数: 15520
+  缺失单元格数: 13684
+  缺失率: 88.2%
+
+energy:
+  字段数: 11
+  总单元格数: 10670
+  缺失单元格数: 1441
+  缺失率: 13.5%
+
+fg_hyperparam:
+  字段数: 9
+  总单元格数: 8730
+  缺失单元格数: 7811
+  缺失率: 89.5%
+
+fg_perf:
+  字段数: 9
+  总单元格数: 8730
+  缺失单元格数: 8193
+  缺失率: 93.8%
+
+fg_energy:
+  字段数: 11
+  总单元格数: 10670
+  缺失单元格数: 6072
+  缺失率: 56.9%
+
+bg:
+  字段数: 4
+  总单元格数: 3880
+  缺失单元格数: 3024
+  缺失率: 77.9%
+
+basic:
+  字段数: 9
+  总单元格数: 8730
+  缺失单元格数: 1284
+  缺失率: 14.7%
+
+====================================================================================================
+📋 缺失字段最多的10条记录
+====================================================================================================
+
+1. Experiment ID: VulBERTa_mlp_008
+   缺失字段数: 76
+   缺失字段（前15个）:
+     - hyperparam_alpha
+     - hyperparam_batch_size
+     - hyperparam_dropout
+     - hyperparam_epochs
+     - hyperparam_kfold
+     - hyperparam_learning_rate
+     - hyperparam_max_iter
+     - hyperparam_seed
+     - perf_accuracy
+     - perf_best_val_accuracy
+     - perf_map
+     - perf_precision
+     - perf_rank1
+     - perf_rank5
+     - perf_recall
+     ... 还有 61 个字段
+
+2. Experiment ID: VulBERTa_mlp_009
+   缺失字段数: 76
+   缺失字段（前15个）:
+     - hyperparam_alpha
+     - hyperparam_batch_size
+     - hyperparam_dropout
+     - hyperparam_epochs
+     - hyperparam_kfold
+     - hyperparam_learning_rate
+     - hyperparam_max_iter
+     - hyperparam_seed
+     - perf_accuracy
+     - perf_best_val_accuracy
+     - perf_map
+     - perf_precision
+     - perf_rank1
+     - perf_rank5
+     - perf_recall
+     ... 还有 61 个字段
+
+3. Experiment ID: VulBERTa_mlp_010
+   缺失字段数: 76
+   缺失字段（前15个）:
+     - hyperparam_alpha
+     - hyperparam_batch_size
+     - hyperparam_dropout
+     - hyperparam_epochs
+     - hyperparam_kfold
+     - hyperparam_learning_rate
+     - hyperparam_max_iter
+     - hyperparam_weight_decay
+     - perf_accuracy
+     - perf_best_val_accuracy
+     - perf_map
+     - perf_precision
+     - perf_rank1
+     - perf_rank5
+     - perf_recall
+     ... 还有 61 个字段
+
+4. Experiment ID: VulBERTa_mlp_011
+   缺失字段数: 76
+   缺失字段（前15个）:
+     - hyperparam_alpha
+     - hyperparam_batch_size
+     - hyperparam_dropout
+     - hyperparam_epochs
+     - hyperparam_kfold
+     - hyperparam_learning_rate
+     - hyperparam_max_iter
+     - hyperparam_weight_decay
+     - perf_accuracy
+     - perf_best_val_accuracy
+     - perf_map
+     - perf_precision
+     - perf_rank1
+     - perf_rank5
+     - perf_recall
+     ... 还有 61 个字段
+
+5. Experiment ID: bug-localization-by-dnn-and-rvsm_default_021
+   缺失字段数: 76
+   缺失字段（前15个）:
+     - hyperparam_alpha
+     - hyperparam_batch_size
+     - hyperparam_dropout
+     - hyperparam_epochs
+     - hyperparam_kfold
+     - hyperparam_learning_rate
+     - hyperparam_max_iter
+     - hyperparam_weight_decay
+     - perf_accuracy
+     - perf_best_val_accuracy
+     - perf_map
+     - perf_precision
+     - perf_rank1
+     - perf_rank5
+     - perf_recall
+     ... 还有 61 个字段
+
+6. Experiment ID: bug-localization-by-dnn-and-rvsm_default_022
+   缺失字段数: 76
+   缺失字段（前15个）:
+     - hyperparam_alpha
+     - hyperparam_batch_size
+     - hyperparam_dropout
+     - hyperparam_epochs
+     - hyperparam_kfold
+     - hyperparam_learning_rate
+     - hyperparam_max_iter
+     - hyperparam_weight_decay
+     - perf_accuracy
+     - perf_best_val_accuracy
+     - perf_map
+     - perf_precision
+     - perf_rank1
+     - perf_rank5
+     - perf_recall
+     ... 还有 61 个字段
+
+7. Experiment ID: VulBERTa_mlp_001
+   缺失字段数: 73
+   缺失字段（前15个）:
+     - hyperparam_alpha
+     - hyperparam_batch_size
+     - hyperparam_dropout
+     - hyperparam_kfold
+     - hyperparam_learning_rate
+     - hyperparam_max_iter
+     - hyperparam_seed
+     - hyperparam_weight_decay
+     - perf_accuracy
+     - perf_best_val_accuracy
+     - perf_map
+     - perf_precision
+     - perf_rank1
+     - perf_rank5
+     - perf_recall
+     ... 还有 58 个字段
+
+8. Experiment ID: VulBERTa_mlp_002
+   缺失字段数: 73
+   缺失字段（前15个）:
+     - hyperparam_alpha
+     - hyperparam_batch_size
+     - hyperparam_dropout
+     - hyperparam_kfold
+     - hyperparam_learning_rate
+     - hyperparam_max_iter
+     - hyperparam_seed
+     - hyperparam_weight_decay
+     - perf_accuracy
+     - perf_best_val_accuracy
+     - perf_map
+     - perf_precision
+     - perf_rank1
+     - perf_rank5
+     - perf_recall
+     ... 还有 58 个字段
+
+9. Experiment ID: VulBERTa_mlp_003
+   缺失字段数: 73
+   缺失字段（前15个）:
+     - hyperparam_alpha
+     - hyperparam_batch_size
+     - hyperparam_dropout
+     - hyperparam_kfold
+     - hyperparam_learning_rate
+     - hyperparam_max_iter
+     - hyperparam_seed
+     - hyperparam_weight_decay
+     - perf_accuracy
+     - perf_best_val_accuracy
+     - perf_map
+     - perf_precision
+     - perf_rank1
+     - perf_rank5
+     - perf_recall
+     ... 还有 58 个字段
+
+10. Experiment ID: VulBERTa_mlp_004
+   缺失字段数: 73
+   缺失字段（前15个）:
+     - hyperparam_alpha
+     - hyperparam_batch_size
+     - hyperparam_dropout
+     - hyperparam_kfold
+     - hyperparam_learning_rate
+     - hyperparam_max_iter
+     - hyperparam_seed
+     - hyperparam_weight_decay
+     - perf_accuracy
+     - perf_best_val_accuracy
+     - perf_map
+     - perf_precision
+     - perf_rank1
+     - perf_rank5
+     - perf_recall
+     ... 还有 58 个字段
+
+====================================================================================================
+📊 总结
+====================================================================================================
+
+数据完整性:
+  - 总记录数: 970
+  - 完全无缺失: 0 (0.0%)
+  - 有缺失数据: 970 (100.0%)
+
+字段缺失:
+Traceback (most recent call last):
+  File "/home/green/energy_dl/nightly/analyze_all_missing_data.py", line 211, in <module>
+    main()
+  File "/home/green/energy_dl/nightly/analyze_all_missing_data.py", line 201, in main
+    print(f"  - 有缺失的字段数: {len(missing_stats)} / {len(df.columns)}")
+                                                            ^^
+NameError: name 'df' is not defined. Did you mean: 'f'?

@@ -1,0 +1,1181 @@
+{
+  "task_id": "group6_resnet",
+  "task_name": "pytorch_resnet（图像分类-ResNet）",
+  "success": true,
+  "elapsed_time_minutes": 5.206082582473755,
+  "n_samples": 74,
+  "n_features": 18,
+  "variable_classification": {
+    "n_hyperparams": 4,
+    "n_performance": 2,
+    "n_energy": 4,
+    "n_mediators": 7,
+    "hyperparam_names": [
+      "hyperparam_learning_rate",
+      "hyperparam_epochs",
+      "hyperparam_seed",
+      "hyperparam_l2_regularization"
+    ],
+    "performance_names": [
+      "perf_best_val_accuracy",
+      "perf_test_accuracy"
+    ],
+    "energy_names": [
+      "energy_cpu_pkg_joules",
+      "energy_cpu_ram_joules",
+      "energy_cpu_total_joules",
+      "energy_gpu_total_joules"
+    ],
+    "mediator_names": [
+      "energy_gpu_avg_watts",
+      "energy_gpu_max_watts",
+      "energy_gpu_min_watts",
+      "energy_gpu_temp_avg_celsius",
+      "energy_gpu_temp_max_celsius",
+      "energy_gpu_util_avg_percent",
+      "energy_gpu_util_max_percent"
+    ]
+  },
+  "graph_stats": {
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.25910496711730957,
+    "std": 0.3227277994155884
+  },
+  "edges": {
+    "threshold_0.01": 200,
+    "threshold_0.1": 160,
+    "threshold_0.3": 97,
+    "threshold_0.5": 67
+  },
+  "question1_evidence": {
+    "direct_hyperparam_to_energy": [
+      {
+        "hyperparam": "hyperparam_learning_rate",
+        "energy_var": "energy_cpu_pkg_joules",
+        "strength": 0.30000001192092896
+      },
+      {
+        "hyperparam": "hyperparam_learning_rate",
+        "energy_var": "energy_cpu_ram_joules",
+        "strength": 0.699999988079071
+      },
+      {
+        "hyperparam": "hyperparam_learning_rate",
+        "energy_var": "energy_cpu_total_joules",
+        "strength": 0.45000001788139343
+      },
+      {
+        "hyperparam": "hyperparam_learning_rate",
+        "energy_var": "energy_gpu_total_joules",
+        "strength": 1.0
+      },
+      {
+        "hyperparam": "hyperparam_epochs",
+        "energy_var": "energy_cpu_pkg_joules",
+        "strength": 0.8500000238418579
+      },
+      {
+        "hyperparam": "hyperparam_epochs",
+        "energy_var": "energy_cpu_ram_joules",
+        "strength": 0.800000011920929
+      },
+      {
+        "hyperparam": "hyperparam_epochs",
+        "energy_var": "energy_cpu_total_joules",
+        "strength": 0.6500000357627869
+      },
+      {
+        "hyperparam": "hyperparam_epochs",
+        "energy_var": "energy_gpu_total_joules",
+        "strength": 1.0
+      },
+      {
+        "hyperparam": "hyperparam_seed",
+        "energy_var": "energy_cpu_ram_joules",
+        "strength": 0.30000001192092896
+      },
+      {
+        "hyperparam": "hyperparam_seed",
+        "energy_var": "energy_cpu_total_joules",
+        "strength": 0.30000001192092896
+      },
+      {
+        "hyperparam": "hyperparam_seed",
+        "energy_var": "energy_gpu_total_joules",
+        "strength": 1.0
+      },
+      {
+        "hyperparam": "hyperparam_l2_regularization",
+        "energy_var": "energy_gpu_total_joules",
+        "strength": 1.0
+      }
+    ],
+    "mediated_hyperparam_to_energy": [
+      {
+        "hyperparam": "hyperparam_learning_rate",
+        "mediator": "energy_gpu_avg_watts",
+        "energy_var": "energy_cpu_pkg_joules",
+        "strength_step1": 0.45000001788139343,
+        "strength_step2": 0.75,
+        "indirect_strength": 0.3375000059604645
+      },
+      {
+        "hyperparam": "hyperparam_learning_rate",
+        "mediator": "energy_gpu_avg_watts",
+        "energy_var": "energy_cpu_ram_joules",
+        "strength_step1": 0.45000001788139343,
+        "strength_step2": 0.949999988079071,
+        "indirect_strength": 0.42750000953674316
+      },
+      {
+        "hyperparam": "hyperparam_learning_rate",
+        "mediator": "energy_gpu_avg_watts",
+        "energy_var": "energy_cpu_total_joules",
+        "strength_step1": 0.45000001788139343,
+        "strength_step2": 0.6500000357627869,
+        "indirect_strength": 0.29250001907348633
+      },
+      {
+        "hyperparam": "hyperparam_learning_rate",
+        "mediator": "energy_gpu_avg_watts",
+        "energy_var": "energy_gpu_total_joules",
+        "strength_step1": 0.45000001788139343,
+        "strength_step2": 1.0,
+        "indirect_strength": 0.45000001788139343
+      },
+      {
+        "hyperparam": "hyperparam_learning_rate",
+        "mediator": "energy_gpu_max_watts",
+        "energy_var": "energy_cpu_pkg_joules",
+        "strength_step1": 0.8500000238418579,
+        "strength_step2": 0.3499999940395355,
+        "indirect_strength": 0.29750001430511475
+      },
+      {
+        "hyperparam": "hyperparam_learning_rate",
+        "mediator": "energy_gpu_max_watts",
+        "energy_var": "energy_cpu_ram_joules",
+        "strength_step1": 0.8500000238418579,
+        "strength_step2": 0.8500000238418579,
+        "indirect_strength": 0.7225000262260437
+      },
+      {
+        "hyperparam": "hyperparam_learning_rate",
+        "mediator": "energy_gpu_max_watts",
+        "energy_var": "energy_cpu_total_joules",
+        "strength_step1": 0.8500000238418579,
+        "strength_step2": 0.45000001788139343,
+        "indirect_strength": 0.382500022649765
+      },
+      {
+        "hyperparam": "hyperparam_learning_rate",
+        "mediator": "energy_gpu_max_watts",
+        "energy_var": "energy_gpu_total_joules",
+        "strength_step1": 0.8500000238418579,
+        "strength_step2": 1.0,
+        "indirect_strength": 0.8500000238418579
+      },
+      {
+        "hyperparam": "hyperparam_learning_rate",
+        "mediator": "energy_gpu_min_watts",
+        "energy_var": "energy_cpu_pkg_joules",
+        "strength_step1": 0.30000001192092896,
+        "strength_step2": 0.45000001788139343,
+        "indirect_strength": 0.13500000536441803
+      },
+      {
+        "hyperparam": "hyperparam_learning_rate",
+        "mediator": "energy_gpu_min_watts",
+        "energy_var": "energy_cpu_ram_joules",
+        "strength_step1": 0.30000001192092896,
+        "strength_step2": 1.0,
+        "indirect_strength": 0.30000001192092896
+      },
+      {
+        "hyperparam": "hyperparam_learning_rate",
+        "mediator": "energy_gpu_min_watts",
+        "energy_var": "energy_cpu_total_joules",
+        "strength_step1": 0.30000001192092896,
+        "strength_step2": 0.45000001788139343,
+        "indirect_strength": 0.13500000536441803
+      },
+      {
+        "hyperparam": "hyperparam_learning_rate",
+        "mediator": "energy_gpu_min_watts",
+        "energy_var": "energy_gpu_total_joules",
+        "strength_step1": 0.30000001192092896,
+        "strength_step2": 1.0,
+        "indirect_strength": 0.30000001192092896
+      },
+      {
+        "hyperparam": "hyperparam_learning_rate",
+        "mediator": "energy_gpu_temp_avg_celsius",
+        "energy_var": "energy_cpu_pkg_joules",
+        "strength_step1": 0.699999988079071,
+        "strength_step2": 0.699999988079071,
+        "indirect_strength": 0.4899999797344208
+      },
+      {
+        "hyperparam": "hyperparam_learning_rate",
+        "mediator": "energy_gpu_temp_avg_celsius",
+        "energy_var": "energy_cpu_ram_joules",
+        "strength_step1": 0.699999988079071,
+        "strength_step2": 0.800000011920929,
+        "indirect_strength": 0.5600000023841858
+      },
+      {
+        "hyperparam": "hyperparam_learning_rate",
+        "mediator": "energy_gpu_temp_avg_celsius",
+        "energy_var": "energy_cpu_total_joules",
+        "strength_step1": 0.699999988079071,
+        "strength_step2": 0.550000011920929,
+        "indirect_strength": 0.38499999046325684
+      },
+      {
+        "hyperparam": "hyperparam_learning_rate",
+        "mediator": "energy_gpu_temp_avg_celsius",
+        "energy_var": "energy_gpu_total_joules",
+        "strength_step1": 0.699999988079071,
+        "strength_step2": 1.0,
+        "indirect_strength": 0.699999988079071
+      },
+      {
+        "hyperparam": "hyperparam_learning_rate",
+        "mediator": "energy_gpu_temp_max_celsius",
+        "energy_var": "energy_cpu_pkg_joules",
+        "strength_step1": 0.550000011920929,
+        "strength_step2": 0.699999988079071,
+        "indirect_strength": 0.38499999046325684
+      },
+      {
+        "hyperparam": "hyperparam_learning_rate",
+        "mediator": "energy_gpu_temp_max_celsius",
+        "energy_var": "energy_cpu_ram_joules",
+        "strength_step1": 0.550000011920929,
+        "strength_step2": 0.8500000238418579,
+        "indirect_strength": 0.4675000309944153
+      },
+      {
+        "hyperparam": "hyperparam_learning_rate",
+        "mediator": "energy_gpu_temp_max_celsius",
+        "energy_var": "energy_cpu_total_joules",
+        "strength_step1": 0.550000011920929,
+        "strength_step2": 0.550000011920929,
+        "indirect_strength": 0.30250000953674316
+      },
+      {
+        "hyperparam": "hyperparam_learning_rate",
+        "mediator": "energy_gpu_temp_max_celsius",
+        "energy_var": "energy_gpu_total_joules",
+        "strength_step1": 0.550000011920929,
+        "strength_step2": 1.0,
+        "indirect_strength": 0.550000011920929
+      },
+      {
+        "hyperparam": "hyperparam_learning_rate",
+        "mediator": "energy_gpu_util_avg_percent",
+        "energy_var": "energy_cpu_pkg_joules",
+        "strength_step1": 0.550000011920929,
+        "strength_step2": 0.75,
+        "indirect_strength": 0.4125000238418579
+      },
+      {
+        "hyperparam": "hyperparam_learning_rate",
+        "mediator": "energy_gpu_util_avg_percent",
+        "energy_var": "energy_cpu_ram_joules",
+        "strength_step1": 0.550000011920929,
+        "strength_step2": 0.9000000357627869,
+        "indirect_strength": 0.49500003457069397
+      },
+      {
+        "hyperparam": "hyperparam_learning_rate",
+        "mediator": "energy_gpu_util_avg_percent",
+        "energy_var": "energy_cpu_total_joules",
+        "strength_step1": 0.550000011920929,
+        "strength_step2": 0.6000000238418579,
+        "indirect_strength": 0.33000001311302185
+      },
+      {
+        "hyperparam": "hyperparam_learning_rate",
+        "mediator": "energy_gpu_util_avg_percent",
+        "energy_var": "energy_gpu_total_joules",
+        "strength_step1": 0.550000011920929,
+        "strength_step2": 1.0,
+        "indirect_strength": 0.550000011920929
+      },
+      {
+        "hyperparam": "hyperparam_learning_rate",
+        "mediator": "energy_gpu_util_max_percent",
+        "energy_var": "energy_cpu_pkg_joules",
+        "strength_step1": 0.550000011920929,
+        "strength_step2": 0.800000011920929,
+        "indirect_strength": 0.4400000274181366
+      },
+      {
+        "hyperparam": "hyperparam_learning_rate",
+        "mediator": "energy_gpu_util_max_percent",
+        "energy_var": "energy_cpu_ram_joules",
+        "strength_step1": 0.550000011920929,
+        "strength_step2": 0.8500000238418579,
+        "indirect_strength": 0.4675000309944153
+      },
+      {
+        "hyperparam": "hyperparam_learning_rate",
+        "mediator": "energy_gpu_util_max_percent",
+        "energy_var": "energy_cpu_total_joules",
+        "strength_step1": 0.550000011920929,
+        "strength_step2": 0.6500000357627869,
+        "indirect_strength": 0.35750001668930054
+      },
+      {
+        "hyperparam": "hyperparam_learning_rate",
+        "mediator": "energy_gpu_util_max_percent",
+        "energy_var": "energy_gpu_total_joules",
+        "strength_step1": 0.550000011920929,
+        "strength_step2": 1.0,
+        "indirect_strength": 0.550000011920929
+      }
+    ]
+  },
+  "question2_evidence": {
+    "direct_edges_perf_to_energy": [
+      {
+        "from": "perf_best_val_accuracy",
+        "to": "energy_cpu_pkg_joules",
+        "strength": 0.6000000238418579
+      },
+      {
+        "from": "perf_best_val_accuracy",
+        "to": "energy_cpu_ram_joules",
+        "strength": 0.6000000238418579
+      },
+      {
+        "from": "perf_best_val_accuracy",
+        "to": "energy_cpu_total_joules",
+        "strength": 0.45000001788139343
+      },
+      {
+        "from": "perf_best_val_accuracy",
+        "to": "energy_gpu_total_joules",
+        "strength": 1.0
+      },
+      {
+        "from": "perf_test_accuracy",
+        "to": "energy_cpu_pkg_joules",
+        "strength": 0.6500000357627869
+      },
+      {
+        "from": "perf_test_accuracy",
+        "to": "energy_cpu_ram_joules",
+        "strength": 0.75
+      },
+      {
+        "from": "perf_test_accuracy",
+        "to": "energy_cpu_total_joules",
+        "strength": 0.3499999940395355
+      },
+      {
+        "from": "perf_test_accuracy",
+        "to": "energy_gpu_total_joules",
+        "strength": 1.0
+      }
+    ],
+    "direct_edges_energy_to_perf": [],
+    "common_hyperparams": [
+      {
+        "hyperparam": "hyperparam_learning_rate",
+        "affects_performance": [
+          {
+            "var": "perf_best_val_accuracy",
+            "strength": 0.8500000238418579
+          },
+          {
+            "var": "perf_test_accuracy",
+            "strength": 0.3499999940395355
+          }
+        ],
+        "affects_energy": [
+          {
+            "var": "energy_cpu_pkg_joules",
+            "strength": 0.30000001192092896
+          },
+          {
+            "var": "energy_cpu_ram_joules",
+            "strength": 0.699999988079071
+          },
+          {
+            "var": "energy_cpu_total_joules",
+            "strength": 0.45000001788139343
+          },
+          {
+            "var": "energy_gpu_total_joules",
+            "strength": 1.0
+          }
+        ]
+      }
+    ],
+    "mediated_tradeoffs": [
+      {
+        "path": "perf_best_val_accuracy → energy_gpu_avg_watts → energy_cpu_pkg_joules",
+        "strength_step1": 0.4000000059604645,
+        "strength_step2": 0.75,
+        "path_strength": 0.30000001192092896
+      },
+      {
+        "path": "perf_best_val_accuracy → energy_gpu_avg_watts → energy_cpu_ram_joules",
+        "strength_step1": 0.4000000059604645,
+        "strength_step2": 0.949999988079071,
+        "path_strength": 0.3799999952316284
+      },
+      {
+        "path": "perf_best_val_accuracy → energy_gpu_avg_watts → energy_cpu_total_joules",
+        "strength_step1": 0.4000000059604645,
+        "strength_step2": 0.6500000357627869,
+        "path_strength": 0.2600000202655792
+      },
+      {
+        "path": "perf_best_val_accuracy → energy_gpu_avg_watts → energy_gpu_total_joules",
+        "strength_step1": 0.4000000059604645,
+        "strength_step2": 1.0,
+        "path_strength": 0.4000000059604645
+      },
+      {
+        "path": "perf_best_val_accuracy → energy_gpu_min_watts → energy_cpu_pkg_joules",
+        "strength_step1": 0.30000001192092896,
+        "strength_step2": 0.45000001788139343,
+        "path_strength": 0.13500000536441803
+      },
+      {
+        "path": "perf_best_val_accuracy → energy_gpu_min_watts → energy_cpu_ram_joules",
+        "strength_step1": 0.30000001192092896,
+        "strength_step2": 1.0,
+        "path_strength": 0.30000001192092896
+      },
+      {
+        "path": "perf_best_val_accuracy → energy_gpu_min_watts → energy_cpu_total_joules",
+        "strength_step1": 0.30000001192092896,
+        "strength_step2": 0.45000001788139343,
+        "path_strength": 0.13500000536441803
+      },
+      {
+        "path": "perf_best_val_accuracy → energy_gpu_min_watts → energy_gpu_total_joules",
+        "strength_step1": 0.30000001192092896,
+        "strength_step2": 1.0,
+        "path_strength": 0.30000001192092896
+      },
+      {
+        "path": "perf_test_accuracy → energy_gpu_temp_avg_celsius → energy_cpu_pkg_joules",
+        "strength_step1": 0.30000001192092896,
+        "strength_step2": 0.699999988079071,
+        "path_strength": 0.21000000834465027
+      },
+      {
+        "path": "perf_test_accuracy → energy_gpu_temp_avg_celsius → energy_cpu_ram_joules",
+        "strength_step1": 0.30000001192092896,
+        "strength_step2": 0.800000011920929,
+        "path_strength": 0.24000000953674316
+      },
+      {
+        "path": "perf_test_accuracy → energy_gpu_temp_avg_celsius → energy_cpu_total_joules",
+        "strength_step1": 0.30000001192092896,
+        "strength_step2": 0.550000011920929,
+        "path_strength": 0.16500000655651093
+      },
+      {
+        "path": "perf_test_accuracy → energy_gpu_temp_avg_celsius → energy_gpu_total_joules",
+        "strength_step1": 0.30000001192092896,
+        "strength_step2": 1.0,
+        "path_strength": 0.30000001192092896
+      },
+      {
+        "path": "perf_test_accuracy → energy_gpu_temp_max_celsius → energy_cpu_pkg_joules",
+        "strength_step1": 0.4000000059604645,
+        "strength_step2": 0.699999988079071,
+        "path_strength": 0.2800000011920929
+      },
+      {
+        "path": "perf_test_accuracy → energy_gpu_temp_max_celsius → energy_cpu_ram_joules",
+        "strength_step1": 0.4000000059604645,
+        "strength_step2": 0.8500000238418579,
+        "path_strength": 0.3400000035762787
+      },
+      {
+        "path": "perf_test_accuracy → energy_gpu_temp_max_celsius → energy_cpu_total_joules",
+        "strength_step1": 0.4000000059604645,
+        "strength_step2": 0.550000011920929,
+        "path_strength": 0.2200000137090683
+      },
+      {
+        "path": "perf_test_accuracy → energy_gpu_temp_max_celsius → energy_gpu_total_joules",
+        "strength_step1": 0.4000000059604645,
+        "strength_step2": 1.0,
+        "path_strength": 0.4000000059604645
+      }
+    ]
+  },
+  "question3_evidence": {
+    "mediation_paths_to_energy": [
+      {
+        "path_id": "HP12_M3_E0",
+        "hyperparam": "hyperparam_learning_rate",
+        "mediator": "energy_gpu_avg_watts",
+        "outcome": "energy_cpu_pkg_joules",
+        "strength_X_to_M": 0.45000001788139343,
+        "strength_M_to_Y": 0.75,
+        "indirect_strength": 0.3375000059604645,
+        "direct_strength": 0.30000001192092896,
+        "mediation_type": "partial"
+      },
+      {
+        "path_id": "HP12_M3_E1",
+        "hyperparam": "hyperparam_learning_rate",
+        "mediator": "energy_gpu_avg_watts",
+        "outcome": "energy_cpu_ram_joules",
+        "strength_X_to_M": 0.45000001788139343,
+        "strength_M_to_Y": 0.949999988079071,
+        "indirect_strength": 0.42750000953674316,
+        "direct_strength": 0.699999988079071,
+        "mediation_type": "partial"
+      },
+      {
+        "path_id": "HP12_M3_E2",
+        "hyperparam": "hyperparam_learning_rate",
+        "mediator": "energy_gpu_avg_watts",
+        "outcome": "energy_cpu_total_joules",
+        "strength_X_to_M": 0.45000001788139343,
+        "strength_M_to_Y": 0.6500000357627869,
+        "indirect_strength": 0.29250001907348633,
+        "direct_strength": 0.45000001788139343,
+        "mediation_type": "partial"
+      },
+      {
+        "path_id": "HP12_M3_E6",
+        "hyperparam": "hyperparam_learning_rate",
+        "mediator": "energy_gpu_avg_watts",
+        "outcome": "energy_gpu_total_joules",
+        "strength_X_to_M": 0.45000001788139343,
+        "strength_M_to_Y": 1.0,
+        "indirect_strength": 0.45000001788139343,
+        "direct_strength": 1.0,
+        "mediation_type": "partial"
+      },
+      {
+        "path_id": "HP12_M4_E0",
+        "hyperparam": "hyperparam_learning_rate",
+        "mediator": "energy_gpu_max_watts",
+        "outcome": "energy_cpu_pkg_joules",
+        "strength_X_to_M": 0.8500000238418579,
+        "strength_M_to_Y": 0.3499999940395355,
+        "indirect_strength": 0.29750001430511475,
+        "direct_strength": 0.30000001192092896,
+        "mediation_type": "partial"
+      },
+      {
+        "path_id": "HP12_M4_E1",
+        "hyperparam": "hyperparam_learning_rate",
+        "mediator": "energy_gpu_max_watts",
+        "outcome": "energy_cpu_ram_joules",
+        "strength_X_to_M": 0.8500000238418579,
+        "strength_M_to_Y": 0.8500000238418579,
+        "indirect_strength": 0.7225000262260437,
+        "direct_strength": 0.699999988079071,
+        "mediation_type": "partial"
+      },
+      {
+        "path_id": "HP12_M4_E2",
+        "hyperparam": "hyperparam_learning_rate",
+        "mediator": "energy_gpu_max_watts",
+        "outcome": "energy_cpu_total_joules",
+        "strength_X_to_M": 0.8500000238418579,
+        "strength_M_to_Y": 0.45000001788139343,
+        "indirect_strength": 0.382500022649765,
+        "direct_strength": 0.45000001788139343,
+        "mediation_type": "partial"
+      },
+      {
+        "path_id": "HP12_M4_E6",
+        "hyperparam": "hyperparam_learning_rate",
+        "mediator": "energy_gpu_max_watts",
+        "outcome": "energy_gpu_total_joules",
+        "strength_X_to_M": 0.8500000238418579,
+        "strength_M_to_Y": 1.0,
+        "indirect_strength": 0.8500000238418579,
+        "direct_strength": 1.0,
+        "mediation_type": "partial"
+      },
+      {
+        "path_id": "HP12_M5_E0",
+        "hyperparam": "hyperparam_learning_rate",
+        "mediator": "energy_gpu_min_watts",
+        "outcome": "energy_cpu_pkg_joules",
+        "strength_X_to_M": 0.30000001192092896,
+        "strength_M_to_Y": 0.45000001788139343,
+        "indirect_strength": 0.13500000536441803,
+        "direct_strength": 0.30000001192092896,
+        "mediation_type": "partial"
+      },
+      {
+        "path_id": "HP12_M5_E1",
+        "hyperparam": "hyperparam_learning_rate",
+        "mediator": "energy_gpu_min_watts",
+        "outcome": "energy_cpu_ram_joules",
+        "strength_X_to_M": 0.30000001192092896,
+        "strength_M_to_Y": 1.0,
+        "indirect_strength": 0.30000001192092896,
+        "direct_strength": 0.699999988079071,
+        "mediation_type": "partial"
+      },
+      {
+        "path_id": "HP12_M5_E2",
+        "hyperparam": "hyperparam_learning_rate",
+        "mediator": "energy_gpu_min_watts",
+        "outcome": "energy_cpu_total_joules",
+        "strength_X_to_M": 0.30000001192092896,
+        "strength_M_to_Y": 0.45000001788139343,
+        "indirect_strength": 0.13500000536441803,
+        "direct_strength": 0.45000001788139343,
+        "mediation_type": "partial"
+      },
+      {
+        "path_id": "HP12_M5_E6",
+        "hyperparam": "hyperparam_learning_rate",
+        "mediator": "energy_gpu_min_watts",
+        "outcome": "energy_gpu_total_joules",
+        "strength_X_to_M": 0.30000001192092896,
+        "strength_M_to_Y": 1.0,
+        "indirect_strength": 0.30000001192092896,
+        "direct_strength": 1.0,
+        "mediation_type": "partial"
+      },
+      {
+        "path_id": "HP12_M7_E0",
+        "hyperparam": "hyperparam_learning_rate",
+        "mediator": "energy_gpu_temp_avg_celsius",
+        "outcome": "energy_cpu_pkg_joules",
+        "strength_X_to_M": 0.699999988079071,
+        "strength_M_to_Y": 0.699999988079071,
+        "indirect_strength": 0.4899999797344208,
+        "direct_strength": 0.30000001192092896,
+        "mediation_type": "partial"
+      },
+      {
+        "path_id": "HP12_M7_E1",
+        "hyperparam": "hyperparam_learning_rate",
+        "mediator": "energy_gpu_temp_avg_celsius",
+        "outcome": "energy_cpu_ram_joules",
+        "strength_X_to_M": 0.699999988079071,
+        "strength_M_to_Y": 0.800000011920929,
+        "indirect_strength": 0.5600000023841858,
+        "direct_strength": 0.699999988079071,
+        "mediation_type": "partial"
+      },
+      {
+        "path_id": "HP12_M7_E2",
+        "hyperparam": "hyperparam_learning_rate",
+        "mediator": "energy_gpu_temp_avg_celsius",
+        "outcome": "energy_cpu_total_joules",
+        "strength_X_to_M": 0.699999988079071,
+        "strength_M_to_Y": 0.550000011920929,
+        "indirect_strength": 0.38499999046325684,
+        "direct_strength": 0.45000001788139343,
+        "mediation_type": "partial"
+      },
+      {
+        "path_id": "HP12_M7_E6",
+        "hyperparam": "hyperparam_learning_rate",
+        "mediator": "energy_gpu_temp_avg_celsius",
+        "outcome": "energy_gpu_total_joules",
+        "strength_X_to_M": 0.699999988079071,
+        "strength_M_to_Y": 1.0,
+        "indirect_strength": 0.699999988079071,
+        "direct_strength": 1.0,
+        "mediation_type": "partial"
+      },
+      {
+        "path_id": "HP12_M8_E0",
+        "hyperparam": "hyperparam_learning_rate",
+        "mediator": "energy_gpu_temp_max_celsius",
+        "outcome": "energy_cpu_pkg_joules",
+        "strength_X_to_M": 0.550000011920929,
+        "strength_M_to_Y": 0.699999988079071,
+        "indirect_strength": 0.38499999046325684,
+        "direct_strength": 0.30000001192092896,
+        "mediation_type": "partial"
+      },
+      {
+        "path_id": "HP12_M8_E1",
+        "hyperparam": "hyperparam_learning_rate",
+        "mediator": "energy_gpu_temp_max_celsius",
+        "outcome": "energy_cpu_ram_joules",
+        "strength_X_to_M": 0.550000011920929,
+        "strength_M_to_Y": 0.8500000238418579,
+        "indirect_strength": 0.4675000309944153,
+        "direct_strength": 0.699999988079071,
+        "mediation_type": "partial"
+      },
+      {
+        "path_id": "HP12_M8_E2",
+        "hyperparam": "hyperparam_learning_rate",
+        "mediator": "energy_gpu_temp_max_celsius",
+        "outcome": "energy_cpu_total_joules",
+        "strength_X_to_M": 0.550000011920929,
+        "strength_M_to_Y": 0.550000011920929,
+        "indirect_strength": 0.30250000953674316,
+        "direct_strength": 0.45000001788139343,
+        "mediation_type": "partial"
+      },
+      {
+        "path_id": "HP12_M8_E6",
+        "hyperparam": "hyperparam_learning_rate",
+        "mediator": "energy_gpu_temp_max_celsius",
+        "outcome": "energy_gpu_total_joules",
+        "strength_X_to_M": 0.550000011920929,
+        "strength_M_to_Y": 1.0,
+        "indirect_strength": 0.550000011920929,
+        "direct_strength": 1.0,
+        "mediation_type": "partial"
+      },
+      {
+        "path_id": "HP12_M9_E0",
+        "hyperparam": "hyperparam_learning_rate",
+        "mediator": "energy_gpu_util_avg_percent",
+        "outcome": "energy_cpu_pkg_joules",
+        "strength_X_to_M": 0.550000011920929,
+        "strength_M_to_Y": 0.75,
+        "indirect_strength": 0.4125000238418579,
+        "direct_strength": 0.30000001192092896,
+        "mediation_type": "partial"
+      },
+      {
+        "path_id": "HP12_M9_E1",
+        "hyperparam": "hyperparam_learning_rate",
+        "mediator": "energy_gpu_util_avg_percent",
+        "outcome": "energy_cpu_ram_joules",
+        "strength_X_to_M": 0.550000011920929,
+        "strength_M_to_Y": 0.9000000357627869,
+        "indirect_strength": 0.49500003457069397,
+        "direct_strength": 0.699999988079071,
+        "mediation_type": "partial"
+      },
+      {
+        "path_id": "HP12_M9_E2",
+        "hyperparam": "hyperparam_learning_rate",
+        "mediator": "energy_gpu_util_avg_percent",
+        "outcome": "energy_cpu_total_joules",
+        "strength_X_to_M": 0.550000011920929,
+        "strength_M_to_Y": 0.6000000238418579,
+        "indirect_strength": 0.33000001311302185,
+        "direct_strength": 0.45000001788139343,
+        "mediation_type": "partial"
+      },
+      {
+        "path_id": "HP12_M9_E6",
+        "hyperparam": "hyperparam_learning_rate",
+        "mediator": "energy_gpu_util_avg_percent",
+        "outcome": "energy_gpu_total_joules",
+        "strength_X_to_M": 0.550000011920929,
+        "strength_M_to_Y": 1.0,
+        "indirect_strength": 0.550000011920929,
+        "direct_strength": 1.0,
+        "mediation_type": "partial"
+      },
+      {
+        "path_id": "HP12_M10_E0",
+        "hyperparam": "hyperparam_learning_rate",
+        "mediator": "energy_gpu_util_max_percent",
+        "outcome": "energy_cpu_pkg_joules",
+        "strength_X_to_M": 0.550000011920929,
+        "strength_M_to_Y": 0.800000011920929,
+        "indirect_strength": 0.4400000274181366,
+        "direct_strength": 0.30000001192092896,
+        "mediation_type": "partial"
+      },
+      {
+        "path_id": "HP12_M10_E1",
+        "hyperparam": "hyperparam_learning_rate",
+        "mediator": "energy_gpu_util_max_percent",
+        "outcome": "energy_cpu_ram_joules",
+        "strength_X_to_M": 0.550000011920929,
+        "strength_M_to_Y": 0.8500000238418579,
+        "indirect_strength": 0.4675000309944153,
+        "direct_strength": 0.699999988079071,
+        "mediation_type": "partial"
+      },
+      {
+        "path_id": "HP12_M10_E2",
+        "hyperparam": "hyperparam_learning_rate",
+        "mediator": "energy_gpu_util_max_percent",
+        "outcome": "energy_cpu_total_joules",
+        "strength_X_to_M": 0.550000011920929,
+        "strength_M_to_Y": 0.6500000357627869,
+        "indirect_strength": 0.35750001668930054,
+        "direct_strength": 0.45000001788139343,
+        "mediation_type": "partial"
+      },
+      {
+        "path_id": "HP12_M10_E6",
+        "hyperparam": "hyperparam_learning_rate",
+        "mediator": "energy_gpu_util_max_percent",
+        "outcome": "energy_gpu_total_joules",
+        "strength_X_to_M": 0.550000011920929,
+        "strength_M_to_Y": 1.0,
+        "indirect_strength": 0.550000011920929,
+        "direct_strength": 1.0,
+        "mediation_type": "partial"
+      }
+    ],
+    "mediation_paths_to_performance": [
+      {
+        "path_id": "HP12_M7_P16",
+        "hyperparam": "hyperparam_learning_rate",
+        "mediator": "energy_gpu_temp_avg_celsius",
+        "outcome": "perf_best_val_accuracy",
+        "strength_X_to_M": 0.699999988079071,
+        "strength_M_to_Y": 0.30000001192092896,
+        "indirect_strength": 0.21000000834465027,
+        "direct_strength": 0.8500000238418579,
+        "mediation_type": "partial"
+      }
+    ],
+    "multi_step_paths": [
+      {
+        "path": "hyperparam_learning_rate → energy_gpu_min_watts → energy_gpu_avg_watts → energy_cpu_pkg_joules",
+        "strength_step1": 0.30000001192092896,
+        "strength_step2": 0.30000001192092896,
+        "strength_step3": 0.75,
+        "path_strength": 0.06750000268220901
+      },
+      {
+        "path": "hyperparam_learning_rate → energy_gpu_min_watts → energy_gpu_avg_watts → energy_cpu_ram_joules",
+        "strength_step1": 0.30000001192092896,
+        "strength_step2": 0.30000001192092896,
+        "strength_step3": 0.949999988079071,
+        "path_strength": 0.08550000190734863
+      },
+      {
+        "path": "hyperparam_learning_rate → energy_gpu_min_watts → energy_gpu_avg_watts → energy_cpu_total_joules",
+        "strength_step1": 0.30000001192092896,
+        "strength_step2": 0.30000001192092896,
+        "strength_step3": 0.6500000357627869,
+        "path_strength": 0.058500006794929504
+      },
+      {
+        "path": "hyperparam_learning_rate → energy_gpu_min_watts → energy_gpu_avg_watts → energy_gpu_total_joules",
+        "strength_step1": 0.30000001192092896,
+        "strength_step2": 0.30000001192092896,
+        "strength_step3": 1.0,
+        "path_strength": 0.09000000357627869
+      },
+      {
+        "path": "hyperparam_learning_rate → energy_gpu_min_watts → energy_gpu_max_watts → energy_cpu_pkg_joules",
+        "strength_step1": 0.30000001192092896,
+        "strength_step2": 0.30000001192092896,
+        "strength_step3": 0.3499999940395355,
+        "path_strength": 0.03150000050663948
+      },
+      {
+        "path": "hyperparam_learning_rate → energy_gpu_min_watts → energy_gpu_max_watts → energy_cpu_ram_joules",
+        "strength_step1": 0.30000001192092896,
+        "strength_step2": 0.30000001192092896,
+        "strength_step3": 0.8500000238418579,
+        "path_strength": 0.07650000602006912
+      },
+      {
+        "path": "hyperparam_learning_rate → energy_gpu_min_watts → energy_gpu_max_watts → energy_cpu_total_joules",
+        "strength_step1": 0.30000001192092896,
+        "strength_step2": 0.30000001192092896,
+        "strength_step3": 0.45000001788139343,
+        "path_strength": 0.04050000384449959
+      },
+      {
+        "path": "hyperparam_learning_rate → energy_gpu_min_watts → energy_gpu_max_watts → energy_gpu_total_joules",
+        "strength_step1": 0.30000001192092896,
+        "strength_step2": 0.30000001192092896,
+        "strength_step3": 1.0,
+        "path_strength": 0.09000000357627869
+      },
+      {
+        "path": "hyperparam_learning_rate → energy_gpu_min_watts → energy_gpu_util_avg_percent → energy_cpu_pkg_joules",
+        "strength_step1": 0.30000001192092896,
+        "strength_step2": 0.30000001192092896,
+        "strength_step3": 0.75,
+        "path_strength": 0.06750000268220901
+      },
+      {
+        "path": "hyperparam_learning_rate → energy_gpu_min_watts → energy_gpu_util_avg_percent → energy_cpu_ram_joules",
+        "strength_step1": 0.30000001192092896,
+        "strength_step2": 0.30000001192092896,
+        "strength_step3": 0.9000000357627869,
+        "path_strength": 0.08100000768899918
+      },
+      {
+        "path": "hyperparam_learning_rate → energy_gpu_min_watts → energy_gpu_util_avg_percent → energy_cpu_total_joules",
+        "strength_step1": 0.30000001192092896,
+        "strength_step2": 0.30000001192092896,
+        "strength_step3": 0.6000000238418579,
+        "path_strength": 0.05400000512599945
+      },
+      {
+        "path": "hyperparam_learning_rate → energy_gpu_min_watts → energy_gpu_util_avg_percent → energy_gpu_total_joules",
+        "strength_step1": 0.30000001192092896,
+        "strength_step2": 0.30000001192092896,
+        "strength_step3": 1.0,
+        "path_strength": 0.09000000357627869
+      },
+      {
+        "path": "hyperparam_learning_rate → energy_gpu_temp_avg_celsius → energy_gpu_avg_watts → energy_cpu_pkg_joules",
+        "strength_step1": 0.699999988079071,
+        "strength_step2": 0.3499999940395355,
+        "strength_step3": 0.75,
+        "path_strength": 0.1837499886751175
+      },
+      {
+        "path": "hyperparam_learning_rate → energy_gpu_temp_avg_celsius → energy_gpu_avg_watts → energy_cpu_ram_joules",
+        "strength_step1": 0.699999988079071,
+        "strength_step2": 0.3499999940395355,
+        "strength_step3": 0.949999988079071,
+        "path_strength": 0.23274998366832733
+      },
+      {
+        "path": "hyperparam_learning_rate → energy_gpu_temp_avg_celsius → energy_gpu_avg_watts → energy_cpu_total_joules",
+        "strength_step1": 0.699999988079071,
+        "strength_step2": 0.3499999940395355,
+        "strength_step3": 0.6500000357627869,
+        "path_strength": 0.15925000607967377
+      },
+      {
+        "path": "hyperparam_learning_rate → energy_gpu_temp_avg_celsius → energy_gpu_avg_watts → energy_gpu_total_joules",
+        "strength_step1": 0.699999988079071,
+        "strength_step2": 0.3499999940395355,
+        "strength_step3": 1.0,
+        "path_strength": 0.2449999898672104
+      },
+      {
+        "path": "hyperparam_learning_rate → energy_gpu_temp_avg_celsius → energy_gpu_max_watts → energy_cpu_pkg_joules",
+        "strength_step1": 0.699999988079071,
+        "strength_step2": 0.45000001788139343,
+        "strength_step3": 0.3499999940395355,
+        "path_strength": 0.11024999618530273
+      },
+      {
+        "path": "hyperparam_learning_rate → energy_gpu_temp_avg_celsius → energy_gpu_max_watts → energy_cpu_ram_joules",
+        "strength_step1": 0.699999988079071,
+        "strength_step2": 0.45000001788139343,
+        "strength_step3": 0.8500000238418579,
+        "path_strength": 0.26774999499320984
+      },
+      {
+        "path": "hyperparam_learning_rate → energy_gpu_temp_avg_celsius → energy_gpu_max_watts → energy_cpu_total_joules",
+        "strength_step1": 0.699999988079071,
+        "strength_step2": 0.45000001788139343,
+        "strength_step3": 0.45000001788139343,
+        "path_strength": 0.1417500078678131
+      },
+      {
+        "path": "hyperparam_learning_rate → energy_gpu_temp_avg_celsius → energy_gpu_max_watts → energy_gpu_total_joules",
+        "strength_step1": 0.699999988079071,
+        "strength_step2": 0.45000001788139343,
+        "strength_step3": 1.0,
+        "path_strength": 0.3149999976158142
+      },
+      {
+        "path": "hyperparam_learning_rate → energy_gpu_temp_avg_celsius → energy_gpu_util_avg_percent → energy_cpu_pkg_joules",
+        "strength_step1": 0.699999988079071,
+        "strength_step2": 0.30000001192092896,
+        "strength_step3": 0.75,
+        "path_strength": 0.1574999988079071
+      },
+      {
+        "path": "hyperparam_learning_rate → energy_gpu_temp_avg_celsius → energy_gpu_util_avg_percent → energy_cpu_ram_joules",
+        "strength_step1": 0.699999988079071,
+        "strength_step2": 0.30000001192092896,
+        "strength_step3": 0.9000000357627869,
+        "path_strength": 0.18900001049041748
+      },
+      {
+        "path": "hyperparam_learning_rate → energy_gpu_temp_avg_celsius → energy_gpu_util_avg_percent → energy_cpu_total_joules",
+        "strength_step1": 0.699999988079071,
+        "strength_step2": 0.30000001192092896,
+        "strength_step3": 0.6000000238418579,
+        "path_strength": 0.12600001692771912
+      },
+      {
+        "path": "hyperparam_learning_rate → energy_gpu_temp_avg_celsius → energy_gpu_util_avg_percent → energy_gpu_total_joules",
+        "strength_step1": 0.699999988079071,
+        "strength_step2": 0.30000001192092896,
+        "strength_step3": 1.0,
+        "path_strength": 0.21000000834465027
+      },
+      {
+        "path": "hyperparam_learning_rate → energy_gpu_temp_max_celsius → energy_gpu_avg_watts → energy_cpu_pkg_joules",
+        "strength_step1": 0.550000011920929,
+        "strength_step2": 0.3499999940395355,
+        "strength_step3": 0.75,
+        "path_strength": 0.1443749964237213
+      },
+      {
+        "path": "hyperparam_learning_rate → energy_gpu_temp_max_celsius → energy_gpu_avg_watts → energy_cpu_ram_joules",
+        "strength_step1": 0.550000011920929,
+        "strength_step2": 0.3499999940395355,
+        "strength_step3": 0.949999988079071,
+        "path_strength": 0.18287499248981476
+      },
+      {
+        "path": "hyperparam_learning_rate → energy_gpu_temp_max_celsius → energy_gpu_avg_watts → energy_cpu_total_joules",
+        "strength_step1": 0.550000011920929,
+        "strength_step2": 0.3499999940395355,
+        "strength_step3": 0.6500000357627869,
+        "path_strength": 0.1251250058412552
+      },
+      {
+        "path": "hyperparam_learning_rate → energy_gpu_temp_max_celsius → energy_gpu_avg_watts → energy_gpu_total_joules",
+        "strength_step1": 0.550000011920929,
+        "strength_step2": 0.3499999940395355,
+        "strength_step3": 1.0,
+        "path_strength": 0.19249999523162842
+      },
+      {
+        "path": "hyperparam_learning_rate → energy_gpu_util_avg_percent → energy_gpu_max_watts → energy_cpu_pkg_joules",
+        "strength_step1": 0.550000011920929,
+        "strength_step2": 0.45000001788139343,
+        "strength_step3": 0.3499999940395355,
+        "path_strength": 0.08662500232458115
+      },
+      {
+        "path": "hyperparam_learning_rate → energy_gpu_util_avg_percent → energy_gpu_max_watts → energy_cpu_ram_joules",
+        "strength_step1": 0.550000011920929,
+        "strength_step2": 0.45000001788139343,
+        "strength_step3": 0.8500000238418579,
+        "path_strength": 0.21037502586841583
+      },
+      {
+        "path": "hyperparam_learning_rate → energy_gpu_util_avg_percent → energy_gpu_max_watts → energy_cpu_total_joules",
+        "strength_step1": 0.550000011920929,
+        "strength_step2": 0.45000001788139343,
+        "strength_step3": 0.45000001788139343,
+        "path_strength": 0.11137501150369644
+      },
+      {
+        "path": "hyperparam_learning_rate → energy_gpu_util_avg_percent → energy_gpu_max_watts → energy_gpu_total_joules",
+        "strength_step1": 0.550000011920929,
+        "strength_step2": 0.45000001788139343,
+        "strength_step3": 1.0,
+        "path_strength": 0.24750001728534698
+      },
+      {
+        "path": "hyperparam_learning_rate → energy_gpu_util_max_percent → energy_gpu_max_watts → energy_cpu_pkg_joules",
+        "strength_step1": 0.550000011920929,
+        "strength_step2": 0.3499999940395355,
+        "strength_step3": 0.3499999940395355,
+        "path_strength": 0.06737499684095383
+      },
+      {
+        "path": "hyperparam_learning_rate → energy_gpu_util_max_percent → energy_gpu_max_watts → energy_cpu_ram_joules",
+        "strength_step1": 0.550000011920929,
+        "strength_step2": 0.3499999940395355,
+        "strength_step3": 0.8500000238418579,
+        "path_strength": 0.16362500190734863
+      },
+      {
+        "path": "hyperparam_learning_rate → energy_gpu_util_max_percent → energy_gpu_max_watts → energy_cpu_total_joules",
+        "strength_step1": 0.550000011920929,
+        "strength_step2": 0.3499999940395355,
+        "strength_step3": 0.45000001788139343,
+        "path_strength": 0.08662500232458115
+      },
+      {
+        "path": "hyperparam_learning_rate → energy_gpu_util_max_percent → energy_gpu_max_watts → energy_gpu_total_joules",
+        "strength_step1": 0.550000011920929,
+        "strength_step2": 0.3499999940395355,
+        "strength_step3": 1.0,
+        "path_strength": 0.19249999523162842
+      },
+      {
+        "path": "hyperparam_learning_rate → energy_gpu_util_max_percent → energy_gpu_min_watts → energy_cpu_pkg_joules",
+        "strength_step1": 0.550000011920929,
+        "strength_step2": 0.5,
+        "strength_step3": 0.45000001788139343,
+        "path_strength": 0.12375000864267349
+      },
+      {
+        "path": "hyperparam_learning_rate → energy_gpu_util_max_percent → energy_gpu_min_watts → energy_cpu_ram_joules",
+        "strength_step1": 0.550000011920929,
+        "strength_step2": 0.5,
+        "strength_step3": 1.0,
+        "path_strength": 0.2750000059604645
+      },
+      {
+        "path": "hyperparam_learning_rate → energy_gpu_util_max_percent → energy_gpu_min_watts → energy_cpu_total_joules",
+        "strength_step1": 0.550000011920929,
+        "strength_step2": 0.5,
+        "strength_step3": 0.45000001788139343,
+        "path_strength": 0.12375000864267349
+      },
+      {
+        "path": "hyperparam_learning_rate → energy_gpu_util_max_percent → energy_gpu_min_watts → energy_gpu_total_joules",
+        "strength_step1": 0.550000011920929,
+        "strength_step2": 0.5,
+        "strength_step3": 1.0,
+        "path_strength": 0.2750000059604645
+      },
+      {
+        "path": "hyperparam_learning_rate → energy_gpu_util_max_percent → energy_gpu_temp_max_celsius → energy_cpu_pkg_joules",
+        "strength_step1": 0.550000011920929,
+        "strength_step2": 0.3499999940395355,
+        "strength_step3": 0.699999988079071,
+        "path_strength": 0.13474999368190765
+      },
+      {
+        "path": "hyperparam_learning_rate → energy_gpu_util_max_percent → energy_gpu_temp_max_celsius → energy_cpu_ram_joules",
+        "strength_step1": 0.550000011920929,
+        "strength_step2": 0.3499999940395355,
+        "strength_step3": 0.8500000238418579,
+        "path_strength": 0.16362500190734863
+      },
+      {
+        "path": "hyperparam_learning_rate → energy_gpu_util_max_percent → energy_gpu_temp_max_celsius → energy_cpu_total_joules",
+        "strength_step1": 0.550000011920929,
+        "strength_step2": 0.3499999940395355,
+        "strength_step3": 0.550000011920929,
+        "path_strength": 0.10587500035762787
+      },
+      {
+        "path": "hyperparam_learning_rate → energy_gpu_util_max_percent → energy_gpu_temp_max_celsius → energy_gpu_total_joules",
+        "strength_step1": 0.550000011920929,
+        "strength_step2": 0.3499999940395355,
+        "strength_step3": 1.0,
+        "path_strength": 0.19249999523162842
+      }
+    ]
+  },
+  "config": {
+    "alpha_linear": 0.05,
+    "beta_linear": 0.1,
+    "n_particles": 20,
+    "tau": 1.0,
+    "n_steps": 5000,
+    "n_grad_mc_samples": 128,
+    "n_acyclicity_mc_samples": 32
+  },
+  "feature_names": [
+    "energy_cpu_pkg_joules",
+    "energy_cpu_ram_joules",
+    "energy_cpu_total_joules",
+    "energy_gpu_avg_watts",
+    "energy_gpu_max_watts",
+    "energy_gpu_min_watts",
+    "energy_gpu_total_joules",
+    "energy_gpu_temp_avg_celsius",
+    "energy_gpu_temp_max_celsius",
+    "energy_gpu_util_avg_percent",
+    "energy_gpu_util_max_percent",
+    "is_parallel",
+    "hyperparam_learning_rate",
+    "hyperparam_epochs",
+    "hyperparam_seed",
+    "hyperparam_l2_regularization",
+    "perf_best_val_accuracy",
+    "perf_test_accuracy"
+  ]
+}

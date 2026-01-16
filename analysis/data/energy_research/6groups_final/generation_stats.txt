@@ -1,0 +1,62 @@
+6分组数据生成统计
+============================================================
+
+生成时间: 2026-01-15 23:16:23.694433
+输入文件: /home/green/energy_dl/nightly/data/data.csv
+可用数据: 818 行
+总数据行数: 818 (100.0%)
+
+
+group1_examples:
+  模型数: 4
+  数据行数: 304
+  列数: 21
+  模型: ['mnist', 'mnist_ff', 'mnist_rnn', 'siamese']
+  模型变量: ['model_mnist_ff', 'model_mnist_rnn', 'model_siamese']
+  超参数: ['hyperparam_batch_size', 'hyperparam_learning_rate', 'hyperparam_epochs', 'hyperparam_seed']
+  性能指标: ['perf_test_accuracy']
+
+group2_vulberta:
+  模型数: 1
+  数据行数: 72
+  列数: 20
+  模型: ['mlp']
+  模型变量: []
+  超参数: ['hyperparam_learning_rate', 'hyperparam_epochs', 'hyperparam_seed', 'hyperparam_l2_regularization']
+  性能指标: ['perf_eval_loss', 'perf_final_training_loss', 'perf_eval_samples_per_second']
+
+group3_person_reid:
+  模型数: 3
+  数据行数: 206
+  列数: 22
+  模型: ['densenet121', 'hrnet18', 'pcb']
+  模型变量: ['model_hrnet18', 'model_pcb']
+  超参数: ['hyperparam_dropout', 'hyperparam_learning_rate', 'hyperparam_epochs', 'hyperparam_seed']
+  性能指标: ['perf_map', 'perf_rank1', 'perf_rank5']
+
+group4_bug_localization:
+  模型数: 1
+  数据行数: 90
+  列数: 21
+  模型: ['default']
+  模型变量: []
+  超参数: ['hyperparam_alpha', 'hyperparam_kfold', 'hyperparam_max_iter', 'hyperparam_seed']
+  性能指标: ['perf_top1_accuracy', 'perf_top5_accuracy', 'perf_top10_accuracy', 'perf_top20_accuracy']
+
+group5_mrt_oast:
+  模型数: 1
+  数据行数: 72
+  列数: 21
+  模型: ['default']
+  模型变量: []
+  超参数: ['hyperparam_dropout', 'hyperparam_learning_rate', 'hyperparam_epochs', 'hyperparam_seed', 'hyperparam_l2_regularization']
+  性能指标: ['perf_accuracy', 'perf_precision', 'perf_recall']
+
+group6_resnet:
+  模型数: 1
+  数据行数: 74
+  列数: 19
+  模型: ['resnet20']
+  模型变量: []
+  超参数: ['hyperparam_learning_rate', 'hyperparam_epochs', 'hyperparam_seed', 'hyperparam_l2_regularization']
+  性能指标: ['perf_best_val_accuracy', 'perf_test_accuracy']

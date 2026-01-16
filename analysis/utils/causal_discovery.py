@@ -202,7 +202,10 @@ class CausalGraphLearner:
             n_unique = len(np.unique(data.iloc[:, i]))
             if n_unique < 10:
                 # 离散列：添加小噪声（标准差为值域的1%）
-                col_range = data.iloc[:, i].max() - data.iloc[:, i].min()
+                # Fix for numpy 2.x: convert to float before subtraction (handles boolean columns)
+                col_max = float(data.iloc[:, i].max())
+                col_min = float(data.iloc[:, i].min())
+                col_range = col_max - col_min
                 noise_std = max(0.01 * col_range, 0.01)  # 至少0.01
                 noise = np.random.normal(0, noise_std, size=len(data))
                 data_continuous[:, i] += noise

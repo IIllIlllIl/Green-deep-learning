@@ -1,7 +1,7 @@
 # Claude 助手快速指南 - Energy DL Project
 
-**版本**: v5.6.0
-**最后更新**: 2026-01-10
+**版本**: v5.7.0
+**最后更新**: 2026-01-15
 **状态**: ⏳ 进行中 - 能耗数据因果分析阶段
 
 > **提示**: 本文档为精简版快速指南。完整详细文档请查看 [docs/CLAUDE_FULL_REFERENCE.md](docs/CLAUDE_FULL_REFERENCE.md)
@@ -16,6 +16,7 @@
 - [⚡ 5分钟快速验证](#5分钟快速验证)
 - [📁 项目结构快览](#项目结构快览)
 - [📚 核心文档索引](#核心文档索引)
+- [🚨 数据处理关键提醒](#数据处理关键提醒) ⭐⭐⭐⭐⭐ **必读！**
 - [⚠️ 关键开发规范](#关键开发规范)
 - [🚨 常见错误与解决方案](#常见错误与解决方案)
 - [🔍 脚本复用检查指南](#脚本复用检查指南)
@@ -261,9 +262,116 @@ energy_dl/nightly/
 
 | 文档 | 用途 |
 |------|------|
-| [docs/results_reports/DATA_REPAIR_REPORT_20260104.md](docs/results_reports/DATA_REPAIR_REPORT_20260104.md) | **数据完整性修复报告** (2026-01-04) ⭐⭐⭐ |
-| [analysis/docs/reports/DATA_COMPARISON_OLD_VS_NEW_20251229.md](analysis/docs/reports/DATA_COMPARISON_OLD_VS_NEW_20251229.md) | 新旧数据对比分析 |
-| [docs/results_reports/DATA_FORMAT_DESIGN_DECISION_SUMMARY.md](docs/results_reports/DATA_FORMAT_DESIGN_DECISION_SUMMARY.md) | 数据格式设计决定 |
+| **[docs/DATA_MASTER_GUIDE.md](docs/DATA_MASTER_GUIDE.md)** | **数据使用主指南** - 单一真实来源 ⭐⭐⭐⭐⭐ |
+| [docs/RAW_DATA_CSV_USAGE_GUIDE.md](docs/RAW_DATA_CSV_USAGE_GUIDE.md) | raw_data.csv 详细使用指南 ⭐⭐⭐⭐⭐ |
+| [docs/results_reports/DATA_REPAIR_REPORT_20260104.md](docs/results_reports/DATA_REPAIR_REPORT_20260104.md) | 数据完整性修复报告 (2026-01-04) ⭐⭐⭐ |
+| [analysis/docs/DATA_UNIQUENESS_CLARIFICATION_20251228.md](analysis/docs/DATA_UNIQUENESS_CLARIFICATION_20251228.md) | 唯一标识说明 ⭐⭐⭐ |
+| [analysis/docs/DATA_UNDERSTANDING_CORRECTION_20251228.md](analysis/docs/DATA_UNDERSTANDING_CORRECTION_20251228.md) | 数据理解关键更正 ⭐⭐⭐ |
+
+---
+
+## 🚨 数据处理关键提醒 ⭐⭐⭐⭐⭐
+
+> **极其重要**: 在处理数据前，**必须**阅读本章节以避免常见的严重错误！
+
+### ⚠️⚠️⚠️ 唯一标识符错误（最常见）
+
+**❌ 错误认识**: `experiment_id` 是唯一的
+**✅ 正确认识**: `timestamp` 才是唯一键
+
+```python
+# ❌ 错误！会丢失大量数据！
+df_unique = df.drop_duplicates(subset=['experiment_id'])
+
+# ✅ 正确！
+df_unique = df.drop_duplicates(subset=['timestamp'])
+```
+
+**原因**:
+- `experiment_id`: 代表实验**配置**（可运行多次）
+- `timestamp`: 代表实验**运行实例**（唯一）
+
+**详细说明**: [analysis/docs/DATA_UNIQUENESS_CLARIFICATION_20251228.md](analysis/docs/DATA_UNIQUENESS_CLARIFICATION_20251228.md)
+
+### ⚠️⚠️⚠️ 数据文件选择
+
+**✅ 推荐使用**: `data/data.csv` (970行，约818条可用记录，统一格式)
+**⚠️ 仅特殊情况使用**: `data/raw_data.csv` (970行，577条完全可用，需特殊处理)
+
+```python
+# ✅ 推荐：使用 data.csv（简单易用）
+import pandas as pd
+df = pd.read_csv('data/data.csv')
+# 直接使用字段，无需考虑 fg_ 前缀
+learning_rate = df['learning_rate']
+
+# ⚠️ 如果必须使用 raw_data.csv，先阅读使用指南！
+# 参考: docs/RAW_DATA_CSV_USAGE_GUIDE.md
+```
+
+### ⚠️⚠️⚠️ 并行模式数据处理
+
+**在 raw_data.csv 中**:
+- ❌ 并行模式数据在 `fg_` 前缀字段中
+- ❌ 非并行模式数据在顶层字段中
+- ❌ **不能直接使用顶层字段名！**
+
+**解决方案**:
+1. **推荐**: 使用 `data.csv`（已自动处理）
+2. **备选**: 使用 `raw_data.csv` + 特殊处理函数
+
+**详细指南**: [docs/RAW_DATA_CSV_USAGE_GUIDE.md](docs/RAW_DATA_CSV_USAGE_GUIDE.md) ⭐⭐⭐⭐⭐
+
+### ⚠️⚠️ 数据验证必须做
+
+```python
+# ✅ 在任何数据处理前，先验证数据质量
+df = pd.read_csv('data/data.csv')
+
+# 1. 检查唯一性
+assert df['timestamp'].nunique() == len(df), "timestamp 必须唯一！"
+
+# 2. 筛选可用数据
+df_usable = df[
+    (df['status'] == 'success') &  # 训练成功
+    (~df[[col for col in df.columns if col.startswith('energy_')]].isnull().all(axis=1)) &  # 有能耗
+    (~df[[col for col in df.columns if col.startswith('perf_')]].isnull().all(axis=1))      # 有性能
+]
+
+print(f"可用记录: {len(df_usable)}/{len(df)} ({len(df_usable)/len(df)*100:.1f}%)")
+```
+
+### ⚠️⚠️ 6分组数据生成原则 ⭐ 重要
+
+**核心原则**: 将共用超参数和性能指标的模型分为一组，尽可能保留所有818条有用数据
+
+**分组策略**：
+1. **按共用特征分组** - 相同超参数和性能指标的模型归为一组
+2. **保留所有数据** - 不设置缺失率阈值，保留组内所有非空数据
+3. **只选择相关列** - 每组只包含该组实际使用的特征
+
+**正确实现**：
+```python
+# ✅ 每组只选择该组使用的列
+if group_id == 'group1_examples':
+    # examples组使用的超参数和性能指标
+    selected_cols = energy_cols + control_cols + [
+        'hyperparam_batch_size', 'hyperparam_learning_rate',
+        'hyperparam_epochs', 'hyperparam_seed', 'perf_test_accuracy'
+    ]
+```
+
+**目标**: 从818条可用数据中保留尽可能多的数据（目标>800条）
+
+**相关文档**:
+- [analysis/docs/reports/6GROUPS_DATA_DESIGN_CORRECT_20260115.md](analysis/docs/reports/6GROUPS_DATA_DESIGN_CORRECT_20260115.md) - 正确的6分组设计
+
+### 📖 完整数据使用指南
+
+**在处理数据前，请先阅读**:
+- 📘 [docs/DATA_MASTER_GUIDE.md](docs/DATA_MASTER_GUIDE.md) - **数据使用主指南**（必读） ⭐⭐⭐⭐⭐
+- 📗 [docs/RAW_DATA_CSV_USAGE_GUIDE.md](docs/RAW_DATA_CSV_USAGE_GUIDE.md) - raw_data.csv 详细指南
+- 📙 [analysis/docs/DATA_FILES_COMPARISON.md](analysis/docs/DATA_FILES_COMPARISON.md) - 文件对比分析
 
 ---
 
@@ -476,6 +584,19 @@ EOF
 2. ⏳ 能耗和性能之间的权衡关系
 3. ⏳ 中间变量的中介效应
 
+### 环境配置 ⭐ 重要
+
+**DiBS分析需要专用conda环境**：
+```bash
+# 激活causal-research环境（已安装DiBS）
+conda activate causal-research
+
+# 或直接使用完整路径
+/home/green/miniconda3/envs/causal-research/bin/python script.py
+```
+
+⚠️ **注意**: base环境没有安装DiBS，会导致分析失败！
+
 ### 快速参考
 
 **主要文档**:
@@ -531,35 +652,76 @@ python3 tools/data_management/repair_missing_energy_data.py
 
 ## 📊 数据文件说明
 
+### 数据可用性概览 (2026-01-13更新) ⭐⭐⭐
+
+**最新分析结果**:
+- **总记录数**: 970条（含header，实际969条数据）
+- **✅ 完全可用记录**: **577条 (59.5%)** - 训练成功、有能耗数据、有性能指标
+- **❌ 不可用记录**: 393条 (40.5%)
+
+**不可用原因分布**:
+- 性能指标缺失: 393条 (100%不可用记录都有此问题)
+- 能耗数据缺失: 142条 (14.6%)
+- 训练失败: 116条 (12.0%)
+
+**推荐使用的高质量数据** (8个模型，487条记录，100%可用):
+- pytorch_resnet_cifar10/resnet20 (53条)
+- Person_reID系列: densenet121, hrnet18, pcb (159条)
+- examples系列: mnist, mnist_rnn, siamese, mnist_ff (275条)
+
+**详细分析报告**: [docs/DATA_USABILITY_SUMMARY_20260113.md](docs/DATA_USABILITY_SUMMARY_20260113.md) 📋
+
+---
+
 ### raw_data.csv (主数据文件) ⭐⭐⭐
 
 - **位置**: `data/raw_data.csv` ✅ (2026-01-05 重组后)
 - **旧位置**: ~~`results/raw_data.csv`~~ (已废弃)
-- **规模**: 836行（含header），87列
-- **完整性**: **795/836 (95.1%)** 有效能耗数据 🎉
+- **规模**: 970行（含header），87列
+- **数据可用性**: **577/969 (59.5%)** 完全可用记录
+- **能耗数据**: **828/969 (85.4%)** 有能耗数据
 - **最后更新**: 2026-01-04 (数据修复完成)
 - **备份**: `data/backups/raw_data.csv.backup_*`
 - **验证**: `tools/data_management/validate_raw_data.py`
+
+**主要问题**:
+- ⚠️ VulBERTa/mlp (151条): 训练成功但缺失所有性能指标
+- ⚠️ bug-localization (106条): 训练成功但缺失性能指标
+- ⚠️ unknown (/) (116条): 数据质量问题，建议清理
 
 ### data.csv (精简数据文件) ⭐⭐
 
 - **位置**: `data/data.csv` ✅ (2026-01-05 重组后)
 - **旧位置**: ~~`results/data.csv`~~ (已废弃)
-- **规模**: 待更新（原726行，56列）
+- **规模**: 970行（含header，实际969条数据），56列
 - **特性**: 统一并行/非并行字段，添加 is_parallel 列
 - **生成**: `tools/data_management/create_unified_data_csv.py`
 - **状态**: ⚠️ 需要重新生成以反映最新数据
 
-### 数据修复记录
+### 数据质量修复记录
 
 **修复日期**: 2026-01-04
 **修复实验数**: 253个
-**完整性提升**: 69.7% → 95.1% (+25.4%)
+**能耗完整性提升**: 69.7% → 85.4% (实际有能耗数据)
 
 **相关文件**:
 - 修复报告: `docs/results_reports/DATA_REPAIR_REPORT_20260104.md`
+- 可用性分析: `docs/DATA_USABILITY_SUMMARY_20260113.md` ⭐ 新增
 - 修复日志: `data/backups/data_repair_log_*`
 - 数据来源: `data/recoverable_energy_data.json`
+
+### 数据使用建议
+
+根据研究目的选择合适的数据集：
+
+| 使用场景 | 推荐数据 | 记录数 | 数据质量 |
+|---------|---------|--------|---------|
+| **高质量分析（推荐）** | 8个100%可用模型 | 487条 | ⭐⭐⭐ 优秀 |
+| **平衡分析** | +MRT-OAST可用部分 | 552条 | ⭐⭐ 良好 |
+| **最大化分析** | 所有可用记录 | 577条 | ⭐⚠️ 混合 |
+| **能耗专项分析** | 有能耗数据的记录 | 828条 | ⭐ 仅能耗可用 |
+
+**详细说明**: 参见 [docs/DATA_USABILITY_SUMMARY_20260113.md](docs/DATA_USABILITY_SUMMARY_20260113.md)
 
 ---
 
@@ -582,16 +744,16 @@ python3 tools/data_management/repair_missing_energy_data.py
 ---
 
 **维护者**: Green
-**文档版本**: 5.6.0
-**最后更新**: 2026-01-10
-**重要更新 (P0 改进完成)**:
-- ✅ **添加 TOC 目录** - 可点击跳转，提升导航效率50% ⭐⭐⭐
-- ✅ **拆分关键开发规范** - 创建3个独立文档（38KB专题内容），主文档保持精简
-- ✅ **添加5分钟快速验证** - 一键健康检查脚本，新用户快速上手 ⭐⭐
-- ✅ **创建健康检查脚本** - tools/quick_health_check.sh 自动验证环境
-- ✅ **优化文档结构** - 精简主文档，信息密度显著提升
+**文档版本**: 5.7.0
+**最后更新**: 2026-01-15
+**重要更新 (v5.7.0)**:
+- ✅ **修复data.csv行数信息** - 从726行更正为970行
+- ✅ **添加conda环境说明** - 分析模块必须使用causal-research环境
+- ✅ **添加6分组数据生成注意事项** - 避免统一阈值导致数据丢失
+- ✅ **更新数据可用性信息** - data.csv约818条可用记录
 
 **历史更新**:
+- v5.6.0: 添加TOC目录、拆分关键开发规范、添加5分钟快速验证
 - v5.5.0: 新增独立验证规范
 - v5.4.0: 脚本重复性分析和清理
 - v5.3.0: 项目文件结构重组

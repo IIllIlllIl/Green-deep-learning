@@ -1,0 +1,1611 @@
+[
+  {
+    "group_id": "group1_examples",
+    "group_name": "examples（图像分类-小型）",
+    "n_samples": 126,
+    "n_features": 18,
+    "missing_values": {
+      "total_missing": 0,
+      "features_with_missing": 0,
+      "missing_rate": 0.0,
+      "worst_features": {}
+    },
+    "feature_variance": {
+      "zero_variance_features": [],
+      "near_zero_variance_features": [],
+      "low_cv_features": [],
+      "n_constant_features": 0,
+      "n_low_variance_features": 0
+    },
+    "distribution_stats": {
+      "hyperparam_batch_size": {
+        "mean": 206.44444444444446,
+        "std": 1249.089585613814,
+        "min": 19.0,
+        "max": 10000.0,
+        "median": 32.0,
+        "q25": 32.0,
+        "q75": 68.75,
+        "n_outliers": 2,
+        "outlier_rate": 0.015873015873015872
+      },
+      "hyperparam_epochs": {
+        "mean": 9.873015873015873,
+        "std": 1.5999206329521576,
+        "min": 5.0,
+        "max": 15.0,
+        "median": 10.0,
+        "q25": 10.0,
+        "q75": 10.0,
+        "n_outliers": 29,
+        "outlier_rate": 0.23015873015873015
+      },
+      "hyperparam_learning_rate": {
+        "mean": 0.010148437547110882,
+        "std": 0.0017090171976986252,
+        "min": 0.00559625225492,
+        "max": 0.0183745588189432,
+        "median": 0.01,
+        "q25": 0.01,
+        "q75": 0.01,
+        "n_outliers": 27,
+        "outlier_rate": 0.21428571428571427
+      },
+      "hyperparam_seed": {
+        "mean": 1025.968253968254,
+        "std": 2392.865047382348,
+        "min": 1.0,
+        "max": 9809.0,
+        "median": 1.0,
+        "q25": 1.0,
+        "q75": 1.0,
+        "n_outliers": 27,
+        "outlier_rate": 0.21428571428571427
+      },
+      "perf_test_accuracy": {
+        "mean": 72.33698359888697,
+        "std": 37.10591843723339,
+        "min": 3.97999994456768,
+        "max": 100.0,
+        "median": 92.10499739646912,
+        "q25": 46.5,
+        "q75": 99.0,
+        "n_outliers": 0,
+        "outlier_rate": 0.0
+      },
+      "energy_cpu_pkg_joules": {
+        "mean": 5444.597698412699,
+        "std": 5493.21060221407,
+        "min": 195.26,
+        "max": 21791.11,
+        "median": 5118.245000000001,
+        "q25": 493.60749999999996,
+        "q75": 8677.9725,
+        "n_outliers": 0,
+        "outlier_rate": 0.0
+      },
+      "energy_cpu_ram_joules": {
+        "mean": 372.7031746031746,
+        "std": 368.255161114466,
+        "min": 14.59,
+        "max": 1520.5,
+        "median": 343.1,
+        "q25": 38.96,
+        "q75": 583.2425,
+        "n_outliers": 0,
+        "outlier_rate": 0.0
+      },
+      "energy_cpu_total_joules": {
+        "mean": 5817.300873015874,
+        "std": 5858.263649410262,
+        "min": 210.77,
+        "max": 23311.61,
+        "median": 5486.605,
+        "q25": 533.2574999999999,
+        "q75": 9255.677500000002,
+        "n_outliers": 0,
+        "outlier_rate": 0.0
+      },
+      "energy_gpu_avg_watts": {
+        "mean": 170.86025281907504,
+        "std": 83.76631722339062,
+        "min": 7.210524590163938,
+        "max": 291.1032,
+        "median": 179.4315120772947,
+        "q25": 94.0772288560998,
+        "q75": 248.73946013564773,
+        "n_outliers": 0,
+        "outlier_rate": 0.0
+      },
+      "energy_gpu_max_watts": {
+        "mean": 210.90865079365076,
+        "std": 92.72347734940207,
+        "min": 77.36,
+        "max": 319.66,
+        "median": 203.035,
+        "q25": 97.965,
+        "q75": 299.77500000000003,
+        "n_outliers": 0,
+        "outlier_rate": 0.0
+      },
+      "energy_gpu_min_watts": {
+        "mean": 125.83507936507935,
+        "std": 84.51398789545817,
+        "min": 3.38,
+        "max": 260.3,
+        "median": 77.485,
+        "q25": 72.97,
+        "q75": 223.0575,
+        "n_outliers": 0,
+        "outlier_rate": 0.0
+      },
+      "energy_gpu_total_joules": {
+        "mean": 23899.588412698413,
+        "std": 30107.51128029486,
+        "min": 368.03,
+        "max": 135539.68000000005,
+        "median": 7268.445000000001,
+        "q25": 2443.0375,
+        "q75": 41565.19750000002,
+        "n_outliers": 0,
+        "outlier_rate": 0.0
+      },
+      "energy_gpu_temp_avg_celsius": {
+        "mean": 68.16440264313852,
+        "std": 12.892808843387101,
+        "min": 36.88852459016393,
+        "max": 83.51086956521739,
+        "median": 69.23333333333333,
+        "q25": 60.173878205128204,
+        "q75": 80.06,
+        "n_outliers": 0,
+        "outlier_rate": 0.0
+      },
+      "energy_gpu_temp_max_celsius": {
+        "mean": 71.38888888888889,
+        "std": 11.778605840911544,
+        "min": 44.0,
+        "max": 85.0,
+        "median": 75.0,
+        "q25": 65.0,
+        "q75": 82.0,
+        "n_outliers": 0,
+        "outlier_rate": 0.0
+      },
+      "energy_gpu_util_avg_percent": {
+        "mean": 45.48979163723468,
+        "std": 31.94728198109428,
+        "min": 0.0,
+        "max": 99.52045454545454,
+        "median": 46.27777777777778,
+        "q25": 11.744548872180449,
+        "q75": 72.58279220779221,
+        "n_outliers": 0,
+        "outlier_rate": 0.0
+      },
+      "energy_gpu_util_max_percent": {
+        "mean": 61.3968253968254,
+        "std": 38.433959851168986,
+        "min": 0.0,
+        "max": 100.0,
+        "median": 74.0,
+        "q25": 14.25,
+        "q75": 100.0,
+        "n_outliers": 0,
+        "outlier_rate": 0.0
+      },
+      "duration_seconds": {
+        "mean": 147.42479830128806,
+        "std": 143.28082617155653,
+        "min": 7.119969129562378,
+        "max": 574.6750166416168,
+        "median": 143.22448182106018,
+        "q25": 17.715197682380676,
+        "q75": 219.03344482183456,
+        "n_outliers": 0,
+        "outlier_rate": 0.0
+      },
+      "num_mutated_params": {
+        "mean": 1.0396825396825398,
+        "std": 0.6621274034600126,
+        "min": 0.0,
+        "max": 4.0,
+        "median": 1.0,
+        "q25": 1.0,
+        "q75": 1.0,
+        "n_outliers": 15,
+        "outlier_rate": 0.11904761904761904
+      }
+    },
+    "feature_categories": {
+      "hyperparameters": [
+        "hyperparam_batch_size",
+        "hyperparam_epochs",
+        "hyperparam_learning_rate",
+        "hyperparam_seed"
+      ],
+      "energy_metrics": [
+        "energy_cpu_pkg_joules",
+        "energy_cpu_ram_joules",
+        "energy_cpu_total_joules",
+        "energy_gpu_avg_watts",
+        "energy_gpu_max_watts",
+        "energy_gpu_min_watts",
+        "energy_gpu_total_joules",
+        "energy_gpu_temp_avg_celsius",
+        "energy_gpu_temp_max_celsius",
+        "energy_gpu_util_avg_percent",
+        "energy_gpu_util_max_percent"
+      ],
+      "performance_metrics": [
+        "perf_test_accuracy"
+      ],
+      "control_variables": [
+        "duration_seconds",
+        "num_mutated_params"
+      ],
+      "n_hyperparams": 4,
+      "n_energy": 11,
+      "n_performance": 1,
+      "n_controls": 2
+    },
+    "hyperparam_diversity": {
+      "hyperparam_batch_size": {
+        "n_unique": 42,
+        "n_total": 126,
+        "diversity_ratio": 0.3333333333333333
+      },
+      "hyperparam_epochs": {
+        "n_unique": 11,
+        "n_total": 126,
+        "diversity_ratio": 0.0873015873015873
+      },
+      "hyperparam_learning_rate": {
+        "n_unique": 28,
+        "n_total": 126,
+        "diversity_ratio": 0.2222222222222222
+      },
+      "hyperparam_seed": {
+        "n_unique": 28,
+        "n_total": 126,
+        "diversity_ratio": 0.2222222222222222
+      }
+    },
+    "quality_rating": {
+      "overall": "优秀",
+      "sample_size": "优秀",
+      "missing_data": "优秀",
+      "feature_coverage": "优秀",
+      "hyperparam_coverage": "充分",
+      "dibs_ready": true,
+      "recommendations": []
+    }
+  },
+  {
+    "group_id": "group2_vulberta",
+    "group_name": "VulBERTa（代码漏洞检测）",
+    "n_samples": 52,
+    "n_features": 16,
+    "missing_values": {
+      "total_missing": 0,
+      "features_with_missing": 0,
+      "missing_rate": 0.0,
+      "worst_features": {}
+    },
+    "feature_variance": {
+      "zero_variance_features": [
+        "energy_gpu_util_max_percent"
+      ],
+      "near_zero_variance_features": [],
+      "low_cv_features": [
+        "energy_gpu_max_watts",
+        "energy_gpu_temp_avg_celsius",
+        "energy_gpu_temp_max_celsius"
+      ],
+      "n_constant_features": 1,
+      "n_low_variance_features": 3
+    },
+    "distribution_stats": {
+      "perf_eval_loss": {
+        "mean": 0.7261896958717933,
+        "std": 0.06110074810554114,
+        "min": 0.6637400388717651,
+        "max": 0.9852018356323242,
+        "median": 0.7066717147827148,
+        "q25": 0.6990937441587448,
+        "q75": 0.7155421376228333,
+        "n_outliers": 8,
+        "outlier_rate": 0.15384615384615385
+      },
+      "perf_final_training_loss": {
+        "mean": 0.7385442307692309,
+        "std": 0.04531061172276093,
+        "min": 0.6013,
+        "max": 0.8334,
+        "median": 0.7466,
+        "q25": 0.707975,
+        "q75": 0.75085,
+        "n_outliers": 0,
+        "outlier_rate": 0.0
+      },
+      "perf_eval_samples_per_second": {
+        "mean": 56.881807692307696,
+        "std": 3.8070041952544216,
+        "min": 48.878,
+        "max": 59.11,
+        "median": 58.872,
+        "q25": 58.40025,
+        "q75": 59.019,
+        "n_outliers": 12,
+        "outlier_rate": 0.23076923076923078
+      },
+      "energy_cpu_pkg_joules": {
+        "mean": 136695.14653846156,
+        "std": 43625.37489566261,
+        "min": 74991.75,
+        "max": 273395.9,
+        "median": 136246.64500000002,
+        "q25": 93732.11499999999,
+        "q75": 147177.74000000002,
+        "n_outliers": 0,
+        "outlier_rate": 0.0
+      },
+      "energy_cpu_ram_joules": {
+        "mean": 9104.153653846153,
+        "std": 2464.084569989215,
+        "min": 5931.85,
+        "max": 16131.99,
+        "median": 8522.66,
+        "q25": 7368.4775,
+        "q75": 9228.380000000001,
+        "n_outliers": 3,
+        "outlier_rate": 0.057692307692307696
+      },
+      "energy_cpu_total_joules": {
+        "mean": 145799.3001923077,
+        "std": 45892.643788563015,
+        "min": 80923.6,
+        "max": 289527.89,
+        "median": 145510.625,
+        "q25": 101121.5375,
+        "q75": 155740.4325,
+        "n_outliers": 0,
+        "outlier_rate": 0.0
+      },
+      "energy_gpu_avg_watts": {
+        "mean": 223.8139478808075,
+        "std": 9.36851775023357,
+        "min": 211.32741519063327,
+        "max": 242.33988209487177,
+        "median": 221.73981905707814,
+        "q25": 215.31959253496595,
+        "q75": 229.63442079152526,
+        "n_outliers": 0,
+        "outlier_rate": 0.0
+      },
+      "energy_gpu_max_watts": {
+        "mean": 319.0959615384615,
+        "std": 0.33300332457496373,
+        "min": 318.22,
+        "max": 319.8,
+        "median": 319.07500000000005,
+        "q25": 318.895,
+        "q75": 319.33,
+        "n_outliers": 0,
+        "outlier_rate": 0.0
+      },
+      "energy_gpu_min_watts": {
+        "mean": 24.136153846153846,
+        "std": 35.416119524475654,
+        "min": 4.49,
+        "max": 89.62,
+        "median": 4.970000000000001,
+        "q25": 4.865,
+        "q75": 5.22,
+        "n_outliers": 12,
+        "outlier_rate": 0.23076923076923078
+      },
+      "energy_gpu_total_joules": {
+        "mean": 829701.6336538461,
+        "std": 234006.77637189653,
+        "min": 555008.1500000013,
+        "max": 1534201.7199999953,
+        "median": 730021.3999999993,
+        "q25": 690617.1875000007,
+        "q75": 878121.6000000011,
+        "n_outliers": 1,
+        "outlier_rate": 0.019230769230769232
+      },
+      "energy_gpu_temp_avg_celsius": {
+        "mean": 78.67166509953455,
+        "std": 0.6234768398116988,
+        "min": 77.51406892190958,
+        "max": 79.8590622429394,
+        "median": 78.86130372232222,
+        "q25": 78.05567855210582,
+        "q75": 79.08501820673195,
+        "n_outliers": 0,
+        "outlier_rate": 0.0
+      },
+      "energy_gpu_temp_max_celsius": {
+        "mean": 84.03846153846153,
+        "std": 0.3941502879259338,
+        "min": 83.0,
+        "max": 85.0,
+        "median": 84.0,
+        "q25": 84.0,
+        "q75": 84.0,
+        "n_outliers": 8,
+        "outlier_rate": 0.15384615384615385
+      },
+      "energy_gpu_util_avg_percent": {
+        "mean": 87.21190894883931,
+        "std": 3.4550538507867814,
+        "min": 82.70679199514858,
+        "max": 91.92285071786888,
+        "median": 88.43239888842895,
+        "q25": 83.2118805456046,
+        "q75": 89.1854821088518,
+        "n_outliers": 0,
+        "outlier_rate": 0.0
+      },
+      "energy_gpu_util_max_percent": {
+        "mean": 100.0,
+        "std": 0.0,
+        "min": 100.0,
+        "max": 100.0,
+        "median": 100.0,
+        "q25": 100.0,
+        "q75": 100.0,
+        "n_outliers": 0,
+        "outlier_rate": 0.0
+      },
+      "duration_seconds": {
+        "mean": 3783.186973773516,
+        "std": 983.7835812050564,
+        "min": 1969.8063945770264,
+        "max": 6729.83655166626,
+        "median": 3427.581894993782,
+        "q25": 3250.744709074497,
+        "q75": 3774.37890291214,
+        "n_outliers": 7,
+        "outlier_rate": 0.1346153846153846
+      },
+      "num_mutated_params": {
+        "mean": 0.38461538461538464,
+        "std": 0.49125075078907476,
+        "min": 0.0,
+        "max": 1.0,
+        "median": 0.0,
+        "q25": 0.0,
+        "q75": 1.0,
+        "n_outliers": 0,
+        "outlier_rate": 0.0
+      }
+    },
+    "feature_categories": {
+      "hyperparameters": [],
+      "energy_metrics": [
+        "energy_cpu_pkg_joules",
+        "energy_cpu_ram_joules",
+        "energy_cpu_total_joules",
+        "energy_gpu_avg_watts",
+        "energy_gpu_max_watts",
+        "energy_gpu_min_watts",
+        "energy_gpu_total_joules",
+        "energy_gpu_temp_avg_celsius",
+        "energy_gpu_temp_max_celsius",
+        "energy_gpu_util_avg_percent",
+        "energy_gpu_util_max_percent"
+      ],
+      "performance_metrics": [
+        "perf_eval_loss",
+        "perf_final_training_loss",
+        "perf_eval_samples_per_second"
+      ],
+      "control_variables": [
+        "duration_seconds",
+        "num_mutated_params"
+      ],
+      "n_hyperparams": 0,
+      "n_energy": 11,
+      "n_performance": 3,
+      "n_controls": 2
+    },
+    "hyperparam_diversity": {},
+    "quality_rating": {
+      "overall": "需要清理",
+      "sample_size": "优秀",
+      "missing_data": "优秀",
+      "feature_coverage": "优秀",
+      "hyperparam_coverage": "无",
+      "dibs_ready": false,
+      "recommendations": [
+        "无超参数数据，只能分析能耗-性能关系，不能分析超参数影响",
+        "存在1个常数特征，需要在DiBS训练前移除"
+      ]
+    }
+  },
+  {
+    "group_id": "group3_person_reid",
+    "group_name": "Person_reID（行人重识别）",
+    "n_samples": 118,
+    "n_features": 19,
+    "missing_values": {
+      "total_missing": 0,
+      "features_with_missing": 0,
+      "missing_rate": 0.0,
+      "worst_features": {}
+    },
+    "feature_variance": {
+      "zero_variance_features": [],
+      "near_zero_variance_features": [],
+      "low_cv_features": [
+        "perf_rank5",
+        "energy_gpu_temp_max_celsius"
+      ],
+      "n_constant_features": 0,
+      "n_low_variance_features": 2
+    },
+    "distribution_stats": {
+      "hyperparam_dropout": {
+        "mean": 0.4579247535033086,
+        "std": 0.07966581707023124,
+        "min": 0.3012827091650035,
+        "max": 0.5927177959376558,
+        "median": 0.493725324448158,
+        "q25": 0.39757558785422914,
+        "q75": 0.5186457939896952,
+        "n_outliers": 0,
+        "outlier_rate": 0.0
+      },
+      "hyperparam_epochs": {
+        "mean": 60.08474576271186,
+        "std": 14.495844539355751,
+        "min": 31.0,
+        "max": 90.0,
+        "median": 60.0,
+        "q25": 48.5,
+        "q75": 70.0,
+        "n_outliers": 0,
+        "outlier_rate": 0.0
+      },
+      "hyperparam_learning_rate": {
+        "mean": 0.04716566804831698,
+        "std": 0.012646928701844844,
+        "min": 0.025203540264015,
+        "max": 0.0747043808344376,
+        "median": 0.05,
+        "q25": 0.03777079442910765,
+        "q75": 0.053753492722549076,
+        "n_outliers": 0,
+        "outlier_rate": 0.0
+      },
+      "hyperparam_seed": {
+        "mean": 4575.423728813559,
+        "std": 2916.2297208435543,
+        "min": 3.0,
+        "max": 9974.0,
+        "median": 4313.5,
+        "q25": 1859.0,
+        "q75": 6908.5,
+        "n_outliers": 0,
+        "outlier_rate": 0.0
+      },
+      "perf_map": {
+        "mean": 0.746808245762712,
+        "std": 0.036312683134024616,
+        "min": 0.568987,
+        "max": 0.780575,
+        "median": 0.749973,
+        "q25": 0.734186,
+        "q75": 0.77559775,
+        "n_outliers": 1,
+        "outlier_rate": 0.00847457627118644
+      },
+      "perf_rank1": {
+        "mean": 0.9049554237288135,
+        "std": 0.02199788221135688,
+        "min": 0.797803,
+        "max": 0.933195,
+        "median": 0.904246,
+        "q25": 0.8958582500000001,
+        "q75": 0.9244355,
+        "n_outliers": 1,
+        "outlier_rate": 0.00847457627118644
+      },
+      "perf_rank5": {
+        "mean": 0.9642698644067796,
+        "std": 0.009012379498266457,
+        "min": 0.918943,
+        "max": 0.976247,
+        "median": 0.9639255,
+        "q25": 0.96095625,
+        "q75": 0.9713477500000001,
+        "n_outliers": 1,
+        "outlier_rate": 0.00847457627118644
+      },
+      "energy_cpu_pkg_joules": {
+        "mean": 164370.08644067793,
+        "std": 57126.2244701771,
+        "min": 72165.26,
+        "max": 328065.49,
+        "median": 146663.755,
+        "q25": 121325.5625,
+        "q75": 206278.6675,
+        "n_outliers": 0,
+        "outlier_rate": 0.0
+      },
+      "energy_cpu_ram_joules": {
+        "mean": 11960.455762711865,
+        "std": 3759.8530887721417,
+        "min": 5866.07,
+        "max": 23075.76,
+        "median": 11163.205,
+        "q25": 9201.3125,
+        "q75": 14354.595,
+        "n_outliers": 0,
+        "outlier_rate": 0.0
+      },
+      "energy_cpu_total_joules": {
+        "mean": 176330.54220338984,
+        "std": 60811.85092345705,
+        "min": 78031.33,
+        "max": 351047.24,
+        "median": 158807.665,
+        "q25": 130931.785,
+        "q75": 221892.0475,
+        "n_outliers": 0,
+        "outlier_rate": 0.0
+      },
+      "energy_gpu_avg_watts": {
+        "mean": 226.28765513050132,
+        "std": 11.204498820937948,
+        "min": 202.4565757328993,
+        "max": 248.81575066698963,
+        "median": 229.19888888788824,
+        "q25": 217.56895953501737,
+        "q75": 235.25329913766697,
+        "n_outliers": 0,
+        "outlier_rate": 0.0
+      },
+      "energy_gpu_max_watts": {
+        "mean": 291.3224576271186,
+        "std": 20.4581435078745,
+        "min": 253.94,
+        "max": 318.35,
+        "median": 293.46,
+        "q25": 272.175,
+        "q75": 310.825,
+        "n_outliers": 0,
+        "outlier_rate": 0.0
+      },
+      "energy_gpu_min_watts": {
+        "mean": 59.59440677966103,
+        "std": 44.135628911217196,
+        "min": 4.83,
+        "max": 187.61,
+        "median": 89.345,
+        "q25": 13.98,
+        "q75": 90.415,
+        "n_outliers": 0,
+        "outlier_rate": 0.0
+      },
+      "energy_gpu_total_joules": {
+        "mean": 983753.35,
+        "std": 311184.27668048616,
+        "min": 488041.8900000013,
+        "max": 1859335.85,
+        "median": 969904.3549999987,
+        "q25": 744116.6549999987,
+        "q75": 1133159.4849999961,
+        "n_outliers": 0,
+        "outlier_rate": 0.0
+      },
+      "energy_gpu_temp_avg_celsius": {
+        "mean": 80.11936862996389,
+        "std": 1.6831751479331114,
+        "min": 77.72325203252032,
+        "max": 82.97247994967762,
+        "median": 79.90736267357987,
+        "q25": 78.53633698818749,
+        "q75": 82.04125353268003,
+        "n_outliers": 0,
+        "outlier_rate": 0.0
+      },
+      "energy_gpu_temp_max_celsius": {
+        "mean": 84.28813559322033,
+        "std": 0.6146598658511118,
+        "min": 83.0,
+        "max": 86.0,
+        "median": 84.0,
+        "q25": 84.0,
+        "q75": 85.0,
+        "n_outliers": 0,
+        "outlier_rate": 0.0
+      },
+      "energy_gpu_util_avg_percent": {
+        "mean": 87.25316873535375,
+        "std": 10.604653054992005,
+        "min": 57.44748858447488,
+        "max": 99.68691311066208,
+        "median": 90.43729714660691,
+        "q25": 80.60058975014452,
+        "q75": 96.89839121763502,
+        "n_outliers": 0,
+        "outlier_rate": 0.0
+      },
+      "energy_gpu_util_max_percent": {
+        "mean": 95.35593220338983,
+        "std": 7.529458299636343,
+        "min": 75.0,
+        "max": 100.0,
+        "median": 100.0,
+        "q25": 91.0,
+        "q75": 100.0,
+        "n_outliers": 0,
+        "outlier_rate": 0.0
+      },
+      "duration_seconds": {
+        "mean": 4463.39450288223,
+        "std": 1394.92962401428,
+        "min": 2276.774841070175,
+        "max": 8636.056714773178,
+        "median": 4275.391222119331,
+        "q25": 3459.505030274391,
+        "q75": 5290.938725292683,
+        "n_outliers": 0,
+        "outlier_rate": 0.0
+      }
+    },
+    "feature_categories": {
+      "hyperparameters": [
+        "hyperparam_dropout",
+        "hyperparam_epochs",
+        "hyperparam_learning_rate",
+        "hyperparam_seed"
+      ],
+      "energy_metrics": [
+        "energy_cpu_pkg_joules",
+        "energy_cpu_ram_joules",
+        "energy_cpu_total_joules",
+        "energy_gpu_avg_watts",
+        "energy_gpu_max_watts",
+        "energy_gpu_min_watts",
+        "energy_gpu_total_joules",
+        "energy_gpu_temp_avg_celsius",
+        "energy_gpu_temp_max_celsius",
+        "energy_gpu_util_avg_percent",
+        "energy_gpu_util_max_percent"
+      ],
+      "performance_metrics": [
+        "perf_map",
+        "perf_rank1",
+        "perf_rank5"
+      ],
+      "control_variables": [
+        "duration_seconds"
+      ],
+      "n_hyperparams": 4,
+      "n_energy": 11,
+      "n_performance": 3,
+      "n_controls": 1
+    },
+    "hyperparam_diversity": {
+      "hyperparam_dropout": {
+        "n_unique": 96,
+        "n_total": 118,
+        "diversity_ratio": 0.8135593220338984
+      },
+      "hyperparam_epochs": {
+        "n_unique": 45,
+        "n_total": 118,
+        "diversity_ratio": 0.3813559322033898
+      },
+      "hyperparam_learning_rate": {
+        "n_unique": 96,
+        "n_total": 118,
+        "diversity_ratio": 0.8135593220338984
+      },
+      "hyperparam_seed": {
+        "n_unique": 112,
+        "n_total": 118,
+        "diversity_ratio": 0.9491525423728814
+      }
+    },
+    "quality_rating": {
+      "overall": "优秀",
+      "sample_size": "优秀",
+      "missing_data": "优秀",
+      "feature_coverage": "优秀",
+      "hyperparam_coverage": "充分",
+      "dibs_ready": true,
+      "recommendations": []
+    }
+  },
+  {
+    "group_id": "group4_bug_localization",
+    "group_name": "bug-localization（缺陷定位）",
+    "n_samples": 40,
+    "n_features": 17,
+    "missing_values": {
+      "total_missing": 0,
+      "features_with_missing": 0,
+      "missing_rate": 0.0,
+      "worst_features": {}
+    },
+    "feature_variance": {
+      "zero_variance_features": [],
+      "near_zero_variance_features": [],
+      "low_cv_features": [
+        "perf_top5_accuracy",
+        "perf_top10_accuracy",
+        "perf_top20_accuracy"
+      ],
+      "n_constant_features": 0,
+      "n_low_variance_features": 3
+    },
+    "distribution_stats": {
+      "perf_top1_accuracy": {
+        "mean": 0.380325,
+        "std": 0.0044224804503053905,
+        "min": 0.364,
+        "max": 0.386,
+        "median": 0.3815,
+        "q25": 0.37875000000000003,
+        "q75": 0.383,
+        "n_outliers": 1,
+        "outlier_rate": 0.025
+      },
+      "perf_top5_accuracy": {
+        "mean": 0.6268,
+        "std": 0.002784572885353545,
+        "min": 0.617,
+        "max": 0.632,
+        "median": 0.627,
+        "q25": 0.626,
+        "q75": 0.629,
+        "n_outliers": 0,
+        "outlier_rate": 0.0
+      },
+      "perf_top10_accuracy": {
+        "mean": 0.738825,
+        "std": 0.0021707555106873495,
+        "min": 0.731,
+        "max": 0.744,
+        "median": 0.739,
+        "q25": 0.738,
+        "q75": 0.74,
+        "n_outliers": 1,
+        "outlier_rate": 0.025
+      },
+      "perf_top20_accuracy": {
+        "mean": 0.8274249999999999,
+        "std": 0.002217500325210281,
+        "min": 0.821,
+        "max": 0.833,
+        "median": 0.827,
+        "q25": 0.826,
+        "q75": 0.829,
+        "n_outliers": 0,
+        "outlier_rate": 0.0
+      },
+      "energy_cpu_pkg_joules": {
+        "mean": 56395.14575,
+        "std": 16935.502981306625,
+        "min": 6949.01,
+        "max": 80614.62,
+        "median": 55640.405,
+        "q25": 54179.307499999995,
+        "q75": 64998.2325,
+        "n_outliers": 3,
+        "outlier_rate": 0.075
+      },
+      "energy_cpu_ram_joules": {
+        "mean": 2181.6045,
+        "std": 632.8403726381316,
+        "min": 307.71,
+        "max": 3067.34,
+        "median": 2204.05,
+        "q25": 2098.125,
+        "q75": 2470.3450000000003,
+        "n_outliers": 3,
+        "outlier_rate": 0.075
+      },
+      "energy_cpu_total_joules": {
+        "mean": 58576.75025,
+        "std": 17567.033223843548,
+        "min": 7256.72,
+        "max": 83681.96,
+        "median": 57843.134999999995,
+        "q25": 56293.447499999995,
+        "q75": 67435.31999999999,
+        "n_outliers": 3,
+        "outlier_rate": 0.075
+      },
+      "energy_gpu_avg_watts": {
+        "mean": 54.534506496628445,
+        "std": 34.18004684240016,
+        "min": 3.614962162162171,
+        "max": 87.96602272727264,
+        "median": 71.70338977598178,
+        "q25": 3.8903390702590905,
+        "q75": 72.85317700210078,
+        "n_outliers": 0,
+        "outlier_rate": 0.0
+      },
+      "energy_gpu_max_watts": {
+        "mean": 60.258750000000006,
+        "std": 37.473903753145336,
+        "min": 4.04,
+        "max": 97.47,
+        "median": 79.96000000000001,
+        "q25": 4.805,
+        "q75": 81.01,
+        "n_outliers": 0,
+        "outlier_rate": 0.0
+      },
+      "energy_gpu_min_watts": {
+        "mean": 36.83775,
+        "std": 24.10629872870234,
+        "min": 3.28,
+        "max": 74.46,
+        "median": 42.47,
+        "q25": 3.485,
+        "q75": 50.7475,
+        "n_outliers": 0,
+        "outlier_rate": 0.0
+      },
+      "energy_gpu_total_joules": {
+        "mean": 25732.061,
+        "std": 23921.153623479076,
+        "min": 1435.7900000000009,
+        "max": 69669.08999999994,
+        "median": 24943.280000000006,
+        "q25": 3726.014999999998,
+        "q75": 25873.6175,
+        "n_outliers": 0,
+        "outlier_rate": 0.0
+      },
+      "energy_gpu_temp_avg_celsius": {
+        "mean": 47.39236457307087,
+        "std": 9.79414379303421,
+        "min": 33.37405405405406,
+        "max": 63.39141414141414,
+        "median": 48.89212566465073,
+        "q25": 36.00905241112238,
+        "q75": 50.404390934844194,
+        "n_outliers": 0,
+        "outlier_rate": 0.0
+      },
+      "energy_gpu_temp_max_celsius": {
+        "mean": 49.2,
+        "std": 8.809086218218097,
+        "min": 37.0,
+        "max": 66.0,
+        "median": 49.0,
+        "q25": 40.0,
+        "q75": 50.75,
+        "n_outliers": 0,
+        "outlier_rate": 0.0
+      },
+      "energy_gpu_util_avg_percent": {
+        "mean": 0.8570933251039723,
+        "std": 1.4352516319948705,
+        "min": 0.0,
+        "max": 3.746819338422392,
+        "median": 0.24504044684129428,
+        "q25": 0.0,
+        "q75": 0.29748123544831406,
+        "n_outliers": 8,
+        "outlier_rate": 0.2
+      },
+      "energy_gpu_util_max_percent": {
+        "mean": 4.25,
+        "std": 5.107812015897178,
+        "min": 0.0,
+        "max": 14.0,
+        "median": 3.0,
+        "q25": 0.0,
+        "q75": 3.0,
+        "n_outliers": 8,
+        "outlier_rate": 0.2
+      },
+      "duration_seconds": {
+        "mean": 862.8583831489086,
+        "std": 254.50802288686774,
+        "min": 119.18197321891785,
+        "max": 1224.7764918804169,
+        "median": 853.0233182907104,
+        "q25": 830.4080743789673,
+        "q75": 986.497908949852,
+        "n_outliers": 3,
+        "outlier_rate": 0.075
+      },
+      "num_mutated_params": {
+        "mean": 0.5,
+        "std": 0.5063696835418333,
+        "min": 0.0,
+        "max": 1.0,
+        "median": 0.5,
+        "q25": 0.0,
+        "q75": 1.0,
+        "n_outliers": 0,
+        "outlier_rate": 0.0
+      }
+    },
+    "feature_categories": {
+      "hyperparameters": [],
+      "energy_metrics": [
+        "energy_cpu_pkg_joules",
+        "energy_cpu_ram_joules",
+        "energy_cpu_total_joules",
+        "energy_gpu_avg_watts",
+        "energy_gpu_max_watts",
+        "energy_gpu_min_watts",
+        "energy_gpu_total_joules",
+        "energy_gpu_temp_avg_celsius",
+        "energy_gpu_temp_max_celsius",
+        "energy_gpu_util_avg_percent",
+        "energy_gpu_util_max_percent"
+      ],
+      "performance_metrics": [
+        "perf_top1_accuracy",
+        "perf_top5_accuracy",
+        "perf_top10_accuracy",
+        "perf_top20_accuracy"
+      ],
+      "control_variables": [
+        "duration_seconds",
+        "num_mutated_params"
+      ],
+      "n_hyperparams": 0,
+      "n_energy": 11,
+      "n_performance": 4,
+      "n_controls": 2
+    },
+    "hyperparam_diversity": {},
+    "quality_rating": {
+      "overall": "良好",
+      "sample_size": "可用",
+      "missing_data": "优秀",
+      "feature_coverage": "优秀",
+      "hyperparam_coverage": "无",
+      "dibs_ready": true,
+      "recommendations": [
+        "样本量为40，建议增加到50+以提高稳定性",
+        "无超参数数据，只能分析能耗-性能关系，不能分析超参数影响"
+      ]
+    }
+  },
+  {
+    "group_id": "group5_mrt_oast",
+    "group_name": "MRT-OAST（缺陷定位）",
+    "n_samples": 46,
+    "n_features": 16,
+    "missing_values": {
+      "total_missing": 0,
+      "features_with_missing": 0,
+      "missing_rate": 0.0,
+      "worst_features": {}
+    },
+    "feature_variance": {
+      "zero_variance_features": [],
+      "near_zero_variance_features": [],
+      "low_cv_features": [
+        "energy_gpu_max_watts",
+        "energy_gpu_temp_avg_celsius",
+        "energy_gpu_temp_max_celsius"
+      ],
+      "n_constant_features": 0,
+      "n_low_variance_features": 3
+    },
+    "distribution_stats": {
+      "perf_accuracy": {
+        "mean": 0.8900565217391304,
+        "std": 0.046500497737713226,
+        "min": 0.7478,
+        "max": 0.9892,
+        "median": 0.8843000000000001,
+        "q25": 0.8687,
+        "q75": 0.9185,
+        "n_outliers": 0,
+        "outlier_rate": 0.0
+      },
+      "perf_precision": {
+        "mean": 0.9463606521739132,
+        "std": 0.06139767795182753,
+        "min": 0.5967,
+        "max": 0.999124,
+        "median": 0.9469325,
+        "q25": 0.9279000000000001,
+        "q75": 0.982075,
+        "n_outliers": 1,
+        "outlier_rate": 0.021739130434782608
+      },
+      "perf_recall": {
+        "mean": 0.7940445434782609,
+        "std": 0.057705249982497354,
+        "min": 0.6191,
+        "max": 0.944146,
+        "median": 0.7969999999999999,
+        "q25": 0.7688999999999999,
+        "q75": 0.8324,
+        "n_outliers": 0,
+        "outlier_rate": 0.0
+      },
+      "energy_cpu_pkg_joules": {
+        "mean": 47649.14021739131,
+        "std": 12949.161794677504,
+        "min": 20037.11,
+        "max": 79423.39,
+        "median": 46891.58500000001,
+        "q25": 38610.595,
+        "q75": 57180.9725,
+        "n_outliers": 0,
+        "outlier_rate": 0.0
+      },
+      "energy_cpu_ram_joules": {
+        "mean": 3371.639782608695,
+        "std": 767.101854342373,
+        "min": 1531.2,
+        "max": 5246.62,
+        "median": 3566.38,
+        "q25": 2953.865,
+        "q75": 3802.93,
+        "n_outliers": 0,
+        "outlier_rate": 0.0
+      },
+      "energy_cpu_total_joules": {
+        "mean": 51020.779999999984,
+        "std": 13693.625081135138,
+        "min": 21568.31,
+        "max": 84670.01,
+        "median": 50457.965,
+        "q25": 41561.2275,
+        "q75": 60969.134999999995,
+        "n_outliers": 0,
+        "outlier_rate": 0.0
+      },
+      "energy_gpu_avg_watts": {
+        "mean": 236.88341360844836,
+        "std": 10.952308304226964,
+        "min": 217.20815991237703,
+        "max": 268.00774535809035,
+        "median": 235.96733094370808,
+        "q25": 234.19805725932474,
+        "q75": 238.94042838283852,
+        "n_outliers": 9,
+        "outlier_rate": 0.1956521739130435
+      },
+      "energy_gpu_max_watts": {
+        "mean": 316.26978260869566,
+        "std": 1.4964008511245868,
+        "min": 311.43,
+        "max": 318.71,
+        "median": 316.605,
+        "q25": 315.4325,
+        "q75": 317.4275,
+        "n_outliers": 0,
+        "outlier_rate": 0.0
+      },
+      "energy_gpu_min_watts": {
+        "mean": 82.58804347826086,
+        "std": 7.394924271136618,
+        "min": 67.78,
+        "max": 91.17,
+        "median": 81.99,
+        "q25": 76.4975,
+        "q75": 89.72999999999999,
+        "n_outliers": 0,
+        "outlier_rate": 0.0
+      },
+      "energy_gpu_total_joules": {
+        "mean": 331219.2369565218,
+        "std": 67898.3889331574,
+        "min": 145950.39000000004,
+        "max": 505784.3899999994,
+        "median": 356936.3300000003,
+        "q25": 299032.75749999995,
+        "q75": 361150.0074999998,
+        "n_outliers": 0,
+        "outlier_rate": 0.0
+      },
+      "energy_gpu_temp_avg_celsius": {
+        "mean": 79.77062573993975,
+        "std": 0.6733137665441228,
+        "min": 77.98203592814372,
+        "max": 80.95865633074935,
+        "median": 79.85270474782669,
+        "q25": 79.35561382994933,
+        "q75": 80.2749399857144,
+        "n_outliers": 0,
+        "outlier_rate": 0.0
+      },
+      "energy_gpu_temp_max_celsius": {
+        "mean": 84.15217391304348,
+        "std": 0.4698648176442915,
+        "min": 83.0,
+        "max": 85.0,
+        "median": 84.0,
+        "q25": 84.0,
+        "q75": 84.0,
+        "n_outliers": 11,
+        "outlier_rate": 0.2391304347826087
+      },
+      "energy_gpu_util_avg_percent": {
+        "mean": 93.45128150722036,
+        "std": 1.0061871614570508,
+        "min": 91.23552894211576,
+        "max": 94.755743084857,
+        "median": 93.20422204799648,
+        "q25": 92.80712084229046,
+        "q75": 94.49280104712042,
+        "n_outliers": 0,
+        "outlier_rate": 0.0
+      },
+      "energy_gpu_util_max_percent": {
+        "mean": 99.08695652173913,
+        "std": 1.2793416181166826,
+        "min": 97.0,
+        "max": 100.0,
+        "median": 100.0,
+        "q25": 98.0,
+        "q75": 100.0,
+        "n_outliers": 0,
+        "outlier_rate": 0.0
+      },
+      "duration_seconds": {
+        "mean": 1444.2099898846252,
+        "std": 311.6795150371807,
+        "min": 673.6653892993927,
+        "max": 2189.4368748664856,
+        "median": 1563.2809765338898,
+        "q25": 1302.369235038757,
+        "q75": 1571.5359583497047,
+        "n_outliers": 0,
+        "outlier_rate": 0.0
+      },
+      "num_mutated_params": {
+        "mean": 1.4130434782608696,
+        "std": 1.795996621582095,
+        "min": 0.0,
+        "max": 5.0,
+        "median": 1.0,
+        "q25": 0.0,
+        "q75": 1.0,
+        "n_outliers": 8,
+        "outlier_rate": 0.17391304347826086
+      }
+    },
+    "feature_categories": {
+      "hyperparameters": [],
+      "energy_metrics": [
+        "energy_cpu_pkg_joules",
+        "energy_cpu_ram_joules",
+        "energy_cpu_total_joules",
+        "energy_gpu_avg_watts",
+        "energy_gpu_max_watts",
+        "energy_gpu_min_watts",
+        "energy_gpu_total_joules",
+        "energy_gpu_temp_avg_celsius",
+        "energy_gpu_temp_max_celsius",
+        "energy_gpu_util_avg_percent",
+        "energy_gpu_util_max_percent"
+      ],
+      "performance_metrics": [
+        "perf_accuracy",
+        "perf_precision",
+        "perf_recall"
+      ],
+      "control_variables": [
+        "duration_seconds",
+        "num_mutated_params"
+      ],
+      "n_hyperparams": 0,
+      "n_energy": 11,
+      "n_performance": 3,
+      "n_controls": 2
+    },
+    "hyperparam_diversity": {},
+    "quality_rating": {
+      "overall": "良好",
+      "sample_size": "可用",
+      "missing_data": "优秀",
+      "feature_coverage": "优秀",
+      "hyperparam_coverage": "无",
+      "dibs_ready": true,
+      "recommendations": [
+        "样本量为46，建议增加到50+以提高稳定性",
+        "无超参数数据，只能分析能耗-性能关系，不能分析超参数影响"
+      ]
+    }
+  },
+  {
+    "group_id": "group6_resnet",
+    "group_name": "pytorch_resnet（图像分类-ResNet）",
+    "n_samples": 41,
+    "n_features": 18,
+    "missing_values": {
+      "total_missing": 0,
+      "features_with_missing": 0,
+      "missing_rate": 0.0,
+      "worst_features": {}
+    },
+    "feature_variance": {
+      "zero_variance_features": [],
+      "near_zero_variance_features": [],
+      "low_cv_features": [
+        "perf_best_val_accuracy",
+        "perf_test_accuracy"
+      ],
+      "n_constant_features": 0,
+      "n_low_variance_features": 2
+    },
+    "distribution_stats": {
+      "hyperparam_epochs": {
+        "mean": 196.02439024390245,
+        "std": 53.63650240502174,
+        "min": 108.0,
+        "max": 297.0,
+        "median": 200.0,
+        "q25": 153.0,
+        "q75": 232.0,
+        "n_outliers": 0,
+        "outlier_rate": 0.0
+      },
+      "hyperparam_learning_rate": {
+        "mean": 0.08587043865276632,
+        "std": 0.022942923807793263,
+        "min": 0.0505336421108525,
+        "max": 0.1345605456624013,
+        "median": 0.0880393018497036,
+        "q25": 0.065292553015874,
+        "q75": 0.1,
+        "n_outliers": 0,
+        "outlier_rate": 0.0
+      },
+      "hyperparam_seed": {
+        "mean": 5765.170731707317,
+        "std": 2897.8372875511745,
+        "min": 409.0,
+        "max": 9992.0,
+        "median": 6982.0,
+        "q25": 3388.0,
+        "q75": 8189.0,
+        "n_outliers": 0,
+        "outlier_rate": 0.0
+      },
+      "hyperparam_weight_decay": {
+        "mean": 0.0001665280775959914,
+        "std": 0.00017502672532217347,
+        "min": 1.0520467131875386e-05,
+        "max": 0.0006598858465262,
+        "median": 0.0001,
+        "q25": 4.561127826318631e-05,
+        "q75": 0.0002078906160795,
+        "n_outliers": 0,
+        "outlier_rate": 0.0
+      },
+      "perf_best_val_accuracy": {
+        "mean": 91.49878048780488,
+        "std": 0.7250834266549989,
+        "min": 90.12,
+        "max": 92.49,
+        "median": 91.71,
+        "q25": 90.82,
+        "q75": 92.14,
+        "n_outliers": 0,
+        "outlier_rate": 0.0
+      },
+      "perf_test_accuracy": {
+        "mean": 91.49756097560976,
+        "std": 0.7247750702383635,
+        "min": 90.15,
+        "max": 92.47,
+        "median": 91.71,
+        "q25": 90.82,
+        "q75": 92.15,
+        "n_outliers": 0,
+        "outlier_rate": 0.0
+      },
+      "energy_cpu_pkg_joules": {
+        "mean": 58081.377804878044,
+        "std": 20472.526036251427,
+        "min": 30645.71,
+        "max": 121574.58,
+        "median": 54361.51,
+        "q25": 41603.95,
+        "q75": 75805.42,
+        "n_outliers": 0,
+        "outlier_rate": 0.0
+      },
+      "energy_cpu_ram_joules": {
+        "mean": 3683.5936585365853,
+        "std": 1475.6757818331168,
+        "min": 1832.36,
+        "max": 8265.16,
+        "median": 3272.19,
+        "q25": 2529.3,
+        "q75": 4558.1,
+        "n_outliers": 0,
+        "outlier_rate": 0.0
+      },
+      "energy_cpu_total_joules": {
+        "mean": 61764.971463414644,
+        "std": 21932.58579033484,
+        "min": 32478.07,
+        "max": 129839.74,
+        "median": 57633.7,
+        "q25": 44087.25,
+        "q75": 80750.43,
+        "n_outliers": 0,
+        "outlier_rate": 0.0
+      },
+      "energy_gpu_avg_watts": {
+        "mean": 230.35466547103405,
+        "std": 8.168997679258032,
+        "min": 211.7737085769984,
+        "max": 238.1812052980128,
+        "median": 234.7615625000004,
+        "q25": 225.94957458563547,
+        "q75": 236.1256710775048,
+        "n_outliers": 0,
+        "outlier_rate": 0.0
+      },
+      "energy_gpu_max_watts": {
+        "mean": 256.4014634146341,
+        "std": 7.38995046024519,
+        "min": 240.77,
+        "max": 264.83,
+        "median": 260.31,
+        "q25": 250.01,
+        "q75": 262.43,
+        "n_outliers": 0,
+        "outlier_rate": 0.0
+      },
+      "energy_gpu_min_watts": {
+        "mean": 86.51804878048782,
+        "std": 6.289629647090594,
+        "min": 69.53,
+        "max": 92.31,
+        "median": 89.76,
+        "q25": 83.56,
+        "q75": 90.58,
+        "n_outliers": 0,
+        "outlier_rate": 0.0
+      },
+      "energy_gpu_total_joules": {
+        "mean": 268957.4080487805,
+        "std": 75323.27839777146,
+        "min": 150857.3199999999,
+        "max": 434559.6500000007,
+        "median": 256339.48000000016,
+        "q25": 211409.31999999992,
+        "q75": 320494.24000000017,
+        "n_outliers": 0,
+        "outlier_rate": 0.0
+      },
+      "energy_gpu_temp_avg_celsius": {
+        "mean": 81.541758381285,
+        "std": 1.5208856406904037,
+        "min": 76.2547770700637,
+        "max": 82.64486592544147,
+        "median": 82.17919075144509,
+        "q25": 81.78947368421052,
+        "q75": 82.37719298245614,
+        "n_outliers": 7,
+        "outlier_rate": 0.17073170731707318
+      },
+      "energy_gpu_temp_max_celsius": {
+        "mean": 83.29268292682927,
+        "std": 1.1883581623194328,
+        "min": 79.0,
+        "max": 84.0,
+        "median": 84.0,
+        "q25": 83.0,
+        "q75": 84.0,
+        "n_outliers": 1,
+        "outlier_rate": 0.024390243902439025
+      },
+      "energy_gpu_util_avg_percent": {
+        "mean": 66.86788450178685,
+        "std": 7.401388963463718,
+        "min": 54.00527240773287,
+        "max": 74.14024005053696,
+        "median": 72.70823244552058,
+        "q25": 60.24025385312783,
+        "q75": 73.4460511679644,
+        "n_outliers": 0,
+        "outlier_rate": 0.0
+      },
+      "energy_gpu_util_max_percent": {
+        "mean": 83.92682926829268,
+        "std": 7.380346346555964,
+        "min": 71.0,
+        "max": 91.0,
+        "median": 89.0,
+        "q25": 75.0,
+        "q75": 89.0,
+        "n_outliers": 0,
+        "outlier_rate": 0.0
+      },
+      "duration_seconds": {
+        "mean": 1207.5702384623085,
+        "std": 357.79619756886177,
+        "min": 655.5144646167755,
+        "max": 2117.8777158260345,
+        "median": 1135.9036231040957,
+        "q25": 923.8873929977416,
+        "q75": 1475.6209123134613,
+        "n_outliers": 0,
+        "outlier_rate": 0.0
+      }
+    },
+    "feature_categories": {
+      "hyperparameters": [
+        "hyperparam_epochs",
+        "hyperparam_learning_rate",
+        "hyperparam_seed",
+        "hyperparam_weight_decay"
+      ],
+      "energy_metrics": [
+        "energy_cpu_pkg_joules",
+        "energy_cpu_ram_joules",
+        "energy_cpu_total_joules",
+        "energy_gpu_avg_watts",
+        "energy_gpu_max_watts",
+        "energy_gpu_min_watts",
+        "energy_gpu_total_joules",
+        "energy_gpu_temp_avg_celsius",
+        "energy_gpu_temp_max_celsius",
+        "energy_gpu_util_avg_percent",
+        "energy_gpu_util_max_percent"
+      ],
+      "performance_metrics": [
+        "perf_best_val_accuracy",
+        "perf_test_accuracy"
+      ],
+      "control_variables": [
+        "duration_seconds"
+      ],
+      "n_hyperparams": 4,
+      "n_energy": 11,
+      "n_performance": 2,
+      "n_controls": 1
+    },
+    "hyperparam_diversity": {
+      "hyperparam_epochs": {
+        "n_unique": 32,
+        "n_total": 41,
+        "diversity_ratio": 0.7804878048780488
+      },
+      "hyperparam_learning_rate": {
+        "n_unique": 37,
+        "n_total": 41,
+        "diversity_ratio": 0.9024390243902439
+      },
+      "hyperparam_seed": {
+        "n_unique": 40,
+        "n_total": 41,
+        "diversity_ratio": 0.975609756097561
+      },
+      "hyperparam_weight_decay": {
+        "n_unique": 37,
+        "n_total": 41,
+        "diversity_ratio": 0.9024390243902439
+      }
+    },
+    "quality_rating": {
+      "overall": "良好",
+      "sample_size": "可用",
+      "missing_data": "优秀",
+      "feature_coverage": "优秀",
+      "hyperparam_coverage": "充分",
+      "dibs_ready": true,
+      "recommendations": [
+        "样本量为41，建议增加到50+以提高稳定性"
+      ]
+    }
+  }
+]

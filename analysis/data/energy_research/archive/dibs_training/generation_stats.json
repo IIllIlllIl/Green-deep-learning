@@ -1,0 +1,424 @@
+{
+  "generation_time": "2026-01-15 18:03:17",
+  "input_file": "/home/green/energy_dl/nightly/data/data.csv",
+  "output_dir": "/home/green/energy_dl/nightly/analysis/data/energy_research/dibs_training",
+  "total_tasks": 6,
+  "successful_tasks": 6,
+  "task_stats": [
+    {
+      "group_id": "group1_examples",
+      "group_name": "examples（图像分类-小型）",
+      "repositories": [
+        "examples"
+      ],
+      "models": [
+        "mnist_ff",
+        "mnist_rnn",
+        "siamese",
+        "mnist"
+      ],
+      "n_samples_raw": 304,
+      "n_samples_final": 126,
+      "n_features_raw": 39,
+      "n_features_final": 19,
+      "n_cols_removed_high_missing": 20,
+      "n_rows_removed_missing": 178,
+      "missing_threshold": 0.4,
+      "feature_names": [
+        "hyperparam_batch_size",
+        "hyperparam_epochs",
+        "hyperparam_learning_rate",
+        "hyperparam_seed",
+        "perf_test_accuracy",
+        "energy_cpu_pkg_joules",
+        "energy_cpu_ram_joules",
+        "energy_cpu_total_joules",
+        "energy_gpu_avg_watts",
+        "energy_gpu_max_watts",
+        "energy_gpu_min_watts",
+        "energy_gpu_total_joules",
+        "energy_gpu_temp_avg_celsius",
+        "energy_gpu_temp_max_celsius",
+        "energy_gpu_util_avg_percent",
+        "energy_gpu_util_max_percent",
+        "duration_seconds",
+        "is_parallel",
+        "num_mutated_params"
+      ],
+      "hyperparams": [
+        "hyperparam_batch_size",
+        "hyperparam_epochs",
+        "hyperparam_learning_rate",
+        "hyperparam_seed"
+      ],
+      "performance": [
+        "perf_test_accuracy"
+      ],
+      "energy": [
+        "energy_cpu_pkg_joules",
+        "energy_cpu_ram_joules",
+        "energy_cpu_total_joules",
+        "energy_gpu_avg_watts",
+        "energy_gpu_max_watts",
+        "energy_gpu_min_watts",
+        "energy_gpu_total_joules",
+        "energy_gpu_temp_avg_celsius",
+        "energy_gpu_temp_max_celsius",
+        "energy_gpu_util_avg_percent",
+        "energy_gpu_util_max_percent"
+      ],
+      "controls": [
+        "duration_seconds",
+        "is_parallel",
+        "num_mutated_params"
+      ],
+      "missing_rate_before_clean": 0.06267313019390582,
+      "processing_success": true,
+      "output_file": "/home/green/energy_dl/nightly/analysis/data/energy_research/dibs_training/group1_examples.csv"
+    },
+    {
+      "group_id": "group2_vulberta",
+      "group_name": "VulBERTa（代码漏洞检测）",
+      "repositories": [
+        "VulBERTa"
+      ],
+      "models": [
+        "mlp",
+        "lstm",
+        "cnn"
+      ],
+      "n_samples_raw": 152,
+      "n_samples_final": 52,
+      "n_features_raw": 39,
+      "n_features_final": 17,
+      "n_cols_removed_high_missing": 22,
+      "n_rows_removed_missing": 100,
+      "missing_threshold": 0.4,
+      "feature_names": [
+        "perf_eval_loss",
+        "perf_final_training_loss",
+        "perf_eval_samples_per_second",
+        "energy_cpu_pkg_joules",
+        "energy_cpu_ram_joules",
+        "energy_cpu_total_joules",
+        "energy_gpu_avg_watts",
+        "energy_gpu_max_watts",
+        "energy_gpu_min_watts",
+        "energy_gpu_total_joules",
+        "energy_gpu_temp_avg_celsius",
+        "energy_gpu_temp_max_celsius",
+        "energy_gpu_util_avg_percent",
+        "energy_gpu_util_max_percent",
+        "duration_seconds",
+        "is_parallel",
+        "num_mutated_params"
+      ],
+      "hyperparams": [],
+      "performance": [
+        "perf_eval_loss",
+        "perf_final_training_loss",
+        "perf_eval_samples_per_second"
+      ],
+      "energy": [
+        "energy_cpu_pkg_joules",
+        "energy_cpu_ram_joules",
+        "energy_cpu_total_joules",
+        "energy_gpu_avg_watts",
+        "energy_gpu_max_watts",
+        "energy_gpu_min_watts",
+        "energy_gpu_total_joules",
+        "energy_gpu_temp_avg_celsius",
+        "energy_gpu_temp_max_celsius",
+        "energy_gpu_util_avg_percent",
+        "energy_gpu_util_max_percent"
+      ],
+      "controls": [
+        "duration_seconds",
+        "is_parallel",
+        "num_mutated_params"
+      ],
+      "missing_rate_before_clean": 0.17956656346749225,
+      "processing_success": true,
+      "output_file": "/home/green/energy_dl/nightly/analysis/data/energy_research/dibs_training/group2_vulberta.csv"
+    },
+    {
+      "group_id": "group3_person_reid",
+      "group_name": "Person_reID（行人重识别）",
+      "repositories": [
+        "Person_reID_baseline_pytorch"
+      ],
+      "models": [
+        "densenet121",
+        "hrnet18",
+        "pcb",
+        "resnet50",
+        "resnet50_ibn_a"
+      ],
+      "n_samples_raw": 206,
+      "n_samples_final": 118,
+      "n_features_raw": 39,
+      "n_features_final": 20,
+      "n_cols_removed_high_missing": 19,
+      "n_rows_removed_missing": 88,
+      "missing_threshold": 0.4,
+      "feature_names": [
+        "hyperparam_dropout",
+        "hyperparam_epochs",
+        "hyperparam_learning_rate",
+        "hyperparam_seed",
+        "perf_map",
+        "perf_rank1",
+        "perf_rank5",
+        "energy_cpu_pkg_joules",
+        "energy_cpu_ram_joules",
+        "energy_cpu_total_joules",
+        "energy_gpu_avg_watts",
+        "energy_gpu_max_watts",
+        "energy_gpu_min_watts",
+        "energy_gpu_total_joules",
+        "energy_gpu_temp_avg_celsius",
+        "energy_gpu_temp_max_celsius",
+        "energy_gpu_util_avg_percent",
+        "energy_gpu_util_max_percent",
+        "duration_seconds",
+        "is_parallel"
+      ],
+      "hyperparams": [
+        "hyperparam_dropout",
+        "hyperparam_epochs",
+        "hyperparam_learning_rate",
+        "hyperparam_seed"
+      ],
+      "performance": [
+        "perf_map",
+        "perf_rank1",
+        "perf_rank5"
+      ],
+      "energy": [
+        "energy_cpu_pkg_joules",
+        "energy_cpu_ram_joules",
+        "energy_cpu_total_joules",
+        "energy_gpu_avg_watts",
+        "energy_gpu_max_watts",
+        "energy_gpu_min_watts",
+        "energy_gpu_total_joules",
+        "energy_gpu_temp_avg_celsius",
+        "energy_gpu_temp_max_celsius",
+        "energy_gpu_util_avg_percent",
+        "energy_gpu_util_max_percent"
+      ],
+      "controls": [
+        "duration_seconds",
+        "is_parallel"
+      ],
+      "missing_rate_before_clean": 0.0412621359223301,
+      "processing_success": true,
+      "output_file": "/home/green/energy_dl/nightly/analysis/data/energy_research/dibs_training/group3_person_reid.csv"
+    },
+    {
+      "group_id": "group4_bug_localization",
+      "group_name": "bug-localization（缺陷定位）",
+      "repositories": [
+        "bug-localization-by-dnn-and-rvsm"
+      ],
+      "models": [
+        "default",
+        "dnn",
+        "dnn_attention",
+        "dnn_bilstm",
+        "dnn_cnn"
+      ],
+      "n_samples_raw": 142,
+      "n_samples_final": 40,
+      "n_features_raw": 39,
+      "n_features_final": 18,
+      "n_cols_removed_high_missing": 21,
+      "n_rows_removed_missing": 102,
+      "missing_threshold": 0.4,
+      "feature_names": [
+        "perf_top1_accuracy",
+        "perf_top5_accuracy",
+        "perf_top10_accuracy",
+        "perf_top20_accuracy",
+        "energy_cpu_pkg_joules",
+        "energy_cpu_ram_joules",
+        "energy_cpu_total_joules",
+        "energy_gpu_avg_watts",
+        "energy_gpu_max_watts",
+        "energy_gpu_min_watts",
+        "energy_gpu_total_joules",
+        "energy_gpu_temp_avg_celsius",
+        "energy_gpu_temp_max_celsius",
+        "energy_gpu_util_avg_percent",
+        "energy_gpu_util_max_percent",
+        "duration_seconds",
+        "is_parallel",
+        "num_mutated_params"
+      ],
+      "hyperparams": [],
+      "performance": [
+        "perf_top1_accuracy",
+        "perf_top5_accuracy",
+        "perf_top10_accuracy",
+        "perf_top20_accuracy"
+      ],
+      "energy": [
+        "energy_cpu_pkg_joules",
+        "energy_cpu_ram_joules",
+        "energy_cpu_total_joules",
+        "energy_gpu_avg_watts",
+        "energy_gpu_max_watts",
+        "energy_gpu_min_watts",
+        "energy_gpu_total_joules",
+        "energy_gpu_temp_avg_celsius",
+        "energy_gpu_temp_max_celsius",
+        "energy_gpu_util_avg_percent",
+        "energy_gpu_util_max_percent"
+      ],
+      "controls": [
+        "duration_seconds",
+        "is_parallel",
+        "num_mutated_params"
+      ],
+      "missing_rate_before_clean": 0.10954616588419405,
+      "processing_success": true,
+      "output_file": "/home/green/energy_dl/nightly/analysis/data/energy_research/dibs_training/group4_bug_localization.csv"
+    },
+    {
+      "group_id": "group5_mrt_oast",
+      "group_name": "MRT-OAST（缺陷定位）",
+      "repositories": [
+        "MRT-OAST"
+      ],
+      "models": [
+        "default",
+        "resnet",
+        "googlenet",
+        "densenet"
+      ],
+      "n_samples_raw": 92,
+      "n_samples_final": 46,
+      "n_features_raw": 39,
+      "n_features_final": 17,
+      "n_cols_removed_high_missing": 22,
+      "n_rows_removed_missing": 46,
+      "missing_threshold": 0.4,
+      "feature_names": [
+        "perf_accuracy",
+        "perf_precision",
+        "perf_recall",
+        "energy_cpu_pkg_joules",
+        "energy_cpu_ram_joules",
+        "energy_cpu_total_joules",
+        "energy_gpu_avg_watts",
+        "energy_gpu_max_watts",
+        "energy_gpu_min_watts",
+        "energy_gpu_total_joules",
+        "energy_gpu_temp_avg_celsius",
+        "energy_gpu_temp_max_celsius",
+        "energy_gpu_util_avg_percent",
+        "energy_gpu_util_max_percent",
+        "duration_seconds",
+        "is_parallel",
+        "num_mutated_params"
+      ],
+      "hyperparams": [],
+      "performance": [
+        "perf_accuracy",
+        "perf_precision",
+        "perf_recall"
+      ],
+      "energy": [
+        "energy_cpu_pkg_joules",
+        "energy_cpu_ram_joules",
+        "energy_cpu_total_joules",
+        "energy_gpu_avg_watts",
+        "energy_gpu_max_watts",
+        "energy_gpu_min_watts",
+        "energy_gpu_total_joules",
+        "energy_gpu_temp_avg_celsius",
+        "energy_gpu_temp_max_celsius",
+        "energy_gpu_util_avg_percent",
+        "energy_gpu_util_max_percent"
+      ],
+      "controls": [
+        "duration_seconds",
+        "is_parallel",
+        "num_mutated_params"
+      ],
+      "missing_rate_before_clean": 0.054987212276214836,
+      "processing_success": true,
+      "output_file": "/home/green/energy_dl/nightly/analysis/data/energy_research/dibs_training/group5_mrt_oast.csv"
+    },
+    {
+      "group_id": "group6_resnet",
+      "group_name": "pytorch_resnet（图像分类-ResNet）",
+      "repositories": [
+        "pytorch_resnet_cifar10"
+      ],
+      "models": [
+        "resnet20",
+        "resnet32",
+        "resnet44"
+      ],
+      "n_samples_raw": 74,
+      "n_samples_final": 41,
+      "n_features_raw": 39,
+      "n_features_final": 19,
+      "n_cols_removed_high_missing": 20,
+      "n_rows_removed_missing": 33,
+      "missing_threshold": 0.4,
+      "feature_names": [
+        "hyperparam_epochs",
+        "hyperparam_learning_rate",
+        "hyperparam_seed",
+        "hyperparam_weight_decay",
+        "perf_best_val_accuracy",
+        "perf_test_accuracy",
+        "energy_cpu_pkg_joules",
+        "energy_cpu_ram_joules",
+        "energy_cpu_total_joules",
+        "energy_gpu_avg_watts",
+        "energy_gpu_max_watts",
+        "energy_gpu_min_watts",
+        "energy_gpu_total_joules",
+        "energy_gpu_temp_avg_celsius",
+        "energy_gpu_temp_max_celsius",
+        "energy_gpu_util_avg_percent",
+        "energy_gpu_util_max_percent",
+        "duration_seconds",
+        "is_parallel"
+      ],
+      "hyperparams": [
+        "hyperparam_epochs",
+        "hyperparam_learning_rate",
+        "hyperparam_seed",
+        "hyperparam_weight_decay"
+      ],
+      "performance": [
+        "perf_best_val_accuracy",
+        "perf_test_accuracy"
+      ],
+      "energy": [
+        "energy_cpu_pkg_joules",
+        "energy_cpu_ram_joules",
+        "energy_cpu_total_joules",
+        "energy_gpu_avg_watts",
+        "energy_gpu_max_watts",
+        "energy_gpu_min_watts",
+        "energy_gpu_total_joules",
+        "energy_gpu_temp_avg_celsius",
+        "energy_gpu_temp_max_celsius",
+        "energy_gpu_util_avg_percent",
+        "energy_gpu_util_max_percent"
+      ],
+      "controls": [
+        "duration_seconds",
+        "is_parallel"
+      ],
+      "missing_rate_before_clean": 0.057610241820768134,
+      "processing_success": true,
+      "output_file": "/home/green/energy_dl/nightly/analysis/data/energy_research/dibs_training/group6_resnet.csv"
+    }
+  ]
+}

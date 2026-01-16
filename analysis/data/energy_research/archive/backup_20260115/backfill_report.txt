@@ -1,0 +1,143 @@
+================================================================================
+超参数默认值填充报告
+================================================================================
+
+## 总体统计
+
+总单元格数: 13842
+  - 原始已有值 (recorded): 3341 (24.14%)
+  - 新填充值 (backfilled): 2955 (21.35%)
+  - 不适用 (N/A): 7546 (54.52%)
+
+填充后完整性: 45.48%
+
+## 主超参数列 (repository字段)
+
+### hyperparam_epochs
+  - 总数: 1120
+  - recorded: 557 (49.73%)
+  - backfilled: 414 (36.96%)
+  - N/A: 149 (13.30%)
+  - 填充后完整性: 86.70%
+
+### hyperparam_max_iter
+  - 总数: 1120
+  - recorded: 55 (4.91%)
+  - backfilled: 94 (8.39%)
+  - N/A: 971 (86.70%)
+  - 填充后完整性: 13.30%
+
+### hyperparam_learning_rate
+  - 总数: 1120
+  - recorded: 548 (48.93%)
+  - backfilled: 423 (37.77%)
+  - N/A: 149 (13.30%)
+  - 填充后完整性: 86.70%
+
+### hyperparam_batch_size
+  - 总数: 1120
+  - recorded: 193 (17.23%)
+  - backfilled: 161 (14.37%)
+  - N/A: 766 (68.39%)
+  - 填充后完整性: 31.61%
+
+### hyperparam_dropout
+  - 总数: 1120
+  - recorded: 221 (19.73%)
+  - backfilled: 145 (12.95%)
+  - N/A: 754 (67.32%)
+  - 填充后完整性: 32.68%
+
+### hyperparam_weight_decay
+  - 总数: 1120
+  - recorded: 171 (15.27%)
+  - backfilled: 185 (16.52%)
+  - N/A: 764 (68.21%)
+  - 填充后完整性: 31.79%
+
+### hyperparam_alpha
+  - 总数: 1120
+  - recorded: 54 (4.82%)
+  - backfilled: 95 (8.48%)
+  - N/A: 971 (86.70%)
+  - 填充后完整性: 13.30%
+
+### hyperparam_kfold
+  - 总数: 1120
+  - recorded: 49 (4.38%)
+  - backfilled: 100 (8.93%)
+  - N/A: 971 (86.70%)
+  - 填充后完整性: 13.30%
+
+### hyperparam_seed
+  - 总数: 1120
+  - recorded: 574 (51.25%)
+  - backfilled: 546 (48.75%)
+  - N/A: 0 (0.00%)
+  - 填充后完整性: 100.00%
+
+## 前台超参数列 (fg_repository字段)
+
+### fg_hyperparam_epochs
+  - 总数: 418
+  - recorded: 208 (49.76%)
+  - backfilled: 134 (32.06%)
+  - N/A: 76 (18.18%)
+  - 填充后完整性: 81.82%
+
+### fg_hyperparam_max_iter
+  - 总数: 418
+  - recorded: 27 (6.46%)
+  - backfilled: 49 (11.72%)
+  - N/A: 342 (81.82%)
+  - 填充后完整性: 18.18%
+
+### fg_hyperparam_learning_rate
+  - 总数: 418
+  - recorded: 202 (48.33%)
+  - backfilled: 140 (33.49%)
+  - N/A: 76 (18.18%)
+  - 填充后完整性: 81.82%
+
+### fg_hyperparam_batch_size
+  - 总数: 418
+  - recorded: 94 (22.49%)
+  - backfilled: 55 (13.16%)
+  - N/A: 269 (64.35%)
+  - 填充后完整性: 35.65%
+
+### fg_hyperparam_dropout
+  - 总数: 418
+  - recorded: 67 (16.03%)
+  - backfilled: 38 (9.09%)
+  - N/A: 313 (74.88%)
+  - 填充后完整性: 25.12%
+
+### fg_hyperparam_weight_decay
+  - 总数: 418
+  - recorded: 52 (12.44%)
+  - backfilled: 75 (17.94%)
+  - N/A: 291 (69.62%)
+  - 填充后完整性: 30.38%
+
+### fg_hyperparam_alpha
+  - 总数: 418
+  - recorded: 33 (7.89%)
+  - backfilled: 43 (10.29%)
+  - N/A: 342 (81.82%)
+  - 填充后完整性: 18.18%
+
+### fg_hyperparam_kfold
+  - 总数: 418
+  - recorded: 23 (5.50%)
+  - backfilled: 53 (12.68%)
+  - N/A: 342 (81.82%)
+  - 填充后完整性: 18.18%
+
+### fg_hyperparam_seed
+  - 总数: 418
+  - recorded: 213 (50.96%)
+  - backfilled: 205 (49.04%)
+  - N/A: 0 (0.00%)
+  - 填充后完整性: 100.00%
+

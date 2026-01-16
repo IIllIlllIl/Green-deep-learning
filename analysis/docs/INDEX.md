@@ -1,6 +1,6 @@
 # 项目文档总索引
 
-**最后更新**: 2026-01-10
+**最后更新**: 2026-01-16
 **项目**: Causality-Aided Fairness Trade-off Analysis (ASE 2023论文复现 + 能耗研究扩展)
 
 ---
@@ -58,9 +58,117 @@
 
 **详细说明**：
 - [../../docs/RAW_DATA_CSV_USAGE_GUIDE.md](../../docs/RAW_DATA_CSV_USAGE_GUIDE.md) 🚨 **必读：raw_data.csv使用指南** ⭐⭐⭐⭐⭐ **[2026-01-10新增]**
+- [../../docs/DATA_MASTER_GUIDE.md](../../docs/DATA_MASTER_GUIDE.md) 🚨 **必读：数据使用主指南** ⭐⭐⭐⭐⭐ **[2026-01-15新增]**
 - [DATA_UNDERSTANDING_CORRECTION_20251228.md](DATA_UNDERSTANDING_CORRECTION_20251228.md) 🚨 **必读（已更新：添加错误6）**
 - [DATA_UNIQUENESS_CLARIFICATION_20251228.md](DATA_UNIQUENESS_CLARIFICATION_20251228.md) 🚨 **必读：唯一标识说明** ⭐⭐⭐
 - [DATA_FILES_COMPARISON.md](DATA_FILES_COMPARISON.md) - 已更新
+
+---
+
+## 🚨🚨🚨 数据处理关键提醒 ⭐⭐⭐⭐⭐
+
+> **极其重要**: **在处理主项目数据前，必须阅读本章节**！否则很可能犯严重错误！
+
+### ⚠️⚠️⚠️ 错误1：误用 experiment_id 作为唯一键（最常见且最严重）
+
+**❌ 错误**:
+```python
+# 这会导致丢失大量有效数据！
+df_unique = df.drop_duplicates(subset=['experiment_id'])
+```
+
+**✅ 正确**:
+```python
+# timestamp 才是唯一键！
+df_unique = df.drop_duplicates(subset=['timestamp'])
+```
+
+**原因**:
+- `experiment_id`: 代表实验**配置**（可以运行多次，不同轮次复用相同ID）
+- `timestamp`: 代表实验**运行实例**（唯一，每次运行都不同）
+
+**详细说明**: [DATA_UNIQUENESS_CLARIFICATION_20251228.md](DATA_UNIQUENESS_CLARIFICATION_20251228.md) ⭐⭐⭐
+
+### ⚠️⚠️⚠️ 错误2：不知道该用哪个数据文件
+
+**✅ 推荐**: 使用 `data/data.csv` (726行，95.3%可用，统一格式，易用)
+
+**⚠️ 备选**: 使用 `data/raw_data.csv` (970行，59.5%可用，需特殊处理)
+
+**对比**:
+
+| 特征 | data.csv ✅ | raw_data.csv ⚠️ |
+|------|------------|-----------------|
+| 记录数 | 726 | 970 |
+| 可用率 | 95.3% | 59.5% |
+| 并行模式处理 | ✅ 已自动处理 | ❌ 需手动处理 |
+| 使用难度 | ⭐ 简单 | ⭐⭐⭐⭐ 复杂 |
+
+**何时使用 raw_data.csv**:
+- 仅在需要最大数据完整性（970行 vs 726行）时使用
+- **使用前必读**: [../../docs/RAW_DATA_CSV_USAGE_GUIDE.md](../../docs/RAW_DATA_CSV_USAGE_GUIDE.md) ⭐⭐⭐⭐⭐
+
+**详细对比**: [DATA_FILES_COMPARISON.md](DATA_FILES_COMPARISON.md)
+
+### ⚠️⚠️⚠️ 错误3：直接读取 raw_data.csv 忽略并行模式
+
+**问题**: raw_data.csv 中并行模式数据在 `fg_` 前缀字段中，直接使用顶层字段会丢失数据！
+
+**❌ 错误**:
+```python
+df = pd.read_csv('data/raw_data.csv')
+learning_rate = df['learning_rate']  # 并行模式数据会丢失！
+```
+
+**✅ 解决方案**:
+```python
+# 方案A: 使用 data.csv（推荐）
+df = pd.read_csv('data/data.csv')
+learning_rate = df['learning_rate']  # 自动处理并行/非并行
+
+# 方案B: 使用 raw_data.csv + 特殊处理函数
+# 参考: ../../docs/RAW_DATA_CSV_USAGE_GUIDE.md 中的 get_field() 函数
+```
+
+### ⚠️⚠️ 错误4：不验证数据质量
+
+**✅ 正确做法 - 在任何分析前验证数据**:
+
+```python
+import pandas as pd
+
+df = pd.read_csv('data/data.csv')
+
+# 1. 验证 timestamp 唯一性
+assert df['timestamp'].nunique() == len(df), "timestamp 必须唯一！"
+
+# 2. 筛选可用数据
+df_usable = df[
+    (df['status'] == 'success') &  # 训练成功
+    (~df[[col for col in df.columns if col.startswith('energy_')]].isnull().all(axis=1)) &  # 有能耗
+    (~df[[col for col in df.columns if col.startswith('perf_')]].isnull().all(axis=1))      # 有性能
+]
+
+print(f"可用记录: {len(df_usable)}/{len(df)} ({len(df_usable)/len(df)*100:.1f}%)")
+```
+
+### 📖 完整数据使用指南
+
+**在处理主项目数据前，强烈推荐先阅读**:
+
+1. 📘 [../../docs/DATA_MASTER_GUIDE.md](../../docs/DATA_MASTER_GUIDE.md) - **数据使用主指南**（单一真实来源，必读） ⭐⭐⭐⭐⭐
+2. 📗 [../../docs/RAW_DATA_CSV_USAGE_GUIDE.md](../../docs/RAW_DATA_CSV_USAGE_GUIDE.md) - raw_data.csv 详细使用指南
+3. 📙 [DATA_FILES_COMPARISON.md](DATA_FILES_COMPARISON.md) - data.csv vs raw_data.csv 对比
+4. 📕 [DATA_UNIQUENESS_CLARIFICATION_20251228.md](DATA_UNIQUENESS_CLARIFICATION_20251228.md) - 唯一标识说明
+5. 📗 [DATA_UNDERSTANDING_CORRECTION_20251228.md](DATA_UNDERSTANDING_CORRECTION_20251228.md) - 数据理解关键更正
+
+### 🛠️ 相关工具脚本
+
+数据处理工具位于主项目的 `tools/data_management/`:
+- `validate_raw_data.py` - 数据验证
+- `deduplicate_by_timestamp.py` - 去重处理
+- `append_session_to_raw_data.py` - 追加新数据
+- `create_unified_data_csv.py` - 生成统一data.csv
 
 ---
 
@@ -95,6 +203,7 @@
 
 | 文档 | 用途 | 实验日期 |
 |------|------|---------|
+| **DIBS_EDGES_CSV_QUALITY_VERIFICATION.md** ✅ ⭐⭐⭐⭐⭐ | **DiBS因果边CSV文件质量验证报告**（数据完整性、脚本正确性、文档准确性全面验证） | 2026-01-16 |
 | **QUESTIONS_2_3_DIBS_COMPLETE_REPORT_20260105.md** 🎯 ⭐⭐⭐⭐⭐ | **研究问题2和3的DiBS分析完整报告**（6/6组成功，825条总边，超参数影响分离，中介效应缺失） | 2026-01-05 |
 | **DATA_UPDATE_40PERCENT_THRESHOLD_20260105.md** 🔄 ⭐⭐⭐⭐⭐ | **6组数据更新报告**（40%阈值，所有6组包含性能指标，支持完整能耗-性能分析） | 2026-01-05 |
 | **PERFORMANCE_METRICS_MISSING_ANALYSIS_20260105.md** ⚠️ ⭐⭐⭐⭐⭐ | **性能指标缺失分析报告**（2/6组缺失性能指标，分层分析策略推荐） | 2026-01-05 |

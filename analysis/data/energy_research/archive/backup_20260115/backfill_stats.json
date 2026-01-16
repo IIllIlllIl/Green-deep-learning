@@ -1,0 +1,126 @@
+{
+  "main_hyperparams": {
+    "total_cells": 10080,
+    "originally_filled": 2422,
+    "backfilled": 2163,
+    "not_applicable": 5495,
+    "by_param": {
+      "hyperparam_epochs": {
+        "total": 1120,
+        "recorded": 557,
+        "backfilled": 414,
+        "not_applicable": 149
+      },
+      "hyperparam_max_iter": {
+        "total": 1120,
+        "recorded": 55,
+        "backfilled": 94,
+        "not_applicable": 971
+      },
+      "hyperparam_learning_rate": {
+        "total": 1120,
+        "recorded": 548,
+        "backfilled": 423,
+        "not_applicable": 149
+      },
+      "hyperparam_batch_size": {
+        "total": 1120,
+        "recorded": 193,
+        "backfilled": 161,
+        "not_applicable": 766
+      },
+      "hyperparam_dropout": {
+        "total": 1120,
+        "recorded": 221,
+        "backfilled": 145,
+        "not_applicable": 754
+      },
+      "hyperparam_weight_decay": {
+        "total": 1120,
+        "recorded": 171,
+        "backfilled": 185,
+        "not_applicable": 764
+      },
+      "hyperparam_alpha": {
+        "total": 1120,
+        "recorded": 54,
+        "backfilled": 95,
+        "not_applicable": 971
+      },
+      "hyperparam_kfold": {
+        "total": 1120,
+        "recorded": 49,
+        "backfilled": 100,
+        "not_applicable": 971
+      },
+      "hyperparam_seed": {
+        "total": 1120,
+        "recorded": 574,
+        "backfilled": 546,
+        "not_applicable": 0
+      }
+    }
+  },
+  "fg_hyperparams": {
+    "total_cells": 3762,
+    "originally_filled": 919,
+    "backfilled": 792,
+    "not_applicable": 2051,
+    "by_param": {
+      "fg_hyperparam_epochs": {
+        "total": 418,
+        "recorded": 208,
+        "backfilled": 134,
+        "not_applicable": 76
+      },
+      "fg_hyperparam_max_iter": {
+        "total": 418,
+        "recorded": 27,
+        "backfilled": 49,
+        "not_applicable": 342
+      },
+      "fg_hyperparam_learning_rate": {
+        "total": 418,
+        "recorded": 202,
+        "backfilled": 140,
+        "not_applicable": 76
+      },
+      "fg_hyperparam_batch_size": {
+        "total": 418,
+        "recorded": 94,
+        "backfilled": 55,
+        "not_applicable": 269
+      },
+      "fg_hyperparam_dropout": {
+        "total": 418,
+        "recorded": 67,
+        "backfilled": 38,
+        "not_applicable": 313
+      },
+      "fg_hyperparam_weight_decay": {
+        "total": 418,
+        "recorded": 52,
+        "backfilled": 75,
+        "not_applicable": 291
+      },
+      "fg_hyperparam_alpha": {
+        "total": 418,
+        "recorded": 33,
+        "backfilled": 43,
+        "not_applicable": 342
+      },
+      "fg_hyperparam_kfold": {
+        "total": 418,
+        "recorded": 23,
+        "backfilled": 53,
+        "not_applicable": 342
+      },
+      "fg_hyperparam_seed": {
+        "total": 418,
+        "recorded": 213,
+        "backfilled": 205,
+        "not_applicable": 0
+      }
+    }
+  }
+}

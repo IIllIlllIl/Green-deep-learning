@@ -1,0 +1,7 @@
+task_group,task_name,n_samples,n_features,n_hyperparams,n_performance,n_energy,n_mediators,direct_edges_extracted,indirect_paths_extracted,q1_direct_hp_to_energy,q1_mediated_hp_to_energy,q2_perf_to_energy,q2_energy_to_perf,q2_common_hyperparams,q2_mediated_tradeoffs,q3_mediation_to_energy,q3_mediation_to_perf,q3_multi_step_paths,total_edges,elapsed_time_minutes,graph_max,graph_mean,strong_edges_gt_0.3,total_edges_gt_0.01
+group1_examples,examples（图像分类-小型）,304,20,4,1,4,7,11,92,7,20,2,0,2,0,20,4,48,103,14.364567895730337,1.0,0.28975000977516174,135,230
+group2_vulberta,VulBERTa（代码漏洞检测）,72,18,4,3,4,6,20,114,10,17,9,0,1,42,17,2,36,134,5.195929988225301,1.0,0.240895077586174,100,185
+group3_person_reid,Person_reID（行人重识别）,206,21,4,3,4,7,13,192,7,32,6,0,0,48,32,0,80,205,10.643151899178823,1.0,0.2727891206741333,139,277
+group4_bug_localization,bug-localization（缺陷定位）,90,20,4,4,4,7,27,142,11,18,16,0,0,70,18,0,36,169,6.577557341257731,1.0,0.27674999833106995,143,215
+group5_mrt_oast,MRT-OAST（缺陷定位）,72,20,5,3,4,7,21,102,10,18,5,0,4,24,18,8,34,123,6.0795151154200235,1.0,0.21850000321865082,98,232
+group6_resnet,pytorch_resnet（图像分类-ResNet）,74,18,4,2,4,7,22,117,12,28,8,0,1,16,28,1,44,139,5.206082582473755,1.0,0.25910496711730957,97,200
