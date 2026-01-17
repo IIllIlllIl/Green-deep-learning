@@ -296,6 +296,7 @@ print(f"可用记录: {len(df_usable)}/{len(df)} ({len(df_usable)/len(df)*100:.1
 - ⏳ 生成分析报告
 
 **相关文档**:
+- [RELATIVE_VALUE_TRANSFORMATION_PLAN.md](RELATIVE_VALUE_TRANSFORMATION_PLAN.md) - **相对值转换方案**（消除并行/非并行系统偏差，Subagent评估⭐⭐⭐⭐） ⭐⭐⭐⭐⭐ **[2026-01-16新增]**
 - [DATA_COMPARISON_OLD_VS_NEW_20251229.md](reports/DATA_COMPARISON_OLD_VS_NEW_20251229.md) - 新旧数据集详细对比 ⭐⭐⭐
 
 #### 问题2: 能耗和性能之间的权衡关系 ⏳

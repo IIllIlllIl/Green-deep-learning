@@ -1,0 +1,25 @@
+path_id,path_length,source,target,path,path_strength,step1_strength,step2_strength,step3_strength,path_type,question_relevance,interpretation
+P2_264,2,hyperparam_kfold_x_is_parallel,hyperparam_seed,kfold_x_parallel → top1_accuracy → seed,0.6500000357627869,0.6500000357627869,1.0,,moderation_mediated,other,kfold_x_parallel通过top1_accuracy间接影响seed
+P2_310,2,hyperparam_max_iter_x_is_parallel,hyperparam_seed,max_iter_x_parallel → max_iter → seed,0.45000001788139343,0.45000001788139343,1.0,,moderation_mediated,other,max_iter_x_parallel通过max_iter间接影响seed
+P2_087,2,hyperparam_kfold,hyperparam_seed,kfold → max_iter → seed,0.45000001788139343,0.45000001788139343,1.0,,other_mediation,other,kfold通过max_iter间接影响seed
+P2_093,2,hyperparam_kfold,hyperparam_seed,kfold → kfold_x_parallel → seed,0.45000001788139343,0.45000001788139343,1.0,,other_mediation,other,kfold通过kfold_x_parallel间接影响seed
+P2_184,2,hyperparam_alpha_x_is_parallel,hyperparam_seed,alpha_x_parallel → alpha → seed,0.45000001788139343,0.45000001788139343,1.0,,moderation_mediated,other,alpha_x_parallel通过alpha间接影响seed
+P2_260,2,hyperparam_kfold_x_is_parallel,hyperparam_seed,kfold_x_parallel → is_parallel → seed,0.4000000059604645,0.4000000059604645,1.0,,moderation_mediated,other,kfold_x_parallel通过is_parallel间接影响seed
+P2_183,2,hyperparam_alpha_x_is_parallel,hyperparam_seed,alpha_x_parallel → is_parallel → seed,0.4000000059604645,0.4000000059604645,1.0,,moderation_mediated,other,alpha_x_parallel通过is_parallel间接影响seed
+P2_135,2,hyperparam_max_iter,hyperparam_seed,max_iter → top10_accuracy → seed,0.4000000059604645,0.4000000059604645,1.0,,other_mediation,other,max_iter通过top10_accuracy间接影响seed
+P2_026,2,hyperparam_alpha,hyperparam_seed,alpha → is_parallel → seed,0.3499999940395355,0.3499999940395355,1.0,,other_mediation,other,alpha通过is_parallel间接影响seed
+P2_031,2,hyperparam_alpha,hyperparam_seed,alpha → top20_accuracy → seed,0.3499999940395355,0.3499999940395355,1.0,,other_mediation,other,alpha通过top20_accuracy间接影响seed
+P2_080,2,hyperparam_kfold,hyperparam_seed,kfold → gpu_min_watts → seed,0.3499999940395355,0.3499999940395355,1.0,,other_mediation,other,kfold通过gpu_min_watts间接影响seed
+P2_088,2,hyperparam_kfold,hyperparam_seed,kfold → top1_accuracy → seed,0.3499999940395355,0.3499999940395355,1.0,,other_mediation,other,kfold通过top1_accuracy间接影响seed
+P2_256,2,hyperparam_kfold_x_is_parallel,hyperparam_seed,kfold_x_parallel → gpu_temp_avg_celsius → seed,0.3499999940395355,0.3499999940395355,1.0,,moderation_mediated,other,kfold_x_parallel通过gpu_temp_avg_celsius间接影响seed
+P2_262,2,hyperparam_kfold_x_is_parallel,hyperparam_seed,kfold_x_parallel → kfold → seed,0.3499999940395355,0.3499999940395355,1.0,,moderation_mediated,other,kfold_x_parallel通过kfold间接影响seed
+P2_089,2,hyperparam_kfold,hyperparam_seed,kfold → top5_accuracy → seed,0.3499999940395355,0.3499999940395355,1.0,,other_mediation,other,kfold通过top5_accuracy间接影响seed
+P2_267,2,hyperparam_kfold_x_is_parallel,hyperparam_seed,kfold_x_parallel → top20_accuracy → seed,0.30000001192092896,0.30000001192092896,1.0,,moderation_mediated,other,kfold_x_parallel通过top20_accuracy间接影响seed
+P2_189,2,hyperparam_alpha_x_is_parallel,hyperparam_seed,alpha_x_parallel → top20_accuracy → seed,0.30000001192092896,0.30000001192092896,1.0,,moderation_mediated,other,alpha_x_parallel通过top20_accuracy间接影响seed
+P2_255,2,hyperparam_kfold_x_is_parallel,hyperparam_seed,kfold_x_parallel → gpu_total_joules → seed,0.30000001192092896,0.30000001192092896,1.0,,moderation_mediated,other,kfold_x_parallel通过gpu_total_joules间接影响seed
+P2_258,2,hyperparam_kfold_x_is_parallel,hyperparam_seed,kfold_x_parallel → gpu_util_avg_percent → seed,0.30000001192092896,0.30000001192092896,1.0,,moderation_mediated,other,kfold_x_parallel通过gpu_util_avg_percent间接影响seed
+P2_091,2,hyperparam_kfold,hyperparam_seed,kfold → top20_accuracy → seed,0.30000001192092896,0.30000001192092896,1.0,,other_mediation,other,kfold通过top20_accuracy间接影响seed
+P2_186,2,hyperparam_alpha_x_is_parallel,hyperparam_seed,alpha_x_parallel → max_iter → seed,0.30000001192092896,0.30000001192092896,1.0,,moderation_mediated,other,alpha_x_parallel通过max_iter间接影响seed
+P2_029,2,hyperparam_alpha,hyperparam_seed,alpha → top1_accuracy → seed,0.30000001192092896,0.30000001192092896,1.0,,other_mediation,other,alpha通过top1_accuracy间接影响seed
+P2_187,2,hyperparam_alpha_x_is_parallel,hyperparam_seed,alpha_x_parallel → top1_accuracy → seed,0.30000001192092896,0.30000001192092896,1.0,,moderation_mediated,other,alpha_x_parallel通过top1_accuracy间接影响seed
+P2_265,2,hyperparam_kfold_x_is_parallel,hyperparam_seed,kfold_x_parallel → top5_accuracy → seed,0.30000001192092896,0.30000001192092896,1.0,,moderation_mediated,other,kfold_x_parallel通过top5_accuracy间接影响seed

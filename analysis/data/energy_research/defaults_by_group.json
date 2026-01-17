@@ -1,0 +1,39 @@
+{
+  "group1_examples": {
+    "hyperparam_epochs": 10,
+    "hyperparam_learning_rate": 0.01,
+    "hyperparam_batch_size": 32,
+    "hyperparam_seed": 1
+  },
+  "group2_vulberta": {
+    "hyperparam_epochs": 10,
+    "hyperparam_learning_rate": 3e-05,
+    "hyperparam_seed": 42,
+    "hyperparam_weight_decay": 0.0
+  },
+  "group3_person_reid": {
+    "hyperparam_epochs": 60,
+    "hyperparam_learning_rate": 0.05,
+    "hyperparam_seed": 1334,
+    "hyperparam_dropout": 0.5
+  },
+  "group4_bug_localization": {
+    "hyperparam_max_iter": 10000,
+    "hyperparam_kfold": 10,
+    "hyperparam_alpha": 1e-05,
+    "hyperparam_seed": 42
+  },
+  "group5_mrt_oast": {
+    "hyperparam_epochs": 10,
+    "hyperparam_learning_rate": 0.0001,
+    "hyperparam_seed": 1334,
+    "hyperparam_dropout": 0.2,
+    "hyperparam_weight_decay": 0.0
+  },
+  "group6_resnet": {
+    "hyperparam_epochs": 200,
+    "hyperparam_learning_rate": 0.1,
+    "hyperparam_seed": 1334,
+    "hyperparam_weight_decay": 0.0001
+  }
+}

@@ -1,0 +1,207 @@
+{
+  "task_id": "group5_mrt_oast",
+  "task_name": "MRT-OAST（缺陷定位）",
+  "success": true,
+  "elapsed_time_minutes": 7.697376815478007,
+  "n_samples": 72,
+  "n_features": 24,
+  "variable_classification": {
+    "n_hyperparams": 4,
+    "n_interactions": 4,
+    "n_performance": 3,
+    "n_energy": 4,
+    "n_mediators": 7,
+    "hyperparam_names": [
+      "hyperparam_dropout",
+      "hyperparam_learning_rate",
+      "hyperparam_epochs",
+      "hyperparam_l2_regularization"
+    ],
+    "interaction_names": [
+      "hyperparam_dropout_x_is_parallel",
+      "hyperparam_learning_rate_x_is_parallel",
+      "hyperparam_epochs_x_is_parallel",
+      "hyperparam_l2_regularization_x_is_parallel"
+    ],
+    "performance_names": [
+      "perf_accuracy",
+      "perf_precision",
+      "perf_recall"
+    ],
+    "energy_names": [
+      "energy_cpu_pkg_joules",
+      "energy_cpu_ram_joules",
+      "energy_cpu_total_joules",
+      "energy_gpu_total_joules"
+    ],
+    "mediator_names": [
+      "energy_gpu_avg_watts",
+      "energy_gpu_max_watts",
+      "energy_gpu_min_watts",
+      "energy_gpu_temp_avg_celsius",
+      "energy_gpu_temp_max_celsius",
+      "energy_gpu_util_avg_percent",
+      "energy_gpu_util_max_percent"
+    ]
+  },
+  "graph_stats": {
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.15720486640930176,
+    "std": 0.21535097062587738
+  },
+  "edges": {
+    "threshold_0.01": 390,
+    "threshold_0.1": 243,
+    "threshold_0.3": 78,
+    "threshold_0.5": 27
+  },
+  "question1_evidence": {
+    "direct_hyperparam_to_energy": [],
+    "mediated_hyperparam_to_energy": [
+      {
+        "hyperparam": "hyperparam_epochs",
+        "mediator": "energy_gpu_avg_watts",
+        "energy_var": "energy_gpu_total_joules",
+        "strength_step1": 0.4000000059604645,
+        "strength_step2": 0.3499999940395355,
+        "indirect_strength": 0.14000000059604645
+      }
+    ],
+    "moderation_effects": []
+  },
+  "question2_evidence": {
+    "direct_edges_perf_to_energy": [],
+    "direct_edges_energy_to_perf": [
+      {
+        "from": "energy_cpu_ram_joules",
+        "to": "perf_accuracy",
+        "strength": 0.30000001192092896
+      },
+      {
+        "from": "energy_cpu_total_joules",
+        "to": "perf_accuracy",
+        "strength": 0.30000001192092896
+      },
+      {
+        "from": "energy_gpu_total_joules",
+        "to": "perf_recall",
+        "strength": 0.30000001192092896
+      }
+    ],
+    "common_hyperparams": [],
+    "mediated_tradeoffs": []
+  },
+  "question3_evidence": {
+    "mediation_paths_to_energy": [
+      {
+        "path_id": "HP14_M3_E6",
+        "hyperparam": "hyperparam_epochs",
+        "mediator": "energy_gpu_avg_watts",
+        "outcome": "energy_gpu_total_joules",
+        "strength_X_to_M": 0.4000000059604645,
+        "strength_M_to_Y": 0.3499999940395355,
+        "indirect_strength": 0.14000000059604645,
+        "direct_strength": 0.25,
+        "mediation_type": "partial"
+      }
+    ],
+    "mediation_paths_to_performance": [
+      {
+        "path_id": "HP14_M3_P17",
+        "hyperparam": "hyperparam_epochs",
+        "mediator": "energy_gpu_avg_watts",
+        "outcome": "perf_accuracy",
+        "strength_X_to_M": 0.4000000059604645,
+        "strength_M_to_Y": 0.4000000059604645,
+        "indirect_strength": 0.1600000113248825,
+        "direct_strength": 0.20000000298023224,
+        "mediation_type": "partial"
+      },
+      {
+        "path_id": "HP14_M3_P18",
+        "hyperparam": "hyperparam_epochs",
+        "mediator": "energy_gpu_avg_watts",
+        "outcome": "perf_precision",
+        "strength_X_to_M": 0.4000000059604645,
+        "strength_M_to_Y": 0.30000001192092896,
+        "indirect_strength": 0.12000000476837158,
+        "direct_strength": 0.20000000298023224,
+        "mediation_type": "partial"
+      },
+      {
+        "path_id": "HP14_M5_P17",
+        "hyperparam": "hyperparam_epochs",
+        "mediator": "energy_gpu_min_watts",
+        "outcome": "perf_accuracy",
+        "strength_X_to_M": 0.5,
+        "strength_M_to_Y": 0.30000001192092896,
+        "indirect_strength": 0.15000000596046448,
+        "direct_strength": 0.20000000298023224,
+        "mediation_type": "partial"
+      },
+      {
+        "path_id": "HP14_M5_P18",
+        "hyperparam": "hyperparam_epochs",
+        "mediator": "energy_gpu_min_watts",
+        "outcome": "perf_precision",
+        "strength_X_to_M": 0.5,
+        "strength_M_to_Y": 0.30000001192092896,
+        "indirect_strength": 0.15000000596046448,
+        "direct_strength": 0.20000000298023224,
+        "mediation_type": "partial"
+      }
+    ],
+    "multi_step_paths": [
+      {
+        "path": "hyperparam_epochs → energy_gpu_min_watts → energy_gpu_util_avg_percent → perf_accuracy",
+        "strength_step1": 0.5,
+        "strength_step2": 0.3499999940395355,
+        "strength_step3": 0.3499999940395355,
+        "path_strength": 0.0612499974668026
+      },
+      {
+        "path": "hyperparam_epochs → energy_gpu_temp_avg_celsius → energy_gpu_util_avg_percent → perf_accuracy",
+        "strength_step1": 0.30000001192092896,
+        "strength_step2": 0.45000001788139343,
+        "strength_step3": 0.3499999940395355,
+        "path_strength": 0.04725000262260437
+      }
+    ]
+  },
+  "config": {
+    "alpha_linear": 0.05,
+    "beta_linear": 0.1,
+    "n_particles": 20,
+    "tau": 1.0,
+    "n_steps": 5000,
+    "n_grad_mc_samples": 128,
+    "n_acyclicity_mc_samples": 32
+  },
+  "feature_names": [
+    "energy_cpu_pkg_joules",
+    "energy_cpu_ram_joules",
+    "energy_cpu_total_joules",
+    "energy_gpu_avg_watts",
+    "energy_gpu_max_watts",
+    "energy_gpu_min_watts",
+    "energy_gpu_total_joules",
+    "energy_gpu_temp_avg_celsius",
+    "energy_gpu_temp_max_celsius",
+    "energy_gpu_util_avg_percent",
+    "energy_gpu_util_max_percent",
+    "is_parallel",
+    "hyperparam_dropout",
+    "hyperparam_learning_rate",
+    "hyperparam_epochs",
+    "hyperparam_seed",
+    "hyperparam_l2_regularization",
+    "perf_accuracy",
+    "perf_precision",
+    "perf_recall",
+    "hyperparam_dropout_x_is_parallel",
+    "hyperparam_learning_rate_x_is_parallel",
+    "hyperparam_epochs_x_is_parallel",
+    "hyperparam_l2_regularization_x_is_parallel"
+  ]
+}

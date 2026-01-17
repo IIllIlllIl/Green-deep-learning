@@ -1,0 +1,12 @@
+path_id,path_length,source,target,path,path_strength,step1_strength,step2_strength,step3_strength,path_type,question_relevance,interpretation
+P2_159,2,hyperparam_learning_rate_x_is_parallel,hyperparam_seed,learning_rate_x_parallel → learning_rate → seed,0.4000000059604645,0.4000000059604645,1.0,,moderation_mediated,other,learning_rate_x_parallel通过learning_rate间接影响seed
+P2_204,2,hyperparam_epochs_x_is_parallel,hyperparam_seed,epochs_x_parallel → gpu_total_joules → seed,0.3800000008940696,0.4000000059604645,0.949999988079071,,moderation_mediated,other,epochs_x_parallel通过gpu_total_joules间接影响seed
+P2_163,2,hyperparam_learning_rate_x_is_parallel,hyperparam_seed,learning_rate_x_parallel → dropout_x_parallel → seed,0.3499999940395355,0.3499999940395355,1.0,,moderation_mediated,other,learning_rate_x_parallel通过dropout_x_parallel间接影响seed
+P2_211,2,hyperparam_epochs_x_is_parallel,hyperparam_seed,epochs_x_parallel → epochs → seed,0.3499999940395355,0.3499999940395355,1.0,,moderation_mediated,other,epochs_x_parallel通过epochs间接影响seed
+P2_109,2,hyperparam_epochs,hyperparam_seed,epochs → gpu_min_watts → seed,0.3499999940395355,0.3499999940395355,1.0,,other_mediation,other,epochs通过gpu_min_watts间接影响seed
+P2_055,2,hyperparam_learning_rate,hyperparam_seed,learning_rate → learning_rate_x_parallel → seed,0.3499999940395355,0.3499999940395355,1.0,,other_mediation,other,learning_rate通过learning_rate_x_parallel间接影响seed
+P2_110,2,hyperparam_epochs,hyperparam_seed,epochs → gpu_total_joules → seed,0.3324999901652337,0.3499999940395355,0.949999988079071,,other_mediation,other,epochs通过gpu_total_joules间接影响seed
+P2_138,2,hyperparam_dropout_x_is_parallel,hyperparam_seed,dropout_x_parallel → dropout → seed,0.30000001192092896,0.30000001192092896,1.0,,moderation_mediated,other,dropout_x_parallel通过dropout间接影响seed
+P2_018,2,hyperparam_dropout,hyperparam_seed,dropout → dropout_x_parallel → seed,0.30000001192092896,0.30000001192092896,1.0,,other_mediation,other,dropout通过dropout_x_parallel间接影响seed
+P2_053,2,hyperparam_learning_rate,hyperparam_seed,learning_rate → rank5 → seed,0.30000001192092896,0.30000001192092896,1.0,,other_mediation,other,learning_rate通过rank5间接影响seed
+P2_122,2,hyperparam_epochs,hyperparam_seed,epochs → epochs_x_parallel → seed,0.30000001192092896,0.30000001192092896,1.0,,other_mediation,other,epochs通过epochs_x_parallel间接影响seed

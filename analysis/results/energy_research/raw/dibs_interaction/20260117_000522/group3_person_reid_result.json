@@ -1,0 +1,174 @@
+{
+  "task_id": "group3_person_reid",
+  "task_name": "Person_reID（行人重识别）",
+  "success": true,
+  "elapsed_time_minutes": 12.488691508769989,
+  "n_samples": 206,
+  "n_features": 24,
+  "variable_classification": {
+    "n_hyperparams": 3,
+    "n_interactions": 3,
+    "n_performance": 3,
+    "n_energy": 4,
+    "n_mediators": 7,
+    "hyperparam_names": [
+      "hyperparam_dropout",
+      "hyperparam_learning_rate",
+      "hyperparam_epochs"
+    ],
+    "interaction_names": [
+      "hyperparam_dropout_x_is_parallel",
+      "hyperparam_learning_rate_x_is_parallel",
+      "hyperparam_epochs_x_is_parallel"
+    ],
+    "performance_names": [
+      "perf_map",
+      "perf_rank1",
+      "perf_rank5"
+    ],
+    "energy_names": [
+      "energy_cpu_pkg_joules",
+      "energy_cpu_ram_joules",
+      "energy_cpu_total_joules",
+      "energy_gpu_total_joules"
+    ],
+    "mediator_names": [
+      "energy_gpu_avg_watts",
+      "energy_gpu_max_watts",
+      "energy_gpu_min_watts",
+      "energy_gpu_temp_avg_celsius",
+      "energy_gpu_temp_max_celsius",
+      "energy_gpu_util_avg_percent",
+      "energy_gpu_util_max_percent"
+    ]
+  },
+  "graph_stats": {
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.16614584624767303,
+    "std": 0.2042510211467743
+  },
+  "edges": {
+    "threshold_0.01": 449,
+    "threshold_0.1": 267,
+    "threshold_0.3": 72,
+    "threshold_0.5": 23
+  },
+  "question1_evidence": {
+    "direct_hyperparam_to_energy": [
+      {
+        "hyperparam": "hyperparam_epochs",
+        "energy_var": "energy_gpu_total_joules",
+        "strength": 0.3499999940395355,
+        "effect_type": "main_effect"
+      }
+    ],
+    "mediated_hyperparam_to_energy": [
+      {
+        "hyperparam": "hyperparam_epochs",
+        "mediator": "energy_gpu_temp_max_celsius",
+        "energy_var": "energy_gpu_total_joules",
+        "strength_step1": 0.30000001192092896,
+        "strength_step2": 0.30000001192092896,
+        "indirect_strength": 0.09000000357627869
+      }
+    ],
+    "moderation_effects": [
+      {
+        "interaction_term": "hyperparam_epochs_x_is_parallel",
+        "base_hyperparam": "hyperparam_epochs",
+        "energy_var": "energy_gpu_total_joules",
+        "moderation_strength": 0.4000000059604645,
+        "main_effect_strength": 0.3499999940395355,
+        "interpretation": "is_parallel调节了该超参数对能耗的效应"
+      }
+    ]
+  },
+  "question2_evidence": {
+    "direct_edges_perf_to_energy": [],
+    "direct_edges_energy_to_perf": [],
+    "common_hyperparams": [],
+    "mediated_tradeoffs": [
+      {
+        "path": "perf_map → energy_gpu_temp_max_celsius → energy_gpu_total_joules",
+        "strength_step1": 0.4000000059604645,
+        "strength_step2": 0.30000001192092896,
+        "path_strength": 0.12000000476837158
+      }
+    ]
+  },
+  "question3_evidence": {
+    "mediation_paths_to_energy": [
+      {
+        "path_id": "HP16_M8_E6",
+        "hyperparam": "hyperparam_epochs",
+        "mediator": "energy_gpu_temp_max_celsius",
+        "outcome": "energy_gpu_total_joules",
+        "strength_X_to_M": 0.30000001192092896,
+        "strength_M_to_Y": 0.30000001192092896,
+        "indirect_strength": 0.09000000357627869,
+        "direct_strength": 0.3499999940395355,
+        "mediation_type": "partial"
+      }
+    ],
+    "mediation_paths_to_performance": [],
+    "multi_step_paths": [
+      {
+        "path": "hyperparam_epochs → energy_gpu_min_watts → energy_gpu_temp_max_celsius → energy_gpu_total_joules",
+        "strength_step1": 0.3499999940395355,
+        "strength_step2": 0.4000000059604645,
+        "strength_step3": 0.30000001192092896,
+        "path_strength": 0.04200000315904617
+      },
+      {
+        "path": "hyperparam_epochs → energy_gpu_min_watts → energy_gpu_util_avg_percent → energy_gpu_total_joules",
+        "strength_step1": 0.3499999940395355,
+        "strength_step2": 0.3499999940395355,
+        "strength_step3": 0.45000001788139343,
+        "path_strength": 0.05512499809265137
+      },
+      {
+        "path": "hyperparam_epochs → energy_gpu_temp_max_celsius → energy_gpu_avg_watts → energy_gpu_total_joules",
+        "strength_step1": 0.30000001192092896,
+        "strength_step2": 0.3499999940395355,
+        "strength_step3": 0.3499999940395355,
+        "path_strength": 0.03674999997019768
+      }
+    ]
+  },
+  "config": {
+    "alpha_linear": 0.05,
+    "beta_linear": 0.1,
+    "n_particles": 20,
+    "tau": 1.0,
+    "n_steps": 5000,
+    "n_grad_mc_samples": 128,
+    "n_acyclicity_mc_samples": 32
+  },
+  "feature_names": [
+    "energy_cpu_pkg_joules",
+    "energy_cpu_ram_joules",
+    "energy_cpu_total_joules",
+    "energy_gpu_avg_watts",
+    "energy_gpu_max_watts",
+    "energy_gpu_min_watts",
+    "energy_gpu_total_joules",
+    "energy_gpu_temp_avg_celsius",
+    "energy_gpu_temp_max_celsius",
+    "energy_gpu_util_avg_percent",
+    "energy_gpu_util_max_percent",
+    "is_parallel",
+    "model_hrnet18",
+    "model_pcb",
+    "hyperparam_dropout",
+    "hyperparam_learning_rate",
+    "hyperparam_epochs",
+    "hyperparam_seed",
+    "perf_map",
+    "perf_rank1",
+    "perf_rank5",
+    "hyperparam_dropout_x_is_parallel",
+    "hyperparam_learning_rate_x_is_parallel",
+    "hyperparam_epochs_x_is_parallel"
+  ]
+}

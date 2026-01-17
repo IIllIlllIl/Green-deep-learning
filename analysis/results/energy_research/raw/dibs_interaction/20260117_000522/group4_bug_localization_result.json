@@ -1,0 +1,161 @@
+{
+  "task_id": "group4_bug_localization",
+  "task_name": "bug-localization（缺陷定位）",
+  "success": true,
+  "elapsed_time_minutes": 8.339525417486827,
+  "n_samples": 90,
+  "n_features": 23,
+  "variable_classification": {
+    "n_hyperparams": 3,
+    "n_interactions": 3,
+    "n_performance": 4,
+    "n_energy": 4,
+    "n_mediators": 7,
+    "hyperparam_names": [
+      "hyperparam_alpha",
+      "hyperparam_kfold",
+      "hyperparam_max_iter"
+    ],
+    "interaction_names": [
+      "hyperparam_alpha_x_is_parallel",
+      "hyperparam_kfold_x_is_parallel",
+      "hyperparam_max_iter_x_is_parallel"
+    ],
+    "performance_names": [
+      "perf_top1_accuracy",
+      "perf_top5_accuracy",
+      "perf_top10_accuracy",
+      "perf_top20_accuracy"
+    ],
+    "energy_names": [
+      "energy_cpu_pkg_joules",
+      "energy_cpu_ram_joules",
+      "energy_cpu_total_joules",
+      "energy_gpu_total_joules"
+    ],
+    "mediator_names": [
+      "energy_gpu_avg_watts",
+      "energy_gpu_max_watts",
+      "energy_gpu_min_watts",
+      "energy_gpu_temp_avg_celsius",
+      "energy_gpu_temp_max_celsius",
+      "energy_gpu_util_avg_percent",
+      "energy_gpu_util_max_percent"
+    ]
+  },
+  "graph_stats": {
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.14773157238960266,
+    "std": 0.2140052616596222
+  },
+  "edges": {
+    "threshold_0.01": 365,
+    "threshold_0.1": 202,
+    "threshold_0.3": 59,
+    "threshold_0.5": 25
+  },
+  "question1_evidence": {
+    "direct_hyperparam_to_energy": [],
+    "mediated_hyperparam_to_energy": [
+      {
+        "hyperparam": "hyperparam_kfold",
+        "mediator": "energy_gpu_min_watts",
+        "energy_var": "energy_gpu_total_joules",
+        "strength_step1": 0.3499999940395355,
+        "strength_step2": 0.30000001192092896,
+        "indirect_strength": 0.10500000417232513
+      }
+    ],
+    "moderation_effects": [
+      {
+        "interaction_term": "hyperparam_kfold_x_is_parallel",
+        "base_hyperparam": "hyperparam_kfold",
+        "energy_var": "energy_gpu_total_joules",
+        "moderation_strength": 0.30000001192092896,
+        "main_effect_strength": 0.10000000149011612,
+        "interpretation": "is_parallel调节了该超参数对能耗的效应"
+      }
+    ]
+  },
+  "question2_evidence": {
+    "direct_edges_perf_to_energy": [],
+    "direct_edges_energy_to_perf": [
+      {
+        "from": "energy_cpu_ram_joules",
+        "to": "perf_top20_accuracy",
+        "strength": 0.30000001192092896
+      },
+      {
+        "from": "energy_gpu_total_joules",
+        "to": "perf_top10_accuracy",
+        "strength": 0.30000001192092896
+      }
+    ],
+    "common_hyperparams": [],
+    "mediated_tradeoffs": []
+  },
+  "question3_evidence": {
+    "mediation_paths_to_energy": [
+      {
+        "path_id": "HP13_M5_E6",
+        "hyperparam": "hyperparam_kfold",
+        "mediator": "energy_gpu_min_watts",
+        "outcome": "energy_gpu_total_joules",
+        "strength_X_to_M": 0.3499999940395355,
+        "strength_M_to_Y": 0.30000001192092896,
+        "indirect_strength": 0.10500000417232513,
+        "direct_strength": 0.10000000149011612,
+        "mediation_type": "partial"
+      }
+    ],
+    "mediation_paths_to_performance": [
+      {
+        "path_id": "HP13_M5_P16",
+        "hyperparam": "hyperparam_kfold",
+        "mediator": "energy_gpu_min_watts",
+        "outcome": "perf_top1_accuracy",
+        "strength_X_to_M": 0.3499999940395355,
+        "strength_M_to_Y": 0.30000001192092896,
+        "indirect_strength": 0.10500000417232513,
+        "direct_strength": 0.3499999940395355,
+        "mediation_type": "partial"
+      }
+    ],
+    "multi_step_paths": []
+  },
+  "config": {
+    "alpha_linear": 0.05,
+    "beta_linear": 0.1,
+    "n_particles": 20,
+    "tau": 1.0,
+    "n_steps": 5000,
+    "n_grad_mc_samples": 128,
+    "n_acyclicity_mc_samples": 32
+  },
+  "feature_names": [
+    "energy_cpu_pkg_joules",
+    "energy_cpu_ram_joules",
+    "energy_cpu_total_joules",
+    "energy_gpu_avg_watts",
+    "energy_gpu_max_watts",
+    "energy_gpu_min_watts",
+    "energy_gpu_total_joules",
+    "energy_gpu_temp_avg_celsius",
+    "energy_gpu_temp_max_celsius",
+    "energy_gpu_util_avg_percent",
+    "energy_gpu_util_max_percent",
+    "is_parallel",
+    "hyperparam_alpha",
+    "hyperparam_kfold",
+    "hyperparam_max_iter",
+    "hyperparam_seed",
+    "perf_top1_accuracy",
+    "perf_top5_accuracy",
+    "perf_top10_accuracy",
+    "perf_top20_accuracy",
+    "hyperparam_alpha_x_is_parallel",
+    "hyperparam_kfold_x_is_parallel",
+    "hyperparam_max_iter_x_is_parallel"
+  ]
+}

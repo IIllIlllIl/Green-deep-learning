@@ -1,0 +1,130 @@
+{
+  "task_id": "group1_examples",
+  "task_name": "examples（图像分类-小型）",
+  "success": true,
+  "elapsed_time_minutes": 15.848341027895609,
+  "n_samples": 304,
+  "n_features": 23,
+  "variable_classification": {
+    "n_hyperparams": 3,
+    "n_interactions": 3,
+    "n_performance": 1,
+    "n_energy": 4,
+    "n_mediators": 7,
+    "hyperparam_names": [
+      "hyperparam_batch_size",
+      "hyperparam_learning_rate",
+      "hyperparam_epochs"
+    ],
+    "interaction_names": [
+      "hyperparam_batch_size_x_is_parallel",
+      "hyperparam_learning_rate_x_is_parallel",
+      "hyperparam_epochs_x_is_parallel"
+    ],
+    "performance_names": [
+      "perf_test_accuracy"
+    ],
+    "energy_names": [
+      "energy_cpu_pkg_joules",
+      "energy_cpu_ram_joules",
+      "energy_cpu_total_joules",
+      "energy_gpu_total_joules"
+    ],
+    "mediator_names": [
+      "energy_gpu_avg_watts",
+      "energy_gpu_max_watts",
+      "energy_gpu_min_watts",
+      "energy_gpu_temp_avg_celsius",
+      "energy_gpu_temp_max_celsius",
+      "energy_gpu_util_avg_percent",
+      "energy_gpu_util_max_percent"
+    ]
+  },
+  "graph_stats": {
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.1732514202594757,
+    "std": 0.2285154163837433
+  },
+  "edges": {
+    "threshold_0.01": 371,
+    "threshold_0.1": 252,
+    "threshold_0.3": 65,
+    "threshold_0.5": 34
+  },
+  "question1_evidence": {
+    "direct_hyperparam_to_energy": [],
+    "mediated_hyperparam_to_energy": [],
+    "moderation_effects": [
+      {
+        "interaction_term": "hyperparam_batch_size_x_is_parallel",
+        "base_hyperparam": "hyperparam_batch_size",
+        "energy_var": "energy_cpu_total_joules",
+        "moderation_strength": 0.3499999940395355,
+        "main_effect_strength": 0.0,
+        "interpretation": "is_parallel调节了该超参数对能耗的效应"
+      },
+      {
+        "interaction_term": "hyperparam_batch_size_x_is_parallel",
+        "base_hyperparam": "hyperparam_batch_size",
+        "energy_var": "energy_gpu_total_joules",
+        "moderation_strength": 0.30000001192092896,
+        "main_effect_strength": 0.0,
+        "interpretation": "is_parallel调节了该超参数对能耗的效应"
+      }
+    ]
+  },
+  "question2_evidence": {
+    "direct_edges_perf_to_energy": [],
+    "direct_edges_energy_to_perf": [],
+    "common_hyperparams": [],
+    "mediated_tradeoffs": []
+  },
+  "question3_evidence": {
+    "mediation_paths_to_energy": [],
+    "mediation_paths_to_performance": [],
+    "multi_step_paths": [
+      {
+        "path": "hyperparam_batch_size → energy_gpu_max_watts → energy_gpu_util_max_percent → perf_test_accuracy",
+        "strength_step1": 0.30000001192092896,
+        "strength_step2": 0.4000000059604645,
+        "strength_step3": 0.3499999940395355,
+        "path_strength": 0.041999999433755875
+      }
+    ]
+  },
+  "config": {
+    "alpha_linear": 0.05,
+    "beta_linear": 0.1,
+    "n_particles": 20,
+    "tau": 1.0,
+    "n_steps": 5000,
+    "n_grad_mc_samples": 128,
+    "n_acyclicity_mc_samples": 32
+  },
+  "feature_names": [
+    "energy_cpu_pkg_joules",
+    "energy_cpu_ram_joules",
+    "energy_cpu_total_joules",
+    "energy_gpu_avg_watts",
+    "energy_gpu_max_watts",
+    "energy_gpu_min_watts",
+    "energy_gpu_total_joules",
+    "energy_gpu_temp_avg_celsius",
+    "energy_gpu_temp_max_celsius",
+    "energy_gpu_util_avg_percent",
+    "energy_gpu_util_max_percent",
+    "is_parallel",
+    "model_mnist_ff",
+    "model_mnist_rnn",
+    "model_siamese",
+    "hyperparam_batch_size",
+    "hyperparam_learning_rate",
+    "hyperparam_epochs",
+    "hyperparam_seed",
+    "perf_test_accuracy",
+    "hyperparam_batch_size_x_is_parallel",
+    "hyperparam_learning_rate_x_is_parallel",
+    "hyperparam_epochs_x_is_parallel"
+  ]
+}

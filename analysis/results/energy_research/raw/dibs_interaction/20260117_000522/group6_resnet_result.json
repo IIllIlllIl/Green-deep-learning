@@ -1,0 +1,120 @@
+{
+  "task_id": "group6_resnet",
+  "task_name": "pytorch_resnet（图像分类-ResNet）",
+  "success": true,
+  "elapsed_time_minutes": 6.710453291734059,
+  "n_samples": 74,
+  "n_features": 21,
+  "variable_classification": {
+    "n_hyperparams": 3,
+    "n_interactions": 3,
+    "n_performance": 2,
+    "n_energy": 4,
+    "n_mediators": 7,
+    "hyperparam_names": [
+      "hyperparam_learning_rate",
+      "hyperparam_epochs",
+      "hyperparam_l2_regularization"
+    ],
+    "interaction_names": [
+      "hyperparam_learning_rate_x_is_parallel",
+      "hyperparam_epochs_x_is_parallel",
+      "hyperparam_l2_regularization_x_is_parallel"
+    ],
+    "performance_names": [
+      "perf_best_val_accuracy",
+      "perf_test_accuracy"
+    ],
+    "energy_names": [
+      "energy_cpu_pkg_joules",
+      "energy_cpu_ram_joules",
+      "energy_cpu_total_joules",
+      "energy_gpu_total_joules"
+    ],
+    "mediator_names": [
+      "energy_gpu_avg_watts",
+      "energy_gpu_max_watts",
+      "energy_gpu_min_watts",
+      "energy_gpu_temp_avg_celsius",
+      "energy_gpu_temp_max_celsius",
+      "energy_gpu_util_avg_percent",
+      "energy_gpu_util_max_percent"
+    ]
+  },
+  "graph_stats": {
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.14263038337230682,
+    "std": 0.20706647634506226
+  },
+  "edges": {
+    "threshold_0.01": 305,
+    "threshold_0.1": 162,
+    "threshold_0.3": 42,
+    "threshold_0.5": 19
+  },
+  "question1_evidence": {
+    "direct_hyperparam_to_energy": [
+      {
+        "hyperparam": "hyperparam_epochs",
+        "energy_var": "energy_cpu_pkg_joules",
+        "strength": 0.30000001192092896,
+        "effect_type": "main_effect"
+      }
+    ],
+    "mediated_hyperparam_to_energy": [],
+    "moderation_effects": [
+      {
+        "interaction_term": "hyperparam_epochs_x_is_parallel",
+        "base_hyperparam": "hyperparam_epochs",
+        "energy_var": "energy_cpu_pkg_joules",
+        "moderation_strength": 0.30000001192092896,
+        "main_effect_strength": 0.30000001192092896,
+        "interpretation": "is_parallel调节了该超参数对能耗的效应"
+      }
+    ]
+  },
+  "question2_evidence": {
+    "direct_edges_perf_to_energy": [],
+    "direct_edges_energy_to_perf": [],
+    "common_hyperparams": [],
+    "mediated_tradeoffs": []
+  },
+  "question3_evidence": {
+    "mediation_paths_to_energy": [],
+    "mediation_paths_to_performance": [],
+    "multi_step_paths": []
+  },
+  "config": {
+    "alpha_linear": 0.05,
+    "beta_linear": 0.1,
+    "n_particles": 20,
+    "tau": 1.0,
+    "n_steps": 5000,
+    "n_grad_mc_samples": 128,
+    "n_acyclicity_mc_samples": 32
+  },
+  "feature_names": [
+    "energy_cpu_pkg_joules",
+    "energy_cpu_ram_joules",
+    "energy_cpu_total_joules",
+    "energy_gpu_avg_watts",
+    "energy_gpu_max_watts",
+    "energy_gpu_min_watts",
+    "energy_gpu_total_joules",
+    "energy_gpu_temp_avg_celsius",
+    "energy_gpu_temp_max_celsius",
+    "energy_gpu_util_avg_percent",
+    "energy_gpu_util_max_percent",
+    "is_parallel",
+    "hyperparam_learning_rate",
+    "hyperparam_epochs",
+    "hyperparam_seed",
+    "hyperparam_l2_regularization",
+    "perf_best_val_accuracy",
+    "perf_test_accuracy",
+    "hyperparam_learning_rate_x_is_parallel",
+    "hyperparam_epochs_x_is_parallel",
+    "hyperparam_l2_regularization_x_is_parallel"
+  ]
+}

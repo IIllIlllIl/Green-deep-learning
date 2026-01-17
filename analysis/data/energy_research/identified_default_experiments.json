@@ -1,0 +1,94 @@
+{
+  "group1_examples": {
+    "total": 10,
+    "parallel": 4,
+    "nonparallel": 6,
+    "parallel_avg_gpu_energy": 50972.14999999999,
+    "nonparallel_avg_gpu_energy": 12157.076666666668,
+    "parallel_avg_cpu_energy": 8780.275,
+    "nonparallel_avg_cpu_energy": 4352.733333333334,
+    "timestamps": [
+      "2025-11-19T01:29:07.726147",
+      "2025-11-19T01:33:54.313987",
+      "2025-11-19T01:41:07.675831",
+      "2025-11-19T03:09:43.028622",
+      "2025-11-19T06:20:33.763015",
+      "2025-11-19T06:26:04.995640",
+      "2025-12-01T23:00:29.618158",
+      "2025-12-01T23:01:50.375298",
+      "2025-12-10T22:47:21.216386",
+      "2025-12-10T22:49:01.372578"
+    ]
+  },
+  "group2_vulberta": {
+    "total": 2,
+    "parallel": 1,
+    "nonparallel": 1,
+    "parallel_avg_gpu_energy": 847272.32,
+    "nonparallel_avg_gpu_energy": 726127.3999999991,
+    "parallel_avg_cpu_energy": 143366.48,
+    "nonparallel_avg_cpu_energy": 97040.7,
+    "timestamps": [
+      "2025-11-18T22:06:40.713330",
+      "2025-11-19T03:05:49.240123"
+    ],
+    "note": "Found in data.csv, missing from 6groups due to no performance metrics"
+  },
+  "group3_person_reid": {
+    "total": 6,
+    "parallel": 3,
+    "nonparallel": 3,
+    "parallel_avg_gpu_energy": 962693.6966666669,
+    "nonparallel_avg_gpu_energy": 919491.349999999,
+    "parallel_avg_cpu_energy": 201294.28666666665,
+    "nonparallel_avg_cpu_energy": 136697.53666666665,
+    "timestamps": [
+      "2025-11-18T23:01:27.340848",
+      "2025-11-19T00:13:04.690345",
+      "2025-11-19T01:25:45.050848",
+      "2025-11-19T04:47:23.246728",
+      "2025-11-19T06:11:31.988365",
+      "2025-11-19T07:49:34.861156"
+    ]
+  },
+  "group4_bug_localization": {
+    "total": 2,
+    "parallel": 1,
+    "nonparallel": 1,
+    "parallel_avg_gpu_energy": 227915.45000000004,
+    "nonparallel_avg_gpu_energy": 22795.910000000025,
+    "parallel_avg_cpu_energy": 85803.35,
+    "nonparallel_avg_cpu_energy": 61899.84,
+    "timestamps": [
+      "2025-11-18T20:53:53.350873",
+      "2025-11-19T06:49:17.930724"
+    ],
+    "note": "Found in data.csv, missing from 6groups due to no performance metrics"
+  },
+  "group5_mrt_oast": {
+    "total": 2,
+    "parallel": 1,
+    "nonparallel": 1,
+    "parallel_avg_gpu_energy": 303567.8299999995,
+    "nonparallel_avg_gpu_energy": 331876.3299999997,
+    "parallel_avg_cpu_energy": 61053.72,
+    "nonparallel_avg_cpu_energy": 39987.66,
+    "timestamps": [
+      "2025-11-18T20:37:37.187907",
+      "2025-11-19T03:33:26.374038"
+    ]
+  },
+  "group6_resnet": {
+    "total": 2,
+    "parallel": 1,
+    "nonparallel": 1,
+    "parallel_avg_gpu_energy": 252254.5000000001,
+    "nonparallel_avg_gpu_energy": 246851.30000000005,
+    "parallel_avg_cpu_energy": 54607.4,
+    "nonparallel_avg_cpu_energy": 51058.21,
+    "timestamps": [
+      "2025-11-18T21:13:46.055005",
+      "2025-11-19T02:01:33.592966"
+    ]
+  }
+}

@@ -1,0 +1,800 @@
+{
+  "group1_examples": {
+    "group_name": "Group1: examples",
+    "parallel": {
+      "energy_cpu_pkg_joules": {
+        "median": 8039.735000000001,
+        "mean": 8237.0575,
+        "std": 7117.99414281568,
+        "count": 4,
+        "cv": 86.41428256165116,
+        "outliers_removed": 0,
+        "note": "稳健基准值（中位数）"
+      },
+      "energy_cpu_ram_joules": {
+        "median": 502.19500000000005,
+        "mean": 543.2175000000001,
+        "std": 484.16766692094046,
+        "count": 4,
+        "cv": 89.12961510277935,
+        "outliers_removed": 0,
+        "note": "稳健基准值（中位数）"
+      },
+      "energy_cpu_total_joules": {
+        "median": 8541.93,
+        "mean": 8780.275,
+        "std": 7599.969378607171,
+        "count": 4,
+        "cv": 86.55730462436736,
+        "outliers_removed": 0,
+        "note": "稳健基准值（中位数）"
+      },
+      "energy_gpu_total_joules": {
+        "median": 46541.18500000001,
+        "mean": 50972.14999999999,
+        "std": 46041.08011634752,
+        "count": 4,
+        "cv": 90.32595273369385,
+        "outliers_removed": 0,
+        "note": "稳健基准值（中位数）"
+      },
+      "energy_gpu_avg_watts": {
+        "median": 248.94859421134416,
+        "mean": 208.95001139138637,
+        "std": 81.80497077572645,
+        "count": 4,
+        "cv": 39.15049835651683,
+        "outliers_removed": 0,
+        "note": "稳健基准值（中位数）"
+      },
+      "energy_gpu_max_watts": {
+        "median": 294.36,
+        "mean": 247.22000000000003,
+        "std": 106.42469387631175,
+        "count": 4,
+        "cv": 43.0485777349372,
+        "outliers_removed": 0,
+        "note": "稳健基准值（中位数）"
+      },
+      "energy_gpu_min_watts": {
+        "median": 137.435,
+        "mean": 123.48,
+        "std": 98.2855557376905,
+        "count": 4,
+        "cv": 79.59633603635446,
+        "outliers_removed": 0,
+        "note": "稳健基准值（中位数）"
+      }
+    },
+    "nonparallel": {
+      "energy_cpu_pkg_joules": {
+        "median": 2490.9,
+        "mean": 4073.596666666666,
+        "std": 4411.450901790324,
+        "count": 6,
+        "cv": 108.2937576488179,
+        "outliers_removed": 0,
+        "note": "稳健基准值（中位数）"
+      },
+      "energy_cpu_ram_joules": {
+        "median": 184.24,
+        "mean": 279.13666666666666,
+        "std": 298.1354137077088,
+        "count": 6,
+        "cv": 106.80625274634006,
+        "outliers_removed": 0,
+        "note": "稳健基准值（中位数）"
+      },
+      "energy_cpu_total_joules": {
+        "median": 2675.1400000000003,
+        "mean": 4352.733333333334,
+        "std": 4705.515153454153,
+        "count": 6,
+        "cv": 108.10483420657103,
+        "outliers_removed": 0,
+        "note": "稳健基准值（中位数）"
+      },
+      "energy_gpu_total_joules": {
+        "median": 2680.0649999999996,
+        "mean": 12157.076666666668,
+        "std": 19999.569136539583,
+        "count": 6,
+        "cv": 164.50968999295813,
+        "outliers_removed": 0,
+        "note": "稳健基准值（中位数）"
+      },
+      "energy_gpu_avg_watts": {
+        "median": 135.94413354531,
+        "mean": 118.8901729554703,
+        "std": 70.29678273976081,
+        "count": 6,
+        "cv": 59.12749640467771,
+        "outliers_removed": 0,
+        "note": "稳健基准值（中位数）"
+      },
+      "energy_gpu_max_watts": {
+        "median": 139.765,
+        "mean": 180.25833333333333,
+        "std": 113.50650966647977,
+        "count": 6,
+        "cv": 62.96880014783215,
+        "outliers_removed": 0,
+        "note": "稳健基准值（中位数）"
+      },
+      "energy_gpu_min_watts": {
+        "median": 72.74,
+        "mean": 61.63833333333333,
+        "std": 28.31075514122975,
+        "count": 6,
+        "cv": 45.93043583467499,
+        "outliers_removed": 0,
+        "note": "稳健基准值（中位数）"
+      }
+    }
+  },
+  "group2_vulberta": {
+    "group_name": "Group2: VulBERTa/mlp",
+    "parallel": {
+      "energy_cpu_pkg_joules": {
+        "median": 134206.9,
+        "mean": 134206.9,
+        "std": NaN,
+        "count": 1,
+        "cv": NaN,
+        "outliers_removed": 0,
+        "note": "稳健基准值（中位数）"
+      },
+      "energy_cpu_ram_joules": {
+        "median": 9159.58,
+        "mean": 9159.58,
+        "std": NaN,
+        "count": 1,
+        "cv": NaN,
+        "outliers_removed": 0,
+        "note": "稳健基准值（中位数）"
+      },
+      "energy_cpu_total_joules": {
+        "median": 143366.48,
+        "mean": 143366.48,
+        "std": NaN,
+        "count": 1,
+        "cv": NaN,
+        "outliers_removed": 0,
+        "note": "稳健基准值（中位数）"
+      },
+      "energy_gpu_total_joules": {
+        "median": 847272.32,
+        "mean": 847272.32,
+        "std": NaN,
+        "count": 1,
+        "cv": NaN,
+        "outliers_removed": 0,
+        "note": "稳健基准值（中位数）"
+      },
+      "energy_gpu_avg_watts": {
+        "median": 230.92731534478057,
+        "mean": 230.92731534478057,
+        "std": NaN,
+        "count": 1,
+        "cv": NaN,
+        "outliers_removed": 0,
+        "note": "稳健基准值（中位数）"
+      },
+      "energy_gpu_max_watts": {
+        "median": 319.12,
+        "mean": 319.12,
+        "std": NaN,
+        "count": 1,
+        "cv": NaN,
+        "outliers_removed": 0,
+        "note": "稳健基准值（中位数）"
+      },
+      "energy_gpu_min_watts": {
+        "median": 89.21,
+        "mean": 89.21,
+        "std": NaN,
+        "count": 1,
+        "cv": NaN,
+        "outliers_removed": 0,
+        "note": "稳健基准值（中位数）"
+      }
+    },
+    "nonparallel": {
+      "energy_cpu_pkg_joules": {
+        "median": 89815.23,
+        "mean": 89815.23,
+        "std": NaN,
+        "count": 1,
+        "cv": NaN,
+        "outliers_removed": 0,
+        "note": "稳健基准值（中位数）"
+      },
+      "energy_cpu_ram_joules": {
+        "median": 7225.47,
+        "mean": 7225.47,
+        "std": NaN,
+        "count": 1,
+        "cv": NaN,
+        "outliers_removed": 0,
+        "note": "稳健基准值（中位数）"
+      },
+      "energy_cpu_total_joules": {
+        "median": 97040.7,
+        "mean": 97040.7,
+        "std": NaN,
+        "count": 1,
+        "cv": NaN,
+        "outliers_removed": 0,
+        "note": "稳健基准值（中位数）"
+      },
+      "energy_gpu_total_joules": {
+        "median": 726127.3999999991,
+        "mean": 726127.3999999991,
+        "std": NaN,
+        "count": 1,
+        "cv": NaN,
+        "outliers_removed": 0,
+        "note": "稳健基准值（中位数）"
+      },
+      "energy_gpu_avg_watts": {
+        "median": 239.40896801846327,
+        "mean": 239.40896801846327,
+        "std": NaN,
+        "count": 1,
+        "cv": NaN,
+        "outliers_removed": 0,
+        "note": "稳健基准值（中位数）"
+      },
+      "energy_gpu_max_watts": {
+        "median": 318.86,
+        "mean": 318.86,
+        "std": NaN,
+        "count": 1,
+        "cv": NaN,
+        "outliers_removed": 0,
+        "note": "稳健基准值（中位数）"
+      },
+      "energy_gpu_min_watts": {
+        "median": 4.72,
+        "mean": 4.72,
+        "std": NaN,
+        "count": 1,
+        "cv": NaN,
+        "outliers_removed": 0,
+        "note": "稳健基准值（中位数）"
+      }
+    }
+  },
+  "group3_person_reid": {
+    "group_name": "Group3: Person_reID",
+    "parallel": {
+      "energy_cpu_pkg_joules": {
+        "median": 198674.72,
+        "mean": 189601.73666666666,
+        "std": 33980.70030143335,
+        "count": 3,
+        "cv": 17.922146125261413,
+        "outliers_removed": 0,
+        "note": "稳健基准值（中位数）"
+      },
+      "energy_cpu_ram_joules": {
+        "median": 11935.12,
+        "mean": 11692.550000000001,
+        "std": 1621.797870235376,
+        "count": 3,
+        "cv": 13.870352234845058,
+        "outliers_removed": 0,
+        "note": "稳健基准值（中位数）"
+      },
+      "energy_cpu_total_joules": {
+        "median": 210609.84,
+        "mean": 201294.28666666665,
+        "std": 35594.22192151043,
+        "count": 3,
+        "cv": 17.68267868449376,
+        "outliers_removed": 0,
+        "note": "稳健基准值（中位数）"
+      },
+      "energy_gpu_total_joules": {
+        "median": 984670.8200000002,
+        "mean": 962693.6966666669,
+        "std": 162342.81586886523,
+        "count": 3,
+        "cv": 16.863392419725844,
+        "outliers_removed": 0,
+        "note": "稳健基准值（中位数）"
+      },
+      "energy_gpu_avg_watts": {
+        "median": 230.9938584474888,
+        "mean": 231.5332596248304,
+        "std": 1.5482316607732252,
+        "count": 3,
+        "cv": 0.6686865046006494,
+        "outliers_removed": 0,
+        "note": "稳健基准值（中位数）"
+      },
+      "energy_gpu_max_watts": {
+        "median": 291.1,
+        "mean": 287.46999999999997,
+        "std": 31.87042359304313,
+        "count": 3,
+        "cv": 11.086521582440998,
+        "outliers_removed": 0,
+        "note": "稳健基准值（中位数）"
+      },
+      "energy_gpu_min_watts": {
+        "median": 4.99,
+        "mean": 4.943333333333333,
+        "std": 0.09865765724632489,
+        "count": 3,
+        "cv": 1.9957718930477049,
+        "outliers_removed": 0,
+        "note": "稳健基准值（中位数）"
+      }
+    },
+    "nonparallel": {
+      "energy_cpu_pkg_joules": {
+        "median": 132745.23,
+        "mean": 126492.62666666666,
+        "std": 19482.068406964223,
+        "count": 3,
+        "cv": 15.40174231522867,
+        "outliers_removed": 0,
+        "note": "稳健基准值（中位数）"
+      },
+      "energy_cpu_ram_joules": {
+        "median": 10850.82,
+        "mean": 10204.910000000002,
+        "std": 1326.060748646155,
+        "count": 3,
+        "cv": 12.994340456174083,
+        "outliers_removed": 0,
+        "note": "稳健基准值（中位数）"
+      },
+      "energy_cpu_total_joules": {
+        "median": 143596.05,
+        "mean": 136697.53666666665,
+        "std": 20793.466487109195,
+        "count": 3,
+        "cv": 15.211295678146355,
+        "outliers_removed": 0,
+        "note": "稳健基准值（中位数）"
+      },
+      "energy_gpu_total_joules": {
+        "median": 986557.170000001,
+        "mean": 919491.349999999,
+        "std": 151485.5387765265,
+        "count": 3,
+        "cv": 16.47492809764079,
+        "outliers_removed": 0,
+        "note": "稳健基准值（中位数）"
+      },
+      "energy_gpu_avg_watts": {
+        "median": 237.7468260038235,
+        "mean": 240.8039228794336,
+        "std": 7.003020213240587,
+        "count": 3,
+        "cv": 2.9081836082657504,
+        "outliers_removed": 0,
+        "note": "稳健基准值（中位数）"
+      },
+      "energy_gpu_max_watts": {
+        "median": 290.61,
+        "mean": 288.2366666666667,
+        "std": 31.187801033951295,
+        "count": 3,
+        "cv": 10.820205976784573,
+        "outliers_removed": 0,
+        "note": "稳健基准值（中位数）"
+      },
+      "energy_gpu_min_watts": {
+        "median": 11.81,
+        "mean": 12.163333333333334,
+        "std": 0.7365686209263418,
+        "count": 3,
+        "cv": 6.0556477467224585,
+        "outliers_removed": 0,
+        "note": "稳健基准值（中位数）"
+      }
+    }
+  },
+  "group4_bug_localization": {
+    "group_name": "Group4: bug-localization",
+    "parallel": {
+      "energy_cpu_pkg_joules": {
+        "median": 82596.83,
+        "mean": 82596.83,
+        "std": NaN,
+        "count": 1,
+        "cv": NaN,
+        "outliers_removed": 0,
+        "note": "稳健基准值（中位数）"
+      },
+      "energy_cpu_ram_joules": {
+        "median": 3206.52,
+        "mean": 3206.52,
+        "std": NaN,
+        "count": 1,
+        "cv": NaN,
+        "outliers_removed": 0,
+        "note": "稳健基准值（中位数）"
+      },
+      "energy_cpu_total_joules": {
+        "median": 85803.35,
+        "mean": 85803.35,
+        "std": NaN,
+        "count": 1,
+        "cv": NaN,
+        "outliers_removed": 0,
+        "note": "稳健基准值（中位数）"
+      },
+      "energy_gpu_total_joules": {
+        "median": 227915.45000000004,
+        "mean": 227915.45000000004,
+        "std": NaN,
+        "count": 1,
+        "cv": NaN,
+        "outliers_removed": 0,
+        "note": "稳健基准值（中位数）"
+      },
+      "energy_gpu_avg_watts": {
+        "median": 235.69332988624615,
+        "mean": 235.69332988624615,
+        "std": NaN,
+        "count": 1,
+        "cv": NaN,
+        "outliers_removed": 0,
+        "note": "稳健基准值（中位数）"
+      },
+      "energy_gpu_max_watts": {
+        "median": 311.52,
+        "mean": 311.52,
+        "std": NaN,
+        "count": 1,
+        "cv": NaN,
+        "outliers_removed": 0,
+        "note": "稳健基准值（中位数）"
+      },
+      "energy_gpu_min_watts": {
+        "median": 111.24,
+        "mean": 111.24,
+        "std": NaN,
+        "count": 1,
+        "cv": NaN,
+        "outliers_removed": 0,
+        "note": "稳健基准值（中位数）"
+      }
+    },
+    "nonparallel": {
+      "energy_cpu_pkg_joules": {
+        "median": 59638.9,
+        "mean": 59638.9,
+        "std": NaN,
+        "count": 1,
+        "cv": NaN,
+        "outliers_removed": 0,
+        "note": "稳健基准值（中位数）"
+      },
+      "energy_cpu_ram_joules": {
+        "median": 2260.94,
+        "mean": 2260.94,
+        "std": NaN,
+        "count": 1,
+        "cv": NaN,
+        "outliers_removed": 0,
+        "note": "稳健基准值（中位数）"
+      },
+      "energy_cpu_total_joules": {
+        "median": 61899.84,
+        "mean": 61899.84,
+        "std": NaN,
+        "count": 1,
+        "cv": NaN,
+        "outliers_removed": 0,
+        "note": "稳健基准值（中位数）"
+      },
+      "energy_gpu_total_joules": {
+        "median": 22795.910000000025,
+        "mean": 22795.910000000025,
+        "std": NaN,
+        "count": 1,
+        "cv": NaN,
+        "outliers_removed": 0,
+        "note": "稳健基准值（中位数）"
+      },
+      "energy_gpu_avg_watts": {
+        "median": 74.01269480519488,
+        "mean": 74.01269480519488,
+        "std": NaN,
+        "count": 1,
+        "cv": NaN,
+        "outliers_removed": 0,
+        "note": "稳健基准值（中位数）"
+      },
+      "energy_gpu_max_watts": {
+        "median": 84.11,
+        "mean": 84.11,
+        "std": NaN,
+        "count": 1,
+        "cv": NaN,
+        "outliers_removed": 0,
+        "note": "稳健基准值（中位数）"
+      },
+      "energy_gpu_min_watts": {
+        "median": 44.41,
+        "mean": 44.41,
+        "std": NaN,
+        "count": 1,
+        "cv": NaN,
+        "outliers_removed": 0,
+        "note": "稳健基准值（中位数）"
+      }
+    }
+  },
+  "group5_mrt_oast": {
+    "group_name": "Group5: MRT-OAST",
+    "parallel": {
+      "energy_cpu_pkg_joules": {
+        "median": 57839.19,
+        "mean": 57839.19,
+        "std": NaN,
+        "count": 1,
+        "cv": NaN,
+        "outliers_removed": 0,
+        "note": "稳健基准值（中位数）"
+      },
+      "energy_cpu_ram_joules": {
+        "median": 3214.53,
+        "mean": 3214.53,
+        "std": NaN,
+        "count": 1,
+        "cv": NaN,
+        "outliers_removed": 0,
+        "note": "稳健基准值（中位数）"
+      },
+      "energy_cpu_total_joules": {
+        "median": 61053.72,
+        "mean": 61053.72,
+        "std": NaN,
+        "count": 1,
+        "cv": NaN,
+        "outliers_removed": 0,
+        "note": "稳健基准值（中位数）"
+      },
+      "energy_gpu_total_joules": {
+        "median": 303567.8299999995,
+        "mean": 303567.8299999995,
+        "std": NaN,
+        "count": 1,
+        "cv": NaN,
+        "outliers_removed": 0,
+        "note": "稳健基准值（中位数）"
+      },
+      "energy_gpu_avg_watts": {
+        "median": 234.4153127413124,
+        "mean": 234.4153127413124,
+        "std": NaN,
+        "count": 1,
+        "cv": NaN,
+        "outliers_removed": 0,
+        "note": "稳健基准值（中位数）"
+      },
+      "energy_gpu_max_watts": {
+        "median": 316.13,
+        "mean": 316.13,
+        "std": NaN,
+        "count": 1,
+        "cv": NaN,
+        "outliers_removed": 0,
+        "note": "稳健基准值（中位数）"
+      },
+      "energy_gpu_min_watts": {
+        "median": 4.89,
+        "mean": 4.89,
+        "std": NaN,
+        "count": 1,
+        "cv": NaN,
+        "outliers_removed": 0,
+        "note": "稳健基准值（中位数）"
+      }
+    },
+    "nonparallel": {
+      "energy_cpu_pkg_joules": {
+        "median": 37083.15,
+        "mean": 37083.15,
+        "std": NaN,
+        "count": 1,
+        "cv": NaN,
+        "outliers_removed": 0,
+        "note": "稳健基准值（中位数）"
+      },
+      "energy_cpu_ram_joules": {
+        "median": 2904.51,
+        "mean": 2904.51,
+        "std": NaN,
+        "count": 1,
+        "cv": NaN,
+        "outliers_removed": 0,
+        "note": "稳健基准值（中位数）"
+      },
+      "energy_cpu_total_joules": {
+        "median": 39987.66,
+        "mean": 39987.66,
+        "std": NaN,
+        "count": 1,
+        "cv": NaN,
+        "outliers_removed": 0,
+        "note": "稳健基准值（中位数）"
+      },
+      "energy_gpu_total_joules": {
+        "median": 331876.3299999997,
+        "mean": 331876.3299999997,
+        "std": NaN,
+        "count": 1,
+        "cv": NaN,
+        "outliers_removed": 0,
+        "note": "稳健基准值（中位数）"
+      },
+      "energy_gpu_avg_watts": {
+        "median": 270.25759771986947,
+        "mean": 270.25759771986947,
+        "std": NaN,
+        "count": 1,
+        "cv": NaN,
+        "outliers_removed": 0,
+        "note": "稳健基准值（中位数）"
+      },
+      "energy_gpu_max_watts": {
+        "median": 318.31,
+        "mean": 318.31,
+        "std": NaN,
+        "count": 1,
+        "cv": NaN,
+        "outliers_removed": 0,
+        "note": "稳健基准值（中位数）"
+      },
+      "energy_gpu_min_watts": {
+        "median": 66.75,
+        "mean": 66.75,
+        "std": NaN,
+        "count": 1,
+        "cv": NaN,
+        "outliers_removed": 0,
+        "note": "稳健基准值（中位数）"
+      }
+    }
+  },
+  "group6_resnet": {
+    "group_name": "Group6: ResNet",
+    "parallel": {
+      "energy_cpu_pkg_joules": {
+        "median": 51431.03,
+        "mean": 51431.03,
+        "std": NaN,
+        "count": 1,
+        "cv": NaN,
+        "outliers_removed": 0,
+        "note": "稳健基准值（中位数）"
+      },
+      "energy_cpu_ram_joules": {
+        "median": 3176.37,
+        "mean": 3176.37,
+        "std": NaN,
+        "count": 1,
+        "cv": NaN,
+        "outliers_removed": 0,
+        "note": "稳健基准值（中位数）"
+      },
+      "energy_cpu_total_joules": {
+        "median": 54607.4,
+        "mean": 54607.4,
+        "std": NaN,
+        "count": 1,
+        "cv": NaN,
+        "outliers_removed": 0,
+        "note": "稳健基准值（中位数）"
+      },
+      "energy_gpu_total_joules": {
+        "median": 252254.5000000001,
+        "mean": 252254.5000000001,
+        "std": NaN,
+        "count": 1,
+        "cv": NaN,
+        "outliers_removed": 0,
+        "note": "稳健基准值（中位数）"
+      },
+      "energy_gpu_avg_watts": {
+        "median": 228.69854941069815,
+        "mean": 228.69854941069815,
+        "std": NaN,
+        "count": 1,
+        "cv": NaN,
+        "outliers_removed": 0,
+        "note": "稳健基准值（中位数）"
+      },
+      "energy_gpu_max_watts": {
+        "median": 252.29,
+        "mean": 252.29,
+        "std": NaN,
+        "count": 1,
+        "cv": NaN,
+        "outliers_removed": 0,
+        "note": "稳健基准值（中位数）"
+      },
+      "energy_gpu_min_watts": {
+        "median": 75.56,
+        "mean": 75.56,
+        "std": NaN,
+        "count": 1,
+        "cv": NaN,
+        "outliers_removed": 0,
+        "note": "稳健基准值（中位数）"
+      }
+    },
+    "nonparallel": {
+      "energy_cpu_pkg_joules": {
+        "median": 47985.6,
+        "mean": 47985.6,
+        "std": NaN,
+        "count": 1,
+        "cv": NaN,
+        "outliers_removed": 0,
+        "note": "稳健基准值（中位数）"
+      },
+      "energy_cpu_ram_joules": {
+        "median": 3072.61,
+        "mean": 3072.61,
+        "std": NaN,
+        "count": 1,
+        "cv": NaN,
+        "outliers_removed": 0,
+        "note": "稳健基准值（中位数）"
+      },
+      "energy_cpu_total_joules": {
+        "median": 51058.21,
+        "mean": 51058.21,
+        "std": NaN,
+        "count": 1,
+        "cv": NaN,
+        "outliers_removed": 0,
+        "note": "稳健基准值（中位数）"
+      },
+      "energy_gpu_total_joules": {
+        "median": 246851.30000000005,
+        "mean": 246851.30000000005,
+        "std": NaN,
+        "count": 1,
+        "cv": NaN,
+        "outliers_removed": 0,
+        "note": "稳健基准值（中位数）"
+      },
+      "energy_gpu_avg_watts": {
+        "median": 224.61446769790723,
+        "mean": 224.61446769790723,
+        "std": NaN,
+        "count": 1,
+        "cv": NaN,
+        "outliers_removed": 0,
+        "note": "稳健基准值（中位数）"
+      },
+      "energy_gpu_max_watts": {
+        "median": 247.6,
+        "mean": 247.6,
+        "std": NaN,
+        "count": 1,
+        "cv": NaN,
+        "outliers_removed": 0,
+        "note": "稳健基准值（中位数）"
+      },
+      "energy_gpu_min_watts": {
+        "median": 69.53,
+        "mean": 69.53,
+        "std": NaN,
+        "count": 1,
+        "cv": NaN,
+        "outliers_removed": 0,
+        "note": "稳健基准值（中位数）"
+      }
+    }
+  }
+}

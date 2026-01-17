@@ -1,0 +1,132 @@
+{
+  "task_id": "group2_vulberta",
+  "task_name": "VulBERTa（代码漏洞检测）",
+  "success": true,
+  "elapsed_time_minutes": 6.665971930821737,
+  "n_samples": 72,
+  "n_features": 21,
+  "variable_classification": {
+    "n_hyperparams": 3,
+    "n_interactions": 3,
+    "n_performance": 3,
+    "n_energy": 4,
+    "n_mediators": 6,
+    "hyperparam_names": [
+      "hyperparam_learning_rate",
+      "hyperparam_epochs",
+      "hyperparam_l2_regularization"
+    ],
+    "interaction_names": [
+      "hyperparam_learning_rate_x_is_parallel",
+      "hyperparam_epochs_x_is_parallel",
+      "hyperparam_l2_regularization_x_is_parallel"
+    ],
+    "performance_names": [
+      "perf_eval_loss",
+      "perf_final_training_loss",
+      "perf_eval_samples_per_second"
+    ],
+    "energy_names": [
+      "energy_cpu_pkg_joules",
+      "energy_cpu_ram_joules",
+      "energy_cpu_total_joules",
+      "energy_gpu_total_joules"
+    ],
+    "mediator_names": [
+      "energy_gpu_avg_watts",
+      "energy_gpu_max_watts",
+      "energy_gpu_min_watts",
+      "energy_gpu_temp_avg_celsius",
+      "energy_gpu_temp_max_celsius",
+      "energy_gpu_util_avg_percent"
+    ]
+  },
+  "graph_stats": {
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.16360542178153992,
+    "std": 0.21802747249603271
+  },
+  "edges": {
+    "threshold_0.01": 305,
+    "threshold_0.1": 194,
+    "threshold_0.3": 60,
+    "threshold_0.5": 21
+  },
+  "question1_evidence": {
+    "direct_hyperparam_to_energy": [],
+    "mediated_hyperparam_to_energy": [],
+    "moderation_effects": []
+  },
+  "question2_evidence": {
+    "direct_edges_perf_to_energy": [],
+    "direct_edges_energy_to_perf": [
+      {
+        "from": "energy_gpu_total_joules",
+        "to": "perf_eval_loss",
+        "strength": 0.3499999940395355
+      }
+    ],
+    "common_hyperparams": [],
+    "mediated_tradeoffs": [
+      {
+        "path": "perf_eval_samples_per_second → energy_gpu_util_avg_percent → energy_cpu_ram_joules",
+        "strength_step1": 0.30000001192092896,
+        "strength_step2": 0.3499999940395355,
+        "path_strength": 0.10500000417232513
+      }
+    ]
+  },
+  "question3_evidence": {
+    "mediation_paths_to_energy": [],
+    "mediation_paths_to_performance": [],
+    "multi_step_paths": [
+      {
+        "path": "hyperparam_learning_rate → energy_gpu_max_watts → energy_gpu_avg_watts → perf_final_training_loss",
+        "strength_step1": 0.30000001192092896,
+        "strength_step2": 0.3499999940395355,
+        "strength_step3": 0.3499999940395355,
+        "path_strength": 0.03674999997019768
+      },
+      {
+        "path": "hyperparam_epochs → energy_gpu_max_watts → energy_gpu_avg_watts → perf_final_training_loss",
+        "strength_step1": 0.3499999940395355,
+        "strength_step2": 0.3499999940395355,
+        "strength_step3": 0.3499999940395355,
+        "path_strength": 0.04287499934434891
+      }
+    ]
+  },
+  "config": {
+    "alpha_linear": 0.05,
+    "beta_linear": 0.1,
+    "n_particles": 20,
+    "tau": 1.0,
+    "n_steps": 5000,
+    "n_grad_mc_samples": 128,
+    "n_acyclicity_mc_samples": 32
+  },
+  "feature_names": [
+    "energy_cpu_pkg_joules",
+    "energy_cpu_ram_joules",
+    "energy_cpu_total_joules",
+    "energy_gpu_avg_watts",
+    "energy_gpu_max_watts",
+    "energy_gpu_min_watts",
+    "energy_gpu_total_joules",
+    "energy_gpu_temp_avg_celsius",
+    "energy_gpu_temp_max_celsius",
+    "energy_gpu_util_avg_percent",
+    "is_parallel",
+    "hyperparam_learning_rate",
+    "hyperparam_epochs",
+    "hyperparam_seed",
+    "hyperparam_l2_regularization",
+    "perf_eval_loss",
+    "perf_final_training_loss",
+    "perf_eval_samples_per_second",
+    "hyperparam_learning_rate_x_is_parallel",
+    "hyperparam_epochs_x_is_parallel",
+    "hyperparam_l2_regularization_x_is_parallel"
+  ]
+}

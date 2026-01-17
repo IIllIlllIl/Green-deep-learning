@@ -1,0 +1,449 @@
+{
+  "group1_examples_energy": {
+    "mean": [
+      9878.074210526314,
+      709.463322368421,
+      10587.537532894738,
+      162.62364933384183,
+      205.89917763157894,
+      115.97444078947368,
+      34524.65930921052,
+      67.8002353128658,
+      70.96710526315789,
+      48.968121224856574,
+      60.74013157894737
+    ],
+    "std": [
+      13158.38475561443,
+      962.4339402155166,
+      14119.211338342933,
+      72.9686366774992,
+      89.5674788419325,
+      69.92992314455289,
+      41664.93016742916,
+      10.951312351504889,
+      10.139109897581514,
+      33.92723932204516,
+      36.351195882500896
+    ],
+    "columns": [
+      "energy_cpu_pkg_joules",
+      "energy_cpu_ram_joules",
+      "energy_cpu_total_joules",
+      "energy_gpu_avg_watts",
+      "energy_gpu_max_watts",
+      "energy_gpu_min_watts",
+      "energy_gpu_total_joules",
+      "energy_gpu_temp_avg_celsius",
+      "energy_gpu_temp_max_celsius",
+      "energy_gpu_util_avg_percent",
+      "energy_gpu_util_max_percent"
+    ]
+  },
+  "group1_examples_hyperparam": {
+    "mean": [
+      147.7443946188341,
+      0.010788166550267556,
+      9.853556485355648
+    ],
+    "std": [
+      937.8022883184419,
+      0.0033591810258004244,
+      2.566173972607482
+    ],
+    "columns": [
+      "hyperparam_batch_size",
+      "hyperparam_learning_rate",
+      "hyperparam_epochs"
+    ]
+  },
+  "group1_examples_perf": {
+    "mean": [
+      76.0213484007277
+    ],
+    "std": [
+      33.43987113499765
+    ],
+    "columns": [
+      "perf_test_accuracy"
+    ]
+  },
+  "group2_vulberta_energy": {
+    "mean": [
+      136226.30236111113,
+      9223.969583333334,
+      145450.27194444445,
+      223.98824042780362,
+      319.02583333333337,
+      36.38111111111111,
+      837818.9459722224,
+      78.70899620923369,
+      84.0,
+      88.266441867054,
+      100.0
+    ],
+    "std": [
+      40779.822286238654,
+      2401.0123282056798,
+      43002.26724492457,
+      8.098559094469145,
+      0.4015205474194332,
+      40.564854093837454,
+      222811.26646378817,
+      0.6229547312804796,
+      0.408248290463863,
+      3.439921143251051,
+      1.0
+    ],
+    "columns": [
+      "energy_cpu_pkg_joules",
+      "energy_cpu_ram_joules",
+      "energy_cpu_total_joules",
+      "energy_gpu_avg_watts",
+      "energy_gpu_max_watts",
+      "energy_gpu_min_watts",
+      "energy_gpu_total_joules",
+      "energy_gpu_temp_avg_celsius",
+      "energy_gpu_temp_max_celsius",
+      "energy_gpu_util_avg_percent",
+      "energy_gpu_util_max_percent"
+    ]
+  },
+  "group2_vulberta_hyperparam": {
+    "mean": [
+      2.774830251711754e-05,
+      12.62962962962963,
+      0.0002681755953394955
+    ],
+    "std": [
+      8.821276004525557e-06,
+      4.029044075102937,
+      0.0002756166517949282
+    ],
+    "columns": [
+      "hyperparam_learning_rate",
+      "hyperparam_epochs",
+      "hyperparam_l2_regularization"
+    ]
+  },
+  "group2_vulberta_perf": {
+    "mean": [
+      0.7251748889684677,
+      0.7235097222222221,
+      55.47590277777778
+    ],
+    "std": [
+      0.058612052550442814,
+      0.06519824077322058,
+      4.562216971920687
+    ],
+    "columns": [
+      "perf_eval_loss",
+      "perf_final_training_loss",
+      "perf_eval_samples_per_second"
+    ]
+  },
+  "group3_person_reid_energy": {
+    "mean": [
+      177095.5033009709,
+      12886.951650485436,
+      189982.4549514563,
+      226.89700615748302,
+      291.2285436893204,
+      57.56548543689321,
+      986948.3446601945,
+      79.81680619011975,
+      83.90291262135922,
+      84.33271986249166,
+      93.72330097087378
+    ],
+    "std": [
+      75418.63118211375,
+      5226.018368859275,
+      80575.94461573039,
+      14.599462690924936,
+      23.848701412114828,
+      56.455196820711926,
+      333431.66589534364,
+      2.5831904631106153,
+      1.7067232165749784,
+      14.900871083741373,
+      9.791324710631763
+    ],
+    "columns": [
+      "energy_cpu_pkg_joules",
+      "energy_cpu_ram_joules",
+      "energy_cpu_total_joules",
+      "energy_gpu_avg_watts",
+      "energy_gpu_max_watts",
+      "energy_gpu_min_watts",
+      "energy_gpu_total_joules",
+      "energy_gpu_temp_avg_celsius",
+      "energy_gpu_temp_max_celsius",
+      "energy_gpu_util_avg_percent",
+      "energy_gpu_util_max_percent"
+    ]
+  },
+  "group3_person_reid_hyperparam": {
+    "mean": [
+      0.4675094778461801,
+      0.047195588869279825,
+      60.0625
+    ],
+    "std": [
+      0.07398383856042832,
+      0.011628016632754123,
+      13.399523503230865
+    ],
+    "columns": [
+      "hyperparam_dropout",
+      "hyperparam_learning_rate",
+      "hyperparam_epochs"
+    ]
+  },
+  "group3_person_reid_perf": {
+    "mean": [
+      0.7466190485436893,
+      0.9047949708737865,
+      0.9643330631067961
+    ],
+    "std": [
+      0.038411899638806216,
+      0.02323380558413713,
+      0.00939503319519074
+    ],
+    "columns": [
+      "perf_map",
+      "perf_rank1",
+      "perf_rank5"
+    ]
+  },
+  "group4_bug_localization_energy": {
+    "mean": [
+      56178.38288888889,
+      2143.324333333333,
+      58321.70722222223,
+      72.33136257694397,
+      78.85522222222222,
+      54.27155555555555,
+      43691.081333333335,
+      55.18518273865955,
+      56.611111111111114,
+      2.44482576502985,
+      9.022222222222222
+    ],
+    "std": [
+      17947.127113653733,
+      666.3538570960461,
+      18612.096676545905,
+      27.82962888852114,
+      29.95556576842061,
+      24.13895201219211,
+      27936.944413878362,
+      10.006496524826776,
+      9.33296956963079,
+      2.0688943074203254,
+      6.003661434265255
+    ],
+    "columns": [
+      "energy_cpu_pkg_joules",
+      "energy_cpu_ram_joules",
+      "energy_cpu_total_joules",
+      "energy_gpu_avg_watts",
+      "energy_gpu_max_watts",
+      "energy_gpu_min_watts",
+      "energy_gpu_total_joules",
+      "energy_gpu_temp_avg_celsius",
+      "energy_gpu_temp_max_celsius",
+      "energy_gpu_util_avg_percent",
+      "energy_gpu_util_max_percent"
+    ]
+  },
+  "group4_bug_localization_hyperparam": {
+    "mean": [
+      1.2547803594114766e-05,
+      5.758620689655173,
+      6866.878787878788
+    ],
+    "std": [
+      4.5674366908689935e-06,
+      2.860614503718088,
+      5676.960138097682
+    ],
+    "columns": [
+      "hyperparam_alpha",
+      "hyperparam_kfold",
+      "hyperparam_max_iter"
+    ]
+  },
+  "group4_bug_localization_perf": {
+    "mean": [
+      0.38075555555555557,
+      0.6272777777777777,
+      0.7389111111111111,
+      0.8273333333333333
+    ],
+    "std": [
+      0.0037097802004704395,
+      0.0025474509166693513,
+      0.0021377269571228887,
+      0.002195955878933416
+    ],
+    "columns": [
+      "perf_top1_accuracy",
+      "perf_top5_accuracy",
+      "perf_top10_accuracy",
+      "perf_top20_accuracy"
+    ]
+  },
+  "group5_mrt_oast_energy": {
+    "mean": [
+      47943.12263888889,
+      3329.1591666666664,
+      51272.281805555554,
+      235.75428136838957,
+      316.4588888888889,
+      76.23666666666666,
+      324298.23124999995,
+      79.68264842879576,
+      84.11111111111111,
+      93.12979419192457,
+      98.97222222222223
+    ],
+    "std": [
+      14344.406266236385,
+      866.0479757427959,
+      15165.77349590988,
+      10.085285905227888,
+      1.4040255176886904,
+      22.56762701058507,
+      78978.49315578851,
+      0.6383583198728783,
+      0.4267303193260338,
+      1.3408610610743275,
+      1.2906955728321048
+    ],
+    "columns": [
+      "energy_cpu_pkg_joules",
+      "energy_cpu_ram_joules",
+      "energy_cpu_total_joules",
+      "energy_gpu_avg_watts",
+      "energy_gpu_max_watts",
+      "energy_gpu_min_watts",
+      "energy_gpu_total_joules",
+      "energy_gpu_temp_avg_celsius",
+      "energy_gpu_temp_max_celsius",
+      "energy_gpu_util_avg_percent",
+      "energy_gpu_util_max_percent"
+    ]
+  },
+  "group5_mrt_oast_hyperparam": {
+    "mean": [
+      0.16647638945837165,
+      9.491386596931898e-05,
+      9.958333333333334,
+      0.0001412622527241332
+    ],
+    "std": [
+      0.0708743520324969,
+      2.339423617043092e-05,
+      2.8207440901688017,
+      0.00020746288743220186
+    ],
+    "columns": [
+      "hyperparam_dropout",
+      "hyperparam_learning_rate",
+      "hyperparam_epochs",
+      "hyperparam_l2_regularization"
+    ]
+  },
+  "group5_mrt_oast_perf": {
+    "mean": [
+      621.7413033333333,
+      0.9480608194444444,
+      0.7930129722222223
+    ],
+    "std": [
+      1486.8567896153654,
+      0.06619851593404627,
+      0.0662157642507038
+    ],
+    "columns": [
+      "perf_accuracy",
+      "perf_precision",
+      "perf_recall"
+    ]
+  },
+  "group6_resnet_energy": {
+    "mean": [
+      79710.23486486488,
+      5474.572162162162,
+      85184.80702702703,
+      221.66019342304665,
+      268.9916216216216,
+      97.6608108108108,
+      305659.4579729729,
+      78.34146831434894,
+      81.3108108108108,
+      71.7378501063035,
+      84.82432432432432
+    ],
+    "std": [
+      50076.5646919947,
+      4018.7241816870696,
+      54087.84807088069,
+      17.156814478538568,
+      27.79847147397249,
+      27.683137454822308,
+      104860.07596071206,
+      4.91356817460998,
+      2.9542716469897368,
+      16.32737571604074,
+      11.126251047918172
+    ],
+    "columns": [
+      "energy_cpu_pkg_joules",
+      "energy_cpu_ram_joules",
+      "energy_cpu_total_joules",
+      "energy_gpu_avg_watts",
+      "energy_gpu_max_watts",
+      "energy_gpu_min_watts",
+      "energy_gpu_total_joules",
+      "energy_gpu_temp_avg_celsius",
+      "energy_gpu_temp_max_celsius",
+      "energy_gpu_util_avg_percent",
+      "energy_gpu_util_max_percent"
+    ]
+  },
+  "group6_resnet_hyperparam": {
+    "mean": [
+      0.08929241231946576,
+      194.67857142857142,
+      0.00016940727555035602
+    ],
+    "std": [
+      0.023919071197767754,
+      50.252969756898494,
+      0.00017238181133451836
+    ],
+    "columns": [
+      "hyperparam_learning_rate",
+      "hyperparam_epochs",
+      "hyperparam_l2_regularization"
+    ]
+  },
+  "group6_resnet_perf": {
+    "mean": [
+      91.61162162162161,
+      91.61094594594594
+    ],
+    "std": [
+      0.6287246357831168,
+      0.628593816599677
+    ],
+    "columns": [
+      "perf_best_val_accuracy",
+      "perf_test_accuracy"
+    ]
+  }
+}
