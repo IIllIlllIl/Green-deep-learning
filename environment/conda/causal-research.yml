@@ -1,0 +1,21 @@
+# causal-research - 因果推断分析环境
+# Python: 3.12
+# 用于 DiBS 图学习和因果推断分析
+
+name: causal-research
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12
+  - pip
+  - pip:
+    - dibs-lib==1.2.0
+    - jax==0.4.25
+    - jaxlib==0.4.25
+    - torch==2.9.0
+    - pandas
+    - scikit-learn
+    - statsmodels
+    - matplotlib
+    - seaborn
+    - jupyter

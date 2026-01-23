@@ -1,0 +1,12 @@
+# pytorch_resnet_cifar10 - ResNet CIFAR-10 训练环境
+# Python: 3.10
+
+name: pytorch_resnet_cifar10
+channels:
+  - pytorch
+dependencies:
+  - python=3.10
+  - pip
+  - pip:
+    - torch==2.5.1+cu121
+    - torchvision==0.20.1+cu121

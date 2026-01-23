@@ -1,0 +1,15 @@
+# vulberta - VulBERTa 漏洞检测训练环境
+# Python: 3.8
+
+name: vulberta
+channels:
+  - pytorch
+dependencies:
+  - python=3.8
+  - pip
+  - pip:
+    - torch==1.8.0+cu111
+    - torchvision==0.9.0+cu111
+    - torchaudio==0.8.0
+    - transformers==4.4.1
+    - tokenizers==0.10.1

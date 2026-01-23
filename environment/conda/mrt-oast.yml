@@ -1,0 +1,18 @@
+# mrt-oast - MRT-OAST 代码克隆检测训练环境
+# Python: 3.7
+
+name: mrt-oast
+channels:
+  - pytorch
+  - conda-forge
+dependencies:
+  - python=3.7
+  - numpy
+  - matplotlib
+  - pip
+  - pip:
+    - torch==1.13.1+cu117
+    - torchvision==0.14.1+cu117
+    - torchaudio==0.13.1+cu117
+    - javalang==0.13.0
+    - tensorboard
