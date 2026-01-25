@@ -1,0 +1,424 @@
+# JSON配置文件书写规范 ⭐⭐⭐
+
+**文档版本**: 1.0
+**创建日期**: 2025-12-13
+**最后更新**: 2025-12-13
+**适用版本**: v4.7.3+
+
+---
+
+> ⚠️ **重要提示 (2026-01-25)**
+>
+> 本文档强调的"**单参数变异原则**"可能与当前实验设计不一致！
+>
+> 根据最新的 [EXPERIMENT_EXPANSION_PLAN_20260105.md](EXPERIMENT_EXPANSION_PLAN_20260105.md)，项目已扩展为支持**多参数变异**实验。
+>
+> **关键变化**:
+> - **原设计**: 每次只变异1个超参数
+> - **新设计**: 可同时变异多个超参数
+>
+> 如果您正在进行多参数变异实验，请参考 EXPERIMENT_EXPANSION_PLAN_20260105.md 中的配置格式。
+>
+> 对于单参数变异实验，本规范仍然有效。
+
+---
+
+## 🎯 核心原则
+
+1. **单参数变异原则**: 每个实验配置只能变异一个超参数
+2. **使用`mutate`数组**: 指定变异参数时使用`"mutate": ["参数名"]`数组格式
+3. **禁止`mutate_params`对象**: 不要使用`mutate_params`对象（会导致多参数同时变异）
+4. **键名规范**: 使用`"repo"`而非`"repository"`
+
+---
+
+## 📋 配置文件结构
+
+### 顶层结构
+
+```json
+{
+  "experiment_name": "配置名称",
+  "description": "描述",
+  "comment": "注释说明",
+
+  "mode": "mutation",
+  "max_retries": 2,
+  "governor": "performance",
+  "use_deduplication": true,
+  "historical_csvs": ["data/raw_data.csv"],
+
+  "experiments": [
+    // 实验配置列表
+  ]
+}
+```
+
+### 必须字段
+
+| 字段 | 类型 | 说明 | 默认值 |
+|------|------|------|--------|
+| `mode` | string | 实验模式 | `"mutation"` |
+| `max_retries` | number | 最大重试次数 | `2` |
+| `governor` | string | CPU调频策略 | `"performance"` |
+| `use_deduplication` | boolean | 启用去重 | `true` |
+| `historical_csvs` | array | 历史数据文件列表 | `["data/raw_data.csv"]` |
+| `experiments` | array | 实验配置列表 | **必需** |
+
+---
+
+## 🔧 实验配置类型
+
+### 1. 默认值实验（Default）
+
+**用途**: 建立基线，使用所有参数的默认值
+
+**格式**:
+```json
+{
+  "comment": "模型名 - 默认值实验",
+  "repo": "仓库名",
+  "model": "模型名",
+  "mode": "default",
+  "runs_per_config": 1
+}
+```
+
+**示例**:
+```json
+{
+  "comment": "VulBERTa/mlp - 默认值实验",
+  "repo": "VulBERTa",
+  "model": "mlp",
+  "mode": "default",
+  "runs_per_config": 3
+}
+```
+
+### 2. 非并行单参数变异（Mutation - Nonparallel）
+
+**用途**: 研究单个参数对模型的影响
+
+**格式**:
+```json
+{
+  "comment": "模型名 - 参数名变异",
+  "repo": "仓库名",
+  "model": "模型名",
+  "mode": "mutation",
+  "mutate": ["参数名"],
+  "runs_per_config": N
+}
+```
+
+**示例**:
+```json
+{
+  "comment": "VulBERTa/mlp - learning_rate变异",
+  "repo": "VulBERTa",
+  "model": "mlp",
+  "mode": "mutation",
+  "mutate": ["learning_rate"],
+  "runs_per_config": 5
+}
+```
+
+### 3. 并行模式（Parallel）
+
+**用途**: 前景模型训练+后台GPU负载
+
+#### 3a. 并行默认值实验
+
+```json
+{
+  "comment": "模型名 - 并行 - 默认值",
+  "repo": "前景仓库名",
+  "model": "前景模型名",
+  "mode": "parallel",
+  "foreground": {
+    "repo": "前景仓库名",
+    "model": "前景模型名",
+    "mode": "default"
+  },
+  "background": {
+    "repo": "后台仓库名",
+    "model": "后台模型名",
+    "hyperparameters": {}
+  },
+  "runs_per_config": 1
+}
+```
+
+#### 3b. 并行单参数变异
+
+```json
+{
+  "comment": "模型名 - 并行 - 参数名变异",
+  "repo": "前景仓库名",
+  "model": "前景模型名",
+  "mode": "parallel",
+  "foreground": {
+    "repo": "前景仓库名",
+    "model": "前景模型名",
+    "mode": "mutation",
+    "mutate": ["参数名"]
+  },
+  "background": {
+    "repo": "后台仓库名",
+    "model": "后台模型名",
+    "hyperparameters": {}
+  },
+  "runs_per_config": 5
+}
+```
+
+**示例**:
+```json
+{
+  "comment": "VulBERTa/mlp - 并行 - learning_rate变异",
+  "repo": "VulBERTa",
+  "model": "mlp",
+  "mode": "parallel",
+  "foreground": {
+    "repo": "VulBERTa",
+    "model": "mlp",
+    "mode": "mutation",
+    "mutate": ["learning_rate"]
+  },
+  "background": {
+    "repo": "examples",
+    "model": "mnist",
+    "hyperparameters": {}
+  },
+  "runs_per_config": 5
+}
+```
+
+---
+
+## ❌ 常见错误与修正
+
+### 错误1: 使用`mutate_params`对象
+
+**❌ 错误写法**:
+```json
+{
+  "repo": "VulBERTa",
+  "model": "mlp",
+  "mutation_type": "mutation",
+  "mutate_params": {
+    "learning_rate": {
+      "distribution": "log_uniform",
+      "min": 1e-5,
+      "max": 1e-3
+    }
+  }
+}
+```
+
+**问题**: 这种格式会导致多个参数同时变异
+
+**✅ 正确写法**:
+```json
+{
+  "repo": "VulBERTa",
+  "model": "mlp",
+  "mode": "mutation",
+  "mutate": ["learning_rate"],
+  "runs_per_config": 5
+}
+```
+
+### 错误2: 使用`repository`而非`repo`
+
+**❌ 错误写法**:
+```json
+{
+  "repository": "VulBERTa",
+  "model": "mlp"
+}
+```
+
+**✅ 正确写法**:
+```json
+{
+  "repo": "VulBERTa",
+  "model": "mlp"
+}
+```
+
+### 错误3: 使用`mutation_type`而非`mode`
+
+**❌ 错误写法**:
+```json
+{
+  "mutation_type": "mutation"
+}
+```
+
+**✅ 正确写法**:
+```json
+{
+  "mode": "mutation"
+}
+```
+
+### 错误4: 多参数变异
+
+**❌ 错误写法**:
+```json
+{
+  "mode": "mutation",
+  "mutate": ["learning_rate", "epochs", "dropout"]
+}
+```
+
+**问题**: 违反单参数变异原则
+
+**✅ 正确写法**: 拆分为3个独立配置
+```json
+[
+  {
+    "mode": "mutation",
+    "mutate": ["learning_rate"],
+    "runs_per_config": 5
+  },
+  {
+    "mode": "mutation",
+    "mutate": ["epochs"],
+    "runs_per_config": 5
+  },
+  {
+    "mode": "mutation",
+    "mutate": ["dropout"],
+    "runs_per_config": 5
+  }
+]
+```
+
+---
+
+## 📝 完整示例
+
+参考：`settings/stage2_optimized_nonparallel_and_fast_parallel.json`
+
+```json
+{
+  "experiment_name": "example_config",
+  "description": "示例配置",
+  "mode": "mutation",
+  "max_retries": 2,
+  "governor": "performance",
+  "use_deduplication": true,
+  "historical_csvs": ["data/raw_data.csv"],
+
+  "experiments": [
+    {
+      "comment": "VulBERTa/mlp - 非并行 - 默认值",
+      "repo": "VulBERTa",
+      "model": "mlp",
+      "mode": "default",
+      "runs_per_config": 1
+    },
+    {
+      "comment": "VulBERTa/mlp - 非并行 - learning_rate变异",
+      "repo": "VulBERTa",
+      "model": "mlp",
+      "mode": "mutation",
+      "mutate": ["learning_rate"],
+      "runs_per_config": 5
+    },
+    {
+      "comment": "VulBERTa/mlp - 并行 - learning_rate变异",
+      "repo": "VulBERTa",
+      "model": "mlp",
+      "mode": "parallel",
+      "foreground": {
+        "repo": "VulBERTa",
+        "model": "mlp",
+        "mode": "mutation",
+        "mutate": ["learning_rate"]
+      },
+      "background": {
+        "repo": "examples",
+        "model": "mnist",
+        "hyperparameters": {}
+      },
+      "runs_per_config": 5
+    }
+  ]
+}
+```
+
+---
+
+## ✅ 验证清单
+
+创建配置文件后，使用以下步骤验证：
+
+### 1. JSON格式验证
+```bash
+python3 -m json.tool settings/your_config.json > /dev/null && echo "✅ JSON格式正确" || echo "❌ JSON格式错误"
+```
+
+### 2. 字段验证
+- [ ] 使用`"repo"`而非`"repository"`
+- [ ] 使用`"mode"`而非`"mutation_type"`
+- [ ] 使用`"mutate": ["参数名"]`数组格式
+- [ ] 没有使用`"mutate_params"`对象
+- [ ] 每个实验只变异一个参数
+
+### 3. 结构验证
+- [ ] 非并行模式：直接指定`repo`, `model`, `mode`, `mutate`
+- [ ] 并行模式：使用`foreground`/`background`嵌套结构
+- [ ] 顶层包含必需的全局字段
+
+### 4. 运行验证
+```bash
+# 干运行（dry-run）检查配置有效性
+python3 mutation.py -ec settings/your_config.json --dry-run
+```
+
+---
+
+## 🚨 紧急修正步骤
+
+如果发现配置文件使用了错误格式：
+
+1. **立即停止实验** (如果正在运行)
+2. **备份原配置**:
+   ```bash
+   cp settings/config.json settings/archived/config_错误格式_$(date +%Y%m%d).json
+   ```
+3. **使用正确格式重写**
+4. **运行验证测试**
+5. **更新文档说明**
+
+---
+
+## 📚 参考资料
+
+- **正确示例**: `settings/stage2_optimized_nonparallel_and_fast_parallel.json`
+- **配置指南**: `docs/SETTINGS_CONFIGURATION_GUIDE.md`
+- **最佳实践**: `docs/JSON_CONFIG_BEST_PRACTICES.md`
+- **修复报告**: `docs/results_reports/PHASE4_CONFIG_FIX_REPORT.md`
+
+---
+
+## 🔍 历史问题案例
+
+### 案例1: Phase 4验证配置错误 (2025-12-13)
+
+**问题**: 使用`mutate_params`对象导致多参数变异
+
+**影响**: 违反单参数变异原则，数据无法用于分析
+
+**修正**: 将`mutate_params`改为`mutate`数组
+
+**详细**: `docs/results_reports/PHASE4_CONFIG_FIX_REPORT.md`
+
+---
+
+**文档维护者**: Green + Claude (AI Assistant)
+**最后更新**: 2025-12-13
+**版本**: 1.0

@@ -170,7 +170,7 @@ python3 tools/data_management/validate_raw_data.py
 - ✅ 实验结果分析
 - ✅ 配置验证
 
-**详细指南**: 本文档已包含所有关键验证步骤。历史详细文档已归档到 `archived/INDEPENDENT_VALIDATION_GUIDE_merged_20260125.md`
+**详细指南**: 参见 [INDEPENDENT_VALIDATION_GUIDE.md](INDEPENDENT_VALIDATION_GUIDE.md)
 
 ---
 
@@ -242,14 +242,10 @@ mv docs/OLD_PLAN.md docs/archived/OLD_PLAN_archived_20260110.md
 
 ## 📚 相关文档
 
-- [JSON配置编写规范](JSON_CONFIG_STANDARDS.md) - 配置文件书写标准 ⭐⭐⭐
-- [数据使用指南](DATA_USAGE_GUIDE.md) - 数据文件使用指南 ⭐⭐⭐
-- [CLAUDE.md](../CLAUDE.md) - 5分钟快速指南
-- [CLAUDE_FULL_REFERENCE.md](CLAUDE_FULL_REFERENCE.md) - 完整项目参考
-
-**历史文档** (已归档到 `archived/` 目录):
-- 脚本开发详细标准: `archived/SCRIPT_DEV_STANDARDS_merged_20260125.md`
-- 独立验证详细指南: `archived/INDEPENDENT_VALIDATION_GUIDE_merged_20260125.md`
+- [脚本开发规范](SCRIPT_DEV_STANDARDS.md) - 详细的脚本编写标准
+- [独立验证规范](INDEPENDENT_VALIDATION_GUIDE.md) - Subagent 验证指南
+- [JSON配置规范](JSON_CONFIG_WRITING_STANDARDS.md) - 配置文件书写标准
+- [CLAUDE.md](../CLAUDE.md) - 项目快速指南
 
 ---
 

@@ -1,20 +1,8 @@
-# Claude 助手完整参考指南 - Mutation-Based Training Energy Profiler
+# Claude 助手指南 - Mutation-Based Training Energy Profiler
 
-**项目版本**: v5.9.0 (2026-01-25)
-**最后更新**: 2026-01-25
-**状态**: ⏳ 进行中 - 能耗数据因果分析阶段
-
-> **文档说明**: 本文档是完整的项目参考手册，包含所有详细信息。快速入门请查看 [CLAUDE.md](../CLAUDE.md)（5分钟快速指南）
-
----
-
-## 📋 文档更新记录 (v5.9.0)
-
-**重要变更 (2026-01-25)**:
-- ✅ **新增文件创建决策规则** - 添加明确的文件放置规则表（🗂️ 章节）
-- ✅ **新增版本管理规则** - 明确CLAUDE.md与FULL_REFERENCE的同步机制
-- ✅ **精简文档导航** - 从12个链接精简到3个核心文档
-- ✅ **优化文档结构** - 提升快速指南的简洁性
+**项目版本**: v4.9.0 (2026-01-04)
+**最后更新**: 2026-01-04
+**状态**: 🎉 Complete - Data Integrity Repair Completed (95.1%)
 
 ---
 
@@ -194,7 +182,8 @@ energy_dl/nightly/
 - [SCRIPTS_QUICKREF.md](docs/SCRIPTS_QUICKREF.md) - 脚本快速参考
 
 ### 配置与规范
-- [JSON_CONFIG_STANDARDS.md](docs/JSON_CONFIG_STANDARDS.md) - **JSON配置编写规范（统一版）** ⭐⭐⭐
+- [JSON_CONFIG_WRITING_STANDARDS.md](docs/JSON_CONFIG_WRITING_STANDARDS.md) - **JSON配置书写规范** ⭐⭐⭐
+- [JSON_CONFIG_BEST_PRACTICES.md](docs/JSON_CONFIG_BEST_PRACTICES.md) - 配置最佳实践
 - [SETTINGS_CONFIGURATION_GUIDE.md](docs/SETTINGS_CONFIGURATION_GUIDE.md) - 配置指南
 - [11_MODELS_FINAL_DEFINITION.md](docs/11_MODELS_FINAL_DEFINITION.md) - 11个模型最终定义
 
@@ -766,7 +755,7 @@ if composite_key in existing_keys:
 }
 ```
 
-**详细文档**: [JSON_CONFIG_STANDARDS.md](docs/JSON_CONFIG_STANDARDS.md) ⭐⭐⭐
+**详细文档**: [JSON_CONFIG_WRITING_STANDARDS.md](docs/JSON_CONFIG_WRITING_STANDARDS.md) ⭐⭐⭐
 
 ### 3. CSV数据完整性
 - `raw_data.csv`为主数据文件，使用复合键去重
@@ -1077,13 +1066,12 @@ python3 -m json.tool settings/stage2_optimized_*.json
 ---
 
 **维护者**: Green
-**Claude助手指南版本**: 5.8.0
-**最后更新**: 2026-01-25
-**项目状态**: ⏳ 进行中 - 能耗数据因果分析阶段
+**Claude助手指南版本**: 2.2
+**最后更新**: 2026-01-04
+**项目状态**: 🎉 完成 - v4.9.0 数据完整性修复完成（95.1%），836个实验全部训练成功！
 
-> **文档使用提示**：
-> - 本文件为Claude助手的**完整参考手册**，包含所有详细信息
-> - **快速入门（5分钟）**: 请查看 [CLAUDE.md](../CLAUDE.md)
+> **提示**：
+> - 本文件为Claude助手的主要参考指南，保持简洁易读
 > - 详细内容查看对应的文档链接
 > - 每次任务前请先阅读"任务执行要求"章节
 > - 当项目结构或规范变更时，及时更新此文档

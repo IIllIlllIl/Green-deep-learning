@@ -1,5 +1,7 @@
 # Mutation-Based Training Energy Profiler
 
+> 深度学习训练能耗与性能的系统性研究框架
+
 自动化深度学习模型训练的超参数变异与能耗性能分析框架
 
 **当前版本**: v4.7.13 (2026-01-05)
@@ -8,9 +10,111 @@
 
 ---
 
+## 为什么需要这个项目?
+
+深度学习训练的能耗成本日益显著，但超参数对能耗的影响尚未被充分理解。本项目通过自动化实验帮助研究者：
+
+- **📊 量化能耗** - 准确测量不同超参数配置下的CPU/GPU能耗
+- **⚡ 优化配置** - 识别能耗高效的超参数组合
+- **⚖️ 权衡分析** - 理解能耗与性能之间的权衡关系
+- **🔬 因果推断** - 研究超参数对能耗的因果影响（而非仅仅是相关性）
+- **✅ 可复现研究** - 标准化的能耗测量方法，支持学术研究
+
+### 适用场景
+
+**🎓 研究人员**
+- 获取836个实验的真实能耗数据
+- 使用因果分析工具研究超参数影响
+- 复现论文实验结果
+
+**👨‍💻 机器学习工程师**
+- 优化模型训练的能效比
+- 找到最佳超参数配置
+- 监控生产环境GPU能耗
+
+**🌱 绿色计算倡导者**
+- 量化深度学习的碳足迹
+- 对比不同模型的能耗差异
+- 推广低碳AI实践
+
+---
+
 ## 项目概述
 
 研究深度学习训练超参数对能耗和性能的影响。通过自动化变异超参数、监控能耗、收集性能指标,支持大规模实验研究。
+
+### 系统架构
+
+```
+┌─────────────────────────────────────────────────────────┐
+│                   mutation.py (入口)                     │
+│  - 解析配置  - 生成超参数  - 管理实验流程                 │
+└────────────────────┬────────────────────────────────────┘
+                     │
+         ┌───────────┴───────────┐
+         │                       │
+    ┌────▼─────┐          ┌─────▼─────┐
+    │  顺序训练  │          │  并行训练  │
+    │          │          │ (前景+背景) │
+    └────┬─────┘          └─────┬─────┘
+         │                      │
+         └──────────┬───────────┘
+                    │
+         ┌──────────▼────────────┐
+         │   能耗监控模块         │
+         │ - perf (CPU)          │
+         │ - nvidia-smi (GPU)    │
+         └──────────┬────────────┘
+                    │
+         ┌──────────▼────────────┐
+         │   数据收集模块         │
+         │ - experiment.json     │
+         │ - energy/             │
+         │ - training.log        │
+         └──────────┬────────────┘
+                    │
+         ┌──────────▼────────────┐
+         │   数据聚合模块         │
+         │ - summary.csv         │
+         │ → raw_data.csv        │
+         │ → data.csv            │
+         └──────────┬────────────┘
+                    │
+         ┌──────────▼────────────┐
+         │   分析模块 (analysis/) │
+         │ - DiBS因果发现        │
+         │ - DML因果推断         │
+         │ - 回归分析            │
+         └───────────────────────┘
+```
+
+### 数据流程
+
+```
+实验配置 (settings/*.json)
+    ↓
+超参数变异 (mutation/hyperparams.py)
+    ↓
+模型训练 (repos/)
+    ↓
+能耗监控 (energy/)
+    ├─ CPU: perf工具采样
+    └─ GPU: nvidia-smi采样
+    ↓
+结果收集 (results/run_*/)
+    ├─ summary.csv (会话汇总)
+    ├─ experiment.json (完整数据)
+    └─ energy/ (原始能耗数据)
+    ↓
+数据聚合 (tools/data_management/)
+    ├─ raw_data.csv (87列，836行)
+    └─ data.csv (54列，精简版)
+    ↓
+因果分析 (analysis/)
+    ├─ DiBS: 因果图学习
+    ├─ DML: 因果效应估计
+    └─ 回归: 相关性分析
+```
 
 ### 核心功能
 
@@ -28,50 +132,175 @@
 
 ---
 
+## 安装
+
+### 方法1: 快速安装（推荐）
+
+```bash
+# 1. 克隆仓库
+git clone https://github.com/yourusername/energy_dl.git
+cd energy_dl/nightly
+
+# 2. 安装系统依赖
+sudo apt-get install linux-tools-common linux-tools-generic
+
+# 3. 配置perf权限（用于CPU能耗监控）
+sudo sysctl -w kernel.perf_event_paranoid=-1
+
+# 4. 验证安装
+python3 mutation.py --list
+```
+
+### 方法2: 使用Docker（可选）
+
+```bash
+# 构建Docker镜像
+docker build -t energy-dl:latest .
+
+# 运行容器（支持GPU）
+docker run -it --gpus all energy-dl:latest
+```
+
+### 验证安装
+
+运行健康检查脚本验证环境配置：
+
+```bash
+bash tools/quick_health_check.sh
+```
+
+**预期输出**:
+```
+✅ Python version: 3.8+
+✅ NVIDIA driver: Installed
+✅ perf tool: Available
+✅ GPU: Available
+✅ Data files: Found (836 experiments)
+✅ Environment: Ready
+```
+
+### 安装注意事项
+
+- **权限**: 需要sudo权限以获取准确的CPU能耗数据（使用perf工具）
+- **离线模式**: 设置`HF_HUB_OFFLINE=1`避免从网络下载模型
+- **GPU监控**: 确保nvidia-smi命令可用
+- **数据完整性**: 首次运行会自动创建`data/`目录并初始化数据文件
+
+---
+
 ## 快速开始
 
-### 1. 列出可用模型
+### 步骤1: 列出可用模型
 
 ```bash
 python3 mutation.py --list
 ```
 
-### 2. 运行单个实验
-
-```bash
-# 基本用法
-python3 mutation.py -r pytorch_resnet_cifar10 -m resnet20 -mt epochs,learning_rate -n 3
+**预期输出**:
+```
+Available repositories and models:
+examples/
+  - mnist (epochs, learning_rate, batch_size, seed)
+  - mnist_ff (epochs, learning_rate, batch_size, seed)
+  - mnist_rnn (epochs, learning_rate, batch_size, seed)
+  - siamese (epochs, learning_rate, batch_size, seed)
+Person_reID_baseline_pytorch/
+  - densenet121 (epochs, learning_rate, dropout, seed)
+  - hrnet18 (epochs, learning_rate, dropout, seed)
+  - pcb (epochs, learning_rate, dropout, seed)
+VulBERTa/
+  - mlp (epochs, learning_rate, weight_decay, seed)
+pytorch_resnet_cifar10/
+  - resnet20 (epochs, learning_rate, weight_decay, seed)
+MRT-OAST/
+  - default (epochs, learning_rate, dropout, weight_decay, seed)
+bug-localization-by-dnn-and-rvsm/
+  - default (max_iter, alpha, kfold, seed)
 ```
 
-### 3. 运行批量实验（推荐）
+### 步骤2: 运行第一个实验（5分钟快速验证）
+
+```bash
+# 基本用法 - 运行3个epochs变异的MNIST实验
+python3 mutation.py -r examples -m mnist -mt epochs,learning_rate -n 3
+```
+
+**预期输出**:
+```
+[INFO] Starting experiment: examples_mnist_001
+[INFO] Hyperparameters: epochs=15, learning_rate=0.001, batch_size=32, seed=42
+[INFO] Training completed: 95.2% accuracy in 45.3 seconds
+[INFO] Energy metrics:
+  - CPU: 120.5 joules
+  - GPU: 450.2 joules
+[INFO] Results saved to: results/run_20260125_143052/summary.csv
+```
+
+### 步骤3: 运行批量实验（推荐）
 
 ```bash
 # 快速验证（15-20分钟，1 epoch）
 HF_HUB_OFFLINE=1 python3 mutation.py -ec settings/11_models_quick_validation_1epoch.json
-
-# 变异实验验证（1次变异，快速测试）
-sudo -E python3 mutation.py -ec settings/mutation_validation_1x.json -g performance
-
-# 完整变异实验（3次变异，完整数据）
-sudo -E python3 mutation.py -ec settings/mutation_all_models_3x_dynamic.json -g performance
-
-# 完整基线实验（9+小时）
-export HF_HUB_OFFLINE=1
-sudo -E python3 mutation.py -ec settings/11_models_sequential_and_parallel_training.json -g performance
 ```
 
-### 4. 分阶段实验（大规模实验推荐）
+**预期输出**:
+```
+[INFO] Running 11 models in quick validation mode (1 epoch each)
+[INFO] Total experiments: 33 (11 models × 3 variants)
+[INFO] Estimated time: 15-20 minutes
+[INFO] Progress: [1/33] examples_mnist ✓
+[INFO] Progress: [2/33] examples_mnist_ff ✓
+...
+[INFO] All experiments completed successfully!
+[INFO] Results: 33/33 successful, 0/33 failed
+[INFO] Data saved to: results/run_20260125_150000/summary.csv
+```
 
 ```bash
-# 阶段1-4: 已完成 ✓
-# sudo -E python3 mutation.py -ec settings/stage1_nonparallel_completion.json
-# sudo -E python3 mutation.py -ec settings/stage2_optimized_nonparallel_and_fast_parallel.json
-# sudo -E python3 mutation.py -ec settings/stage3_4_merged_optimized_parallel.json
+# 完整变异实验（3次变异，完整数据，需要sudo获取能耗）
+sudo -E python3 mutation.py -ec settings/mutation_all_models_3x_dynamic.json -g performance
+```
 
-# 阶段7-8: 已完成 ✓ (2025-12-06~07)
-# sudo -E python3 mutation.py -ec settings/stage7_nonparallel_fast_models.json
-# sudo -E python3 mutation.py -ec settings/stage8_nonparallel_medium_slow_models.json
+**预期输出**:
+```
+[INFO] Running mutation experiments with performance monitoring
+[INFO] Total configurations: 45 (after deduplication)
+[INFO] Estimated time: 6-8 hours
+...
+[INFO] Energy monitoring enabled: perf (CPU) + nvidia-smi (GPU)
+[INFO] Results saved to: data/raw_data.csv (auto-append mode)
+```
 
+### 步骤4: 查看结果
+
+```bash
+# 查看CSV汇总
+head -20 results/run_*/summary.csv | column -t -s,
+```
+
+**预期输出**:
+```
+experiment_id            repository  model    epochs  learning_rate  batch_size  cpu_total_joules  gpu_total_joules  test_accuracy
+examples_mnist_001       examples    mnist    15      0.001          32          120.5             450.2             0.952
+examples_mnist_ff_002    examples    mnist_ff 20      0.01           64          98.3              320.1             0.912
+pytorch_resnet_003       pytorch_...  resnet20 200     0.1            128         2450.8            5670.3            0.873
+...
+```
+
+### 步骤5: 分析能耗数据
+
+```python
+# 使用Python快速分析
+import pandas as pd
+df = pd.read_csv('results/run_*/summary.csv')
+print(f"Total experiments: {len(df)}")
+print(f"Average GPU energy: {df['gpu_total_joules'].mean():.2f} joules")
+print(df.groupby('model')['gpu_total_joules'].mean().sort_values())
+```
+
+### 分阶段实验（大规模实验推荐）
+
+```bash
 # 阶段最终: 所有剩余实验 (37.8h, 78实验) **[一次性完成]**
 sudo -E python3 mutation.py -ec settings/stage_final_all_remaining.json
 
