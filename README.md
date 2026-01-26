@@ -39,6 +39,37 @@
 
 ---
 
+## 🚀 快速开始（新用户必读）
+
+### ⭐ 重要文档（按优先级排序）
+
+1. **[📚 项目文档索引](docs/INDEX.md)** - 所有文档的导航索引
+2. **[⏱️ 5分钟快速指南](CLAUDE.md)** - 快速了解项目核心
+3. **[📊 数据使用指南](docs/DATA_USAGE_GUIDE.md)** - 处理数据前必读
+4. **[🔧 数据补完任务](docs/PROMPT_QUICK_REFERENCE.md)** - **下一个对话的重点任务**
+5. **[🔬 ATE使用指南](docs/current_plans/CTF_STYLE_ATE_QUICK_START_20260126.md)** - 刚完成的因果推断功能
+
+### 🎯 当前项目状态
+
+**最近完成** (2026-01-26):
+- ✅ ATE集成实施完成（质量评分：87/100）
+- ✅ 18个测试全部通过（100%通过率）
+- ✅ 生产就绪，可安全使用
+- 📄 [详细报告](docs/current_plans/ATE_INTEGRATION_COMPLETION_REPORT_20260126.md)
+
+**下一个任务**:
+- ⏳ 数据补完（目标：95.1% → 98%+）
+- 📋 详细任务文档: [PROMPT_FOR_DATA_COMPLETION.md](docs/PROMPT_FOR_DATA_COMPLETION.md)
+- 🚀 快速参考: [PROMPT_QUICK_REFERENCE.md](docs/PROMPT_QUICK_REFERENCE.md)
+
+**数据状态**:
+- 总实验数: 970条
+- 数据完整性: 95.1%
+- 完全可用: 577条（59.5%）
+- 仅有能耗: 251条（25.9%）
+
+---
+
 ## 项目概述
 
 研究深度学习训练超参数对能耗和性能的影响。通过自动化变异超参数、监控能耗、收集性能指标,支持大规模实验研究。

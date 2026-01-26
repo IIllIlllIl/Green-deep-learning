@@ -1,0 +1,41 @@
+source,target,strength,edge_type,is_significant,strength_level,source_category,target_category,question_relevance,interpretation,ate,ate_ci_lower,ate_ci_upper,ate_is_significant,ate_confounders_count
+hyperparam_kfold_x_is_parallel,perf_top1_accuracy,0.6500000357627869,moderation,yes,very_strong,interaction,performance,other,并行模式调节kfold对top1_accuracy的效应,,,,,0
+energy_gpu_util_max_percent,energy_gpu_util_avg_percent,0.6000000238418579,mediator,yes,very_strong,mediator,mediator,Q3,gpu_util_max_percent通过某种机制影响gpu_util_avg_percent,0.3719373610752222,0.2990376383044786,0.44483708384596576,True,2
+energy_gpu_util_max_percent,energy_gpu_total_joules,0.4500000178813934,mediator,yes,strong,mediator,energy,Q3,gpu_util_max_percent通过某种机制影响gpu_total_joules,2751.3500031974413,2212.0854025707426,3290.61460382414,True,4
+energy_gpu_util_avg_percent,perf_top20_accuracy,0.4500000178813934,irrelevant,yes,strong,mediator,performance,Q2,gpu_util_avg_percent → top20_accuracy,0.005161419399233313,0.004149781196983584,0.006173057601483041,True,4
+energy_gpu_temp_max_celsius,energy_gpu_temp_avg_celsius,0.4000000059604645,mediator,yes,strong,mediator,mediator,Q3,gpu_temp_max_celsius通过某种机制影响gpu_temp_avg_celsius,0.5782764617293189,0.4649342752303724,0.6916186482282654,True,1
+energy_gpu_temp_max_celsius,energy_gpu_util_max_percent,0.4000000059604645,mediator,yes,strong,mediator,mediator,Q3,gpu_temp_max_celsius通过某种机制影响gpu_util_max_percent,-0.004164250175344037,-0.004980443209711468,-0.003348057140976605,True,1
+energy_gpu_min_watts,energy_gpu_max_watts,0.4000000059604645,mediator,yes,strong,mediator,mediator,Q3,gpu_min_watts通过某种机制影响gpu_max_watts,0.7402723840299901,0.595178996760112,0.8853657712998682,True,4
+hyperparam_max_iter,perf_top10_accuracy,0.4000000059604645,main_effect,yes,strong,hyperparam,performance,other,max_iter直接影响top10_accuracy,7.152582689713163e-08,5.750676482529383e-08,8.554488896896943e-08,True,1
+hyperparam_kfold_x_is_parallel,energy_gpu_temp_avg_celsius,0.3499999940395355,moderation,yes,strong,interaction,mediator,other,并行模式调节kfold对gpu_temp_avg_celsius的效应,,,,,0
+energy_cpu_ram_joules,energy_cpu_total_joules,0.3499999940395355,mediator,yes,strong,energy,energy,Q3,cpu_ram_joules通过某种机制影响cpu_total_joules,,,,,0
+hyperparam_alpha,perf_top20_accuracy,0.3499999940395355,main_effect,yes,strong,hyperparam,performance,other,alpha直接影响top20_accuracy,-182.514250558959,-218.28704366851497,-146.74145744940301,True,3
+hyperparam_kfold,perf_top5_accuracy,0.3499999940395355,main_effect,yes,strong,hyperparam,performance,other,kfold直接影响top5_accuracy,0.0002482709560606837,0.0001996098486727897,0.00029693206344857774,True,0
+hyperparam_kfold,perf_top1_accuracy,0.3499999940395355,main_effect,yes,strong,hyperparam,performance,other,kfold直接影响top1_accuracy,0.00010686318421804193,8.591800011130571e-05,0.00012780836832477815,True,2
+energy_gpu_temp_avg_celsius,energy_gpu_total_joules,0.3499999940395355,mediator,yes,strong,mediator,energy,Q3,gpu_temp_avg_celsius通过某种机制影响gpu_total_joules,1064.3363763562686,855.72644659044,1272.9463061220972,True,4
+energy_gpu_avg_watts,energy_gpu_max_watts,0.3499999940395355,mediator,yes,strong,mediator,mediator,Q3,gpu_avg_watts通过某种机制影响gpu_max_watts,,,,,0
+energy_gpu_max_watts,energy_gpu_util_avg_percent,0.3499999940395355,mediator,yes,strong,mediator,mediator,Q3,gpu_max_watts通过某种机制影响gpu_util_avg_percent,-0.08121311515050823,-0.09713088572000785,-0.06529534458100862,True,4
+energy_gpu_util_avg_percent,perf_top10_accuracy,0.3499999940395355,irrelevant,yes,strong,mediator,performance,Q2,gpu_util_avg_percent → top10_accuracy,-0.001127851947111717,-0.0013489109287456134,-0.0009067929654778204,True,3
+energy_gpu_avg_watts,energy_gpu_temp_max_celsius,0.3499999940395355,mediator,yes,strong,mediator,mediator,Q3,gpu_avg_watts通过某种机制影响gpu_temp_max_celsius,-0.680396216861602,-0.813753875366476,-0.547038558356728,True,3
+energy_cpu_pkg_joules,energy_cpu_total_joules,0.3499999940395355,mediator,yes,strong,energy,energy,Q3,cpu_pkg_joules通过某种机制影响cpu_total_joules,,,,,0
+energy_gpu_util_max_percent,perf_top20_accuracy,0.3499999940395355,irrelevant,yes,strong,mediator,performance,Q2,gpu_util_max_percent → top20_accuracy,-0.0003681442711693496,-0.0004403005483185421,-0.0002959879940201571,True,4
+hyperparam_kfold,energy_gpu_min_watts,0.3499999940395355,main_effect,yes,strong,hyperparam,mediator,other,kfold直接影响gpu_min_watts,-3.862545103589699,-4.61960394389328,-3.105486263286118,True,1
+energy_gpu_min_watts,energy_gpu_total_joules,0.3000000119209289,mediator,yes,strong,mediator,energy,Q3,gpu_min_watts通过某种机制影响gpu_total_joules,83.71995540244477,67.31084414356559,100.12906666132395,True,4
+hyperparam_kfold_x_is_parallel,perf_top5_accuracy,0.3000000119209289,moderation,yes,strong,interaction,performance,other,并行模式调节kfold对top5_accuracy的效应,,,,,0
+hyperparam_kfold_x_is_parallel,perf_top20_accuracy,0.3000000119209289,moderation,yes,strong,interaction,performance,other,并行模式调节kfold对top20_accuracy的效应,,,,,0
+hyperparam_alpha,perf_top1_accuracy,0.3000000119209289,main_effect,yes,strong,hyperparam,performance,other,alpha直接影响top1_accuracy,316.8276368364013,254.72942001646666,378.92585365633596,True,2
+hyperparam_kfold,perf_top20_accuracy,0.3000000119209289,main_effect,yes,strong,hyperparam,performance,other,kfold直接影响top20_accuracy,-0.00039614543525871734,-0.00047378994056942596,-0.0003185009299480087,True,3
+hyperparam_kfold_x_is_parallel,energy_gpu_total_joules,0.3000000119209289,moderation,yes,strong,interaction,energy,Q1,并行模式调节kfold对gpu_total_joules的效应,,,,,0
+energy_gpu_min_watts,perf_top1_accuracy,0.3000000119209289,irrelevant,yes,strong,mediator,performance,Q2,gpu_min_watts → top1_accuracy,0.00010345949189740315,8.318143148551213e-05,0.00012373755230929418,True,3
+energy_gpu_max_watts,energy_gpu_avg_watts,0.3000000119209289,mediator,yes,strong,mediator,mediator,Q3,gpu_max_watts通过某种机制影响gpu_avg_watts,,,,,0
+energy_gpu_temp_avg_celsius,energy_gpu_avg_watts,0.3000000119209289,mediator,yes,strong,mediator,mediator,Q3,gpu_temp_avg_celsius通过某种机制影响gpu_avg_watts,0.5311884225185064,0.42707549170487913,0.6353013533321337,True,3
+energy_gpu_temp_avg_celsius,energy_gpu_max_watts,0.3000000119209289,mediator,yes,strong,mediator,mediator,Q3,gpu_temp_avg_celsius通过某种机制影响gpu_max_watts,0.7959461998195615,0.6399407446549275,0.9519516549841955,True,3
+energy_cpu_ram_joules,energy_gpu_total_joules,0.3000000119209289,mediator,yes,strong,energy,energy,Q3,cpu_ram_joules通过某种机制影响gpu_total_joules,6.5739074511252085,5.285421590704668,7.862393311545749,True,4
+hyperparam_alpha_x_is_parallel,perf_top20_accuracy,0.3000000119209289,moderation,yes,strong,interaction,performance,other,并行模式调节alpha对top20_accuracy的效应,,,,,0
+hyperparam_kfold_x_is_parallel,energy_gpu_util_avg_percent,0.3000000119209289,moderation,yes,strong,interaction,mediator,other,并行模式调节kfold对gpu_util_avg_percent的效应,,,,,0
+energy_cpu_ram_joules,energy_cpu_pkg_joules,0.3000000119209289,mediator,yes,strong,energy,energy,Q3,cpu_ram_joules通过某种机制影响cpu_pkg_joules,15.132354509503756,12.16641302564102,18.09829599336649,True,1
+energy_cpu_total_joules,energy_cpu_ram_joules,0.3000000119209289,mediator,yes,strong,energy,energy,Q3,cpu_total_joules通过某种机制影响cpu_ram_joules,,,,,0
+energy_gpu_min_watts,energy_gpu_avg_watts,0.3000000119209289,mediator,yes,strong,mediator,mediator,Q3,gpu_min_watts通过某种机制影响gpu_avg_watts,0.30924796143254724,0.24863536099176797,0.3698605618733265,True,4
+energy_cpu_total_joules,energy_cpu_pkg_joules,0.3000000119209289,mediator,yes,strong,energy,energy,Q3,cpu_total_joules通过某种机制影响cpu_pkg_joules,,,,,0
+hyperparam_alpha_x_is_parallel,perf_top1_accuracy,0.3000000119209289,moderation,yes,strong,interaction,performance,other,并行模式调节alpha对top1_accuracy的效应,,,,,0
+energy_gpu_util_max_percent,energy_gpu_min_watts,0.3000000119209289,mediator,yes,strong,mediator,mediator,Q3,gpu_util_max_percent通过某种机制影响gpu_min_watts,3.1886524849101083,2.563676597867727,3.8136283719524897,True,2

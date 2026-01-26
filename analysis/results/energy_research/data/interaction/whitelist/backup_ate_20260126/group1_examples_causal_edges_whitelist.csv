@@ -1,0 +1,44 @@
+source,target,strength,edge_type,is_significant,strength_level,source_category,target_category,question_relevance,interpretation,ate,ate_ci_lower,ate_ci_upper,ate_is_significant,ate_confounders_count
+hyperparam_batch_size_x_is_parallel,energy_gpu_min_watts,0.949999988079071,moderation,yes,very_strong,interaction,mediator,other,并行模式调节batch_size对gpu_min_watts的效应,,,,,0
+hyperparam_batch_size_x_is_parallel,perf_test_accuracy,0.75,moderation,yes,very_strong,interaction,performance,other,并行模式调节batch_size对test_accuracy的效应,,,,,0
+hyperparam_batch_size_x_is_parallel,energy_gpu_temp_avg_celsius,0.6000000238418579,moderation,yes,very_strong,interaction,mediator,other,并行模式调节batch_size对gpu_temp_avg_celsius的效应,,,,,0
+energy_cpu_total_joules,energy_cpu_pkg_joules,0.550000011920929,mediator,yes,very_strong,energy,energy,Q3,cpu_total_joules通过某种机制影响cpu_pkg_joules,0.9813987335548445,0.789044581778095,1.1737528853315942,True,1
+model_mnist_ff,perf_test_accuracy,0.550000011920929,control_effect,yes,very_strong,control,performance,other,模型控制变量的影响,-58.97180909801507,-70.53028368122602,-47.41333451480412,True,8
+hyperparam_batch_size_x_is_parallel,energy_gpu_avg_watts,0.550000011920929,moderation,yes,very_strong,interaction,mediator,other,并行模式调节batch_size对gpu_avg_watts的效应,,,,,0
+energy_gpu_avg_watts,energy_gpu_min_watts,0.550000011920929,mediator,yes,very_strong,mediator,mediator,Q3,gpu_avg_watts通过某种机制影响gpu_min_watts,1.6630490233364152,1.3370914147624777,1.9890066319103528,True,2
+model_siamese,perf_test_accuracy,0.5,control_effect,yes,strong,control,performance,other,模型控制变量的影响,12.509615465324957,10.057730834121266,14.961500096528649,True,8
+energy_gpu_temp_avg_celsius,energy_gpu_total_joules,0.4500000178813934,mediator,yes,strong,mediator,energy,Q3,gpu_temp_avg_celsius通过某种机制影响gpu_total_joules,1058.4209787868979,850.9704669446659,1265.8714906291298,True,4
+model_siamese,energy_gpu_max_watts,0.4500000178813934,control_effect,yes,strong,control,mediator,other,模型控制变量的影响,12.326086349251627,9.910173424798307,14.741999273704947,True,5
+energy_cpu_total_joules,energy_cpu_ram_joules,0.4500000178813934,mediator,yes,strong,energy,energy,Q3,cpu_total_joules通过某种机制影响cpu_ram_joules,0.0680689404312647,0.054727428106736815,0.08141045275579258,True,0
+hyperparam_batch_size_x_is_parallel,energy_gpu_max_watts,0.4500000178813934,moderation,yes,strong,interaction,mediator,other,并行模式调节batch_size对gpu_max_watts的效应,,,,,0
+energy_gpu_util_avg_percent,energy_gpu_util_max_percent,0.4500000178813934,mediator,yes,strong,mediator,mediator,Q3,gpu_util_avg_percent通过某种机制影响gpu_util_max_percent,,,,,0
+energy_gpu_temp_avg_celsius,energy_gpu_temp_max_celsius,0.4000000059604645,mediator,yes,strong,mediator,mediator,Q3,gpu_temp_avg_celsius通过某种机制影响gpu_temp_max_celsius,0.7127889650320722,0.5730823278857861,0.8524956021783584,True,2
+energy_gpu_min_watts,perf_test_accuracy,0.4000000059604645,irrelevant,yes,strong,mediator,performance,Q2,gpu_min_watts → test_accuracy,-0.3181752256897335,-0.38053756992492127,-0.2558128814545457,True,8
+energy_gpu_temp_max_celsius,perf_test_accuracy,0.4000000059604645,irrelevant,yes,strong,mediator,performance,Q2,gpu_temp_max_celsius → test_accuracy,-0.26748924750946773,-0.31991714002132343,-0.21506135499761206,True,9
+energy_gpu_avg_watts,perf_test_accuracy,0.4000000059604645,irrelevant,yes,strong,mediator,performance,Q2,gpu_avg_watts → test_accuracy,-0.175830292736744,-0.21029303011314582,-0.14136755536034218,True,8
+energy_gpu_avg_watts,energy_gpu_max_watts,0.4000000059604645,mediator,yes,strong,mediator,mediator,Q3,gpu_avg_watts通过某种机制影响gpu_max_watts,0.8133559460804514,0.6539381806486829,0.9727737115122198,True,7
+energy_gpu_avg_watts,energy_gpu_total_joules,0.4000000059604645,mediator,yes,strong,mediator,energy,Q3,gpu_avg_watts通过某种机制影响gpu_total_joules,107.77195967469974,86.6486555784586,128.8952637709409,True,5
+energy_gpu_util_avg_percent,perf_test_accuracy,0.4000000059604645,irrelevant,yes,strong,mediator,performance,Q2,gpu_util_avg_percent → test_accuracy,0.8566174817432661,0.688720455321586,1.0245145081649463,True,9
+energy_gpu_max_watts,energy_gpu_util_max_percent,0.4000000059604645,mediator,yes,strong,mediator,mediator,Q3,gpu_max_watts通过某种机制影响gpu_util_max_percent,0.22368322002258165,0.17984130889815564,0.26752513114700766,True,7
+energy_gpu_util_max_percent,energy_gpu_util_avg_percent,0.3499999940395355,mediator,yes,strong,mediator,mediator,Q3,gpu_util_max_percent通过某种机制影响gpu_util_avg_percent,,,,,0
+model_siamese,energy_gpu_total_joules,0.3499999940395355,control_effect,yes,strong,control,energy,other,模型控制变量的影响,4745.320210709161,3815.2374494101655,5675.402972008156,True,3
+hyperparam_batch_size_x_is_parallel,energy_gpu_util_avg_percent,0.3499999940395355,moderation,yes,strong,interaction,mediator,other,并行模式调节batch_size对gpu_util_avg_percent的效应,,,,,0
+hyperparam_batch_size,perf_test_accuracy,0.3499999940395355,main_effect,yes,strong,hyperparam,performance,other,batch_size直接影响test_accuracy,-0.07035366457039423,-0.0841429828261915,-0.05656434631459696,True,8
+energy_gpu_util_avg_percent,energy_gpu_avg_watts,0.3499999940395355,mediator,yes,strong,mediator,mediator,Q3,gpu_util_avg_percent通过某种机制影响gpu_avg_watts,,,,,0
+energy_cpu_total_joules,energy_gpu_total_joules,0.3499999940395355,mediator,yes,strong,energy,energy,Q3,cpu_total_joules通过某种机制影响gpu_total_joules,2.3968703929867035,1.9270837959613096,2.8666569900120975,True,3
+energy_gpu_util_max_percent,perf_test_accuracy,0.3499999940395355,irrelevant,yes,strong,mediator,performance,Q2,gpu_util_max_percent → test_accuracy,1.2762929617590835,1.026139541254303,1.5264463822638639,True,9
+energy_gpu_temp_avg_celsius,energy_gpu_util_avg_percent,0.3499999940395355,mediator,yes,strong,mediator,mediator,Q3,gpu_temp_avg_celsius通过某种机制影响gpu_util_avg_percent,0.13041914583695877,0.10485699325291484,0.1559812984210027,True,3
+hyperparam_batch_size_x_is_parallel,energy_cpu_total_joules,0.3499999940395355,moderation,yes,strong,interaction,energy,Q1,并行模式调节batch_size对cpu_total_joules的效应,,,,,0
+energy_gpu_util_max_percent,energy_gpu_avg_watts,0.3000000119209289,mediator,yes,strong,mediator,mediator,Q3,gpu_util_max_percent通过某种机制影响gpu_avg_watts,-0.1032743195980828,-0.12351608623930702,-0.08303255295685857,True,3
+energy_gpu_avg_watts,energy_gpu_temp_avg_celsius,0.3000000119209289,mediator,yes,strong,mediator,mediator,Q3,gpu_avg_watts通过某种机制影响gpu_temp_avg_celsius,0.20117963922239754,0.16174842993480762,0.24061084850998746,True,3
+energy_gpu_avg_watts,energy_gpu_util_avg_percent,0.3000000119209289,mediator,yes,strong,mediator,mediator,Q3,gpu_avg_watts通过某种机制影响gpu_util_avg_percent,,,,,0
+energy_gpu_avg_watts,energy_gpu_temp_max_celsius,0.3000000119209289,mediator,yes,strong,mediator,mediator,Q3,gpu_avg_watts通过某种机制影响gpu_temp_max_celsius,-0.007967658413022554,-0.009529319461974975,-0.0064059973640701335,True,3
+energy_cpu_ram_joules,energy_cpu_pkg_joules,0.3000000119209289,mediator,yes,strong,energy,energy,Q3,cpu_ram_joules通过某种机制影响cpu_pkg_joules,-1.293769644482325,-1.5473484948008607,-1.0401907941637893,True,1
+hyperparam_batch_size,energy_gpu_max_watts,0.3000000119209289,main_effect,yes,strong,hyperparam,mediator,other,batch_size直接影响gpu_max_watts,-0.033076586468769306,-0.03955959741664809,-0.026593575520890523,True,5
+model_mnist_rnn,energy_gpu_max_watts,0.3000000119209289,control_effect,yes,strong,control,mediator,other,模型控制变量的影响,-29.5017276653576,-35.284066287767686,-23.71938904294751,True,5
+energy_gpu_min_watts,energy_gpu_max_watts,0.3000000119209289,mediator,yes,strong,mediator,mediator,Q3,gpu_min_watts通过某种机制影响gpu_max_watts,-0.3116466388010268,-0.372729380006028,-0.25056389759602554,True,5
+energy_gpu_min_watts,energy_gpu_temp_avg_celsius,0.3000000119209289,mediator,yes,strong,mediator,mediator,Q3,gpu_min_watts通过某种机制影响gpu_temp_avg_celsius,0.05398634696675953,0.04340502296127466,0.0645676709722444,True,1
+model_mnist_ff,energy_gpu_max_watts,0.3000000119209289,control_effect,yes,strong,control,mediator,other,模型控制变量的影响,4.9432857980583504,3.974401781638914,5.912169814477787,True,5
+is_parallel,perf_test_accuracy,0.3000000119209289,mode_effect,yes,strong,mode,performance,other,is_parallel → test_accuracy,4.340772916129403,3.48998142456804,5.191564407690766,True,8
+energy_gpu_min_watts,energy_gpu_util_max_percent,0.3000000119209289,mediator,yes,strong,mediator,mediator,Q3,gpu_min_watts通过某种机制影响gpu_util_max_percent,-0.005183039528195297,-0.006198915275721575,-0.004167163780669019,True,3
+hyperparam_batch_size_x_is_parallel,energy_gpu_total_joules,0.3000000119209289,moderation,yes,strong,interaction,energy,Q1,并行模式调节batch_size对gpu_total_joules的效应,,,,,0

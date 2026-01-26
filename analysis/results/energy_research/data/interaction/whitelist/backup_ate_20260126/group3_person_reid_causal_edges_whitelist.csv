@@ -1,0 +1,51 @@
+source,target,strength,edge_type,is_significant,strength_level,source_category,target_category,question_relevance,interpretation,ate,ate_ci_lower,ate_ci_upper,ate_is_significant,ate_confounders_count
+model_hrnet18,energy_gpu_util_max_percent,0.5,control_effect,yes,strong,control,mediator,other,模型控制变量的影响,9.409786597386427,7.565468424298688,11.254104770474166,True,2
+energy_gpu_util_max_percent,energy_gpu_max_watts,0.5,mediator,yes,strong,mediator,mediator,Q3,gpu_util_max_percent通过某种机制影响gpu_max_watts,1.5609505129052812,1.255004212375846,1.8668968134347164,True,5
+model_hrnet18,energy_gpu_total_joules,0.4500000178813934,control_effect,yes,strong,control,energy,other,模型控制变量的影响,-33549.88399218263,-40125.661254650426,-26974.106729714833,True,6
+energy_gpu_util_avg_percent,energy_gpu_total_joules,0.4500000178813934,mediator,yes,strong,mediator,energy,Q3,gpu_util_avg_percent通过某种机制影响gpu_total_joules,6592.920627769046,5300.708184726313,7885.133070811779,True,8
+energy_gpu_temp_avg_celsius,energy_gpu_avg_watts,0.4500000178813934,mediator,yes,strong,mediator,mediator,Q3,gpu_temp_avg_celsius通过某种机制影响gpu_avg_watts,,,,,0
+model_pcb,energy_gpu_temp_max_celsius,0.4500000178813934,control_effect,yes,strong,control,mediator,other,模型控制变量的影响,1.069082212763458,0.8595420990618203,1.2786223264650958,True,6
+energy_gpu_util_max_percent,energy_gpu_temp_max_celsius,0.4500000178813934,mediator,yes,strong,mediator,mediator,Q3,gpu_util_max_percent通过某种机制影响gpu_temp_max_celsius,0.09679274352445788,0.07782136579366414,0.11576412125525162,True,8
+energy_gpu_util_max_percent,energy_gpu_temp_avg_celsius,0.4500000178813934,mediator,yes,strong,mediator,mediator,Q3,gpu_util_max_percent通过某种机制影响gpu_temp_avg_celsius,0.04582914796109626,0.036846634960721394,0.05481166096147112,True,5
+model_hrnet18,energy_gpu_avg_watts,0.4000000059604645,control_effect,yes,strong,control,mediator,other,模型控制变量的影响,-6.567842766071136,-7.855139948221079,-5.280545583921193,True,6
+energy_gpu_min_watts,energy_gpu_temp_max_celsius,0.4000000059604645,mediator,yes,strong,mediator,mediator,Q3,gpu_min_watts通过某种机制影响gpu_temp_max_celsius,0.024158717299730497,0.01942360870898332,0.028893825890477676,True,8
+is_parallel,energy_gpu_avg_watts,0.4000000059604645,mode_effect,yes,strong,mode,mediator,other,is_parallel → gpu_avg_watts,-9.113300726523645,-10.89950766892228,-7.327093784125011,True,6
+is_parallel,energy_gpu_total_joules,0.4000000059604645,mode_effect,yes,strong,mode,energy,other,is_parallel → gpu_total_joules,-98.37886148933728,-117.66111834124739,-79.09660463742718,True,6
+is_parallel,energy_gpu_min_watts,0.4000000059604645,mode_effect,yes,strong,mode,mediator,other,is_parallel → gpu_min_watts,20.6837270867896,16.629716577778836,24.73773759580036,True,5
+energy_cpu_pkg_joules,energy_gpu_total_joules,0.4000000059604645,mediator,yes,strong,energy,energy,Q3,cpu_pkg_joules通过某种机制影响gpu_total_joules,2.066293934019625,1.6613003229517787,2.471287545087472,True,8
+is_parallel,energy_gpu_util_max_percent,0.4000000059604645,mode_effect,yes,strong,mode,mediator,other,is_parallel → gpu_util_max_percent,10.519518338136992,8.457692743862141,12.581343932411842,True,2
+energy_gpu_max_watts,energy_gpu_util_avg_percent,0.4000000059604645,mediator,yes,strong,mediator,mediator,Q3,gpu_max_watts通过某种机制影响gpu_util_avg_percent,0.25039875665692735,0.2013206003521696,0.2994769129616851,True,5
+energy_gpu_util_avg_percent,energy_gpu_min_watts,0.4000000059604645,mediator,yes,strong,mediator,mediator,Q3,gpu_util_avg_percent通过某种机制影响gpu_min_watts,,,,,0
+hyperparam_epochs_x_is_parallel,energy_gpu_total_joules,0.4000000059604645,moderation,yes,strong,interaction,energy,Q1,并行模式调节epochs对gpu_total_joules的效应,,,,,0
+energy_gpu_util_avg_percent,energy_gpu_util_max_percent,0.4000000059604645,mediator,yes,strong,mediator,mediator,Q3,gpu_util_avg_percent通过某种机制影响gpu_util_max_percent,0.18537849451995636,0.1490443095940449,0.2217126794458678,True,4
+energy_gpu_temp_avg_celsius,energy_gpu_temp_max_celsius,0.4000000059604645,mediator,yes,strong,mediator,mediator,Q3,gpu_temp_avg_celsius通过某种机制影响gpu_temp_max_celsius,0.42911879682792187,0.3450115126496492,0.5132260810061946,True,9
+hyperparam_epochs,energy_gpu_total_joules,0.3499999940395355,main_effect,yes,strong,hyperparam,energy,Q1,epochs直接影响gpu_total_joules,6098.468140860895,4903.16838525216,7293.76789646963,True,6
+is_parallel,energy_gpu_max_watts,0.3499999940395355,mode_effect,yes,strong,mode,mediator,other,is_parallel → gpu_max_watts,42.27477867167349,33.98892205202549,50.56063529132149,True,4
+model_hrnet18,energy_gpu_max_watts,0.3499999940395355,control_effect,yes,strong,control,mediator,other,模型控制变量的影响,-65.97043234106017,-78.90063707990797,-53.04022760221238,True,4
+energy_gpu_min_watts,energy_gpu_util_avg_percent,0.3499999940395355,mediator,yes,strong,mediator,mediator,Q3,gpu_min_watts通过某种机制影响gpu_util_avg_percent,,,,,0
+energy_gpu_avg_watts,energy_gpu_total_joules,0.3499999940395355,mediator,yes,strong,mediator,energy,Q3,gpu_avg_watts通过某种机制影响gpu_total_joules,6345.636868734161,5101.892042462266,7589.381695006056,True,10
+energy_gpu_min_watts,energy_gpu_max_watts,0.3499999940395355,mediator,yes,strong,mediator,mediator,Q3,gpu_min_watts通过某种机制影响gpu_max_watts,0.16943440660734413,0.1362252629123047,0.20264355030238357,True,7
+hyperparam_epochs,energy_gpu_min_watts,0.3499999940395355,main_effect,yes,strong,hyperparam,mediator,other,epochs直接影响gpu_min_watts,-0.0259728126037702,-0.031063483874109156,-0.02088214133343124,True,5
+energy_gpu_temp_max_celsius,energy_gpu_avg_watts,0.3499999940395355,mediator,yes,strong,mediator,mediator,Q3,gpu_temp_max_celsius通过某种机制影响gpu_avg_watts,,,,,0
+energy_gpu_temp_avg_celsius,energy_gpu_min_watts,0.3499999940395355,mediator,yes,strong,mediator,mediator,Q3,gpu_temp_avg_celsius通过某种机制影响gpu_min_watts,1.2896116286437453,1.0368477494295711,1.5423755078579195,True,7
+energy_gpu_avg_watts,energy_gpu_temp_max_celsius,0.3499999940395355,mediator,yes,strong,mediator,mediator,Q3,gpu_avg_watts通过某种机制影响gpu_temp_max_celsius,,,,,0
+energy_gpu_avg_watts,energy_gpu_temp_avg_celsius,0.3499999940395355,mediator,yes,strong,mediator,mediator,Q3,gpu_avg_watts通过某种机制影响gpu_temp_avg_celsius,,,,,0
+hyperparam_epochs_x_is_parallel,energy_gpu_temp_max_celsius,0.3000000119209289,moderation,yes,strong,interaction,mediator,other,并行模式调节epochs对gpu_temp_max_celsius的效应,,,,,0
+model_pcb,perf_map,0.3000000119209289,control_effect,yes,strong,control,performance,other,模型控制变量的影响,0.0419148449007003,0.033699535300163036,0.05013015450123756,True,0
+energy_cpu_pkg_joules,energy_cpu_total_joules,0.3000000119209289,mediator,yes,strong,energy,energy,Q3,cpu_pkg_joules通过某种机制影响cpu_total_joules,,,,,0
+energy_gpu_util_avg_percent,energy_gpu_temp_avg_celsius,0.3000000119209289,mediator,yes,strong,mediator,mediator,Q3,gpu_util_avg_percent通过某种机制影响gpu_temp_avg_celsius,-0.019849204373277682,-0.02373964843044011,-0.015958760316115254,True,5
+energy_gpu_util_max_percent,energy_gpu_avg_watts,0.3000000119209289,mediator,yes,strong,mediator,mediator,Q3,gpu_util_max_percent通过某种机制影响gpu_avg_watts,-0.06792798032435513,-0.08124186446792873,-0.05461409618078152,True,7
+energy_gpu_util_max_percent,energy_gpu_min_watts,0.3000000119209289,mediator,yes,strong,mediator,mediator,Q3,gpu_util_max_percent通过某种机制影响gpu_min_watts,-1.4528952726273836,-1.7376627460623508,-1.1681277991924164,True,5
+energy_cpu_ram_joules,energy_cpu_pkg_joules,0.3000000119209289,mediator,yes,strong,energy,energy,Q3,cpu_ram_joules通过某种机制影响cpu_pkg_joules,-0.7182879998438075,-0.8590724478131938,-0.5775035518744213,True,1
+model_pcb,energy_gpu_avg_watts,0.3000000119209289,control_effect,yes,strong,control,mediator,other,模型控制变量的影响,-255.17130499593108,-305.1848807751336,-205.1577292167286,True,6
+hyperparam_learning_rate,perf_rank5,0.3000000119209289,main_effect,yes,strong,hyperparam,performance,other,learning_rate直接影响rank5,-0.28427597088245393,-0.3399940611754149,-0.22855788058949295,True,0
+energy_gpu_avg_watts,energy_gpu_max_watts,0.3000000119209289,mediator,yes,strong,mediator,mediator,Q3,gpu_avg_watts通过某种机制影响gpu_max_watts,,,,,0
+energy_gpu_temp_max_celsius,energy_gpu_total_joules,0.3000000119209289,mediator,yes,strong,mediator,energy,Q3,gpu_temp_max_celsius通过某种机制影响gpu_total_joules,-18709.281708137256,-22376.300922932158,-15042.262493342354,True,10
+energy_gpu_max_watts,energy_gpu_avg_watts,0.3000000119209289,mediator,yes,strong,mediator,mediator,Q3,gpu_max_watts通过某种机制影响gpu_avg_watts,,,,,0
+energy_cpu_total_joules,energy_cpu_pkg_joules,0.3000000119209289,mediator,yes,strong,energy,energy,Q3,cpu_total_joules通过某种机制影响cpu_pkg_joules,,,,,0
+is_parallel,energy_gpu_temp_max_celsius,0.3000000119209289,mode_effect,yes,strong,mode,mediator,other,is_parallel → gpu_temp_max_celsius,0.7948141366734639,0.6390305658854649,0.9505977074614629,True,6
+energy_gpu_max_watts,energy_gpu_temp_avg_celsius,0.3000000119209289,mediator,yes,strong,mediator,mediator,Q3,gpu_max_watts通过某种机制影响gpu_temp_avg_celsius,-0.11121492519001372,-0.1330130505272564,-0.08941679985277103,True,6
+hyperparam_epochs,energy_gpu_temp_max_celsius,0.3000000119209289,main_effect,yes,strong,hyperparam,mediator,other,epochs直接影响gpu_temp_max_celsius,-0.0028425209301604503,-0.0033996550324718986,-0.002285386827849002,True,6
+model_hrnet18,energy_gpu_min_watts,0.3000000119209289,control_effect,yes,strong,control,mediator,other,模型控制变量的影响,2.7930003032169566,2.245572243786433,3.34042836264748,True,5
+model_hrnet18,energy_gpu_temp_avg_celsius,0.3000000119209289,control_effect,yes,strong,control,mediator,other,模型控制变量的影响,-1.0729909159544313,-1.2832971354815,-0.8626846964273628,True,4
+energy_cpu_total_joules,energy_cpu_ram_joules,0.3000000119209289,mediator,yes,strong,energy,energy,Q3,cpu_total_joules通过某种机制影响cpu_ram_joules,0.18879809546233506,0.15179366875171738,0.22580252217295274,True,1

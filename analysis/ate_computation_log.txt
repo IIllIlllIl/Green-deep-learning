@@ -1,0 +1,2975 @@
+IPython could not be loaded!
+DML估计失败: Input contains NaN.，使用简化方法
+DML估计失败: Input contains NaN.，使用简化方法
+DML估计失败: Input contains NaN.，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN.，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN.，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+白名单目录: /home/green/energy_dl/nightly/analysis/results/energy_research/data/interaction/whitelist
+组数据目录: /home/green/energy_dl/nightly/analysis/data/energy_research/6groups_final
+输出目录: /home/green/energy_dl/nightly/analysis/results/energy_research/data/interaction/whitelist_with_ate
+策略: T0/T1=quantile, ref_df=non_parallel
+Dry run: False
+指定组: 全部
+找到 6 个白名单文件
+
+============================================================
+处理组: group1_examples
+白名单: /home/green/energy_dl/nightly/analysis/results/energy_research/data/interaction/whitelist/group1_examples_causal_edges_whitelist.csv
+组数据: /home/green/energy_dl/nightly/analysis/data/energy_research/6groups_final/group1_examples.csv
+输出: /home/green/energy_dl/nightly/analysis/results/energy_research/data/interaction/whitelist_with_ate/group1_examples_causal_edges_whitelist_with_ate.csv
+策略: T0/T1=quantile, ref_df=non_parallel
+Dry run: False
+============================================================
+  加载白名单: /home/green/energy_dl/nightly/analysis/results/energy_research/data/interaction/whitelist/group1_examples_causal_edges_whitelist.csv
+    记录数: 43
+    列: ['source', 'target', 'strength', 'edge_type', 'is_significant', 'strength_level', 'source_category', 'target_category', 'question_relevance', 'interpretation']
+  加载组数据: /home/green/energy_dl/nightly/analysis/data/energy_research/6groups_final/group1_examples.csv
+    记录数: 304
+    列数: 21
+  构建ref_df: 非并行模式 (n=126)
+
+  [1/43] 计算ATE: hyperparam_batch_size_x_is_parallel → energy_gpu_min_watts
+    创建交互项: hyperparam_batch_size_interaction_is_parallel
+    使用 19 个混淆因素
+  计算T0/T1: 0.0000 / 55.0000 (策略=quantile, 差异=55.0000)
+
+估计因果效应: hyperparam_batch_size_interaction_is_parallel → energy_gpu_min_watts
+  混淆因素: 19个
+  样本数: 304
+    ✓ ATE: 89.8536
+      95% CI: [74.2399, 105.4673]
+      显著: True
+
+  [2/43] 计算ATE: hyperparam_batch_size_x_is_parallel → perf_test_accuracy
+    创建交互项: hyperparam_batch_size_interaction_is_parallel
+    使用 19 个混淆因素
+  计算T0/T1: 0.0000 / 55.0000 (策略=quantile, 差异=55.0000)
+
+估计因果效应: hyperparam_batch_size_interaction_is_parallel → perf_test_accuracy
+  混淆因素: 19个
+  样本数: 304
+    ✓ ATE: -6.5922
+      95% CI: [-15.9211, 2.7368]
+      显著: False
+
+  [3/43] 计算ATE: hyperparam_batch_size_x_is_parallel → energy_gpu_temp_avg_celsius
+    创建交互项: hyperparam_batch_size_interaction_is_parallel
+    使用 19 个混淆因素
+  计算T0/T1: 0.0000 / 55.0000 (策略=quantile, 差异=55.0000)
+
+估计因果效应: hyperparam_batch_size_interaction_is_parallel → energy_gpu_temp_avg_celsius
+  混淆因素: 19个
+  样本数: 304
+    ✓ ATE: 12.5795
+      95% CI: [9.9149, 15.2440]
+      显著: True
+
+  [4/43] 计算ATE: energy_cpu_total_joules → energy_cpu_pkg_joules
+    使用 18 个混淆因素
+  计算T0/T1: 921.3275 / 12539.7600 (策略=quantile, 差异=11618.4325)
+
+估计因果效应: energy_cpu_total_joules → energy_cpu_pkg_joules
+  混淆因素: 18个
+  样本数: 304
+    ✓ ATE: 15276.4046
+      95% CI: [12859.5232, 17693.2860]
+      显著: True
+
+  [5/43] 计算ATE: model_mnist_ff → perf_test_accuracy
+    将布尔变量 'model_mnist_ff' 编码为0/1
+    使用 18 个混淆因素
+
+估计因果效应: model_mnist_ff → perf_test_accuracy
+  混淆因素: 18个
+  样本数: 304
+    ✓ ATE: -46.7516
+      95% CI: [-55.4430, -38.0602]
+      显著: True
+
+  [6/43] 计算ATE: hyperparam_batch_size_x_is_parallel → energy_gpu_avg_watts
+    创建交互项: hyperparam_batch_size_interaction_is_parallel
+    使用 19 个混淆因素
+  计算T0/T1: 0.0000 / 55.0000 (策略=quantile, 差异=55.0000)
+
+估计因果效应: hyperparam_batch_size_interaction_is_parallel → energy_gpu_avg_watts
+  混淆因素: 19个
+  样本数: 304
+    ✓ ATE: 87.8404
+      95% CI: [71.2341, 104.4467]
+      显著: True
+
+  [7/43] 计算ATE: energy_gpu_avg_watts → energy_gpu_min_watts
+    使用 18 个混淆因素
+  计算T0/T1: 95.3884 / 196.1023 (策略=quantile, 差异=100.7139)
+
+估计因果效应: energy_gpu_avg_watts → energy_gpu_min_watts
+  混淆因素: 18个
+  样本数: 304
+    ✓ ATE: 77.0323
+      95% CI: [63.8664, 90.1982]
+      显著: True
+
+  [8/43] 计算ATE: model_siamese → perf_test_accuracy
+    将布尔变量 'model_siamese' 编码为0/1
+    使用 18 个混淆因素
+
+估计因果效应: model_siamese → perf_test_accuracy
+  混淆因素: 18个
+  样本数: 304
+    ✓ ATE: 29.1538
+      95% CI: [24.5680, 33.7395]
+      显著: True
+
+  [9/43] 计算ATE: energy_gpu_temp_avg_celsius → energy_gpu_total_joules
+    使用 18 个混淆因素
+  计算T0/T1: 62.2083 / 75.9733 (策略=quantile, 差异=13.7649)
+
+估计因果效应: energy_gpu_temp_avg_celsius → energy_gpu_total_joules
+  混淆因素: 18个
+  样本数: 304
+    ✓ ATE: 42378.2055
+      95% CI: [34285.9441, 50470.4668]
+      显著: True
+
+  [10/43] 计算ATE: model_siamese → energy_gpu_max_watts
+    将布尔变量 'model_siamese' 编码为0/1
+    使用 18 个混淆因素
+
+估计因果效应: model_siamese → energy_gpu_max_watts
+  混淆因素: 18个
+  样本数: 304
+    ✓ ATE: 35.9022
+      95% CI: [18.6698, 53.1346]
+      显著: True
+
+  [11/43] 计算ATE: energy_cpu_total_joules → energy_cpu_ram_joules
+    使用 18 个混淆因素
+  计算T0/T1: 921.3275 / 12539.7600 (策略=quantile, 差异=11618.4325)
+
+估计因果效应: energy_cpu_total_joules → energy_cpu_ram_joules
+  混淆因素: 18个
+  样本数: 304
+    ✓ ATE: 1086.6984
+      95% CI: [907.5080, 1265.8888]
+      显著: True
+
+  [12/43] 计算ATE: hyperparam_batch_size_x_is_parallel → energy_gpu_max_watts
+    创建交互项: hyperparam_batch_size_interaction_is_parallel
+    使用 19 个混淆因素
+  计算T0/T1: 0.0000 / 55.0000 (策略=quantile, 差异=55.0000)
+
+估计因果效应: hyperparam_batch_size_interaction_is_parallel → energy_gpu_max_watts
+  混淆因素: 19个
+  样本数: 304
+    ✓ ATE: 70.2537
+      95% CI: [50.8414, 89.6659]
+      显著: True
+
+  [13/43] 计算ATE: energy_gpu_util_avg_percent → energy_gpu_util_max_percent
+    使用 18 个混淆因素
+  计算T0/T1: 12.7112 / 77.2056 (策略=quantile, 差异=64.4944)
+
+估计因果效应: energy_gpu_util_avg_percent → energy_gpu_util_max_percent
+  混淆因素: 18个
+  样本数: 304
+    ✓ ATE: 50.2303
+      95% CI: [44.3023, 56.1583]
+      显著: True
+
+  [14/43] 计算ATE: energy_gpu_temp_avg_celsius → energy_gpu_temp_max_celsius
+    使用 18 个混淆因素
+  计算T0/T1: 62.2083 / 75.9733 (策略=quantile, 差异=13.7649)
+
+估计因果效应: energy_gpu_temp_avg_celsius → energy_gpu_temp_max_celsius
+  混淆因素: 18个
+  样本数: 304
+    ✓ ATE: 15.3026
+      95% CI: [13.8020, 16.8033]
+      显著: True
+
+  [15/43] 计算ATE: energy_gpu_min_watts → perf_test_accuracy
+    使用 18 个混淆因素
+  计算T0/T1: 75.2350 / 162.0950 (策略=quantile, 差异=86.8600)
+
+估计因果效应: energy_gpu_min_watts → perf_test_accuracy
+  混淆因素: 18个
+  样本数: 304
+    ✓ ATE: 6.0828
+      95% CI: [-1.4290, 13.5946]
+      显著: False
+
+  [16/43] 计算ATE: energy_gpu_temp_max_celsius → perf_test_accuracy
+    使用 18 个混淆因素
+  计算T0/T1: 65.0000 / 78.0000 (策略=quantile, 差异=13.0000)
+
+估计因果效应: energy_gpu_temp_max_celsius → perf_test_accuracy
+  混淆因素: 18个
+  样本数: 304
+    ✓ ATE: 16.4161
+      95% CI: [9.2441, 23.5882]
+      显著: True
+
+  [17/43] 计算ATE: energy_gpu_avg_watts → perf_test_accuracy
+    使用 18 个混淆因素
+  计算T0/T1: 95.3884 / 196.1023 (策略=quantile, 差异=100.7139)
+
+估计因果效应: energy_gpu_avg_watts → perf_test_accuracy
+  混淆因素: 18个
+  样本数: 304
+    ✓ ATE: 24.5548
+      95% CI: [17.5385, 31.5711]
+      显著: True
+
+  [18/43] 计算ATE: energy_gpu_avg_watts → energy_gpu_max_watts
+    使用 18 个混淆因素
+  计算T0/T1: 95.3884 / 196.1023 (策略=quantile, 差异=100.7139)
+
+估计因果效应: energy_gpu_avg_watts → energy_gpu_max_wattsDML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN.，使用简化方法
+T1-T0差异较小: 52.0000 (阈值=93.9912)。ATE估计可能不稳定。
+DML估计失败: Input contains NaN.，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN.，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+T1-T0差异较小: 52.0000 (阈值=93.9912)。ATE估计可能不稳定。
+DML估计失败: Input contains NaN.，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+
+  混淆因素: 18个
+  样本数: 304
+    ✓ ATE: 127.1509
+      95% CI: [112.9193, 141.3824]
+      显著: True
+
+  [19/43] 计算ATE: energy_gpu_avg_watts → energy_gpu_total_joules
+    使用 18 个混淆因素
+  计算T0/T1: 95.3884 / 196.1023 (策略=quantile, 差异=100.7139)
+
+估计因果效应: energy_gpu_avg_watts → energy_gpu_total_joules
+  混淆因素: 18个
+  样本数: 304
+    ✓ ATE: 41543.1190
+      95% CI: [33395.9619, 49690.2761]
+      显著: True
+
+  [20/43] 计算ATE: energy_gpu_util_avg_percent → perf_test_accuracy
+    使用 18 个混淆因素
+  计算T0/T1: 12.7112 / 77.2056 (策略=quantile, 差异=64.4944)
+
+估计因果效应: energy_gpu_util_avg_percent → perf_test_accuracy
+  混淆因素: 18个
+  样本数: 304
+    ✓ ATE: 26.3876
+      95% CI: [19.4565, 33.3187]
+      显著: True
+
+  [21/43] 计算ATE: energy_gpu_max_watts → energy_gpu_util_max_percent
+    使用 18 个混淆因素
+  计算T0/T1: 99.3150 / 310.5950 (策略=quantile, 差异=211.2800)
+
+估计因果效应: energy_gpu_max_watts → energy_gpu_util_max_percent
+  混淆因素: 18个
+  样本数: 304
+    ✓ ATE: 63.0329
+      95% CI: [58.9469, 67.1189]
+      显著: True
+
+  [22/43] 计算ATE: energy_gpu_util_max_percent → energy_gpu_util_avg_percent
+    使用 18 个混淆因素
+  计算T0/T1: 29.0000 / 100.0000 (策略=quantile, 差异=71.0000)
+
+估计因果效应: energy_gpu_util_max_percent → energy_gpu_util_avg_percent
+  混淆因素: 18个
+  样本数: 304
+    ✓ ATE: 54.4480
+      95% CI: [49.8810, 59.0150]
+      显著: True
+
+  [23/43] 计算ATE: model_siamese → energy_gpu_total_joules
+    将布尔变量 'model_siamese' 编码为0/1
+    使用 18 个混淆因素
+
+估计因果效应: model_siamese → energy_gpu_total_joules
+  混淆因素: 18个
+  样本数: 304
+    ✓ ATE: 50796.5081
+      95% CI: [37504.1888, 64088.8275]
+      显著: True
+
+  [24/43] 计算ATE: hyperparam_batch_size_x_is_parallel → energy_gpu_util_avg_percent
+    创建交互项: hyperparam_batch_size_interaction_is_parallel
+    使用 19 个混淆因素
+  计算T0/T1: 0.0000 / 55.0000 (策略=quantile, 差异=55.0000)
+
+估计因果效应: hyperparam_batch_size_interaction_is_parallel → energy_gpu_util_avg_percent
+  混淆因素: 19个
+  样本数: 304
+    ✓ ATE: 36.1524
+      95% CI: [29.9077, 42.3970]
+      显著: True
+
+  [25/43] 计算ATE: hyperparam_batch_size → perf_test_accuracy
+    使用 18 个混淆因素
+  计算T0/T1: 32.0000 / 84.0000 (策略=quantile, 差异=52.0000)
+
+估计因果效应: hyperparam_batch_size → perf_test_accuracy
+  混淆因素: 18个
+  样本数: 304
+    ✓ ATE: -1.6112
+      95% CI: [-10.9633, 7.7408]
+      显著: False
+
+  [26/43] 计算ATE: energy_gpu_util_avg_percent → energy_gpu_avg_watts
+    使用 18 个混淆因素
+  计算T0/T1: 12.7112 / 77.2056 (策略=quantile, 差异=64.4944)
+
+估计因果效应: energy_gpu_util_avg_percent → energy_gpu_avg_watts
+  混淆因素: 18个
+  样本数: 304
+    ✓ ATE: 108.7831
+      95% CI: [97.8110, 119.7551]
+      显著: True
+
+  [27/43] 计算ATE: energy_cpu_total_joules → energy_gpu_total_joules
+    使用 18 个混淆因素
+  计算T0/T1: 921.3275 / 12539.7600 (策略=quantile, 差异=11618.4325)
+
+估计因果效应: energy_cpu_total_joules → energy_gpu_total_joules
+  混淆因素: 18个
+  样本数: 304
+    ✓ ATE: 51543.8077
+      95% CI: [44159.0800, 58928.5354]
+      显著: True
+
+  [28/43] 计算ATE: energy_gpu_util_max_percent → perf_test_accuracy
+    使用 18 个混淆因素
+  计算T0/T1: 29.0000 / 100.0000 (策略=quantile, 差异=71.0000)
+
+估计因果效应: energy_gpu_util_max_percent → perf_test_accuracy
+  混淆因素: 18个
+  样本数: 304
+    ✓ ATE: 18.0885
+      95% CI: [10.8266, 25.3504]
+      显著: True
+
+  [29/43] 计算ATE: energy_gpu_temp_avg_celsius → energy_gpu_util_avg_percent
+    使用 18 个混淆因素
+  计算T0/T1: 62.2083 / 75.9733 (策略=quantile, 差异=13.7649)
+
+估计因果效应: energy_gpu_temp_avg_celsius → energy_gpu_util_avg_percent
+  混淆因素: 18个
+  样本数: 304
+    ✓ ATE: 46.5802
+      95% CI: [41.0153, 52.1451]
+      显著: True
+
+  [30/43] 计算ATE: hyperparam_batch_size_x_is_parallel → energy_cpu_total_joules
+    创建交互项: hyperparam_batch_size_interaction_is_parallel
+    使用 19 个混淆因素
+  计算T0/T1: 0.0000 / 55.0000 (策略=quantile, 差异=55.0000)
+
+估计因果效应: hyperparam_batch_size_interaction_is_parallel → energy_cpu_total_joules
+  混淆因素: 19个
+  样本数: 304
+    ✓ ATE: 183.8529
+      95% CI: [-1300.5291, 1668.2349]
+      显著: False
+
+  [31/43] 计算ATE: energy_gpu_util_max_percent → energy_gpu_avg_watts
+    使用 18 个混淆因素
+  计算T0/T1: 29.0000 / 100.0000 (策略=quantile, 差异=71.0000)
+
+估计因果效应: energy_gpu_util_max_percent → energy_gpu_avg_watts
+  混淆因素: 18个
+  样本数: 304
+    ✓ ATE: 107.4610
+      95% CI: [96.3244, 118.5975]
+      显著: True
+
+  [32/43] 计算ATE: energy_gpu_avg_watts → energy_gpu_temp_avg_celsius
+    使用 18 个混淆因素
+  计算T0/T1: 95.3884 / 196.1023 (策略=quantile, 差异=100.7139)
+
+估计因果效应: energy_gpu_avg_watts → energy_gpu_temp_avg_celsius
+  混淆因素: 18个
+  样本数: 304
+    ✓ ATE: 14.2022
+      95% CI: [12.3216, 16.0827]
+      显著: True
+
+  [33/43] 计算ATE: energy_gpu_avg_watts → energy_gpu_util_avg_percent
+    使用 18 个混淆因素
+  计算T0/T1: 95.3884 / 196.1023 (策略=quantile, 差异=100.7139)
+
+估计因果效应: energy_gpu_avg_watts → energy_gpu_util_avg_percent
+  混淆因素: 18个
+  样本数: 304
+    ✓ ATE: 57.1349
+      95% CI: [53.0065, 61.2633]
+      显著: True
+
+  [34/43] 计算ATE: energy_gpu_avg_watts → energy_gpu_temp_max_celsius
+    使用 18 个混淆因素
+  计算T0/T1: 95.3884 / 196.1023 (策略=quantile, 差异=100.7139)
+
+估计因果效应: energy_gpu_avg_watts → energy_gpu_temp_max_celsius
+  混淆因素: 18个
+  样本数: 304
+    ✓ ATE: 14.3289
+      95% CI: [12.7106, 15.9473]
+      显著: True
+
+  [35/43] 计算ATE: energy_cpu_ram_joules → energy_cpu_pkg_joules
+    使用 18 个混淆因素
+  计算T0/T1: 60.7250 / 769.0875 (策略=quantile, 差异=708.3625)
+
+估计因果效应: energy_cpu_ram_joules → energy_cpu_pkg_joules
+  混淆因素: 18个
+  样本数: 304
+    ✓ ATE: 15237.5359
+      95% CI: [12817.5353, 17657.5365]
+      显著: True
+
+  [36/43] 计算ATE: hyperparam_batch_size → energy_gpu_max_watts
+    使用 18 个混淆因素
+  计算T0/T1: 32.0000 / 84.0000 (策略=quantile, 差异=52.0000)
+
+估计因果效应: hyperparam_batch_size → energy_gpu_max_watts
+  混淆因素: 18个
+  样本数: 304
+    ✓ ATE: -35.9308
+      95% CI: [-56.9705, -14.8911]
+      显著: True
+
+  [37/43] 计算ATE: model_mnist_rnn → energy_gpu_max_watts
+    将布尔变量 'model_mnist_rnn' 编码为0/1
+    使用 18 个混淆因素
+
+估计因果效应: model_mnist_rnn → energy_gpu_max_watts
+  混淆因素: 18个
+  样本数: 304
+    ✓ ATE: -27.6434
+      95% CI: [-51.9253, -3.3615]
+      显著: True
+
+  [38/43] 计算ATE: energy_gpu_min_watts → energy_gpu_max_watts
+    使用 18 个混淆因素
+  计算T0/T1: 75.2350 / 162.0950 (策略=quantile, 差异=86.8600)
+
+估计因果效应: energy_gpu_min_watts → energy_gpu_max_watts
+  混淆因素: 18个
+  样本数: 304
+    ✓ ATE: 95.8472
+      95% CI: [78.7787, 112.9157]
+      显著: True
+
+  [39/43] 计算ATE: energy_gpu_min_watts → energy_gpu_temp_avg_celsius
+    使用 18 个混淆因素
+  计算T0/T1: 75.2350 / 162.0950 (策略=quantile, 差异=86.8600)
+
+估计因果效应: energy_gpu_min_watts → energy_gpu_temp_avg_celsius
+  混淆因素: 18个
+  样本数: 304
+    ✓ ATE: 14.6952
+      95% CI: [12.8634, 16.5270]
+      显著: True
+
+  [40/43] 计算ATE: model_mnist_ff → energy_gpu_max_watts
+    将布尔变量 'model_mnist_ff' 编码为0/1
+    使用 18 个混淆因素
+
+估计因果效应: model_mnist_ff → energy_gpu_max_watts
+  混淆因素: 18个
+  样本数: 304
+    ✓ ATE: 28.8600
+      95% CI: [5.1145, 52.6054]
+      显著: True
+
+  [41/43] 计算ATE: is_parallel → perf_test_accuracy
+    将布尔变量 'is_parallel' 编码为0/1DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN.，使用简化方法
+DML估计失败: Input contains NaN.，使用简化方法
+DML估计失败: Input contains NaN.，使用简化方法
+DML估计失败: Input contains NaN.，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN.，使用简化方法
+DML估计失败: Input contains NaN.，使用简化方法
+DML估计失败: Input contains NaN.，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN.，使用简化方法
+DML估计失败: Input contains NaN.，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN.，使用简化方法
+DML估计失败: Input contains NaN.，使用简化方法
+
+    使用 18 个混淆因素
+
+估计因果效应: is_parallel → perf_test_accuracy
+  混淆因素: 18个
+  样本数: 304
+    ✓ ATE: -2.9154
+      95% CI: [-10.4649, 4.6340]
+      显著: False
+
+  [42/43] 计算ATE: energy_gpu_min_watts → energy_gpu_util_max_percent
+    使用 18 个混淆因素
+  计算T0/T1: 75.2350 / 162.0950 (策略=quantile, 差异=86.8600)
+
+估计因果效应: energy_gpu_min_watts → energy_gpu_util_max_percent
+  混淆因素: 18个
+  样本数: 304
+    ✓ ATE: 42.3618
+      95% CI: [35.6978, 49.0258]
+      显著: True
+
+  [43/43] 计算ATE: hyperparam_batch_size_x_is_parallel → energy_gpu_total_joules
+    创建交互项: hyperparam_batch_size_interaction_is_parallel
+    使用 19 个混淆因素
+  计算T0/T1: 0.0000 / 55.0000 (策略=quantile, 差异=55.0000)
+
+估计因果效应: hyperparam_batch_size_interaction_is_parallel → energy_gpu_total_joules
+  混淆因素: 19个
+  样本数: 304
+    ✓ ATE: 11454.3591
+      95% CI: [4520.8926, 18387.8256]
+      显著: True
+
+✓ 结果已保存到: /home/green/energy_dl/nightly/analysis/results/energy_research/data/interaction/whitelist_with_ate/group1_examples_causal_edges_whitelist_with_ate.csv
+
+============================================================
+处理完成: group1_examples
+  总边数: 43
+  ATE计算成功: 43 (100.0%)
+  统计显著边: 38
+============================================================
+
+============================================================
+处理组: group2_vulberta
+白名单: /home/green/energy_dl/nightly/analysis/results/energy_research/data/interaction/whitelist/group2_vulberta_causal_edges_whitelist.csv
+组数据: /home/green/energy_dl/nightly/analysis/data/energy_research/6groups_final/group2_vulberta.csv
+输出: /home/green/energy_dl/nightly/analysis/results/energy_research/data/interaction/whitelist_with_ate/group2_vulberta_causal_edges_whitelist_with_ate.csv
+策略: T0/T1=quantile, ref_df=non_parallel
+Dry run: False
+============================================================
+  加载白名单: /home/green/energy_dl/nightly/analysis/results/energy_research/data/interaction/whitelist/group2_vulberta_causal_edges_whitelist.csv
+    记录数: 35
+    列: ['source', 'target', 'strength', 'edge_type', 'is_significant', 'strength_level', 'source_category', 'target_category', 'question_relevance', 'interpretation']
+  加载组数据: /home/green/energy_dl/nightly/analysis/data/energy_research/6groups_final/group2_vulberta.csv
+    记录数: 72
+    列数: 20
+  构建ref_df: 非并行模式 (n=25)
+
+  [1/35] 计算ATE: hyperparam_learning_rate_x_is_parallel → perf_final_training_loss
+    创建交互项: hyperparam_learning_rate_interaction_is_parallel
+    使用 18 个混淆因素
+  计算T0/T1: 0.0000 / 0.0000 (策略=quantile, 差异=0.0000)
+
+估计因果效应: hyperparam_learning_rate_interaction_is_parallel → perf_final_training_loss
+  混淆因素: 18个
+  样本数: 72
+    ✓ ATE: 0.0776
+      95% CI: [0.0212, 0.1340]
+      显著: True
+
+  [2/35] 计算ATE: hyperparam_learning_rate_x_is_parallel → energy_gpu_temp_max_celsius
+    创建交互项: hyperparam_learning_rate_interaction_is_parallel
+    使用 18 个混淆因素
+  计算T0/T1: 0.0000 / 0.0000 (策略=quantile, 差异=0.0000)
+
+估计因果效应: hyperparam_learning_rate_interaction_is_parallel → energy_gpu_temp_max_celsius
+  混淆因素: 18个
+  样本数: 72
+    ✓ ATE: 0.6970
+      95% CI: [0.2889, 1.1050]
+      显著: True
+
+  [3/35] 计算ATE: hyperparam_epochs_x_is_parallel → energy_gpu_util_avg_percent
+    创建交互项: hyperparam_epochs_interaction_is_parallel
+    使用 18 个混淆因素
+  计算T0/T1: 0.0000 / 13.5000 (策略=quantile, 差异=13.5000)
+
+估计因果效应: hyperparam_epochs_interaction_is_parallel → energy_gpu_util_avg_percent
+  混淆因素: 18个
+  样本数: 72
+    ✓ ATE: -0.8654
+      95% CI: [-3.3693, 1.6385]
+      显著: False
+
+  [4/35] 计算ATE: energy_gpu_temp_max_celsius → energy_gpu_max_watts
+    使用 17 个混淆因素
+    T0/T1计算失败: T1 (84.0000) <= T0 (84.0000)。数据变异性不足，请检查treatment变量'energy_gpu_temp_max_celsius'，使用默认ATE
+
+估计因果效应: energy_gpu_temp_max_celsius → energy_gpu_max_watts
+  混淆因素: 17个
+  样本数: 72
+    ✓ ATE: -0.1536
+      95% CI: [-0.5360, 0.2287]
+      显著: False
+
+  [5/35] 计算ATE: energy_cpu_total_joules → energy_gpu_total_joules
+    使用 17 个混淆因素
+  计算T0/T1: 101270.8050 / 155825.0275 (策略=quantile, 差异=54554.2225)
+
+估计因果效应: energy_cpu_total_joules → energy_gpu_total_joules
+  混淆因素: 17个
+  样本数: 72
+    ✓ ATE: 221990.9925
+      95% CI: [131472.7439, 312509.2411]
+      显著: True
+
+  [6/35] 计算ATE: hyperparam_learning_rate → perf_final_training_loss
+    使用 17 个混淆因素
+  计算T0/T1: 0.0000 / 0.0000 (策略=quantile, 差异=0.0000)
+
+估计因果效应: hyperparam_learning_rate → perf_final_training_loss
+  混淆因素: 17个
+  样本数: 72
+    ✓ ATE: 0.0724
+      95% CI: [0.0157, 0.1292]
+      显著: True
+
+  [7/35] 计算ATE: hyperparam_learning_rate_x_is_parallel → energy_gpu_max_watts
+    创建交互项: hyperparam_learning_rate_interaction_is_parallel
+    使用 18 个混淆因素
+  计算T0/T1: 0.0000 / 0.0000 (策略=quantile, 差异=0.0000)
+
+估计因果效应: hyperparam_learning_rate_interaction_is_parallel → energy_gpu_max_watts
+  混淆因素: 18个
+  样本数: 72
+    ✓ ATE: -0.3605
+      95% CI: [-0.7274, 0.0065]
+      显著: False
+
+  [8/35] 计算ATE: hyperparam_epochs_x_is_parallel → perf_eval_loss
+    创建交互项: hyperparam_epochs_interaction_is_parallel
+    使用 18 个混淆因素
+  计算T0/T1: 0.0000 / 13.5000 (策略=quantile, 差异=13.5000)
+
+估计因果效应: hyperparam_epochs_interaction_is_parallel → perf_eval_loss
+  混淆因素: 18个
+  样本数: 72
+    ✓ ATE: 0.0374
+      95% CI: [-0.0229, 0.0977]
+      显著: False
+
+  [9/35] 计算ATE: energy_gpu_min_watts → energy_gpu_avg_watts
+    使用 17 个混淆因素
+  计算T0/T1: 4.9100 / 88.9700 (策略=quantile, 差异=84.0600)
+
+估计因果效应: energy_gpu_min_watts → energy_gpu_avg_watts
+  混淆因素: 17个
+  样本数: 72
+    ✓ ATE: 6.9890
+      95% CI: [3.5660, 10.4120]
+      显著: True
+
+  [10/35] 计算ATE: hyperparam_epochs → perf_eval_loss
+    使用 17 个混淆因素
+  计算T0/T1: 9.5000 / 15.5000 (策略=quantile, 差异=6.0000)
+
+估计因果效应: hyperparam_epochs → perf_eval_loss
+  混淆因素: 17个
+  样本数: 72
+    ✓ ATE: 0.0501
+      95% CI: [-0.0123, 0.1126]
+      显著: False
+
+  [11/35] 计算ATE: is_parallel → energy_gpu_temp_max_celsius
+    将布尔变量 'is_parallel' 编码为0/1
+    使用 17 个混淆因素
+
+估计因果效应: is_parallel → energy_gpu_temp_max_celsius
+  混淆因素: 17个
+  样本数: 72
+    ✓ ATE: 0.3677
+      95% CI: [0.1715, 0.5639]
+      显著: True
+
+  [12/35] 计算ATE: energy_gpu_min_watts → energy_gpu_util_avg_percent
+    使用 17 个混淆因素
+  计算T0/T1: 4.9100 / 88.9700 (策略=quantile, 差异=84.0600)
+
+估计因果效应: energy_gpu_min_watts → energy_gpu_util_avg_percent
+  混淆因素: 17个
+  样本数: 72
+    ✓ ATE: 5.1304
+      95% CI: [4.0566, 6.2043]
+      显著: True
+
+  [13/35] 计算ATE: hyperparam_epochs_x_is_parallel → energy_gpu_temp_max_celsius
+    创建交互项: hyperparam_epochs_interaction_is_parallel
+    使用 18 个混淆因素
+  计算T0/T1: 0.0000 / 13.5000 (策略=quantile, 差异=13.5000)
+
+估计因果效应: hyperparam_epochs_interaction_is_parallel → energy_gpu_temp_max_celsius
+  混淆因素: 18个
+  样本数: 72
+    ✓ ATE: 0.2912
+      95% CI: [-0.0475, 0.6299]
+      显著: False
+
+  [14/35] 计算ATE: hyperparam_epochs → energy_gpu_max_watts
+    使用 17 个混淆因素
+  计算T0/T1: 9.5000 / 15.5000 (策略=quantile, 差异=6.0000)
+
+估计因果效应: hyperparam_epochs → energy_gpu_max_watts
+  混淆因素: 17个
+  样本数: 72
+    ✓ ATE: 0.0293
+      95% CI: [-0.3178, 0.3765]
+      显著: False
+
+  [15/35] 计算ATE: energy_gpu_total_joules → energy_cpu_ram_joules
+    使用 17 个混淆因素DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN.，使用简化方法
+DML估计失败: Input contains NaN.，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN.，使用简化方法
+DML估计失败: Input contains NaN.，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN.，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+
+  计算T0/T1: 690821.5900 / 880600.4650 (策略=quantile, 差异=189778.8750)
+
+估计因果效应: energy_gpu_total_joules → energy_cpu_ram_joules
+  混淆因素: 17个
+  样本数: 72
+    ✓ ATE: 3290.1458
+      95% CI: [2470.7419, 4109.5498]
+      显著: True
+
+  [16/35] 计算ATE: energy_gpu_temp_max_celsius → energy_gpu_avg_watts
+    使用 17 个混淆因素
+    T0/T1计算失败: T1 (84.0000) <= T0 (84.0000)。数据变异性不足，请检查treatment变量'energy_gpu_temp_max_celsius'，使用默认ATE
+
+估计因果效应: energy_gpu_temp_max_celsius → energy_gpu_avg_watts
+  混淆因素: 17个
+  样本数: 72
+    ✓ ATE: -10.6693
+      95% CI: [-15.1411, -6.1974]
+      显著: True
+
+  [17/35] 计算ATE: energy_gpu_util_avg_percent → energy_cpu_ram_joules
+    使用 17 个混淆因素
+  计算T0/T1: 83.4783 / 91.4903 (策略=quantile, 差异=8.0120)
+
+估计因果效应: energy_gpu_util_avg_percent → energy_cpu_ram_joules
+  混淆因素: 17个
+  样本数: 72
+    ✓ ATE: 1724.4158
+      95% CI: [674.5061, 2774.3255]
+      显著: True
+
+  [18/35] 计算ATE: energy_gpu_avg_watts → energy_gpu_temp_avg_celsius
+    使用 17 个混淆因素
+  计算T0/T1: 218.4091 / 228.4492 (策略=quantile, 差异=10.0401)
+
+估计因果效应: energy_gpu_avg_watts → energy_gpu_temp_avg_celsius
+  混淆因素: 17个
+  样本数: 72
+    ✓ ATE: 0.6236
+      95% CI: [0.3709, 0.8763]
+      显著: True
+
+  [19/35] 计算ATE: energy_gpu_avg_watts → perf_final_training_loss
+    使用 17 个混淆因素
+  计算T0/T1: 218.4091 / 228.4492 (策略=quantile, 差异=10.0401)
+
+估计因果效应: energy_gpu_avg_watts → perf_final_training_loss
+  混淆因素: 17个
+  样本数: 72
+    ✓ ATE: 0.0173
+      95% CI: [-0.0130, 0.0476]
+      显著: False
+
+  [20/35] 计算ATE: energy_gpu_min_watts → energy_gpu_temp_avg_celsius
+    使用 17 个混淆因素
+  计算T0/T1: 4.9100 / 88.9700 (策略=quantile, 差异=84.0600)
+
+估计因果效应: energy_gpu_min_watts → energy_gpu_temp_avg_celsius
+  混淆因素: 17个
+  样本数: 72
+    ✓ ATE: 0.3258
+      95% CI: [0.0441, 0.6075]
+      显著: True
+
+  [21/35] 计算ATE: energy_gpu_max_watts → energy_gpu_avg_watts
+    使用 17 个混淆因素
+  计算T0/T1: 318.8050 / 319.3300 (策略=quantile, 差异=0.5250)
+
+估计因果效应: energy_gpu_max_watts → energy_gpu_avg_watts
+  混淆因素: 17个
+  样本数: 72
+    ✓ ATE: 1.3639
+      95% CI: [-2.4507, 5.1784]
+      显著: False
+
+  [22/35] 计算ATE: hyperparam_epochs_x_is_parallel → energy_gpu_temp_avg_celsius
+    创建交互项: hyperparam_epochs_interaction_is_parallel
+    使用 18 个混淆因素
+  计算T0/T1: 0.0000 / 13.5000 (策略=quantile, 差异=13.5000)
+
+估计因果效应: hyperparam_epochs_interaction_is_parallel → energy_gpu_temp_avg_celsius
+  混淆因素: 18个
+  样本数: 72
+    ✓ ATE: 0.9810
+      95% CI: [0.5833, 1.3788]
+      显著: True
+
+  [23/35] 计算ATE: hyperparam_l2_regularization_x_is_parallel → energy_gpu_temp_max_celsius
+    创建交互项: hyperparam_l2_regularization_interaction_is_parallel
+    使用 18 个混淆因素
+  计算T0/T1: 0.0000 / 0.0003 (策略=quantile, 差异=0.0003)
+
+估计因果效应: hyperparam_l2_regularization_interaction_is_parallel → energy_gpu_temp_max_celsius
+  混淆因素: 18个
+  样本数: 72
+    ✓ ATE: 0.3077
+      95% CI: [0.0466, 0.5688]
+      显著: True
+
+  [24/35] 计算ATE: energy_cpu_total_joules → energy_cpu_pkg_joules
+    使用 17 个混淆因素
+  计算T0/T1: 101270.8050 / 155825.0275 (策略=quantile, 差异=54554.2225)
+
+估计因果效应: energy_cpu_total_joules → energy_cpu_pkg_joules
+  混淆因素: 17个
+  样本数: 72
+    ✓ ATE: 59595.3781
+      95% CI: [46551.2945, 72639.4616]
+      显著: True
+
+  [25/35] 计算ATE: hyperparam_epochs → perf_final_training_loss
+    使用 17 个混淆因素
+  计算T0/T1: 9.5000 / 15.5000 (策略=quantile, 差异=6.0000)
+
+估计因果效应: hyperparam_epochs → perf_final_training_loss
+  混淆因素: 17个
+  样本数: 72
+    ✓ ATE: -0.0198
+      95% CI: [-0.0887, 0.0490]
+      显著: False
+
+  [26/35] 计算ATE: hyperparam_learning_rate_x_is_parallel → energy_gpu_avg_watts
+    创建交互项: hyperparam_learning_rate_interaction_is_parallel
+    使用 18 个混淆因素
+  计算T0/T1: 0.0000 / 0.0000 (策略=quantile, 差异=0.0000)
+
+估计因果效应: hyperparam_learning_rate_interaction_is_parallel → energy_gpu_avg_watts
+  混淆因素: 18个
+  样本数: 72
+    ✓ ATE: -4.4264
+      95% CI: [-9.7604, 0.9076]
+      显著: False
+
+  [27/35] 计算ATE: energy_gpu_min_watts → perf_eval_samples_per_second
+    使用 17 个混淆因素
+  计算T0/T1: 4.9100 / 88.9700 (策略=quantile, 差异=84.0600)
+
+估计因果效应: energy_gpu_min_watts → perf_eval_samples_per_second
+  混淆因素: 17个
+  样本数: 72
+    ✓ ATE: -6.7657
+      95% CI: [-8.1999, -5.3316]
+      显著: True
+
+  [28/35] 计算ATE: energy_gpu_avg_watts → energy_gpu_temp_max_celsius
+    使用 17 个混淆因素
+  计算T0/T1: 218.4091 / 228.4492 (策略=quantile, 差异=10.0401)
+
+估计因果效应: energy_gpu_avg_watts → energy_gpu_temp_max_celsius
+  混淆因素: 17个
+  样本数: 72
+    ✓ ATE: -0.1667
+      95% CI: [-0.3539, 0.0206]
+      显著: False
+
+  [29/35] 计算ATE: hyperparam_learning_rate → energy_gpu_max_watts
+    使用 17 个混淆因素
+  计算T0/T1: 0.0000 / 0.0000 (策略=quantile, 差异=0.0000)
+
+估计因果效应: hyperparam_learning_rate → energy_gpu_max_watts
+  混淆因素: 17个
+  样本数: 72
+    ✓ ATE: 0.0473
+      95% CI: [-0.3527, 0.4473]
+      显著: False
+
+  [30/35] 计算ATE: energy_gpu_min_watts → energy_gpu_temp_max_celsius
+    使用 17 个混淆因素
+  计算T0/T1: 4.9100 / 88.9700 (策略=quantile, 差异=84.0600)
+
+估计因果效应: energy_gpu_min_watts → energy_gpu_temp_max_celsius
+  混淆因素: 17个
+  样本数: 72
+    ✓ ATE: -0.0556
+      95% CI: [-0.2464, 0.1353]
+      显著: False
+
+  [31/35] 计算ATE: energy_cpu_ram_joules → energy_cpu_total_joules
+    使用 17 个混淆因素
+  计算T0/T1: 7368.4775 / 9443.3775 (策略=quantile, 差异=2074.9000)
+
+估计因果效应: energy_cpu_ram_joules → energy_cpu_total_joules
+  混淆因素: 17个
+  样本数: 72
+    ✓ ATE: 55007.6050
+      95% CI: [39519.6300, 70495.5800]
+      显著: True
+
+  [32/35] 计算ATE: energy_gpu_temp_avg_celsius → perf_final_training_loss
+    使用 17 个混淆因素
+  计算T0/T1: 78.1185 / 79.1857 (策略=quantile, 差异=1.0672)
+
+估计因果效应: energy_gpu_temp_avg_celsius → perf_final_training_loss
+  混淆因素: 17个
+  样本数: 72
+    ✓ ATE: 0.0206
+      95% CI: [-0.0096, 0.0507]
+      显著: False
+
+  [33/35] 计算ATE: energy_cpu_ram_joules → energy_gpu_total_joules
+    使用 17 个混淆因素
+  计算T0/T1: 7368.4775 / 9443.3775 (策略=quantile, 差异=2074.9000)
+
+估计因果效应: energy_cpu_ram_joules → energy_gpu_total_joules
+  混淆因素: 17个
+  样本数: 72
+    ✓ ATE: 304309.9025
+      95% CI: [228047.8288, 380571.9762]
+      显著: True
+
+  [34/35] 计算ATE: energy_cpu_pkg_joules → energy_cpu_total_joules
+    使用 17 个混淆因素
+  计算T0/T1: 93892.0700 / 147206.7925 (策略=quantile, 差异=53314.7225)
+
+估计因果效应: energy_cpu_pkg_joules → energy_cpu_total_joules
+  混淆因素: 17个
+  样本数: 72
+    ✓ ATE: 62461.1089
+      95% CI: [48610.9467, 76311.2711]
+      显著: True
+
+  [35/35] 计算ATE: energy_gpu_min_watts → perf_eval_loss
+    使用 17 个混淆因素
+  计算T0/T1: 4.9100 / 88.9700 (策略=quantile, 差异=84.0600)
+
+估计因果效应: energy_gpu_min_watts → perf_eval_loss
+  混淆因素: 17个
+  样本数: 72
+    ✓ ATE: 0.0222
+      95% CI: [-0.0047, 0.0492]
+      显著: False
+
+✓ 结果已保存到: /home/green/energy_dl/nightly/analysis/results/energy_research/data/interaction/whitelist_with_ate/group2_vulberta_causal_edges_whitelist_with_ate.csv
+
+============================================================
+处理完成: group2_vulberta
+  总边数: 35
+  ATE计算成功: 35 (100.0%)
+  统计显著边: 19
+============================================================
+
+============================================================DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN.，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+
+处理组: group3_person_reid
+白名单: /home/green/energy_dl/nightly/analysis/results/energy_research/data/interaction/whitelist/group3_person_reid_causal_edges_whitelist.csv
+组数据: /home/green/energy_dl/nightly/analysis/data/energy_research/6groups_final/group3_person_reid.csv
+输出: /home/green/energy_dl/nightly/analysis/results/energy_research/data/interaction/whitelist_with_ate/group3_person_reid_causal_edges_whitelist_with_ate.csv
+策略: T0/T1=quantile, ref_df=non_parallel
+Dry run: False
+============================================================
+  加载白名单: /home/green/energy_dl/nightly/analysis/results/energy_research/data/interaction/whitelist/group3_person_reid_causal_edges_whitelist.csv
+    记录数: 50
+    列: ['source', 'target', 'strength', 'edge_type', 'is_significant', 'strength_level', 'source_category', 'target_category', 'question_relevance', 'interpretation']
+  加载组数据: /home/green/energy_dl/nightly/analysis/data/energy_research/6groups_final/group3_person_reid.csv
+    记录数: 206
+    列数: 22
+  构建ref_df: 非并行模式 (n=93)
+
+  [1/50] 计算ATE: model_hrnet18 → energy_gpu_util_max_percent
+    将布尔变量 'model_hrnet18' 编码为0/1
+    使用 19 个混淆因素
+
+估计因果效应: model_hrnet18 → energy_gpu_util_max_percent
+  混淆因素: 19个
+  样本数: 206
+    ✓ ATE: -13.5714
+      95% CI: [-16.3015, -10.8413]
+      显著: True
+
+  [2/50] 计算ATE: energy_gpu_util_max_percent → energy_gpu_max_watts
+    使用 19 个混淆因素
+  计算T0/T1: 90.0000 / 100.0000 (策略=quantile, 差异=10.0000)
+
+估计因果效应: energy_gpu_util_max_percent → energy_gpu_max_watts
+  混淆因素: 19个
+  样本数: 206
+    ✓ ATE: nan
+      95% CI: [nan, nan]
+      显著: True
+
+  [3/50] 计算ATE: model_hrnet18 → energy_gpu_total_joules
+    将布尔变量 'model_hrnet18' 编码为0/1
+    使用 19 个混淆因素
+
+估计因果效应: model_hrnet18 → energy_gpu_total_joules
+  混淆因素: 19个
+  样本数: 206
+    ✓ ATE: 166831.3895
+      95% CI: [78537.1406, 255125.6383]
+      显著: True
+
+  [4/50] 计算ATE: energy_gpu_util_avg_percent → energy_gpu_total_joules
+    使用 19 个混淆因素
+  计算T0/T1: 71.3118 / 96.9868 (策略=quantile, 差异=25.6750)
+
+估计因果效应: energy_gpu_util_avg_percent → energy_gpu_total_joules
+  混淆因素: 19个
+  样本数: 206
+    ✓ ATE: 235952.5786
+      95% CI: [150360.3656, 321544.7917]
+      显著: True
+
+  [5/50] 计算ATE: energy_gpu_temp_avg_celsius → energy_gpu_avg_watts
+    使用 19 个混淆因素
+  计算T0/T1: 78.2715 / 82.0725 (策略=quantile, 差异=3.8010)
+
+估计因果效应: energy_gpu_temp_avg_celsius → energy_gpu_avg_watts
+  混淆因素: 19个
+  样本数: 206
+    ✓ ATE: 14.1584
+      95% CI: [10.6541, 17.6627]
+      显著: True
+
+  [6/50] 计算ATE: model_pcb → energy_gpu_temp_max_celsius
+    将布尔变量 'model_pcb' 编码为0/1
+    使用 19 个混淆因素
+
+估计因果效应: model_pcb → energy_gpu_temp_max_celsius
+  混淆因素: 19个
+  样本数: 206
+    ✓ ATE: 0.6779
+      95% CI: [0.3165, 1.0394]
+      显著: True
+
+  [7/50] 计算ATE: energy_gpu_util_max_percent → energy_gpu_temp_max_celsius
+    使用 19 个混淆因素
+  计算T0/T1: 90.0000 / 100.0000 (策略=quantile, 差异=10.0000)
+
+估计因果效应: energy_gpu_util_max_percent → energy_gpu_temp_max_celsius
+  混淆因素: 19个
+  样本数: 206
+    ✓ ATE: nan
+      95% CI: [nan, nan]
+      显著: True
+
+  [8/50] 计算ATE: energy_gpu_util_max_percent → energy_gpu_temp_avg_celsius
+    使用 19 个混淆因素
+  计算T0/T1: 90.0000 / 100.0000 (策略=quantile, 差异=10.0000)
+
+估计因果效应: energy_gpu_util_max_percent → energy_gpu_temp_avg_celsius
+  混淆因素: 19个
+  样本数: 206
+    ✓ ATE: nan
+      95% CI: [nan, nan]
+      显著: True
+
+  [9/50] 计算ATE: model_hrnet18 → energy_gpu_avg_watts
+    将布尔变量 'model_hrnet18' 编码为0/1
+    使用 19 个混淆因素
+
+估计因果效应: model_hrnet18 → energy_gpu_avg_watts
+  混淆因素: 19个
+  样本数: 206
+    ✓ ATE: 9.3322
+      95% CI: [5.1045, 13.5598]
+      显著: True
+
+  [10/50] 计算ATE: energy_gpu_min_watts → energy_gpu_temp_max_celsius
+    使用 19 个混淆因素
+  计算T0/T1: 12.7425 / 90.4900 (策略=quantile, 差异=77.7475)
+
+估计因果效应: energy_gpu_min_watts → energy_gpu_temp_max_celsius
+  混淆因素: 19个
+  样本数: 206
+    ✓ ATE: 0.1942
+      95% CI: [-0.2735, 0.6618]
+      显著: False
+
+  [11/50] 计算ATE: is_parallel → energy_gpu_avg_watts
+    将布尔变量 'is_parallel' 编码为0/1
+    使用 19 个混淆因素
+
+估计因果效应: is_parallel → energy_gpu_avg_watts
+  混淆因素: 19个
+  样本数: 206
+    ✓ ATE: -5.0402
+      95% CI: [-9.2260, -0.8543]
+      显著: True
+
+  [12/50] 计算ATE: is_parallel → energy_gpu_total_joules
+    将布尔变量 'is_parallel' 编码为0/1
+    使用 19 个混淆因素
+
+估计因果效应: is_parallel → energy_gpu_total_joules
+  混淆因素: 19个
+  样本数: 206
+    ✓ ATE: 208201.7741
+      95% CI: [124825.4977, 291578.0504]
+      显著: True
+
+  [13/50] 计算ATE: is_parallel → energy_gpu_min_watts
+    将布尔变量 'is_parallel' 编码为0/1
+    使用 19 个混淆因素
+
+估计因果效应: is_parallel → energy_gpu_min_watts
+  混淆因素: 19个
+  样本数: 206
+    ✓ ATE: 63.2698
+      95% CI: [50.7422, 75.7973]
+      显著: True
+
+  [14/50] 计算ATE: energy_cpu_pkg_joules → energy_gpu_total_joules
+    使用 19 个混淆因素
+  计算T0/T1: 130203.3250 / 218544.7100 (策略=quantile, 差异=88341.3850)
+
+估计因果效应: energy_cpu_pkg_joules → energy_gpu_total_joules
+  混淆因素: 19个
+  样本数: 206
+    ✓ ATE: 428388.7577
+      95% CI: [358256.2975, 498521.2178]
+      显著: True
+
+  [15/50] 计算ATE: is_parallel → energy_gpu_util_max_percent
+    将布尔变量 'is_parallel' 编码为0/1
+    使用 19 个混淆因素
+
+估计因果效应: is_parallel → energy_gpu_util_max_percent
+  混淆因素: 19个
+  样本数: 206
+    ✓ ATE: 7.1405
+      95% CI: [4.4668, 9.8141]
+      显著: True
+
+  [16/50] 计算ATE: energy_gpu_max_watts → energy_gpu_util_avg_percent
+    使用 19 个混淆因素
+  计算T0/T1: 273.2375 / 315.2200 (策略=quantile, 差异=41.9825)
+
+估计因果效应: energy_gpu_max_watts → energy_gpu_util_avg_percent
+  混淆因素: 19个
+  样本数: 206
+    ✓ ATE: 21.7590
+      95% CI: [18.9645, 24.5535]
+      显著: True
+
+  [17/50] 计算ATE: energy_gpu_util_avg_percent → energy_gpu_min_watts
+    使用 19 个混淆因素
+  计算T0/T1: 71.3118 / 96.9868 (策略=quantile, 差异=25.6750)
+
+估计因果效应: energy_gpu_util_avg_percent → energy_gpu_min_watts
+  混淆因素: 19个
+  样本数: 206
+    ✓ ATE: 51.0317
+      95% CI: [37.2102, 64.8533]
+      显著: True
+
+  [18/50] 计算ATE: hyperparam_epochs_x_is_parallel → energy_gpu_total_joules
+    创建交互项: hyperparam_epochs_interaction_is_parallel
+    使用 20 个混淆因素
+  计算T0/T1: 0.0000 / 60.0000 (策略=quantile, 差异=60.0000)
+
+估计因果效应: hyperparam_epochs_interaction_is_parallel → energy_gpu_total_joules
+  混淆因素: 20个
+  样本数: 206
+    ✓ ATE: 332893.6478
+      95% CI: [241118.2397, 424669.0559]
+      显著: True
+
+  [19/50] 计算ATE: energy_gpu_util_avg_percent → energy_gpu_util_max_percent
+    使用 19 个混淆因素
+  计算T0/T1: 71.3118 / 96.9868 (策略=quantile, 差异=25.6750)
+
+估计因果效应: energy_gpu_util_avg_percent → energy_gpu_util_max_percent
+  混淆因素: 19个
+  样本数: 206
+    ✓ ATE: 12.4175
+      95% CI: [10.3395, 14.4954]
+      显著: True
+
+  [20/50] 计算ATE: energy_gpu_temp_avg_celsius → energy_gpu_temp_max_celsius
+    使用 19 个混淆因素
+  计算T0/T1: 78.2715 / 82.0725 (策略=quantile, 差异=3.8010)
+
+估计因果效应: energy_gpu_temp_avg_celsius → energy_gpu_temp_max_celsius
+  混淆因素: 19个
+  样本数: 206
+    ✓ ATE: 0.9709
+      95% CI: [0.5218, 1.4199]
+      显著: True
+
+  [21/50] 计算ATE: hyperparam_epochs → energy_gpu_total_joules
+    使用 19 个混淆因素
+  计算T0/T1: 53.0000 / 65.2500 (策略=quantile, 差异=12.2500)DML估计失败: Input contains NaN.，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN.，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN.，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN.，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+
+
+估计因果效应: hyperparam_epochs → energy_gpu_total_joules
+  混淆因素: 19个
+  样本数: 206
+    ✓ ATE: 290483.0392
+      95% CI: [195626.7096, 385339.3688]
+      显著: True
+
+  [22/50] 计算ATE: is_parallel → energy_gpu_max_watts
+    将布尔变量 'is_parallel' 编码为0/1
+    使用 19 个混淆因素
+
+估计因果效应: is_parallel → energy_gpu_max_watts
+  混淆因素: 19个
+  样本数: 206
+    ✓ ATE: 5.7994
+      95% CI: [-1.0530, 12.6518]
+      显著: False
+
+  [23/50] 计算ATE: model_hrnet18 → energy_gpu_max_watts
+    将布尔变量 'model_hrnet18' 编码为0/1
+    使用 19 个混淆因素
+
+估计因果效应: model_hrnet18 → energy_gpu_max_watts
+  混淆因素: 19个
+  样本数: 206
+    ✓ ATE: -37.8022
+      95% CI: [-42.9390, -32.6654]
+      显著: True
+
+  [24/50] 计算ATE: energy_gpu_min_watts → energy_gpu_util_avg_percent
+    使用 19 个混淆因素
+  计算T0/T1: 12.7425 / 90.4900 (策略=quantile, 差异=77.7475)
+
+估计因果效应: energy_gpu_min_watts → energy_gpu_util_avg_percent
+  混淆因素: 19个
+  样本数: 206
+    ✓ ATE: 13.7269
+      95% CI: [10.0969, 17.3568]
+      显著: True
+
+  [25/50] 计算ATE: energy_gpu_avg_watts → energy_gpu_total_joules
+    使用 19 个混淆因素
+  计算T0/T1: 218.6255 / 236.3690 (策略=quantile, 差异=17.7434)
+
+估计因果效应: energy_gpu_avg_watts → energy_gpu_total_joules
+  混淆因素: 19个
+  样本数: 206
+    ✓ ATE: -88927.1231
+      95% CI: [-179621.7673, 1767.5211]
+      显著: False
+
+  [26/50] 计算ATE: energy_gpu_min_watts → energy_gpu_max_watts
+    使用 19 个混淆因素
+  计算T0/T1: 12.7425 / 90.4900 (策略=quantile, 差异=77.7475)
+
+估计因果效应: energy_gpu_min_watts → energy_gpu_max_watts
+  混淆因素: 19个
+  样本数: 206
+    ✓ ATE: 7.8017
+      95% CI: [1.3445, 14.2590]
+      显著: True
+
+  [27/50] 计算ATE: hyperparam_epochs → energy_gpu_min_watts
+    使用 19 个混淆因素
+  计算T0/T1: 53.0000 / 65.2500 (策略=quantile, 差异=12.2500)
+
+估计因果效应: hyperparam_epochs → energy_gpu_min_watts
+  混淆因素: 19个
+  样本数: 206
+    ✓ ATE: 0.4814
+      95% CI: [-15.3629, 16.3257]
+      显著: False
+
+  [28/50] 计算ATE: energy_gpu_temp_max_celsius → energy_gpu_avg_watts
+    使用 19 个混淆因素
+  计算T0/T1: 84.0000 / 85.0000 (策略=quantile, 差异=1.0000)
+
+估计因果效应: energy_gpu_temp_max_celsius → energy_gpu_avg_watts
+  混淆因素: 19个
+  样本数: 206
+    ✓ ATE: -0.3209
+      95% CI: [-4.2816, 3.6399]
+      显著: False
+
+  [29/50] 计算ATE: energy_gpu_temp_avg_celsius → energy_gpu_min_watts
+    使用 19 个混淆因素
+  计算T0/T1: 78.2715 / 82.0725 (策略=quantile, 差异=3.8010)
+
+估计因果效应: energy_gpu_temp_avg_celsius → energy_gpu_min_watts
+  混淆因素: 19个
+  样本数: 206
+    ✓ ATE: 4.9545
+      95% CI: [-10.5250, 20.4339]
+      显著: False
+
+  [30/50] 计算ATE: energy_gpu_avg_watts → energy_gpu_temp_max_celsius
+    使用 19 个混淆因素
+  计算T0/T1: 218.6255 / 236.3690 (策略=quantile, 差异=17.7434)
+
+估计因果效应: energy_gpu_avg_watts → energy_gpu_temp_max_celsius
+  混淆因素: 19个
+  样本数: 206
+    ✓ ATE: 0.3301
+      95% CI: [-0.1361, 0.7963]
+      显著: False
+
+  [31/50] 计算ATE: energy_gpu_avg_watts → energy_gpu_temp_avg_celsius
+    使用 19 个混淆因素
+  计算T0/T1: 218.6255 / 236.3690 (策略=quantile, 差异=17.7434)
+
+估计因果效应: energy_gpu_avg_watts → energy_gpu_temp_avg_celsius
+  混淆因素: 19个
+  样本数: 206
+    ✓ ATE: 2.9718
+      95% CI: [2.3918, 3.5517]
+      显著: True
+
+  [32/50] 计算ATE: hyperparam_epochs_x_is_parallel → energy_gpu_temp_max_celsius
+    创建交互项: hyperparam_epochs_interaction_is_parallel
+    使用 20 个混淆因素
+  计算T0/T1: 0.0000 / 60.0000 (策略=quantile, 差异=60.0000)
+
+估计因果效应: hyperparam_epochs_interaction_is_parallel → energy_gpu_temp_max_celsius
+  混淆因素: 20个
+  样本数: 206
+    ✓ ATE: 0.6477
+      95% CI: [0.2559, 1.0396]
+      显著: True
+
+  [33/50] 计算ATE: model_pcb → perf_map
+    将布尔变量 'model_pcb' 编码为0/1
+    使用 19 个混淆因素
+
+估计因果效应: model_pcb → perf_map
+  混淆因素: 19个
+  样本数: 206
+    ✓ ATE: 0.0443
+      95% CI: [0.0377, 0.0508]
+      显著: True
+
+  [34/50] 计算ATE: energy_cpu_pkg_joules → energy_cpu_total_joules
+    使用 19 个混淆因素
+  计算T0/T1: 130203.3250 / 218544.7100 (策略=quantile, 差异=88341.3850)
+
+估计因果效应: energy_cpu_pkg_joules → energy_cpu_total_joules
+  混淆因素: 19个
+  样本数: 206
+    ✓ ATE: 126808.2472
+      95% CI: [113161.4622, 140455.0321]
+      显著: True
+
+  [35/50] 计算ATE: energy_gpu_util_avg_percent → energy_gpu_temp_avg_celsius
+    使用 19 个混淆因素
+  计算T0/T1: 71.3118 / 96.9868 (策略=quantile, 差异=25.6750)
+
+估计因果效应: energy_gpu_util_avg_percent → energy_gpu_temp_avg_celsius
+  混淆因素: 19个
+  样本数: 206
+    ✓ ATE: -2.4569
+      95% CI: [-3.0805, -1.8332]
+      显著: True
+
+  [36/50] 计算ATE: energy_gpu_util_max_percent → energy_gpu_avg_watts
+    使用 19 个混淆因素
+  计算T0/T1: 90.0000 / 100.0000 (策略=quantile, 差异=10.0000)
+
+估计因果效应: energy_gpu_util_max_percent → energy_gpu_avg_watts
+  混淆因素: 19个
+  样本数: 206
+    ✓ ATE: nan
+      95% CI: [nan, nan]
+      显著: True
+
+  [37/50] 计算ATE: energy_gpu_util_max_percent → energy_gpu_min_watts
+    使用 19 个混淆因素
+  计算T0/T1: 90.0000 / 100.0000 (策略=quantile, 差异=10.0000)
+
+估计因果效应: energy_gpu_util_max_percent → energy_gpu_min_watts
+  混淆因素: 19个
+  样本数: 206
+    ✓ ATE: nan
+      95% CI: [nan, nan]
+      显著: True
+
+  [38/50] 计算ATE: energy_cpu_ram_joules → energy_cpu_pkg_joules
+    使用 19 个混淆因素
+  计算T0/T1: 9735.8625 / 15883.0675 (策略=quantile, 差异=6147.2050)
+
+估计因果效应: energy_cpu_ram_joules → energy_cpu_pkg_joules
+  混淆因素: 19个
+  样本数: 206
+    ✓ ATE: 117112.8701
+      95% CI: [104067.9915, 130157.7487]
+      显著: True
+
+  [39/50] 计算ATE: model_pcb → energy_gpu_avg_watts
+    将布尔变量 'model_pcb' 编码为0/1
+    使用 19 个混淆因素
+
+估计因果效应: model_pcb → energy_gpu_avg_watts
+  混淆因素: 19个
+  样本数: 206
+    ✓ ATE: -3.1167
+      95% CI: [-6.6747, 0.4412]
+      显著: False
+
+  [40/50] 计算ATE: hyperparam_learning_rate → perf_rank5
+    使用 19 个混淆因素
+  计算T0/T1: 0.0390 / 0.0507 (策略=quantile, 差异=0.0117)
+
+估计因果效应: hyperparam_learning_rate → perf_rank5
+  混淆因素: 19个
+  样本数: 206
+    ✓ ATE: -0.0068
+      95% CI: [-0.0108, -0.0029]
+      显著: True
+
+  [41/50] 计算ATE: energy_gpu_avg_watts → energy_gpu_max_watts
+    使用 19 个混淆因素
+  计算T0/T1: 218.6255 / 236.3690 (策略=quantile, 差异=17.7434)
+
+估计因果效应: energy_gpu_avg_watts → energy_gpu_max_watts
+  混淆因素: 19个
+  样本数: 206
+    ✓ ATE: -20.5150
+      95% CI: [-26.4240, -14.6059]
+      显著: True
+
+  [42/50] 计算ATE: energy_gpu_temp_max_celsius → energy_gpu_total_joules
+    使用 19 个混淆因素
+  计算T0/T1: 84.0000 / 85.0000 (策略=quantile, 差异=1.0000)
+
+估计因果效应: energy_gpu_temp_max_celsius → energy_gpu_total_joules
+  混淆因素: 19个
+  样本数: 206
+    ✓ ATE: 97484.7347
+      95% CI: [-16596.0872, 211565.5566]
+      显著: False
+
+  [43/50] 计算ATE: energy_gpu_max_watts → energy_gpu_avg_watts
+    使用 19 个混淆因素
+  计算T0/T1: 273.2375 / 315.2200 (策略=quantile, 差异=41.9825)
+
+估计因果效应: energy_gpu_max_watts → energy_gpu_avg_watts
+  混淆因素: 19个
+  样本数: 206
+    ✓ ATE: -10.1147
+      95% CI: [-13.8735, -6.3559]
+      显著: True
+
+  [44/50] 计算ATE: energy_cpu_total_joules → energy_cpu_pkg_joules
+    使用 19 个混淆因素
+  计算T0/T1: 140005.3850 / 233685.4175 (策略=quantile, 差异=93680.0325)
+
+估计因果效应: energy_cpu_total_joules → energy_cpu_pkg_joules
+  混淆因素: 19个
+  样本数: 206
+    ✓ ATE: 119047.8505DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN.，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN.，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN.，使用简化方法
+DML估计失败: Input contains NaN.，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN.，使用简化方法
+DML估计失败: Input contains NaN.，使用简化方法
+
+      95% CI: [106337.0852, 131758.6158]
+      显著: True
+
+  [45/50] 计算ATE: is_parallel → energy_gpu_temp_max_celsius
+    将布尔变量 'is_parallel' 编码为0/1
+    使用 19 个混淆因素
+
+估计因果效应: is_parallel → energy_gpu_temp_max_celsius
+  混淆因素: 19个
+  样本数: 206
+    ✓ ATE: 0.9991
+      95% CI: [0.5111, 1.4871]
+      显著: True
+
+  [46/50] 计算ATE: energy_gpu_max_watts → energy_gpu_temp_avg_celsius
+    使用 19 个混淆因素
+  计算T0/T1: 273.2375 / 315.2200 (策略=quantile, 差异=41.9825)
+
+估计因果效应: energy_gpu_max_watts → energy_gpu_temp_avg_celsius
+  混淆因素: 19个
+  样本数: 206
+    ✓ ATE: -2.5504
+      95% CI: [-3.1670, -1.9339]
+      显著: True
+
+  [47/50] 计算ATE: hyperparam_epochs → energy_gpu_temp_max_celsius
+    使用 19 个混淆因素
+  计算T0/T1: 53.0000 / 65.2500 (策略=quantile, 差异=12.2500)
+
+估计因果效应: hyperparam_epochs → energy_gpu_temp_max_celsius
+  混淆因素: 19个
+  样本数: 206
+    ✓ ATE: -0.0942
+      95% CI: [-0.5102, 0.3218]
+      显著: False
+
+  [48/50] 计算ATE: model_hrnet18 → energy_gpu_min_watts
+    将布尔变量 'model_hrnet18' 编码为0/1
+    使用 19 个混淆因素
+
+估计因果效应: model_hrnet18 → energy_gpu_min_watts
+  混淆因素: 19个
+  样本数: 206
+    ✓ ATE: 10.8250
+      95% CI: [-7.3087, 28.9586]
+      显著: False
+
+  [49/50] 计算ATE: model_hrnet18 → energy_gpu_temp_avg_celsius
+    将布尔变量 'model_hrnet18' 编码为0/1
+    使用 19 个混淆因素
+
+估计因果效应: model_hrnet18 → energy_gpu_temp_avg_celsius
+  混淆因素: 19个
+  样本数: 206
+    ✓ ATE: 2.6173
+      95% CI: [2.0145, 3.2202]
+      显著: True
+
+  [50/50] 计算ATE: energy_cpu_total_joules → energy_cpu_ram_joules
+    使用 19 个混淆因素
+  计算T0/T1: 140005.3850 / 233685.4175 (策略=quantile, 差异=93680.0325)
+
+估计因果效应: energy_cpu_total_joules → energy_cpu_ram_joules
+  混淆因素: 19个
+  样本数: 206
+    ✓ ATE: 7775.6707
+      95% CI: [6817.1979, 8734.1434]
+      显著: True
+
+✓ 结果已保存到: /home/green/energy_dl/nightly/analysis/results/energy_research/data/interaction/whitelist_with_ate/group3_person_reid_causal_edges_whitelist_with_ate.csv
+
+============================================================
+处理完成: group3_person_reid
+  总边数: 50
+  ATE计算成功: 50 (100.0%)
+  统计显著边: 39
+============================================================
+
+============================================================
+处理组: group4_bug_localization
+白名单: /home/green/energy_dl/nightly/analysis/results/energy_research/data/interaction/whitelist/group4_bug_localization_causal_edges_whitelist.csv
+组数据: /home/green/energy_dl/nightly/analysis/data/energy_research/6groups_final/group4_bug_localization.csv
+输出: /home/green/energy_dl/nightly/analysis/results/energy_research/data/interaction/whitelist_with_ate/group4_bug_localization_causal_edges_whitelist_with_ate.csv
+策略: T0/T1=quantile, ref_df=non_parallel
+Dry run: False
+============================================================
+  加载白名单: /home/green/energy_dl/nightly/analysis/results/energy_research/data/interaction/whitelist/group4_bug_localization_causal_edges_whitelist.csv
+    记录数: 40
+    列: ['source', 'target', 'strength', 'edge_type', 'is_significant', 'strength_level', 'source_category', 'target_category', 'question_relevance', 'interpretation']
+  加载组数据: /home/green/energy_dl/nightly/analysis/data/energy_research/6groups_final/group4_bug_localization.csv
+    记录数: 90
+    列数: 21
+  构建ref_df: 非并行模式 (n=25)
+
+  [1/40] 计算ATE: hyperparam_kfold_x_is_parallel → perf_top1_accuracy
+    创建交互项: hyperparam_kfold_interaction_is_parallel
+    使用 19 个混淆因素
+  计算T0/T1: 0.0000 / 6.0000 (策略=quantile, 差异=6.0000)
+
+估计因果效应: hyperparam_kfold_interaction_is_parallel → perf_top1_accuracy
+  混淆因素: 19个
+  样本数: 90
+    ✓ ATE: -0.0019
+      95% CI: [-0.0050, 0.0013]
+      显著: False
+
+  [2/40] 计算ATE: energy_gpu_util_max_percent → energy_gpu_util_avg_percent
+    使用 18 个混淆因素
+  计算T0/T1: 3.0000 / 14.0000 (策略=quantile, 差异=11.0000)
+
+估计因果效应: energy_gpu_util_max_percent → energy_gpu_util_avg_percent
+  混淆因素: 18个
+  样本数: 90
+    ✓ ATE: nan
+      95% CI: [nan, nan]
+      显著: True
+
+  [3/40] 计算ATE: energy_gpu_util_max_percent → energy_gpu_total_joules
+    使用 18 个混淆因素
+  计算T0/T1: 3.0000 / 14.0000 (策略=quantile, 差异=11.0000)
+
+估计因果效应: energy_gpu_util_max_percent → energy_gpu_total_joules
+  混淆因素: 18个
+  样本数: 90
+    ✓ ATE: nan
+      95% CI: [nan, nan]
+      显著: True
+
+  [4/40] 计算ATE: energy_gpu_util_avg_percent → perf_top20_accuracy
+    使用 18 个混淆因素
+  计算T0/T1: 0.2445 / 3.7178 (策略=quantile, 差异=3.4732)
+
+估计因果效应: energy_gpu_util_avg_percent → perf_top20_accuracy
+  混淆因素: 18个
+  样本数: 90
+    ✓ ATE: -0.0008
+      95% CI: [-0.0017, 0.0001]
+      显著: False
+
+  [5/40] 计算ATE: energy_gpu_temp_max_celsius → energy_gpu_temp_avg_celsius
+    使用 18 个混淆因素
+  计算T0/T1: 49.0000 / 64.0000 (策略=quantile, 差异=15.0000)
+
+估计因果效应: energy_gpu_temp_max_celsius → energy_gpu_temp_avg_celsius
+  混淆因素: 18个
+  样本数: 90
+    ✓ ATE: 14.0183
+      95% CI: [11.2980, 16.7385]
+      显著: True
+
+  [6/40] 计算ATE: energy_gpu_temp_max_celsius → energy_gpu_util_max_percent
+    使用 18 个混淆因素
+  计算T0/T1: 49.0000 / 64.0000 (策略=quantile, 差异=15.0000)
+
+估计因果效应: energy_gpu_temp_max_celsius → energy_gpu_util_max_percent
+  混淆因素: 18个
+  样本数: 90
+    ✓ ATE: 7.9250
+      95% CI: [6.1633, 9.6867]
+      显著: True
+
+  [7/40] 计算ATE: energy_gpu_min_watts → energy_gpu_max_watts
+    使用 18 个混淆因素
+  计算T0/T1: 42.4650 / 73.9050 (策略=quantile, 差异=31.4400)
+
+估计因果效应: energy_gpu_min_watts → energy_gpu_max_watts
+  混淆因素: 18个
+  样本数: 90
+    ✓ ATE: 32.7029
+      95% CI: [22.2146, 43.1911]
+      显著: True
+
+  [8/40] 计算ATE: hyperparam_max_iter → perf_top10_accuracy
+    使用 18 个混淆因素
+  计算T0/T1: 2270.0000 / 10461.0000 (策略=quantile, 差异=8191.0000)
+
+估计因果效应: hyperparam_max_iter → perf_top10_accuracy
+  混淆因素: 18个
+  样本数: 90
+    ✓ ATE: 0.0005
+      95% CI: [-0.0009, 0.0018]
+      显著: False
+
+  [9/40] 计算ATE: hyperparam_kfold_x_is_parallel → energy_gpu_temp_avg_celsius
+    创建交互项: hyperparam_kfold_interaction_is_parallel
+    使用 19 个混淆因素
+  计算T0/T1: 0.0000 / 6.0000 (策略=quantile, 差异=6.0000)
+
+估计因果效应: hyperparam_kfold_interaction_is_parallel → energy_gpu_temp_avg_celsius
+  混淆因素: 19个
+  样本数: 90
+    ✓ ATE: -2.6175
+      95% CI: [-10.8943, 5.6593]
+      显著: False
+
+  [10/40] 计算ATE: energy_cpu_ram_joules → energy_cpu_total_joules
+    使用 18 个混淆因素
+  计算T0/T1: 2102.3500 / 2458.0075 (策略=quantile, 差异=355.6575)
+
+估计因果效应: energy_cpu_ram_joules → energy_cpu_total_joules
+  混淆因素: 18个
+  样本数: 90
+    ✓ ATE: 22481.6198
+      95% CI: [16282.7902, 28680.4493]
+      显著: True
+
+  [11/40] 计算ATE: hyperparam_alpha → perf_top20_accuracy
+    使用 18 个混淆因素
+  计算T0/T1: 0.0000 / 0.0000 (策略=quantile, 差异=0.0000)
+
+估计因果效应: hyperparam_alpha → perf_top20_accuracy
+  混淆因素: 18个
+  样本数: 90
+    ✓ ATE: -0.0009
+      95% CI: [-0.0022, 0.0005]
+      显著: False
+
+  [12/40] 计算ATE: hyperparam_kfold → perf_top5_accuracy
+    使用 18 个混淆因素
+  计算T0/T1: 3.0000 / 8.0000 (策略=quantile, 差异=5.0000)
+
+估计因果效应: hyperparam_kfold → perf_top5_accuracy
+  混淆因素: 18个
+  样本数: 90
+    ✓ ATE: 0.0016
+      95% CI: [-0.0008, 0.0040]
+      显著: False
+
+  [13/40] 计算ATE: hyperparam_kfold → perf_top1_accuracy
+    使用 18 个混淆因素
+  计算T0/T1: 3.0000 / 8.0000 (策略=quantile, 差异=5.0000)DML估计失败: Input contains NaN.，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN.，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN.，使用简化方法
+DML估计失败: Input contains NaN.，使用简化方法
+DML估计失败: Input contains NaN.，使用简化方法
+DML估计失败: Input contains NaN.，使用简化方法
+DML估计失败: Input contains NaN.，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN.，使用简化方法
+DML估计失败: Input contains NaN.，使用简化方法
+
+
+估计因果效应: hyperparam_kfold → perf_top1_accuracy
+  混淆因素: 18个
+  样本数: 90
+    ✓ ATE: 0.0019
+      95% CI: [-0.0014, 0.0051]
+      显著: False
+
+  [14/40] 计算ATE: energy_gpu_temp_avg_celsius → energy_gpu_total_joules
+    使用 18 个混淆因素
+  计算T0/T1: 48.9859 / 63.3258 (策略=quantile, 差异=14.3399)
+
+估计因果效应: energy_gpu_temp_avg_celsius → energy_gpu_total_joules
+  混淆因素: 18个
+  样本数: 90
+    ✓ ATE: 41229.4003
+      95% CI: [33394.1363, 49064.6643]
+      显著: True
+
+  [15/40] 计算ATE: energy_gpu_avg_watts → energy_gpu_max_watts
+    使用 18 个混淆因素
+  计算T0/T1: 71.6867 / 88.5767 (策略=quantile, 差异=16.8901)
+
+估计因果效应: energy_gpu_avg_watts → energy_gpu_max_watts
+  混淆因素: 18个
+  样本数: 90
+    ✓ ATE: 33.0869
+      95% CI: [22.6513, 43.5224]
+      显著: True
+
+  [16/40] 计算ATE: energy_gpu_max_watts → energy_gpu_util_avg_percent
+    使用 18 个混淆因素
+  计算T0/T1: 79.9550 / 95.9050 (策略=quantile, 差异=15.9500)
+
+估计因果效应: energy_gpu_max_watts → energy_gpu_util_avg_percent
+  混淆因素: 18个
+  样本数: 90
+    ✓ ATE: 3.0649
+      95% CI: [2.4840, 3.6457]
+      显著: True
+
+  [17/40] 计算ATE: energy_gpu_util_avg_percent → perf_top10_accuracy
+    使用 18 个混淆因素
+  计算T0/T1: 0.2445 / 3.7178 (策略=quantile, 差异=3.4732)
+
+估计因果效应: energy_gpu_util_avg_percent → perf_top10_accuracy
+  混淆因素: 18个
+  样本数: 90
+    ✓ ATE: -0.0006
+      95% CI: [-0.0015, 0.0003]
+      显著: False
+
+  [18/40] 计算ATE: energy_gpu_avg_watts → energy_gpu_temp_max_celsius
+    使用 18 个混淆因素
+  计算T0/T1: 71.6867 / 88.5767 (策略=quantile, 差异=16.8901)
+
+估计因果效应: energy_gpu_avg_watts → energy_gpu_temp_max_celsius
+  混淆因素: 18个
+  样本数: 90
+    ✓ ATE: 14.3333
+      95% CI: [11.8351, 16.8316]
+      显著: True
+
+  [19/40] 计算ATE: energy_cpu_pkg_joules → energy_cpu_total_joules
+    使用 18 个混淆因素
+  计算T0/T1: 54588.4100 / 65141.0275 (策略=quantile, 差异=10552.6175)
+
+估计因果效应: energy_cpu_pkg_joules → energy_cpu_total_joules
+  混淆因素: 18个
+  样本数: 90
+    ✓ ATE: 22661.5971
+      95% CI: [16491.4427, 28831.7515]
+      显著: True
+
+  [20/40] 计算ATE: energy_gpu_util_max_percent → perf_top20_accuracy
+    使用 18 个混淆因素
+  计算T0/T1: 3.0000 / 14.0000 (策略=quantile, 差异=11.0000)
+
+估计因果效应: energy_gpu_util_max_percent → perf_top20_accuracy
+  混淆因素: 18个
+  样本数: 90
+    ✓ ATE: nan
+      95% CI: [nan, nan]
+      显著: True
+
+  [21/40] 计算ATE: hyperparam_kfold → energy_gpu_min_watts
+    使用 18 个混淆因素
+  计算T0/T1: 3.0000 / 8.0000 (策略=quantile, 差异=5.0000)
+
+估计因果效应: hyperparam_kfold → energy_gpu_min_watts
+  混淆因素: 18个
+  样本数: 90
+    ✓ ATE: -15.2161
+      95% CI: [-33.8703, 3.4382]
+      显著: False
+
+  [22/40] 计算ATE: energy_gpu_min_watts → energy_gpu_total_joules
+    使用 18 个混淆因素
+  计算T0/T1: 42.4650 / 73.9050 (策略=quantile, 差异=31.4400)
+
+估计因果效应: energy_gpu_min_watts → energy_gpu_total_joules
+  混淆因素: 18个
+  样本数: 90
+    ✓ ATE: 37446.9711
+      95% CI: [28782.7316, 46111.2106]
+      显著: True
+
+  [23/40] 计算ATE: hyperparam_kfold_x_is_parallel → perf_top5_accuracy
+    创建交互项: hyperparam_kfold_interaction_is_parallel
+    使用 19 个混淆因素
+  计算T0/T1: 0.0000 / 6.0000 (策略=quantile, 差异=6.0000)
+
+估计因果效应: hyperparam_kfold_interaction_is_parallel → perf_top5_accuracy
+  混淆因素: 19个
+  样本数: 90
+    ✓ ATE: -0.0013
+      95% CI: [-0.0037, 0.0011]
+      显著: False
+
+  [24/40] 计算ATE: hyperparam_kfold_x_is_parallel → perf_top20_accuracy
+    创建交互项: hyperparam_kfold_interaction_is_parallel
+    使用 19 个混淆因素
+  计算T0/T1: 0.0000 / 6.0000 (策略=quantile, 差异=6.0000)
+
+估计因果效应: hyperparam_kfold_interaction_is_parallel → perf_top20_accuracy
+  混淆因素: 19个
+  样本数: 90
+    ✓ ATE: -0.0006
+      95% CI: [-0.0028, 0.0017]
+      显著: False
+
+  [25/40] 计算ATE: hyperparam_alpha → perf_top1_accuracy
+    使用 18 个混淆因素
+  计算T0/T1: 0.0000 / 0.0000 (策略=quantile, 差异=0.0000)
+
+估计因果效应: hyperparam_alpha → perf_top1_accuracy
+  混淆因素: 18个
+  样本数: 90
+    ✓ ATE: 0.0011
+      95% CI: [-0.0011, 0.0033]
+      显著: False
+
+  [26/40] 计算ATE: hyperparam_kfold → perf_top20_accuracy
+    使用 18 个混淆因素
+  计算T0/T1: 3.0000 / 8.0000 (策略=quantile, 差异=5.0000)
+
+估计因果效应: hyperparam_kfold → perf_top20_accuracy
+  混淆因素: 18个
+  样本数: 90
+    ✓ ATE: 0.0007
+      95% CI: [-0.0015, 0.0029]
+      显著: False
+
+  [27/40] 计算ATE: hyperparam_kfold_x_is_parallel → energy_gpu_total_joules
+    创建交互项: hyperparam_kfold_interaction_is_parallel
+    使用 19 个混淆因素
+  计算T0/T1: 0.0000 / 6.0000 (策略=quantile, 差异=6.0000)
+
+估计因果效应: hyperparam_kfold_interaction_is_parallel → energy_gpu_total_joules
+  混淆因素: 19个
+  样本数: 90
+    ✓ ATE: 21670.6474
+      95% CI: [2298.1578, 41043.1370]
+      显著: True
+
+  [28/40] 计算ATE: energy_gpu_min_watts → perf_top1_accuracy
+    使用 18 个混淆因素
+  计算T0/T1: 42.4650 / 73.9050 (策略=quantile, 差异=31.4400)
+
+估计因果效应: energy_gpu_min_watts → perf_top1_accuracy
+  混淆因素: 18个
+  样本数: 90
+    ✓ ATE: 0.0004
+      95% CI: [-0.0011, 0.0020]
+      显著: False
+
+  [29/40] 计算ATE: energy_gpu_max_watts → energy_gpu_avg_watts
+    使用 18 个混淆因素
+  计算T0/T1: 79.9550 / 95.9050 (策略=quantile, 差异=15.9500)
+
+估计因果效应: energy_gpu_max_watts → energy_gpu_avg_watts
+  混淆因素: 18个
+  样本数: 90
+    ✓ ATE: 31.9266
+      95% CI: [22.4007, 41.4525]
+      显著: True
+
+  [30/40] 计算ATE: energy_gpu_temp_avg_celsius → energy_gpu_avg_watts
+    使用 18 个混淆因素
+  计算T0/T1: 48.9859 / 63.3258 (策略=quantile, 差异=14.3399)
+
+估计因果效应: energy_gpu_temp_avg_celsius → energy_gpu_avg_watts
+  混淆因素: 18个
+  样本数: 90
+    ✓ ATE: 31.3254
+      95% CI: [21.9225, 40.7282]
+      显著: True
+
+  [31/40] 计算ATE: energy_gpu_temp_avg_celsius → energy_gpu_max_watts
+    使用 18 个混淆因素
+  计算T0/T1: 48.9859 / 63.3258 (策略=quantile, 差异=14.3399)
+
+估计因果效应: energy_gpu_temp_avg_celsius → energy_gpu_max_watts
+  混淆因素: 18个
+  样本数: 90
+    ✓ ATE: 32.4267
+      95% CI: [22.1308, 42.7226]
+      显著: True
+
+  [32/40] 计算ATE: energy_cpu_ram_joules → energy_gpu_total_joules
+    使用 18 个混淆因素
+  计算T0/T1: 2102.3500 / 2458.0075 (策略=quantile, 差异=355.6575)
+
+估计因果效应: energy_cpu_ram_joules → energy_gpu_total_joules
+  混淆因素: 18个
+  样本数: 90
+    ✓ ATE: 25947.7129
+      95% CI: [15608.8129, 36286.6129]
+      显著: True
+
+  [33/40] 计算ATE: hyperparam_alpha_x_is_parallel → perf_top20_accuracy
+    创建交互项: hyperparam_alpha_interaction_is_parallel
+    使用 19 个混淆因素
+  计算T0/T1: 0.0000 / 0.0000 (策略=quantile, 差异=0.0000)
+
+估计因果效应: hyperparam_alpha_interaction_is_parallel → perf_top20_accuracy
+  混淆因素: 19个
+  样本数: 90
+    ✓ ATE: -0.0003
+      95% CI: [-0.0017, 0.0010]
+      显著: False
+
+  [34/40] 计算ATE: hyperparam_kfold_x_is_parallel → energy_gpu_util_avg_percent
+    创建交互项: hyperparam_kfold_interaction_is_parallel
+    使用 19 个混淆因素
+  计算T0/T1: 0.0000 / 6.0000 (策略=quantile, 差异=6.0000)
+
+估计因果效应: hyperparam_kfold_interaction_is_parallel → energy_gpu_util_avg_percent
+  混淆因素: 19个
+  样本数: 90
+    ✓ ATE: -0.1720
+      95% CI: [-2.1187, 1.7747]
+      显著: False
+
+  [35/40] 计算ATE: energy_cpu_ram_joules → energy_cpu_pkg_joules
+    使用 18 个混淆因素
+  计算T0/T1: 2102.3500 / 2458.0075 (策略=quantile, 差异=355.6575)
+
+估计因果效应: energy_cpu_ram_joules → energy_cpu_pkg_joules
+  混淆因素: 18个DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN.，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN.，使用简化方法
+DML估计失败: Input contains NaN.，使用简化方法
+DML估计失败: Input contains NaN.，使用简化方法
+DML估计失败: Input contains NaN.，使用简化方法
+DML估计失败: Input contains NaN.，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN.，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN.，使用简化方法
+DML估计失败: Input contains NaN.，使用简化方法
+DML估计失败: Input contains NaN.，使用简化方法
+
+  样本数: 90
+    ✓ ATE: 21691.8311
+      95% CI: [15716.5996, 27667.0626]
+      显著: True
+
+  [36/40] 计算ATE: energy_cpu_total_joules → energy_cpu_ram_joules
+    使用 18 个混淆因素
+  计算T0/T1: 56686.4975 / 67580.1550 (策略=quantile, 差异=10893.6575)
+
+估计因果效应: energy_cpu_total_joules → energy_cpu_ram_joules
+  混淆因素: 18个
+  样本数: 90
+    ✓ ATE: 782.5696
+      95% CI: [557.1797, 1007.9594]
+      显著: True
+
+  [37/40] 计算ATE: energy_gpu_min_watts → energy_gpu_avg_watts
+    使用 18 个混淆因素
+  计算T0/T1: 42.4650 / 73.9050 (策略=quantile, 差异=31.4400)
+
+估计因果效应: energy_gpu_min_watts → energy_gpu_avg_watts
+  混淆因素: 18个
+  样本数: 90
+    ✓ ATE: 31.7563
+      95% CI: [22.2056, 41.3070]
+      显著: True
+
+  [38/40] 计算ATE: energy_cpu_total_joules → energy_cpu_pkg_joules
+    使用 18 个混淆因素
+  计算T0/T1: 56686.4975 / 67580.1550 (策略=quantile, 差异=10893.6575)
+
+估计因果效应: energy_cpu_total_joules → energy_cpu_pkg_joules
+  混淆因素: 18个
+  样本数: 90
+    ✓ ATE: 21879.0276
+      95% CI: [15933.6654, 27824.3898]
+      显著: True
+
+  [39/40] 计算ATE: hyperparam_alpha_x_is_parallel → perf_top1_accuracy
+    创建交互项: hyperparam_alpha_interaction_is_parallel
+    使用 19 个混淆因素
+  计算T0/T1: 0.0000 / 0.0000 (策略=quantile, 差异=0.0000)
+
+估计因果效应: hyperparam_alpha_interaction_is_parallel → perf_top1_accuracy
+  混淆因素: 19个
+  样本数: 90
+    ✓ ATE: 0.0008
+      95% CI: [-0.0014, 0.0030]
+      显著: False
+
+  [40/40] 计算ATE: energy_gpu_util_max_percent → energy_gpu_min_watts
+    使用 18 个混淆因素
+  计算T0/T1: 3.0000 / 14.0000 (策略=quantile, 差异=11.0000)
+
+估计因果效应: energy_gpu_util_max_percent → energy_gpu_min_watts
+  混淆因素: 18个
+  样本数: 90
+    ✓ ATE: nan
+      95% CI: [nan, nan]
+      显著: True
+
+✓ 结果已保存到: /home/green/energy_dl/nightly/analysis/results/energy_research/data/interaction/whitelist_with_ate/group4_bug_localization_causal_edges_whitelist_with_ate.csv
+
+============================================================
+处理完成: group4_bug_localization
+  总边数: 40
+  ATE计算成功: 40 (100.0%)
+  统计显著边: 23
+============================================================
+
+============================================================
+处理组: group5_mrt_oast
+白名单: /home/green/energy_dl/nightly/analysis/results/energy_research/data/interaction/whitelist/group5_mrt_oast_causal_edges_whitelist.csv
+组数据: /home/green/energy_dl/nightly/analysis/data/energy_research/6groups_final/group5_mrt_oast.csv
+输出: /home/green/energy_dl/nightly/analysis/results/energy_research/data/interaction/whitelist_with_ate/group5_mrt_oast_causal_edges_whitelist_with_ate.csv
+策略: T0/T1=quantile, ref_df=non_parallel
+Dry run: False
+============================================================
+  加载白名单: /home/green/energy_dl/nightly/analysis/results/energy_research/data/interaction/whitelist/group5_mrt_oast_causal_edges_whitelist.csv
+    记录数: 40
+    列: ['source', 'target', 'strength', 'edge_type', 'is_significant', 'strength_level', 'source_category', 'target_category', 'question_relevance', 'interpretation']
+  加载组数据: /home/green/energy_dl/nightly/analysis/data/energy_research/6groups_final/group5_mrt_oast.csv
+    记录数: 72
+    列数: 21
+  构建ref_df: 非并行模式 (n=36)
+
+  [1/40] 计算ATE: hyperparam_epochs_x_is_parallel → perf_recall
+    创建交互项: hyperparam_epochs_interaction_is_parallel
+    使用 19 个混淆因素
+  计算T0/T1: 0.0000 / 9.2500 (策略=quantile, 差异=9.2500)
+
+估计因果效应: hyperparam_epochs_interaction_is_parallel → perf_recall
+  混淆因素: 19个
+  样本数: 72
+    ✓ ATE: -0.0076
+      95% CI: [-0.0527, 0.0375]
+      显著: False
+
+  [2/40] 计算ATE: hyperparam_epochs → energy_gpu_max_watts
+    使用 18 个混淆因素
+  计算T0/T1: 8.0000 / 12.0000 (策略=quantile, 差异=4.0000)
+
+估计因果效应: hyperparam_epochs → energy_gpu_max_watts
+  混淆因素: 18个
+  样本数: 72
+    ✓ ATE: 0.2965
+      95% CI: [-0.6666, 1.2597]
+      显著: False
+
+  [3/40] 计算ATE: hyperparam_epochs → energy_gpu_min_watts
+    使用 18 个混淆因素
+  计算T0/T1: 8.0000 / 12.0000 (策略=quantile, 差异=4.0000)
+
+估计因果效应: hyperparam_epochs → energy_gpu_min_watts
+  混淆因素: 18个
+  样本数: 72
+    ✓ ATE: 6.6633
+      95% CI: [-0.9632, 14.2899]
+      显著: False
+
+  [4/40] 计算ATE: hyperparam_epochs_x_is_parallel → energy_gpu_min_watts
+    创建交互项: hyperparam_epochs_interaction_is_parallel
+    使用 19 个混淆因素
+  计算T0/T1: 0.0000 / 9.2500 (策略=quantile, 差异=9.2500)
+
+估计因果效应: hyperparam_epochs_interaction_is_parallel → energy_gpu_min_watts
+  混淆因素: 19个
+  样本数: 72
+    ✓ ATE: 4.9072
+      95% CI: [-6.6919, 16.5064]
+      显著: False
+
+  [5/40] 计算ATE: hyperparam_dropout → perf_precision
+    使用 18 个混淆因素
+  计算T0/T1: 0.1016 / 0.2000 (策略=quantile, 差异=0.0984)
+
+估计因果效应: hyperparam_dropout → perf_precision
+  混淆因素: 18个
+  样本数: 72
+    ✓ ATE: -0.0038
+      95% CI: [-0.0470, 0.0394]
+      显著: False
+
+  [6/40] 计算ATE: energy_gpu_temp_avg_celsius → energy_gpu_util_avg_percent
+    使用 18 个混淆因素
+  计算T0/T1: 79.2636 / 80.1473 (策略=quantile, 差异=0.8837)
+
+估计因果效应: energy_gpu_temp_avg_celsius → energy_gpu_util_avg_percent
+  混淆因素: 18个
+  样本数: 72
+    ✓ ATE: 1.6976
+      95% CI: [1.2113, 2.1839]
+      显著: True
+
+  [7/40] 计算ATE: hyperparam_epochs_x_is_parallel → energy_gpu_util_max_percent
+    创建交互项: hyperparam_epochs_interaction_is_parallel
+    使用 19 个混淆因素
+  计算T0/T1: 0.0000 / 9.2500 (策略=quantile, 差异=9.2500)
+
+估计因果效应: hyperparam_epochs_interaction_is_parallel → energy_gpu_util_max_percent
+  混淆因素: 19个
+  样本数: 72
+    ✓ ATE: 1.7214
+      95% CI: [1.1992, 2.2436]
+      显著: True
+
+  [8/40] 计算ATE: energy_gpu_util_avg_percent → energy_gpu_min_watts
+    使用 18 个混淆因素
+  计算T0/T1: 92.7060 / 94.4292 (策略=quantile, 差异=1.7232)
+
+估计因果效应: energy_gpu_util_avg_percent → energy_gpu_min_watts
+  混淆因素: 18个
+  样本数: 72
+    ✓ ATE: 24.1072
+      95% CI: [15.1681, 33.0463]
+      显著: True
+
+  [9/40] 计算ATE: energy_cpu_ram_joules → energy_gpu_total_joules
+    使用 18 个混淆因素
+  计算T0/T1: 2952.2825 / 3792.5800 (策略=quantile, 差异=840.2975)
+
+估计因果效应: energy_cpu_ram_joules → energy_gpu_total_joules
+  混淆因素: 18个
+  样本数: 72
+    ✓ ATE: 114125.8286
+      95% CI: [88542.9696, 139708.6877]
+      显著: True
+
+  [10/40] 计算ATE: hyperparam_learning_rate → perf_recall
+    使用 18 个混淆因素
+  计算T0/T1: 0.0001 / 0.0001 (策略=quantile, 差异=0.0000)
+
+估计因果效应: hyperparam_learning_rate → perf_recall
+  混淆因素: 18个
+  样本数: 72
+    ✓ ATE: 0.0534
+      95% CI: [0.0140, 0.0928]
+      显著: True
+
+  [11/40] 计算ATE: hyperparam_dropout → perf_recall
+    使用 18 个混淆因素
+  计算T0/T1: 0.1016 / 0.2000 (策略=quantile, 差异=0.0984)
+
+估计因果效应: hyperparam_dropout → perf_recall
+  混淆因素: 18个
+  样本数: 72
+    ✓ ATE: -0.0353
+      95% CI: [-0.0750, 0.0044]
+      显著: False
+
+  [12/40] 计算ATE: hyperparam_learning_rate_x_is_parallel → perf_recall
+    创建交互项: hyperparam_learning_rate_interaction_is_parallel
+    使用 19 个混淆因素
+  计算T0/T1: 0.0000 / 0.0001 (策略=quantile, 差异=0.0001)
+
+估计因果效应: hyperparam_learning_rate_interaction_is_parallel → perf_recall
+  混淆因素: 19个
+  样本数: 72
+    ✓ ATE: -0.0223
+      95% CI: [-0.0666, 0.0220]
+      显著: False
+
+  [13/40] 计算ATE: energy_gpu_avg_watts → perf_accuracy
+    使用 18 个混淆因素
+  计算T0/T1: 231.0497 / 238.3031 (策略=quantile, 差异=7.2534)
+
+估计因果效应: energy_gpu_avg_watts → perf_accuracy
+  混淆因素: 18个DML估计失败: Input contains NaN.，使用简化方法
+DML估计失败: Input contains NaN.，使用简化方法
+DML估计失败: Input contains NaN.，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN.，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN.，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+T1-T0差异较小: 0.0000 (阈值=0.0000)。ATE估计可能不稳定。
+DML估计失败: Input contains NaN.，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN.，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN.，使用简化方法
+DML估计失败: Input contains NaN.，使用简化方法
+DML估计失败: Input contains NaN.，使用简化方法
+DML估计失败: Input contains NaN.，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN.，使用简化方法
+
+  样本数: 72
+    ✓ ATE: -1432.7173
+      95% CI: [-2210.6700, -654.7647]
+      显著: True
+
+  [14/40] 计算ATE: hyperparam_epochs → energy_gpu_avg_watts
+    使用 18 个混淆因素
+  计算T0/T1: 8.0000 / 12.0000 (策略=quantile, 差异=4.0000)
+
+估计因果效应: hyperparam_epochs → energy_gpu_avg_watts
+  混淆因素: 18个
+  样本数: 72
+    ✓ ATE: -5.8734
+      95% CI: [-12.6074, 0.8607]
+      显著: False
+
+  [15/40] 计算ATE: hyperparam_epochs → energy_gpu_util_max_percent
+    使用 18 个混淆因素
+  计算T0/T1: 8.0000 / 12.0000 (策略=quantile, 差异=4.0000)
+
+估计因果效应: hyperparam_epochs → energy_gpu_util_max_percent
+  混淆因素: 18个
+  样本数: 72
+    ✓ ATE: 0.5394
+      95% CI: [-0.2182, 1.2969]
+      显著: False
+
+  [16/40] 计算ATE: energy_gpu_min_watts → energy_gpu_util_max_percent
+    使用 18 个混淆因素
+  计算T0/T1: 76.4750 / 89.7100 (策略=quantile, 差异=13.2350)
+
+估计因果效应: energy_gpu_min_watts → energy_gpu_util_max_percent
+  混淆因素: 18个
+  样本数: 72
+    ✓ ATE: 1.6667
+      95% CI: [1.2049, 2.1285]
+      显著: True
+
+  [17/40] 计算ATE: energy_cpu_total_joules → energy_cpu_pkg_joules
+    使用 18 个混淆因素
+  计算T0/T1: 41504.7775 / 60990.4175 (策略=quantile, 差异=19485.6400)
+
+估计因果效应: energy_cpu_total_joules → energy_cpu_pkg_joules
+  混淆因素: 18个
+  样本数: 72
+    ✓ ATE: 23673.9142
+      95% CI: [19877.7128, 27470.1156]
+      显著: True
+
+  [18/40] 计算ATE: hyperparam_epochs_x_is_parallel → perf_precision
+    创建交互项: hyperparam_epochs_interaction_is_parallel
+    使用 19 个混淆因素
+  计算T0/T1: 0.0000 / 9.2500 (策略=quantile, 差异=9.2500)
+
+估计因果效应: hyperparam_epochs_interaction_is_parallel → perf_precision
+  混淆因素: 19个
+  样本数: 72
+    ✓ ATE: -0.0147
+      95% CI: [-0.0662, 0.0367]
+      显著: False
+
+  [19/40] 计算ATE: energy_gpu_avg_watts → energy_gpu_temp_avg_celsius
+    使用 18 个混淆因素
+  计算T0/T1: 231.0497 / 238.3031 (策略=quantile, 差异=7.2534)
+
+估计因果效应: energy_gpu_avg_watts → energy_gpu_temp_avg_celsius
+  混淆因素: 18个
+  样本数: 72
+    ✓ ATE: 0.0208
+      95% CI: [-0.2782, 0.3199]
+      显著: False
+
+  [20/40] 计算ATE: hyperparam_learning_rate_x_is_parallel → perf_accuracy
+    创建交互项: hyperparam_learning_rate_interaction_is_parallel
+    使用 19 个混淆因素
+  计算T0/T1: 0.0000 / 0.0001 (策略=quantile, 差异=0.0001)
+
+估计因果效应: hyperparam_learning_rate_interaction_is_parallel → perf_accuracy
+  混淆因素: 19个
+  样本数: 72
+    ✓ ATE: 108.2260
+      95% CI: [-895.7358, 1112.1877]
+      显著: False
+
+  [21/40] 计算ATE: energy_gpu_avg_watts → energy_gpu_temp_max_celsius
+    使用 18 个混淆因素
+  计算T0/T1: 231.0497 / 238.3031 (策略=quantile, 差异=7.2534)
+
+估计因果效应: energy_gpu_avg_watts → energy_gpu_temp_max_celsius
+  混淆因素: 18个
+  样本数: 72
+    ✓ ATE: -0.3333
+      95% CI: [-0.5174, -0.1493]
+      显著: True
+
+  [22/40] 计算ATE: energy_gpu_avg_watts → energy_gpu_total_joules
+    使用 18 个混淆因素
+  计算T0/T1: 231.0497 / 238.3031 (策略=quantile, 差异=7.2534)
+
+估计因果效应: energy_gpu_avg_watts → energy_gpu_total_joules
+  混淆因素: 18个
+  样本数: 72
+    ✓ ATE: 32996.5031
+      95% CI: [-3190.8818, 69183.8879]
+      显著: False
+
+  [23/40] 计算ATE: energy_cpu_total_joules → energy_cpu_ram_joules
+    使用 18 个混淆因素
+  计算T0/T1: 41504.7775 / 60990.4175 (策略=quantile, 差异=19485.6400)
+
+估计因果效应: energy_cpu_total_joules → energy_cpu_ram_joules
+  混淆因素: 18个
+  样本数: 72
+    ✓ ATE: 1287.5317
+      95% CI: [1016.1059, 1558.9574]
+      显著: True
+
+  [24/40] 计算ATE: energy_gpu_min_watts → energy_gpu_util_avg_percent
+    使用 18 个混淆因素
+  计算T0/T1: 76.4750 / 89.7100 (策略=quantile, 差异=13.2350)
+
+估计因果效应: energy_gpu_min_watts → energy_gpu_util_avg_percent
+  混淆因素: 18个
+  样本数: 72
+    ✓ ATE: 2.0182
+      95% CI: [1.6045, 2.4319]
+      显著: True
+
+  [25/40] 计算ATE: hyperparam_l2_regularization_x_is_parallel → perf_recall
+    创建交互项: hyperparam_l2_regularization_interaction_is_parallel
+    使用 19 个混淆因素
+  计算T0/T1: 0.0000 / 0.0000 (策略=quantile, 差异=0.0000)
+
+估计因果效应: hyperparam_l2_regularization_interaction_is_parallel → perf_recall
+  混淆因素: 19个
+  样本数: 72
+    ✓ ATE: -0.0165
+      95% CI: [-0.0671, 0.0342]
+      显著: False
+
+  [26/40] 计算ATE: energy_gpu_util_avg_percent → energy_gpu_util_max_percent
+    使用 18 个混淆因素
+  计算T0/T1: 92.7060 / 94.4292 (策略=quantile, 差异=1.7232)
+
+估计因果效应: energy_gpu_util_avg_percent → energy_gpu_util_max_percent
+  混淆因素: 18个
+  样本数: 72
+    ✓ ATE: 1.7778
+      95% CI: [1.3393, 2.2162]
+      显著: True
+
+  [27/40] 计算ATE: energy_gpu_util_avg_percent → perf_accuracy
+    使用 18 个混淆因素
+  计算T0/T1: 92.7060 / 94.4292 (策略=quantile, 差异=1.7232)
+
+估计因果效应: energy_gpu_util_avg_percent → perf_accuracy
+  混淆因素: 18个
+  样本数: 72
+    ✓ ATE: 181.5734
+      95% CI: [-580.6987, 943.8456]
+      显著: False
+
+  [28/40] 计算ATE: energy_gpu_min_watts → energy_gpu_max_watts
+    使用 18 个混淆因素
+  计算T0/T1: 76.4750 / 89.7100 (策略=quantile, 差异=13.2350)
+
+估计因果效应: energy_gpu_min_watts → energy_gpu_max_watts
+  混淆因素: 18个
+  样本数: 72
+    ✓ ATE: -1.0678
+      95% CI: [-1.6762, -0.4594]
+      显著: True
+
+  [29/40] 计算ATE: hyperparam_epochs_x_is_parallel → energy_gpu_avg_watts
+    创建交互项: hyperparam_epochs_interaction_is_parallel
+    使用 19 个混淆因素
+  计算T0/T1: 0.0000 / 9.2500 (策略=quantile, 差异=9.2500)
+
+估计因果效应: hyperparam_epochs_interaction_is_parallel → energy_gpu_avg_watts
+  混淆因素: 19个
+  样本数: 72
+    ✓ ATE: -2.0721
+      95% CI: [-8.2653, 4.1211]
+      显著: False
+
+  [30/40] 计算ATE: hyperparam_epochs_x_is_parallel → energy_gpu_temp_max_celsius
+    创建交互项: hyperparam_epochs_interaction_is_parallel
+    使用 19 个混淆因素
+  计算T0/T1: 0.0000 / 9.2500 (策略=quantile, 差异=9.2500)
+
+估计因果效应: hyperparam_epochs_interaction_is_parallel → energy_gpu_temp_max_celsius
+  混淆因素: 19个
+  样本数: 72
+    ✓ ATE: -0.0286
+      95% CI: [-0.2874, 0.2302]
+      显著: False
+
+  [31/40] 计算ATE: hyperparam_l2_regularization → energy_gpu_max_watts
+    使用 18 个混淆因素
+  计算T0/T1: 0.0000 / 0.0003 (策略=quantile, 差异=0.0003)
+
+估计因果效应: hyperparam_l2_regularization → energy_gpu_max_watts
+  混淆因素: 18个
+  样本数: 72
+    ✓ ATE: 0.2533
+      95% CI: [-0.4487, 0.9553]
+      显著: False
+
+  [32/40] 计算ATE: hyperparam_epochs → energy_gpu_temp_avg_celsius
+    使用 18 个混淆因素
+  计算T0/T1: 8.0000 / 12.0000 (策略=quantile, 差异=4.0000)
+
+估计因果效应: hyperparam_epochs → energy_gpu_temp_avg_celsius
+  混淆因素: 18个
+  样本数: 72
+    ✓ ATE: 0.1865
+      95% CI: [-0.1782, 0.5512]
+      显著: False
+
+  [33/40] 计算ATE: energy_gpu_util_max_percent → energy_gpu_max_watts
+    使用 18 个混淆因素
+  计算T0/T1: 98.0000 / 100.0000 (策略=quantile, 差异=2.0000)
+
+估计因果效应: energy_gpu_util_max_percent → energy_gpu_max_watts
+  混淆因素: 18个
+  样本数: 72
+    ✓ ATE: nan
+      95% CI: [nan, nan]
+      显著: True
+
+  [34/40] 计算ATE: energy_gpu_min_watts → perf_accuracy
+    使用 18 个混淆因素
+  计算T0/T1: 76.4750 / 89.7100 (策略=quantile, 差异=13.2350)
+
+估计因果效应: energy_gpu_min_watts → perf_accuracy
+  混淆因素: 18个
+  样本数: 72
+    ✓ ATE: -457.5137
+      95% CI: [-1282.9662, 367.9389]
+      显著: False
+
+  [35/40] 计算ATE: energy_gpu_min_watts → perf_precision
+    使用 18 个混淆因素
+  计算T0/T1: 76.4750 / 89.7100 (策略=quantile, 差异=13.2350)
+
+估计因果效应: energy_gpu_min_watts → perf_precision
+  混淆因素: 18个
+  样本数: 72DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN.，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN.，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN.，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+
+    ✓ ATE: -0.0166
+      95% CI: [-0.0473, 0.0142]
+      显著: False
+
+  [36/40] 计算ATE: energy_gpu_avg_watts → perf_precision
+    使用 18 个混淆因素
+  计算T0/T1: 231.0497 / 238.3031 (策略=quantile, 差异=7.2534)
+
+估计因果效应: energy_gpu_avg_watts → perf_precision
+  混淆因素: 18个
+  样本数: 72
+    ✓ ATE: 0.0388
+      95% CI: [0.0091, 0.0684]
+      显著: True
+
+  [37/40] 计算ATE: hyperparam_dropout_x_is_parallel → energy_gpu_temp_avg_celsius
+    创建交互项: hyperparam_dropout_interaction_is_parallel
+    使用 19 个混淆因素
+  计算T0/T1: 0.0000 / 0.1114 (策略=quantile, 差异=0.1114)
+
+估计因果效应: hyperparam_dropout_interaction_is_parallel → energy_gpu_temp_avg_celsius
+  混淆因素: 19个
+  样本数: 72
+    ✓ ATE: 0.8391
+      95% CI: [0.5390, 1.1393]
+      显著: True
+
+  [38/40] 计算ATE: energy_cpu_pkg_joules → energy_cpu_total_joules
+    使用 18 个混淆因素
+  计算T0/T1: 38540.4125 / 57256.8150 (策略=quantile, 差异=18716.4025)
+
+估计因果效应: energy_cpu_pkg_joules → energy_cpu_total_joules
+  混淆因素: 18个
+  样本数: 72
+    ✓ ATE: 24920.4258
+      95% CI: [20869.7772, 28971.0745]
+      显著: True
+
+  [39/40] 计算ATE: energy_cpu_pkg_joules → energy_cpu_ram_joules
+    使用 18 个混淆因素
+  计算T0/T1: 38540.4125 / 57256.8150 (策略=quantile, 差异=18716.4025)
+
+估计因果效应: energy_cpu_pkg_joules → energy_cpu_ram_joules
+  混淆因素: 18个
+  样本数: 72
+    ✓ ATE: 1235.0767
+      95% CI: [950.5879, 1519.5654]
+      显著: True
+
+  [40/40] 计算ATE: hyperparam_learning_rate_x_is_parallel → perf_precision
+    创建交互项: hyperparam_learning_rate_interaction_is_parallel
+    使用 19 个混淆因素
+  计算T0/T1: 0.0000 / 0.0001 (策略=quantile, 差异=0.0001)
+
+估计因果效应: hyperparam_learning_rate_interaction_is_parallel → perf_precision
+  混淆因素: 19个
+  样本数: 72
+    ✓ ATE: -0.0151
+      95% CI: [-0.0661, 0.0359]
+      显著: False
+
+✓ 结果已保存到: /home/green/energy_dl/nightly/analysis/results/energy_research/data/interaction/whitelist_with_ate/group5_mrt_oast_causal_edges_whitelist_with_ate.csv
+
+============================================================
+处理完成: group5_mrt_oast
+  总边数: 40
+  ATE计算成功: 40 (100.0%)
+  统计显著边: 18
+============================================================
+
+============================================================
+处理组: group6_resnet
+白名单: /home/green/energy_dl/nightly/analysis/results/energy_research/data/interaction/whitelist/group6_resnet_causal_edges_whitelist.csv
+组数据: /home/green/energy_dl/nightly/analysis/data/energy_research/6groups_final/group6_resnet.csv
+输出: /home/green/energy_dl/nightly/analysis/results/energy_research/data/interaction/whitelist_with_ate/group6_resnet_causal_edges_whitelist_with_ate.csv
+策略: T0/T1=quantile, ref_df=non_parallel
+Dry run: False
+============================================================
+  加载白名单: /home/green/energy_dl/nightly/analysis/results/energy_research/data/interaction/whitelist/group6_resnet_causal_edges_whitelist.csv
+    记录数: 19
+    列: ['source', 'target', 'strength', 'edge_type', 'is_significant', 'strength_level', 'source_category', 'target_category', 'question_relevance', 'interpretation']
+  加载组数据: /home/green/energy_dl/nightly/analysis/data/energy_research/6groups_final/group6_resnet.csv
+    记录数: 74
+    列数: 19
+  构建ref_df: 非并行模式 (n=31)
+
+  [1/19] 计算ATE: energy_gpu_temp_avg_celsius → energy_gpu_temp_max_celsius
+    使用 16 个混淆因素
+  计算T0/T1: 77.8020 / 82.2028 (策略=quantile, 差异=4.4008)
+
+估计因果效应: energy_gpu_temp_avg_celsius → energy_gpu_temp_max_celsius
+  混淆因素: 16个
+  样本数: 74
+    ✓ ATE: 4.7297
+      95% CI: [3.9117, 5.5477]
+      显著: True
+
+  [2/19] 计算ATE: energy_cpu_total_joules → energy_gpu_total_joules
+    使用 16 个混淆因素
+  计算T0/T1: 50320.3800 / 97295.2625 (策略=quantile, 差异=46974.8825)
+
+估计因果效应: energy_cpu_total_joules → energy_gpu_total_joules
+  混淆因素: 16个
+  样本数: 74
+    ✓ ATE: 163046.6305
+      95% CI: [132578.6472, 193514.6139]
+      显著: True
+
+  [3/19] 计算ATE: energy_gpu_util_avg_percent → energy_gpu_util_max_percent
+    使用 16 个混淆因素
+  计算T0/T1: 59.3413 / 73.6895 (策略=quantile, 差异=14.3483)
+
+估计因果效应: energy_gpu_util_avg_percent → energy_gpu_util_max_percent
+  混淆因素: 16个
+  样本数: 74
+    ✓ ATE: 18.4595
+      95% CI: [15.5890, 21.3299]
+      显著: True
+
+  [4/19] 计算ATE: energy_gpu_temp_max_celsius → energy_gpu_util_max_percent
+    使用 16 个混淆因素
+  计算T0/T1: 80.0000 / 84.0000 (策略=quantile, 差异=4.0000)
+
+估计因果效应: energy_gpu_temp_max_celsius → energy_gpu_util_max_percent
+  混淆因素: 16个
+  样本数: 74
+    ✓ ATE: 3.4065
+      95% CI: [-0.8614, 7.6745]
+      显著: False
+
+  [5/19] 计算ATE: energy_gpu_util_avg_percent → energy_gpu_max_watts
+    使用 16 个混淆因素
+  计算T0/T1: 59.3413 / 73.6895 (策略=quantile, 差异=14.3483)
+
+估计因果效应: energy_gpu_util_avg_percent → energy_gpu_max_watts
+  混淆因素: 16个
+  样本数: 74
+    ✓ ATE: 36.9465
+      95% CI: [27.3501, 46.5429]
+      显著: True
+
+  [6/19] 计算ATE: energy_gpu_util_avg_percent → energy_gpu_avg_watts
+    使用 16 个混淆因素
+  计算T0/T1: 59.3413 / 73.6895 (策略=quantile, 差异=14.3483)
+
+估计因果效应: energy_gpu_util_avg_percent → energy_gpu_avg_watts
+  混淆因素: 16个
+  样本数: 74
+    ✓ ATE: -9.8077
+      95% CI: [-17.4030, -2.2123]
+      显著: True
+
+  [7/19] 计算ATE: energy_gpu_temp_max_celsius → energy_gpu_avg_watts
+    使用 16 个混淆因素
+  计算T0/T1: 80.0000 / 84.0000 (策略=quantile, 差异=4.0000)
+
+估计因果效应: energy_gpu_temp_max_celsius → energy_gpu_avg_watts
+  混淆因素: 16个
+  样本数: 74
+    ✓ ATE: 12.1057
+      95% CI: [5.5744, 18.6370]
+      显著: True
+
+  [8/19] 计算ATE: energy_gpu_max_watts → energy_gpu_min_watts
+    使用 16 个混淆因素
+  计算T0/T1: 249.7675 / 264.3175 (策略=quantile, 差异=14.5500)
+
+估计因果效应: energy_gpu_max_watts → energy_gpu_min_watts
+  混淆因素: 16个
+  样本数: 74
+    ✓ ATE: 33.9389
+      95% CI: [23.8345, 44.0434]
+      显著: True
+
+  [9/19] 计算ATE: energy_gpu_temp_max_celsius → energy_gpu_temp_avg_celsius
+    使用 16 个混淆因素
+  计算T0/T1: 80.0000 / 84.0000 (策略=quantile, 差异=4.0000)
+
+估计因果效应: energy_gpu_temp_max_celsius → energy_gpu_temp_avg_celsius
+  混淆因素: 16个
+  样本数: 74
+    ✓ ATE: 5.9609
+      95% CI: [4.5599, 7.3619]
+      显著: True
+
+  [10/19] 计算ATE: energy_gpu_avg_watts → energy_cpu_ram_joules
+    使用 16 个混淆因素
+  计算T0/T1: 214.1395 / 235.4513 (策略=quantile, 差异=21.3118)
+
+估计因果效应: energy_gpu_avg_watts → energy_cpu_ram_joules
+  混淆因素: 16个
+  样本数: 74
+    ✓ ATE: -4702.6227
+      95% CI: [-6208.2321, -3197.0133]
+      显著: True
+
+  [11/19] 计算ATE: hyperparam_epochs → energy_gpu_max_watts
+    使用 16 个混淆因素
+  计算T0/T1: 153.0000 / 213.2500 (策略=quantile, 差异=60.2500)
+
+估计因果效应: hyperparam_epochs → energy_gpu_max_watts
+  混淆因素: 16个
+  样本数: 74
+    ✓ ATE: 1.8946
+      95% CI: [-9.1864, 12.9756]
+      显著: False
+
+  [12/19] 计算ATE: energy_gpu_max_watts → energy_gpu_util_avg_percent
+    使用 16 个混淆因素
+  计算T0/T1: 249.7675 / 264.3175 (策略=quantile, 差异=14.5500)
+
+估计因果效应: energy_gpu_max_watts → energy_gpu_util_avg_percent
+  混淆因素: 16个
+  样本数: 74
+    ✓ ATE: 25.0259
+      95% CI: [20.1804, 29.8714]
+      显著: True
+
+  [13/19] 计算ATE: hyperparam_epochs_x_is_parallel → energy_cpu_pkg_joules
+    创建交互项: hyperparam_epochs_interaction_is_parallel
+    使用 17 个混淆因素
+  计算T0/T1: 0.0000 / 200.0000 (策略=quantile, 差异=200.0000)
+
+估计因果效应: hyperparam_epochs_interaction_is_parallel → energy_cpu_pkg_joulesDML估计失败: Input contains NaN.，使用简化方法
+DML估计失败: Input contains NaN.，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN，使用简化方法
+DML估计失败: Input contains NaN.，使用简化方法
+DML估计失败: Input contains NaN.，使用简化方法
+Traceback (most recent call last):
+  File "/home/green/energy_dl/nightly/analysis/scripts/compute_ate_for_whitelist.py", line 485, in main
+    computer.generate_summary_report(all_stats, output_path=summary_path)
+  File "/home/green/energy_dl/nightly/analysis/scripts/compute_ate_for_whitelist.py", line 430, in generate_summary_report
+    if output_path and not dry_run:
+                           ^^^^^^^
+NameError: name 'dry_run' is not defined
+
+  混淆因素: 17个
+  样本数: 74
+    ✓ ATE: 12298.5293
+      95% CI: [-5731.8113, 30328.8699]
+      显著: False
+
+  [14/19] 计算ATE: hyperparam_epochs → energy_gpu_util_max_percent
+    使用 16 个混淆因素
+  计算T0/T1: 153.0000 / 213.2500 (策略=quantile, 差异=60.2500)
+
+估计因果效应: hyperparam_epochs → energy_gpu_util_max_percent
+  混淆因素: 16个
+  样本数: 74
+    ✓ ATE: 1.8056
+      95% CI: [-3.5593, 7.1704]
+      显著: False
+
+  [15/19] 计算ATE: energy_gpu_min_watts → energy_gpu_util_max_percent
+    使用 16 个混淆因素
+  计算T0/T1: 76.5400 / 92.0700 (策略=quantile, 差异=15.5300)
+
+估计因果效应: energy_gpu_min_watts → energy_gpu_util_max_percent
+  混淆因素: 16个
+  样本数: 74
+    ✓ ATE: 17.4898
+      95% CI: [14.3372, 20.6423]
+      显著: True
+
+  [16/19] 计算ATE: energy_gpu_max_watts → energy_gpu_temp_avg_celsius
+    使用 16 个混淆因素
+  计算T0/T1: 249.7675 / 264.3175 (策略=quantile, 差异=14.5500)
+
+估计因果效应: energy_gpu_max_watts → energy_gpu_temp_avg_celsius
+  混淆因素: 16个
+  样本数: 74
+    ✓ ATE: -3.4558
+      95% CI: [-5.5807, -1.3308]
+      显著: True
+
+  [17/19] 计算ATE: energy_gpu_util_max_percent → energy_gpu_util_avg_percent
+    使用 16 个混淆因素
+  计算T0/T1: 74.0000 / 90.0000 (策略=quantile, 差异=16.0000)
+
+估计因果效应: energy_gpu_util_max_percent → energy_gpu_util_avg_percent
+  混淆因素: 16个
+  样本数: 74
+    ✓ ATE: 27.9917
+      95% CI: [22.5222, 33.4613]
+      显著: True
+
+  [18/19] 计算ATE: hyperparam_epochs → energy_cpu_pkg_joules
+    使用 16 个混淆因素
+  计算T0/T1: 153.0000 / 213.2500 (策略=quantile, 差异=60.2500)
+
+估计因果效应: hyperparam_epochs → energy_cpu_pkg_joules
+  混淆因素: 16个
+  样本数: 74
+    ✓ ATE: 38085.1261
+      95% CI: [19140.7497, 57029.5025]
+      显著: True
+
+  [19/19] 计算ATE: hyperparam_l2_regularization_x_is_parallel → perf_test_accuracy
+    创建交互项: hyperparam_l2_regularization_interaction_is_parallel
+    使用 17 个混淆因素
+  计算T0/T1: 0.0000 / 0.0001 (策略=quantile, 差异=0.0001)
+
+估计因果效应: hyperparam_l2_regularization_interaction_is_parallel → perf_test_accuracy
+  混淆因素: 17个
+  样本数: 74
+    ✓ ATE: 0.3282
+      95% CI: [-0.0385, 0.6949]
+      显著: False
+
+✓ 结果已保存到: /home/green/energy_dl/nightly/analysis/results/energy_research/data/interaction/whitelist_with_ate/group6_resnet_causal_edges_whitelist_with_ate.csv
+
+============================================================
+处理完成: group6_resnet
+  总边数: 19
+  ATE计算成功: 19 (100.0%)
+  统计显著边: 14
+============================================================
+
+================================================================================
+ATE计算汇总报告
+================================================================================
+
+group1_examples:
+  总边数: 43
+  ATE计算成功: 43 (100.0%)
+  统计显著边: 38
+
+group2_vulberta:
+  总边数: 35
+  ATE计算成功: 35 (100.0%)
+  统计显著边: 19
+
+group3_person_reid:
+  总边数: 50
+  ATE计算成功: 50 (100.0%)
+  统计显著边: 39
+
+group4_bug_localization:
+  总边数: 40
+  ATE计算成功: 40 (100.0%)
+  统计显著边: 23
+
+group5_mrt_oast:
+  总边数: 40
+  ATE计算成功: 40 (100.0%)
+  统计显著边: 18
+
+group6_resnet:
+  总边数: 19
+  ATE计算成功: 19 (100.0%)
+  统计显著边: 14
+
+================================================================================
+总计:
+  总边数: 227
+  ATE计算成功: 227 (100.0% of total)
+  统计显著边: 151 (66.5% of successful)
+================================================================================
+
+错误: name 'dry_run' is not defined

@@ -70,6 +70,12 @@ repos/*/Market/
 repos/*/origindata/
 repos/*/pretrained_models/
 
+# External repository git directories
+analysis/CTF_original/.git/
+
+# External repository - exclude entire directory
+analysis/CTF_original/
+
 # Dataset files in repos only
 repos/**/*.csv
 repos/**/*.json
