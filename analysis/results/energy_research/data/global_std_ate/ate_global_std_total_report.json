@@ -1,0 +1,143 @@
+{
+  "timestamp": "2026-01-30 19:00:38",
+  "config": {
+    "global_std_dir": "data/energy_research/6groups_global_std",
+    "whitelist_dir": "results/energy_research/data/interaction/whitelist",
+    "output_dir": "results/energy_research/data/global_std_ate",
+    "threshold": 0.3,
+    "dry_run": false
+  },
+  "results": [
+    {
+      "group": 1,
+      "success": true,
+      "summary": {
+        "group_id": "group1_examples",
+        "group_num": 1,
+        "data_rows": 304,
+        "edges_total": 43,
+        "edges_updated": 39,
+        "ate_computed": 39,
+        "ate_significant": 39,
+        "ate_mean": 0.67170755172074,
+        "ate_std": 3.348997347298763,
+        "ate_min": -4.14364759724662,
+        "ate_max": 19.8489365417881,
+        "elapsed_seconds": 31.002376794815063,
+        "timestamp": "2026-01-30 18:59:29"
+      },
+      "output_file": "results/energy_research/data/global_std_ate/group1_examples_causal_edges_whitelist_global_std_ate.csv",
+      "summary_file": "results/energy_research/data/global_std_ate/group1_examples_ate_global_std_summary.json"
+    },
+    {
+      "group": 2,
+      "success": true,
+      "summary": {
+        "group_id": "group2_vulberta",
+        "group_num": 2,
+        "data_rows": 72,
+        "edges_total": 35,
+        "edges_updated": 29,
+        "ate_computed": 29,
+        "ate_significant": 29,
+        "ate_mean": 8.057975059287786,
+        "ate_std": 41.965511073391724,
+        "ate_min": -4.707446551243352,
+        "ate_max": 225.45059280371092,
+        "elapsed_seconds": 11.820142030715942,
+        "timestamp": "2026-01-30 18:59:41"
+      },
+      "output_file": "results/energy_research/data/global_std_ate/group2_vulberta_causal_edges_whitelist_global_std_ate.csv",
+      "summary_file": "results/energy_research/data/global_std_ate/group2_vulberta_ate_global_std_summary.json"
+    },
+    {
+      "group": 3,
+      "success": true,
+      "summary": {
+        "group_id": "group3_person_reid",
+        "group_num": 3,
+        "data_rows": 206,
+        "edges_total": 50,
+        "edges_updated": 40,
+        "ate_computed": 40,
+        "ate_significant": 40,
+        "ate_mean": 0.43340836148795087,
+        "ate_std": 1.5866675714341996,
+        "ate_min": -0.953415639806017,
+        "ate_max": 9.1025121734772,
+        "elapsed_seconds": 23.380067586898804,
+        "timestamp": "2026-01-30 19:00:04"
+      },
+      "output_file": "results/energy_research/data/global_std_ate/group3_person_reid_causal_edges_whitelist_global_std_ate.csv",
+      "summary_file": "results/energy_research/data/global_std_ate/group3_person_reid_ate_global_std_summary.json"
+    },
+    {
+      "group": 4,
+      "success": true,
+      "summary": {
+        "group_id": "group4_bug_localization",
+        "group_num": 4,
+        "data_rows": 90,
+        "edges_total": 40,
+        "edges_updated": 34,
+        "ate_computed": 34,
+        "ate_significant": 34,
+        "ate_mean": 2.323686357192392,
+        "ate_std": 22.846082270917492,
+        "ate_min": -45.27705724337265,
+        "ate_max": 123.77219313399894,
+        "elapsed_seconds": 14.105584859848022,
+        "timestamp": "2026-01-30 19:00:18"
+      },
+      "output_file": "results/energy_research/data/global_std_ate/group4_bug_localization_causal_edges_whitelist_global_std_ate.csv",
+      "summary_file": "results/energy_research/data/global_std_ate/group4_bug_localization_ate_global_std_summary.json"
+    },
+    {
+      "group": 5,
+      "success": true,
+      "summary": {
+        "group_id": "group5_mrt_oast",
+        "group_num": 5,
+        "data_rows": 72,
+        "edges_total": 40,
+        "edges_updated": 36,
+        "ate_computed": 36,
+        "ate_significant": 36,
+        "ate_mean": 21.9402134510812,
+        "ate_std": 130.54637351832093,
+        "ate_min": -4.580513323824563,
+        "ate_max": 783.3805812795414,
+        "elapsed_seconds": 14.595834732055664,
+        "timestamp": "2026-01-30 19:00:33"
+      },
+      "output_file": "results/energy_research/data/global_std_ate/group5_mrt_oast_causal_edges_whitelist_global_std_ate.csv",
+      "summary_file": "results/energy_research/data/global_std_ate/group5_mrt_oast_ate_global_std_summary.json"
+    },
+    {
+      "group": 6,
+      "success": true,
+      "summary": {
+        "group_id": "group6_resnet",
+        "group_num": 6,
+        "data_rows": 74,
+        "edges_total": 19,
+        "edges_updated": 13,
+        "ate_computed": 13,
+        "ate_significant": 13,
+        "ate_mean": -0.22952091817887182,
+        "ate_std": 0.8251603737987692,
+        "ate_min": -1.7284978267219377,
+        "ate_max": 0.8400784592766363,
+        "elapsed_seconds": 5.190145254135132,
+        "timestamp": "2026-01-30 19:00:38"
+      },
+      "output_file": "results/energy_research/data/global_std_ate/group6_resnet_causal_edges_whitelist_global_std_ate.csv",
+      "summary_file": "results/energy_research/data/global_std_ate/group6_resnet_ate_global_std_summary.json"
+    }
+  ],
+  "summary": {
+    "total_groups": 6,
+    "successful_groups": 6,
+    "failed_groups": 0
+  }
+}

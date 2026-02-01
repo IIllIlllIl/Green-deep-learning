@@ -222,7 +222,37 @@ class CausalInferenceEngine:
                 is_significant = not (ci_lower <= 0 <= ci_upper)
                 print(f"  统计显著: {'是' if is_significant else '否'}")
 
-            return float(ate), (ci_lower, ci_upper)
+            ate_value = float(ate)
+
+            # 合理性检查：对于全局标准化数据，ATE不应过大
+            ate_threshold = 10.0
+            if abs(ate_value) > ate_threshold:
+                warnings.warn(
+                    f"极端ATE值检测: {treatment}→{outcome}\n"
+                    f"  原始ATE: {ate_value:.4f} (阈值={ate_threshold})\n"
+                    f"  可能原因: 高度共线性或treatment变异性低\n"
+                    f"  使用简化ATE估计作为后备"
+                )
+
+                # 使用简化ATE估计
+                simple_ate, simple_ci = self._simple_ate_estimate(data, treatment, outcome)
+
+                # 更新存储的结果为简化ATE
+                if edge_key in self.ate_results:
+                    self.ate_results[edge_key]['ate'] = simple_ate
+                    self.ate_results[edge_key]['ci_lower'] = simple_ci[0]
+                    self.ate_results[edge_key]['ci_upper'] = simple_ci[1]
+                    # 标记为已修复
+                    self.ate_results[edge_key]['was_repaired'] = True
+                    self.ate_results[edge_key]['ate_original'] = ate_value
+
+                # 可选：记录原始值用于调试
+                if self.verbose:
+                    print(f"  简化ATE: {simple_ate:.4f} (原始: {ate_value:.4f})")
+
+                return simple_ate, simple_ci
+
+            return ate_value, (ci_lower, ci_upper)
 
         except ImportError:
             # EconML未安装，使用简化方法
@@ -300,6 +330,20 @@ class CausalInferenceEngine:
             raise ValueError("causal_graph不能为None")
         if len(var_names) != causal_graph.shape[0]:
             raise ValueError(f"变量名数量({len(var_names)})与图大小({causal_graph.shape[0]})不匹配")
+
+        # 如果未提供ref_df，创建数据均值向量作为参考配置（CTF风格）
+        if ref_df is None:
+            # 创建包含所有变量均值的单行DataFrame
+            ref_data = {}
+            for var in var_names:
+                if var in data.columns:
+                    ref_data[var] = [data[var].mean()]
+                else:
+                    # 如果变量不在数据中，使用0（但这种情况不应该发生）
+                    ref_data[var] = [0.0]
+            ref_df = pd.DataFrame(ref_data)
+            if self.verbose:
+                print(f"✓ 创建ref_df（数据均值向量），包含{len(var_names)}个变量")
 
         results = {}
         n_vars = len(var_names)
@@ -468,7 +512,7 @@ class CausalInferenceEngine:
                                     var_names: List[str],
                                     threshold: float = 0.3,
                                     ref_df: pd.DataFrame = None,
-                                    t_strategy: str = None) -> Dict[str, Dict]:
+                                    t_strategy: str = 'quantile') -> Dict[str, Dict]:
         """
         对因果图中的所有边进行CTF风格的因果推断
 
@@ -477,8 +521,8 @@ class CausalInferenceEngine:
             causal_graph: 邻接矩阵 (n_vars, n_vars)
             var_names: 变量名列表
             threshold: 边权重阈值
-            ref_df: 参考数据集（可选，迭代2功能）
-            t_strategy: T0/T1计算策略（可选，迭代2功能）
+            ref_df: 参考数据集，如果为None则自动创建数据均值向量（CTF风格）
+            t_strategy: T0/T1计算策略，默认'quantile'（使用25/75分位数，CTF风格）
 
         返回:
             results: {
@@ -495,6 +539,20 @@ class CausalInferenceEngine:
             raise ValueError("causal_graph不能为None")
         if len(var_names) != causal_graph.shape[0]:
             raise ValueError(f"变量名数量({len(var_names)})与图大小({causal_graph.shape[0]})不匹配")
+
+        # 如果未提供ref_df，创建数据均值向量作为参考配置（CTF风格）
+        if ref_df is None:
+            # 创建包含所有变量均值的单行DataFrame
+            ref_data = {}
+            for var in var_names:
+                if var in data.columns:
+                    ref_data[var] = [data[var].mean()]
+                else:
+                    # 如果变量不在数据中，使用0（但这种情况不应该发生）
+                    ref_data[var] = [0.0]
+            ref_df = pd.DataFrame(ref_data)
+            if self.verbose:
+                print(f"✓ 创建ref_df（数据均值向量），包含{len(var_names)}个变量")
 
         results = {}
         n_vars = len(var_names)

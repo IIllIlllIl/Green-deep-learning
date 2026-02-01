@@ -1,0 +1,15 @@
+{
+  "group_id": "group1_examples",
+  "group_num": 1,
+  "data_rows": 304,
+  "edges_total": 66,
+  "edges_updated": 66,
+  "ate_computed": 36,
+  "ate_significant": 48,
+  "ate_mean": -0.02546262245179822,
+  "ate_std": 0.9481358808259478,
+  "ate_min": -4.105907803873409,
+  "ate_max": 2.2453679510063473,
+  "elapsed_seconds": 10.384297370910645,
+  "timestamp": "2026-01-31 13:04:04"
+}

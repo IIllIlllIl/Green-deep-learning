@@ -1,0 +1,15 @@
+{
+  "group_id": "group3_person_reid",
+  "group_num": 3,
+  "data_rows": 206,
+  "edges_total": 47,
+  "edges_updated": 45,
+  "ate_computed": 24,
+  "ate_significant": 38,
+  "ate_mean": 0.3745294304820093,
+  "ate_std": 0.6984979044223255,
+  "ate_min": -0.7524169914503938,
+  "ate_max": 2.041044472177536,
+  "elapsed_seconds": 6.9662861824035645,
+  "timestamp": "2026-01-31 12:17:41"
+}

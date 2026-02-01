@@ -35,25 +35,62 @@ class TradeoffDetector:
     """
 
     def __init__(self,
-                 sign_functions: Dict[str, Callable],
+                 sign_functions: Optional[Dict[str, Callable]] = None,
+                 rules: Optional[Dict[str, str]] = None,
+                 current_values: Optional[Dict[str, float]] = None,
                  verbose: bool = False):
-        if not sign_functions:
-            raise ValueError("sign_functions不能为空")
+        """
+        初始化权衡检测器
 
-        self.sign_functions = sign_functions
+        参数:
+            sign_functions: sign函数字典 {metric_name: sign_func}（可选）
+            rules: 规则字典 {指标模式: 规则}（可选，如果未提供sign_functions则使用）
+            current_values: 当前值字典 {metric_name: 当前值}（可选，用于sign函数）
+            verbose: 是否输出详细信息
+        """
+        # 首先设置verbose属性（必须在前面，因为后续代码会使用）
         self.verbose = verbose
+        self.current_values = current_values or {}
         self.detected_tradeoffs = []
+
+        # 处理sign_functions和rules
+        if sign_functions is not None:
+            self.sign_functions = sign_functions
+            if self.verbose:
+                print(f"使用提供的sign_functions: {len(sign_functions)}个函数")
+        elif rules is not None:
+            # 从规则创建sign函数
+            self.sign_functions = create_sign_functions_from_rules(rules)
+            if self.verbose:
+                print(f"从规则创建sign_functions: {len(rules)}条规则")
+        else:
+            # 默认使用能耗/性能规则
+            self.sign_functions = create_energy_perf_sign_functions()
+            if self.verbose:
+                print(f"使用默认的能耗/性能规则系统")
+
+        # 验证sign_functions是否可调用
+        if hasattr(self.sign_functions, 'get'):
+            # 如果是PatternSignFunctions对象，检查get方法
+            pass
+        elif not isinstance(self.sign_functions, dict):
+            raise ValueError(f"sign_functions必须是字典或支持get方法的对象，实际类型: {type(self.sign_functions)}")
+
+
+        if self.verbose and self.current_values:
+            print(f"使用当前值字典: {len(self.current_values)}个指标")
 
     def detect_tradeoffs(self,
                         causal_effects: Dict[str, Dict],
-                        require_significance: bool = True) -> List[Dict]:
+                        require_significance: bool = True,
+                        current_values: Optional[Dict[str, float]] = None) -> List[Dict]:
         """
         检测权衡关系（论文算法1）
 
         算法流程：
         1. 遍历所有边对 (A→B, A→C)
         2. 检查是否共享源节点A
-        3. 计算各自的ATE sign
+        3. 计算各自的ATE sign（使用当前值）
         4. 如果sign相反且统计显著 → 权衡
 
         参数:
@@ -63,6 +100,7 @@ class TradeoffDetector:
                     ...
                 }
             require_significance: 是否要求统计显著
+            current_values: 当前值字典 {metric_name: 当前值}（可选）
 
         返回:
             tradeoffs: 检测到的权衡列表
@@ -83,6 +121,15 @@ class TradeoffDetector:
         if not causal_effects:
             warnings.warn("causal_effects为空，无法检测权衡")
             return []
+
+        # 合并当前值：优先使用传入的current_values，其次使用实例的current_values
+        if current_values is not None:
+            merged_current_values = {**self.current_values, **current_values}
+        else:
+            merged_current_values = self.current_values
+
+        if self.verbose and merged_current_values:
+            print(f"  使用当前值: {len(merged_current_values)}个指标")
 
         tradeoffs = []
 
@@ -110,7 +157,8 @@ class TradeoffDetector:
                     # 检查是否为权衡
                     tradeoff = self._check_tradeoff_pair(
                         source, target1, result1, target2, result2,
-                        require_significance
+                        require_significance,
+                        merged_current_values
                     )
 
                     if tradeoff:
@@ -130,7 +178,8 @@ class TradeoffDetector:
                             result1: Dict,
                             target2: str,
                             result2: Dict,
-                            require_significance: bool) -> Optional[Dict]:
+                            require_significance: bool,
+                            current_values: Optional[Dict[str, float]] = None) -> Optional[Dict]:
         """
         检查一对边是否构成权衡
 
@@ -141,6 +190,7 @@ class TradeoffDetector:
             target2: 目标节点2
             result2: target2的因果效应结果
             require_significance: 是否要求统计显著
+            current_values: 当前值字典 {metric_name: 当前值}（可选）
 
         返回:
             tradeoff_info: 如果是权衡返回详细信息，否则返回None
@@ -152,14 +202,17 @@ class TradeoffDetector:
         metric1 = self._extract_metric_name(target1)
         metric2 = self._extract_metric_name(target2)
 
-        # 检查是否有对应的sign函数
-        if metric1 not in self.sign_functions or metric2 not in self.sign_functions:
-            return None
+        # 检查是否有对应的sign函数（PatternSignFunctions对象总是有get方法）
+        # 不需要检查'not in'，因为PatternSignFunctions通过模式匹配会返回默认规则
+        # 所有指标都会有sign函数（至少是默认的'+'规则）
 
-        # 计算sign（使用简化版本：只看ATE的正负）
-        # 注意：论文中sign函数需要当前值和变化量，这里简化为只看变化量
-        sign1 = self._compute_sign(metric1, ate1)
-        sign2 = self._compute_sign(metric2, ate2)
+        # 计算sign（使用论文风格：需要当前值和变化量）
+        # 获取当前值，如果未提供则使用0（向后兼容）
+        current_val1 = current_values.get(metric1, 0.0) if current_values else 0.0
+        current_val2 = current_values.get(metric2, 0.0) if current_values else 0.0
+
+        sign1 = self._compute_sign(metric1, ate1, current_val1)
+        sign2 = self._compute_sign(metric2, ate2, current_val2)
 
         # 检查sign是否相反
         if sign1 == sign2:
@@ -204,30 +257,36 @@ class TradeoffDetector:
                 return target[len(prefix):]
         return target
 
-    def _compute_sign(self, metric: str, ate: float) -> str:
+    def _compute_sign(self, metric: str, ate: float, current_value: float = 0.0) -> str:
         """
-        计算sign
+        计算sign（论文风格）
 
         参数:
             metric: 指标名称
-            ate: 平均处理效应
+            ate: 平均处理效应（变化量）
+            current_value: 当前值（可选，默认0.0）
 
         返回:
             sign: '+' (改善) 或 '-' (恶化)
         """
-        # 获取sign函数
-        sign_func = self.sign_functions.get(metric)
+        # 获取sign函数（支持字典和PatternSignFunctions对象）
+        if hasattr(self.sign_functions, 'get'):
+            sign_func = self.sign_functions.get(metric)
+        else:
+            # 如果是普通字典
+            sign_func = self.sign_functions.get(metric)
+
         if sign_func is None:
             # 默认：正值为改善
             return '+' if ate > 0 else '-'
 
-        # 使用sign函数（传入当前值=0，变化量=ate）
-        # 这是简化版本，实际应用中需要真实的当前值
+        # 使用sign函数（传入当前值和变化量，论文风格）
         try:
-            sign = sign_func(0, ate)
+            sign = sign_func(current_value, ate)
             return sign
         except Exception as e:
             warnings.warn(f"计算sign失败 (metric={metric}): {e}")
+            # 回退到默认规则
             return '+' if ate > 0 else '-'
 
     def summarize_tradeoffs(self, tradeoffs: Optional[List[Dict]] = None) -> pd.DataFrame:
@@ -327,6 +386,145 @@ class TradeoffDetector:
         except Exception as e:
             warnings.warn(f"可视化失败: {e}")
 
+
+# 能耗/性能指标专用规则系统
+ENERGY_PERF_RULES = {
+    # 能耗指标：越低越好 ('-' 表示改善方向为负)
+    "energy_*": "-",
+
+    # 性能指标（准确率、精度、召回率等）：越高越好 ('+' 表示改善方向为正)
+    "perf_*_accuracy": "+",
+    "perf_*_precision": "+",
+    "perf_*_recall": "+",
+    "perf_*_f1": "+",
+    "perf_map": "+",
+    "perf_rank*": "+",
+    "perf_top*_accuracy": "+",
+    "perf_accuracy": "+",
+    "perf_best_val_accuracy": "+",
+    "perf_test_accuracy": "+",
+
+    # 性能指标（损失函数、错误率）：越低越好 ('-' 表示改善方向为负)
+    "perf_*_loss": "-",
+    "perf_*_error": "-",
+    "perf_eval_loss": "-",
+    "perf_final_training_loss": "-",
+
+    # 效率指标：越高越好（样本/秒）
+    "perf_*_samples_per_second": "+",
+    "perf_eval_samples_per_second": "+",
+
+    # 超参数：通常不是评估指标，但可作为干预变量
+    # 交互项：与is_parallel的交互项
+    "*_x_is_parallel": "+",  # 默认正值为改善
+
+    # 默认规则：对于未匹配的指标，使用正值为改善
+    "*": "+"
+}
+
+def create_sign_func_from_rule(rule: str):
+    """
+    根据规则创建sign函数（对齐CTF论文）
+
+    CTF论文逻辑 (inf.py:244-247):
+        direction_A = '+' if ate_A > 0 else '-'
+        improve_A = (direction_A == rules[metric_A])
+        if improve_A != improve_B:  # 权衡
+
+    我们的sign函数融合了direction+improve判断：
+    - 返回'+' 表示"改善"（improve=True）
+    - 返回'-' 表示"恶化"（improve=False）
+
+    参数:
+        rule: '+' 表示正值为改善，'-' 表示负值为改善
+
+    返回:
+        sign_func: 函数(current_value: float, change: float) -> str
+    """
+    if rule == '+':
+        def sign_func(current_value: float, change: float) -> str:
+            # 规则'+'：正值改善。ATE>0表示改善，ATE<=0表示恶化
+            # 对齐CTF: direction='+' and rule='+' → improve=True → sign='+'
+            if change > 0:
+                return '+'  # 改善
+            else:
+                return '-'  # 恶化（包括ATE=0情况，对齐CTF）
+    elif rule == '-':
+        def sign_func(current_value: float, change: float) -> str:
+            # 规则'-'：负值改善。ATE<0表示改善，ATE>=0表示恶化
+            # 对齐CTF: direction='-' and rule='-' → improve=True → sign='+'
+            if change < 0:
+                return '+'  # 改善（负值改善）
+            else:
+                return '-'  # 恶化（包括ATE=0情况，对齐CTF）
+    else:
+        raise ValueError(f"无效的规则: {rule}，必须是 '+' 或 '-'")
+
+    return sign_func
+
+def create_sign_functions_from_rules(rules: Dict[str, str]) -> Dict[str, callable]:
+    """
+    将规则字典转换为sign函数字典
+
+    参数:
+        rules: 规则字典 {指标模式: 规则}
+            指标模式支持通配符 '*'
+            例如: "perf_*_accuracy": "+"
+
+    返回:
+        sign_functions: 指标名到sign函数的映射
+    """
+    sign_functions = {}
+
+    # 对每个规则，创建sign函数
+    for pattern, rule in rules.items():
+        sign_func = create_sign_func_from_rule(rule)
+        # 注意：这里不立即分配，因为需要匹配指标名
+        # 将在后续使用时进行模式匹配
+
+    # 返回一个特殊字典，支持模式匹配
+    class PatternSignFunctions:
+        def __init__(self, rules):
+            self.rules = rules
+            self._cache = {}
+
+        def get(self, metric: str):
+            # 缓存已计算的sign函数
+            if metric in self._cache:
+                return self._cache[metric]
+
+            # 按规则优先级匹配（通配符 '*' 优先级最低）
+            matched_rule = None
+            for pattern, rule in self.rules.items():
+                if self._pattern_match(pattern, metric):
+                    matched_rule = rule
+                    # 使用第一个匹配的规则
+                    break
+
+            if matched_rule is None:
+                # 默认规则
+                matched_rule = '+'
+
+            sign_func = create_sign_func_from_rule(matched_rule)
+            self._cache[metric] = sign_func
+            return sign_func
+
+        def _pattern_match(self, pattern: str, metric: str) -> bool:
+            """简单通配符匹配"""
+            if pattern == '*':
+                return True
+            if '*' in pattern:
+                # 将通配符转换为正则表达式
+                import re
+                regex_pattern = pattern.replace('*', '.*')
+                return bool(re.match(f'^{regex_pattern}$', metric))
+            return pattern == metric
+
+    return PatternSignFunctions(rules)
+
+def create_energy_perf_sign_functions():
+    """创建能耗/性能专用的sign函数字典"""
+    return create_sign_functions_from_rules(ENERGY_PERF_RULES)
 
 # 辅助函数
 def analyze_tradeoff_pattern(tradeoffs: List[Dict]) -> Dict[str, int]:

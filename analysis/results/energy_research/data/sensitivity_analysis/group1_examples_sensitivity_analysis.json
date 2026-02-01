@@ -1,0 +1,166 @@
+{
+  "group_id": "group1_examples",
+  "group_num": 1,
+  "threshold_sensitivity": {
+    "0.1": {
+      "edge_count": 43,
+      "edge_percentage": 1.8282312925170068
+    },
+    "0.3": {
+      "edge_count": 43,
+      "edge_percentage": 1.8282312925170068
+    },
+    "0.5": {
+      "edge_count": 7,
+      "edge_percentage": 0.2976190476190476
+    }
+  },
+  "cleaning_sensitivity": {
+    "median": {
+      "original_nan": 8328,
+      "remaining_nan": 7904,
+      "rows_removed": 0,
+      "final_rows": 304,
+      "nan_reduction_percent": 5.091258405379443
+    },
+    "mean": {
+      "original_nan": 8328,
+      "remaining_nan": 7904,
+      "rows_removed": 0,
+      "final_rows": 304,
+      "nan_reduction_percent": 5.091258405379443
+    },
+    "drop": {
+      "original_nan": 8328,
+      "remaining_nan": 0,
+      "rows_removed": 304,
+      "final_rows": 0,
+      "nan_reduction_percent": 100.0
+    },
+    "zero": {
+      "original_nan": 8328,
+      "remaining_nan": 0,
+      "rows_removed": 0,
+      "final_rows": 304,
+      "nan_reduction_percent": 100.0
+    }
+  },
+  "ate_sensitivity": {
+    "hyperparam_batch_size_x_is_parallel->energy_gpu_min_watts": {
+      "0.1": {
+        "ate": -4.130089902389391,
+        "ci_lower": -4.939587523257711,
+        "ci_upper": -3.32059228152107,
+        "is_significant": true,
+        "confounders_count": 1
+      },
+      "0.3": {
+        "ate": -4.121931610096794,
+        "ci_lower": -4.929830205675766,
+        "ci_upper": -3.3140330145178227,
+        "is_significant": true,
+        "confounders_count": 1
+      },
+      "0.5": {
+        "ate": -4.112373796320264,
+        "ci_lower": -4.918399060399036,
+        "ci_upper": -3.306348532241492,
+        "is_significant": true,
+        "confounders_count": 1
+      }
+    },
+    "hyperparam_batch_size_x_is_parallel->perf_test_accuracy": {
+      "0.1": {
+        "ate": 20.604710623051506,
+        "ci_lower": 16.56618734093341,
+        "ci_upper": 24.643233905169602,
+        "is_significant": true,
+        "confounders_count": 9
+      },
+      "0.3": {
+        "ate": 18.345733751133345,
+        "ci_lower": 14.74996993591121,
+        "ci_upper": 21.94149756635548,
+        "is_significant": true,
+        "confounders_count": 9
+      },
+      "0.5": {
+        "ate": 0.388042758783014,
+        "ci_lower": 0.3119863780615432,
+        "ci_upper": 0.4640991395044847,
+        "is_significant": true,
+        "confounders_count": 1
+      }
+    },
+    "hyperparam_batch_size_x_is_parallel->energy_gpu_temp_avg_celsius": {
+      "0.1": {
+        "ate": 1.0595436291516325,
+        "ci_lower": 0.8518730778379126,
+        "ci_upper": 1.2672141804653525,
+        "is_significant": true,
+        "confounders_count": 2
+      },
+      "0.3": {
+        "ate": 1.1957669456919933,
+        "ci_lower": 0.9613966243363625,
+        "ci_upper": 1.430137267047624,
+        "is_significant": true,
+        "confounders_count": 2
+      },
+      "0.5": {
+        "ate": -10.877728214923506,
+        "ci_lower": -13.009762945048513,
+        "ci_upper": -8.7456934847985,
+        "is_significant": true,
+        "confounders_count": 0
+      }
+    },
+    "energy_cpu_total_joules->energy_cpu_pkg_joules": {
+      "0.1": {
+        "ate": 1.241394858702235,
+        "ci_lower": 0.9980814663965969,
+        "ci_upper": 1.484708251007873,
+        "is_significant": true,
+        "confounders_count": 2
+      },
+      "0.3": {
+        "ate": 1.2359298540118961,
+        "ci_lower": 0.9936876026255645,
+        "ci_upper": 1.4781721053982277,
+        "is_significant": true,
+        "confounders_count": 2
+      },
+      "0.5": {
+        "ate": 0.9967132224571336,
+        "ci_lower": 0.8013574308555353,
+        "ci_upper": 1.1920690140587318,
+        "is_significant": true,
+        "confounders_count": 0
+      }
+    },
+    "model_mnist_ff->perf_test_accuracy": {
+      "0.1": {
+        "ate": -1.8352923402724286,
+        "ci_lower": -2.1950096389658245,
+        "ci_upper": -1.4755750415790325,
+        "is_significant": true,
+        "confounders_count": 9
+      },
+      "0.3": {
+        "ate": -1.5622114188344887,
+        "ci_lower": -1.8684048569260485,
+        "ci_upper": -1.2560179807429288,
+        "is_significant": true,
+        "confounders_count": 9
+      },
+      "0.5": {
+        "ate": -1.6496525428437159,
+        "ci_lower": -1.9729844412410842,
+        "ci_upper": -1.3263206444463476,
+        "is_significant": true,
+        "confounders_count": 1
+      }
+    }
+  },
+  "timestamp": "2026-01-30 19:04:48"
+}

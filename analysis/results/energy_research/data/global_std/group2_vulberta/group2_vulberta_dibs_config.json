@@ -1,0 +1,21 @@
+{
+  "group_config": {
+    "id": "group2_vulberta",
+    "name": "VulBERTa\uff08\u4ee3\u7801\u6f0f\u6d1e\u68c0\u6d4b\uff09",
+    "csv_file": "group2_vulberta_dibs_ready.csv",
+    "expected_samples": 72,
+    "expected_features": 49,
+    "description": "\u4ee3\u7801\u6f0f\u6d1e\u68c0\u6d4b\u6a21\u578b\uff0cBERT\u67b6\u6784"
+  },
+  "dibs_config": {
+    "alpha_linear": 0.05,
+    "beta_linear": 0.1,
+    "n_particles": 20,
+    "tau": 1.0,
+    "n_steps": 5000,
+    "n_grad_mc_samples": 128,
+    "n_acyclicity_mc_samples": 32
+  },
+  "runtime_seconds": 10822.67752981186,
+  "timestamp": "2026-01-30T23:19:01.784321"
+}

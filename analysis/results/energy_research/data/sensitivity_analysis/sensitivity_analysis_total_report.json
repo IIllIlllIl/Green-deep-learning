@@ -1,0 +1,25 @@
+{
+  "timestamp": "2026-01-30 19:04:48",
+  "config": {
+    "global_std_dir": "data/energy_research/6groups_global_std",
+    "whitelist_dir": "results/energy_research/data/interaction/whitelist",
+    "output_dir": "results/energy_research/data/sensitivity_analysis"
+  },
+  "results": [
+    {
+      "group": 1,
+      "success": true,
+      "results_file": "results/energy_research/data/sensitivity_analysis/group1_examples_sensitivity_analysis.json",
+      "summary": {
+        "threshold_sensitivity": 3,
+        "cleaning_sensitivity": 4,
+        "ate_sensitivity": 5
+      }
+    }
+  ],
+  "summary": {
+    "total_groups": 1,
+    "successful_groups": 1,
+    "failed_groups": 0
+  }
+}

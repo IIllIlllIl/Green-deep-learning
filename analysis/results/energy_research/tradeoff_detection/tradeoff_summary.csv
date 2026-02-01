@@ -1,0 +1,7 @@
+group_id,group_num,total_edges,tradeoffs_detected,tradeoffs_ratio,energy_vs_perf,hyperparam_intervention
+group1_examples,1,43,12,27.9%,12,0
+group2_vulberta,2,35,0,0.0%,0,0
+group3_person_reid,3,45,17,37.8%,1,0
+group4_bug_localization,4,36,0,0.0%,0,0
+group5_mrt_oast,5,39,4,10.3%,1,0
+group6_resnet,6,19,4,21.1%,0,0

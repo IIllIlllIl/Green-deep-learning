@@ -1,0 +1,256 @@
+{
+  "analysis_date": "2026-01-30T16:38:40.162617",
+  "groups": {
+    "group1_examples": {
+      "n_samples": 304,
+      "n_columns": 21,
+      "missing_overall_pct": 4.3389724310776945,
+      "missing_energy_pct": 0.0,
+      "complete_rows": 211,
+      "complete_rows_pct": 69.4078947368421,
+      "energy_columns": [
+        "energy_cpu_pkg_joules",
+        "energy_cpu_ram_joules",
+        "energy_cpu_total_joules",
+        "energy_gpu_avg_watts",
+        "energy_gpu_max_watts",
+        "energy_gpu_min_watts",
+        "energy_gpu_total_joules",
+        "energy_gpu_temp_avg_celsius",
+        "energy_gpu_temp_max_celsius",
+        "energy_gpu_util_avg_percent",
+        "energy_gpu_util_max_percent"
+      ]
+    },
+    "group2_vulberta": {
+      "n_samples": 72,
+      "n_columns": 20,
+      "missing_overall_pct": 12.916666666666668,
+      "missing_energy_pct": 0.0,
+      "complete_rows": 10,
+      "complete_rows_pct": 13.88888888888889,
+      "energy_columns": [
+        "energy_cpu_pkg_joules",
+        "energy_cpu_ram_joules",
+        "energy_cpu_total_joules",
+        "energy_gpu_avg_watts",
+        "energy_gpu_max_watts",
+        "energy_gpu_min_watts",
+        "energy_gpu_total_joules",
+        "energy_gpu_temp_avg_celsius",
+        "energy_gpu_temp_max_celsius",
+        "energy_gpu_util_avg_percent",
+        "energy_gpu_util_max_percent"
+      ]
+    },
+    "group3_person_reid": {
+      "n_samples": 206,
+      "n_columns": 22,
+      "missing_overall_pct": 3.751103265666372,
+      "missing_energy_pct": 0.0,
+      "complete_rows": 118,
+      "complete_rows_pct": 57.28155339805825,
+      "energy_columns": [
+        "energy_cpu_pkg_joules",
+        "energy_cpu_ram_joules",
+        "energy_cpu_total_joules",
+        "energy_gpu_avg_watts",
+        "energy_gpu_max_watts",
+        "energy_gpu_min_watts",
+        "energy_gpu_total_joules",
+        "energy_gpu_temp_avg_celsius",
+        "energy_gpu_temp_max_celsius",
+        "energy_gpu_util_avg_percent",
+        "energy_gpu_util_max_percent"
+      ]
+    },
+    "group4_bug_localization": {
+      "n_samples": 90,
+      "n_columns": 21,
+      "missing_overall_pct": 12.486772486772486,
+      "missing_energy_pct": 0.0,
+      "complete_rows": 10,
+      "complete_rows_pct": 11.11111111111111,
+      "energy_columns": [
+        "energy_cpu_pkg_joules",
+        "energy_cpu_ram_joules",
+        "energy_cpu_total_joules",
+        "energy_gpu_avg_watts",
+        "energy_gpu_max_watts",
+        "energy_gpu_min_watts",
+        "energy_gpu_total_joules",
+        "energy_gpu_temp_avg_celsius",
+        "energy_gpu_temp_max_celsius",
+        "energy_gpu_util_avg_percent",
+        "energy_gpu_util_max_percent"
+      ]
+    },
+    "group5_mrt_oast": {
+      "n_samples": 72,
+      "n_columns": 21,
+      "missing_overall_pct": 8.531746031746032,
+      "missing_energy_pct": 0.0,
+      "complete_rows": 40,
+      "complete_rows_pct": 55.55555555555556,
+      "energy_columns": [
+        "energy_cpu_pkg_joules",
+        "energy_cpu_ram_joules",
+        "energy_cpu_total_joules",
+        "energy_gpu_avg_watts",
+        "energy_gpu_max_watts",
+        "energy_gpu_min_watts",
+        "energy_gpu_total_joules",
+        "energy_gpu_temp_avg_celsius",
+        "energy_gpu_temp_max_celsius",
+        "energy_gpu_util_avg_percent",
+        "energy_gpu_util_max_percent"
+      ]
+    },
+    "group6_resnet": {
+      "n_samples": 74,
+      "n_columns": 19,
+      "missing_overall_pct": 5.761024182076813,
+      "missing_energy_pct": 0.0,
+      "complete_rows": 41,
+      "complete_rows_pct": 55.4054054054054,
+      "energy_columns": [
+        "energy_cpu_pkg_joules",
+        "energy_cpu_ram_joules",
+        "energy_cpu_total_joules",
+        "energy_gpu_avg_watts",
+        "energy_gpu_max_watts",
+        "energy_gpu_min_watts",
+        "energy_gpu_total_joules",
+        "energy_gpu_temp_avg_celsius",
+        "energy_gpu_temp_max_celsius",
+        "energy_gpu_util_avg_percent",
+        "energy_gpu_util_max_percent"
+      ]
+    }
+  },
+  "global_stats": {
+    "total_columns": 42,
+    "common_columns": 14,
+    "unique_columns": 28,
+    "merged_total_samples": 818,
+    "merged_complete_samples": 520,
+    "merged_complete_pct": 63.56968215158925,
+    "dropna_loss_pct": 36.43031784841076
+  },
+  "recommendations": {
+    "primary_strategy": {
+      "name": "\u4fdd\u5b88\u586b\u5145 - \u5168\u5c40\u6807\u51c6\u5316",
+      "description": "\u57fa\u4e8e\u5168\u5c40\u5747\u503c/\u4e2d\u4f4d\u6570\u586b\u5145\u7f3a\u5931\u503c\uff0c\u7136\u540e\u8fdb\u884c\u5168\u5c40\u6807\u51c6\u5316",
+      "rationale": [
+        "\u80fd\u8017\u5217\u65e0\u7f3a\u5931\uff0c\u6838\u5fc3\u6570\u636e\u8d28\u91cf\u9ad8",
+        "\u5408\u5e76\u4ec5\u5171\u540c\u5217\u540e\u4ecd\u670963.6%\u5b8c\u5168\u53ef\u7528\u8bb0\u5f55",
+        "dropna\u4f1a\u635f\u593136.4%\u6837\u672c\uff0c\u4e0d\u53ef\u63a5\u53d7",
+        "\u7ec4\u7279\u6709\u5217\uff08\u6a21\u578b\u6807\u8bc6\u3001\u6027\u80fd\u6307\u6807\uff09\u5e94\u4fdd\u7559\uff0c\u7528\u4e8e\u540e\u7eed\u5206\u6790"
+      ],
+      "implementation": [
+        "1. \u5408\u5e76\u6240\u67096\u7ec4\u6570\u636e\uff08\u4fdd\u7559\u6240\u6709\u5217\uff09",
+        "2. \u5bf9\u5171\u540c\u5217\u4e2d\u7684\u7f3a\u5931\u503c\uff08hyperparam_seed\uff09\u4f7f\u7528\u5168\u5c40\u4e2d\u4f4d\u6570\u586b\u5145",
+        "3. \u5bf9\u7ec4\u7279\u6709\u5217\u7f3a\u5931\u503c\u4fdd\u6301NaN\uff08\u8fd9\u4e9b\u5217\u672c\u5c31\u4e0d\u662f\u6240\u6709\u7ec4\u90fd\u6709\uff09",
+        "4. \u4ec5\u5bf9\u5171\u540c\u5217\u8fdb\u884c\u5168\u5c40\u6807\u51c6\u5316",
+        "5. \u57fa\u4e8e\u6807\u51c6\u5316\u540e\u7684\u8d85\u53c2\u6570\u91cd\u5efa\u4ea4\u4e92\u9879"
+      ]
+    },
+    "sensitivity_analysis": {
+      "name": "CTF\u5220\u9664\u7b56\u7565",
+      "description": "\u4f7f\u7528CTF\u539f\u59cb\u7684dropna()\u7b56\u7565\uff0c\u7528\u4e8e\u654f\u611f\u6027\u5206\u6790",
+      "rationale": [
+        "\u4e0e\u53c2\u8003\u8bba\u6587\u5bf9\u9f50",
+        "\u9a8c\u8bc1\u586b\u5145\u7b56\u7565\u7684\u5f71\u54cd",
+        "\u8bc4\u4f30\u6837\u672c\u91cf\u51cf\u5c11\u5bf9\u7ed3\u679c\u7684\u5f71\u54cd"
+      ],
+      "implementation": [
+        "1. \u5408\u5e76\u4ec5\u5171\u540c\u5217\u7684\u6570\u636e",
+        "2. dropna()\u5220\u9664\u6240\u6709\u542b\u7f3a\u5931\u503c\u7684\u884c",
+        "3. \u5bf9\u5269\u4f59\u6837\u672c\u8fdb\u884c\u5168\u5c40\u6807\u51c6\u5316",
+        "4. \u5bf9\u6bd4\u4fdd\u5b88\u586b\u5145vs dropna\u7684ATE\u5dee\u5f02"
+      ]
+    },
+    "key_findings": [
+      "\u2705 \u80fd\u8017\u5217\u5b8c\u5168\u65e0\u7f3a\u5931\uff0811\u5217\uff09",
+      "\u26a0\ufe0f hyperparam_seed\u7f3a\u5931\u7387: 36.4% (298/818)",
+      "\u26a0\ufe0f dropna\u4f1a\u635f\u593136.4%\u6837\u672c",
+      "\u2705 \u4fdd\u5b88\u586b\u5145\u53ef\u4fdd\u7559\u6240\u6709818\u4e2a\u6837\u672c",
+      "\u26a0\ufe0f \u7ec4\u5185\u6807\u51c6\u5316\u5bfc\u81f4ATE\u4e0d\u53ef\u6bd4\uff08energy_gpu_avg_watts\u6807\u51c6\u5dee\u8303\u56f4: 8.10-72.97 watts\uff09",
+      "\u2705 \u5171\u540c\u521714\u4e2a\uff0c\u8db3\u591f\u8fdb\u884c\u5168\u5c40\u6807\u51c6\u5316\u5206\u6790"
+    ]
+  },
+  "energy_std_comparison": {
+    "group1_examples_energy_gpu_avg_watts": {
+      "std": 73.08894778422476,
+      "mean": 162.62364933384183
+    },
+    "group1_examples_energy_gpu_max_watts": {
+      "std": 89.71515821483511,
+      "mean": 205.89917763157894
+    },
+    "group1_examples_energy_gpu_min_watts": {
+      "std": 70.0452240029743,
+      "mean": 115.97444078947368
+    },
+    "group2_vulberta_energy_gpu_avg_watts": {
+      "std": 8.155391785371146,
+      "mean": 223.98824042780362
+    },
+    "group2_vulberta_energy_gpu_max_watts": {
+      "std": 0.4043382700409642,
+      "mean": 319.02583333333337
+    },
+    "group2_vulberta_energy_gpu_min_watts": {
+      "std": 40.84952322908822,
+      "mean": 36.38111111111111
+    },
+    "group3_person_reid_energy_gpu_avg_watts": {
+      "std": 14.635027817171576,
+      "mean": 226.89700615748302
+    },
+    "group3_person_reid_energy_gpu_max_watts": {
+      "std": 23.906798212969534,
+      "mean": 291.2285436893204
+    },
+    "group3_person_reid_energy_gpu_min_watts": {
+      "std": 56.592724909567934,
+      "mean": 57.56548543689321
+    },
+    "group4_bug_localization_energy_gpu_avg_watts": {
+      "std": 27.98553839351233,
+      "mean": 72.33136257694397
+    },
+    "group4_bug_localization_energy_gpu_max_watts": {
+      "std": 30.123385377133097,
+      "mean": 78.85522222222222
+    },
+    "group4_bug_localization_energy_gpu_min_watts": {
+      "std": 24.274185294472026,
+      "mean": 54.27155555555555
+    },
+    "group5_mrt_oast_energy_gpu_avg_watts": {
+      "std": 10.156060709711511,
+      "mean": 235.75428136838957
+    },
+    "group5_mrt_oast_energy_gpu_max_watts": {
+      "std": 1.4138784492206484,
+      "mean": 316.4588888888889
+    },
+    "group5_mrt_oast_energy_gpu_min_watts": {
+      "std": 22.725998265930993,
+      "mean": 76.23666666666666
+    },
+    "group6_resnet_energy_gpu_avg_watts": {
+      "std": 17.27392719971356,
+      "mean": 221.66019342304665
+    },
+    "group6_resnet_energy_gpu_max_watts": {
+      "std": 27.988224335314833,
+      "mean": 268.9916216216216
+    },
+    "group6_resnet_energy_gpu_min_watts": {
+      "std": 27.87210304409596,
+      "mean": 97.6608108108108
+    }
+  }
+}

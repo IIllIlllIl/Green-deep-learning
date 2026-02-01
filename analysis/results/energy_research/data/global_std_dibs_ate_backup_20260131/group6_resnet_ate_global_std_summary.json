@@ -1,0 +1,15 @@
+{
+  "group_id": "group6_resnet",
+  "group_num": 6,
+  "data_rows": 74,
+  "edges_total": 169,
+  "edges_updated": 169,
+  "ate_computed": 54,
+  "ate_significant": 142,
+  "ate_mean": 0.5217310481530792,
+  "ate_std": 1.6622736952951112,
+  "ate_min": -3.8590950295397093,
+  "ate_max": 8.107528236884479,
+  "elapsed_seconds": 14.049954891204834,
+  "timestamp": "2026-01-31 13:02:37"
+}

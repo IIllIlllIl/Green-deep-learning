@@ -1,0 +1,19 @@
+{
+  "group_id": "group1_examples",
+  "group_name": "examples\uff08\u56fe\u50cf\u5206\u7c7b-\u5c0f\u578b\uff09",
+  "samples": 304,
+  "features": 49,
+  "graph_min": 0.0,
+  "graph_max": 0.699999988079071,
+  "graph_mean": 0.06920032948255539,
+  "graph_std": 0.10150853544473648,
+  "edges_gt_0.01": 1068,
+  "edges_gt_0.1": 582,
+  "edges_gt_0.3": 66,
+  "edges_gt_0.5": 3,
+  "strong_edges_weight_gt_0.3": 66,
+  "total_possible_edges": 2352,
+  "strong_edge_percentage": 2.806122448979592,
+  "runtime_seconds": 12804.576709747314,
+  "timestamp": "2026-01-30T23:47:55.208617"
+}
