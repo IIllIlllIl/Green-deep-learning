@@ -220,7 +220,19 @@ print(f"可用记录: {len(df_usable)}/{len(df)} ({len(df_usable)/len(df)*100:.1
 
 ### 3. 实验报告
 
-位置：`docs/reports/`
+位置：`docs/reports/` 和 `results/energy_research/reports/`
+
+**最新验收报告（2026-02-03）** ⭐⭐⭐⭐⭐:
+
+| 文档 | 位置 | 用途 | 日期 |
+|------|------|------|------|
+| **ATE_CI_FIX_ACCEPTANCE_REPORT_20260203.md** ✅ | analysis/docs/reports/ | **ATE置信区间计算修复验收报告**（CI宽度为0问���修复，6组数据重新计算） | 2026-02-03 |
+| **ALGORITHM1_GLOBAL_STD_TRADEOFF_ACCEPTANCE_REPORT_20260203.md** ✅ | analysis/docs/reports/ | **算法1权衡检测验收报告**（全局标准化ATE，61个权衡，7个能耗vs性能） | 2026-02-03 |
+| **ATE_CALCULATION_ACCEPTANCE_REPORT_20260203.md** ✅ | analysis/docs/reports/ | **ATE计算验收报告**（129/131边有效ATE，116条显著） | 2026-02-03 |
+| **GLOBAL_STD_FIX_ACCEPTANCE_REPORT_20260201.md** ✅ | analysis/results/.../reports/ | **全局标准化修复验收报告**（818样本，35列统一标准化） | 2026-02-01 |
+| **DIBS_RESULTS_ACCEPTANCE_REPORT_20260203.md** ✅ | analysis/results/.../reports/ | **DiBS因果图学习验收报告**（6组完整，131条有向边） | 2026-02-03 |
+
+**历史报告**:
 
 | 文档 | 用途 | 实验日期 |
 |------|------|---------|

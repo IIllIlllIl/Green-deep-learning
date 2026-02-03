@@ -1,8 +1,8 @@
 {
-  "timestamp": "2026-01-31 13:36:14",
+  "timestamp": "2026-02-03 23:26:41",
   "config": {
-    "global_std_dir": "data/energy_research/6groups_global_std",
-    "dibs_dir": "results/energy_research/data/global_std",
+    "global_std_dir": "../data/energy_research/6groups_global_std",
+    "dibs_dir": "../results/energy_research/data/global_std",
     "output_dir": "results/energy_research/data/global_std_dibs_ate",
     "threshold": 0.3,
     "dry_run": false
@@ -15,19 +15,19 @@
         "group_id": "group1_examples",
         "group_num": 1,
         "data_rows": 304,
-        "edges_total": 66,
-        "edges_updated": 66,
-        "ate_computed": 36,
-        "ate_significant": 47,
-        "ate_mean": 0.14845072933740522,
-        "ate_std": 0.7241125554156851,
+        "edges_total": 41,
+        "edges_updated": 39,
+        "ate_computed": 39,
+        "ate_significant": 33,
+        "ate_mean": 0.0609270565728791,
+        "ate_std": 0.5964444115396985,
         "ate_min": -1.5247544454453597,
-        "ate_max": 2.3178842359041893,
-        "elapsed_seconds": 10.477679014205933,
-        "timestamp": "2026-01-31 13:35:40"
+        "ate_max": 2.1852377696767413,
+        "elapsed_seconds": 24.870824337005615,
+        "timestamp": "2026-02-03 23:15:36"
       },
-      "output_file": "results/energy_research/data/global_std_dibs_ate/group1_examples_dibs_global_std_ate.csv",
-      "summary_file": "results/energy_research/data/global_std_dibs_ate/group1_examples_ate_global_std_summary.json"
+      "output_file": "group1_examples_dibs_global_std_ate.csv",
+      "summary_file": "group1_examples_ate_global_std_summary.json"
     },
     {
       "group": 2,
@@ -36,19 +36,19 @@
         "group_id": "group2_vulberta",
         "group_num": 2,
         "data_rows": 72,
-        "edges_total": 161,
-        "edges_updated": 159,
-        "ate_computed": 48,
-        "ate_significant": 120,
-        "ate_mean": 0.01613870048407676,
-        "ate_std": 0.26231659374987276,
-        "ate_min": -1.3625437124113768,
-        "ate_max": 0.6454848922878265,
-        "elapsed_seconds": 4.227621793746948,
-        "timestamp": "2026-01-31 13:35:45"
+        "edges_total": 18,
+        "edges_updated": 16,
+        "ate_computed": 16,
+        "ate_significant": 11,
+        "ate_mean": 0.2872225145406,
+        "ate_std": 1.2738821560031726,
+        "ate_min": -1.7230529064282183,
+        "ate_max": 4.6864268529575694,
+        "elapsed_seconds": 9.168949127197266,
+        "timestamp": "2026-02-03 23:15:46"
       },
-      "output_file": "results/energy_research/data/global_std_dibs_ate/group2_vulberta_dibs_global_std_ate.csv",
-      "summary_file": "results/energy_research/data/global_std_dibs_ate/group2_vulberta_ate_global_std_summary.json"
+      "output_file": "group2_vulberta_dibs_global_std_ate.csv",
+      "summary_file": "group2_vulberta_ate_global_std_summary.json"
     },
     {
       "group": 3,
@@ -57,19 +57,19 @@
         "group_id": "group3_person_reid",
         "group_num": 3,
         "data_rows": 206,
-        "edges_total": 47,
-        "edges_updated": 45,
-        "ate_computed": 24,
-        "ate_significant": 38,
-        "ate_mean": 0.3418557282695425,
-        "ate_std": 0.475121493256778,
-        "ate_min": -0.08489105192602164,
-        "ate_max": 1.519243008594858,
-        "elapsed_seconds": 7.022945880889893,
-        "timestamp": "2026-01-31 13:35:52"
+        "edges_total": 32,
+        "edges_updated": 30,
+        "ate_computed": 29,
+        "ate_significant": 29,
+        "ate_mean": 0.2112078017470403,
+        "ate_std": 0.36224029392339807,
+        "ate_min": -0.6677204824385489,
+        "ate_max": 1.0303024572222148,
+        "elapsed_seconds": 18.008225679397583,
+        "timestamp": "2026-02-03 23:16:05"
       },
-      "output_file": "results/energy_research/data/global_std_dibs_ate/group3_person_reid_dibs_global_std_ate.csv",
-      "summary_file": "results/energy_research/data/global_std_dibs_ate/group3_person_reid_ate_global_std_summary.json"
+      "output_file": "group3_person_reid_dibs_global_std_ate.csv",
+      "summary_file": "group3_person_reid_ate_global_std_summary.json"
     },
     {
       "group": 4,
@@ -78,19 +78,19 @@
         "group_id": "group4_bug_localization",
         "group_num": 4,
         "data_rows": 90,
-        "edges_total": 120,
-        "edges_updated": 114,
-        "ate_computed": 46,
-        "ate_significant": 83,
-        "ate_mean": 0.1154183863324495,
-        "ate_std": 0.3192282176890363,
-        "ate_min": -0.20463655692659663,
-        "ate_max": 1.2392674370248078,
-        "elapsed_seconds": 7.341852426528931,
-        "timestamp": "2026-01-31 13:35:59"
+        "edges_total": 22,
+        "edges_updated": 20,
+        "ate_computed": 20,
+        "ate_significant": 17,
+        "ate_mean": 0.3132702659477076,
+        "ate_std": 0.47349824426898385,
+        "ate_min": -0.6928247568054134,
+        "ate_max": 1.3106693288858284,
+        "elapsed_seconds": 10.929948568344116,
+        "timestamp": "2026-02-03 23:16:17"
       },
-      "output_file": "results/energy_research/data/global_std_dibs_ate/group4_bug_localization_dibs_global_std_ate.csv",
-      "summary_file": "results/energy_research/data/global_std_dibs_ate/group4_bug_localization_ate_global_std_summary.json"
+      "output_file": "group4_bug_localization_dibs_global_std_ate.csv",
+      "summary_file": "group4_bug_localization_ate_global_std_summary.json"
     },
     {
       "group": 5,
@@ -99,19 +99,19 @@
         "group_id": "group5_mrt_oast",
         "group_num": 5,
         "data_rows": 72,
-        "edges_total": 153,
-        "edges_updated": 151,
-        "ate_computed": 59,
-        "ate_significant": 104,
-        "ate_mean": -0.0019053715580813761,
-        "ate_std": 0.29866472445837655,
-        "ate_min": -0.6901012758391365,
-        "ate_max": 1.0202044050760743,
-        "elapsed_seconds": 3.870182752609253,
-        "timestamp": "2026-01-31 13:36:03"
+        "edges_total": 24,
+        "edges_updated": 22,
+        "ate_computed": 22,
+        "ate_significant": 19,
+        "ate_mean": 0.039641973660903045,
+        "ate_std": 0.27213132436705906,
+        "ate_min": -0.8716207809917802,
+        "ate_max": 0.6331060109161563,
+        "elapsed_seconds": 11.63556456565857,
+        "timestamp": "2026-02-03 23:16:30"
       },
-      "output_file": "results/energy_research/data/global_std_dibs_ate/group5_mrt_oast_dibs_global_std_ate.csv",
-      "summary_file": "results/energy_research/data/global_std_dibs_ate/group5_mrt_oast_ate_global_std_summary.json"
+      "output_file": "group5_mrt_oast_dibs_global_std_ate.csv",
+      "summary_file": "group5_mrt_oast_ate_global_std_summary.json"
     },
     {
       "group": 6,
@@ -120,19 +120,19 @@
         "group_id": "group6_resnet",
         "group_num": 6,
         "data_rows": 74,
-        "edges_total": 169,
-        "edges_updated": 169,
-        "ate_computed": 54,
-        "ate_significant": 142,
-        "ate_mean": 0.23452640337847253,
-        "ate_std": 0.582275133953568,
-        "ate_min": -0.8968974396414979,
-        "ate_max": 2.3996497805561625,
-        "elapsed_seconds": 10.955505132675171,
-        "timestamp": "2026-01-31 13:36:14"
+        "edges_total": 14,
+        "edges_updated": 14,
+        "ate_computed": 14,
+        "ate_significant": 14,
+        "ate_mean": 0.03672022031333068,
+        "ate_std": 0.6170051101234006,
+        "ate_min": -1.1133522141013683,
+        "ate_max": 1.3838156488248456,
+        "elapsed_seconds": 8.812310218811035,
+        "timestamp": "2026-02-03 23:16:40"
       },
-      "output_file": "results/energy_research/data/global_std_dibs_ate/group6_resnet_dibs_global_std_ate.csv",
-      "summary_file": "results/energy_research/data/global_std_dibs_ate/group6_resnet_ate_global_std_summary.json"
+      "output_file": "group6_resnet_dibs_global_std_ate.csv",
+      "summary_file": "group6_resnet_ate_global_std_summary.json"
     }
   ],
   "summary": {

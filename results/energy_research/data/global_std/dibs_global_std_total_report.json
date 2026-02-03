@@ -1,0 +1,26 @@
+{
+  "total_groups": 1,
+  "successful_groups": 1,
+  "groups": [
+    {
+      "group_id": "group5_mrt_oast",
+      "group_name": "MRT-OAST\uff08\u7f3a\u9677\u5b9a\u4f4d\uff09",
+      "samples": 60,
+      "features": 37,
+      "graph_min": 0.0,
+      "graph_max": 0.699999988079071,
+      "graph_mean": 0.024726076051592827,
+      "graph_std": 0.07819420099258423,
+      "edges_gt_0.01": 217,
+      "edges_gt_0.1": 95,
+      "edges_gt_0.3": 23,
+      "edges_gt_0.5": 7,
+      "strong_edges_weight_gt_0.3": 23,
+      "total_possible_edges": 1332,
+      "strong_edge_percentage": 1.7267267267267266,
+      "runtime_seconds": 2080.07927441597,
+      "timestamp": "2026-02-03T17:39:43.320814"
+    }
+  ],
+  "timestamp": "2026-02-03T17:39:43.320981"
+}

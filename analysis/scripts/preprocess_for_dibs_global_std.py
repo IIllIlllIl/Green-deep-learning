@@ -77,6 +77,8 @@ def preprocess_group_for_dibs(group_name: str, input_dir: Path, output_dir: Path
         'strategy_used': {},
         'missing_counts': {}
     }
+    rows_to_drop = set()  # 记录需要删除的行索引
+    cols_to_drop = set()  # 记录需要删除的列名
 
     for col in df.columns:
         missing_count = df[col].isna().sum()
@@ -114,15 +116,26 @@ def preprocess_group_for_dibs(group_name: str, input_dir: Path, output_dir: Path
             fill_info['columns_filled'].append(col)
 
         elif col in perf_cols:
-            # 性能指标：结构性NaN
-            if is_all_nan:
-                df[col].fillna(-999, inplace=True)  # 全NaN用-999标记
-                strategy = "perf_all_nan_marked_missing"
+            # 性能指标：删除缺失行（而非填充-999）
+            if missing_count > 0:
+                if is_all_nan:
+                    # 整列都是NaN：标记删除该列
+                    cols_to_drop.add(col)
+                    strategy = "perf_column_dropped"
+                    # 不添加到 columns_filled（因为列被删除，未填充）
+                else:
+                    # 部分缺失：记录缺失行索引
+                    missing_indices = df[df[col].isna()].index.tolist()
+                    rows_to_drop.update(missing_indices)
+                    strategy = f"perf_delete_rows({missing_count} rows)"
+                    # 添加到 columns_filled（因为缺失行将被删除）
+                    fill_info['columns_filled'].append(col)
+
+                fill_info['strategy_used'][col] = strategy
             else:
-                df[col].fillna(-999, inplace=True)  # 部分NaN也用-999标记
-                strategy = "perf_marked_missing(-999)"
-            fill_info['strategy_used'][col] = strategy
-            fill_info['columns_filled'].append(col)
+                # 无缺失值
+                strategy = "perf_no_missing"
+                fill_info['strategy_used'][col] = strategy
 
         elif col in model_cols:
             # 模型列：二值变量
@@ -157,6 +170,36 @@ def preprocess_group_for_dibs(group_name: str, input_dir: Path, output_dir: Path
                 strategy = f"other_col_mean({col_mean:.4f})"
             fill_info['strategy_used'][col] = strategy
             fill_info['columns_filled'].append(col)
+
+    # 5.1 删除标记的列（全NaN性能指标列）
+    if cols_to_drop:
+        original_cols = len(df.columns)
+        df.drop(columns=list(cols_to_drop), inplace=True)
+        if verbose:
+            print(f"  删除全NaN性能指标列: {len(cols_to_drop)}列 (原始{original_cols}列 → 剩余{len(df.columns)}列)")
+        # 记录删除的列
+        fill_info['cols_dropped'] = {
+            'count': len(cols_to_drop),
+            'columns': sorted(list(cols_to_drop))
+        }
+    else:
+        fill_info['cols_dropped'] = {'count': 0, 'columns': []}
+
+    # 5.2 删除标记的行（性能指标缺失行）
+    if rows_to_drop:
+        original_rows = len(df)
+        df.drop(index=list(rows_to_drop), inplace=True)
+        df.reset_index(drop=True, inplace=True)
+        dropped_rows = original_rows - len(df)
+        if verbose:
+            print(f"  删除性能指标缺失行: {dropped_rows}行 (原始{original_rows}行 → 剩余{len(df)}行)")
+        # 记录删除信息
+        fill_info['rows_dropped'] = {
+            'count': dropped_rows,
+            'indices': sorted(list(rows_to_drop))
+        }
+    else:
+        fill_info['rows_dropped'] = {'count': 0, 'indices': []}
 
     # 6. 验证无缺失值
     remaining_missing = df.isnull().sum().sum()

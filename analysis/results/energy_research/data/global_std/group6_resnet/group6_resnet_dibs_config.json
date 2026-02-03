@@ -4,18 +4,18 @@
     "name": "pytorch_resnet\uff08\u56fe\u50cf\u5206\u7c7b-ResNet\uff09",
     "csv_file": "group6_resnet_dibs_ready.csv",
     "expected_samples": 74,
-    "expected_features": 49,
+    "expected_features": 36,
     "description": "\u6807\u51c6ResNet\u56fe\u50cf\u5206\u7c7b\u6a21\u578b"
   },
   "dibs_config": {
     "alpha_linear": 0.05,
     "beta_linear": 0.1,
-    "n_particles": 20,
+    "n_particles": 2,
     "tau": 1.0,
-    "n_steps": 5000,
-    "n_grad_mc_samples": 128,
-    "n_acyclicity_mc_samples": 32
+    "n_steps": 100,
+    "n_grad_mc_samples": 4,
+    "n_acyclicity_mc_samples": 2
   },
-  "runtime_seconds": 10958.119262695312,
-  "timestamp": "2026-01-30T23:23:48.349450"
+  "runtime_seconds": 5.7,
+  "timestamp": "2026-02-03T22:19:00.151666"
 }

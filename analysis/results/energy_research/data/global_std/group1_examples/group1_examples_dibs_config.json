@@ -4,7 +4,7 @@
     "name": "examples\uff08\u56fe\u50cf\u5206\u7c7b-\u5c0f\u578b\uff09",
     "csv_file": "group1_examples_dibs_ready.csv",
     "expected_samples": 304,
-    "expected_features": 49,
+    "expected_features": 35,
     "description": "\u5c0f\u578b\u56fe\u50cf\u5206\u7c7b\u6a21\u578b\uff0c\u5305\u542bMNIST\u76f8\u5173\u6a21\u578b"
   },
   "dibs_config": {
@@ -16,6 +16,6 @@
     "n_grad_mc_samples": 128,
     "n_acyclicity_mc_samples": 32
   },
-  "runtime_seconds": 12804.576709747314,
-  "timestamp": "2026-01-30T23:47:55.208523"
+  "runtime_seconds": 3251.0660333633423,
+  "timestamp": "2026-02-03T18:55:00.082270"
 }

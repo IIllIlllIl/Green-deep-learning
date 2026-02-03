@@ -1,0 +1,624 @@
+{
+  "group1_examples": [
+    {
+      "intervention": "energy_gpu_max_watts",
+      "metric1": "energy_gpu_temp_avg_celsius",
+      "metric2": "hyperparam_seed",
+      "ate1": -0.3390563051594727,
+      "ate2": -0.8273278485425075,
+      "sign1": "+",
+      "sign2": "-",
+      "is_significant": true
+    },
+    {
+      "intervention": "energy_gpu_max_watts",
+      "metric1": "hyperparam_seed",
+      "metric2": "perf_test_accuracy",
+      "ate1": -0.8273278485425075,
+      "ate2": 0.0820230635378957,
+      "sign1": "-",
+      "sign2": "+",
+      "is_significant": true
+    },
+    {
+      "intervention": "model_mnist_ff",
+      "metric1": "energy_gpu_util_avg_percent",
+      "metric2": "model_mnist_rnn",
+      "ate1": -0.3803565134263424,
+      "ate2": -0.3271889400921659,
+      "sign1": "+",
+      "sign2": "-",
+      "is_significant": true
+    },
+    {
+      "intervention": "model_mnist_ff",
+      "metric1": "energy_gpu_util_avg_percent",
+      "metric2": "hyperparam_seed",
+      "ate1": -0.3803565134263424,
+      "ate2": -0.4089801711903753,
+      "sign1": "+",
+      "sign2": "-",
+      "is_significant": true
+    },
+    {
+      "intervention": "model_mnist_ff",
+      "metric1": "energy_gpu_util_avg_percent",
+      "metric2": "perf_test_accuracy",
+      "ate1": -0.3803565134263424,
+      "ate2": -1.5247544454453597,
+      "sign1": "+",
+      "sign2": "-",
+      "is_significant": true
+    },
+    {
+      "intervention": "model_siamese",
+      "metric1": "model_mnist_rnn",
+      "metric2": "hyperparam_seed",
+      "ate1": -0.3047210300429184,
+      "ate2": 0.4066644667800633,
+      "sign1": "-",
+      "sign2": "+",
+      "is_significant": true
+    },
+    {
+      "intervention": "hyperparam_batch_size_x_is_parallel",
+      "metric1": "energy_gpu_avg_watts",
+      "metric2": "energy_gpu_min_watts",
+      "ate1": 0.0932934442472333,
+      "ate2": -0.3398878497663617,
+      "sign1": "-",
+      "sign2": "+",
+      "is_significant": true
+    },
+    {
+      "intervention": "hyperparam_batch_size_x_is_parallel",
+      "metric1": "energy_gpu_avg_watts",
+      "metric2": "energy_gpu_temp_avg_celsius",
+      "ate1": 0.0932934442472333,
+      "ate2": -0.0185687011951507,
+      "sign1": "-",
+      "sign2": "+",
+      "is_significant": true
+    },
+    {
+      "intervention": "hyperparam_batch_size_x_is_parallel",
+      "metric1": "energy_gpu_avg_watts",
+      "metric2": "hyperparam_batch_size",
+      "ate1": 0.0932934442472333,
+      "ate2": 0.1325063308948631,
+      "sign1": "-",
+      "sign2": "+",
+      "is_significant": true
+    },
+    {
+      "intervention": "hyperparam_batch_size_x_is_parallel",
+      "metric1": "energy_gpu_avg_watts",
+      "metric2": "hyperparam_learning_rate_x_is_parallel",
+      "ate1": 0.0932934442472333,
+      "ate2": 0.4194301390189679,
+      "sign1": "-",
+      "sign2": "+",
+      "is_significant": true
+    },
+    {
+      "intervention": "hyperparam_batch_size_x_is_parallel",
+      "metric1": "energy_gpu_avg_watts",
+      "metric2": "hyperparam_epochs_x_is_parallel",
+      "ate1": 0.0932934442472333,
+      "ate2": 0.3953242667191036,
+      "sign1": "-",
+      "sign2": "+",
+      "is_significant": true
+    },
+    {
+      "intervention": "hyperparam_batch_size_x_is_parallel",
+      "metric1": "energy_gpu_min_watts",
+      "metric2": "is_parallel",
+      "ate1": -0.3398878497663617,
+      "ate2": -0.0712641544382056,
+      "sign1": "+",
+      "sign2": "-",
+      "is_significant": true
+    },
+    {
+      "intervention": "hyperparam_batch_size_x_is_parallel",
+      "metric1": "energy_gpu_min_watts",
+      "metric2": "model_mnist_rnn",
+      "ate1": -0.3398878497663617,
+      "ate2": -0.0412215950942141,
+      "sign1": "+",
+      "sign2": "-",
+      "is_significant": true
+    },
+    {
+      "intervention": "hyperparam_batch_size_x_is_parallel",
+      "metric1": "energy_gpu_min_watts",
+      "metric2": "perf_test_accuracy",
+      "ate1": -0.3398878497663617,
+      "ate2": -0.1641183835872286,
+      "sign1": "+",
+      "sign2": "-",
+      "is_significant": true
+    },
+    {
+      "intervention": "hyperparam_batch_size_x_is_parallel",
+      "metric1": "energy_gpu_temp_avg_celsius",
+      "metric2": "is_parallel",
+      "ate1": -0.0185687011951507,
+      "ate2": -0.0712641544382056,
+      "sign1": "+",
+      "sign2": "-",
+      "is_significant": true
+    },
+    {
+      "intervention": "hyperparam_batch_size_x_is_parallel",
+      "metric1": "energy_gpu_temp_avg_celsius",
+      "metric2": "model_mnist_rnn",
+      "ate1": -0.0185687011951507,
+      "ate2": -0.0412215950942141,
+      "sign1": "+",
+      "sign2": "-",
+      "is_significant": true
+    },
+    {
+      "intervention": "hyperparam_batch_size_x_is_parallel",
+      "metric1": "energy_gpu_temp_avg_celsius",
+      "metric2": "perf_test_accuracy",
+      "ate1": -0.0185687011951507,
+      "ate2": -0.1641183835872286,
+      "sign1": "+",
+      "sign2": "-",
+      "is_significant": true
+    },
+    {
+      "intervention": "hyperparam_batch_size_x_is_parallel",
+      "metric1": "is_parallel",
+      "metric2": "hyperparam_batch_size",
+      "ate1": -0.0712641544382056,
+      "ate2": 0.1325063308948631,
+      "sign1": "-",
+      "sign2": "+",
+      "is_significant": true
+    },
+    {
+      "intervention": "hyperparam_batch_size_x_is_parallel",
+      "metric1": "is_parallel",
+      "metric2": "hyperparam_learning_rate_x_is_parallel",
+      "ate1": -0.0712641544382056,
+      "ate2": 0.4194301390189679,
+      "sign1": "-",
+      "sign2": "+",
+      "is_significant": true
+    },
+    {
+      "intervention": "hyperparam_batch_size_x_is_parallel",
+      "metric1": "is_parallel",
+      "metric2": "hyperparam_epochs_x_is_parallel",
+      "ate1": -0.0712641544382056,
+      "ate2": 0.3953242667191036,
+      "sign1": "-",
+      "sign2": "+",
+      "is_significant": true
+    },
+    {
+      "intervention": "hyperparam_batch_size_x_is_parallel",
+      "metric1": "model_mnist_rnn",
+      "metric2": "hyperparam_batch_size",
+      "ate1": -0.0412215950942141,
+      "ate2": 0.1325063308948631,
+      "sign1": "-",
+      "sign2": "+",
+      "is_significant": true
+    },
+    {
+      "intervention": "hyperparam_batch_size_x_is_parallel",
+      "metric1": "model_mnist_rnn",
+      "metric2": "hyperparam_learning_rate_x_is_parallel",
+      "ate1": -0.0412215950942141,
+      "ate2": 0.4194301390189679,
+      "sign1": "-",
+      "sign2": "+",
+      "is_significant": true
+    },
+    {
+      "intervention": "hyperparam_batch_size_x_is_parallel",
+      "metric1": "model_mnist_rnn",
+      "metric2": "hyperparam_epochs_x_is_parallel",
+      "ate1": -0.0412215950942141,
+      "ate2": 0.3953242667191036,
+      "sign1": "-",
+      "sign2": "+",
+      "is_significant": true
+    },
+    {
+      "intervention": "hyperparam_batch_size_x_is_parallel",
+      "metric1": "hyperparam_batch_size",
+      "metric2": "perf_test_accuracy",
+      "ate1": 0.1325063308948631,
+      "ate2": -0.1641183835872286,
+      "sign1": "+",
+      "sign2": "-",
+      "is_significant": true
+    },
+    {
+      "intervention": "hyperparam_batch_size_x_is_parallel",
+      "metric1": "perf_test_accuracy",
+      "metric2": "hyperparam_learning_rate_x_is_parallel",
+      "ate1": -0.1641183835872286,
+      "ate2": 0.4194301390189679,
+      "sign1": "-",
+      "sign2": "+",
+      "is_significant": true
+    },
+    {
+      "intervention": "hyperparam_batch_size_x_is_parallel",
+      "metric1": "perf_test_accuracy",
+      "metric2": "hyperparam_epochs_x_is_parallel",
+      "ate1": -0.1641183835872286,
+      "ate2": 0.3953242667191036,
+      "sign1": "-",
+      "sign2": "+",
+      "is_significant": true
+    },
+    {
+      "intervention": "hyperparam_epochs_x_is_parallel",
+      "metric1": "energy_gpu_min_watts",
+      "metric2": "energy_gpu_temp_max_celsius",
+      "ate1": -0.1467681233280478,
+      "ate2": 0.1043948208841024,
+      "sign1": "+",
+      "sign2": "-",
+      "is_significant": true
+    },
+    {
+      "intervention": "hyperparam_epochs_x_is_parallel",
+      "metric1": "energy_gpu_min_watts",
+      "metric2": "is_parallel",
+      "ate1": -0.1467681233280478,
+      "ate2": -0.6872203386555858,
+      "sign1": "+",
+      "sign2": "-",
+      "is_significant": true
+    },
+    {
+      "intervention": "hyperparam_epochs_x_is_parallel",
+      "metric1": "energy_gpu_temp_max_celsius",
+      "metric2": "perf_test_accuracy",
+      "ate1": 0.1043948208841024,
+      "ate2": 0.3047465068098091,
+      "sign1": "-",
+      "sign2": "+",
+      "is_significant": true
+    },
+    {
+      "intervention": "hyperparam_epochs_x_is_parallel",
+      "metric1": "is_parallel",
+      "metric2": "perf_test_accuracy",
+      "ate1": -0.6872203386555858,
+      "ate2": 0.3047465068098091,
+      "sign1": "-",
+      "sign2": "+",
+      "is_significant": true
+    }
+  ],
+  "group2_vulberta": [
+    {
+      "intervention": "energy_cpu_ram_joules",
+      "metric1": "energy_cpu_pkg_joules",
+      "metric2": "perf_final_training_loss",
+      "ate1": 0.4081250370415435,
+      "ate2": -0.1828782952145233,
+      "sign1": "-",
+      "sign2": "+",
+      "is_significant": true
+    },
+    {
+      "intervention": "energy_cpu_ram_joules",
+      "metric1": "energy_cpu_total_joules",
+      "metric2": "perf_final_training_loss",
+      "ate1": 0.4058941186246859,
+      "ate2": -0.1828782952145233,
+      "sign1": "-",
+      "sign2": "+",
+      "is_significant": true
+    },
+    {
+      "intervention": "energy_cpu_ram_joules",
+      "metric1": "energy_gpu_total_joules",
+      "metric2": "perf_final_training_loss",
+      "ate1": 0.4172839890942476,
+      "ate2": -0.1828782952145233,
+      "sign1": "-",
+      "sign2": "+",
+      "is_significant": true
+    },
+    {
+      "intervention": "energy_cpu_ram_joules",
+      "metric1": "perf_eval_loss",
+      "metric2": "perf_final_training_loss",
+      "ate1": 0.4189330439095707,
+      "ate2": -0.1828782952145233,
+      "sign1": "-",
+      "sign2": "+",
+      "is_significant": true
+    }
+  ],
+  "group3_person_reid": [
+    {
+      "intervention": "energy_gpu_avg_watts",
+      "metric1": "energy_gpu_min_watts",
+      "metric2": "energy_gpu_temp_avg_celsius",
+      "ate1": -0.050422574581703,
+      "ate2": 0.2153418804097954,
+      "sign1": "+",
+      "sign2": "-",
+      "is_significant": true
+    },
+    {
+      "intervention": "energy_gpu_max_watts",
+      "metric1": "energy_gpu_util_avg_percent",
+      "metric2": "model_pcb",
+      "ate1": 0.3177449990655314,
+      "ate2": 0.1746053627338108,
+      "sign1": "-",
+      "sign2": "+",
+      "is_significant": true
+    },
+    {
+      "intervention": "energy_gpu_max_watts",
+      "metric1": "model_hrnet18",
+      "metric2": "model_pcb",
+      "ate1": -0.6677204824385489,
+      "ate2": 0.1746053627338108,
+      "sign1": "-",
+      "sign2": "+",
+      "is_significant": true
+    },
+    {
+      "intervention": "energy_gpu_temp_max_celsius",
+      "metric1": "energy_gpu_min_watts",
+      "metric2": "hyperparam_seed",
+      "ate1": 0.1306785518822111,
+      "ate2": 0.1516579418122826,
+      "sign1": "-",
+      "sign2": "+",
+      "is_significant": true
+    },
+    {
+      "intervention": "energy_gpu_temp_max_celsius",
+      "metric1": "hyperparam_learning_rate",
+      "metric2": "hyperparam_seed",
+      "ate1": -0.0007416399951179,
+      "ate2": 0.1516579418122826,
+      "sign1": "-",
+      "sign2": "+",
+      "is_significant": true
+    },
+    {
+      "intervention": "hyperparam_epochs",
+      "metric1": "energy_gpu_min_watts",
+      "metric2": "energy_gpu_total_joules",
+      "ate1": -0.1266820337590804,
+      "ate2": 0.2578938745171579,
+      "sign1": "+",
+      "sign2": "-",
+      "is_significant": true
+    },
+    {
+      "intervention": "hyperparam_epochs_x_is_parallel",
+      "metric1": "energy_gpu_min_watts",
+      "metric2": "energy_gpu_total_joules",
+      "ate1": -0.0941537549048205,
+      "ate2": 0.4814205947846355,
+      "sign1": "+",
+      "sign2": "-",
+      "is_significant": true
+    },
+    {
+      "intervention": "hyperparam_epochs_x_is_parallel",
+      "metric1": "energy_gpu_total_joules",
+      "metric2": "is_parallel",
+      "ate1": 0.4814205947846355,
+      "ate2": 0.0500615732431685,
+      "sign1": "-",
+      "sign2": "+",
+      "is_significant": true
+    },
+    {
+      "intervention": "hyperparam_epochs_x_is_parallel",
+      "metric1": "energy_gpu_total_joules",
+      "metric2": "hyperparam_epochs",
+      "ate1": 0.4814205947846355,
+      "ate2": 0.1618360222676247,
+      "sign1": "-",
+      "sign2": "+",
+      "is_significant": true
+    },
+    {
+      "intervention": "hyperparam_epochs_x_is_parallel",
+      "metric1": "energy_gpu_total_joules",
+      "metric2": "hyperparam_dropout_x_is_parallel",
+      "ate1": 0.4814205947846355,
+      "ate2": 0.1784458373695626,
+      "sign1": "-",
+      "sign2": "+",
+      "is_significant": true
+    },
+    {
+      "intervention": "hyperparam_dropout_x_is_parallel",
+      "metric1": "energy_gpu_min_watts",
+      "metric2": "is_parallel",
+      "ate1": 0.302509420103904,
+      "ate2": 0.0819789424173895,
+      "sign1": "-",
+      "sign2": "+",
+      "is_significant": true
+    },
+    {
+      "intervention": "hyperparam_dropout_x_is_parallel",
+      "metric1": "energy_gpu_min_watts",
+      "metric2": "hyperparam_dropout",
+      "ate1": 0.302509420103904,
+      "ate2": 0.5622712269610043,
+      "sign1": "-",
+      "sign2": "+",
+      "is_significant": true
+    }
+  ],
+  "group4_bug_localization": [
+    {
+      "intervention": "energy_cpu_pkg_joules",
+      "metric1": "energy_gpu_temp_avg_celsius",
+      "metric2": "hyperparam_kfold",
+      "ate1": 0.8262181687935667,
+      "ate2": 0.6330486466490366,
+      "sign1": "-",
+      "sign2": "+",
+      "is_significant": true
+    },
+    {
+      "intervention": "energy_gpu_max_watts",
+      "metric1": "energy_gpu_util_avg_percent",
+      "metric2": "energy_gpu_util_max_percent",
+      "ate1": -0.0204803361327386,
+      "ate2": 0.0808916252616039,
+      "sign1": "+",
+      "sign2": "-",
+      "is_significant": true
+    },
+    {
+      "intervention": "energy_gpu_min_watts",
+      "metric1": "energy_gpu_temp_avg_celsius",
+      "metric2": "hyperparam_seed",
+      "ate1": 0.831479309277755,
+      "ate2": 0.2066267948936651,
+      "sign1": "-",
+      "sign2": "+",
+      "is_significant": true
+    },
+    {
+      "intervention": "energy_gpu_min_watts",
+      "metric1": "hyperparam_seed",
+      "metric2": "hyperparam_kfold_x_is_parallel",
+      "ate1": 0.2066267948936651,
+      "ate2": -0.1337909189725611,
+      "sign1": "+",
+      "sign2": "-",
+      "is_significant": true
+    },
+    {
+      "intervention": "energy_gpu_total_joules",
+      "metric1": "energy_cpu_ram_joules",
+      "metric2": "energy_gpu_util_avg_percent",
+      "ate1": 0.0778569969894563,
+      "ate2": -0.0130072180364401,
+      "sign1": "-",
+      "sign2": "+",
+      "is_significant": true
+    }
+  ],
+  "group5_mrt_oast": [
+    {
+      "intervention": "energy_gpu_min_watts",
+      "metric1": "hyperparam_l2_regularization",
+      "metric2": "hyperparam_learning_rate_x_is_parallel",
+      "ate1": 0.1446983895102699,
+      "ate2": -0.0203004816721016,
+      "sign1": "+",
+      "sign2": "-",
+      "is_significant": true
+    },
+    {
+      "intervention": "energy_gpu_min_watts",
+      "metric1": "hyperparam_l2_regularization",
+      "metric2": "hyperparam_epochs_x_is_parallel",
+      "ate1": 0.1446983895102699,
+      "ate2": -0.0214089575607722,
+      "sign1": "+",
+      "sign2": "-",
+      "is_significant": true
+    },
+    {
+      "intervention": "perf_accuracy",
+      "metric1": "hyperparam_seed",
+      "metric2": "hyperparam_dropout",
+      "ate1": 1.055424724746456e-05,
+      "ate2": -5.125487421915407e-06,
+      "sign1": "+",
+      "sign2": "-",
+      "is_significant": true
+    },
+    {
+      "intervention": "hyperparam_learning_rate_x_is_parallel",
+      "metric1": "is_parallel",
+      "metric2": "perf_recall",
+      "ate1": -0.0354812886462927,
+      "ate2": 0.6331060109161563,
+      "sign1": "-",
+      "sign2": "+",
+      "is_significant": true
+    },
+    {
+      "intervention": "hyperparam_epochs_x_is_parallel",
+      "metric1": "is_parallel",
+      "metric2": "hyperparam_learning_rate_x_is_parallel",
+      "ate1": -0.0803604888553877,
+      "ate2": 0.3338952301818663,
+      "sign1": "-",
+      "sign2": "+",
+      "is_significant": true
+    },
+    {
+      "intervention": "hyperparam_epochs_x_is_parallel",
+      "metric1": "is_parallel",
+      "metric2": "hyperparam_dropout_x_is_parallel",
+      "ate1": -0.0803604888553877,
+      "ate2": 0.4608662373448177,
+      "sign1": "-",
+      "sign2": "+",
+      "is_significant": true
+    }
+  ],
+  "group6_resnet": [
+    {
+      "intervention": "energy_gpu_max_watts",
+      "metric1": "hyperparam_learning_rate",
+      "metric2": "hyperparam_epochs_x_is_parallel",
+      "ate1": 0.6161543662117334,
+      "ate2": -0.3123517232132022,
+      "sign1": "+",
+      "sign2": "-",
+      "is_significant": true
+    },
+    {
+      "intervention": "energy_gpu_max_watts",
+      "metric1": "hyperparam_learning_rate_x_is_parallel",
+      "metric2": "hyperparam_epochs_x_is_parallel",
+      "ate1": 0.632777539857432,
+      "ate2": -0.3123517232132022,
+      "sign1": "+",
+      "sign2": "-",
+      "is_significant": true
+    },
+    {
+      "intervention": "energy_gpu_util_max_percent",
+      "metric1": "hyperparam_learning_rate",
+      "metric2": "hyperparam_epochs_x_is_parallel",
+      "ate1": -0.7210594142551029,
+      "ate2": 1.3838156488248456,
+      "sign1": "-",
+      "sign2": "+",
+      "is_significant": true
+    },
+    {
+      "intervention": "hyperparam_learning_rate_x_is_parallel",
+      "metric1": "hyperparam_learning_rate",
+      "metric2": "hyperparam_epochs",
+      "ate1": 0.4851188782681423,
+      "ate2": -0.1028893934180956,
+      "sign1": "+",
+      "sign2": "-",
+      "is_significant": true
+    }
+  ]
+}

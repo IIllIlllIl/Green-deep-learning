@@ -45,6 +45,17 @@ def create_global_standardized_data():
         'group6_resnet'
     ]
 
+    # 每个组特有的性能指标列映射
+    group_performance_columns = {
+        'group1_examples': ['perf_test_accuracy'],
+        'group2_vulberta': ['perf_eval_loss', 'perf_final_training_loss', 'perf_eval_samples_per_second'],
+        'group3_person_reid': ['perf_map', 'perf_rank1', 'perf_rank5'],
+        'group4_bug_localization': ['perf_top1_accuracy', 'perf_top5_accuracy',
+                                   'perf_top10_accuracy', 'perf_top20_accuracy'],
+        'group5_mrt_oast': ['perf_accuracy', 'perf_precision', 'perf_recall'],
+        'group6_resnet': ['perf_best_val_accuracy', 'perf_test_accuracy']
+    }
+
     # 1. 读取并合并所有数据
     print('\n步骤1: 读取并合并所有6组数据')
     print('-' * 40)
@@ -173,11 +184,29 @@ def create_global_standardized_data():
         group_data = std_data[std_data['_group'] == group].copy()
         group_data = group_data.drop(columns=['_group'])
 
+        # 过滤列：只保留该组拥有的性能指标列
+        if group in group_performance_columns:
+            # 获取该组允许的性能指标列
+            allowed_perf_cols = group_performance_columns[group]
+
+            # 找到所有性能指标列
+            all_perf_cols = [col for col in group_data.columns if col.startswith('perf_')]
+
+            # 删除不属于该组的性能指标列
+            cols_to_drop = [col for col in all_perf_cols if col not in allowed_perf_cols]
+            if cols_to_drop:
+                group_data = group_data.drop(columns=cols_to_drop)
+                print(f'  {group}: 删除{len(cols_to_drop)}个跨组性能指标列')
+                for col in cols_to_drop[:3]:  # 只显示前3个
+                    print(f'    - {col}')
+                if len(cols_to_drop) > 3:
+                    print(f'    ... 共{len(cols_to_drop)}个列')
+
         # 保存
         output_file = output_dir / f'{group}_global_std.csv'
         group_data.to_csv(output_file, index=False)
 
-        print(f'  {group}: {len(group_data)} 行 → {output_file}')
+        print(f'  {group}: {len(group_data)} 行, {len(group_data.columns)} 列 → {output_file}')
 
     # 8. 生成汇总报告
     print('\n步骤8: 生成汇总报告')

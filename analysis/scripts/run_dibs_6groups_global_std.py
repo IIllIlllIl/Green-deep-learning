@@ -45,14 +45,16 @@ OPTIMAL_CONFIG = {
     "n_acyclicity_mc_samples": 32  # 无环性MC样本数
 }
 
-# ========== 6个任务组配置（全局标准化版本，2026-01-30）==========
+# ========== 6个任务组配置（全局标准化版本，2026-02-03更新）==========
+# 更新：基于修复后的全局标准化数据（每个组只保留自己特有的性能指标列）
+# 注意：group5删除了12个缺失perf_accuracy的行
 TASK_GROUPS = [
     {
         "id": "group1_examples",
         "name": "examples（图像分类-小型）",
         "csv_file": "group1_examples_dibs_ready.csv",
         "expected_samples": 304,
-        "expected_features": 49,  # 50列 - timestamp列
+        "expected_features": 35,  # 实际列数（移除timestamp后）
         "description": "小型图像分类模型，包含MNIST相关模型"
     },
     {
@@ -60,7 +62,7 @@ TASK_GROUPS = [
         "name": "VulBERTa（代码漏洞检测）",
         "csv_file": "group2_vulberta_dibs_ready.csv",
         "expected_samples": 72,
-        "expected_features": 49,  # 50列 - timestamp列
+        "expected_features": 37,  # 实际列数（移除timestamp后）
         "description": "代码漏洞检测模型，BERT架构"
     },
     {
@@ -68,7 +70,7 @@ TASK_GROUPS = [
         "name": "Person_reID（行人重识别）",
         "csv_file": "group3_person_reid_dibs_ready.csv",
         "expected_samples": 206,
-        "expected_features": 49,  # 50列 - timestamp列
+        "expected_features": 37,  # 实际列数（移除timestamp后）
         "description": "行人重识别模型，关注识别准确性"
     },
     {
@@ -76,15 +78,15 @@ TASK_GROUPS = [
         "name": "bug-localization（缺陷定位）",
         "csv_file": "group4_bug_localization_dibs_ready.csv",
         "expected_samples": 90,
-        "expected_features": 49,  # 50列 - timestamp列
+        "expected_features": 38,  # 实际列数（移除timestamp后）
         "description": "代码缺陷定位模型，多标签分类"
     },
     {
         "id": "group5_mrt_oast",
         "name": "MRT-OAST（缺陷定位）",
         "csv_file": "group5_mrt_oast_dibs_ready.csv",
-        "expected_samples": 72,
-        "expected_features": 49,  # 50列 - timestamp列
+        "expected_samples": 60,  # 删除了12个缺失perf_accuracy的行
+        "expected_features": 37,  # 实际列数（移除timestamp后）
         "description": "另一缺陷定位模型，不同架构"
     },
     {
@@ -92,7 +94,7 @@ TASK_GROUPS = [
         "name": "pytorch_resnet（图像分类-ResNet）",
         "csv_file": "group6_resnet_dibs_ready.csv",
         "expected_samples": 74,
-        "expected_features": 49,  # 50列 - timestamp列
+        "expected_features": 36,  # 实际列数（移除timestamp后）
         "description": "标准ResNet图像分类模型"
     }
 ]
@@ -429,7 +431,7 @@ def main():
             print(f"\n{summary['group_name']}:")
             print(f"  样本数: {summary['samples']}")
             print(f"  特征数: {summary['features']}")
-            print(f"  强边数: {summary['strong_edges_prob_gt_0.5']}")
+            print(f"  强边数: {summary['edges_gt_0.3']}")
             print(f"  强边比例: {summary['strong_edge_percentage']:.1f}%")
             print(f"  运行时间: {summary['runtime_seconds']:.1f}秒")
 

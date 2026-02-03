@@ -172,28 +172,63 @@ def compute_ate_for_group(
         print(f"❌ 读取文件失败: {e}")
         return {"success": False, "error": f"读取文件失败: {e}"}
 
-    # 计算超过阈值的边数
-    n_edges = np.sum(causal_graph > threshold)
-    print(f"   ✅ 读取成功: {len(data_df)} 条数据, {n_edges} 条边 (阈值>{threshold})")
+    # 计算原始因果图超过阈值的边数
+    n_edges_original = np.sum(causal_graph > threshold)
+    print(f"   ✅ 读取成功: {len(data_df)} 条数据, 原始因果图 {n_edges_original} 条边 (阈值>{threshold})")
 
     if dry_run:
         print(f"   🧪 Dry run模式 - 只检查数据，不计算ATE")
-        return {"success": True, "dry_run": True, "data_rows": len(data_df), "edges": n_edges}
+        # 在dry-run中也进行特征过滤，以报告准确的边数
+        exclude_cols = ['timestamp', 'experiment_id', 'session_id']
+        feature_cols = [col for col in data_df.columns if col not in exclude_cols]
+        common_features = [f for f in dibs_feature_names if f in feature_cols]
+
+        if len(common_features) >= 5:
+            common_indices = [dibs_feature_names.index(f) for f in common_features]
+            filtered_causal_graph = causal_graph[np.ix_(common_indices, common_indices)]
+            n_edges_filtered = np.sum(filtered_causal_graph > threshold)
+            print(f"   过滤后共有特征: {len(common_features)} 个，过滤后边数: {n_edges_filtered}")
+            return {"success": True, "dry_run": True, "data_rows": len(data_df),
+                    "edges_original": n_edges_original, "edges_filtered": n_edges_filtered,
+                    "common_features": len(common_features)}
+        else:
+            print(f"   共有特征太少: {len(common_features)} 个，无法进行ATE计算")
+            return {"success": False, "dry_run": True, "error": "共有特征太少"}
 
     # 3. 数据清洗：处理NaN值
     print(f"   数据清洗...")
     original_rows = len(data_df)
     original_nan = data_df.isna().sum().sum()
 
-    # 数值列：用中位数填充
+    # 首先删除全为NaN的数值列（防御性编程）
+    all_nan_numeric_cols = []
     numeric_cols = data_df.select_dtypes(include=[np.number]).columns
+    for col in numeric_cols:
+        if data_df[col].isna().all():
+            all_nan_numeric_cols.append(col)
+
+    if all_nan_numeric_cols:
+        print(f"   删除全NaN数值列: {len(all_nan_numeric_cols)} 个")
+        for col in all_nan_numeric_cols[:5]:  # 只显示前5个
+            print(f"      {col}: 全为NaN，删除")
+        if len(all_nan_numeric_cols) > 5:
+            print(f"      ... 共{len(all_nan_numeric_cols)}个列")
+        data_df = data_df.drop(columns=all_nan_numeric_cols)
+        numeric_cols = data_df.select_dtypes(include=[np.number]).columns
+
+    # 数值列：用中位数填充
     for col in numeric_cols:
         if data_df[col].isna().sum() > 0:
             median_val = data_df[col].median()
-            data_df[col] = data_df[col].fillna(median_val)
-            na_count = data_df[col].isna().sum()
-            if na_count == 0:
-                print(f"      {col}: 用中位数 {median_val:.4f} 填充")
+            # 检查median_val是否为NaN（全NaN列应该已被删除，但以防万一）
+            if pd.isna(median_val):
+                print(f"      ⚠ {col}: 中位数为NaN，用0填充")
+                data_df[col] = data_df[col].fillna(0)
+            else:
+                data_df[col] = data_df[col].fillna(median_val)
+                na_count = data_df[col].isna().sum()
+                if na_count == 0:
+                    print(f"      {col}: 用中位数 {median_val:.4f} 填充")
 
     # 布尔列：用False填充
     bool_cols = data_df.select_dtypes(include=[bool]).columns
@@ -231,36 +266,49 @@ def compute_ate_for_group(
     exclude_cols = ['timestamp', 'experiment_id', 'session_id']  # 常见非特征列
     feature_cols = [col for col in data_df.columns if col not in exclude_cols]
 
-    # 5. 验证DiBS特征名与数据特征名匹配
+    # 5. 处理DiBS特征名与数据特征名匹配
     # DiBS因果图已经加载为causal_graph，特征名在dibs_feature_names
-    # 确保顺序一致
-    if len(feature_cols) != len(dibs_feature_names):
-        print(f"❌ 特征数量不匹配: 数据有{len(feature_cols)}个特征, DiBS有{len(dibs_feature_names)}个特征")
-        return {"success": False, "error": "特征数量不匹配"}
+    # 找出数据和DiBS共有的特征
+    common_features = [f for f in dibs_feature_names if f in feature_cols]
+    data_only_features = [f for f in feature_cols if f not in dibs_feature_names]
+    dibs_only_features = [f for f in dibs_feature_names if f not in feature_cols]
 
-    # 检查特征名是否一致（顺序可能不同，但DiBS因果图与特征名顺序对应）
-    # 我们假设DiBS因果图的特征顺序与数据特征顺序一致
-    # 如果不一致，需要重新排序causal_graph
-    # 这里简化处理：假设顺序一致
-    print(f"   ✅ 特征验证通过: {len(feature_cols)}个特征")
+    print(f"   特征匹配分析:")
+    print(f"     - 共有特征: {len(common_features)} 个")
+    if data_only_features:
+        print(f"     - 数据特有特征: {len(data_only_features)} 个 (例如: {', '.join(data_only_features[:3])}{'...' if len(data_only_features) > 3 else ''})")
+    if dibs_only_features:
+        print(f"     - DiBS特有特征: {len(dibs_only_features)} 个 (例如: {', '.join(dibs_only_features[:3])}{'...' if len(dibs_only_features) > 3 else ''})")
 
-    # 6. 使用DiBS因果图（已经加载）
-    # causal_graph 和 dibs_feature_names 已从load_dibs_causal_graph加载
-    # 确保特征顺序一致
-    # 如果dibs_feature_names与feature_cols顺序不同，需要重新排序causal_graph
-    # 这里假设顺序一致
-    print(f"   使用DiBS因果图...")
+    # 如果共有的特征太少，无法进行有意义的ATE计算
+    if len(common_features) < 5:
+        print(f"❌ 共有特征太少: 仅{len(common_features)}个，无法进行有意义的ATE计算")
+        return {"success": False, "error": "共有特征太少"}
 
-    # 7. 从DiBS因果图创建边列表DataFrame（模拟白名单）
-    print(f"   从DiBS因果图提取边（阈值>{threshold})...")
+    # 过滤DiBS因果图，只保留共有特征
+    # 获取共有特征在DiBS特征列表中的索引
+    common_indices = [dibs_feature_names.index(f) for f in common_features]
+
+    # 从DiBS因果图中提取子矩阵（只包含共有特征）
+    filtered_causal_graph = causal_graph[np.ix_(common_indices, common_indices)]
+    filtered_dibs_features = common_features  # 已按DiBS原始顺序排序
+
+    print(f"   ✅ 特征过滤完成: 保留 {len(common_features)} 个共有特征")
+    print(f"   ✅ 过滤后因果图大小: {filtered_causal_graph.shape[0]}×{filtered_causal_graph.shape[1]}")
+
+    # 6. 使用过滤后的DiBS因果图
+    print(f"   使用过滤后的DiBS因果图...")
+
+    # 7. 从过滤后的DiBS因果图创建边列表DataFrame（模拟白名单）
+    print(f"   从过滤后因果图提取边（阈值>{threshold})...")
     edges = []
-    n_vars = causal_graph.shape[0]
+    n_vars = filtered_causal_graph.shape[0]
     for i in range(n_vars):
         for j in range(n_vars):
-            weight = causal_graph[i, j]
+            weight = filtered_causal_graph[i, j]
             if weight > threshold:
-                source_name = feature_cols[i]  # 假设顺序一致
-                target_name = feature_cols[j]
+                source_name = filtered_dibs_features[i]
+                target_name = filtered_dibs_features[j]
                 edges.append({
                     'source': source_name,
                     'target': target_name,
@@ -298,8 +346,8 @@ def compute_ate_for_group(
     try:
         results = engine.analyze_all_edges_ctf_style(
             data=data_df,
-            causal_graph=causal_graph,
-            var_names=feature_cols,
+            causal_graph=filtered_causal_graph,
+            var_names=filtered_dibs_features,
             threshold=threshold,
             ref_df=None,  # 使用CTF风格：自动创建数据均值向量
             t_strategy='quantile'  # 使用CTF风格：25/75分位数T0/T1

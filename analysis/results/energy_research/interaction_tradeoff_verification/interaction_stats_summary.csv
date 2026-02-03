@@ -1,0 +1,7 @@
+total_edges,causal_effects_count,interaction_count,pos_sig,neg_sig,pos_nonsig,neg_nonsig,can_form_tradeoff,group_id,group_num
+43,43,8,6,0,1,1,False,group1_examples,1
+35,35,9,4,0,2,3,False,group2_vulberta,2
+50,45,2,2,0,0,0,False,group3_person_reid,3
+40,36,8,1,0,1,6,False,group4_bug_localization,4
+40,39,11,2,0,2,7,False,group5_mrt_oast,5
+19,19,2,0,0,2,0,False,group6_resnet,6

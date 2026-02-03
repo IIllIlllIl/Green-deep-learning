@@ -121,6 +121,17 @@ class CausalInferenceEngine:
             X = data[confounders].values if confounders else None  # 混淆因素
             W = data[controls].values if controls else None  # 控制变量
 
+            # 处理布尔类型变量（修复numpy boolean subtract警告）
+            # 将布尔数组转换为浮点数数组，避免numpy减法操作错误
+            if T.dtype == bool:
+                T = T.astype(float)
+            if Y.dtype == bool:
+                Y = Y.astype(float)
+            if X is not None and X.dtype == bool:
+                X = X.astype(float)
+            if W is not None and W.dtype == bool:
+                W = W.astype(float)
+
             # 检查数据变异性
             if len(np.unique(T)) < 2:
                 warnings.warn(f"干预变量{treatment}缺乏变异性")
@@ -149,6 +160,10 @@ class CausalInferenceEngine:
                 X_for_ate = X
                 if self.verbose:
                     print(f"  使用原始数据计算ATE (n={len(data)})")
+
+            # 处理X_for_ate的布尔类型（修复numpy boolean subtract警告）
+            if X_for_ate is not None and X_for_ate.dtype == bool:
+                X_for_ate = X_for_ate.astype(float)
 
             # 计算T0和T1（如果未提供）
             if T0 is None or T1 is None:
@@ -192,10 +207,10 @@ class CausalInferenceEngine:
             # 计算置信区间
             try:
                 if T0_calc is not None and T1_calc is not None:
-                    # 使用T0/T1计算效应
-                    effects = dml.effect(X=X_for_ate, T0=T0_calc, T1=T1_calc)
-                    ci_lower = np.percentile(effects, 2.5)
-                    ci_upper = np.percentile(effects, 97.5)
+                    # 使用ate_inference计算带T0/T1的置信区间（修复CI宽度为0的问题）
+                    ate_inference = dml.ate_inference(X=X_for_ate, T0=T0_calc, T1=T1_calc)
+                    ci = ate_inference.conf_int()[0]  # 95%置信区间
+                    ci_lower, ci_upper = float(ci[0]), float(ci[1])
                 else:
                     ate_inference = dml.ate_inference(X=X_for_ate)
                     ci = ate_inference.conf_int()[0]  # 95%置信区间
@@ -273,6 +288,14 @@ class CausalInferenceEngine:
         使用简单的分组均值差异作为ATE估计。
         注意：这个方法不控制混淆因素，结果可能有偏。
         """
+        # 处理布尔类型变量（修复numpy boolean subtract警告）
+        # 创建数据副本，避免修改原始数据
+        data = data.copy()
+        if data[treatment].dtype == bool:
+            data[treatment] = data[treatment].astype(float)
+        if data[outcome].dtype == bool:
+            data[outcome] = data[outcome].astype(float)
+
         # 按treatment分组
         if data[treatment].dtype in [np.float64, np.float32]:
             # 连续变量：使用中位数分组

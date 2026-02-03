@@ -2,14 +2,14 @@
   "group_id": "group1_examples",
   "group_num": 1,
   "data_rows": 304,
-  "edges_total": 66,
-  "edges_updated": 66,
-  "ate_computed": 36,
-  "ate_significant": 47,
-  "ate_mean": 0.14845072933740522,
-  "ate_std": 0.7241125554156851,
+  "edges_total": 41,
+  "edges_updated": 39,
+  "ate_computed": 39,
+  "ate_significant": 33,
+  "ate_mean": 0.0609270565728791,
+  "ate_std": 0.5964444115396985,
   "ate_min": -1.5247544454453597,
-  "ate_max": 2.3178842359041893,
-  "elapsed_seconds": 10.477679014205933,
-  "timestamp": "2026-01-31 13:35:40"
+  "ate_max": 2.1852377696767413,
+  "elapsed_seconds": 24.870824337005615,
+  "timestamp": "2026-02-03 23:15:36"
 }
