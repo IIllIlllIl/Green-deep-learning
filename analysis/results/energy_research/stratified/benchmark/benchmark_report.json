@@ -1,0 +1,138 @@
+{
+  "timestamp": "2026-02-06T21:38:07.324484",
+  "total_benchmarks": 4,
+  "successful": 2,
+  "passed": 0,
+  "results": [
+    {
+      "success": true,
+      "layer_id": "group1_parallel",
+      "global_group": "group1_examples",
+      "edge_comparison": {
+        "global_edges": 41,
+        "stratified_edges": 33,
+        "common_edges": 12,
+        "global_only": 29,
+        "stratified_only": 21,
+        "retention_rate": 0.2926829268292683,
+        "common_edge_list": [
+          "energy_gpu_max_watts->hyperparam_seed",
+          "model_mnist_ff->energy_gpu_min_watts",
+          "energy_gpu_temp_avg_celsius->energy_gpu_min_watts",
+          "model_mnist_ff->hyperparam_seed",
+          "energy_gpu_util_max_percent->energy_gpu_max_watts",
+          "model_siamese->energy_gpu_min_watts",
+          "energy_gpu_temp_max_celsius->energy_gpu_temp_avg_celsius",
+          "model_mnist_ff->perf_test_accuracy",
+          "model_siamese->hyperparam_seed",
+          "energy_gpu_max_watts->perf_test_accuracy",
+          "hyperparam_epochs->perf_test_accuracy",
+          "energy_gpu_avg_watts->energy_gpu_min_watts"
+        ],
+        "global_only_list": [
+          "hyperparam_epochs_x_is_parallel->energy_gpu_temp_max_celsius",
+          "energy_gpu_avg_watts->energy_gpu_util_avg_percent",
+          "hyperparam_epochs_x_is_parallel->is_parallel",
+          "hyperparam_epochs_x_is_parallel->energy_gpu_min_watts",
+          "hyperparam_batch_size_x_is_parallel->energy_gpu_min_watts",
+          "hyperparam_batch_size_x_is_parallel->hyperparam_batch_size",
+          "energy_gpu_max_watts->energy_gpu_temp_avg_celsius",
+          "hyperparam_batch_size_x_is_parallel->model_mnist_rnn",
+          "model_mnist_ff->model_mnist_rnn",
+          "energy_gpu_total_joules->energy_cpu_ram_joules"
+        ],
+        "stratified_only_list": [
+          "model_mnist_rnn->energy_gpu_min_watts",
+          "model_mnist_rnn->perf_test_accuracy",
+          "model_siamese->model_mnist_ff",
+          "energy_gpu_temp_max_celsius->energy_gpu_min_watts",
+          "hyperparam_epochs->energy_gpu_min_watts",
+          "model_mnist_rnn->model_mnist_ff",
+          "energy_gpu_util_max_percent->energy_gpu_min_watts",
+          "model_mnist_ff->energy_gpu_avg_watts",
+          "model_mnist_ff->energy_gpu_temp_max_celsius",
+          "energy_cpu_ram_joules->energy_cpu_pkg_joules"
+        ]
+      },
+      "ate_comparison": {
+        "consistent_count": 8,
+        "inconsistent_count": 3,
+        "total_count": 11,
+        "consistency_rate": 0.7272727272727273,
+        "inconsistent_details": [
+          {
+            "edge": "energy_gpu_max_watts->hyperparam_seed",
+            "global_ate": -0.8273278485425075,
+            "stratified_ate": 0.9225605928198768,
+            "global_sign": "-",
+            "stratified_sign": "+"
+          },
+          {
+            "edge": "energy_gpu_max_watts->perf_test_accuracy",
+            "global_ate": 0.0820230635378957,
+            "stratified_ate": -0.4787555920998195,
+            "global_sign": "+",
+            "stratified_sign": "-"
+          },
+          {
+            "edge": "hyperparam_epochs->perf_test_accuracy",
+            "global_ate": 0.0,
+            "stratified_ate": 0.0016651060030549,
+            "global_sign": "-",
+            "stratified_sign": "+"
+          }
+        ]
+      },
+      "retention_pass": false,
+      "ate_pass": false,
+      "overall_pass": false
+    },
+    {
+      "success": true,
+      "layer_id": "group1_non_parallel",
+      "global_group": "group1_examples",
+      "edge_comparison": {
+        "global_edges": 41,
+        "stratified_edges": 1,
+        "common_edges": 1,
+        "global_only": 40,
+        "stratified_only": 0,
+        "retention_rate": 0.024390243902439025,
+        "common_edge_list": [
+          "model_mnist_ff->perf_test_accuracy"
+        ],
+        "global_only_list": [
+          "hyperparam_epochs_x_is_parallel->energy_gpu_temp_max_celsius",
+          "energy_gpu_temp_avg_celsius->energy_gpu_min_watts",
+          "model_mnist_ff->hyperparam_seed",
+          "energy_gpu_avg_watts->energy_gpu_util_avg_percent",
+          "hyperparam_epochs_x_is_parallel->is_parallel",
+          "model_siamese->hyperparam_seed",
+          "energy_gpu_max_watts->perf_test_accuracy",
+          "hyperparam_epochs_x_is_parallel->energy_gpu_min_watts",
+          "hyperparam_batch_size_x_is_parallel->energy_gpu_min_watts",
+          "energy_gpu_max_watts->energy_gpu_temp_avg_celsius"
+        ],
+        "stratified_only_list": []
+      },
+      "ate_comparison": {
+        "consistent_count": 1,
+        "inconsistent_count": 0,
+        "total_count": 1,
+        "consistency_rate": 1.0,
+        "inconsistent_details": []
+      },
+      "retention_pass": false,
+      "ate_pass": true,
+      "overall_pass": false
+    },
+    {
+      "success": false,
+      "error": "\u5206\u5c42ATE\u6570\u636e\u4e0d\u5b58\u5728"
+    },
+    {
+      "success": false,
+      "error": "\u5206\u5c42ATE\u6570\u636e\u4e0d\u5b58\u5728"
+    }
+  ]
+}

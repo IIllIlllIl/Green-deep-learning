@@ -1,0 +1,4 @@
+source,target,edge_weight,ate,ci_lower,ci_upper,se,p_value,n_confounders
+energy_gpu_temp_max_celsius,energy_gpu_min_watts,0.5,0.0,0.0,0.0,0.0,1.0,10
+hyperparam_epochs,energy_gpu_total_joules,0.5,0.015893877948967596,0.012778677870969948,0.019009078026965245,0.0015893877948967596,0.0,10
+hyperparam_epochs,hyperparam_seed,0.5,-0.06037294613278961,-0.07220604357481637,-0.048539848690762846,0.006037294613278961,0.0,10

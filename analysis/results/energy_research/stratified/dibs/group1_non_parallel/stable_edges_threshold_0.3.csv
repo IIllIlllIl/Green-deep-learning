@@ -1,0 +1,2 @@
+source,target,source_idx,target_idx,detections,n_runs,detection_rate,p_value,is_stable
+model_mnist_ff,perf_test_accuracy,11,18,5,5,1.0,0.03125,True

@@ -1,0 +1,2 @@
+source,target,edge_weight,ate,ci_lower,ci_upper,se,p_value,n_confounders
+model_mnist_ff,perf_test_accuracy,0.5,-1.4290461237099523,-1.8934574734571286,-0.9646347739627761,0.2369445661975389,1.6280590209305501e-09,10

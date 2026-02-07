@@ -1,0 +1,85 @@
+{
+  "timestamp": "2026-02-07T12:16:09.351156",
+  "layers_processed": 4,
+  "total_tradeoffs": 15,
+  "stats_by_layer": [
+    {
+      "layer_id": "group1_parallel",
+      "total_edges": 33,
+      "significant_edges": 30,
+      "tradeoffs_detected": 15,
+      "energy_vs_perf": 2,
+      "hyperparam_intervention": 6,
+      "timestamp": "2026-02-07T12:16:09.342745"
+    },
+    {
+      "layer_id": "group1_non_parallel",
+      "total_edges": 1,
+      "significant_edges": 1,
+      "tradeoffs_detected": 0,
+      "energy_vs_perf": 0,
+      "hyperparam_intervention": 0,
+      "timestamp": "2026-02-07T12:16:09.345015"
+    },
+    {
+      "layer_id": "group3_parallel",
+      "total_edges": 2,
+      "significant_edges": 2,
+      "tradeoffs_detected": 0,
+      "energy_vs_perf": 0,
+      "hyperparam_intervention": 0,
+      "timestamp": "2026-02-07T12:16:09.347022"
+    },
+    {
+      "layer_id": "group3_non_parallel",
+      "total_edges": 3,
+      "significant_edges": 2,
+      "tradeoffs_detected": 0,
+      "energy_vs_perf": 0,
+      "hyperparam_intervention": 0,
+      "timestamp": "2026-02-07T12:16:09.349181"
+    }
+  ],
+  "comparison": {
+    "group1": {
+      "parallel": {
+        "layer_id": "group1_parallel",
+        "total_edges": 33,
+        "significant_edges": 30,
+        "tradeoffs_detected": 15,
+        "energy_vs_perf": 2,
+        "hyperparam_intervention": 6,
+        "timestamp": "2026-02-07T12:16:09.342745"
+      },
+      "non_parallel": {
+        "layer_id": "group1_non_parallel",
+        "total_edges": 1,
+        "significant_edges": 1,
+        "tradeoffs_detected": 0,
+        "energy_vs_perf": 0,
+        "hyperparam_intervention": 0,
+        "timestamp": "2026-02-07T12:16:09.345015"
+      }
+    },
+    "group3": {
+      "parallel": {
+        "layer_id": "group3_parallel",
+        "total_edges": 2,
+        "significant_edges": 2,
+        "tradeoffs_detected": 0,
+        "energy_vs_perf": 0,
+        "hyperparam_intervention": 0,
+        "timestamp": "2026-02-07T12:16:09.347022"
+      },
+      "non_parallel": {
+        "layer_id": "group3_non_parallel",
+        "total_edges": 3,
+        "significant_edges": 2,
+        "tradeoffs_detected": 0,
+        "energy_vs_perf": 0,
+        "hyperparam_intervention": 0,
+        "timestamp": "2026-02-07T12:16:09.349181"
+      }
+    }
+  }
+}

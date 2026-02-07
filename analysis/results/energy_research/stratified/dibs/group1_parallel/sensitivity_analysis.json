@@ -1,0 +1,30 @@
+{
+  "task_id": "group1_parallel",
+  "task_name": "group1_examples (\u5e76\u884c)",
+  "n_runs": 3,
+  "seeds": [
+    42,
+    123,
+    456
+  ],
+  "config": {
+    "alpha_linear": 0.05,
+    "beta_linear": 0.1,
+    "n_particles": 20,
+    "tau": 1.0,
+    "n_steps": 5000,
+    "n_grad_mc_samples": 128,
+    "n_acyclicity_mc_samples": 32
+  },
+  "n_stable_edges": 0,
+  "stability_report": [
+    {
+      "source": "energy_cpu_ram_joules",
+      "target": "energy_cpu_pkg_joules",
+      "source_idx": 1,
+      "target_idx": 0,
+      "detections": 2,
+      "n_runs": 3,
+      "detection_rate": 0.6666666666666666,
+      "p_value": 0.5,
+      "is_stable": 

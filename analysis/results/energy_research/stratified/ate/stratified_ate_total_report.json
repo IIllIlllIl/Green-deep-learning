@@ -1,0 +1,76 @@
+{
+  "timestamp": "2026-02-07T12:15:51.142372",
+  "config": {
+    "threshold": 0.3,
+    "n_bootstrap": 500,
+    "alpha": 0.1,
+    "t_strategy": "quantile"
+  },
+  "total_runtime_seconds": 34.58876347541809,
+  "results": [
+    {
+      "task_id": "group1_parallel",
+      "success": true,
+      "summary": {
+        "task_id": "group1_parallel",
+        "task_name": "group1_examples (\u5e76\u884c)",
+        "n_samples": 178,
+        "n_features": 26,
+        "n_edges_total": 33,
+        "n_edges_successful": 33,
+        "n_edges_failed": 0,
+        "elapsed_seconds": 30.77749013900757,
+        "timestamp": "2026-02-07T12:15:47.331911"
+      },
+      "error": null
+    },
+    {
+      "task_id": "group1_non_parallel",
+      "success": true,
+      "summary": {
+        "task_id": "group1_non_parallel",
+        "task_name": "group1_examples (\u975e\u5e76\u884c)",
+        "n_samples": 126,
+        "n_features": 26,
+        "n_edges_total": 1,
+        "n_edges_successful": 1,
+        "n_edges_failed": 0,
+        "elapsed_seconds": 0.6998357772827148,
+        "timestamp": "2026-02-07T12:15:48.039072"
+      },
+      "error": null
+    },
+    {
+      "task_id": "group3_parallel",
+      "success": true,
+      "summary": {
+        "task_id": "group3_parallel",
+        "task_name": "group3_person_reid (\u5e76\u884c)",
+        "n_samples": 113,
+        "n_features": 28,
+        "n_edges_total": 2,
+        "n_edges_successful": 2,
+        "n_edges_failed": 0,
+        "elapsed_seconds": 1.30007004737854,
+        "timestamp": "2026-02-07T12:15:49.345733"
+      },
+      "error": null
+    },
+    {
+      "task_id": "group3_non_parallel",
+      "success": true,
+      "summary": {
+        "task_id": "group3_non_parallel",
+        "task_name": "group3_person_reid (\u975e\u5e76\u884c)",
+        "n_samples": 93,
+        "n_features": 28,
+        "n_edges_total": 3,
+        "n_edges_successful": 3,
+        "n_edges_failed": 0,
+        "elapsed_seconds": 1.7708373069763184,
+        "timestamp": "2026-02-07T12:15:51.123150"
+      },
+      "error": null
+    }
+  ]
+}

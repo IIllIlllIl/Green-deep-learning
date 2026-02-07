@@ -1,0 +1,3 @@
+source,target,source_idx,target_idx,detections,n_runs,detection_rate,p_value,is_stable
+energy_gpu_util_avg_percent,energy_gpu_min_watts,9,5,5,5,1.0,0.03125,True
+model_hrnet18,energy_gpu_min_watts,19,5,5,5,1.0,0.03125,True

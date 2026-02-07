@@ -1,0 +1,11 @@
+{
+  "task_id": "group1_non_parallel",
+  "task_name": "group1_examples (\u975e\u5e76\u884c)",
+  "n_samples": 126,
+  "n_features": 26,
+  "n_edges_total": 1,
+  "n_edges_successful": 1,
+  "n_edges_failed": 0,
+  "elapsed_seconds": 0.6998357772827148,
+  "timestamp": "2026-02-07T12:15:48.039072"
+}

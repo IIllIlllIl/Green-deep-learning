@@ -1,0 +1,9 @@
+{
+  "layer_id": "group1_non_parallel",
+  "total_edges": 1,
+  "significant_edges": 1,
+  "tradeoffs_detected": 0,
+  "energy_vs_perf": 0,
+  "hyperparam_intervention": 0,
+  "timestamp": "2026-02-07T12:16:09.345015"
+}

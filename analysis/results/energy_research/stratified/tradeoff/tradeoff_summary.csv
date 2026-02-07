@@ -1,0 +1,5 @@
+layer_id,total_edges,significant_edges,tradeoffs_detected,energy_vs_perf,hyperparam_intervention,timestamp
+group1_parallel,33,30,15,2,6,2026-02-07T12:16:09.342745
+group1_non_parallel,1,1,0,0,0,2026-02-07T12:16:09.345015
+group3_parallel,2,2,0,0,0,2026-02-07T12:16:09.347022
+group3_non_parallel,3,2,0,0,0,2026-02-07T12:16:09.349181

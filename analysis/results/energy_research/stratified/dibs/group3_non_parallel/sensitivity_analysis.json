@@ -1,0 +1,34 @@
+{
+  "task_id": "group3_non_parallel",
+  "task_name": "group3_person_reid (\u975e\u5e76\u884c)",
+  "n_runs": 7,
+  "seeds": [
+    42,
+    123,
+    456,
+    789,
+    1011,
+    2022,
+    3033
+  ],
+  "config": {
+    "alpha_linear": 0.08,
+    "beta_linear": 0.15,
+    "n_particles": 15,
+    "tau": 1.2,
+    "n_steps": 10000,
+    "n_grad_mc_samples": 128,
+    "n_acyclicity_mc_samples": 32
+  },
+  "n_stable_edges": 3,
+  "stability_report": [
+    {
+      "source": "energy_cpu_pkg_joules",
+      "target": "energy_cpu_ram_joules",
+      "source_idx": 0,
+      "target_idx": 1,
+      "detections": 3,
+      "n_runs": 7,
+      "detection_rate": 0.42857142857142855,
+      "p_value": 0.7734375,
+      "is_stable": 

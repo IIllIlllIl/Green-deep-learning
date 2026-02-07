@@ -1,0 +1,16 @@
+intervention,metric1,metric2,ate1,ate2,sign1,sign2,is_significant
+energy_gpu_max_watts,hyperparam_seed,perf_test_accuracy,0.6927380673543069,-0.4460490263999609,+,-,True
+model_mnist_ff,energy_gpu_temp_max_celsius,hyperparam_seed,-0.4894643279508408,-0.4605731118400952,+,-,True
+model_mnist_ff,energy_gpu_temp_max_celsius,perf_test_accuracy,-0.4894643279508408,-1.5841334993700218,+,-,True
+model_siamese,energy_gpu_max_watts,energy_gpu_min_watts,0.2247352469567272,-0.3307535065363578,-,+,True
+model_siamese,energy_gpu_max_watts,hyperparam_seed,0.2247352469567272,0.6242596545161447,-,+,True
+model_siamese,energy_gpu_min_watts,energy_gpu_util_avg_percent,-0.3307535065363578,0.7062632744767202,+,-,True
+model_siamese,energy_gpu_min_watts,model_mnist_ff,-0.3307535065363578,-0.391304347826087,+,-,True
+model_siamese,energy_gpu_util_avg_percent,hyperparam_seed,0.7062632744767202,0.6242596545161447,-,+,True
+model_siamese,model_mnist_ff,hyperparam_seed,-0.391304347826087,0.6242596545161447,-,+,True
+hyperparam_batch_size,energy_gpu_avg_watts,energy_gpu_max_watts,0.091304792777045,-0.0183260210072649,-,+,True
+hyperparam_batch_size,energy_gpu_max_watts,energy_gpu_temp_avg_celsius,-0.0183260210072649,0.0361493164701262,+,-,True
+hyperparam_batch_size,energy_gpu_max_watts,energy_gpu_util_avg_percent,-0.0183260210072649,0.1647937602313868,+,-,True
+hyperparam_batch_size,energy_gpu_max_watts,energy_gpu_util_max_percent,-0.0183260210072649,0.0330228125700395,+,-,True
+hyperparam_batch_size,energy_gpu_max_watts,model_mnist_rnn,-0.0183260210072649,-0.080341408694784,+,-,True
+hyperparam_epochs,energy_gpu_min_watts,perf_test_accuracy,0.0102850709591874,0.0023261545505679,-,+,True

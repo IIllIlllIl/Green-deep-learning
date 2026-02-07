@@ -1,7 +1,37 @@
 # 项目���档总索引
 
-**最后更新**: 2026-01-23
+**最后更新**: 2026-02-06
 **项目**: Causality-Aided Fairness Trade-off Analysis (ASE 2023论文复现 + 能耗研究扩展)
+
+---
+
+## 🆕 分层因果分析 (2026-02) ⭐⭐⭐
+
+**状态**: 进行中（DiBS分析执行中）
+
+### 提案文档
+- [STRATIFIED_ANALYSIS_PROPOSAL_V2_20260206.md](proposals/STRATIFIED_ANALYSIS_PROPOSAL_V2_20260206.md) - 分层分析总体方案 v2.1 ⭐⭐⭐
+- [STRATIFIED_DIBS_ANALYSIS_PROPOSAL_20260206.md](proposals/STRATIFIED_DIBS_ANALYSIS_PROPOSAL_20260206.md) - DiBS分层分析方案 v1.1 ⭐⭐
+- [DOC_DATA_CLEANUP_PROPOSAL_20260206.md](proposals/DOC_DATA_CLEANUP_PROPOSAL_20260206.md) - 文档整理方案 v1.1
+
+### 数据目录说明
+
+⚠️ **重要数据选择指南**（避免之前的数据选择错误）:
+
+| 用途 | 正确数据源 | 原因 | 避免使用 |
+|------|-----------|------|---------|
+| DiBS因果图学习 | `6groups_dibs_ready/` | 无缺失值，已预处理 | ❌ `6groups_global_std/`（含缺失值） |
+| 分层DiBS分析 | `stratified/` | 按is_parallel分层 | ❌ `6groups_*`（未分层） |
+| 全局标准化（非DiBS） | `6groups_global_std/` | 含统一标准化参数 | ❌ 直接用`raw_data.csv` |
+| 一般分析 | `6groups_final/` | 基础分组数据 | - |
+
+### 分层分析脚本
+- `scripts/stratified/prepare_stratified_data.py` - 分层数据准备
+- `scripts/stratified/run_dibs_stratified.py` - 分层DiBS分析
+
+### 分层分析结果
+- `results/energy_research/stratified/dibs/` - DiBS分层因果图
+- `data/energy_research/stratified/` - 分层数据（4层）
 
 ---
 

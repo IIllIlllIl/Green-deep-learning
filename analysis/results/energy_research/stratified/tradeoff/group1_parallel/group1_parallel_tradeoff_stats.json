@@ -1,0 +1,9 @@
+{
+  "layer_id": "group1_parallel",
+  "total_edges": 33,
+  "significant_edges": 30,
+  "tradeoffs_detected": 15,
+  "energy_vs_perf": 2,
+  "hyperparam_intervention": 6,
+  "timestamp": "2026-02-07T12:16:09.342745"
+}
