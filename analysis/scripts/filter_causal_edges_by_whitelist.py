@@ -27,24 +27,26 @@ logger = logging.getLogger(__name__)
 
 # ============================================================================
 # 白名单规则定义（基于因果逻辑和研究问题）
+# 版本: v2.0 (2026-02-07)
+# 修订: 功率变量(energy_gpu_*_watts)从mediator改为energy
 # ============================================================================
 
 WHITELIST_RULES = {
-    # 规则组1: 超参数主效应 (Q1, Q2)
-    ('hyperparam', 'energy'): True,       # 超参数 → 能耗
-    ('hyperparam', 'mediator'): True,     # 超参数 → 中间变量
+    # 规则组1: 超参数主效应 (RQ1)
+    ('hyperparam', 'energy'): True,       # 超参数 → 能耗（含功率）
+    ('hyperparam', 'mediator'): True,     # 超参数 → 中间变量（温度、利用率）
     ('hyperparam', 'performance'): True,  # 超参数 → 性能
 
-    # 规则组2: 交互项调节效应 (Q1, Q2)
+    # 规则组2: 交互项调节效应 (RQ1b)
     ('interaction', 'energy'): True,      # 交互项 → 能耗
     ('interaction', 'mediator'): True,    # 交互项 → 中间变量
     ('interaction', 'performance'): True, # 交互项 → 性能
 
-    # 规则组3: 中间变量中介效应 (Q2/Q3)
-    ('mediator', 'energy'): True,         # 中间变量 → 能耗
+    # 规则组3: 中介效应 (RQ2)
+    ('mediator', 'energy'): True,         # 中间变量 → 能耗（含功率）
     ('mediator', 'mediator'): True,       # 中间变量 → 中间变量
-    ('mediator', 'performance'): True,    # 中间变量 → 性能
-    ('energy', 'energy'): True,           # 能耗 → 能耗 (能耗分解)
+    ('mediator', 'performance'): True,    # 中间变量 → 性能（用于RQ3）
+    ('energy', 'energy'): True,           # 能耗 → 能耗 (能耗指标间关系)
 
     # 规则组4: 控制变量影响
     ('control', 'energy'): True,          # 模型控制变量 → 能耗
@@ -54,9 +56,11 @@ WHITELIST_RULES = {
     ('mode', 'mediator'): True,           # 并行模式 → 中间变量
     ('mode', 'performance'): True,        # 并行模式 → 性能
 
-    # 注意: 白名单矩阵中的⚠️在实现中都视为False（禁止）
-    # 理由参见 docs/CAUSAL_EDGE_WHITELIST_DESIGN.md 第5.2节"特殊情况说明"
-    # 其他所有组合默认为 False（黑名单）
+    # 禁止规则（显式列出以便理解）:
+    # ('energy', 'performance'): False,   # 能耗不直接影响性能（权衡通过超参数产生）
+    # ('performance', '*'): False,        # 性能不应作为因
+    # ('energy', 'hyperparam'): False,    # 反因果
+    # ('energy', 'mediator'): False,      # 能耗不应影响物理状态（反因果）
 }
 
 def is_edge_allowed(source_cat: str, target_cat: str) -> bool:

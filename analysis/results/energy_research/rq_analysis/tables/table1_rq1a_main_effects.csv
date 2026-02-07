@@ -1,0 +1,5 @@
+Group,Source,Target,Edge Strength,ATE,CI Lower,CI Upper,Significant
+Examples,hyperparam_learning_rate,energy_gpu_min_watts,0.35,-0.002091657899733,-0.0025016228480807,-0.0016816929513853,True
+MRT OAST,hyperparam_epochs,energy_gpu_max_watts,0.35,0.0,0.0,0.0,False
+Person ReID,hyperparam_epochs,energy_gpu_total_joules,0.8,0.2578938745171579,0.207346675111795,0.3084410739225209,True
+Person ReID,hyperparam_epochs,energy_gpu_min_watts,0.4,-0.1266820337590804,-0.1515117123758601,-0.1018523551423006,True

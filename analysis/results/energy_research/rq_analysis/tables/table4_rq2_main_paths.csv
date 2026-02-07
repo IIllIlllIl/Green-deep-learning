@@ -1,0 +1,8 @@
+Group,Path Type,Source,Mediator,Target,Step1 Strength,Step2 Strength,Path Strength
+Examples,main_effect,epochs,gpu_util_avg_percent,gpu_min_watts,0.4000000059604645,0.3499999940395355,0.3499999940395355
+VulBERTa,main_effect,epochs,gpu_util_max_percent,gpu_min_watts,0.3000000119209289,0.3000000119209289,0.3000000119209289
+Examples,moderation_effect,batch_size×P,gpu_temp_avg_celsius,gpu_avg_watts,0.5,0.3499999940395355,0.3499999940395355
+Examples,moderation_effect,batch_size×P,gpu_temp_avg_celsius,gpu_min_watts,0.5,0.3499999940395355,0.3499999940395355
+Examples,moderation_effect,batch_size×P,gpu_util_max_percent,gpu_max_watts,0.3000000119209289,0.4500000178813934,0.3000000119209289
+Examples,moderation_effect,learning_rate×P,gpu_util_avg_percent,gpu_min_watts,0.3000000119209289,0.3499999940395355,0.3000000119209289
+Examples,moderation_effect,epochs×P,gpu_temp_max_celsius,gpu_min_watts,0.3499999940395355,0.3000000119209289,0.3000000119209289

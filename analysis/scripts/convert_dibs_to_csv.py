@@ -218,15 +218,34 @@ def classify_edge_type(source, target):
 
 
 def get_variable_category(var_name):
-    """获取变量类别"""
+    """获取变量类别
+
+    变量分类规则 (v2.0 - 2026-02-07更新):
+    - energy: 能耗结果变量（包括焦耳和功率指标）
+    - mediator: 机制中介变量（仅温度和利用率，物理状态变量）
+    - hyperparam: 超参数处理变量
+    - interaction: 交互项调节变量
+    - performance: 性能结果变量
+    - control: 模型控制变量
+    - mode: 并行模式变量
+
+    修订说明:
+    - 功率变量(energy_gpu_*_watts)从mediator改为energy
+    - 中间变量仅保留物理状态变量(温度、利用率)
+    """
     if '_x_is_parallel' in var_name:
         return 'interaction'
     elif var_name.startswith('hyperparam_'):
         return 'hyperparam'
+    # 能耗指标：焦耳能耗 + 功率指标
     elif var_name in ['energy_cpu_pkg_joules', 'energy_cpu_ram_joules',
-                      'energy_cpu_total_joules', 'energy_gpu_total_joules']:
+                      'energy_cpu_total_joules', 'energy_gpu_total_joules',
+                      'energy_gpu_avg_watts', 'energy_gpu_min_watts',
+                      'energy_gpu_max_watts']:
         return 'energy'
-    elif var_name.startswith('energy_gpu'):
+    # 中间变量：仅温度和利用率（物理状态变量）
+    elif var_name in ['energy_gpu_temp_avg_celsius', 'energy_gpu_temp_max_celsius',
+                      'energy_gpu_util_avg_percent', 'energy_gpu_util_max_percent']:
         return 'mediator'
     elif var_name.startswith('perf_'):
         return 'performance'

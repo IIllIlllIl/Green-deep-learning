@@ -1,0 +1,5 @@
+Group,Intervention,Energy Variable,Performance Variable,ATE Energy,ATE Performance,Direction
+Examples,batch_size×P,gpu_min_watts,test_accuracy,-0.3398878497663617,-0.1641183835872286,Both↓ (Same direction)
+VulBERTa,energy_cpu_ram_joules,cpu_pkg_joules,final_training_loss,0.4081250370415435,-0.1828782952145233,Energy↑ Performance↓
+VulBERTa,energy_cpu_ram_joules,cpu_total_joules,final_training_loss,0.4058941186246859,-0.1828782952145233,Energy↑ Performance↓
+VulBERTa,energy_cpu_ram_joules,gpu_total_joules,final_training_loss,0.4172839890942476,-0.1828782952145233,Energy↑ Performance↓

@@ -1,0 +1,5 @@
+Intervention Type,Total Tradeoffs,Energy vs Performance,Energy vs Energy,Other
+Hyperparameter,1,0,1,0
+Interaction (×Parallel),34,1,2,31
+Other,26,3,0,23
+Total,61,4,3,54
