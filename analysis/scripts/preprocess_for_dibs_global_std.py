@@ -13,6 +13,11 @@ DiBS要求：
    - 组特有超参数：用该组内非NaN值的均值填充
    - 性能指标：用-999标记（区分结构性缺失）
 3. 能耗列：无缺失，保持不变
+
+v2.0 修改 (2026-02-09):
+- 删除全0值的列（不适用于该组的超参数和模型）
+- Group4超参数语义合并：max_iter→epochs, alpha→l2_regularization
+- 删除重命名后的原始列（避免重复）
 """
 
 import pandas as pd
@@ -21,6 +26,165 @@ from pathlib import Path
 import json
 import argparse
 from datetime import datetime
+
+
+def remove_all_zero_columns(df: pd.DataFrame, verbose: bool = True) -> tuple[pd.DataFrame, list[str]]:
+    """
+    删除全0值的列（表示该变量不适用于此组）
+
+    参数:
+        df: 输入DataFrame
+        verbose: 是否输出详细信息
+
+    返回:
+        df: 删除全0列后的DataFrame
+        removed_cols: 被删除的列名列表
+    """
+    removed_cols = []
+    for col in df.columns:
+        # 检查是否全为0（或接近0的浮点数）
+        if (df[col] == 0).all() or (df[col].abs() < 1e-10).all():
+            removed_cols.append(col)
+
+    if removed_cols:
+        df = df.drop(columns=removed_cols)
+        if verbose:
+            print(f"  删除全0列: {len(removed_cols)}列")
+            for col in removed_cols:
+                print(f"    - {col}")
+
+    return df, removed_cols
+
+
+def rename_group4_hyperparams(df: pd.DataFrame, verbose: bool = True) -> tuple[pd.DataFrame, dict]:
+    """
+    Group4超参数语义合并：
+    - hyperparam_max_iter → hyperparam_epochs
+    - hyperparam_alpha → hyperparam_l2_regularization
+
+    参数:
+        df: 输入DataFrame
+        verbose: 是否输出详细信息
+
+    返回:
+        df: 重命名后的DataFrame
+        rename_info: 重命名信息字典
+    """
+    rename_info = {
+        'renamed_columns': {},
+        'dropped_columns': []
+    }
+
+    # 检查是否为Group4（通过特征列判断）
+    is_group4 = 'hyperparam_max_iter' in df.columns or 'hyperparam_alpha' in df.columns
+
+    if not is_group4:
+        return df, rename_info
+
+    # 重命名 hyperparam_max_iter → hyperparam_epochs
+    if 'hyperparam_max_iter' in df.columns:
+        # 检查是否已存在 hyperparam_epochs
+        if 'hyperparam_epochs' in df.columns:
+            # 检查hyperparam_epochs是否全为NaN（如果是，说明是占位列，可以替换）
+            epochs_notna = df['hyperparam_epochs'].notna().sum()
+            max_iter_notna = df['hyperparam_max_iter'].notna().sum()
+
+            if epochs_notna == 0 and max_iter_notna > 0:
+                # hyperparam_epochs全为NaN，hyperparam_max_iter有数据：替换
+                df = df.drop(columns=['hyperparam_epochs'])
+                df = df.rename(columns={'hyperparam_max_iter': 'hyperparam_epochs'})
+                rename_info['renamed_columns']['hyperparam_max_iter'] = 'hyperparam_epochs'
+                if verbose:
+                    print(f"  替换占位列: hyperparam_epochs(全NaN) ← hyperparam_max_iter({max_iter_notna}有效值)")
+            elif max_iter_notna == 0:
+                # hyperparam_max_iter全为NaN，删除它
+                df = df.drop(columns=['hyperparam_max_iter'])
+                rename_info['dropped_columns'].append('hyperparam_max_iter')
+                if verbose:
+                    print(f"  删除空列: hyperparam_max_iter(全NaN)")
+            else:
+                # 两列都有数据，删除源列避免重复
+                df = df.drop(columns=['hyperparam_max_iter'])
+                rename_info['dropped_columns'].append('hyperparam_max_iter')
+                if verbose:
+                    print(f"  删除原始列: hyperparam_max_iter(保留已有的hyperparam_epochs)")
+        else:
+            # 不存在，进行重命名
+            df = df.rename(columns={'hyperparam_max_iter': 'hyperparam_epochs'})
+            rename_info['renamed_columns']['hyperparam_max_iter'] = 'hyperparam_epochs'
+            if verbose:
+                print(f"  重命名: hyperparam_max_iter → hyperparam_epochs")
+
+    # 重命名 hyperparam_alpha → hyperparam_l2_regularization
+    if 'hyperparam_alpha' in df.columns:
+        # 检查是否已存在 hyperparam_l2_regularization
+        if 'hyperparam_l2_regularization' in df.columns:
+            # 检查hyperparam_l2_regularization是否全为NaN
+            l2_notna = df['hyperparam_l2_regularization'].notna().sum()
+            alpha_notna = df['hyperparam_alpha'].notna().sum()
+
+            if l2_notna == 0 and alpha_notna > 0:
+                # hyperparam_l2_regularization全为NaN，hyperparam_alpha有数据：替换
+                df = df.drop(columns=['hyperparam_l2_regularization'])
+                df = df.rename(columns={'hyperparam_alpha': 'hyperparam_l2_regularization'})
+                rename_info['renamed_columns']['hyperparam_alpha'] = 'hyperparam_l2_regularization'
+                if verbose:
+                    print(f"  替换占位列: hyperparam_l2_regularization(全NaN) ← hyperparam_alpha({alpha_notna}有效值)")
+            elif alpha_notna == 0:
+                # hyperparam_alpha全为NaN，删除它
+                df = df.drop(columns=['hyperparam_alpha'])
+                rename_info['dropped_columns'].append('hyperparam_alpha')
+                if verbose:
+                    print(f"  删除空列: hyperparam_alpha(全NaN)")
+            else:
+                # 两列都有数据，删除源列避免重复
+                df = df.drop(columns=['hyperparam_alpha'])
+                rename_info['dropped_columns'].append('hyperparam_alpha')
+                if verbose:
+                    print(f"  删除原始列: hyperparam_alpha(保留已有的hyperparam_l2_regularization)")
+        else:
+            # 不存在，进行重命名
+            df = df.rename(columns={'hyperparam_alpha': 'hyperparam_l2_regularization'})
+            rename_info['renamed_columns']['hyperparam_alpha'] = 'hyperparam_l2_regularization'
+            if verbose:
+                print(f"  重命名: hyperparam_alpha → hyperparam_l2_regularization")
+
+    # v2.0修复：重命名交互项列
+    # 交互项格式: hyperparam_{name}_x_is_parallel
+    interaction_rename_map = {
+        'hyperparam_max_iter_x_is_parallel': 'hyperparam_epochs_x_is_parallel',
+        'hyperparam_alpha_x_is_parallel': 'hyperparam_l2_regularization_x_is_parallel'
+    }
+
+    for old_col, new_col in interaction_rename_map.items():
+        if old_col in df.columns:
+            # 检查目标列是否已存在
+            if new_col in df.columns:
+                # 检查new_col是否全为0/NaN
+                new_notna = df[new_col].notna().sum() & (df[new_col] != 0).sum()
+                old_notna = df[old_col].notna().sum() & (df[old_col] != 0).sum()
+
+                if new_notna == 0 and old_notna > 0:
+                    # 目标列为空，源列有数据：替换
+                    df = df.drop(columns=[new_col])
+                    df = df.rename(columns={old_col: new_col})
+                    rename_info['renamed_columns'][old_col] = new_col
+                    if verbose:
+                        print(f"  替换交互项: {new_col}(全0) ← {old_col}({old_notna}有效值)")
+                else:
+                    # 删除源列
+                    df = df.drop(columns=[old_col])
+                    rename_info['dropped_columns'].append(old_col)
+                    if verbose and old_notna > 0:
+                        print(f"  删除交互项: {old_col}(保留已有的{new_col})")
+            else:
+                # 目标列不存在，直接重命名
+                df = df.rename(columns={old_col: new_col})
+                rename_info['renamed_columns'][old_col] = new_col
+                if verbose:
+                    print(f"  重命名交互项: {old_col} → {new_col}")
+
+    return df, rename_info
 
 
 def preprocess_group_for_dibs(group_name: str, input_dir: Path, output_dir: Path,
@@ -46,6 +210,9 @@ def preprocess_group_for_dibs(group_name: str, input_dir: Path, output_dir: Path
         df = df.drop(columns=['timestamp'])
         if verbose:
             print(f"  移除 timestamp 列")
+
+    # 2.1 Group4超参数语义合并（在缺失值处理之前）
+    df, rename_info = rename_group4_hyperparams(df, verbose=verbose)
 
     # 3. 处理 hyperparam_seed（保留-1，表示"未设置seed"）
     if 'hyperparam_seed' in df.columns:
@@ -201,7 +368,10 @@ def preprocess_group_for_dibs(group_name: str, input_dir: Path, output_dir: Path
     else:
         fill_info['rows_dropped'] = {'count': 0, 'indices': []}
 
-    # 6. 验证无缺失值
+    # 6. 删除全0列（v2.0新增：删除不适用于该组的超参数和模型列）
+    df, removed_zero_cols = remove_all_zero_columns(df, verbose=verbose)
+
+    # 7. 验证无缺失值
     remaining_missing = df.isnull().sum().sum()
     if remaining_missing > 0:
         raise ValueError(f"预处理后仍有 {remaining_missing} 个缺失值!")
@@ -220,6 +390,12 @@ def preprocess_group_for_dibs(group_name: str, input_dir: Path, output_dir: Path
 
     # 8. 保存填充信息（转换numpy类型为Python类型）
     info_file = output_dir / f"{group_name}_preprocess_info.json"
+
+    # 添加v2.0新增信息：重命名和删除全0列
+    fill_info['v2_changes'] = {
+        'rename_info': rename_info,
+        'removed_zero_columns': removed_zero_cols
+    }
 
     # 转换numpy类型为Python原生类型
     def convert_to_python(obj):

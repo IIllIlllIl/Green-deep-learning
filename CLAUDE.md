@@ -1,6 +1,6 @@
 # Claude 助手快速指南 - Energy DL Project
 
-**版本**: v6.0.0 | **状态**: ✅ 因果分析完成 | **更新**: 2026-02-01
+**版本**: v6.1.0 | **状态**: ✅ 因果分析完成+归档整理 | **更新**: 2026-02-10
 
 > **5分钟快速指南** · 完整参考见 [docs/CLAUDE_FULL_REFERENCE.md](docs/CLAUDE_FULL_REFERENCE.md) (1089行)
 
@@ -8,17 +8,18 @@
 
 ## 📊 项目状态
 
-**当前阶段**: ✅ 因果分析阶段完成 (全局标准化修复工程 v2.0)
+**当前阶段**: ✅ 因果分析阶段完成 + 文件归档整理
 
 **核心成果**:
 - 📦 **836个实验** (95.1%完整性)
-- 🔬 **6组DiBS因果图** (全局标准化，强边比例2.0%-7.2%)
-- ⚖️ **37个显著权衡** (100%统计显著性，14个能耗vs性能)
-- 📊 **3份可视化报告** (权衡分析、干预分布、ATE分布)
+- 🔬 **6组DiBS因果图** (全局标准化，13000步训练，强边比例2.0%-17.8%)
+- ⚖️ **61个显著权衡** (100%统计显著性，7个能耗vs性能)
+- 📊 **完整工作流文档** (DiBS训练→ATE计算→权衡检测)
 
-**最新进展**: 全局标准化修复工程已验收通过
-- [进度跟踪](analysis/docs/technical_reference/GLOBAL_STANDARDIZATION_FIX_PROGRESS.md)
-- [验收报告](analysis/results/energy_research/reports/GLOBAL_STD_FIX_ACCEPTANCE_REPORT_20260201.md)
+**最新进展**: DiBS后续工作流完成 + 文件归档整理
+- [DiBS工作流文档](../docs/technical_reference/DIBS_END_TO_END_WORKFLOW_20260210.md)
+- [归档操作日志](analysis/archive/archive_log_20260210.md)
+- [归档执行总结](analysis/ARCHIVE_EXECUTION_SUMMARY_20260210.md)
 
 ---
 
@@ -59,19 +60,20 @@ cat analysis/docs/technical_reference/GLOBAL_STANDARDIZATION_FIX_PROGRESS.md
 
 **最新成果** (v2.0):
 - 全局标准化数据: 818样本，50列，35列统一标准化
-- DiBS因果图: 6组完整（49×49邻接矩阵）
-- ATE计算: 6组成功，异常值已修复
-- 权衡检测: 37个显著权衡，14个能耗vs性能
+- DiBS因果图: 6组完整（49×49邻接矩阵，13000步训练）
+- ATE计算: 6组成功，使用EconML的DML方法
+- 权衡检测: 61个显著权衡，7个能耗vs性能
 
 **文档索引**:
 - [模块总览](analysis/README.md)
 - [文档索引](analysis/docs/INDEX.md)
-- [进度跟踪](analysis/docs/technical_reference/GLOBAL_STANDARDIZATION_FIX_PROGRESS.md)
+- [DiBS工作流](../docs/technical_reference/DIBS_END_TO_END_WORKFLOW_20260210.md)
 
 **关键文件**:
 - 数据: `analysis/data/energy_research/6groups_global_std/`
-- 结果: `analysis/results/energy_research/tradeoff_detection/`
-- 图表: `analysis/results/energy_research/tradeoff_detection/figures/`
+- 结果: `analysis/results/energy_research/tradeoff_detection_global_std/`
+- 图表: `analysis/results/energy_research/tradeoff_detection_global_std/figures/`
+- 归档: `analysis/archive/archive_20260210/`
 
 ---
 
@@ -178,7 +180,26 @@ cat analysis/docs/technical_reference/GLOBAL_STANDARDIZATION_FIX_PROGRESS.md
 | 数据 | 位置 | 说明 |
 |------|------|------|
 | 全局标准化数据 | `analysis/data/energy_research/6groups_global_std/` | 818样本×50列 |
-| 权衡检测结果 | `analysis/results/energy_research/tradeoff_detection/` | 37个权衡+图表 |
+| DiBS因果图 | `analysis/results/energy_research/data/global_std/` | 6组因果图结果 |
+| 权衡检测结果 | `analysis/results/energy_research/tradeoff_detection_global_std/` | 61个权衡+图表 |
+| 归档文件 | `analysis/archive/archive_20260210/` | 已归档的旧版本 |
+
+---
+
+## 🗃️ 归档文件说明
+
+**最近归档**: 2026-02-10（黑名单策略）
+
+已归档的旧版本文件（保留30天）：
+- 数据: 6groups_final, 6groups_interaction, 6groups_dibs_ready_v1_backup
+- 结果: archived_data, interaction_tradeoff_verification, tradeoff_detection_interaction_based
+- 脚本: run_algorithm1_tradeoff_detection.py（旧版）
+
+**归档文档**:
+- [归档日志](analysis/archive/archive_log_20260210.md) - 完整操作记录+回滚方案
+- [执行总结](analysis/ARCHIVE_EXECUTION_SUMMARY_20260210.md) - 归档统计
+
+**回滚方法**: 参见归档日志中的manifest.txt和恢复脚本
 
 ---
 
@@ -191,9 +212,10 @@ cat analysis/docs/technical_reference/GLOBAL_STANDARDIZATION_FIX_PROGRESS.md
 
 ---
 
-**维护者**: Green | **版本**: v6.0.0 | **更新**: 2026-02-01
+**维护者**: Green | **版本**: v6.1.0 | **更新**: 2026-02-10
 
 **版本历史**:
+- v6.1.0 (2026-02-10): DiBS工作流完成，文件归档整理
 - v6.0.0 (2026-02-01): 重构为精简版，因果分析完成
 - v5.9.0 (2026-01-25): 添加文件创建规则
 - v5.8.0 (2026-01-25): 优化文档导航

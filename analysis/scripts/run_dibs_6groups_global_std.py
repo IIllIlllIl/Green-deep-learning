@@ -34,27 +34,34 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')
 
 from utils.causal_discovery import CausalGraphLearner
 
-# ========== 最优配置（基于2026-01-05参数调优结果） ==========
+# ========== 最优配置（v2.0 - 基于CTF论文修改） ==========
+# CTF源码参考: analysis/CTF_original/src/discovery.py
+# L142: 使用MarginalDiBS变体
+# L148: n_particles=50, steps=13000
+# 默认值: alpha_linear=1.0, beta_linear=1.0
 OPTIMAL_CONFIG = {
-    "alpha_linear": 0.05,        # DiBS默认值，效果良好
-    "beta_linear": 0.1,          # 低无环约束，允许更多边探索 ⭐关键参数
-    "n_particles": 20,           # 最佳性价比
-    "tau": 1.0,                  # Gumbel-softmax温度
-    "n_steps": 5000,             # 足够收敛
-    "n_grad_mc_samples": 128,    # MC梯度样本数
+    "variant": "MarginalDiBS",    # v2.0新增：从JointDiBS切换到MarginalDiBS（匹配CTF论文）
+    "alpha_linear": 0.5,          # v3.0修改：从1.0改为0.5（降低DAG惩罚，产生更多边）
+    "beta_linear": 1.0,           # v2.0修改：从0.1改为1.0（CTF使用默认值）
+    "n_particles": 100,           # v3.0修改：从50改为100（增加粒子数，更广探索）
+    "tau": 1.0,                   # Gumbel-softmax温度
+    "n_steps": 60000,             # v3.0修改：从13000→20000→60000（预计4.5h，6h预算内）
+    "n_grad_mc_samples": 128,     # MC梯度样本数
     "n_acyclicity_mc_samples": 32  # 无环性MC样本数
 }
 
-# ========== 6个任务组配置（全局标准化版本，2026-02-03更新）==========
-# 更新：基于修复后的全局标准化数据（每个组只保留自己特有的性能指标列）
-# 注意：group5删除了12个缺失perf_accuracy的行
+# ========== 6个任务组配置（v2.0 - 数据清理后预期特征数）==========
+# v2.0更新：
+# 1. 删除全0列（不适用于该组的超参数和模型）
+# 2. Group4超参数语义合并：max_iter→epochs, alpha→l2_regularization
+# 预期特征数已更新为清理后的值
 TASK_GROUPS = [
     {
         "id": "group1_examples",
         "name": "examples（图像分类-小型）",
         "csv_file": "group1_examples_dibs_ready.csv",
         "expected_samples": 304,
-        "expected_features": 35,  # 实际列数（移除timestamp后）
+        "expected_features": 23,  # v2.0更新：删除全0列后约23列
         "description": "小型图像分类模型，包含MNIST相关模型"
     },
     {
@@ -62,7 +69,7 @@ TASK_GROUPS = [
         "name": "VulBERTa（代码漏洞检测）",
         "csv_file": "group2_vulberta_dibs_ready.csv",
         "expected_samples": 72,
-        "expected_features": 37,  # 实际列数（移除timestamp后）
+        "expected_features": 24,  # v2.0更新：删除全0列后约24列
         "description": "代码漏洞检测模型，BERT架构"
     },
     {
@@ -70,7 +77,7 @@ TASK_GROUPS = [
         "name": "Person_reID（行人重识别）",
         "csv_file": "group3_person_reid_dibs_ready.csv",
         "expected_samples": 206,
-        "expected_features": 37,  # 实际列数（移除timestamp后）
+        "expected_features": 25,  # v2.0更新：删除全0列后约25列
         "description": "行人重识别模型，关注识别准确性"
     },
     {
@@ -78,7 +85,7 @@ TASK_GROUPS = [
         "name": "bug-localization（缺陷定位）",
         "csv_file": "group4_bug_localization_dibs_ready.csv",
         "expected_samples": 90,
-        "expected_features": 38,  # 实际列数（移除timestamp后）
+        "expected_features": 24,  # v2.0更新：超参数合并后约24列
         "description": "代码缺陷定位模型，多标签分类"
     },
     {
@@ -86,7 +93,7 @@ TASK_GROUPS = [
         "name": "MRT-OAST（缺陷定位）",
         "csv_file": "group5_mrt_oast_dibs_ready.csv",
         "expected_samples": 60,  # 删除了12个缺失perf_accuracy的行
-        "expected_features": 37,  # 实际列数（移除timestamp后）
+        "expected_features": 26,  # v2.0更新：删除全0列后约26列
         "description": "另一缺陷定位模型，不同架构"
     },
     {
@@ -94,7 +101,7 @@ TASK_GROUPS = [
         "name": "pytorch_resnet（图像分类-ResNet）",
         "csv_file": "group6_resnet_dibs_ready.csv",
         "expected_samples": 74,
-        "expected_features": 36,  # 实际列数（移除timestamp后）
+        "expected_features": 24,  # v2.0更新：删除全0列后约24列
         "description": "标准ResNet图像分类模型"
     }
 ]
@@ -187,11 +194,13 @@ def run_dibs_for_group(task_config, output_dir, config=OPTIMAL_CONFIG, verbose=T
     learner = CausalGraphLearner(
         n_vars=len(feature_names),
         alpha=config["alpha_linear"],
+        n_steps=config["n_steps"],  # v2.0修复：传递n_steps参数（匹配CTF论文的13000步）
         n_particles=config["n_particles"],
         beta=config["beta_linear"],
         tau=config["tau"],
         n_grad_mc_samples=config["n_grad_mc_samples"],
-        n_acyclicity_mc_samples=config["n_acyclicity_mc_samples"]
+        n_acyclicity_mc_samples=config["n_acyclicity_mc_samples"],
+        variant=config.get("variant", "JointDiBS")  # v2.0新增：支持MarginalDiBS变体
     )
 
     # 4. 运行DiBS

@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-02-03 23:35:48",
+  "timestamp": "2026-02-10 16:59:58",
   "ate_source": "global_std_dibs_ate",
   "rules_used": "ENERGY_PERF_RULES",
   "require_significance": true,
   "total_groups_processed": 6,
-  "total_tradeoffs": 61,
-  "total_energy_vs_perf": 7
+  "total_tradeoffs": 73,
+  "total_energy_vs_perf": 3
 }

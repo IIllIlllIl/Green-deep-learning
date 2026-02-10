@@ -1,5 +1,5 @@
 Mediator,Main Effect Paths,Moderation Paths,Total Paths,Hyperparameters,Interactions,Energy Variables,Group Coverage
-gpu_temp_avg_celsius,0,2,2,-,batch_size×P,"gpu_avg_watts, gpu_min_watts",1/6
-gpu_temp_max_celsius,0,1,1,-,epochs×P,gpu_min_watts,1/6
-gpu_util_avg_percent,1,1,2,epochs,learning_rate×P,gpu_min_watts,1/6
-gpu_util_max_percent,1,1,2,epochs,batch_size×P,"gpu_max_watts, gpu_min_watts",2/6
+gpu_temp_avg_celsius,3,0,3,"learning_rate, epochs",-,"gpu_avg_watts, gpu_max_watts",2/6
+gpu_temp_max_celsius,2,0,2,learning_rate,-,gpu_max_watts,2/6
+gpu_util_avg_percent,4,0,4,"epochs, learning_rate",-,"gpu_avg_watts, gpu_total_joules, gpu_max_watts",3/6
+gpu_util_max_percent,3,2,5,"learning_rate, epochs",epochs×P,"gpu_max_watts, gpu_min_watts",3/6

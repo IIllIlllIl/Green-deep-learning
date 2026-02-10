@@ -1,0 +1,22 @@
+{
+  "group_config": {
+    "id": "group3_person_reid",
+    "name": "Person_reID\uff08\u884c\u4eba\u91cd\u8bc6\u522b\uff09",
+    "csv_file": "group3_person_reid_dibs_ready.csv",
+    "expected_samples": 206,
+    "expected_features": 25,
+    "description": "\u884c\u4eba\u91cd\u8bc6\u522b\u6a21\u578b\uff0c\u5173\u6ce8\u8bc6\u522b\u51c6\u786e\u6027"
+  },
+  "dibs_config": {
+    "variant": "MarginalDiBS",
+    "alpha_linear": 1.0,
+    "beta_linear": 1.0,
+    "n_particles": 50,
+    "tau": 1.0,
+    "n_steps": 13000,
+    "n_grad_mc_samples": 128,
+    "n_acyclicity_mc_samples": 32
+  },
+  "runtime_seconds": 196.7580590248108,
+  "timestamp": "2026-02-10T13:32:55.484916"
+}

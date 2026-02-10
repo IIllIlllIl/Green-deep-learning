@@ -1,0 +1,19 @@
+{
+  "group_id": "group6_resnet",
+  "group_name": "pytorch_resnet\uff08\u56fe\u50cf\u5206\u7c7b-ResNet\uff09",
+  "samples": 74,
+  "features": 21,
+  "graph_min": 0.0,
+  "graph_max": 0.7799999713897705,
+  "graph_mean": 0.07732425630092621,
+  "graph_std": 0.14607520401477814,
+  "edges_gt_0.01": 191,
+  "edges_gt_0.1": 95,
+  "edges_gt_0.3": 40,
+  "edges_gt_0.5": 14,
+  "strong_edges_weight_gt_0.3": 40,
+  "total_possible_edges": 420,
+  "strong_edge_percentage": 9.523809523809524,
+  "runtime_seconds": 159.52361869812012,
+  "timestamp": "2026-02-10T13:41:43.852980"
+}

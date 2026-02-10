@@ -1,8 +1,4 @@
-Group,Source,Target,Edge Strength,ATE,CI Lower,CI Upper,Significant
-Examples,hyperparam_batch_size_x_is_parallel,energy_gpu_avg_watts,0.55,0.0932934442472333,0.0750079291747756,0.1115789593196911,True
-Examples,hyperparam_learning_rate_x_is_parallel,energy_gpu_avg_watts,0.4,-0.0065586181893224,-0.0078441073544296,-0.0052731290242152,True
-Examples,hyperparam_epochs_x_is_parallel,energy_gpu_min_watts,0.35,-0.1467681233280478,-0.1755346755003452,-0.1180015711557504,True
-Examples,hyperparam_batch_size_x_is_parallel,energy_gpu_min_watts,0.90000004,-0.3398878497663617,-0.4065058683205687,-0.2732698312121548,True
-Person ReID,hyperparam_epochs_x_is_parallel,energy_gpu_total_joules,0.5,0.4814205947846355,0.387062158206847,0.5757790313624241,True
-Person ReID,hyperparam_dropout_x_is_parallel,energy_gpu_min_watts,0.4,0.302509420103904,0.2432175737635388,0.3618012664442692,True
-Person ReID,hyperparam_epochs_x_is_parallel,energy_gpu_min_watts,0.5,-0.0941537549048205,-0.1126078908661653,-0.0756996189434757,True
+interaction,CPU_pkg,CPU_ram,CPU_total,GPU_total,GPU功率(avg),GPU功率(min),GPU功率(max),Total
+epochs×P,—,n=1,—,—,—,n=1,n=1,n=3
+learning_rate×P,—,—,—,—,—,n=1,—,n=1
+Total,—,n=1,—,—,—,n=2,n=1,n=4

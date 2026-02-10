@@ -10,9 +10,7 @@
     "model_hrnet18",
     "model_pcb",
     "hyperparam_dropout",
-    "hyperparam_alpha",
     "hyperparam_kfold",
-    "hyperparam_max_iter",
     "perf_accuracy",
     "hyperparam_batch_size_x_is_parallel",
     "hyperparam_learning_rate_x_is_parallel",
@@ -34,9 +32,7 @@
     "model_hrnet18": "model_all_nan_fill_0",
     "model_pcb": "model_all_nan_fill_0",
     "hyperparam_dropout": "hyperparam_group_mean(-1.6246)",
-    "hyperparam_alpha": "hyperparam_all_nan_fill_0",
     "hyperparam_kfold": "hyperparam_all_nan_fill_0",
-    "hyperparam_max_iter": "hyperparam_all_nan_fill_0",
     "perf_accuracy": "perf_delete_rows(12 rows)",
     "hyperparam_batch_size_x_is_parallel": "hyperparam_all_nan_fill_0",
     "hyperparam_learning_rate_x_is_parallel": "hyperparam_group_mean(-0.3995)",
@@ -58,9 +54,7 @@
     "model_hrnet18": 72,
     "model_pcb": 72,
     "hyperparam_dropout": 23,
-    "hyperparam_alpha": 72,
     "hyperparam_kfold": 72,
-    "hyperparam_max_iter": 72,
     "perf_accuracy": 12,
     "hyperparam_batch_size_x_is_parallel": 72,
     "hyperparam_learning_rate_x_is_parallel": 22,
@@ -90,6 +84,28 @@
       9,
       10,
       11
+    ]
+  },
+  "v2_changes": {
+    "rename_info": {
+      "renamed_columns": {},
+      "dropped_columns": [
+        "hyperparam_max_iter",
+        "hyperparam_alpha"
+      ]
+    },
+    "removed_zero_columns": [
+      "model_mnist_ff",
+      "model_mnist_rnn",
+      "model_siamese",
+      "hyperparam_batch_size",
+      "model_hrnet18",
+      "model_pcb",
+      "hyperparam_kfold",
+      "hyperparam_batch_size_x_is_parallel",
+      "hyperparam_alpha_x_is_parallel",
+      "hyperparam_kfold_x_is_parallel",
+      "hyperparam_max_iter_x_is_parallel"
     ]
   }
 }

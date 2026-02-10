@@ -1,0 +1,15 @@
+{
+  "group_id": "group2_vulberta",
+  "group_num": 2,
+  "data_rows": 72,
+  "edges_total": 18,
+  "edges_updated": 16,
+  "ate_computed": 16,
+  "ate_significant": 11,
+  "ate_mean": 0.2872225145406,
+  "ate_std": 1.2738821560031726,
+  "ate_min": -1.7230529064282183,
+  "ate_max": 4.6864268529575694,
+  "elapsed_seconds": 9.168949127197266,
+  "timestamp": "2026-02-03 23:15:46"
+}

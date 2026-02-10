@@ -38,7 +38,7 @@ COLORS = {
 
 # 路径配置
 BASE_DIR = Path('/home/green/energy_dl/nightly/analysis')
-CAUSAL_GRAPH_DIR = BASE_DIR / 'results/energy_research/archived_data/global_std'
+CAUSAL_GRAPH_DIR = BASE_DIR / 'results/energy_research/data/global_std'
 OUTPUT_DIR = BASE_DIR / 'results/energy_research/rq_analysis'
 TABLES_DIR = OUTPUT_DIR / 'tables'
 FIGURES_DIR = OUTPUT_DIR / 'figures'

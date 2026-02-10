@@ -22,6 +22,7 @@ class CausalGraphLearner:
         n_vars: 变量数量（论文中为46个指标）
         alpha: DAG惩罚参数（论文中为0.9），控制图的稀疏性
         n_steps: 迭代次数（论文中为10000次）
+        variant: DiBS变体类型 ("JointDiBS" 或 "MarginalDiBS")
         random_seed: 随机种子，用于结果可复现
 
     示例:
@@ -39,6 +40,7 @@ class CausalGraphLearner:
                  tau: float = 1.0,
                  n_grad_mc_samples: int = 128,
                  n_acyclicity_mc_samples: int = 32,
+                 variant: str = "JointDiBS",
                  random_seed: int = 42):
 
         # 输入验证
@@ -50,6 +52,8 @@ class CausalGraphLearner:
             raise ValueError(f"n_steps must be positive, got {n_steps}")
         if n_particles <= 0:
             raise ValueError(f"n_particles must be positive, got {n_particles}")
+        if variant not in ["JointDiBS", "MarginalDiBS"]:
+            raise ValueError(f"variant must be 'JointDiBS' or 'MarginalDiBS', got {variant}")
 
         self.n_vars = n_vars
         self.alpha = alpha
@@ -59,6 +63,7 @@ class CausalGraphLearner:
         self.tau = tau
         self.n_grad_mc_samples = n_grad_mc_samples
         self.n_acyclicity_mc_samples = n_acyclicity_mc_samples
+        self.variant = variant  # v2.0新增：支持MarginalDiBS变体
         self.random_seed = random_seed
 
         # 初始化DiBS模型
@@ -103,12 +108,17 @@ class CausalGraphLearner:
             print(f"  粒子数: {self.n_particles}")
             print(f"  Beta参数: {self.beta}")
             print(f"  Tau参数: {self.tau}")
+            print(f"  DiBS变体: {self.variant}")  # v2.0新增
 
         try:
-            # 尝试导入DiBS
-            from dibs.inference import JointDiBS
+            # 尝试导入DiBS（根据variant选择不同的类）
+            if self.variant == "MarginalDiBS":
+                from dibs.inference import MarginalDiBS as DiBSClass
+            else:  # JointDiBS
+                from dibs.inference import JointDiBS as DiBSClass
+
             from dibs.models.graph import ErdosReniDAGDistribution
-            from dibs.models import LinearGaussian
+            from dibs.models import LinearGaussian, BGe
             import jax.random as random
 
             # 运行DiBS（这是耗时操作）
@@ -121,25 +131,32 @@ class CausalGraphLearner:
             # 创建图模型（Erdős-Rényi先验）
             graph_model = ErdosReniDAGDistribution(
                 n_vars=self.n_vars,
-                n_edges_per_node=2  # 每个节点平均2条边
+                n_edges_per_node=3  # v3.0修改：从2改为3（更稠密的图先验）
             )
 
-            # 创建似然模型（线性高斯模型）
-            # 注意：graph_dist参数是必需的
-            likelihood_model = LinearGaussian(
-                graph_dist=graph_model,
-                obs_noise=0.1,
-                mean_edge=0.0,
-                sig_edge=1.0,
-                min_edge=0.5
-            )
+            # 创建似然模型（根据variant选择不同的模型）
+            # v2.0新增：MarginalDiBS使用BGe似然模型（匹配CTF论文）
+            # JointDiBS使用LinearGaussian似然模型
+            if self.variant == "MarginalDiBS":
+                # MarginalDiBS需要BGe似然模型
+                likelihood_model = BGe(graph_dist=graph_model)
+            else:
+                # JointDiBS使用LinearGaussian似然模型
+                likelihood_model = LinearGaussian(
+                    graph_dist=graph_model,
+                    obs_noise=0.1,
+                    mean_edge=0.0,
+                    sig_edge=1.0,
+                    min_edge=0.5
+                )
 
             # 初始化DiBS模型（使用所有可配置参数）
             # 注意：安装的DiBS版本使用inference_model参数，而不是graph_model和likelihood_model分开
-            self.model = JointDiBS(
+            # v2.0新增：支持MarginalDiBS变体，根据variant参数选择不同的DiBS类和似然模型
+            self.model = DiBSClass(
                 x=data_continuous,
                 interv_mask=None,  # 观测数据，无干预
-                inference_model=likelihood_model,  # 使用LinearGaussian作为inference模型
+                inference_model=likelihood_model,  # BGe for MarginalDiBS, LinearGaussian for JointDiBS
                 alpha_linear=self.alpha,  # DAG惩罚参数
                 beta_linear=self.beta,  # 无环约束惩罚斜率
                 tau=self.tau,  # Gumbel-softmax温度
@@ -148,18 +165,167 @@ class CausalGraphLearner:
             )
 
             # 运行SVGD采样
+            # 注意：需要设置callback=None与callback_every配合，否则会返回所有中间图
             key, subk = random.split(key)
-            gs, thetas = self.model.sample(
+            sample_result = self.model.sample(
                 key=subk,
                 n_particles=self.n_particles,  # 使用可配置的粒子数
                 steps=self.n_steps,
-                callback_every=100 if verbose else None
+                callback_every=None,  # 不使用callback
+                callback=None  # 明确设置为None
             )
 
-            # 获取学习到的图：对所有粒子的图求平均
-            # gs的形状是 [n_particles, n_vars, n_vars]
+            # 处理不同的返回格式
+            # MarginalDiBS返回单个Array (n_particles, n_vars, n_vars)
+            # JointDiBS返回tuple (gs, thetas)
             import jax.numpy as jnp
-            self.learned_graph = jnp.mean(gs, axis=0)  # 平均边概率
+            if isinstance(sample_result, tuple):
+                # JointDiBS: (gs, thetas) 其中gs是 [n_particles, n_vars, n_vars]
+                gs, thetas = sample_result
+                self.learned_graph = jnp.mean(gs, axis=0)  # 平均边概率
+            else:
+                # MarginalDiBS: 直接返回图数组 [n_particles, n_vars, n_vars]
+                self.learned_graph = jnp.mean(sample_result, axis=0)  # 平均边概率
+
+            # 转换为numpy数组
+            self.learned_graph = np.array(self.learned_graph)
+
+            if verbose:
+                n_edges = np.sum(self.learned_graph > 0)
+                density = n_edges / (self.n_vars * (self.n_vars - 1))
+                print(f"\n✓ DiBS学习完成")
+                print(f"  学到的边数: {n_edges}")
+                print(f"  图密度: {density:.3f}")
+                print(f"  是否为DAG: {self._is_dag(self.learned_graph)}")
+
+        except ImportError as e:
+            raise RuntimeError(
+                f"无法导入DiBS库。请确保已正确安装DiBS: {e}\n"
+                "安装方法: pip install -e /tmp/dibs"
+            )
+        except Exception as e:
+            raise RuntimeError(f"DiBS拟合失败: {e}")
+
+        return self.learned_graph
+
+    def fit_with_callback(self,
+                         data: pd.DataFrame,
+                         callback: callable,
+                         callback_every: int = 10,
+                         verbose: bool = True) -> np.ndarray:
+        """
+        学习因果图（带callback监控）
+
+        与fit()方法相同，但支持callback机制以监控训练进度。
+
+        参数:
+            data: 训练数据，shape (n_samples, n_vars)
+            callback: 回调函数，签名 callback(step, *args, **kwargs)
+            callback_every: 每隔多少步调用一次callback
+            verbose: 是否输出进度信息
+
+        返回:
+            learned_graph: 邻接矩阵，shape (n_vars, n_vars)
+
+        示例:
+            >>> def my_callback(step, *args, **kwargs):
+            ...     print(f"Step {step}")
+            >>> learner.fit_with_callback(data, callback=my_callback, callback_every=100)
+        """
+        # 输入验证
+        if data is None or len(data) == 0:
+            raise ValueError("data cannot be None or empty")
+        if data.shape[1] != self.n_vars:
+            raise ValueError(
+                f"Expected {self.n_vars} variables, got {data.shape[1]}"
+            )
+        if callback is None:
+            raise ValueError("callback cannot be None")
+        if callback_every <= 0:
+            raise ValueError(f"callback_every must be positive, got {callback_every}")
+
+        # 数据预处理：离散变量→连续变量
+        data_continuous = self._discretize_to_continuous(data)
+
+        if verbose:
+            print(f"开始DiBS因果图学习（带callback监控）...")
+            print(f"  变量数: {self.n_vars}")
+            print(f"  样本数: {len(data)}")
+            print(f"  迭代次数: {self.n_steps}")
+            print(f"  Alpha参数: {self.alpha}")
+            print(f"  粒子数: {self.n_particles}")
+            print(f"  Beta参数: {self.beta}")
+            print(f"  Tau参数: {self.tau}")
+            print(f"  DiBS变体: {self.variant}")
+            print(f"  Callback间隔: {callback_every}")
+
+        try:
+            # 尝试导入DiBS（根据variant选择不同的类）
+            if self.variant == "MarginalDiBS":
+                from dibs.inference import MarginalDiBS as DiBSClass
+            else:  # JointDiBS
+                from dibs.inference import JointDiBS as DiBSClass
+
+            from dibs.models.graph import ErdosReniDAGDistribution
+            from dibs.models import LinearGaussian, BGe
+            import jax.random as random
+
+            # 运行DiBS（这是耗时操作）
+            if verbose:
+                print(f"\n正在运行DiBS算法（带callback监控）...")
+
+            # 创建JAX随机密钥
+            key = random.PRNGKey(self.random_seed)
+
+            # 创建图模型（Erdős-Rényi先验）
+            graph_model = ErdosReniDAGDistribution(
+                n_vars=self.n_vars,
+                n_edges_per_node=3  # v3.0修改：从2改为3
+            )
+
+            # 创建似然模型（根据variant选择不同的模型）
+            if self.variant == "MarginalDiBS":
+                likelihood_model = BGe(graph_dist=graph_model)
+            else:
+                likelihood_model = LinearGaussian(
+                    graph_dist=graph_model,
+                    obs_noise=0.1,
+                    mean_edge=0.0,
+                    sig_edge=1.0,
+                    min_edge=0.5
+                )
+
+            # 初始化DiBS模型
+            self.model = DiBSClass(
+                x=data_continuous,
+                interv_mask=None,
+                inference_model=likelihood_model,
+                alpha_linear=self.alpha,
+                beta_linear=self.beta,
+                tau=self.tau,
+                n_grad_mc_samples=self.n_grad_mc_samples,
+                n_acyclicity_mc_samples=self.n_acyclicity_mc_samples
+            )
+
+            # 运行SVGD采样（启用callback）
+            key, subk = random.split(key)
+            sample_result = self.model.sample(
+                key=subk,
+                n_particles=self.n_particles,
+                steps=self.n_steps,
+                callback_every=callback_every,  # 启用callback
+                callback=callback  # 传递callback函数
+            )
+
+            # 处理不同的返回格式
+            import jax.numpy as jnp
+            if isinstance(sample_result, tuple):
+                # JointDiBS: (gs, thetas)
+                gs, thetas = sample_result
+                self.learned_graph = jnp.mean(gs, axis=0)
+            else:
+                # MarginalDiBS: 直接返回图数组
+                self.learned_graph = jnp.mean(sample_result, axis=0)
 
             # 转换为numpy数组
             self.learned_graph = np.array(self.learned_graph)

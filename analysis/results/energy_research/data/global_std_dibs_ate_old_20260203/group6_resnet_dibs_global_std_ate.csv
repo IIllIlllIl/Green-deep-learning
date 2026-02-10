@@ -1,0 +1,15 @@
+source,target,strength,ate_global_std,ate_global_std_ci_lower,ate_global_std_ci_upper,ate_global_std_is_significant,ate_global_std_confounders_count
+energy_gpu_avg_watts,hyperparam_learning_rate,0.5,-0.23267521020918633,-0.27827955141018684,-0.1870708690081858,True,5
+energy_gpu_avg_watts,hyperparam_epochs,1.0,-0.3062011759496663,-0.3662166064358009,-0.2461857454635317,True,3
+energy_gpu_avg_watts,hyperparam_learning_rate_x_is_parallel,0.5,-1.1133522141013683,-1.3315692480652366,-0.8951351801375,True,1
+energy_gpu_max_watts,hyperparam_learning_rate,0.5,0.6161543662117334,0.49538811043423364,0.7369206219892331,True,5
+energy_gpu_max_watts,hyperparam_learning_rate_x_is_parallel,0.5,0.632777539857432,0.5087531420453754,0.7568019376694887,True,1
+energy_gpu_max_watts,hyperparam_epochs_x_is_parallel,0.5,-0.3123517232132022,-0.37357266096298986,-0.25113078546341455,True,1
+energy_gpu_temp_max_celsius,hyperparam_epochs,0.5,-0.053187587828368646,-0.0636123550427289,-0.04276282061400839,True,3
+energy_gpu_util_max_percent,hyperparam_learning_rate,0.5,-0.7210594142551029,-0.862387059449103,-0.5797317690611028,True,5
+energy_gpu_util_max_percent,hyperparam_epochs_x_is_parallel,0.5,1.3838156488248456,1.112587781655176,1.6550435159945154,True,1
+hyperparam_epochs,hyperparam_learning_rate,0.5,0.0880969601668469,0.0708299559741449,0.1053639643595489,True,6
+perf_test_accuracy,hyperparam_learning_rate,0.5,0.06409030249845392,0.05152860320875695,0.07665200178815089,True,5
+perf_test_accuracy,hyperparam_epochs,0.5,0.08574610753416562,0.06893987045746916,0.10255234461086207,True,3
+hyperparam_learning_rate_x_is_parallel,hyperparam_learning_rate,0.5,0.4851188782681423,0.39003557812758644,0.5802021784086983,True,5
+hyperparam_learning_rate_x_is_parallel,hyperparam_epochs,0.5,-0.10288939341809562,-0.12305571452804237,-0.08272307230814888,True,4

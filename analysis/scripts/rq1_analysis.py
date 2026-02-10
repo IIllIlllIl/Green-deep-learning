@@ -96,7 +96,7 @@ def filter_rq1b_moderation_effects(df):
 
 
 def create_table(df, table_name, filename):
-    """生成并保存分析表格"""
+    """生成并保存分析表格（详细边列表）"""
     # 选择关键列并格式化
     table = df[['group_name', 'source', 'target', 'strength',
                 'ate_global_std', 'ate_global_std_ci_lower',
@@ -115,6 +115,118 @@ def create_table(df, table_name, filename):
     print(f"保存表格: {output_path}")
 
     return table
+
+
+def create_summary_matrix_table(df, table_name, filename):
+    """
+    生成矩阵格式的边数量统计表（按RQ设计文档规格）
+
+    表1: 超参数对能耗的直接因果影响汇总（RQ1a）
+    - 行: 超参数类型
+    - 列: CPU_pkg, CPU_ram, GPU_total, CPU_total, GPU功率
+    - 单元格: n=k (边数量)
+    """
+    if len(df) == 0:
+        print(f"警告: {table_name} 无数据")
+        return pd.DataFrame()
+
+    # 能耗类型映射
+    energy_type_map = {
+        'energy_cpu_pkg_joules': 'CPU_pkg',
+        'energy_cpu_ram_joules': 'CPU_ram',
+        'energy_cpu_total_joules': 'CPU_total',
+        'energy_gpu_total_joules': 'GPU_total',
+        'energy_gpu_avg_watts': 'GPU功率(avg)',
+        'energy_gpu_min_watts': 'GPU功率(min)',
+        'energy_gpu_max_watts': 'GPU功率(max)'
+    }
+
+    # 提取超参数名称（去掉前缀）
+    df = df.copy()
+    df['hyperparam'] = df['source'].str.replace('hyperparam_', '')
+    df['energy_type'] = df['target'].map(energy_type_map)
+
+    # 按超参数和能耗类型统计边数量
+    pivot = df.groupby(['hyperparam', 'energy_type']).size().unstack(fill_value=0)
+
+    # 确保列顺序
+    col_order = ['CPU_pkg', 'CPU_ram', 'CPU_total', 'GPU_total',
+                 'GPU功率(avg)', 'GPU功率(min)', 'GPU功率(max)']
+    for col in col_order:
+        if col not in pivot.columns:
+            pivot[col] = 0
+    pivot = pivot[col_order]
+
+    # 添加总计行
+    pivot.loc['Total'] = pivot.sum()
+
+    # 格式化为 n=k 格式
+    pivot_formatted = pivot.applymap(lambda x: f"n={int(x)}" if x > 0 else "—")
+
+    # 添加总计列
+    pivot_formatted['Total'] = pivot.sum(axis=1).apply(lambda x: f"n={int(x)}")
+
+    # 保存
+    output_path = TABLES_DIR / filename
+    pivot_formatted.to_csv(output_path)
+    print(f"保存矩阵表格: {output_path}")
+
+    return pivot_formatted
+
+
+def create_summary_matrix_table_rq1b(df, table_name, filename):
+    """
+    生成RQ1b调节效应的矩阵格式边数量统计表
+
+    表2: 调节效应分析（RQ1b）
+    - 行: 交互项类型
+    - 列: 各能耗类型
+    - 单元格: n=k (边数量)
+    """
+    if len(df) == 0:
+        print(f"警告: {table_name} 无数据")
+        return pd.DataFrame()
+
+    # 能耗类型映射
+    energy_type_map = {
+        'energy_cpu_pkg_joules': 'CPU_pkg',
+        'energy_cpu_ram_joules': 'CPU_ram',
+        'energy_cpu_total_joules': 'CPU_total',
+        'energy_gpu_total_joules': 'GPU_total',
+        'energy_gpu_avg_watts': 'GPU功率(avg)',
+        'energy_gpu_min_watts': 'GPU功率(min)',
+        'energy_gpu_max_watts': 'GPU功率(max)'
+    }
+
+    # 提取交互项名称
+    df = df.copy()
+    df['interaction'] = df['source'].str.replace('hyperparam_', '').str.replace('_x_is_parallel', '×P')
+    df['energy_type'] = df['target'].map(energy_type_map)
+
+    # 按交互项和能耗类型统计边数量
+    pivot = df.groupby(['interaction', 'energy_type']).size().unstack(fill_value=0)
+
+    # 确保列顺序
+    col_order = ['CPU_pkg', 'CPU_ram', 'CPU_total', 'GPU_total',
+                 'GPU功率(avg)', 'GPU功率(min)', 'GPU功率(max)']
+    for col in col_order:
+        if col not in pivot.columns:
+            pivot[col] = 0
+    pivot = pivot[col_order]
+
+    # 添加总计行
+    pivot.loc['Total'] = pivot.sum()
+
+    # 格式化为 n=k 格式
+    pivot_formatted = pivot.applymap(lambda x: f"n={int(x)}" if x > 0 else "—")
+    pivot_formatted['Total'] = pivot.sum(axis=1).apply(lambda x: f"n={int(x)}")
+
+    # 保存
+    output_path = TABLES_DIR / filename
+    pivot_formatted.to_csv(output_path)
+    print(f"保存矩阵表格: {output_path}")
+
+    return pivot_formatted
 
 
 def create_forest_plot(df, title, filename):
@@ -334,14 +446,19 @@ def main():
     FIGURES_DIR.mkdir(parents=True, exist_ok=True)
 
     # 1. 加载数据
-    print("\n[1/4] 加载DiBS+ATE数据...")
+    print("\n[1/5] 加载DiBS+ATE数据...")
     all_data = load_all_data()
 
     # 2. RQ1a: 主效应分析
-    print("\n[2/4] RQ1a主效应分析...")
+    print("\n[2/5] RQ1a主效应分析...")
     df_main = filter_rq1a_main_effects(all_data)
     if len(df_main) > 0:
-        table1 = create_table(df_main, "表1: 超参数对能耗的主效应",
+        # 生成详细边列表表格
+        table1_detail = create_table(df_main, "表1详情: 超参数对能耗的主效应",
+                              "table1_rq1a_main_effects_detail.csv")
+        # 生成矩阵格式的边数量统计表（按RQ设计文档规格）
+        table1_matrix = create_summary_matrix_table(df_main,
+                              "表1: 超参数对能耗的主效应（边数量统计）",
                               "table1_rq1a_main_effects.csv")
         # 生成柱状图（需求文档规格：10×6 inch）
         create_bar_chart(df_main,
@@ -354,10 +471,15 @@ def main():
                           "figure1_rq1a_main_effects_forest.pdf")
 
     # 3. RQ1b: 调节效应分析
-    print("\n[3/4] RQ1b调节效应分析...")
+    print("\n[3/5] RQ1b调节效应分析...")
     df_mod = filter_rq1b_moderation_effects(all_data)
     if len(df_mod) > 0:
-        table2 = create_table(df_mod, "表2: 并行化对超参数-能耗关系的调节效应",
+        # 生成详细边列表表格
+        table2_detail = create_table(df_mod, "表2详情: 并行化对超参数-能耗关系的调节效应",
+                              "table2_rq1b_moderation_effects_detail.csv")
+        # 生成矩阵格式的边数量统计表
+        table2_matrix = create_summary_matrix_table_rq1b(df_mod,
+                              "表2: 调节效应分析（边数量统计）",
                               "table2_rq1b_moderation_effects.csv")
         # 生成柱状图（需求文档规格：12×6 inch）
         create_bar_chart(df_mod,
@@ -370,8 +492,17 @@ def main():
                           "figure2_rq1b_moderation_effects_forest.pdf")
 
     # 4. 输出摘要
-    print("\n[4/4] 生成分析摘要...")
+    print("\n[4/5] 生成分析摘要...")
     print_summary(df_main, df_mod)
+
+    # 5. 打印矩阵表格
+    print("\n[5/5] 矩阵格式表格预览...")
+    if len(df_main) > 0:
+        print("\n表1: RQ1a 超参数对能耗的主效应（边数量统计）")
+        print(table1_matrix.to_string())
+    if len(df_mod) > 0:
+        print("\n表2: RQ1b 调节效应分析（边数量统计）")
+        print(table2_matrix.to_string())
 
     print("\n分析完成!")
     print(f"表格保存至: {TABLES_DIR}")

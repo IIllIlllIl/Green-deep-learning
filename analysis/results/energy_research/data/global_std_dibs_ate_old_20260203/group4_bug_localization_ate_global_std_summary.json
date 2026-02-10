@@ -1,0 +1,15 @@
+{
+  "group_id": "group4_bug_localization",
+  "group_num": 4,
+  "data_rows": 90,
+  "edges_total": 22,
+  "edges_updated": 20,
+  "ate_computed": 20,
+  "ate_significant": 17,
+  "ate_mean": 0.3132702659477076,
+  "ate_std": 0.47349824426898385,
+  "ate_min": -0.6928247568054134,
+  "ate_max": 1.3106693288858284,
+  "elapsed_seconds": 10.929948568344116,
+  "timestamp": "2026-02-03 23:16:17"
+}

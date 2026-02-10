@@ -5,22 +5,18 @@
     "model_siamese",
     "hyperparam_batch_size",
     "hyperparam_learning_rate",
-    "hyperparam_epochs",
-    "hyperparam_l2_regularization",
     "model_hrnet18",
     "model_pcb",
     "hyperparam_dropout",
-    "hyperparam_alpha",
+    "hyperparam_l2_regularization",
     "hyperparam_kfold",
-    "hyperparam_max_iter",
+    "hyperparam_epochs",
     "hyperparam_batch_size_x_is_parallel",
     "hyperparam_learning_rate_x_is_parallel",
     "hyperparam_epochs_x_is_parallel",
-    "hyperparam_l2_regularization_x_is_parallel",
     "hyperparam_dropout_x_is_parallel",
-    "hyperparam_alpha_x_is_parallel",
-    "hyperparam_kfold_x_is_parallel",
-    "hyperparam_max_iter_x_is_parallel"
+    "hyperparam_l2_regularization_x_is_parallel",
+    "hyperparam_kfold_x_is_parallel"
   ],
   "strategy_used": {
     "model_mnist_ff": "model_all_nan_fill_0",
@@ -28,22 +24,18 @@
     "model_siamese": "model_all_nan_fill_0",
     "hyperparam_batch_size": "hyperparam_all_nan_fill_0",
     "hyperparam_learning_rate": "hyperparam_all_nan_fill_0",
-    "hyperparam_epochs": "hyperparam_all_nan_fill_0",
-    "hyperparam_l2_regularization": "hyperparam_all_nan_fill_0",
     "model_hrnet18": "model_all_nan_fill_0",
     "model_pcb": "model_all_nan_fill_0",
     "hyperparam_dropout": "hyperparam_all_nan_fill_0",
-    "hyperparam_alpha": "hyperparam_group_mean(0.0000)",
+    "hyperparam_l2_regularization": "hyperparam_group_mean(0.0000)",
     "hyperparam_kfold": "hyperparam_group_mean(-0.0000)",
-    "hyperparam_max_iter": "hyperparam_group_mean(-0.0000)",
+    "hyperparam_epochs": "hyperparam_group_mean(-0.0000)",
     "hyperparam_batch_size_x_is_parallel": "hyperparam_all_nan_fill_0",
     "hyperparam_learning_rate_x_is_parallel": "hyperparam_all_nan_fill_0",
     "hyperparam_epochs_x_is_parallel": "hyperparam_all_nan_fill_0",
-    "hyperparam_l2_regularization_x_is_parallel": "hyperparam_all_nan_fill_0",
     "hyperparam_dropout_x_is_parallel": "hyperparam_all_nan_fill_0",
-    "hyperparam_alpha_x_is_parallel": "hyperparam_group_mean(0.0943)",
-    "hyperparam_kfold_x_is_parallel": "hyperparam_group_mean(-0.0641)",
-    "hyperparam_max_iter_x_is_parallel": "hyperparam_group_mean(-0.0624)"
+    "hyperparam_l2_regularization_x_is_parallel": "hyperparam_group_mean(0.0943)",
+    "hyperparam_kfold_x_is_parallel": "hyperparam_group_mean(-0.0641)"
   },
   "missing_counts": {
     "model_mnist_ff": 90,
@@ -51,22 +43,18 @@
     "model_siamese": 90,
     "hyperparam_batch_size": 90,
     "hyperparam_learning_rate": 90,
-    "hyperparam_epochs": 90,
-    "hyperparam_l2_regularization": 90,
     "model_hrnet18": 90,
     "model_pcb": 90,
     "hyperparam_dropout": 90,
-    "hyperparam_alpha": 60,
+    "hyperparam_l2_regularization": 60,
     "hyperparam_kfold": 61,
-    "hyperparam_max_iter": 57,
+    "hyperparam_epochs": 57,
     "hyperparam_batch_size_x_is_parallel": 90,
     "hyperparam_learning_rate_x_is_parallel": 90,
     "hyperparam_epochs_x_is_parallel": 90,
-    "hyperparam_l2_regularization_x_is_parallel": 90,
     "hyperparam_dropout_x_is_parallel": 90,
-    "hyperparam_alpha_x_is_parallel": 60,
-    "hyperparam_kfold_x_is_parallel": 61,
-    "hyperparam_max_iter_x_is_parallel": 57
+    "hyperparam_l2_regularization_x_is_parallel": 60,
+    "hyperparam_kfold_x_is_parallel": 61
   },
   "cols_dropped": {
     "count": 0,
@@ -75,5 +63,31 @@
   "rows_dropped": {
     "count": 0,
     "indices": []
+  },
+  "v2_changes": {
+    "rename_info": {
+      "renamed_columns": {
+        "hyperparam_max_iter": "hyperparam_epochs",
+        "hyperparam_alpha": "hyperparam_l2_regularization",
+        "hyperparam_alpha_x_is_parallel": "hyperparam_l2_regularization_x_is_parallel"
+      },
+      "dropped_columns": [
+        "hyperparam_max_iter_x_is_parallel"
+      ]
+    },
+    "removed_zero_columns": [
+      "model_mnist_ff",
+      "model_mnist_rnn",
+      "model_siamese",
+      "hyperparam_batch_size",
+      "hyperparam_learning_rate",
+      "model_hrnet18",
+      "model_pcb",
+      "hyperparam_dropout",
+      "hyperparam_batch_size_x_is_parallel",
+      "hyperparam_learning_rate_x_is_parallel",
+      "hyperparam_epochs_x_is_parallel",
+      "hyperparam_dropout_x_is_parallel"
+    ]
   }
 }

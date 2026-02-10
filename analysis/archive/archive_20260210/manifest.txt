@@ -1,0 +1,7 @@
+data/energy_research/6groups_final -> archive/archive_20260210/data/
+data/energy_research/6groups_interaction -> archive/archive_20260210/data/
+data/energy_research/6groups_dibs_ready_v1_backup -> archive/archive_20260210/data/
+results/energy_research/archived_data -> archive/archive_20260210/results/
+results/energy_research/interaction_tradeoff_verification -> archive/archive_20260210/results/
+results/energy_research/tradeoff_detection_interaction_based -> archive/archive_20260210/results/
+scripts/run_algorithm1_tradeoff_detection.py -> archive/archive_20260210/scripts/

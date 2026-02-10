@@ -1,0 +1,32 @@
+[
+  {
+    "group": "group1_examples",
+    "status": "failed",
+    "error": "\u56e0\u679c\u56fe\u6587\u4ef6\u4e0d\u5b58\u5728: /home/green/energy_dl/nightly/analysis/results/energy_research/questions_2_3_dibs/20260105_212940/group1_examples_causal_graph.npy"
+  },
+  {
+    "group": "group2_vulberta",
+    "status": "failed",
+    "error": "\u56e0\u679c\u56fe\u6587\u4ef6\u4e0d\u5b58\u5728: /home/green/energy_dl/nightly/analysis/results/energy_research/questions_2_3_dibs/20260105_212940/group2_vulberta_causal_graph.npy"
+  },
+  {
+    "group": "group3_person_reid",
+    "status": "failed",
+    "error": "\u56e0\u679c\u56fe\u6587\u4ef6\u4e0d\u5b58\u5728: /home/green/energy_dl/nightly/analysis/results/energy_research/questions_2_3_dibs/20260105_212940/group3_person_reid_causal_graph.npy"
+  },
+  {
+    "group": "group4_bug_localization",
+    "status": "failed",
+    "error": "\u56e0\u679c\u56fe\u6587\u4ef6\u4e0d\u5b58\u5728: /home/green/energy_dl/nightly/analysis/results/energy_research/questions_2_3_dibs/20260105_212940/group4_bug_localization_causal_graph.npy"
+  },
+  {
+    "group": "group5_mrt_oast",
+    "status": "failed",
+    "error": "\u56e0\u679c\u56fe\u6587\u4ef6\u4e0d\u5b58\u5728: /home/green/energy_dl/nightly/analysis/results/energy_research/questions_2_3_dibs/20260105_212940/group5_mrt_oast_causal_graph.npy"
+  },
+  {
+    "group": "group6_resnet",
+    "status": "failed",
+    "error": "\u56e0\u679c\u56fe\u6587\u4ef6\u4e0d\u5b58\u5728: /home/green/energy_dl/nightly/analysis/results/energy_research/questions_2_3_dibs/20260105_212940/group6_resnet_causal_graph.npy"
+  }
+]

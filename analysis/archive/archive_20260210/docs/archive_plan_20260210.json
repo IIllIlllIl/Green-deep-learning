@@ -1,0 +1,1849 @@
+{
+  "timestamp": "2026-02-10T15:13:05.431573",
+  "keep_patterns": {
+    "data": [
+      "data/energy_research/6groups_global_std",
+      "data/energy_research/6groups_dibs_ready"
+    ],
+    "results": [
+      "results/energy_research/data/global_std",
+      "results/energy_research/data/global_std_dibs_ate",
+      "results/energy_research/tradeoff_detection_global_std",
+      "results/energy_research/rq_analysis"
+    ],
+    "scripts": [
+      "scripts/run_dibs_6groups_global_std.py",
+      "scripts/validate_dibs_results.py",
+      "scripts/compute_ate_dibs_global_std.py",
+      "scripts/run_algorithm1_tradeoff_detection_global_std.py",
+      "scripts/preprocess_for_dibs_global_std.py"
+    ]
+  },
+  "days_to_keep": 2,
+  "data_items": [
+    {
+      "path": "data/energy_research/6groups_dibs_ready",
+      "type": "dir",
+      "age_days": 10,
+      "action": "KEEP"
+    },
+    {
+      "path": "data/energy_research/6groups_dibs_ready/group1_examples_dibs_ready.csv",
+      "type": "file",
+      "age_days": 0,
+      "action": "KEEP"
+    },
+    {
+      "path": "data/energy_research/6groups_dibs_ready/group1_examples_preprocess_info.json",
+      "type": "file",
+      "age_days": 0,
+      "action": "KEEP"
+    },
+    {
+      "path": "data/energy_research/6groups_dibs_ready/group2_vulberta_dibs_ready.csv",
+      "type": "file",
+      "age_days": 0,
+      "action": "KEEP"
+    },
+    {
+      "path": "data/energy_research/6groups_dibs_ready/group2_vulberta_preprocess_info.json",
+      "type": "file",
+      "age_days": 0,
+      "action": "KEEP"
+    },
+    {
+      "path": "data/energy_research/6groups_dibs_ready/group3_person_reid_dibs_ready.csv",
+      "type": "file",
+      "age_days": 0,
+      "action": "KEEP"
+    },
+    {
+      "path": "data/energy_research/6groups_dibs_ready/group3_person_reid_preprocess_info.json",
+      "type": "file",
+      "age_days": 0,
+      "action": "KEEP"
+    },
+    {
+      "path": "data/energy_research/6groups_dibs_ready/group4_bug_localization_dibs_ready.csv",
+      "type": "file",
+      "age_days": 0,
+      "action": "KEEP"
+    },
+    {
+      "path": "data/energy_research/6groups_dibs_ready/group4_bug_localization_preprocess_info.json",
+      "type": "file",
+      "age_days": 0,
+      "action": "KEEP"
+    },
+    {
+      "path": "data/energy_research/6groups_dibs_ready/group5_mrt_oast_dibs_ready.csv",
+      "type": "file",
+      "age_days": 0,
+      "action": "KEEP"
+    },
+    {
+      "path": "data/energy_research/6groups_dibs_ready/group5_mrt_oast_preprocess_info.json",
+      "type": "file",
+      "age_days": 0,
+      "action": "KEEP"
+    },
+    {
+      "path": "data/energy_research/6groups_dibs_ready/group6_resnet_dibs_ready.csv",
+      "type": "file",
+      "age_days": 0,
+      "action": "KEEP"
+    },
+    {
+      "path": "data/energy_research/6groups_dibs_ready/group6_resnet_preprocess_info.json",
+      "type": "file",
+      "age_days": 0,
+      "action": "KEEP"
+    },
+    {
+      "path": "data/energy_research/6groups_dibs_ready_v1_backup",
+      "type": "dir",
+      "age_days": 0,
+      "action": "KEEP"
+    },
+    {
+      "path": "data/energy_research/6groups_dibs_ready_v1_backup/group1_examples_dibs_ready.csv",
+      "type": "file",
+      "age_days": 0,
+      "action": "KEEP"
+    },
+    {
+      "path": "data/energy_research/6groups_dibs_ready_v1_backup/group2_vulberta_dibs_ready.csv",
+      "type": "file",
+      "age_days": 0,
+      "action": "KEEP"
+    },
+    {
+      "path": "data/energy_research/6groups_dibs_ready_v1_backup/group3_person_reid_dibs_ready.csv",
+      "type": "file",
+      "age_days": 0,
+      "action": "KEEP"
+    },
+    {
+      "path": "data/energy_research/6groups_dibs_ready_v1_backup/group4_bug_localization_dibs_ready.csv",
+      "type": "file",
+      "age_days": 0,
+      "action": "KEEP"
+    },
+    {
+      "path": "data/energy_research/6groups_dibs_ready_v1_backup/group5_mrt_oast_dibs_ready.csv",
+      "type": "file",
+      "age_days": 0,
+      "action": "KEEP"
+    },
+    {
+      "path": "data/energy_research/6groups_dibs_ready_v1_backup/group6_resnet_dibs_ready.csv",
+      "type": "file",
+      "age_days": 0,
+      "action": "KEEP"
+    },
+    {
+      "path": "data/energy_research/6groups_final",
+      "type": "dir",
+      "age_days": 24,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "data/energy_research/6groups_final/archive",
+      "type": "dir",
+      "age_days": 24,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "data/energy_research/6groups_final/archive/group2_person_reid.csv",
+      "type": "file",
+      "age_days": 25,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "data/energy_research/6groups_final/archive/group3_vulberta.csv",
+      "type": "file",
+      "age_days": 25,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "data/energy_research/6groups_final/archive/group4_resnet.csv",
+      "type": "file",
+      "age_days": 25,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "data/energy_research/6groups_final/generation_stats.txt",
+      "type": "file",
+      "age_days": 25,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "data/energy_research/6groups_final/group1_examples.csv",
+      "type": "file",
+      "age_days": 25,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "data/energy_research/6groups_final/group2_vulberta.csv",
+      "type": "file",
+      "age_days": 25,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "data/energy_research/6groups_final/group3_person_reid.csv",
+      "type": "file",
+      "age_days": 25,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "data/energy_research/6groups_final/group4_bug_localization.csv",
+      "type": "file",
+      "age_days": 25,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "data/energy_research/6groups_final/group5_mrt_oast.csv",
+      "type": "file",
+      "age_days": 25,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "data/energy_research/6groups_final/group6_resnet.csv",
+      "type": "file",
+      "age_days": 25,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "data/energy_research/6groups_global_std",
+      "type": "dir",
+      "age_days": 10,
+      "action": "KEEP"
+    },
+    {
+      "path": "data/energy_research/6groups_global_std/generation_report.json",
+      "type": "file",
+      "age_days": 7,
+      "action": "KEEP"
+    },
+    {
+      "path": "data/energy_research/6groups_global_std/global_standardization_params.json",
+      "type": "file",
+      "age_days": 7,
+      "action": "KEEP"
+    },
+    {
+      "path": "data/energy_research/6groups_global_std/group1_examples_global_std.csv",
+      "type": "file",
+      "age_days": 7,
+      "action": "KEEP"
+    },
+    {
+      "path": "data/energy_research/6groups_global_std/group2_vulberta_global_std.csv",
+      "type": "file",
+      "age_days": 7,
+      "action": "KEEP"
+    },
+    {
+      "path": "data/energy_research/6groups_global_std/group3_person_reid_global_std.csv",
+      "type": "file",
+      "age_days": 7,
+      "action": "KEEP"
+    },
+    {
+      "path": "data/energy_research/6groups_global_std/group4_bug_localization_global_std.csv",
+      "type": "file",
+      "age_days": 7,
+      "action": "KEEP"
+    },
+    {
+      "path": "data/energy_research/6groups_global_std/group5_mrt_oast_global_std.csv",
+      "type": "file",
+      "age_days": 7,
+      "action": "KEEP"
+    },
+    {
+      "path": "data/energy_research/6groups_global_std/group6_resnet_global_std.csv",
+      "type": "file",
+      "age_days": 7,
+      "action": "KEEP"
+    },
+    {
+      "path": "data/energy_research/6groups_interaction",
+      "type": "dir",
+      "age_days": 24,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "data/energy_research/6groups_interaction/generation_report.txt",
+      "type": "file",
+      "age_days": 24,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "data/energy_research/6groups_interaction/generation_stats.json",
+      "type": "file",
+      "age_days": 24,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "data/energy_research/6groups_interaction/group1_examples_interaction.csv",
+      "type": "file",
+      "age_days": 24,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "data/energy_research/6groups_interaction/group2_vulberta_interaction.csv",
+      "type": "file",
+      "age_days": 24,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "data/energy_research/6groups_interaction/group3_person_reid_interaction.csv",
+      "type": "file",
+      "age_days": 24,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "data/energy_research/6groups_interaction/group4_bug_localization_interaction.csv",
+      "type": "file",
+      "age_days": 24,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "data/energy_research/6groups_interaction/group5_mrt_oast_interaction.csv",
+      "type": "file",
+      "age_days": 24,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "data/energy_research/6groups_interaction/group6_resnet_interaction.csv",
+      "type": "file",
+      "age_days": 24,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "data/energy_research/6groups_interaction/standardization_params.json",
+      "type": "file",
+      "age_days": 24,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "data/energy_research/DATA_CLEANUP_REPORT_20260115.md",
+      "type": "file",
+      "age_days": 25,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "data/energy_research/archive",
+      "type": "dir",
+      "age_days": 24,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "data/energy_research/archive/DATA_FILES_ISSUES_REPORT.md",
+      "type": "file",
+      "age_days": 25,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "data/energy_research/archive/DATA_STATUS_REPORT_20260114.md",
+      "type": "file",
+      "age_days": 26,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "data/energy_research/archive/DUPLICATE_DATA_ANALYSIS_REPORT.md",
+      "type": "file",
+      "age_days": 26,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "data/energy_research/archive/DUPLICATE_DATA_ANALYSIS_REPORT_CORRECTED.md",
+      "type": "file",
+      "age_days": 26,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "data/energy_research/archive/RAW_DATA_VS_DATA_CSV_COMPARISON.md",
+      "type": "file",
+      "age_days": 26,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "data/energy_research/archive/backup_20260115",
+      "type": "dir",
+      "age_days": 25,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "data/energy_research/archive/backup_20260115/BACKFILL_COMPLETION_SUMMARY.md",
+      "type": "file",
+      "age_days": 26,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "data/energy_research/archive/backup_20260115/backfill_report.txt",
+      "type": "file",
+      "age_days": 26,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "data/energy_research/archive/backup_20260115/backfill_stats.json",
+      "type": "file",
+      "age_days": 26,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "data/energy_research/archive/backup_20260115/dibs_training",
+      "type": "dir",
+      "age_days": 35,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "data/energy_research/archive/backup_20260115/dibs_training_non_parallel",
+      "type": "dir",
+      "age_days": 34,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "data/energy_research/archive/backup_20260115/dibs_training_parallel",
+      "type": "dir",
+      "age_days": 34,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "data/energy_research/archive/backup_20260115/independent_verification_report.md",
+      "type": "file",
+      "age_days": 26,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "data/energy_research/archive/backup_20260115/raw_data_backfilled.csv",
+      "type": "file",
+      "age_days": 26,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "data/energy_research/archive/data_status_analysis.json",
+      "type": "file",
+      "age_days": 26,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "data/energy_research/archive/dibs_training",
+      "type": "dir",
+      "age_days": 25,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "data/energy_research/archive/dibs_training/COLUMN_VERIFICATION_REPORT_20260115.md",
+      "type": "file",
+      "age_days": 25,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "data/energy_research/archive/dibs_training/COMPREHENSIVE_DIBS_EVALUATION_20260115.md",
+      "type": "file",
+      "age_days": 25,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "data/energy_research/archive/dibs_training/DATA_QUALITY_ASSESSMENT_20260115.md",
+      "type": "file",
+      "age_days": 25,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "data/energy_research/archive/dibs_training/DIBS_READINESS_CHECKLIST.md",
+      "type": "file",
+      "age_days": 25,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "data/energy_research/archive/dibs_training/EXECUTIVE_SUMMARY.txt",
+      "type": "file",
+      "age_days": 25,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "data/energy_research/archive/dibs_training/QUICK_QUALITY_SUMMARY.md",
+      "type": "file",
+      "age_days": 25,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "data/energy_research/archive/dibs_training/README.md",
+      "type": "file",
+      "age_days": 25,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "data/energy_research/archive/dibs_training/USAGE_GUIDE.md",
+      "type": "file",
+      "age_days": 25,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "data/energy_research/archive/dibs_training/analyze_dibs_data_quality.py",
+      "type": "file",
+      "age_days": 25,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "data/energy_research/archive/dibs_training/detailed_quality_analysis.json",
+      "type": "file",
+      "age_days": 25,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "data/energy_research/archive/dibs_training/generation_stats.json",
+      "type": "file",
+      "age_days": 25,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "data/energy_research/archive/dibs_training/group1_examples.csv",
+      "type": "file",
+      "age_days": 25,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "data/energy_research/archive/dibs_training/group2_vulberta.csv",
+      "type": "file",
+      "age_days": 25,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "data/energy_research/archive/dibs_training/group3_person_reid.csv",
+      "type": "file",
+      "age_days": 25,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "data/energy_research/archive/dibs_training/group4_bug_localization.csv",
+      "type": "file",
+      "age_days": 25,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "data/energy_research/archive/dibs_training/group5_mrt_oast.csv",
+      "type": "file",
+      "age_days": 25,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "data/energy_research/archive/dibs_training/group6_resnet.csv",
+      "type": "file",
+      "age_days": 25,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "data/energy_research/archive/experiments",
+      "type": "dir",
+      "age_days": 49,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "data/energy_research/archive/processed",
+      "type": "dir",
+      "age_days": 41,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "data/energy_research/baseline_values_robust.json",
+      "type": "file",
+      "age_days": 24,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "data/energy_research/defaults_by_group.json",
+      "type": "file",
+      "age_days": 24,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "data/energy_research/identified_default_experiments.json",
+      "type": "file",
+      "age_days": 24,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "data/energy_research/raw",
+      "type": "dir",
+      "age_days": 25,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "data/energy_research/raw/energy_data_original.csv",
+      "type": "file",
+      "age_days": 25,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "data/energy_research/raw/energy_data_original.csv.backup_54col_20251222",
+      "type": "file",
+      "age_days": 48,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "data/energy_research/raw/energy_data_original.csv.backup_726rows_20260104",
+      "type": "file",
+      "age_days": 36,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "data/energy_research/raw/energy_data_original.csv.backup_old_raw_data",
+      "type": "file",
+      "age_days": 25,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "data/energy_research/stratified",
+      "type": "dir",
+      "age_days": 3,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "data/energy_research/stratified/group1_examples",
+      "type": "dir",
+      "age_days": 3,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "data/energy_research/stratified/group1_examples/group1_non_parallel.csv",
+      "type": "file",
+      "age_days": 3,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "data/energy_research/stratified/group1_examples/group1_parallel.csv",
+      "type": "file",
+      "age_days": 3,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "data/energy_research/stratified/group3_person_reid",
+      "type": "dir",
+      "age_days": 3,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "data/energy_research/stratified/group3_person_reid/group3_non_parallel.csv",
+      "type": "file",
+      "age_days": 3,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "data/energy_research/stratified/group3_person_reid/group3_parallel.csv",
+      "type": "file",
+      "age_days": 3,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "data/energy_research/stratified/stratification_report.json",
+      "type": "file",
+      "age_days": 3,
+      "action": "ARCHIVE"
+    }
+  ],
+  "results_items": [
+    {
+      "path": "results/energy_research/archive",
+      "type": "dir",
+      "age_days": 0,
+      "action": "KEEP"
+    },
+    {
+      "path": "results/energy_research/archive/COMPREHENSIVE_CAUSAL_ANALYSIS_REPORT.md",
+      "type": "file",
+      "age_days": 34,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archive/causal_graph_visualizations",
+      "type": "dir",
+      "age_days": 34,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archive/causal_graph_visualizations/group1_examples_causal_graph.png",
+      "type": "file",
+      "age_days": 34,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archive/causal_graph_visualizations/group2_vulberta_causal_graph.png",
+      "type": "file",
+      "age_days": 34,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archive/causal_graph_visualizations/group3_person_reid_causal_graph.png",
+      "type": "file",
+      "age_days": 34,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archive/causal_graph_visualizations/group4_bug_localization_causal_graph.png",
+      "type": "file",
+      "age_days": 34,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archive/causal_graph_visualizations/group5_mrt_oast_causal_graph.png",
+      "type": "file",
+      "age_days": 34,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archive/causal_graph_visualizations/group6_resnet_causal_graph.png",
+      "type": "file",
+      "age_days": 34,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archive/causal_graph_visualizations/visualization_summary.json",
+      "type": "file",
+      "age_days": 34,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archive/dibs_edges_csv",
+      "type": "dir",
+      "age_days": 25,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archive/dibs_edges_csv/dibs_all_edges_summary.csv",
+      "type": "file",
+      "age_days": 25,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archive/dibs_edges_csv/dibs_direct_edges.csv",
+      "type": "file",
+      "age_days": 25,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archive/dibs_edges_csv/dibs_indirect_paths.csv",
+      "type": "file",
+      "age_days": 25,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archive/dibs_parameter_sweep",
+      "type": "dir",
+      "age_days": 36,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archive/dibs_parameter_sweep/20260104_182810",
+      "type": "dir",
+      "age_days": 36,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archive/dibs_parameter_sweep/20260104_195620",
+      "type": "dir",
+      "age_days": 36,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archive/dibs_parameter_sweep/20260104_195820",
+      "type": "dir",
+      "age_days": 36,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archive/dibs_parameter_sweep/20260104_200015",
+      "type": "dir",
+      "age_days": 36,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archive/dibs_parameter_sweep/20260104_200617",
+      "type": "dir",
+      "age_days": 36,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archive/dibs_parameter_sweep/20260104_200823",
+      "type": "dir",
+      "age_days": 36,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archive/dibs_parameter_sweep/20260104_203108",
+      "type": "dir",
+      "age_days": 36,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archive/dibs_quick_test",
+      "type": "dir",
+      "age_days": 36,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archive/dibs_quick_test/TEST1_graph.npy",
+      "type": "file",
+      "age_days": 36,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archive/dibs_quick_test/TEST1_result.json",
+      "type": "file",
+      "age_days": 36,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archive/dibs_quick_test/TEST2_graph.npy",
+      "type": "file",
+      "age_days": 36,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archive/dibs_quick_test/TEST2_result.json",
+      "type": "file",
+      "age_days": 36,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archive/dibs_quick_test/TEST3_graph.npy",
+      "type": "file",
+      "age_days": 36,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archive/dibs_quick_test/TEST3_result.json",
+      "type": "file",
+      "age_days": 36,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archive/mediation_analysis",
+      "type": "dir",
+      "age_days": 34,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archive/mediation_analysis/MEDIATION_ANALYSIS_REPORT.md",
+      "type": "file",
+      "age_days": 34,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archive/mediation_analysis/mediation_analysis_results.json",
+      "type": "file",
+      "age_days": 34,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archive/mode_analysis",
+      "type": "dir",
+      "age_days": 34,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archive/mode_analysis/MODE_MAIN_EFFECT_REPORT.md",
+      "type": "file",
+      "age_days": 34,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archive/mode_analysis/mode_effect_boxplots.png",
+      "type": "file",
+      "age_days": 34,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archive/mode_analysis/mode_effect_by_repo.png",
+      "type": "file",
+      "age_days": 34,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archive/mode_analysis/mode_main_effect_results.json",
+      "type": "file",
+      "age_days": 34,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archive/new_6groups_dibs",
+      "type": "dir",
+      "age_days": 25,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archive/new_6groups_dibs/20260115_180713",
+      "type": "dir",
+      "age_days": 25,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archive/new_6groups_dibs/20260115_180944",
+      "type": "dir",
+      "age_days": 25,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archive/new_6groups_dibs/20260115_181111",
+      "type": "dir",
+      "age_days": 25,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archive/new_6groups_dibs/20260115_181322",
+      "type": "dir",
+      "age_days": 25,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archive/new_6groups_dibs/20260115_181839",
+      "type": "dir",
+      "age_days": 25,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archive/new_6groups_dibs/20260115_182150",
+      "type": "dir",
+      "age_days": 25,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archive/new_6groups_dibs/20260115_182312",
+      "type": "dir",
+      "age_days": 25,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archive/new_6groups_dibs/20260115_182417",
+      "type": "dir",
+      "age_days": 25,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archive/questions_2_3_dibs",
+      "type": "dir",
+      "age_days": 35,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archive/questions_2_3_dibs/20260105_212741",
+      "type": "dir",
+      "age_days": 35,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archive/questions_2_3_dibs/20260105_212940",
+      "type": "dir",
+      "age_days": 35,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archive/raw",
+      "type": "dir",
+      "age_days": 23,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archive/raw/dibs_6groups_final",
+      "type": "dir",
+      "age_days": 24,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archive/raw/dibs_interaction",
+      "type": "dir",
+      "age_days": 23,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archive/regression_validation",
+      "type": "dir",
+      "age_days": 35,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archive/regression_validation/REGRESSION_VALIDATION_REPORT.md",
+      "type": "file",
+      "age_days": 35,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archive/regression_validation/regression_validation_results.json",
+      "type": "file",
+      "age_days": 35,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archived_data",
+      "type": "dir",
+      "age_days": 2,
+      "action": "KEEP"
+    },
+    {
+      "path": "results/energy_research/archived_data/README.md",
+      "type": "file",
+      "age_days": 2,
+      "action": "KEEP"
+    },
+    {
+      "path": "results/energy_research/archived_data/dibs_results",
+      "type": "dir",
+      "age_days": 24,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archived_data/dibs_results/data",
+      "type": "dir",
+      "age_days": 24,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archived_data/dibs_results/docs",
+      "type": "dir",
+      "age_days": 24,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archived_data/global_std",
+      "type": "dir",
+      "age_days": 10,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archived_data/global_std/group1_examples",
+      "type": "dir",
+      "age_days": 10,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archived_data/global_std/group2_vulberta",
+      "type": "dir",
+      "age_days": 10,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archived_data/global_std/group3_person_reid",
+      "type": "dir",
+      "age_days": 10,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archived_data/global_std/group4_bug_localization",
+      "type": "dir",
+      "age_days": 10,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archived_data/global_std/group5_mrt_oast",
+      "type": "dir",
+      "age_days": 10,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archived_data/global_std/group6_resnet",
+      "type": "dir",
+      "age_days": 10,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archived_data/global_std_ate",
+      "type": "dir",
+      "age_days": 10,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archived_data/global_std_ate/ate_global_std_total_report.json",
+      "type": "file",
+      "age_days": 10,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archived_data/global_std_ate/group1_examples_ate_global_std_summary.json",
+      "type": "file",
+      "age_days": 10,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archived_data/global_std_ate/group1_examples_causal_edges_whitelist_global_std_ate.csv",
+      "type": "file",
+      "age_days": 10,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archived_data/global_std_ate/group2_vulberta_ate_global_std_summary.json",
+      "type": "file",
+      "age_days": 10,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archived_data/global_std_ate/group2_vulberta_causal_edges_whitelist_global_std_ate.csv",
+      "type": "file",
+      "age_days": 10,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archived_data/global_std_ate/group3_person_reid_ate_global_std_summary.json",
+      "type": "file",
+      "age_days": 10,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archived_data/global_std_ate/group3_person_reid_causal_edges_whitelist_global_std_ate.csv",
+      "type": "file",
+      "age_days": 10,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archived_data/global_std_ate/group4_bug_localization_ate_global_std_summary.json",
+      "type": "file",
+      "age_days": 10,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archived_data/global_std_ate/group4_bug_localization_causal_edges_whitelist_global_std_ate.csv",
+      "type": "file",
+      "age_days": 10,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archived_data/global_std_ate/group5_mrt_oast_ate_global_std_summary.json",
+      "type": "file",
+      "age_days": 10,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archived_data/global_std_ate/group5_mrt_oast_causal_edges_whitelist_global_std_ate.csv",
+      "type": "file",
+      "age_days": 10,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archived_data/global_std_ate/group6_resnet_ate_global_std_summary.json",
+      "type": "file",
+      "age_days": 10,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archived_data/global_std_ate/group6_resnet_causal_edges_whitelist_global_std_ate.csv",
+      "type": "file",
+      "age_days": 10,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archived_data/global_std_migrated",
+      "type": "dir",
+      "age_days": 3,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archived_data/global_std_migrated/dibs_global_std_total_report.json",
+      "type": "file",
+      "age_days": 3,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archived_data/global_std_migrated/group5_mrt_oast",
+      "type": "dir",
+      "age_days": 3,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archived_data/interaction",
+      "type": "dir",
+      "age_days": 14,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archived_data/interaction/README.md",
+      "type": "file",
+      "age_days": 24,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archived_data/interaction/raw",
+      "type": "dir",
+      "age_days": 23,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archived_data/interaction/threshold",
+      "type": "dir",
+      "age_days": 23,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archived_data/interaction/whitelist",
+      "type": "dir",
+      "age_days": 3,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archived_data/interaction/whitelist_backup_20260123_155836",
+      "type": "dir",
+      "age_days": 20,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archived_data/interaction/whitelist_with_ate",
+      "type": "dir",
+      "age_days": 14,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archived_data/sensitivity_analysis",
+      "type": "dir",
+      "age_days": 10,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archived_data/sensitivity_analysis/group1_examples_sensitivity_analysis.json",
+      "type": "file",
+      "age_days": 10,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/archived_data/sensitivity_analysis/sensitivity_analysis_total_report.json",
+      "type": "file",
+      "age_days": 10,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/causal_graph_visualizations",
+      "type": "dir",
+      "age_days": 0,
+      "action": "KEEP"
+    },
+    {
+      "path": "results/energy_research/causal_graph_visualizations/visualization_summary.json",
+      "type": "file",
+      "age_days": 0,
+      "action": "KEEP"
+    },
+    {
+      "path": "results/energy_research/data",
+      "type": "dir",
+      "age_days": 0,
+      "action": "KEEP"
+    },
+    {
+      "path": "results/energy_research/data/global_std",
+      "type": "dir",
+      "age_days": 0,
+      "action": "KEEP"
+    },
+    {
+      "path": "results/energy_research/data/global_std/dibs_global_std_total_report.json",
+      "type": "file",
+      "age_days": 0,
+      "action": "KEEP"
+    },
+    {
+      "path": "results/energy_research/data/global_std/group1_examples",
+      "type": "dir",
+      "age_days": 0,
+      "action": "KEEP"
+    },
+    {
+      "path": "results/energy_research/data/global_std/group2_vulberta",
+      "type": "dir",
+      "age_days": 0,
+      "action": "KEEP"
+    },
+    {
+      "path": "results/energy_research/data/global_std/group3_person_reid",
+      "type": "dir",
+      "age_days": 0,
+      "action": "KEEP"
+    },
+    {
+      "path": "results/energy_research/data/global_std/group4_bug_localization",
+      "type": "dir",
+      "age_days": 0,
+      "action": "KEEP"
+    },
+    {
+      "path": "results/energy_research/data/global_std/group5_mrt_oast",
+      "type": "dir",
+      "age_days": 0,
+      "action": "KEEP"
+    },
+    {
+      "path": "results/energy_research/data/global_std/group6_resnet",
+      "type": "dir",
+      "age_days": 0,
+      "action": "KEEP"
+    },
+    {
+      "path": "results/energy_research/data/global_std_dibs_ate",
+      "type": "dir",
+      "age_days": 6,
+      "action": "KEEP"
+    },
+    {
+      "path": "results/energy_research/data/global_std_dibs_ate/ate_global_std_total_report.json",
+      "type": "file",
+      "age_days": 6,
+      "action": "KEEP"
+    },
+    {
+      "path": "results/energy_research/data/global_std_dibs_ate/group1_examples_ate_global_std_summary.json",
+      "type": "file",
+      "age_days": 6,
+      "action": "KEEP"
+    },
+    {
+      "path": "results/energy_research/data/global_std_dibs_ate/group1_examples_dibs_global_std_ate.csv",
+      "type": "file",
+      "age_days": 6,
+      "action": "KEEP"
+    },
+    {
+      "path": "results/energy_research/data/global_std_dibs_ate/group2_vulberta_ate_global_std_summary.json",
+      "type": "file",
+      "age_days": 6,
+      "action": "KEEP"
+    },
+    {
+      "path": "results/energy_research/data/global_std_dibs_ate/group2_vulberta_dibs_global_std_ate.csv",
+      "type": "file",
+      "age_days": 6,
+      "action": "KEEP"
+    },
+    {
+      "path": "results/energy_research/data/global_std_dibs_ate/group3_person_reid_ate_global_std_summary.json",
+      "type": "file",
+      "age_days": 6,
+      "action": "KEEP"
+    },
+    {
+      "path": "results/energy_research/data/global_std_dibs_ate/group3_person_reid_dibs_global_std_ate.csv",
+      "type": "file",
+      "age_days": 6,
+      "action": "KEEP"
+    },
+    {
+      "path": "results/energy_research/data/global_std_dibs_ate/group4_bug_localization_ate_global_std_summary.json",
+      "type": "file",
+      "age_days": 6,
+      "action": "KEEP"
+    },
+    {
+      "path": "results/energy_research/data/global_std_dibs_ate/group4_bug_localization_dibs_global_std_ate.csv",
+      "type": "file",
+      "age_days": 6,
+      "action": "KEEP"
+    },
+    {
+      "path": "results/energy_research/data/global_std_dibs_ate/group5_mrt_oast_ate_global_std_summary.json",
+      "type": "file",
+      "age_days": 6,
+      "action": "KEEP"
+    },
+    {
+      "path": "results/energy_research/data/global_std_dibs_ate/group5_mrt_oast_dibs_global_std_ate.csv",
+      "type": "file",
+      "age_days": 6,
+      "action": "KEEP"
+    },
+    {
+      "path": "results/energy_research/data/global_std_dibs_ate/group6_resnet_ate_global_std_summary.json",
+      "type": "file",
+      "age_days": 6,
+      "action": "KEEP"
+    },
+    {
+      "path": "results/energy_research/data/global_std_dibs_ate/group6_resnet_dibs_global_std_ate.csv",
+      "type": "file",
+      "age_days": 6,
+      "action": "KEEP"
+    },
+    {
+      "path": "results/energy_research/interaction_tradeoff_verification",
+      "type": "dir",
+      "age_days": 7,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/interaction_tradeoff_verification/VERIFICATION_REPORT.md",
+      "type": "file",
+      "age_days": 7,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/interaction_tradeoff_verification/interaction_stats_summary.csv",
+      "type": "file",
+      "age_days": 7,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/reports",
+      "type": "dir",
+      "age_days": 6,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/reports/DIBS_RESULTS_ACCEPTANCE_REPORT_20260203.md",
+      "type": "file",
+      "age_days": 6,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/reports/GLOBAL_STD_FIX_ACCEPTANCE_REPORT_20260201.md",
+      "type": "file",
+      "age_days": 8,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/reports/dibs_readiness_report.json",
+      "type": "file",
+      "age_days": 10,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/reports/global_vs_within_standardization_comparison_20260130.md",
+      "type": "file",
+      "age_days": 10,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/reports/missing_patterns_diagnosis_20260130.json",
+      "type": "file",
+      "age_days": 10,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/reports/missing_patterns_diagnosis_20260130.md",
+      "type": "file",
+      "age_days": 10,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/rq_analysis",
+      "type": "dir",
+      "age_days": 2,
+      "action": "KEEP"
+    },
+    {
+      "path": "results/energy_research/rq_analysis/RQ_ANALYSIS_REPORT.md",
+      "type": "file",
+      "age_days": 2,
+      "action": "KEEP"
+    },
+    {
+      "path": "results/energy_research/rq_analysis/figures",
+      "type": "dir",
+      "age_days": 2,
+      "action": "KEEP"
+    },
+    {
+      "path": "results/energy_research/rq_analysis/figures/figure1_rq1a_main_effects_bar.pdf",
+      "type": "file",
+      "age_days": 2,
+      "action": "KEEP"
+    },
+    {
+      "path": "results/energy_research/rq_analysis/figures/figure1_rq1a_main_effects_bar.png",
+      "type": "file",
+      "age_days": 2,
+      "action": "KEEP"
+    },
+    {
+      "path": "results/energy_research/rq_analysis/figures/figure1_rq1a_main_effects_forest.pdf",
+      "type": "file",
+      "age_days": 2,
+      "action": "KEEP"
+    },
+    {
+      "path": "results/energy_research/rq_analysis/figures/figure1_rq1a_main_effects_forest.png",
+      "type": "file",
+      "age_days": 2,
+      "action": "KEEP"
+    },
+    {
+      "path": "results/energy_research/rq_analysis/figures/figure2_rq1b_moderation_effects_bar.pdf",
+      "type": "file",
+      "age_days": 2,
+      "action": "KEEP"
+    },
+    {
+      "path": "results/energy_research/rq_analysis/figures/figure2_rq1b_moderation_effects_bar.png",
+      "type": "file",
+      "age_days": 2,
+      "action": "KEEP"
+    },
+    {
+      "path": "results/energy_research/rq_analysis/figures/figure2_rq1b_moderation_effects_forest.pdf",
+      "type": "file",
+      "age_days": 2,
+      "action": "KEEP"
+    },
+    {
+      "path": "results/energy_research/rq_analysis/figures/figure2_rq1b_moderation_effects_forest.png",
+      "type": "file",
+      "age_days": 2,
+      "action": "KEEP"
+    },
+    {
+      "path": "results/energy_research/rq_analysis/figures/figure3_rq2_causal_paths.pdf",
+      "type": "file",
+      "age_days": 2,
+      "action": "KEEP"
+    },
+    {
+      "path": "results/energy_research/rq_analysis/figures/figure3_rq2_causal_paths.png",
+      "type": "file",
+      "age_days": 2,
+      "action": "KEEP"
+    },
+    {
+      "path": "results/energy_research/rq_analysis/figures/figure4_rq2_mediator_heatmap.pdf",
+      "type": "file",
+      "age_days": 2,
+      "action": "KEEP"
+    },
+    {
+      "path": "results/energy_research/rq_analysis/figures/figure4_rq2_mediator_heatmap.png",
+      "type": "file",
+      "age_days": 2,
+      "action": "KEEP"
+    },
+    {
+      "path": "results/energy_research/rq_analysis/figures/figure5_rq3_tradeoff_scatter.pdf",
+      "type": "file",
+      "age_days": 2,
+      "action": "KEEP"
+    },
+    {
+      "path": "results/energy_research/rq_analysis/figures/figure5_rq3_tradeoff_scatter.png",
+      "type": "file",
+      "age_days": 2,
+      "action": "KEEP"
+    },
+    {
+      "path": "results/energy_research/rq_analysis/figures/figure6_rq3_group_tradeoff_bar.pdf",
+      "type": "file",
+      "age_days": 2,
+      "action": "KEEP"
+    },
+    {
+      "path": "results/energy_research/rq_analysis/figures/figure6_rq3_group_tradeoff_bar.png",
+      "type": "file",
+      "age_days": 2,
+      "action": "KEEP"
+    },
+    {
+      "path": "results/energy_research/rq_analysis/tables",
+      "type": "dir",
+      "age_days": 2,
+      "action": "KEEP"
+    },
+    {
+      "path": "results/energy_research/rq_analysis/tables/table1_rq1a_main_effects.csv",
+      "type": "file",
+      "age_days": 2,
+      "action": "KEEP"
+    },
+    {
+      "path": "results/energy_research/rq_analysis/tables/table2_rq1b_moderation_effects.csv",
+      "type": "file",
+      "age_days": 2,
+      "action": "KEEP"
+    },
+    {
+      "path": "results/energy_research/rq_analysis/tables/table3_rq2_mediator_frequency.csv",
+      "type": "file",
+      "age_days": 2,
+      "action": "KEEP"
+    },
+    {
+      "path": "results/energy_research/rq_analysis/tables/table4_rq2_main_paths.csv",
+      "type": "file",
+      "age_days": 2,
+      "action": "KEEP"
+    },
+    {
+      "path": "results/energy_research/rq_analysis/tables/table5_rq3_tradeoff_summary.csv",
+      "type": "file",
+      "age_days": 2,
+      "action": "KEEP"
+    },
+    {
+      "path": "results/energy_research/rq_analysis/tables/table6_rq3_energy_perf_tradeoffs.csv",
+      "type": "file",
+      "age_days": 2,
+      "action": "KEEP"
+    },
+    {
+      "path": "results/energy_research/stratified",
+      "type": "dir",
+      "age_days": 3,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/stratified/DIBS_ACCEPTANCE_REPORT_20260206.md",
+      "type": "file",
+      "age_days": 3,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/stratified/FINAL_ACCEPTANCE_REPORT_20260207.md",
+      "type": "file",
+      "age_days": 3,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/stratified/PEER_REVIEW_CHECKLIST_20260206.md",
+      "type": "file",
+      "age_days": 3,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/stratified/PEER_REVIEW_COMPLETION_CERTIFICATE_20260206.txt",
+      "type": "file",
+      "age_days": 3,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/stratified/PEER_REVIEW_INDEX_20260206.txt",
+      "type": "file",
+      "age_days": 3,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/stratified/PEER_REVIEW_REPORT_20260206.md",
+      "type": "file",
+      "age_days": 3,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/stratified/PEER_REVIEW_SUMMARY_20260206.md",
+      "type": "file",
+      "age_days": 3,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/stratified/ate",
+      "type": "dir",
+      "age_days": 3,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/stratified/ate/all_layers_ate_fdr_corrected.csv",
+      "type": "file",
+      "age_days": 3,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/stratified/ate/group1_non_parallel",
+      "type": "dir",
+      "age_days": 3,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/stratified/ate/group1_parallel",
+      "type": "dir",
+      "age_days": 3,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/stratified/ate/group3_non_parallel",
+      "type": "dir",
+      "age_days": 3,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/stratified/ate/group3_parallel",
+      "type": "dir",
+      "age_days": 3,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/stratified/ate/stratified_ate_total_report.json",
+      "type": "file",
+      "age_days": 3,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/stratified/benchmark",
+      "type": "dir",
+      "age_days": 3,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/stratified/benchmark/benchmark_report.json",
+      "type": "file",
+      "age_days": 3,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/stratified/dibs",
+      "type": "dir",
+      "age_days": 3,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/stratified/dibs/group1_non_parallel",
+      "type": "dir",
+      "age_days": 3,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/stratified/dibs/group1_parallel",
+      "type": "dir",
+      "age_days": 3,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/stratified/dibs/group3_non_parallel",
+      "type": "dir",
+      "age_days": 3,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/stratified/dibs/group3_parallel",
+      "type": "dir",
+      "age_days": 3,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/stratified/dibs_run.log",
+      "type": "file",
+      "age_days": 3,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/stratified/tradeoff",
+      "type": "dir",
+      "age_days": 3,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/stratified/tradeoff/all_layers_tradeoffs.csv",
+      "type": "file",
+      "age_days": 3,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/stratified/tradeoff/group1_non_parallel",
+      "type": "dir",
+      "age_days": 3,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/stratified/tradeoff/group1_parallel",
+      "type": "dir",
+      "age_days": 3,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/stratified/tradeoff/group3_non_parallel",
+      "type": "dir",
+      "age_days": 3,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/stratified/tradeoff/group3_parallel",
+      "type": "dir",
+      "age_days": 3,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/stratified/tradeoff/stratified_tradeoff_report.json",
+      "type": "file",
+      "age_days": 3,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/stratified/tradeoff/tradeoff_summary.csv",
+      "type": "file",
+      "age_days": 3,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/tradeoff_detection_global_std",
+      "type": "dir",
+      "age_days": 6,
+      "action": "KEEP"
+    },
+    {
+      "path": "results/energy_research/tradeoff_detection_global_std/all_tradeoffs_global_std.json",
+      "type": "file",
+      "age_days": 0,
+      "action": "KEEP"
+    },
+    {
+      "path": "results/energy_research/tradeoff_detection_global_std/config_info.json",
+      "type": "file",
+      "age_days": 0,
+      "action": "KEEP"
+    },
+    {
+      "path": "results/energy_research/tradeoff_detection_global_std/tradeoff_detailed_global_std.csv",
+      "type": "file",
+      "age_days": 0,
+      "action": "KEEP"
+    },
+    {
+      "path": "results/energy_research/tradeoff_detection_global_std/tradeoff_summary_global_std.csv",
+      "type": "file",
+      "age_days": 0,
+      "action": "KEEP"
+    },
+    {
+      "path": "results/energy_research/tradeoff_detection_interaction_based",
+      "type": "dir",
+      "age_days": 8,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/tradeoff_detection_interaction_based/all_tradeoffs.json",
+      "type": "file",
+      "age_days": 8,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/tradeoff_detection_interaction_based/figures",
+      "type": "dir",
+      "age_days": 8,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/tradeoff_detection_interaction_based/figures/ate_by_tradeoff_type.png",
+      "type": "file",
+      "age_days": 8,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/tradeoff_detection_interaction_based/figures/intervention_distribution.png",
+      "type": "file",
+      "age_days": 8,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/tradeoff_detection_interaction_based/figures/tradeoff_overview.png",
+      "type": "file",
+      "age_days": 8,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/tradeoff_detection_interaction_based/tradeoff_detailed.csv",
+      "type": "file",
+      "age_days": 8,
+      "action": "ARCHIVE"
+    },
+    {
+      "path": "results/energy_research/tradeoff_detection_interaction_based/tradeoff_summary.csv",
+      "type": "file",
+      "age_days": 8,
+      "action": "ARCHIVE"
+    }
+  ],
+  "summary": {
+    "keep_count": 19,
+    "archive_count": 85
+  }
+}

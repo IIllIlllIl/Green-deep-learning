@@ -1,0 +1,11 @@
+Group,Source,Target,Edge Strength,ATE,CI Lower,CI Upper,Significant
+Examples,hyperparam_epochs,energy_gpu_total_joules,0.74,0.0,0.0,0.0,False
+MRT OAST,hyperparam_learning_rate,energy_gpu_avg_watts,0.68,0.0043581697806939,0.0035039685036779,0.0052123710577099,True
+MRT OAST,hyperparam_learning_rate,energy_gpu_max_watts,0.56,,,,False
+Person ReID,hyperparam_epochs,energy_gpu_total_joules,0.68,0.1050568923401062,0.0844657414414454,0.1256480432387671,True
+Person ReID,hyperparam_epochs,energy_gpu_min_watts,0.48,-0.0196077458707023,-0.02345086406136,-0.0157646276800446,True
+ResNet,hyperparam_epochs,energy_gpu_total_joules,0.78,0.0571736521372421,0.0459676163183427,0.0683796879561416,True
+ResNet,hyperparam_epochs,energy_gpu_avg_watts,0.65999997,0.0420140747449187,0.0337793160949146,0.0502488333949228,True
+VulBERTa,hyperparam_learning_rate,energy_gpu_avg_watts,0.38,0.0,0.0,0.0,False
+VulBERTa,hyperparam_learning_rate,energy_gpu_min_watts,0.34,0.0,0.0,0.0,False
+VulBERTa,hyperparam_learning_rate,energy_gpu_max_watts,0.38,,,,False
