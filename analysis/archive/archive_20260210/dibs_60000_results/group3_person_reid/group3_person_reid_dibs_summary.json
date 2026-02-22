@@ -1,0 +1,19 @@
+{
+  "group_id": "group3_person_reid",
+  "group_name": "Person_reID\uff08\u884c\u4eba\u91cd\u8bc6\u522b\uff09",
+  "samples": 206,
+  "features": 24,
+  "graph_min": 0.0,
+  "graph_max": 0.9799999594688416,
+  "graph_mean": 0.15687499940395355,
+  "graph_std": 0.22047443687915802,
+  "edges_gt_0.01": 358,
+  "edges_gt_0.1": 221,
+  "edges_gt_0.3": 126,
+  "edges_gt_0.5": 55,
+  "strong_edges_weight_gt_0.3": 126,
+  "total_possible_edges": 552,
+  "strong_edge_percentage": 22.82608695652174,
+  "runtime_seconds": 1862.448088169098,
+  "timestamp": "2026-02-10T21:19:11.290104"
+}

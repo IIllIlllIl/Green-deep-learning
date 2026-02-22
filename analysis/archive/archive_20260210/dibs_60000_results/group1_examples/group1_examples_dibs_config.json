@@ -1,0 +1,22 @@
+{
+  "group_config": {
+    "id": "group1_examples",
+    "name": "examples\uff08\u56fe\u50cf\u5206\u7c7b-\u5c0f\u578b\uff09",
+    "csv_file": "group1_examples_dibs_ready.csv",
+    "expected_samples": 304,
+    "expected_features": 23,
+    "description": "\u5c0f\u578b\u56fe\u50cf\u5206\u7c7b\u6a21\u578b\uff0c\u5305\u542bMNIST\u76f8\u5173\u6a21\u578b"
+  },
+  "dibs_config": {
+    "variant": "MarginalDiBS",
+    "alpha_linear": 0.5,
+    "beta_linear": 1.0,
+    "n_particles": 100,
+    "tau": 1.0,
+    "n_steps": 60000,
+    "n_grad_mc_samples": 128,
+    "n_acyclicity_mc_samples": 32
+  },
+  "runtime_seconds": 1761.1791598796844,
+  "timestamp": "2026-02-10T20:21:26.131902"
+}

@@ -9,14 +9,14 @@
   },
   "dibs_config": {
     "variant": "MarginalDiBS",
-    "alpha_linear": 1.0,
+    "alpha_linear": 0.5,
     "beta_linear": 1.0,
-    "n_particles": 50,
+    "n_particles": 100,
     "tau": 1.0,
-    "n_steps": 13000,
+    "n_steps": 200000,
     "n_grad_mc_samples": 128,
     "n_acyclicity_mc_samples": 32
   },
-  "runtime_seconds": 170.22504782676697,
-  "timestamp": "2026-02-10T13:35:45.716867"
+  "runtime_seconds": 5258.723585367203,
+  "timestamp": "2026-02-17T05:58:20.980353"
 }

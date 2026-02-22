@@ -45,7 +45,7 @@ OPTIMAL_CONFIG = {
     "beta_linear": 1.0,           # v2.0修改：从0.1改为1.0（CTF使用默认值）
     "n_particles": 100,           # v3.0修改：从50改为100（增加粒子数，更广探索）
     "tau": 1.0,                   # Gumbel-softmax温度
-    "n_steps": 60000,             # v3.0修改：从13000→20000→60000（预计4.5h，6h预算内）
+    "n_steps": 200000,            # v3.0修改：从13000→20000→60000→200000（方案C，预计9h）
     "n_grad_mc_samples": 128,     # MC梯度样本数
     "n_acyclicity_mc_samples": 32  # 无环性MC样本数
 }

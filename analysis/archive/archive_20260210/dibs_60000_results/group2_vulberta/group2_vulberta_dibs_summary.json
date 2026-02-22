@@ -1,0 +1,19 @@
+{
+  "group_id": "group2_vulberta",
+  "group_name": "VulBERTa\uff08\u4ee3\u7801\u6f0f\u6d1e\u68c0\u6d4b\uff09",
+  "samples": 72,
+  "features": 22,
+  "graph_min": 0.0,
+  "graph_max": 0.9099999666213989,
+  "graph_mean": 0.12557850778102875,
+  "graph_std": 0.20917654037475586,
+  "edges_gt_0.01": 227,
+  "edges_gt_0.1": 145,
+  "edges_gt_0.3": 81,
+  "edges_gt_0.5": 42,
+  "strong_edges_weight_gt_0.3": 81,
+  "total_possible_edges": 462,
+  "strong_edge_percentage": 17.532467532467532,
+  "runtime_seconds": 1602.6947469711304,
+  "timestamp": "2026-02-10T20:48:08.833994"
+}
